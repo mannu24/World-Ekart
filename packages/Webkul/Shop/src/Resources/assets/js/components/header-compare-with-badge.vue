@@ -1,6 +1,6 @@
 <template>
 <li class="compare-dropdown-container">
-    <a :href="src" @endauth style="color: #242424;">
+    <a :href="src" style="color: #242424;">
 
         <i class="icon wishlist-icon"></i>
         <span class="name">

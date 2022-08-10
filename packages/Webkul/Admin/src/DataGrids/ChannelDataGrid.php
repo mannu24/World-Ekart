@@ -53,7 +53,7 @@ class ChannelDataGrid extends DataGrid
                 $leftJoin->on('channel_translations.channel_id', '=', 'channels.id')
                     ->where('channel_translations.locale', $this->locale);
             })
-            ->addSelect('channels.id', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname');
+            ->addSelect('channels.id', 'channels.theme', 'channels.code', 'channel_translations.locale', 'channel_translations.name as translated_name', 'channels.hostname');
 
         $this->addFilter('id', 'channels.id');
         $this->addFilter('code', 'channels.code');
@@ -89,6 +89,15 @@ class ChannelDataGrid extends DataGrid
             'type'       => 'string',
             'searchable' => true,
             'sortable'   => true,
+            'filterable' => true,
+        ]);
+
+        $this->addColumn([
+            'index'      => 'theme',
+            'label'      => trans('admin::app.datagrid.theme'),
+            'type'       => 'string',
+            'searchable' => true,
+            'sortable'   => false,
             'filterable' => true,
         ]);
 

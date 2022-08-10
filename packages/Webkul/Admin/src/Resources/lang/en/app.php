@@ -175,6 +175,7 @@ return [
         'code'             => 'Code',
         'admin-name'       => 'Name',
         'name'             => 'Name',
+        'theme'             => 'Theme',
         'copy'             => 'Copy',
         'direction'        => 'Direction',
         'fullname'         => 'Full Name',

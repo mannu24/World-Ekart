@@ -10,12 +10,12 @@ return [
             'name' => 'Default'
         ],
 
-        // 'bliss' => [
-        //     'views_path' => 'resources/themes/bliss/views',
-        //     'assets_path' => 'public/themes/bliss/assets',
-        //     'name' => 'Bliss',
-        //     'parent' => 'default'
-        // ]
+        'martfury' => [
+            'views_path' => 'resources/themes/martfury/views',
+            'assets_path' => 'public/themes/martfury/assets',
+            'name' => 'Martfury',
+            'parent' => 'default'
+        ],
 
         'velocity' => [
             'views_path' => 'resources/themes/velocity/views',
