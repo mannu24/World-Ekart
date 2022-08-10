@@ -1,0 +1,5 @@
+<p><?php echo $__env->make("shop::home.slider", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> <?php echo $__env->make("shop::home.featured-products", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?> <?php echo $__env->make("shop::home.new-products", \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?></p>
+<div class="banner-container">
+<div class="left-banner"><img src="http://localhost/themes/default/assets/images/1.webp" data-src="http://localhost/themes/default/assets/images/1.webp" class="lazyload" alt="test" width="720" height="720" /></div>
+<div class="right-banner"><img src="http://localhost/themes/default/assets/images/2.webp" data-src="http://localhost/themes/default/assets/images/2.webp" class="lazyload" alt="test" width="460" height="330" /> <img src="http://localhost/themes/default/assets/images/3.webp" data-src="http://localhost/themes/default/assets/images/3.webp" class="lazyload" alt="test" width="460" height="330" /></div>
+</div>
