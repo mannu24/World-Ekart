@@ -44,7 +44,8 @@ return [
     ],
 
     'minicart' => [
-        'view-cart' => 'View Shopping Cart',
+        'view-cart' => 'View Cart',
+        // 'view-cart' => 'View Shopping Cart',
         'checkout'  => 'Checkout',
         'cart'      => 'Cart',
         'zero'      => '0',
@@ -523,7 +524,8 @@ return [
                 'inactive-add'   => 'Inactive item cannot be added to cart.',
             ],
             'quantity-error'            => 'Requested quantity is not available.',
-            'cart-subtotal'             => 'Cart Subtotal',
+            // 'cart-subtotal'             => 'Cart Subtotal',
+            'cart-subtotal'             => 'Subtotal',
             'cart-remove-action'        => 'Do you really want to do this ?',
             'partial-cart-update'       => 'Only some of the product(s) were updated',
             'link-missing'              => '',

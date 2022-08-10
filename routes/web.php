@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Http\Controllers ;
+use Illuminate\Support\Facades\Route;
+use Auth ;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,3 +14,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/become-a-vendor', [HomeController::class, 'become_a_vendor'])->name('become-a-vendor');
+Route::get('/order-tracking', [HomeController::class, 'order_tracking'])->name('order-tracking');

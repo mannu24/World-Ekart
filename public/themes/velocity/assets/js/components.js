@@ -5434,107 +5434,66 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    "class": "dropdown ".concat(_vm.cartItems.length > 0 ? "" : "disable-active")
-  }, [_c("div", {
-    staticClass: "dropdown-toggle btn btn-link",
-    "class": {
-      "cursor-not-allowed": !_vm.cartItems.length
-    },
+    staticClass: "ps-cart--mini"
+  }, [_c("a", {
+    staticClass: "header__extra",
     attrs: {
-      id: "mini-cart"
+      href: "#"
     }
-  }, [_c("div", {
-    staticClass: "mini-cart-content"
   }, [_c("i", {
-    staticClass: "material-icons-outlined"
-  }, [_vm._v("shopping_cart")]), _vm._v(" "), _c("div", {
-    staticClass: "badge-container"
-  }, [_vm.cartItems.length != 0 ? _c("span", {
-    staticClass: "badge",
+    staticClass: "icon-bag2"
+  }), _vm._v(" "), _c("span", [_c("i", {
     domProps: {
       textContent: _vm._s(_vm.cartItems.length)
     }
-  }) : _vm._e()]), _vm._v(" "), _c("span", {
-    staticClass: "fs18 fw6 cart-text",
-    domProps: {
-      textContent: _vm._s(_vm.cartText)
-    }
-  })]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _c("div", {
-    staticClass: "modal-content dropdown-list sensitive-modal cart-modal-content",
-    "class": {
-      hide: !_vm.cartItems.length
-    },
-    attrs: {
-      id: "cart-modal-content"
-    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "ps-cart__content"
   }, [_c("div", {
-    staticClass: "mini-cart-container"
-  }, _vm._l(_vm.cartItems, function (item, index) {
+    staticClass: "ps-cart__items"
+  }, [_vm.cartItems.length != 0 ? _c("div", _vm._l(_vm.cartItems, function (item, index) {
     return _c("div", {
       key: index,
-      staticClass: "row small-card-container"
+      staticClass: "ps-product--cart-mobile"
     }, [_c("div", {
-      staticClass: "col-3 product-image-container mr15"
-    }, [_c("span", {
-      staticClass: "remove-item",
+      staticClass: "ps-product__thumbnail"
+    }, [_c("a", {
+      attrs: {
+        href: "".concat(_vm.$root.baseUrl, "/").concat(item.url_key)
+      }
+    }, [_c("img", {
+      attrs: {
+        src: "".concat(item.images.medium_image_url),
+        alt: "Product Image"
+      }
+    })])]), _vm._v(" "), _c("div", {
+      staticClass: "ps-product__content"
+    }, [_c("a", {
+      staticClass: "ps-product__title",
+      attrs: {
+        href: "".concat(_vm.$root.baseUrl, "/").concat(item.url_key)
+      },
+      domProps: {
+        innerHTML: _vm._s(item.name)
+      }
+    }), _vm._v(" "), _c("p", [_c("small", [_vm._v("\n                            " + _vm._s(_vm.isTaxInclusive == "1" ? item.base_total_with_tax : item.base_total) + " x " + _vm._s(item.quantity) + "\n                        ")])]), _vm._v(" "), _c("a", {
+      staticClass: "ps-product__remove",
       on: {
         click: function click($event) {
           return _vm.removeProduct(item.id);
         }
       }
-    }, [_c("span", {
-      staticClass: "rango-close"
-    })]), _vm._v(" "), _c("a", {
-      staticClass: "unset",
-      attrs: {
-        href: "".concat(_vm.$root.baseUrl, "/").concat(item.url_key)
-      }
-    }, [_c("div", {
-      staticClass: "product-image",
-      style: "background-image: url(".concat(item.images.medium_image_url, ");")
-    })])]), _vm._v(" "), _c("div", {
-      staticClass: "col-9 no-padding card-body align-vertical-top"
-    }, [_c("div", {
-      staticClass: "no-padding"
-    }, [_c("div", {
-      staticClass: "fs16 text-nowrap fw6 product-name",
-      domProps: {
-        innerHTML: _vm._s(item.name)
-      }
-    }), _vm._v(" "), _c("div", {
-      staticClass: "fs18 card-current-price fw6"
-    }, [_c("div", {
-      staticClass: "display-inbl"
-    }, [_c("label", {
-      staticClass: "fw5"
-    }, [_vm._v(_vm._s(_vm.__("checkout.qty")))]), _vm._v(" "), _c("input", {
-      staticClass: "ml5",
-      attrs: {
-        type: "text",
-        disabled: ""
-      },
-      domProps: {
-        value: item.quantity
-      }
-    })]), _vm._v(" "), _c("span", {
-      staticClass: "card-total-price fw6"
-    }, [_vm._v("\n                                " + _vm._s(_vm.isTaxInclusive == "1" ? item.base_total_with_tax : item.base_total) + "\n                            ")])])])])]);
-  }), 0), _vm._v(" "), _c("div", {
-    staticClass: "modal-footer"
-  }, [_c("h5", {
-    staticClass: "col-6 text-left fw6"
-  }, [_vm._v("\n                " + _vm._s(_vm.subtotalText) + "\n            ")]), _vm._v(" "), _c("h5", {
-    staticClass: "col-6 text-right fw6 no-padding"
-  }, [_vm._v("\n                " + _vm._s(_vm.isTaxInclusive == "1" ? _vm.cartInformation.base_grand_total : _vm.cartInformation.base_sub_total) + "\n            ")])]), _vm._v(" "), _c("div", {
-    staticClass: "modal-footer"
-  }, [_c("a", {
-    staticClass: "col text-left fs16 link-color remove-decoration",
+    }, [_c("i", {
+      staticClass: "icon-cross"
+    })])])]);
+  }), 0) : _c("span", [_vm._v("No products in cart")])]), _vm._v(" "), _vm.cartItems.length != 0 ? _c("div", {
+    staticClass: "ps-cart__footer"
+  }, [_c("h3", [_vm._v(" " + _vm._s(_vm.subtotalText) + ":\n                "), _c("strong", [_vm._v(_vm._s(_vm.isTaxInclusive == "1" ? _vm.cartInformation.base_grand_total : _vm.cartInformation.base_sub_total))])]), _vm._v(" "), _c("figure", [_c("a", {
+    staticClass: "ps-btn",
     attrs: {
       href: _vm.viewCartRoute
     }
-  }, [_vm._v(_vm._s(_vm.viewCartText))]), _vm._v(" "), _c("div", {
-    staticClass: "col text-right no-padding"
-  }, [_c("a", {
+  }, [_vm._v(_vm._s(_vm.viewCartText))]), _vm._v(" "), _c("a", {
+    staticClass: "ps-btn",
     attrs: {
       href: _vm.checkoutRoute
     },
@@ -5543,24 +5502,10 @@ var render = function render() {
         return _vm.checkMinimumOrder($event);
       }
     }
-  }, [_c("button", {
-    staticClass: "theme-btn fs16 fw6",
-    attrs: {
-      type: "button"
-    }
-  }, [_vm._v("\n                        " + _vm._s(_vm.checkoutText) + "\n                    ")])])])])])]);
+  }, [_vm._v(_vm._s(_vm.checkoutText))])])]) : _vm._e()])]);
 };
 
-var staticRenderFns = [function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "down-arrow-container"
-  }, [_c("span", {
-    staticClass: "rango-arrow-down"
-  })]);
-}];
+var staticRenderFns = [];
 render._withStripped = true;
 
 

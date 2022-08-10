@@ -46,7 +46,7 @@
                     {!! view_render_event('bagisto.admin.settings.channel.edit.before') !!}
 
                     {{-- general --}}
-                    <accordian title="{{ __('admin::app.settings.channels.general') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.general') }}" :active="false">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('code') ? 'has-error' : '']">
@@ -110,7 +110,7 @@
                     </accordian>
 
                     {{-- currencies and locales --}}
-                    <accordian title="{{ __('admin::app.settings.channels.currencies-and-locales') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.currencies-and-locales') }}" :active="false">
                         <div slot="body">
 
                             <div class="control-group" :class="[errors.has('locales[]') ? 'has-error' : '']">
