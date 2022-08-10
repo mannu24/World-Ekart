@@ -38,7 +38,7 @@ return [
         \Webkul\Ui\Providers\ModuleServiceProvider::class,
         \Webkul\User\Providers\ModuleServiceProvider::class,
         \Webkul\Velocity\Providers\ModuleServiceProvider::class,
-        //RMA
-        \Webkul\RMA\Providers\RepositoryServiceProvider::class
+        \Webkul\suggestion\Providers\ModuleServiceProvider::class,
+        \RKREZA\Contact\Providers\ModuleServiceProvider::class,
     ],
 ];

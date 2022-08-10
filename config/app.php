@@ -284,6 +284,19 @@ return [
 
         // Razorpay provider
         Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
+
+        // Paytm provider
+        Wontonee\Paytm\Providers\PaytmServiceProvider::class,
+        
+        //Bulk Upload
+        Webkul\Bulkupload\Providers\BulkUploadServiceProvider::class,
+
+        //Contact
+        RKREZA\Contact\Providers\ContactServiceProvider::class,
+
+        //Whatsapp Contact
+        Smartarget\WhatsappContactUs\Providers\WhatsappContactUsServiceProvider::class
+
     ],
 
     /*

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abd4d8e7f27b44365618f5eec34cc2bc",
+    "content-hash": "f99a0bd8b8721fa76e7e141019c83c63",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -172,6 +172,63 @@
             "time": "2022-02-05T10:42:52+00:00"
         },
         {
+            "name": "bagisto/bagisto-bulk-upload",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bagisto/bagisto-bulk-upload.git",
+                "reference": "3238ada3aeaa920b03e48b5d4ff0cb875524c613"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bagisto/bagisto-bulk-upload/zipball/3238ada3aeaa920b03e48b5d4ff0cb875524c613",
+                "reference": "3238ada3aeaa920b03e48b5d4ff0cb875524c613",
+                "shasum": ""
+            },
+            "require": {
+                "konekt/concord": "^1.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webkul\\Bulkupload\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Prateek Srivastava",
+                    "email": "prateek.srivastava781@webkul.com",
+                    "homepage": "https://bagisto.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Add products using CSV or XLS in bagisto.",
+            "homepage": "https://github.com/bagisto/bagisto-bulk-upload",
+            "keywords": [
+                "bagisto",
+                "bulk upload",
+                "product upload"
+            ],
+            "support": {
+                "issues": "https://github.com/bagisto/bagisto-bulk-upload/issues",
+                "source": "https://github.com/bagisto/bagisto-bulk-upload/tree/master"
+            },
+            "time": "2022-01-12T09:12:07+00:00"
+        },
+        {
             "name": "bagisto/bagisto-dhl-shipping",
             "version": "dev-master",
             "source": {
@@ -278,6 +335,59 @@
                 "source": "https://github.com/bagisto/bagisto-rma/tree/master"
             },
             "time": "2022-01-17T13:21:10+00:00"
+        },
+        {
+            "name": "bagisto/bagisto-search-suggestion",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bagisto/bagisto-search-suggestion.git",
+                "reference": "d7c5bc336af60b99dd31aea9eceb1ee983225eb9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bagisto/bagisto-search-suggestion/zipball/d7c5bc336af60b99dd31aea9eceb1ee983225eb9",
+                "reference": "d7c5bc336af60b99dd31aea9eceb1ee983225eb9",
+                "shasum": ""
+            },
+            "require": {
+                "konekt/concord": "^1.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Webkul\\suggestion\\Providers\\suggestionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webkul\\suggestion\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "bagisto"
+                }
+            ],
+            "description": "Bagisto Search-suggestion is a feature to make it faster to complete searches that you're beginning to type.",
+            "homepage": "https://github.com/bagisto/bagisto-search-suggestion",
+            "keywords": [
+                "bagisto",
+                "search",
+                "search suggestion"
+            ],
+            "support": {
+                "issues": "https://github.com/bagisto/bagisto-search-suggestion/issues",
+                "source": "https://github.com/bagisto/bagisto-search-suggestion/tree/master"
+            },
+            "time": "2022-01-17T12:16:18+00:00"
         },
         {
             "name": "bagisto/legacy-api",
@@ -6289,6 +6399,50 @@
             "time": "2021-12-11T13:40:54+00:00"
         },
         {
+            "name": "smartarget/bagisto-whatsapp-contact-us",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/erezson/smartarget-bagisto-whatsapp-contact-us.git",
+                "reference": "b70d9d0979aa338a302eeca03c2d96db762231e7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/erezson%2Fsmartarget-bagisto-whatsapp-contact-us/repository/archive.zip?sha=b70d9d0979aa338a302eeca03c2d96db762231e7",
+                "reference": "b70d9d0979aa338a302eeca03c2d96db762231e7",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Smartarget\\WhatsappContactUs\\Providers\\WhatsappContactUsServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Smartarget\\WhatsappContactUs\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Smartarget",
+                    "email": "Support@smartarget.online"
+                }
+            ],
+            "description": "Allow customers to contact you using Whatsapp",
+            "support": {
+                "issues": "https://gitlab.com/api/v4/projects/27197010/issues"
+            },
+            "time": "2021-06-06T17:23:40+00:00"
+        },
+        {
             "name": "spatie/backtrace",
             "version": "1.2.1",
             "source": {
@@ -9060,6 +9214,51 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "wontonee/paytm",
+            "version": "4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wontone18/paytm-payment-gateway-bagisto-laravel.git",
+                "reference": "6b83a23f921dd4aaefe47d730b11e954bb5f82d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wontone18/paytm-payment-gateway-bagisto-laravel/zipball/6b83a23f921dd4aaefe47d730b11e954bb5f82d9",
+                "reference": "6b83a23f921dd4aaefe47d730b11e954bb5f82d9",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Wontonee\\Paytm\\Providers\\PaytmServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Wontonee\\Paytm\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Saju G",
+                    "email": "saju.g@wontonetech.com"
+                }
+            ],
+            "description": "Paytm payment gateway for bagisto laravel ecommerce",
+            "support": {
+                "issues": "https://github.com/wontone18/paytm-payment-gateway-bagisto-laravel/issues",
+                "source": "https://github.com/wontone18/paytm-payment-gateway-bagisto-laravel/tree/4.0"
+            },
+            "time": "2021-09-02T09:32:38+00:00"
         },
         {
             "name": "wontonee/razorpay",
@@ -12507,8 +12706,10 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "bagisto/bagisto-bulk-upload": 20,
         "bagisto/bagisto-dhl-shipping": 20,
         "bagisto/bagisto-rma": 20,
+        "bagisto/bagisto-search-suggestion": 20,
         "bagisto/rest-api": 20,
         "flynsarmy/db-blade-compiler": 20,
         "codeception/codeception": 20,
@@ -12520,5 +12721,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
