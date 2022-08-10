@@ -1598,6 +1598,17 @@ return [
             'logo-size'                             => 'Image resolution should be like 112px X 41px',
             'favicon-size'                          => 'Image resolution should be like 16px X 16px',
             'invoice-logo-size'                     => 'Image resolution should be like 192px X 50px',
+            //Razorpay 
+            'key-id'=> 'Key Id',
+            'key-secret' => 'Key Secret',
+            
+            //Paytm
+            'merchant-id'                      => 'Merchant Id',
+            'merchant-key'                      => 'Merchant Key',
+            'websitestatus'                      => 'Website',
+            'industrytype'                      => 'Industry Type',
+            'paytmstatus'                      => 'Status',
+            'callback-url'                      => 'Call Back URL'
         ],
     ],
 
@@ -1643,4 +1654,6 @@ return [
             'processing' => 'Order Processing',
         ],
     ],
+    
+    
 ];
