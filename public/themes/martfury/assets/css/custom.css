@@ -1,0 +1,9 @@
+a:visited, a:link {
+    color: inherit;
+}
+.header .header__actions {
+    justify-content: center;
+}
+.ps-form--quick-search .ps-form__categories {
+    border-radius: 4px 0 0 4px;
+}

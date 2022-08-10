@@ -1,11 +1,8 @@
 <template>
-    <a class="wishlist-btn unset" :href="src">
-        <i class="material-icons">favorite_border</i>
-
-        <div class="badge-container" v-if="wishlistCount > 0">
-            <span class="badge" v-text="wishlistCount"></span>
-        </div>
-
+    <a class="header__extra" :href="src">
+        <i class="icon-heart"></i>
+        <!-- <span v-if="wishlistCount > 0"><i v-text="wishlistCount"></i></span> -->
+        <span><i v-text="wishlistCount"></i></span>
         <span v-text="__('header.wishlist')" v-if="isText == 'true'"></span>
     </a>
 </template>
