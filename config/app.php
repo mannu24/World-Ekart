@@ -294,9 +294,6 @@ return [
         //Contact
         RKREZA\Contact\Providers\ContactServiceProvider::class,
 
-        //Whatsapp Contact
-        Smartarget\WhatsappContactUs\Providers\WhatsappContactUsServiceProvider::class
-
     ],
 
     /*

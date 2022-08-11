@@ -7,3 +7,9 @@ a:visited, a:link {
 .ps-form--quick-search .ps-form__categories {
     border-radius: 4px 0 0 4px;
 }
+.ps-block--user-account .ps-block__content {
+    min-width: 200px;
+}
+.locale-icon {
+    background-image: none;
+}
