@@ -281,7 +281,7 @@ return [
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
         Webkul\Notification\Providers\NotificationServiceProvider::class,
-
+        Webkul\SizeChart\Providers\SizeChartServiceProvider::class,
         // Razorpay provider
         Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
 
@@ -293,9 +293,6 @@ return [
 
         //Contact
         RKREZA\Contact\Providers\ContactServiceProvider::class,
-
-        //Whatsapp Contact
-        Smartarget\WhatsappContactUs\Providers\WhatsappContactUsServiceProvider::class
 
     ],
 

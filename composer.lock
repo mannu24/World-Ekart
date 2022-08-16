@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f99a0bd8b8721fa76e7e141019c83c63",
+    "content-hash": "99ceae18019d09277cfe72f655e658a9",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -227,59 +227,6 @@
                 "source": "https://github.com/bagisto/bagisto-bulk-upload/tree/master"
             },
             "time": "2022-01-12T09:12:07+00:00"
-        },
-        {
-            "name": "bagisto/bagisto-dhl-shipping",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bagisto/bagisto-dhl-shipping.git",
-                "reference": "b2e72628cb4146be56150725d998566caa1b2632"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/bagisto-dhl-shipping/zipball/b2e72628cb4146be56150725d998566caa1b2632",
-                "reference": "b2e72628cb4146be56150725d998566caa1b2632",
-                "shasum": ""
-            },
-            "require": {
-                "konekt/concord": "^1.2"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Webkul\\DHLShipping\\Providers\\DHLShippingServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webkul\\DHLShipping\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bagisto"
-                }
-            ],
-            "description": "Provides DHL Shipping methods for shipping the product.",
-            "homepage": "https://github.com/bagisto/bagisto-dhl-shipping",
-            "keywords": [
-                "bagisto",
-                "dhl",
-                "dhl shipping"
-            ],
-            "support": {
-                "issues": "https://github.com/bagisto/bagisto-dhl-shipping/issues",
-                "source": "https://github.com/bagisto/bagisto-dhl-shipping/tree/master"
-            },
-            "time": "2022-01-17T12:53:01+00:00"
         },
         {
             "name": "bagisto/bagisto-rma",
@@ -689,16 +636,16 @@
         },
         {
             "name": "brick/math",
-            "version": "0.10.1",
+            "version": "0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "de846578401f4e58f911b3afeb62ced56365ed87"
+                "reference": "459f2781e1a08d52ee56b0b1444086e038561e3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/de846578401f4e58f911b3afeb62ced56365ed87",
-                "reference": "de846578401f4e58f911b3afeb62ced56365ed87",
+                "url": "https://api.github.com/repos/brick/math/zipball/459f2781e1a08d52ee56b0b1444086e038561e3f",
+                "reference": "459f2781e1a08d52ee56b0b1444086e038561e3f",
                 "shasum": ""
             },
             "require": {
@@ -733,7 +680,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.10.1"
+                "source": "https://github.com/brick/math/tree/0.10.2"
             },
             "funding": [
                 {
@@ -741,7 +688,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-01T22:54:31+00:00"
+            "time": "2022-08-10T22:54:19+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -6397,50 +6344,6 @@
                 "source": "https://github.com/sabberworm/PHP-CSS-Parser/tree/8.4.0"
             },
             "time": "2021-12-11T13:40:54+00:00"
-        },
-        {
-            "name": "smartarget/bagisto-whatsapp-contact-us",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://gitlab.com/erezson/smartarget-bagisto-whatsapp-contact-us.git",
-                "reference": "b70d9d0979aa338a302eeca03c2d96db762231e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/erezson%2Fsmartarget-bagisto-whatsapp-contact-us/repository/archive.zip?sha=b70d9d0979aa338a302eeca03c2d96db762231e7",
-                "reference": "b70d9d0979aa338a302eeca03c2d96db762231e7",
-                "shasum": ""
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Smartarget\\WhatsappContactUs\\Providers\\WhatsappContactUsServiceProvider"
-                    ],
-                    "aliases": []
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Smartarget\\WhatsappContactUs\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Smartarget",
-                    "email": "Support@smartarget.online"
-                }
-            ],
-            "description": "Allow customers to contact you using Whatsapp",
-            "support": {
-                "issues": "https://gitlab.com/api/v4/projects/27197010/issues"
-            },
-            "time": "2021-06-06T17:23:40+00:00"
         },
         {
             "name": "spatie/backtrace",
@@ -12707,7 +12610,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "bagisto/bagisto-bulk-upload": 20,
-        "bagisto/bagisto-dhl-shipping": 20,
         "bagisto/bagisto-rma": 20,
         "bagisto/bagisto-search-suggestion": 20,
         "bagisto/rest-api": 20,
@@ -12721,5 +12623,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }
