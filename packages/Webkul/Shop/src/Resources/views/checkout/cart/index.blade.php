@@ -193,25 +193,10 @@
     @include('shop::checkout.cart.coupon')
 
     <script type="text/x-template" id="quantity-changer-template">
-        <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
-            <div class="wrap">
-                <label>{{ __('shop::app.products.quantity') }}</label>
-
-                <button type="button" class="decrease" @click="decreaseQty()">-</button>
-
-                <input
-                    ref="quantityChanger"
-                    class="control"
-                    :name="controlName"
-                    :model="qty"
-                    v-validate="validations"
-                    data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;"
-                    @keyup="setQty($event)">
-
-                <button type="button" class="increase" @click="increaseQty()">+</button>
-            </div>
-
-            <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
+        <div class="form-group--number quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
+            <button class="up" @click="increaseQty()">+</button>
+            <button class="down" @click="decreaseQty()">-</button>
+            <input ref="quantityChanger" :name="controlName" :model="qty" class="form-control" id="quantity-changer" v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" @keyup="setQty($event)"/>
         </div>
     </script>
 

@@ -17,4 +17,4 @@ use Auth ;
 
 
 Route::get('/become-a-vendor', [HomeController::class, 'become_a_vendor'])->name('become-a-vendor');
-Route::get('/order-tracking', [HomeController::class, 'order_tracking'])->name('order-tracking');
+Route::get('/track-order', [HomeController::class, 'order_tracking'])->name('track-order');

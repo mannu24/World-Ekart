@@ -22,7 +22,30 @@
     } else {
         $searchQuery = false;
     }
-@endphp
+    @endphp
+
+    @if (core()->getCurrentChannel()->currencies->count() > 1)
+        <li>
+            <div class="dropdown">
+                <select
+                    class="bg-transparent border-0 text-uppercase"
+                    onchange="window.location.href = this.value" aria-label="Locale">
+                    @foreach (core()->getCurrentChannel()->currencies as $currency)
+                        @if (isset($searchQuery) && $searchQuery)
+                            <option value="?{{ $searchQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                        @else
+                            <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                        @endif
+                    @endforeach
+
+                </select>
+
+                <div class="select-icon-container">
+                    <span class="select-icon rango-arrow-down"></span>
+                </div>
+            </div>
+        </li>
+    @endif
     <li>
         <div class="dropdown">
             <div class="locale-icon">
@@ -51,26 +74,3 @@
             </div>
         </div>
     </li>
-
-    @if (core()->getCurrentChannel()->currencies->count() > 1)
-        <li>
-            <div class="dropdown">
-               <select
-                    class="bg-transparent border-0 text-uppercase"
-                    onchange="window.location.href = this.value" aria-label="Locale">
-                    @foreach (core()->getCurrentChannel()->currencies as $currency)
-                        @if (isset($searchQuery) && $searchQuery)
-                            <option value="?{{ $searchQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
-                        @else
-                            <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
-                        @endif
-                    @endforeach
-
-                </select>
-
-                <div class="select-icon-container">
-                    <span class="select-icon rango-arrow-down"></span>
-                </div>
-            </div>
-        </li>
-    @endif

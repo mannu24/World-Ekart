@@ -17,7 +17,8 @@
                         <div class="ps-product__content">
                             <a class="ps-product__title" :href="`${$root.baseUrl}/${item.url_key}`" v-html="item.name"></a>
                             <p><small>
-                                {{ isTaxInclusive == '1' ? item.base_total_with_tax : item.base_total }} x {{item.quantity}}
+                                {{ isTaxInclusive == '1' ? item.base_total_with_tax : item.base_total }}
+                                 <!-- x {{item.quantity}} -->
                             </small></p>
                             <a class="ps-product__remove"  @click="removeProduct(item.id)">
                                 <i class="icon-cross"></i>

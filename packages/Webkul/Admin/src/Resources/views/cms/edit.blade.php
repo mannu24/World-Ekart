@@ -41,7 +41,6 @@
                     <div class="control-group">
                         <select class="control" id="locale-switcher" onChange="window.location.href = this.value">
                             @foreach (core()->getAllLocales() as $localeModel)
-
                                 <option value="{{ route('admin.cms.edit', $page->id) . '?locale=' . $localeModel->code }}" {{ ($localeModel->code) == $locale ? 'selected' : '' }}>
                                     {{ $localeModel->name }}
                                 </option>
@@ -94,7 +93,7 @@
                                 <span class="control-error" v-if="errors.has('channels[]')">@{{ errors.first('channels[]') }}</span>
                             </div>
 
-                            <div class="control-group" :class="[errors.has('{{$locale}}[html_content]') ? 'has-error' : '']">
+                            <div class="control-group" style="width:100%" :class="[errors.has('{{$locale}}[html_content]') ? 'has-error' : '']">
                                 <label for="html_content" class="required">{{ __('admin::app.cms.pages.content') }}</label>
 
                                 <textarea type="text" class="control" id="content" name="{{$locale}}[html_content]" v-validate="'required'" data-vv-as="&quot;{{ __('admin::app.cms.pages.content') }}&quot;">{{ old($locale)['html_content'] ?? ($page->translate($locale)['html_content'] ?? '') }}</textarea>
