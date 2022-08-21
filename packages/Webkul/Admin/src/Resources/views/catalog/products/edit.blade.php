@@ -83,6 +83,7 @@
 
             <div class="page-content">
                 @csrf()
+                <input type="hidden" name="user_id" value="{{auth()->guard('admin')->user()->id}}">
 
                 <input name="_method" type="hidden" value="PUT">
 

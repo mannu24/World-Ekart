@@ -28,8 +28,17 @@ class CustomerReviewDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+
+        }
+        else{
+            $p_ids = DB::table('products')->pluck('id');
+        }
+        
         $queryBuilder = DB::table('product_reviews as pr')
             ->leftjoin('product_flat as pf', 'pr.product_id', '=', 'pf.product_id')
+            ->whereIn('pr.product_id',$p_ids)
             ->select('pr.id as product_review_id', 'pr.title', 'pr.comment', 'pf.name as product_name', 'pr.status as product_review_status', 'pr.rating', 'pr.created_at')
             ->where('channel', core()->getCurrentChannelCode())
             ->where('locale', app()->getLocale());

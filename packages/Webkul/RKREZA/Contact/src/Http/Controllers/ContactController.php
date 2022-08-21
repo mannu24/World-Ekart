@@ -30,7 +30,7 @@ class ContactController extends Controller
 
     public function index()
     {
-        $contact        = $this->contact->all();
+        $contact = $this->contact->all();
         return view($this->_config['view'], compact('contact'));
     }
 

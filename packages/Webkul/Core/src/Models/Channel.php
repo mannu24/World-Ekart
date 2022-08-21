@@ -24,6 +24,7 @@ class Channel extends TranslatableModel implements ChannelContract
         'theme',
         'home_page_content',
         'footer_content',
+        'site_name',
         'hostname',
         'default_locale_id',
         'base_currency_id',

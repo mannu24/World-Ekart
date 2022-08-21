@@ -4,7 +4,7 @@ namespace Webkul\Notification\Http\Controllers\Admin;
 
 use Illuminate\Routing\Controller;
 use Webkul\Notification\Repositories\NotificationRepository;
-
+use DB;
 class NotificationController extends Controller
 {
     /**
@@ -52,6 +52,14 @@ class NotificationController extends Controller
      */
     public function getNotifications()
     {
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+
+            $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
+        }
+        else{
+            $o_ids = DB::table('orders')->pluck('id');
+        }
         $params = request()->all();
 
         if (isset($params['page'])) {

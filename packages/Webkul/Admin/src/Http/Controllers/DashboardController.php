@@ -217,6 +217,8 @@ class DashboardController extends Controller
      */
     public function getTopSellingCategories()
     {
+        if(auth()->guard('admin')->user()->role_id==1){
+
         return $this->orderItemRepository->getModel()
             ->leftJoin('products', 'order_items.product_id', 'products.id')
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
@@ -233,6 +235,27 @@ class DashboardController extends Controller
             ->orderBy('total_qty_invoiced', 'DESC')
             ->limit(5)
             ->get();
+        }
+        else{
+            return $this->orderItemRepository->getModel()
+            ->leftJoin('products', 'order_items.product_id', 'products.id')
+            ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
+            ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
+            ->leftJoin('category_translations', 'categories.id', 'category_translations.category_id')
+            ->where('products.user_id',auth()->guard('admin')->user()->role_id)
+            ->where('category_translations.locale', app()->getLocale())
+            ->where('order_items.created_at', '>=', $this->startDate)
+            ->where('order_items.created_at', '<=', $this->endDate)
+            ->addSelect(DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_invoiced'))
+            ->addSelect(DB::raw('COUNT(' . DB::getTablePrefix() . 'products.id) as total_products'))
+            ->addSelect('order_items.id', 'categories.id as category_id', 'category_translations.name')
+            ->groupBy('categories.id')
+            ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
+            ->orderBy('total_qty_invoiced', 'DESC')
+            ->limit(5)
+            ->get();
+        }
+
     }
 
     /**
@@ -242,6 +265,8 @@ class DashboardController extends Controller
      */
     public function getStockThreshold()
     {
+        if(auth()->guard('admin')->user()->role_id==1){
+
         return $this->productInventoryRepository->getModel()
             ->leftJoin('products', 'product_inventories.product_id', 'products.id')
             ->select(DB::raw('SUM(qty) as total_qty'))
@@ -250,6 +275,18 @@ class DashboardController extends Controller
             ->orderBy('total_qty', 'ASC')
             ->limit(5)
             ->get();
+        }
+        else{
+            return $this->productInventoryRepository->getModel()
+            ->leftJoin('products', 'product_inventories.product_id', 'products.id')
+            ->where('products.user_id',auth()->guard('admin')->user()->role_id)
+            ->select(DB::raw('SUM(qty) as total_qty'))
+            ->addSelect('product_inventories.product_id')
+            ->groupBy('product_id')
+            ->orderBy('total_qty', 'ASC')
+            ->limit(5)
+            ->get();
+        }
     }
 
     /**
@@ -259,7 +296,9 @@ class DashboardController extends Controller
      */
     public function getTopSellingProducts()
     {
-        return $this->orderItemRepository->getModel()
+        if(auth()->guard('admin')->user()->role_id==1){
+
+            return $this->orderItemRepository->getModel()
             ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->addSelect('id', 'product_id', 'product_type', 'name')
             ->where('order_items.created_at', '>=', $this->startDate)
@@ -269,6 +308,28 @@ class DashboardController extends Controller
             ->orderBy('total_qty_ordered', 'DESC')
             ->limit(5)
             ->get();
+            }
+            else{
+                if (auth()->guard('admin')->user()->role_id != 1) {
+                    $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+        
+                }
+                else{
+                    $p_ids = DB::table('products')->pluck('id');
+                }
+                return $this->orderItemRepository->getModel()
+                    ->whereIn('product_id',$p_ids)
+                    ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+                    ->addSelect('id', 'product_id', 'product_type', 'name')
+                    ->where('order_items.created_at', '>=', $this->startDate)
+                    ->where('order_items.created_at', '<=', $this->endDate)
+                    ->whereNull('parent_id')
+                    ->groupBy('product_id')
+                    ->orderBy('total_qty_ordered', 'DESC')
+                    ->limit(5)
+                    ->get();
+            }
+        
     }
 
     /**
@@ -278,10 +339,20 @@ class DashboardController extends Controller
      */
     public function getCustomerWithMostSales()
     {
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+
+            $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
+        }
+        else{
+            $o_ids = DB::table('orders')->pluck('id');
+        }
+
         $dbPrefix = DB::getTablePrefix();
 
         return $this->orderRepository->getModel()
             ->leftJoin('refunds', 'orders.id', 'refunds.order_id')
+            ->whereIn('orders.id',$o_ids)
             ->select(DB::raw("(SUM({$dbPrefix}orders.base_grand_total) - SUM(IFNULL({$dbPrefix}refunds.base_grand_total, 0))) as total_base_grand_total"))
             ->addSelect(DB::raw("COUNT({$dbPrefix}orders.id) as total_orders"))
             ->addSelect('orders.id', 'customer_id', 'customer_email', 'customer_first_name', 'customer_last_name')
@@ -324,8 +395,17 @@ class DashboardController extends Controller
      */
     private function getOrdersBetweenDate($start, $end)
     {
-        return $this->orderRepository->scopeQuery(function ($query) use ($start, $end) {
-            return $query->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end);
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+
+            $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
+        }
+        else{
+            $o_ids = DB::table('orders')->pluck('id');
+        }
+
+        return $this->orderRepository->scopeQuery(function ($query) use ($start, $end,$o_ids) {
+            return $query->whereIn('orders.id',$o_ids)->where('orders.created_at', '>=', $start)->where('orders.created_at', '<=', $end);
         });
     }
 

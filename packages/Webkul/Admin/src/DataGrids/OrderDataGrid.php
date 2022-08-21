@@ -29,7 +29,18 @@ class OrderDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+
+            $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
+        }
+        else{
+            $o_ids = DB::table('orders')->pluck('id');
+        }
+
+        // $queryBuilder = DB::table('orders')->whereIn('id', $o_ids);
         $queryBuilder = DB::table('orders')
+           
             ->leftJoin('addresses as order_address_shipping', function ($leftJoin) {
                 $leftJoin->on('order_address_shipping.order_id', '=', 'orders.id')
                     ->where('order_address_shipping.address_type', OrderAddress::ADDRESS_TYPE_SHIPPING);
@@ -38,6 +49,7 @@ class OrderDataGrid extends DataGrid
                 $leftJoin->on('order_address_billing.order_id', '=', 'orders.id')
                     ->where('order_address_billing.address_type', OrderAddress::ADDRESS_TYPE_BILLING);
             })
+            ->whereIn('orders.id', $o_ids)
             ->addSelect('orders.id', 'orders.increment_id', 'orders.base_sub_total', 'orders.base_grand_total', 'orders.created_at', 'channel_name', 'status')
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_billing.first_name, " ", ' . DB::getTablePrefix() . 'order_address_billing.last_name) as billed_to'))
             ->addSelect(DB::raw('CONCAT(' . DB::getTablePrefix() . 'order_address_shipping.first_name, " ", ' . DB::getTablePrefix() . 'order_address_shipping.last_name) as shipped_to'));

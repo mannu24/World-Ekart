@@ -297,6 +297,10 @@
 <a class="ps-btn" href="#">Contact Us</a></div>
 </div>
 </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> a3afc2209cc7f508b98ea655af8cc02205df9d36
 <div class="ps-vendor-banner bg--cover" style="background-image: url('http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg');">
 <div class="ps-vendor-banner">
 <div class="container">
@@ -304,4 +308,9 @@
 <a class="ps-btn ps-btn--lg" href="#">Start Selling</a></div>
 </div>
 </div>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> ecf387f7f1687544b5dbc1de8ba52fb89f4694b5
+>>>>>>> a3afc2209cc7f508b98ea655af8cc02205df9d36
 </div>

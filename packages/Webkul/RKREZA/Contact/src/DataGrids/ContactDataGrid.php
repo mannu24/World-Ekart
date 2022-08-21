@@ -16,9 +16,18 @@ class ContactDataGrid extends DataGrid
 
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('contacts')
-                ->addSelect('contacts.id as contact_id', 'name', 'email', 'message_title', 'message_body','message_reply');
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
 
+            $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
+
+            $queryBuilder = DB::table('contacts')->whereIn('order_id',$o_ids)
+                ->addSelect('contacts.id as contact_id', 'name', 'email', 'message_title', 'message_body','message_reply');
+        }
+        else{
+            $queryBuilder = DB::table('contacts')
+                ->addSelect('contacts.id as contact_id', 'name', 'email', 'message_title', 'message_body','message_reply');
+        }
 
         $this->addFilter('contact_id', 'contacts.id');
 
