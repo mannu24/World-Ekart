@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
 
     <link rel="stylesheet" href="{{ bagisto_asset('css/shop.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('themes/default/assets/css/shop.css') }}"> --}}
     <link rel="stylesheet" href="{{ bagisto_asset('css/custom.css') }}">
 
     @if ($favicon = core()->getCurrentChannel()->favicon_url)
@@ -46,7 +47,8 @@
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
     <div id="app">
-        {{-- <flash-wrapper ref='flashes'></flash-wrapper> --}}
+        <flash-wrapper ref='flashes'></flash-wrapper>
+        <product-quick-view v-if="$root.quickView"></product-quick-view>
 
         <div class="main-container-wrapper">
 

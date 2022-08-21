@@ -1,7 +1,8 @@
 <template>
     <a class="header__extra" :href="src">
         <i class="icon-heart"></i>
-        <span v-if="wishlistCount > 0"><i v-text="wishlistCount"></i></span>
+        <!-- <span v-if="wishlistCount > 0"><i v-text="wishlistCount"></i></span> -->
+        <span><i v-text="wishlistCount"></i></span>
         <span v-text="__('header.wishlist')" v-if="isText == 'true'"></span>
     </a>
 </template>

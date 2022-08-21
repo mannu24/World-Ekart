@@ -17,6 +17,13 @@ return [
             'parent' => 'default'
         ],
 
+        'ekart' => [
+            'views_path' => 'resources/themes/ekart/views',
+            'assets_path' => 'public/themes/ekart/assets',
+            'name' => 'Ekart',
+            'parent' => 'Velocity'
+        ],
+
         'velocity' => [
             'views_path' => 'resources/themes/velocity/views',
             'assets_path' => 'public/themes/velocity/assets',

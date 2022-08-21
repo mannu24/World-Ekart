@@ -1,11 +1,11 @@
 <div v-if="is_customer_exist">
-    <div class="control-group" id="password">
+    <div class="control-group form-group col-md-6" id="password">
         <label for="password">{{ __('shop::app.checkout.onepage.password') }}</label>
 
-        <input type="password" class="control" id="password" name="password" v-model="address.billing.password"/>
+        <input type="password" class="form-control" id="password" name="password" v-model="address.billing.password"/>
     </div>
 
-    <div class="control-group" id="login-and-forgot-btn">
+    <div class="control-group form-group" id="login-and-forgot-btn">
         <div class="forgot-password-link"  style="float: right; margin-right: 503px; margin-top: 11px;">
             <a href="{{ route('customer.forgot-password.create') }}">{{ __('shop::app.customer.login-form.forgot_pass') }}</a>
 
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <button type='button' id="" class="btn btn-primary btn-lg btn-login" @click="loginCustomer">
+        <button type='button' id="" class="ps-btn btn-login" @click="loginCustomer">
             {{ __('shop::app.customer.login-form.button_title') }}
         </button>
     </div>

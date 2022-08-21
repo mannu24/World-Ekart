@@ -19,7 +19,7 @@
             <div class="ps-section__header"><h1>Shopping Cart</h1></div>
             <form action="{{ route('shop.checkout.cart.update') }}" method="POST" @submit.prevent="onSubmit">
                 <div class="ps-section__content">
-                    @if ($cart)
+                    @if (!is_null($cart))
                             <table class="table  ps-table--shopping-cart ps-table--responsive">
                                 <thead>
                                     <tr>
@@ -84,70 +84,72 @@
                     @endif
                     <div class="ps-section__cart-actions">
                         <a href="{{ route('shop.home.index') }}" class="ps-btn">{{ __('shop::app.checkout.cart.continue-shopping') }}</a>
-                        @if ($cart->hasProductsWithQuantityBox())
+                        @if ($cart && $cart->hasProductsWithQuantityBox())
                             <button type="submit" class="ps-btn" id="update_cart_button">{{ __('shop::app.checkout.cart.update-cart') }}</button>
                         @endif
                     </div>
                 </div>
-                <div class="ps-section__footer">
-                    <div class="row justify-space-between">
-                        <div class="col-xl-8 col-lg-4 col-md-12 col-sm-12 col-12 ">
-                            <div class="row">
-                                <coupon-component></coupon-component>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
-                            <div class="ps-block--shopping-total">
-                                <div class="ps-block__header">
-                                    <p> Subtotal <span> {{ core()->currency($cart->base_sub_total) }}</span> </p>
+                @if (!is_null($cart))
+                    <div class="ps-section__footer">
+                        <div class="row justify-space-between">
+                            <div class="col-xl-8 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                                <div class="row">
+                                    <coupon-component></coupon-component>
                                 </div>
-                                @if ($cart->selected_shipping_rate)
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
+                                <div class="ps-block--shopping-total">
                                     <div class="ps-block__header">
-                                        <p>{{ __('shop::app.checkout.total.delivery-charges') }}
-                                            <span> {{ core()->currency($cart->selected_shipping_rate->base_price) }}</span>
-                                        </p>
+                                        <p> Subtotal <span> {{ core()->currency($cart->base_sub_total) }}</span> </p>
                                     </div>
-                                @endif
-                                @if ($cart->base_tax_total)
-                                    @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($cart, true) as $taxRate => $baseTaxAmount )
-                                    <div class="ps-block__header">
-                                        <p>{{ __('shop::app.checkout.total.tax') }} {{ $taxRate }} %
-                                            <span> {{ core()->currency($baseTaxAmount) }}</span>
-                                        </p>
-                                    </div>
-                                    @endforeach
-                                @endif
-                                <div class="ps-block__content">
-                                    <ul class="ps-block__product">
-                                        @foreach ($cart->items as $item)
-                                            <li>
-                                                <span class="ps-block__estimate">
-                                                    <a href="/product/[pid]" class="ps-product__title">
-                                                        {{ $item->name }} <br /> x {{ $item->quantity }}
-                                                    </a>
-                                                </span>
-                                            </li>
+                                    @if ($cart->selected_shipping_rate)
+                                        <div class="ps-block__header">
+                                            <p>{{ __('shop::app.checkout.total.delivery-charges') }}
+                                                <span> {{ core()->currency($cart->selected_shipping_rate->base_price) }}</span>
+                                            </p>
+                                        </div>
+                                    @endif
+                                    @if ($cart->base_tax_total)
+                                        @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($cart, true) as $taxRate => $baseTaxAmount )
+                                        <div class="ps-block__header">
+                                            <p>{{ __('shop::app.checkout.total.tax') }} {{ $taxRate }} %
+                                                <span> {{ core()->currency($baseTaxAmount) }}</span>
+                                            </p>
+                                        </div>
                                         @endforeach
-                                    </ul>
-                                    <h3>{{ __('shop::app.checkout.total.grand-total') }}<span>{{ core()->currency($cart->base_grand_total) }}</span></h3>
+                                    @endif
+                                    <div class="ps-block__content">
+                                        <ul class="ps-block__product">
+                                            @foreach ($cart->items as $item)
+                                                <li>
+                                                    <span class="ps-block__estimate">
+                                                        <a href="/product/[pid]" class="ps-product__title">
+                                                            {{ $item->name }} <br /> x {{ $item->quantity }}
+                                                        </a>
+                                                    </span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                        <h3>{{ __('shop::app.checkout.total.grand-total') }}<span>{{ core()->currency($cart->base_grand_total) }}</span></h3>
+                                    </div>
                                 </div>
+                                @if (! cart()->hasError())
+                                    @php
+                                        $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
+                                        // dd($cart->items) ;
+                                    @endphp
+                                    <proceed-to-checkout
+                                        href="{{ route('shop.checkout.onepage.index') }}"
+                                        add-class="ps-btn"
+                                        text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
+                                        is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
+                                        minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
+                                    </proceed-to-checkout>
+                                @endif
                             </div>
-                            @if (! cart()->hasError())
-                                @php
-                                    $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
-                                    // dd($cart->items) ;
-                                @endphp
-                                <proceed-to-checkout
-                                    href="{{ route('shop.checkout.onepage.index') }}"
-                                    add-class="ps-btn"
-                                    text="{{ __('shop::app.checkout.cart.proceed-to-checkout') }}"
-                                    is-minimum-order-completed="{{ $cart->checkMinimumOrder() }}"
-                                    minimum-order-message="{{ __('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) }}">
-                                </proceed-to-checkout>
-                            @endif
                         </div>
                     </div>
-                </div>
+                @endif
             </form>
         </div>
     </div>

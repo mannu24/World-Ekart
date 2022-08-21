@@ -5,7 +5,22 @@
 @stop
 
 @section('content-wrapper')
-    <checkout></checkout>
+<div class="ps-page--my-account">
+    <div class="ps-breadcrumb border-bottom">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="{{ route('shop.home.index') }}">{{ __('shop::app.home.home-title') }}</a></li>
+                <li>{{ __('shop::app.checkout.onepage.title') }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ps-checkout ps-section--shopping pt-50">
+        <div class="container">
+            <div class="ps-section__header pb-5"><h1>{{ __('shop::app.checkout.onepage.title') }}</h1></div>
+                <checkout></checkout>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
@@ -51,7 +66,7 @@
                     @include('shop::checkout.onepage.customer-info')
 
                     <div class="button-group">
-                        <button type="button" class="btn btn-lg btn-primary" @click="validateForm('address-form')" :disabled="disable_button" id="checkout-address-continue-button">
+                        <button type="button" class="ps-btn" @click="validateForm('address-form')" :disabled="disable_button" id="checkout-address-continue-button">
                             {{ __('shop::app.checkout.onepage.continue') }}
                         </button>
                     </div>
@@ -98,7 +113,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-right" v-show="current_step != 4">
                 <summary-section :key="summeryComponentKey"></summary-section>
             </div>

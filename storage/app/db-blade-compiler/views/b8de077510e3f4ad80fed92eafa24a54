@@ -297,4 +297,11 @@
 <a class="ps-btn" href="#">Contact Us</a></div>
 </div>
 </div>
+<div class="ps-vendor-banner bg--cover" style="background-image: url('http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg');">
+<div class="ps-vendor-banner">
+<div class="container">
+<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>
+<a class="ps-btn ps-btn--lg" href="#">Start Selling</a></div>
+</div>
+</div>
 </div>

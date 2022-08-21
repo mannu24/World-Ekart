@@ -47,5 +47,4 @@
         </a>
     </div>
 </div>
-
 <div class="horizontal-rule mb-10 mt-10"></div>
