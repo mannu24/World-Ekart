@@ -22,6 +22,7 @@
 @section('content')
     <div class="content">
         <form method="POST" action="" @submit.prevent="onSubmit">
+
             <div class="page-header">
                 <div class="page-title">
                     <h1>
@@ -40,7 +41,7 @@
 
             <div class="page-content">
                 @csrf()
-
+                <input type="hidden" name="user_id" value="{{auth()->guard('admin')->user()->id}}">
                 @php
                     $familyId = request()->input('family');
                 @endphp

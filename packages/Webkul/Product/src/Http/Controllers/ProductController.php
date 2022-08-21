@@ -208,7 +208,8 @@ class ProductController extends Controller
         $categories = $this->categoryRepository->getCategoryTree();
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
-
+        // // $user = auth;
+        // dd(auth()->guard('admin')->user()->id);
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
     }
 

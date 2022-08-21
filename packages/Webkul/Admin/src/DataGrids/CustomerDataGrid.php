@@ -35,7 +35,30 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('customers')
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+
+            $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
+
+            $queryBuilder = DB::table('customers')
+            ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
+            ->leftJoin('orders', 'customers.id', '=', 'orders.customer_id')
+            ->whereIn('orders.id',$o_ids)
+            ->addSelect(
+                'customers.id as customer_id',
+                'customers.email',
+                'customers.phone',
+                'customers.gender',
+                'customers.status',
+                'customers.is_suspended',
+                'customer_groups.name as group',
+            )
+            ->addSelect(
+                DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name')
+            );
+        }
+        else{
+             $queryBuilder = DB::table('customers')
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
             ->addSelect(
                 'customers.id as customer_id',
@@ -49,6 +72,9 @@ class CustomerDataGrid extends DataGrid
             ->addSelect(
                 DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name) as full_name')
             );
+        }
+
+       
 
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('full_name', DB::raw('CONCAT(' . DB::getTablePrefix() . 'customers.first_name, " ", ' . DB::getTablePrefix() . 'customers.last_name)'));

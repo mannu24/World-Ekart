@@ -3,7 +3,7 @@
 namespace Webkul\Notification\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
-
+use DB;
 class NotificationRepository extends Repository
 {
     /**
@@ -23,6 +23,15 @@ class NotificationRepository extends Repository
      */
     public function getParamsData($params)
     {
+        if (auth()->guard('admin')->user()->role_id != 1) {
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+
+            $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
+        }
+        else{
+            $o_ids = DB::table('orders')->pluck('id');
+        }
+        $this->model = $this->model->whereIn('order_id',$o_ids);
         if (isset($params['id']) && isset($params['status'])) {
             return $params['status'] != 'All' ? $this->model->where(function($qry) use ($params) {
                     $qry->whereHas('order',function ($q) use ($params) {

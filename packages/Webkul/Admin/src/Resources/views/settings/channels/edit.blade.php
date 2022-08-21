@@ -217,6 +217,50 @@
                                 <span class="control-info mt-10">{{ __('admin::app.settings.channels.favicon-size') }}</span> 
                             </div>
 
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.site_name') }}</label>
+
+                                <input type="text" v-validate="''" class="control" name="{{$locale}}[site_name]" value="{{ old($locale)['site_name'] ?? ($channel->translate($locale)['site_name'] ?? $channel->site_name) }}" />
+                                
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.email_address') }}</label>
+
+                                <input type="text" v-validate="''" class="control" name="{{$locale}}[email_address]" value="{{ old($locale)['email_address'] ?? ($channel->translate($locale)['email_address'] ?? $channel->email_address) }}" />
+                                
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.phone_number') }}</label>
+
+                                <input type="text" v-validate="''" class="control" name="{{$locale}}[phone_number]" value="{{ old($locale)['phone_number'] ?? ($channel->translate($locale)['phone_number'] ?? $channel->phone_number) }}" />
+                                
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.address') }}</label>
+
+                                <!-- <input type="text" v-validate="''" class="control" name="{{$locale}}[address]" value="{{ old($locale)['address'] ?? ($channel->translate($locale)['address'] ?? $channel->address) }}" /> -->
+
+                                <textarea class="control" id="address" name="{{$locale}}[address]">{{ old($locale)['address'] ?? ($channel->translate($locale)['address'] ?? $channel->address) }}</textarea>
+                                
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.facebook_link') }}</label>
+
+                                <input type="text" v-validate="''" class="control" name="{{$locale}}[facebook_link]" value="{{ old($locale)['facebook_link'] ?? ($channel->translate($locale)['facebook_link'] ?? $channel->facebook_link) }}" />
+                                
+                            </div>
+
+                            <div class="control-group">
+                                <label>{{ __('admin::app.settings.channels.instagram_link') }}</label>
+
+                                <input type="text" v-validate="''" class="control" name="{{$locale}}[instagram_link]" value="{{ old($locale)['instagram_link'] ?? ($channel->translate($locale)['instagram_link'] ?? $channel->instagram_link) }}" />
+                                
+                            </div>
+
                         </div>
                     </accordian>
 

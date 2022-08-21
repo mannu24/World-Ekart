@@ -23,32 +23,33 @@
         <div class="page-content">
 
             <div class="dashboard-stats">
+                @if(auth()->guard('admin')->user()->role_id == 1)
+                    <div class="dashboard-card">
+                        <div class="title">
+                            {{ __('admin::app.dashboard.total-customers') }}
+                        </div>
 
-                <div class="dashboard-card">
-                    <div class="title">
-                        {{ __('admin::app.dashboard.total-customers') }}
+                        <div class="data">
+                            {{ $statistics['total_customers']['current'] }}
+
+                            <span class="progress">
+                                @if ($statistics['total_customers']['progress'] < 0)
+                                    <span class="icon graph-down-icon"></span>
+                                    {{ __('admin::app.dashboard.decreased', [
+                                            'progress' => -number_format($statistics['total_customers']['progress'], 1)
+                                        ])
+                                    }}
+                                @else
+                                    <span class="icon graph-up-icon"></span>
+                                    {{ __('admin::app.dashboard.increased', [
+                                            'progress' => number_format($statistics['total_customers']['progress'], 1)
+                                        ])
+                                    }}
+                                @endif
+                            </span>
+                        </div>
                     </div>
-
-                    <div class="data">
-                        {{ $statistics['total_customers']['current'] }}
-
-                        <span class="progress">
-                            @if ($statistics['total_customers']['progress'] < 0)
-                                <span class="icon graph-down-icon"></span>
-                                {{ __('admin::app.dashboard.decreased', [
-                                        'progress' => -number_format($statistics['total_customers']['progress'], 1)
-                                    ])
-                                }}
-                            @else
-                                <span class="icon graph-up-icon"></span>
-                                {{ __('admin::app.dashboard.increased', [
-                                        'progress' => number_format($statistics['total_customers']['progress'], 1)
-                                    ])
-                                }}
-                            @endif
-                        </span>
-                    </div>
-                </div>
+                @endif
 
                 <div class="dashboard-card">
                     <div class="title">

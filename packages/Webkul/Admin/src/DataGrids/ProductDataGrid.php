@@ -52,6 +52,7 @@ class ProductDataGrid extends DataGrid
     protected $extraFilters = [
         'channels',
         'locales',
+        'user_id',
     ];
 
     /**
@@ -91,24 +92,49 @@ class ProductDataGrid extends DataGrid
         }
 
         /* query builder */
-        $queryBuilder = DB::table('product_flat')
-            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
-            ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
-            ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
-            ->select(
-                'product_flat.locale',
-                'product_flat.channel',
-                'product_flat.product_id',
-                'products.sku as product_sku',
-                'product_flat.product_number',
-                'product_flat.name as product_name',
-                'products.type as product_type',
-                'product_flat.status',
-                'product_flat.price',
-                'attribute_families.name as attribute_family',
-                DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
-            );
+        if(auth()->guard('admin')->user()->role_id==1){
 
+            $queryBuilder = DB::table('product_flat')
+                ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
+                ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+                ->leftJoin('admins', 'products.user_id', '=', 'admins.id')
+                ->select(
+                    'product_flat.locale',
+                    'product_flat.channel',
+                    'admins.name as vendor_name',
+                    'product_flat.product_id',
+                    'products.sku as product_sku',
+                    'product_flat.product_number',
+                    'product_flat.name as product_name',
+                    'products.type as product_type',
+                    'product_flat.status',
+                    'product_flat.price',
+                    'attribute_families.name as attribute_family',
+                    DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
+                );
+        }
+        else{
+            $queryBuilder = DB::table('product_flat')
+                ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
+                ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
+                ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+                ->select(
+                    'product_flat.locale',
+                    'product_flat.channel',
+                    'product_flat.product_id',
+                    'products.sku as product_sku',
+                    'product_flat.product_number',
+                    'product_flat.name as product_name',
+                    'products.type as product_type',
+                    'product_flat.status',
+                    'product_flat.price',
+                    'attribute_families.name as attribute_family',
+                    DB::raw('SUM(' . DB::getTablePrefix() . 'product_inventories.qty) as quantity')
+                )->where('products.user_id',auth()->guard('admin')->user()->id);
+        }
+
+        ///
         $queryBuilder->groupBy('product_flat.product_id', 'product_flat.locale', 'product_flat.channel');
 
         $queryBuilder->whereIn('product_flat.locale', $whereInLocales);
@@ -132,6 +158,8 @@ class ProductDataGrid extends DataGrid
      */
     public function addColumns()
     {
+        
+
         $this->addColumn([
             'index'      => 'product_id',
             'label'      => trans('admin::app.datagrid.id'),
@@ -140,6 +168,16 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
         ]);
+        if(auth()->guard('admin')->user()->role_id==1){
+            $this->addColumn([
+                'index'      => 'vendor_name',
+                'label'      => 'Vendor',
+                'type'       => 'string',
+                'searchable' => true,
+                'sortable'   => false,
+                'filterable' => true,
+            ]);
+        }
 
         $this->addColumn([
             'index'      => 'product_sku',
@@ -158,6 +196,8 @@ class ProductDataGrid extends DataGrid
             'sortable'   => true,
             'filterable' => true,
         ]);
+
+        
 
         $this->addColumn([
             'index'      => 'product_name',

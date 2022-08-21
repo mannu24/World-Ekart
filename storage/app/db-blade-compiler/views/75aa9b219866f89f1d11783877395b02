@@ -1,11 +1,11 @@
 <div class="list-container"><span class="list-heading">Quick Links</span>
 <ul class="list-group">
-<li><a href="http://localhost:8000/page/about-us">About Us</a></li>
-<li><a href="http://localhost:8000/page/return-policy">Return Policy</a></li>
-<li><a href="http://localhost:8000/page/refund-policy">Refund Policy</a></li>
-<li><a href="http://localhost:8000/page/terms-conditions">Terms and conditions</a></li>
-<li><a href="http://localhost:8000/page/terms-of-use">Terms of Use</a></li>
-<li><a href="http://localhost:8000/page/contact-us">Contact Us</a></li>
+<li><a href="http://localhost/page/about-us">About Us</a></li>
+<li><a href="http://localhost/page/return-policy">Return Policy</a></li>
+<li><a href="http://localhost/page/refund-policy">Refund Policy</a></li>
+<li><a href="http://localhost/page/terms-conditions">Terms and conditions</a></li>
+<li><a href="http://localhost/page/terms-of-use">Terms of Use</a></li>
+<li><a href="http://localhost/page/contact-us">Contact Us</a></li>
 </ul>
 </div>
 <div class="list-container"><span class="list-heading">Connect With Us</span>

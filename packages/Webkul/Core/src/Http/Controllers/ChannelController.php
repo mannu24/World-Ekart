@@ -116,7 +116,7 @@ class ChannelController extends Controller
     public function edit($id)
     {
         $channel = $this->channelRepository->with(['locales', 'currencies'])->findOrFail($id);
-
+        // return $channel;
         return view($this->_config['view'], compact('channel'));
     }
 
@@ -149,6 +149,12 @@ class ChannelController extends Controller
             'theme'                        => 'nullable',
             $locale . '.home_page_content' => 'nullable',
             $locale . '.footer_content'    => 'nullable',
+            $locale . '.site_name'         => 'nullable',
+            $locale . '.email_address'     => 'nullable',
+            $locale . '.phone_number'      => 'nullable',
+            $locale . '.address'           => 'nullable',
+            $locale . '.facebook_link'     => 'nullable',
+            $locale . '.instagram_link'    => 'nullable',
             'logo.*'                       => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
             'favicon.*'                    => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
 
@@ -162,7 +168,7 @@ class ChannelController extends Controller
             $locale . '.maintenance_mode_text' => 'nullable',
             'allowed_ips'                      => 'nullable',
         ]);
-
+        // dd($da)
         $data = $this->setSEOContent($data, $locale);
 
         $channel = $this->channelRepository->update($data, $id);
