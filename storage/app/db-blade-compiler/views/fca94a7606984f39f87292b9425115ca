@@ -1,1 +1,14 @@
-<div class="static-container"><div class="mb-5">About us page content</div></div>
+<div class="ps-page--single static-page">
+<div class="ps-breadcrumb">
+<div class="container">
+<ul class="breadcrumb">
+<li><a href="http://localhost:8000/">Home</a></li>
+<li>About Us</li>
+</ul>
+</div>
+</div>
+<div class="container-xl">
+<h2 class="text-center">About World E-Kart</h2>
+<p>We are Maximizers. We're out on our own journeys to maximize - be the best at what we choose and care about the most - whether it be our impact, voice, potential, ideas, influence, well-being or more. Because when we Maximize ourselves in our inclusive teams, Worldekart is able to deliver the best imaginable value for our customers and the planet!<br /><br />We're known more by the impact we create than the titles we hold. Impact that is brought by working together on audacious challenges at scale with an aim to revolutionize for the planet customer. We believe great ideas can emerge from anywhere and must be backed. Our people - backed by our culture of end-to-end ownership! <br /><br />The best people make the best teams. And we put all our efforts into finding the right people that fit into our high-performing inclusive teams. Everyone has advice on the table and diversity of thoughts, styles and actions is celebrated. From a category leader to a wish master, we are all bound together and guided by our values of audacity, bias for action, customer-first, integrity and inclusion.</p>
+</div>
+</div>

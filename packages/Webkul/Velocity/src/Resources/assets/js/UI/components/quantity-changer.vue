@@ -1,39 +1,8 @@
 <template>
-    <div
-        :class="`quantity control-group ${
-            errors.has(controlName) ? 'has-error' : ''
-        }`"
-    >
-        <label
-            class="required"
-            for="quantity-changer"
-            v-text="quantityText"
-        ></label>
-
-        <div class="input-btn-group">
-            <button type="button" class="decrease" @click="decreaseQty()">
-                <i class="rango-minus"></i>
-            </button>
-
-            <input
-                ref="quantityChanger"
-                :name="controlName"
-                :model="qty"
-                class="control"
-                id="quantity-changer"
-                v-validate="validations"
-                :data-vv-as="`&quot;${quantityText}&quot;`"
-                @keyup="setQty($event)"
-            />
-
-            <button type="button" class="increase" @click="increaseQty()">
-                <i class="rango-plus"></i>
-            </button>
-        </div>
-
-        <span class="control-error" v-if="errors.has(controlName)">{{
-            errors.first(controlName)
-        }}</span>
+    <div :class="`form-group--number quantity control-group ${errors.has(controlName) ? 'has-error' : ''}`">
+        <button class="up" @click="increaseQty()">+</button>
+        <button class="down" @click="decreaseQty()">-</button>
+        <input ref="quantityChanger" :name="controlName" :model="qty" class="form-control" id="quantity-changer" v-validate="validations" :data-vv-as="`&quot;${quantityText}&quot;`" @keyup="setQty($event)"/>
     </div>
 </template>
 

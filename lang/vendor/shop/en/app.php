@@ -22,6 +22,7 @@ return [
     ],
 
     'home' => [
+        'home-title'          => 'Home',
         'page-title'          => config('app.name') . ' - Home',
         'featured-products'   => 'Featured Products',
         'new-products'        => 'New Products',
@@ -117,6 +118,7 @@ return [
         'signup-form' => [
             'page-title'                  => 'Create New Customer Account',
             'title'                       => 'Sign Up',
+            'title_new'                       => 'Register An Account',
             'firstname'                   => 'First Name',
             'lastname'                    => 'Last Name',
             'email'                       => 'Email',
@@ -149,7 +151,7 @@ return [
 
         'login-form' => [
             'page-title'          => 'Customer Login',
-            'title'               => 'Sign In',
+            'title'               => 'Log In Your Account',
             'email'               => 'Email',
             'password'            => 'Password',
             'forgot_pass'         => 'Forgot Password?',
@@ -194,6 +196,8 @@ return [
                     'page-title' => 'Profile',
                     'title'      => 'Profile',
                     'edit'       => 'Edit',
+                    'title-new'  => 'User Information',
+                    'tab-title'  => 'Account Information',
                 ],
 
                 'edit-success' => 'Profile updated successfully.',

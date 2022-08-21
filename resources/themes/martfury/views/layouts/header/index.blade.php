@@ -335,7 +335,7 @@
                 <ul class="navigation__extra">
                     {{-- <li><a href="{{ route('become-a-vendor') }}">Sell on WorldEkart</a></li> --}}
                     <li><a href="{{ route('shop.cms.page', 'become-a-vendor') }}">Sell on WorldEkart</a></li>
-                    <li><a href="{{ route('order-tracking') }}">Track your Order</a></li>
+                    <li><a href="{{ route('track-order') }}">Track your Order</a></li>
                     @include('shop::layouts.header.locale-currency')
                 </ul>
             </div>
@@ -389,12 +389,12 @@
     </div>
 </header>
 
-
+{{-- 
 <div class="header" id="header">
     <div class="header-bottom" id="header-bottom">
         @include('shop::layouts.header.nav-menu.navmenu')
     </div>
-</div>
+</div> --}}
 
 @push('scripts')
     {{-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs" defer></script> --}}

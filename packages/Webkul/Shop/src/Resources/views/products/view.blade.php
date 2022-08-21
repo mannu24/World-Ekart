@@ -153,24 +153,10 @@
     </script>
 
     <script type="text/x-template" id="quantity-changer-template">
-        <div class="quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
-            <label class="required">{{ __('shop::app.products.quantity') }}</label>
-            <span class="quantity-container">
-                <button type="button" class="decrease" @click="decreaseQty()">-</button>
-
-                <input
-                    ref="quantityChanger"
-                    :name="controlName"
-                    :model="qty"
-                    class="control"
-                    v-validate="validations"
-                    data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;"
-                    @keyup="setQty($event)">
-
-                <button type="button" class="increase" @click="increaseQty()">+</button>
-
-                <span class="control-error" v-if="errors.has(controlName)">@{{ errors.first(controlName) }}</span>
-            </span>
+        <div class="form-group--number quantity control-group" :class="[errors.has(controlName) ? 'has-error' : '']">
+            <button class="up" @click="increaseQty()">+</button>
+            <button class="down" @click="decreaseQty()">-</button>
+            <input ref="quantityChanger" :name="controlName" :model="qty" class="form-control" id="quantity-changer" v-validate="validations" data-vv-as="&quot;{{ __('shop::app.products.quantity') }}&quot;" @keyup="setQty($event)"/>
         </div>
     </script>
 

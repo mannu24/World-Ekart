@@ -1,1 +1,113 @@
-<div class="static-container"><div class="mb-5">Return policy page content</div></div>
+<div class="ps-page--single static-page">
+<div class="ps-breadcrumb">
+<div class="container">
+<ul class="breadcrumb">
+<li><a href="http://localhost:8000/">Home</a></li>
+<li>Return Policy</li>
+</ul>
+</div>
+</div>
+<div class="container-xl">
+<h2 class="text-center">Return Policy</h2>
+<p>Returns is a scheme provided by respective sellers directly under this policy in terms of which the option of exchange, replacement and/ or refund is offered by the respective sellers to you. All products listed under a particular category may not have the same returns policy. For all products, the returns/replacement policy provided on the product page shall prevail over the general returns policy. Do refer the respective item's applicable return/replacement policy on the product page for any exceptions to this returns policy and the table below <br /><br />The return policy is divided into three parts; Do read all sections carefully to understand the conditions and cases under which returns will be accepted. <br /><br />Part 1 &ndash; Category, Return Window and Actions possible</p>
+<table class="pt-5 table table-bordered table-hover">
+<tbody>
+<tr>
+<td>
+<p>Category</p>
+</td>
+<td>
+<p>Returns Window, Actions Possible and Conditions (if any)</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Lifestyle: Jewellery, Footwear Accessories, Travel Accessories, Watch Accessories, etc..</p>
+<p>Home: Pet Supplies &amp; Rest of Home. (Except Home d&eacute;cor, Furnishing, Home Improvement Tools, Household Items)</p>
+</td>
+<td>
+<p>10 days</p>
+<p>Refund or Replacement</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Lifestyle: Watch, Winter Wear (Blazer, Sweatshirt, Scarf, Shawl, Jacket, Coat, Sweater, Thermal, Kid&rsquo;s Thermal, Track Pant, Shrugs), etc...</p>
+</td>
+<td>
+<p>10 days</p>
+<p>Refund, Replacement or Exchange</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Lifestyle: T-Shirt, Footwear, Sari, Short, Dress, Kid&rsquo;s (Capri, Shorts &amp; Tops), Men&rsquo;s (Ethnic Wear, Shirt, Formals, Jeans, Clothing Accessory), Women&rsquo;s (Ethnic Wear, Fabric, Blouse, Jean, Skirt, Trousers, Bra), Bags, Raincoat, Sunglass, Belt, Frame, Backpack, Suitcase, Luggage, etc...</p>
+</td>
+<td>
+<p>14 days</p>
+<p>Refund, Replacement or Exchange</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Medicine (Allopathy &amp; Homeopathy)</p>
+</td>
+<td>
+<p>2 days</p>
+<p>Refund</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Home: Home Improvement Tools, Household Items, Home d&eacute;cor, Furnishing</p>
+</td>
+<td>
+<p>7 days</p>
+<p>Refund or replacement</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Books (All books)</p>
+<p>Sports&nbsp;Equipment&nbsp;(Racquet, ball, support, gloves, bags etc.)</p>
+<p>Exercise &amp; Fitness&nbsp;Equipment's&nbsp;(Home Gym combos, dumbbell etc.)</p>
+<p>Auto Accessories - Car and Bike accessories (helmets, car kit, media players etc.)</p>
+</td>
+<td>
+<p>7 days Replacement only</p>
+<p>Free replacement will be provided within 7 days if the product is delivered in defective/damaged condition or different from the ordered item.</p>
+<p>Please keep the product intact, with original accessories, user manual and warranty cards in the original packaging at the time of returning the product.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>Toys (Remote controlled toys, Learning toys, Stuffed toys etc.)</p>
+<p>Stationary (Pens, Diary notebooks, Calculators etc.)</p>
+<p>Musical Instruments (Microphones &amp; Accessories, Guitars, Violins etc.)</p>
+</td>
+<td>
+<p>10 days Replacement only</p>
+<p>Free replacement will be provided within 10 days if the product is delivered in defective/damaged condition or different from the ordered item.</p>
+<p>Please keep the product intact, with original accessories, user manual and warranty cards in the original packaging at the time of returning the product.</p>
+<p>Non-Returnable - All Wind Instruments (Harmonicas, Flutes etc.) This item is non-returnable due to hygiene and personal&nbsp;wellness. In&nbsp;case these products are delivered in damaged/defective condition or different from the ordered item, we will provide a free replacement.</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>All Mobiles (except Apple &amp; Google phones),</p>
+<p>Electronics - (except Apple / Beats, Google,&nbsp;Realme, Samsung, JBL&amp; Infinity, Epson, HP, Dell, Canon, MI Products (Tablets, Laptops, Smart Watches)</p>
+<p>All Small Home Appliances (Except Chimney, Water Purifier, Fan, Geyser)</p>
+<p>Furniture - Hammock Swing &amp; Stool</p>
+</td>
+<td>
+<p>7 days</p>
+<p>Replacement only</p>
+<p>In order to help you resolve issues with your product, we may troubleshoot your product either through online tools, over the phone, and/or through an in-person technical visit.</p>
+<p>If a defect is determined within the Returns Window, a replacement of the same model will be provided at no additional cost. If no defect is confirmed or the issue is not diagnosed within 7 days of delivery, you will be directed to a brand service centre to resolve any subsequent issues.</p>
+<p>In any case, only one replacement shall be provided.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

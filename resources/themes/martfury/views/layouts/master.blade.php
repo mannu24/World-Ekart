@@ -46,7 +46,7 @@
     {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
     <div id="app">
-        <flash-wrapper ref='flashes'></flash-wrapper>
+        {{-- <flash-wrapper ref='flashes'></flash-wrapper> --}}
 
         <div class="main-container-wrapper">
 
@@ -90,23 +90,23 @@
 
         <overlay-loader :is-open="show_loader"></overlay-loader>
 
-        <go-top bg-color="#0041ff"></go-top>
+        <go-top bg-color="#fff" :radius="0" fg-color="#333" box-shadow="0px 0px 10px rgba(0, 0, 0, .2)"></go-top>
     </div>
 
     <script type="text/javascript">
-        window.flashMessages = [];
+        // window.flashMessages = [];
 
-        @if ($success = session('success'))
-            window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
-        @elseif ($warning = session('warning'))
-            window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
-        @elseif ($error = session('error'))
-            window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
-        @elseif ($info = session('info'))
-            window.flashMessages = [{'type': 'alert-info', 'message': "{{ $info }}" }];
-        @endif
+        // @if ($success = session('success'))
+        //     window.flashMessages = [{'type': 'alert-success', 'message': "{{ $success }}" }];
+        // @elseif ($warning = session('warning'))
+        //     window.flashMessages = [{'type': 'alert-warning', 'message': "{{ $warning }}" }];
+        // @elseif ($error = session('error'))
+        //     window.flashMessages = [{'type': 'alert-error', 'message': "{{ $error }}" }];
+        // @elseif ($info = session('info'))
+        //     window.flashMessages = [{'type': 'alert-info', 'message': "{{ $info }}" }];
+        // @endif
 
-        window.serverErrors = [];
+        // window.serverErrors = [];
 
         @if (isset($errors))
             @if (count($errors))
@@ -116,6 +116,7 @@
     </script>
 
     <script type="text/javascript" src="{{ asset('themes/default/assets/js/shop.js') }}" ></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/jquery.js') }}" ></script> --}}
     <script type="text/javascript" src="{{ asset('vendor/webkul/ui/assets/js/ui.js') }}"></script>
 
     @stack('scripts')

@@ -5475,7 +5475,7 @@ var render = function render() {
       domProps: {
         innerHTML: _vm._s(item.name)
       }
-    }), _vm._v(" "), _c("p", [_c("small", [_vm._v("\n                            " + _vm._s(_vm.isTaxInclusive == "1" ? item.base_total_with_tax : item.base_total) + " x " + _vm._s(item.quantity) + "\n                        ")])]), _vm._v(" "), _c("a", {
+    }), _vm._v(" "), _c("p", [_c("small", [_vm._v("\n                            " + _vm._s(_vm.isTaxInclusive == "1" ? item.base_total_with_tax : item.base_total) + "\n                             ")])]), _vm._v(" "), _c("a", {
       staticClass: "ps-product__remove",
       on: {
         click: function click($event) {
@@ -6178,30 +6178,22 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    "class": "quantity control-group ".concat(_vm.errors.has(_vm.controlName) ? "has-error" : "")
-  }, [_c("label", {
-    staticClass: "required",
-    attrs: {
-      "for": "quantity-changer"
-    },
-    domProps: {
-      textContent: _vm._s(_vm.quantityText)
-    }
-  }), _vm._v(" "), _c("div", {
-    staticClass: "input-btn-group"
+    "class": "form-group--number quantity control-group ".concat(_vm.errors.has(_vm.controlName) ? "has-error" : "")
   }, [_c("button", {
-    staticClass: "decrease",
-    attrs: {
-      type: "button"
-    },
+    staticClass: "up",
+    on: {
+      click: function click($event) {
+        return _vm.increaseQty();
+      }
+    }
+  }, [_vm._v("+")]), _vm._v(" "), _c("button", {
+    staticClass: "down",
     on: {
       click: function click($event) {
         return _vm.decreaseQty();
       }
     }
-  }, [_c("i", {
-    staticClass: "rango-minus"
-  })]), _vm._v(" "), _c("input", {
+  }, [_vm._v("-")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "validate",
       rawName: "v-validate",
@@ -6209,7 +6201,7 @@ var render = function render() {
       expression: "validations"
     }],
     ref: "quantityChanger",
-    staticClass: "control",
+    staticClass: "form-control",
     attrs: {
       name: _vm.controlName,
       model: _vm.qty,
@@ -6221,21 +6213,7 @@ var render = function render() {
         return _vm.setQty($event);
       }
     }
-  }), _vm._v(" "), _c("button", {
-    staticClass: "increase",
-    attrs: {
-      type: "button"
-    },
-    on: {
-      click: function click($event) {
-        return _vm.increaseQty();
-      }
-    }
-  }, [_c("i", {
-    staticClass: "rango-plus"
-  })])]), _vm._v(" "), _vm.errors.has(_vm.controlName) ? _c("span", {
-    staticClass: "control-error"
-  }, [_vm._v(_vm._s(_vm.errors.first(_vm.controlName)))]) : _vm._e()]);
+  })]);
 };
 
 var staticRenderFns = [];

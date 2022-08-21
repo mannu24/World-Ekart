@@ -54,8 +54,8 @@
         </div>
     @endif
 </div>
-
+{{-- 
 <div class="social-link-seperator">
     <span>{{ __('sociallogin::app.shop.customer.login-form.or') }}</span>
-</div>
+</div> --}}
 @endif

@@ -1,4 +1,61 @@
-<div class="sidebar">
+@php
+    $customer = auth()->guard('customer')->user();
+@endphp
+<div class="col-lg-3">
+    <div class="ps-section__left">
+        <aside class="ps-widget--account-dashboard">
+            <div class="ps-widget__header">
+                <figure>
+                    <figcaption>Hello</figcaption>
+                    <p>{{ $customer->email }}</p>
+                </figure>
+            </div>
+            @foreach ($menu->items as $menuItem)
+                <div class="ps-widget__content">
+                    <ul class="ps-list--user-links">
+                        @php
+                            $showCompare = core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false;
+
+                            $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
+                        @endphp
+
+                        @if (! $showCompare)
+                            @php
+                                unset($menuItem['children']['compare']);
+                            @endphp
+                        @endif
+
+                        @if (! $showWishlist)
+                            @php
+                                unset($menuItem['children']['wishlist']);
+                            @endphp
+                        @endif
+                        @foreach ($menuItem['children'] as $index => $subMenuItem)
+                            @if ($index == 'rma')
+                                @if(core()->getConfigData('rma.settings.general.enable_rma'))
+                                    <li class="{{ $menu->getActive($subMenuItem) }}">
+                                        <a href="{{ $subMenuItem['url'] }}" class="d-flex justify-content-between">
+                                            {{ trans($subMenuItem['name']) }}
+                                            <i class="icon angle-right-icon"></i>
+                                        </a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="{{ $menu->getActive($subMenuItem) }}">
+                                    <a href="{{ $subMenuItem['url'] }}" class="d-flex justify-content-between">
+                                        {{ trans($subMenuItem['name']) }}
+                                        <i class="icon angle-right-icon"></i>
+                                    </a>
+                                </li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            @endforeach
+        </aside>
+    </div>
+</div>
+{{-- <div class="sidebar">
     @foreach ($menu->items as $menuItem)
         <div class="menu-block">
             <div class="menu-block-title">
@@ -54,7 +111,7 @@
         </div>
 
     @endforeach
-</div>
+</div> --}}
 
 @push('scripts')
 <script>
