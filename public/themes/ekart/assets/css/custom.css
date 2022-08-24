@@ -167,3 +167,423 @@ a:visited, a:link {
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
+.ps-block--user-account i {
+    line-height: 1.4em;
+}
+
+.ps-shopping .ps-shopping__actions {
+    justify-content: space-between; 
+    width: 100%;
+}
+.ps-shopping .ps-shopping__actions .form-control {
+    margin-right: 25px;
+    width: auto !important;
+}
+
+@media(max-width:767.98px) {
+    .ps-shopping .ps-shopping__actions .form-control {
+        margin-right: 5px;
+    }
+}
+
+.ps-product .ps-product__thumbnail img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.ps-product--wide .ps-product__desc {
+    /* padding-left: 15px; */
+    position: relative;
+    color: #999;
+    line-height: 1.8em;
+}
+
+.ps-product--wide .ps-product__desc span {
+    font-weight: bold;
+}
+
+
+@media (max-width: 1024px){
+    .ps-product--wide .ps-product__thumbnail {
+        flex-basis: auto;
+    }
+    .ps-product--wide .ps-product__shopping {
+        flex-basis: 100%;
+    }
+}
+
+#alert-container {
+    top: 50px;
+    right: 15px;
+    z-index: 100;
+    position: fixed;
+    font-size: 16px;
+}
+
+.ps-product:hover .ps-product__content {
+    visibility: visible;
+    opacity: 1;
+    height: auto;
+}
+.ps-product{
+    border-bottom: 1px solid transparent;
+    margin-bottom: 30px;
+}
+
+.ps-product .ps-product__container {
+    padding: 10px 0;
+}
+
+.ps-btn.btn-small, button.ps-btn.btn-small {
+    padding: 10px 30px;
+    font-size: 15px;
+}
+.ps-product--wide .ps-product__container {
+    padding: 20px !important;
+}
+.modal-parent {
+    background: rgba(0,0,0,.7);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+}
+.layered-filter-wrapper, .scrollable {
+    -ms-overflow-style: none;
+    max-height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.cd-quick-view {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background-color: #fff;
+    box-shadow: 0 0 30px rgb(0 0 0 / 20%);
+    display: none;
+    left: 50%;
+    margin-bottom: 50px;
+    padding: 40px;
+    position: absolute;
+    top: 100px;
+    transform: translateX(-50%);
+    width: 60%;
+    will-change: left,top,width;
+    z-index: 101;
+}
+
+.cd-quick-view .close-btn {
+    font-weight: 600;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.vue-slider {
+    max-width: 97%;
+}
+
+.vue-slider .vue-slider-rail {
+    background-color: #ccc;
+}
+
+.vue-slider .vue-slider-process {
+    background-color: #fcb800!important;
+}
+.vue-slider-process {
+    position: absolute;
+    z-index: 1;
+}
+
+.vue-slider .vue-slider-dot-handle {
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0.5px 0.5px 2px 1px rgb(0 0 0 / 32%);
+    height: 100%;
+    width: 100%;
+}
+
+.vue-slider .vue-slider-dot-tooltip-inner, .vue-slider .vue-slider-dot-tooltip-text {
+    background-color: #fcb800!important;
+    border-color: #fcb800!important;
+}
+
+.vue-slider .vue-slider-dot-tooltip-text {
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 14px;
+    min-width: 20px;
+    padding: 2px 5px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.price-control {
+    background-color: #fff;
+    border: 1px solid #fcb800;
+    text-align: center;
+    width: 30%;
+    margin: 20px auto;
+}
+
+@media (max-width: 767px) {
+    .ps-product .ps-product__container {
+        padding: 10px;
+    }
+}
+
+.checkout-process {
+  padding: 40px 20px;
+}
+.checkout-process .accordian-header h3 {
+  margin-bottom: 0 !important;
+}
+.checkout-process .coupon-container {
+  margin-top: 20px;
+}
+.checkout-process h1 {
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+.checkout-process .scrollable, .checkout-process .layered-filter-wrapper {
+  padding-top: 25px;
+}
+.checkout-process .order-summary-container {
+  top: 75px;
+}
+.checkout-process .order-summary-container .theme-btn, .checkout-process .order-summary-container .cart-details .continue-shopping-btn, .cart-details .checkout-process .order-summary-container .continue-shopping-btn, .checkout-process .order-summary-container .account-content .account-layout .bottom-toolbar .pagination .page-item, .account-content .account-layout .bottom-toolbar .pagination .checkout-process .order-summary-container .page-item {
+  display: none;
+}
+.checkout-process .order-summary-container.bottom h3 {
+  display: none;
+}
+.checkout-process input[type=radio] {
+  transform: scale(1.3);
+  -ms-transform: scale(1.3);
+  -webkit-transform: scale(1.3);
+}
+.checkout-process .styled-select {
+  cursor: pointer;
+}
+.checkout-process .styled-select + .select-icon {
+  top: 55%;
+  left: 92%;
+  font-size: 20px;
+  position: absolute;
+}
+.checkout-process .coupon-container input {
+  max-width: 200px;
+}
+.checkout-process .coupon-container button {
+  margin: 20px 0 30px 0;
+}
+.checkout-process .coupon-container .applied-coupon-details {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.checkout-process .coupon-container .applied-coupon-details label:nth-of-type(1) {
+  color: #26A37C;
+}
+.checkout-process .coupon-container .rango-close {
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.address-container .address-holder {
+  margin-top: 15px;
+}
+.address-container .address-holder > div {
+  margin: 5px 0;
+  padding-left: 0;
+}
+.address-container .address-holder .card {
+  height: 100%;
+}
+.address-container .address-holder .card h5 {
+  font-size: 14px;
+}
+.address-container .address-holder .card .add-address-button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.address-container .address-holder .card .add-address-button > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.address-container .address-holder .card .add-address-button > div span {
+  padding-left: 10px;
+}
+.custom-form label {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+/* .custom-form .form-field {
+  padding: 0;
+  margin-bottom: 30px;
+}
+.custom-form input[type=text],
+.custom-form input[type=password],
+.custom-form input[type=search],
+.custom-form select {
+  width: 100%;
+  resize: none;
+  font-size: 16px;
+  height: 36px;
+  padding: 5px 16px;
+  border-radius: 1px;
+  background: #FFFFFF;
+  border: 1px solid #CCCCCC;
+}
+.custom-form input[type=checkbox] {
+  position: relative;
+  top: 3px;
+} */
+/* .custom-form input:active,
+.custom-form input:focus,
+.custom-form select:focus,
+.custom-form select:active {
+  border-color: #26A37C;
+} */
+
+.shipping-form h3,
+.payment-form h3,
+.review-checkout-conainer h3 {
+  margin-bottom: 20px;
+}
+.shipping-form .shipping-methods > .row,
+.shipping-form .payment-methods > .row,
+.payment-form .shipping-methods > .row,
+.payment-form .payment-methods > .row,
+.review-checkout-conainer .shipping-methods > .row,
+.review-checkout-conainer .payment-methods > .row {
+  margin-bottom: 20px;
+}
+.shipping-form .shipping-methods .instructions,
+.shipping-form .payment-methods .instructions,
+.payment-form .shipping-methods .instructions,
+.payment-form .payment-methods .instructions,
+.review-checkout-conainer .shipping-methods .instructions,
+.review-checkout-conainer .payment-methods .instructions {
+  margin-top: 5px;
+  margin-left: -13px;
+}
+.shipping-form .shipping-methods .instructions label,
+.shipping-form .payment-methods .instructions label,
+.payment-form .shipping-methods .instructions label,
+.payment-form .payment-methods .instructions label,
+.review-checkout-conainer .shipping-methods .instructions label,
+.review-checkout-conainer .payment-methods .instructions label {
+  font-weight: 600;
+  font-size: 14px;
+}
+.shipping-form .shipping-methods .instructions p,
+.shipping-form .payment-methods .instructions p,
+.payment-form .shipping-methods .instructions p,
+.payment-form .payment-methods .instructions p,
+.review-checkout-conainer .shipping-methods .instructions p,
+.review-checkout-conainer .payment-methods .instructions p {
+  margin: 0;
+  font-size: 14px;
+  color: #777777;
+  font-style: italic;
+}
+.shipping-form .address-summary li,
+.payment-form .address-summary li,
+.review-checkout-conainer .address-summary li {
+  display: inline-block;
+}
+.shipping-form .cart-item-list,
+.payment-form .cart-item-list,
+.review-checkout-conainer .cart-item-list {
+  padding: 20px 0;
+  border-bottom: 1px solid #E5E5E5;
+}
+.shipping-form .cart-item-list h4,
+.payment-form .cart-item-list h4,
+.review-checkout-conainer .cart-item-list h4 {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #E5E5E5;
+  margin-bottom: 20px !important;
+}
+.shipping-form .cart-item-list > .row:first-child,
+.payment-form .cart-item-list > .row:first-child,
+.review-checkout-conainer .cart-item-list > .row:first-child {
+  margin-top: 50px;
+}
+.shipping-form .cart-item-list > .row,
+.payment-form .cart-item-list > .row,
+.review-checkout-conainer .cart-item-list > .row {
+  margin-bottom: 20px;
+}
+.shipping-form .cart-details,
+.payment-form .cart-details,
+.review-checkout-conainer .cart-details {
+  padding: 40px 0;
+}
+
+.order-summary-container {
+  top: 50px;
+  padding-top: 25px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  position: -webkit-sticky !important;
+  position: sticky !important;
+  max-width: 500px !important;
+}
+.order-summary-container > div {
+  width: 100%;
+}
+.order-summary-container .order-summary {
+  padding: 25px 30px;
+  border: 1px solid #E5E5E5;
+}
+.order-summary-container .order-summary > h3 {
+  margin-bottom: 20px;
+}
+.order-summary-container .order-summary > .row:not(:last-child) {
+  margin-bottom: 10px;
+}
+.order-summary-container .order-summary #grand-total-detail {
+  margin-top: 15px;
+  padding-top: 15px;
+  margin-bottom: 25px;
+  border-top: 1px solid #E5E5E5;
+}
+
+.order-success-content {
+  padding: 40px 20px;
+  font-size: 16px;
+}
+
+.accordian .accordian-header i.fas {
+    float: right;
+    font-size: 24px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.ps-checkbox>input {
+    height: 0;
+}
+.ps-btn:active, .ps-btn:hover, button.ps-btn:active, button.ps-btn:hover {
+    background-color: #222;
+    color: #fff !important;
+    border: 2px solid #222;
+}
+
+.btn-danger {
+    color: #fff !important;
+    background-color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}

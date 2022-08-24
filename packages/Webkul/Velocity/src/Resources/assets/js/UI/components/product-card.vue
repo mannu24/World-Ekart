@@ -1,89 +1,81 @@
 <template>
-    <div class="col-12 lg-card-container list-card product-card row" v-if="list">
-        <div class="product-image">
-            <a :title="product.name" :href="`${baseUrl}/${product.slug}`">
-                <img
-                    :src="product.image || product.product_image"
-                    :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-
-                <product-quick-view-btn :quick-view-details="product" v-if="!isMobile()"></product-quick-view-btn>
+    <div class="ps-product ps-product--wide" v-if="list">
+        <div class="ps-product__thumbnail">
+            <a :href="`${baseUrl}/${product.slug}`" :title="product.name">
+                <img loading="lazy" :alt="product.name" :src="product.image || product.product_image" :data-src="product.image || product.product_image"
+                :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
             </a>
+            <span class="ps-product__badge new" v-if="product.new">{{ product.new }}</span>
         </div>
-
-        <div class="product-information">
-            <div>
-                <div class="product-name">
-                    <a :href="`${baseUrl}/${product.slug}`" :title="product.name" class="unset">
-                        <span class="fs16">{{ product.name }}</span>
-                    </a>
-                </div>
-
-                <div class="sticker new" v-if="product.new">
-                    {{ product.new }}
-                </div>
-
-                <div class="product-price" v-html="product.priceHTML"></div>
-
-                <div class="product-rating" v-if="product.totalReviews && product.totalReviews > 0">
+        <div class="ps-product__container">
+            <div class="ps-product__content">
+                <a :href="`${baseUrl}/${product.slug}`" :title="product.name" class="ps-product__title">{{product.name}}</a>
+                <p class="ps-product__vendor">Sold by: {{ product.brand }}</p>
+                <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">
                     <star-ratings :ratings="product.avgRating"></star-ratings>
-                    <span>{{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}</span>
+                    <span><a :href="`${$root.baseUrl}/reviews/${product.slug}`">
+                        {{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
+                    </a></span>
                 </div>
-
-                <div class="product-rating" v-else>
-                    <span class="fs14" v-text="product.firstReviewText"></span>
+                <div class="ps-product__rating" v-else>
+                    <span v-text="product.firstReviewText"></span>
                 </div>
-
+                <div class="ps-product__desc"><span>Description:</span> {{ product.shortDescription }}</div>
+            </div>
+            <div class="ps-product__shopping">
+                <p class="ps-product__price text-center" v-html="product.price"></p>
                 <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                <ul class="ps-product__actions justify-content-around">
+                    <li>
+                        <vnode-injector :nodes="getDynamicHTML(product.ulHtml)"></vnode-injector>
+                    </li>
+                    <li v-if="!isMobile()">
+                        <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <div class="card grid-card product-card-new" v-else>
-        <a :href="`${baseUrl}/${product.slug}`" :title="product.name" class="product-image-container">
-            <img
-                loading="lazy"
-                :alt="product.name"
-                :src="product.image || product.product_image"
-                :data-src="product.image || product.product_image"
-                class="card-img-top lzy_img"
-                :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-                <!-- :src="`${$root.baseUrl}/vendor/webkul/ui/assets/images/product/meduim-product-placeholder.png`" /> -->
-
-            <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
-        </a>
-
-        <div class="card-body">
-            <div class="product-name col-12 no-padding">
-                <a
-                    class="unset"
-                    :title="product.name"
-                    :href="`${baseUrl}/${product.slug}`">
-
-                    <span class="fs16">{{ product.name }}</span>
+    <div class="col-lg-4 col-6" v-else>
+        <div class="ps-product">
+            <div class="ps-product__thumbnail">
+                <a :href="`${baseUrl}/${product.slug}`" :title="product.name">
+                    <img loading="lazy" :alt="product.name" :src="product.image || product.product_image" :data-src="product.image || product.product_image"
+                    :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                 </a>
+                <span class="ps-product__badge new" v-if="product.new">{{ product.new }}</span>
+                <ul class="ps-product__actions justify-content-around">
+                    <li>
+                        <vnode-injector :nodes="getDynamicHTML(product.ulHtml)"></vnode-injector>
+                    </li>
+                    <li v-if="!isMobile()">
+                        <product-quick-view-btn :quick-view-details="product"></product-quick-view-btn>
+                    </li>
+                </ul>
             </div>
-
-            <div class="sticker new" v-if="product.new">
-                {{ product.new }}
+            <div class="ps-product__container">
+                <!-- <a :title="product.name" :href="`${baseUrl}/${product.slug}`" class="ps-product__vendor">{{ product.brand }}</a> -->
+                <div class="ps-product__vendor">{{ product.brand }}</div>
+                <div class="ps-product__content">
+                    <a :href="`${baseUrl}/${product.slug}`" class="ps-product__title">{{product.name}}</a>
+                    <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">
+                        <star-ratings :ratings="product.avgRating"></star-ratings>
+                        <span><a :href="`${$root.baseUrl}/reviews/${product.slug}`">
+                            {{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
+                        </a></span>
+                    </div>
+                    <div class="ps-product__rating" v-else>
+                        <span v-text="product.firstReviewText"></span>
+                    </div>
+                    <p class="ps-product__price" v-html="product.price"></p>
+                    <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                </div>
+                <!-- <div class="ps-product__content hover">
+                    <a :href="`${baseUrl}/${product.slug}`" class="ps-product__title">{{product.name}}</a>
+                    <p class="ps-product__price" v-html="product.price"></p>
+                    <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
+                </div> -->
             </div>
-
-            <div v-html="product.priceHTML"></div>
-
-            <div
-                class="product-rating col-12 no-padding"
-                v-if="product.totalReviews && product.totalReviews > 0">
-
-                <star-ratings :ratings="product.avgRating"></star-ratings>
-                <a class="fs14 align-top unset active-hover" :href="`${$root.baseUrl}/reviews/${product.slug}`">
-                    {{ __('products.reviews-count', {'totalReviews': product.totalReviews}) }}
-                </a>
-            </div>
-
-            <div class="product-rating col-12 no-padding" v-else>
-                <span class="fs14" v-text="product.firstReviewText"></span>
-            </div>
-
-            <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
         </div>
     </div>
 </template>
@@ -94,7 +86,6 @@
             'list',
             'product',
         ],
-
         data: function () {
             return {
                 'addToCart': 0,

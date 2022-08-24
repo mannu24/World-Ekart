@@ -1,20 +1,18 @@
 <div class="form-container review-checkout-conainer">
     <accordian :title="'{{ __('shop::app.checkout.onepage.summary') }}'" :active="true">
-        <div class="form-header mb-30" slot="header">
-            <h3 class="fw6 display-inbl">
+        <div class="form-header" slot="header">
+            <h3 class="h4 d-inline-block">
                 {{ __('shop::app.checkout.onepage.summary') }}
             </h3>
-            <i class="rango-arrow"></i>
+            <i class="fas fa-chevron-down"></i>
         </div>
-
         <div slot="body">
             <div class="address-summary row">
                 @if ($billingAddress = $cart->billing_address)
                     <div class="billing-address col-lg-6 col-md-12">
-                        <div class="card-title mb-20">
+                        <div class="card-title">
                             <b>{{ __('shop::app.checkout.onepage.billing-address') }}</b>
                         </div>
-
                         <div class="card-content">
                             <ul type="none">
                                 <li>
@@ -46,13 +44,11 @@
                         </div>
                     </div>
                 @endif
-
                 @if ($cart->haveStockableItems() && $shippingAddress = $cart->shipping_address)
-                    <div class="shipping-address col-6">
-                        <div class="card-title mb-20">
+                    <div class="shipping-address col-lg-6 col-md-12">
+                        <div class="card-title">
                             <b>{{ __('shop::app.checkout.onepage.shipping-address') }}</b>
                         </div>
-
                         <div class="card-content">
                             <ul>
                                 <li>
@@ -86,38 +82,31 @@
                 @endif
 
             </div>
-
             <div class="cart-item-list">
-                <h4 class="fw6">{{ __('velocity::app.checkout.items') }}</h4>
-
+                <h4 class="font-weight-bolder">{{ __('velocity::app.checkout.items') }}</h4>
                 @foreach ($cart->items as $item)
                     @php
                         $productBaseImage = $item->product->getTypeInstance()->getBaseImage($item);
                     @endphp
-
-                    <div class="row col-12 no-padding">
+                    <div class="row col-12 px-0">
                         <div class="col-2 max-sm-img-dimension">
                             <img src="{{ $productBaseImage['medium_image_url'] }}" alt="" />
                         </div>
-
-                        <div class="col-10 no-padding fs16">
-
+                        <div class="col-10 px-0 h4">
                             {!! view_render_event('bagisto.shop.checkout.name.before', ['item' => $item]) !!}
-
-                                <div class="row fs20">
-                                    <span class="col-12 link-color fw6">{{ $item->product->name }}</span>
+                                <div class="row mb-10">
+                                    <span class="col-12 font-weight-bolder">{{ $item->product->name }}</span>
                                 </div>
-
                             {!! view_render_event('bagisto.shop.checkout.name.after', ['item' => $item]) !!}
 
-                            <div class="row col-12">
+                            <div class="row col-12 justify-content-start mb-10">
                                 {!! view_render_event('bagisto.shop.checkout.price.before', ['item' => $item]) !!}
                                         <span class="value">
                                             {{ core()->currency($item->base_price) }}
                                         </span>
                                 {!! view_render_event('bagisto.shop.checkout.price.after', ['item' => $item]) !!}
 
-                                <i class="rango-close text-down-4"></i>
+                                <i class="fas fa-times px-2"></i>
 
                                 {!! view_render_event('bagisto.shop.checkout.quantity.before', ['item' => $item]) !!}
                                     <span class="value">
@@ -147,17 +136,16 @@
                     </div>
                 @endforeach
             </div>
-
-            <div class="order-description row fs16 cart-details">
-                <div class="col-lg-4 col-md-12">
+            <div class="order-description row h4 cart-details align-items-stretch">
+                <div class="col-lg-5 col-md-12">
                     @if ($cart->haveStockableItems())
-                        <div class="shipping mb20">
+                        <div class="shipping mb-20">
                             <div class="decorator">
                                 <i class="icon shipping-icon"></i>
                             </div>
 
                             <div class="text">
-                                <h4 class="fw6 fs18">
+                                <h4 class="font-weight-bolder h4">
                                     {{ core()->currency($cart->selected_shipping_rate->base_price) }}
                                 </h4>
 
@@ -168,13 +156,13 @@
                         </div>
                     @endif
 
-                    <div class="payment mb20">
+                    <div class="payment mb-20">
                         <div class="decorator">
                             <i class="icon payment-icon"></i>
                         </div>
 
                         <div class="text">
-                            <h4 class="fw6 fs18">
+                            <h4 class="font-weight-bolder h4">
                                 {{ core()->getConfigData('sales.paymentmethods.' . $cart->payment->method . '.title') }}
                             </h4>
 
@@ -185,7 +173,7 @@
                     <slot name="place-order-btn"></slot>
                 </div>
 
-                <div class="col-lg-6 col-md-12 order-summary-container bottom pt0 offset-lg-2">
+                <div class="col-lg-6 col-md-12 order-summary-container pt-0 offset-lg-1">
                     <slot name="summary-section"></slot>
                 </div>
             </div>

@@ -1,4 +1,16 @@
 <header class="header header--1" data-sticky="true" id="headerSticky">
+    <nav class="navigation">
+        <div class="ps-container">
+            <div class="navigation__right justify-content-end">
+                <ul class="navigation__extra">
+                    <li><a href="{{ route('shop.cms.page', 'become-a-vendor') }}">Sell on WorldEkart</a></li>
+                    <li><a href="{{ route('track-order') }}">Track your Order</a></li>
+                    @include('shop::layouts.top-nav.locale-currency')
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="header__top">
         <div class="ps-container">
             <div class="header__left">
@@ -141,7 +153,7 @@
     </div>
     <nav class="navigation">
         <div class="ps-container">
-            <div class="navigation__left">
+            {{-- <div class="navigation__left">
                 <div class="menu--product-categories">
                     <div class="menu__toggle"><i class="icon-menu"></i><span>Shop by Department</span></div>
                     <div class="menu__content">
@@ -207,132 +219,21 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="navigation__right">
-                <ul class="menu">
-                    <li class="menu-item-has-children dropdown"><a href="/">Home</a>
-                        <ul class="sub-menu">
-                            <li class="menu-item-has-children dropdown"><a href="/">Marketplace Full Width</a>
-                            </li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/auto-part">Home Auto
-                                    Parts</a></li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/technology">Home
-                                    Technology</a></li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/organic">Home Organic</a>
-                            </li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/market-place">Home
-                                    Marketplace V1</a></li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/market-place-2">Home
-                                    Marketplace V2</a></li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/market-place-3">Home
-                                    Marketplace V3</a></li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/market-place-4">Home
-                                    Marketplace V4</a></li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/electronic">Home
-                                    Electronic</a></li>
-                            <li class="menu-item-has-children dropdown"><a href="/home/furniture">Home
-                                    Furniture</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children has-mega-menu"><a href="/shop">Shop</a>
-                        <div class="mega-menu">
-                            <div class="mega-menu__column">
-                                <h4>Catalog Pages</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/shop">Shop Default</a></li>
-                                    <li><a href="/shop/shop-fullwidth">Shop Fullwidth</a></li>
-                                    <li><a href="/shop/shop-categories">Shop Categories</a></li>
-                                    <li><a href="/shop/shop-sidebar">Shop Sidebar</a></li>
-                                    <li><a href="/shop/shop-sidebar-without-banner">Shop Without Banner</a></li>
-                                    <li><a href="/shop/shop-carousel">Shop Carousel</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu__column">
-                                <h4>Product Layout</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/product/3">Default</a></li>
-                                    <li><a href="/product/extended/7">Extended</a></li>
-                                    <li><a href="/product/full-content/7">Full Content</a></li>
-                                    <li><a href="/product/boxed/7">Boxed</a></li>
-                                    <li><a href="/product/sidebar/7">Sidebar</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu__column">
-                                <h4>Product Types</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/product/3">Simple</a></li>
-                                    <li><a href="/product/image-swatches/11">Image swatches</a></li>
-                                    <li><a href="/product/countdown/10">Countdown</a></li>
-                                    <li><a href="/product/affiliate/7">Affiliate</a></li>
-                                    <li><a href="/product/on-sale/7">On sale</a></li>
-                                    <li><a href="/product/groupped/22">Grouped</a></li>
-                                    <li><a href="/product/out-of-stock/7">Out Of Stock</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu__column">
-                                <h4>Ecomerce Pages</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/account/shopping-cart">Shopping Cart</a></li>
-                                    <li><a href="/account/checkout">Checkout</a></li>
-                                    <li><a href="/account/wishlist">Whishlist</a></li>
-                                    <li><a href="/account/compare">Compare</a></li>
-                                    <li><a href="/account/order-tracking">Order Tracking</a></li>
-                                    <li><a href="/account/login">My Account</a></li>
-                                    <li><a href="/account/login">Login / Register</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="menu-item-has-children has-mega-menu"><a href="/">Pages</a>
-                        <div class="mega-menu">
-                            <div class="mega-menu__column">
-                                <h4>Basic Page</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/page/about-us">About Us</a></li>
-                                    <li><a href="/page/contact-us">Contact</a></li>
-                                    <li><a href="/page/faqs">Faqs</a></li>
-                                    <li><a href="/page/page-404">404 Page</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu__column">
-                                <h4>Vendor Pages</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/vendor/become-a-vendor">Become a Vendor</a></li>
-                                    <li><a href="/store/global-office">Vendor Store</a></li>
-                                    <li><a href="/stores">Store List</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="menu-item-has-children has-mega-menu"><a href="/blog">Blogs</a>
-                        <div class="mega-menu">
-                            <div class="mega-menu__column">
-                                <h4>Blog Layout</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/blog">Grid</a></li>
-                                    <li><a href="/blog/blog-small-thumbnail">Small Thumb</a></li>
-                                    <li><a href="/blog/blog-left-sidebar">Left Sidebar</a></li>
-                                    <li><a href="/blog/blog-right-sidebar">Right Sidebar</a></li>
-                                </ul>
-                            </div>
-                            <div class="mega-menu__column">
-                                <h4>Single Blog</h4>
-                                <ul class="mega-menu__list">
-                                    <li><a href="/post/default">Single 1</a></li>
-                                    <li><a href="/post/detail-2">Single 2</a></li>
-                                    <li><a href="/post/detail-3">Single 3</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navigation__extra">
-                    {{-- <li><a href="{{ route('become-a-vendor') }}">Sell on WorldEkart</a></li> --}}
+            </div> --}}
+            <div class="navigation__right justify-content-center">
+                {{-- <sidebar-header heading= "{{ __('velocity::app.menu-navbar.text-category') }}">
+                    <div class="main-category fs16 unselectable fw6 left">
+                        <i class="rango-view-list align-vertical-top fs18"></i>
+            
+                        <span class="pl5">{{ __('velocity::app.menu-navbar.text-category') }}</span>
+                    </div>
+                </sidebar-header> --}}
+                <mega-menu></mega-menu>
+                {{-- <ul class="navigation__extra">
                     <li><a href="{{ route('shop.cms.page', 'become-a-vendor') }}">Sell on WorldEkart</a></li>
                     <li><a href="{{ route('track-order') }}">Track your Order</a></li>
                     @include('shop::layouts.top-nav.locale-currency')
-                    {{-- @include('velocity::layouts.top-nav.locale-currency') --}}
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </nav>

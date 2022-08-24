@@ -25,7 +25,7 @@
         @if ($favicon = core()->getCurrentChannel()->favicon_url)
             <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
         @else
-            <link rel="icon" sizes="16x16" href="{{ asset('/themes/velocity/assets/images/static/v-icon.png') }}" />
+            <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" />
         @endif
 
         {{-- all styles --}}
@@ -52,41 +52,39 @@
 
                     {!! view_render_event('bagisto.shop.layout.header.after') !!}
 
-                    <div class="main-content-wrapper col-12 no-padding">
+                    <div class="main-content-wrapper">
 
                         {{-- secondary header --}}
-                        <header class="row velocity-divide-page vc-header header-shadow active">
+                        {{-- <header class="row velocity-divide-page vc-header header-shadow active">
 
-                            {{-- mobile header --}}
+                            mobile header
                             <div class="vc-small-screen container">
                                 @include('shop::layouts.header.mobile')
                             </div>
 
-                            {{-- desktop header --}}
-                            {{-- Down Line for sIDE BAR CATEGORY --}}
-                            {{-- @include('shop::layouts.header.desktop') --}}
+                            desktop header
+                            Down Line for sIDE BAR CATEGORY
+                            @include('shop::layouts.header.desktop')
 
-                        </header>
+                        </header> --}}
 
-                        <div class="">
-                            <div class="row col-12 remove-padding-margin">
-                                <sidebar-component
-                                    main-sidebar=true
-                                    id="sidebar-level-0"
-                                    url="{{ url()->to('/') }}"
-                                    category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
-                                    add-class="category-list-container pt10">
-                                </sidebar-component>
+                        <div class="row no-gutters">
+                            {{-- <sidebar-component
+                                main-sidebar=true
+                                id="sidebar-level-0"
+                                url="{{ url()->to('/') }}"
+                                category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
+                                add-class="category-list-container pt10">
+                            </sidebar-component> --}}
 
-                                <div class="col-12 no-padding content" id="home-right-bar-container">
-                                    {{-- <div class="container-right row no-margin col-12 no-padding"> --}}
-                                        {!! view_render_event('bagisto.shop.layout.content.before') !!}
+                            <div class="col-12 no-padding content" id="home-right-bar-container">
+                                {{-- <div class="container-right row no-margin col-12 no-padding"> --}}
+                                    {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
-                                            @yield('content-wrapper')
+                                        @yield('content-wrapper')
 
-                                        {!! view_render_event('bagisto.shop.layout.content.after') !!}
-                                    {{-- </div> --}}
-                                </div>
+                                    {!! view_render_event('bagisto.shop.layout.content.after') !!}
+                                {{-- </div> --}}
                             </div>
                         </div>
                     </div>

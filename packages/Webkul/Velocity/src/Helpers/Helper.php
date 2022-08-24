@@ -339,6 +339,8 @@ class Helper extends Review
 
         return [
             'priceHTML'        => $priceHTML,
+            'price'            => core()->currency($product->price),
+            'brand'            => $product->brand_label,
             'avgRating'        => ceil($reviewHelper->getAverageRating($product)),
             'totalReviews'     => $reviewHelper->getTotalReviews($product),
             'image'            => $productImage,
@@ -349,9 +351,15 @@ class Helper extends Review
             'description'      => $product->description,
             'shortDescription' => $product->short_description,
             'firstReviewText'  => trans('velocity::app.products.be-first-review'),
-            'addToCartHtml'    => view('shop::products.add-to-cart', [
+            'ulHtml'    => view('shop::products.ul-wishlist', [
                 'product'          => $product,
                 'addWishlistClass' => ! (isset($list) && $list) ? '' : '',
+                'moveToCart' => (isset($metaInformation['moveToCart']) && $metaInformation['moveToCart'])
+                    ? $metaInformation['moveToCart'] : null,
+                'addToCartBtnClass' => ! (isset($list) && $list) ? 'small-padding' : '',
+            ])->render(),
+            'addToCartHtml'    => view('shop::products.add-to-cart', [
+                'product'          => $product,
 
                 'showCompare' => core()->getConfigData('general.content.shop.compare_option') == '1'
                     ? true : false,
