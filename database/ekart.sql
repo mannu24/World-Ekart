@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2022 at 07:44 PM
+-- Generation Time: Aug 25, 2022 at 12:20 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,51 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `ekart`
 --
-
-DELIMITER $$
---
--- Functions
---
-CREATE DEFINER=`root`@`localhost` FUNCTION `get_url_path_of_category` (`categoryId` INT, `localeCode` VARCHAR(255)) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC BEGIN
-
-                DECLARE urlPath VARCHAR(255);
-
-                IF NOT EXISTS (
-                    SELECT id
-                    FROM categories
-                    WHERE
-                        id = categoryId
-                        AND parent_id IS NULL
-                )
-                THEN
-                    SELECT
-                        GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO urlPath
-                    FROM
-                        categories AS node,
-                        categories AS parent
-                        JOIN category_translations AS parent_translations ON parent.id = parent_translations.category_id
-                    WHERE
-                        node._lft >= parent._lft
-                        AND node._rgt <= parent._rgt
-                        AND node.id = categoryId
-                        AND node.parent_id IS NOT NULL
-                        AND parent.parent_id IS NOT NULL
-                        AND parent_translations.locale = localeCode
-                    GROUP BY
-                        node.id;
-
-                    IF urlPath IS NULL
-                    THEN
-                        SET urlPath = (SELECT slug FROM category_translations WHERE category_translations.category_id = categoryId);
-                    END IF;
-                 ELSE
-                    SET urlPath = '';
-                 END IF;
-
-                 RETURN urlPath;
-            END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -97,6 +52,26 @@ CREATE TABLE `addresses` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `addresses`
+--
+
+INSERT INTO `addresses` (`id`, `address_type`, `customer_id`, `cart_id`, `order_id`, `first_name`, `last_name`, `gender`, `company_name`, `address1`, `address2`, `postcode`, `city`, `state`, `country`, `email`, `phone`, `vat_id`, `default_address`, `additional`, `created_at`, `updated_at`) VALUES
+(1, 'customer', 1, NULL, NULL, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:35:23', '2022-08-13 15:35:23'),
+(2, 'cart_billing', 1, 6, NULL, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:35:23', '2022-08-13 15:35:23'),
+(3, 'cart_shipping', 1, 6, NULL, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:35:23', '2022-08-13 15:35:23'),
+(4, 'order_shipping', 1, NULL, 1, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:41:30', '2022-08-13 15:41:30'),
+(5, 'order_billing', 1, NULL, 1, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:41:30', '2022-08-13 15:41:30'),
+(7, 'customer', 4, NULL, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', NULL, '+917006022977', NULL, 0, NULL, '2022-08-21 10:28:50', '2022-08-21 10:34:10'),
+(8, 'cart_billing', 4, 12, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-21 12:17:33', '2022-08-21 12:17:33'),
+(9, 'cart_shipping', 4, 12, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-21 12:17:33', '2022-08-21 12:17:33'),
+(10, 'order_shipping', 4, NULL, 2, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
+(11, 'order_billing', 4, NULL, 2, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
+(12, 'cart_billing', 4, 13, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:16', '2022-08-24 20:00:16'),
+(13, 'cart_shipping', 4, 13, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:16', '2022-08-24 20:00:16'),
+(14, 'order_shipping', 4, NULL, 3, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
+(15, 'order_billing', 4, NULL, 3, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31');
+
 -- --------------------------------------------------------
 
 --
@@ -122,7 +97,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `name`, `email`, `password`, `api_token`, `status`, `role_id`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, 'Example', 'admin@example.com', '$2y$10$EpOvWIS0zC2GFot3UHGJqu1Mqlr20jR9Fq8zIk8w5zojdryW.w.DO', 'Un0PX1XRd57lkt8aE7xXgJWRNlq3xBVpCJB01lZFud0LCU1D81qKW2I0rC9dYPeB4gXKgwOhpMzjpzVi', 1, 1, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL);
+(1, 'Example', 'admin@example.com', '$2y$10$EpOvWIS0zC2GFot3UHGJqu1Mqlr20jR9Fq8zIk8w5zojdryW.w.DO', 'Un0PX1XRd57lkt8aE7xXgJWRNlq3xBVpCJB01lZFud0LCU1D81qKW2I0rC9dYPeB4gXKgwOhpMzjpzVi', 1, 1, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL),
+(2, 'Admin 2', 'admin2@ekart.com', '$2y$10$Pg.aRv88Ww0bUaGfcUoM9OS2HZLSS49lg7wSCWJ9rES9jVeelD/Wm', '2YGja6kVifqtNeIzAnAIUxUXsHKKhkJe8ek3sdGRuBwIHCuuegPXI4FfTTtinauzHBWAvwzZdi6dIw1O', 1, 2, NULL, '2022-08-12 06:55:26', '2022-08-12 06:59:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -194,7 +170,7 @@ INSERT INTO `attributes` (`id`, `code`, `admin_name`, `type`, `validation`, `pos
 (22, 'weight', 'Weight', 'text', 'decimal', 25, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (23, 'color', 'Color', 'select', NULL, 26, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (24, 'size', 'Size', 'select', NULL, 27, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(25, 'brand', 'Brand', 'select', NULL, 28, 0, 0, 0, 0, 1, 0, 1, 1, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
+(25, 'brand', 'Brand', 'select', '', 28, 0, 0, 0, 0, 1, 0, 1, 1, '2022-08-10 07:08:12', '2022-08-13 14:37:41', 'dropdown', 1, 0, 0),
 (26, 'guest_checkout', 'Guest Checkout', 'boolean', NULL, 8, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (27, 'product_number', 'Product Number', 'text', NULL, 2, 0, 1, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0);
 
@@ -316,7 +292,10 @@ INSERT INTO `attribute_options` (`id`, `admin_name`, `sort_order`, `attribute_id
 (6, 'S', 1, 24, NULL),
 (7, 'M', 2, 24, NULL),
 (8, 'L', 3, 24, NULL),
-(9, 'XL', 4, 24, NULL);
+(9, 'XL', 4, 24, NULL),
+(10, 'Abibas', 1, 25, NULL),
+(11, 'Puma', 2, 25, NULL),
+(12, 'Nike', 2, 25, NULL);
 
 -- --------------------------------------------------------
 
@@ -344,7 +323,22 @@ INSERT INTO `attribute_option_translations` (`id`, `locale`, `label`, `attribute
 (6, 'en', 'S', 6),
 (7, 'en', 'M', 7),
 (8, 'en', 'L', 8),
-(9, 'en', 'XL', 9);
+(9, 'en', 'XL', 9),
+(10, 'en', 'Abibas', 10),
+(11, 'fr', '', 10),
+(12, 'nl', '', 10),
+(13, 'tr', '', 10),
+(14, 'es', '', 10),
+(15, 'en', 'Puma', 11),
+(16, 'fr', '', 11),
+(17, 'nl', '', 11),
+(18, 'tr', '', 11),
+(19, 'es', '', 11),
+(20, 'en', 'Nike', 12),
+(21, 'fr', '', 12),
+(22, 'nl', '', 12),
+(23, 'tr', '', 12),
+(24, 'es', '', 12);
 
 -- --------------------------------------------------------
 
@@ -390,7 +384,11 @@ INSERT INTO `attribute_translations` (`id`, `locale`, `name`, `attribute_id`) VA
 (24, 'en', 'Size', 24),
 (25, 'en', 'Brand', 25),
 (26, 'en', 'Allow Guest Checkout', 26),
-(27, 'en', 'Product Number', 27);
+(27, 'en', 'Product Number', 27),
+(28, 'fr', '', 25),
+(29, 'nl', '', 25),
+(30, 'tr', '', 25),
+(31, 'es', '', 25);
 
 -- --------------------------------------------------------
 
@@ -544,7 +542,8 @@ CREATE TABLE `bulkupload_data_flow_profiles` (
 --
 
 INSERT INTO `bulkupload_data_flow_profiles` (`id`, `name`, `attribute_family_id`, `run_status`, `created_at`, `updated_at`, `locale_code`) VALUES
-(1, 'Test', 1, 1, '2022-08-10 07:09:40', '2022-08-10 07:16:04', 'en');
+(1, 'Test', 1, 1, '2022-08-10 07:09:40', '2022-08-10 07:16:04', 'en'),
+(2, 'test profile', 1, 0, '2022-08-21 15:39:41', '2022-08-21 15:39:41', 'en');
 
 -- --------------------------------------------------------
 
@@ -595,7 +594,12 @@ INSERT INTO `cart` (`id`, `customer_email`, `customer_first_name`, `customer_las
 (2, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 07:40:26', '2022-08-10 07:40:26', ''),
 (3, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 07:57:34', '2022-08-10 07:57:34', ''),
 (4, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '500.0000', '500.0000', '500.0000', '500.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 08:01:54', '2022-08-10 08:02:05', ''),
-(5, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '300.0000', '300.0000', '300.0000', '300.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 08:06:01', '2022-08-10 08:06:10', '');
+(5, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '300.0000', '300.0000', '300.0000', '300.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 08:06:01', '2022-08-10 08:06:10', ''),
+(6, 'mannukumarshah@gmail.com', 'Manu', 'kumar', 'free_free', NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 1, 1, '2022-08-13 15:27:26', '2022-08-13 15:41:36', ''),
+(7, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-19 11:39:21', '2022-08-19 11:39:22', ''),
+(10, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '800.0000', '800.0000', '800.0000', '800.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-20 19:04:17', '2022-08-20 19:04:30', ''),
+(12, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 2, '5.0000', NULL, 'USD', 'USD', 'USD', 'USD', '1650.0000', '1650.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-21 12:06:54', '2022-08-24 19:58:44', ''),
+(13, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '210.0000', '210.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-24 20:00:01', '2022-08-24 20:00:31', '');
 
 -- --------------------------------------------------------
 
@@ -640,7 +644,14 @@ CREATE TABLE `cart_items` (
 
 INSERT INTO `cart_items` (`id`, `quantity`, `sku`, `type`, `name`, `coupon_code`, `weight`, `total_weight`, `base_total_weight`, `price`, `base_price`, `total`, `base_total`, `tax_percent`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `additional`, `parent_id`, `product_id`, `cart_id`, `tax_category_id`, `created_at`, `updated_at`, `custom_price`, `applied_cart_rule_ids`) VALUES
 (5, 1, 'updatedSKU', 'simple', 'temp1', NULL, '12.0000', '12.0000', '12.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"_token\":\"zskDc40k5hBXBLsFZchls2bt3oxzoX3XtXKWtxFl\",\"product_id\":\"1\",\"quantity\":1}', NULL, 1, 4, NULL, '2022-08-10 08:02:05', '2022-08-10 08:02:05', NULL, ''),
-(7, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"_token\":\"zskDc40k5hBXBLsFZchls2bt3oxzoX3XtXKWtxFl\",\"product_id\":\"2\",\"quantity\":1}', NULL, 2, 5, NULL, '2022-08-10 08:06:10', '2022-08-10 08:06:10', NULL, '');
+(7, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"_token\":\"zskDc40k5hBXBLsFZchls2bt3oxzoX3XtXKWtxFl\",\"product_id\":\"2\",\"quantity\":1}', NULL, 2, 5, NULL, '2022-08-10 08:06:10', '2022-08-10 08:06:10', NULL, ''),
+(8, 1, 'updatedSKU', 'simple', 'temp1', NULL, '12.0000', '12.0000', '12.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1}', NULL, 1, 6, NULL, '2022-08-13 15:27:26', '2022-08-13 15:36:14', NULL, ''),
+(9, 1, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"4\",\"_token\":\"0CYrb05jHQrInn2HfjvPuybK1xk9DynYuAbYXUKH\"}', NULL, 4, 7, NULL, '2022-08-19 11:39:22', '2022-08-19 11:39:22', NULL, ''),
+(10, 1, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"4\",\"_token\":\"TUOUpeFEFDKqwVpaiP1MJyRRTQmmQaXM4TrQIOhZ\"}', NULL, 4, 10, NULL, '2022-08-20 19:04:17', '2022-08-20 19:04:30', NULL, ''),
+(11, 1, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"TUOUpeFEFDKqwVpaiP1MJyRRTQmmQaXM4TrQIOhZ\"}', NULL, 3, 10, NULL, '2022-08-20 19:04:18', '2022-08-20 19:04:30', NULL, ''),
+(15, 3, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '36.0000', '36.0000', '400.0000', '400.0000', '1200.0000', '1200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"SogHAGSqIwg1aQUeu8ffIHPGQks7ykqvs6wYoNJF\"}', NULL, 4, 12, NULL, '2022-08-21 12:06:58', '2022-08-24 19:58:42', NULL, ''),
+(16, 2, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '24.0000', '24.0000', '200.0000', '200.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":2,\"product_id\":\"2\",\"_token\":\"zwSSEN83KcNKGYwzihNMip1GyFxbS205WezdtRIK\"}', NULL, 2, 12, NULL, '2022-08-23 07:43:57', '2022-08-24 19:58:42', NULL, ''),
+(17, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\"}', NULL, 2, 13, NULL, '2022-08-24 20:00:02', '2022-08-24 20:00:30', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -671,6 +682,15 @@ CREATE TABLE `cart_payment` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `cart_payment`
+--
+
+INSERT INTO `cart_payment` (`id`, `method`, `method_title`, `cart_id`, `created_at`, `updated_at`) VALUES
+(1, 'razorpay', NULL, 6, '2022-08-13 15:35:57', '2022-08-13 15:35:57'),
+(17, 'moneytransfer', NULL, 12, '2022-08-24 19:58:37', '2022-08-24 19:58:37'),
+(18, 'moneytransfer', NULL, 13, '2022-08-24 20:00:25', '2022-08-24 20:00:25');
 
 -- --------------------------------------------------------
 
@@ -809,6 +829,18 @@ CREATE TABLE `cart_shipping_rates` (
   `is_calculate_tax` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `cart_shipping_rates`
+--
+
+INSERT INTO `cart_shipping_rates` (`id`, `carrier`, `carrier_title`, `method`, `method_title`, `method_description`, `price`, `base_price`, `cart_address_id`, `created_at`, `updated_at`, `discount_amount`, `base_discount_amount`, `is_calculate_tax`) VALUES
+(1, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 10, 10, 3, '2022-08-13 15:35:24', '2022-08-13 15:35:24', '0.0000', '0.0000', 1),
+(2, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 3, '2022-08-13 15:35:24', '2022-08-13 15:36:14', '0.0000', '0.0000', 1),
+(77, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 50, 50, 9, '2022-08-24 19:58:32', '2022-08-24 19:58:42', '0.0000', '0.0000', 1),
+(78, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 9, '2022-08-24 19:58:32', '2022-08-24 19:58:32', '0.0000', '0.0000', 1),
+(81, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 10, 10, 13, '2022-08-24 20:00:20', '2022-08-24 20:00:30', '0.0000', '0.0000', 1),
+(82, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 13, '2022-08-24 20:00:20', '2022-08-24 20:00:20', '0.0000', '0.0000', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -901,24 +933,86 @@ CREATE TABLE `catalog_rule_product_prices` (
 CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
   `position` int(11) NOT NULL DEFAULT 0,
-  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(191) DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT 0,
   `_lft` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `_rgt` int(10) UNSIGNED NOT NULL DEFAULT 0,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `display_mode` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT 'products_and_description',
-  `category_icon_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `display_mode` varchar(191) DEFAULT 'products_and_description',
+  `category_icon_path` text DEFAULT NULL,
+  `additional` longtext DEFAULT NULL CHECK (json_valid(`additional`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `position`, `image`, `status`, `_lft`, `_rgt`, `parent_id`, `created_at`, `updated_at`, `display_mode`, `category_icon_path`, `additional`) VALUES
-(1, 1, NULL, 1, 1, 14, NULL, '2022-08-10 07:08:11', '2022-08-10 07:08:11', 'products_and_description', NULL, NULL);
+(1, 1, NULL, 1, 1, 140, NULL, '2022-08-10 01:38:11', '2022-08-10 01:38:11', 'products_and_description', NULL, NULL),
+(3, 2, NULL, 1, 40, 61, 1, '2022-08-21 05:07:28', '2022-08-21 05:10:13', 'products_only', NULL, NULL),
+(4, 3, NULL, 1, 14, 39, 1, '2022-08-21 05:08:38', '2022-08-21 05:09:44', 'products_only', NULL, NULL),
+(5, 4, NULL, 1, 62, 81, 1, '2022-08-21 05:11:30', '2022-08-21 05:11:30', 'products_only', NULL, NULL),
+(6, 5, NULL, 1, 82, 101, 1, '2022-08-21 05:12:45', '2022-08-21 05:12:45', 'products_only', NULL, NULL),
+(7, 6, NULL, 1, 102, 117, 1, '2022-08-21 05:13:21', '2022-08-21 05:13:21', 'products_only', NULL, NULL),
+(8, 7, NULL, 1, 118, 119, 1, '2022-08-21 05:14:19', '2022-08-21 05:14:19', 'products_only', NULL, NULL),
+(9, 8, NULL, 1, 120, 133, 1, '2022-08-21 05:15:32', '2022-08-21 05:15:32', 'products_only', NULL, NULL),
+(10, 9, NULL, 1, 134, 135, 1, '2022-08-21 05:16:15', '2022-08-21 05:16:15', 'products_only', NULL, NULL),
+(11, 10, NULL, 1, 136, 137, 1, '2022-08-21 05:17:07', '2022-08-21 05:17:07', 'products_only', NULL, NULL),
+(12, 1, NULL, 1, 138, 139, 1, '2022-08-21 05:18:49', '2022-08-21 05:18:49', 'products_only', NULL, NULL),
+(13, 1, NULL, 1, 41, 46, 3, '2022-08-21 05:24:51', '2022-08-21 05:24:51', 'products_only', NULL, NULL),
+(14, 1, NULL, 1, 47, 52, 3, '2022-08-21 05:25:56', '2022-08-21 05:25:56', 'products_only', NULL, NULL),
+(15, 1, NULL, 1, 53, 58, 3, '2022-08-21 05:27:27', '2022-08-21 05:27:27', 'products_only', NULL, NULL),
+(17, 1, NULL, 1, 15, 20, 4, '2022-08-21 05:29:23', '2022-08-21 05:29:23', 'products_only', NULL, NULL),
+(18, 1, NULL, 1, 21, 26, 4, '2022-08-21 05:33:33', '2022-08-21 05:33:33', 'products_only', NULL, NULL),
+(19, 1, NULL, 1, 27, 32, 4, '2022-08-21 05:34:23', '2022-08-21 05:34:23', 'products_only', NULL, NULL),
+(20, 1, NULL, 1, 33, 38, 4, '2022-08-21 05:35:15', '2022-08-21 05:35:15', 'products_only', NULL, NULL),
+(21, 2, NULL, 1, 63, 68, 5, '2022-08-21 05:41:25', '2022-08-21 05:41:25', 'products_only', NULL, NULL),
+(22, 2, NULL, 1, 69, 74, 5, '2022-08-21 05:42:07', '2022-08-21 05:42:07', 'products_only', NULL, NULL),
+(23, 1, NULL, 1, 75, 80, 5, '2022-08-21 05:43:04', '2022-08-21 05:43:04', 'products_only', NULL, NULL),
+(24, 1, NULL, 1, 83, 90, 6, '2022-08-21 05:44:41', '2022-08-21 05:44:41', 'products_only', NULL, NULL),
+(25, 1, NULL, 1, 91, 96, 6, '2022-08-21 05:45:40', '2022-08-21 05:45:40', 'products_only', NULL, NULL),
+(26, 1, NULL, 1, 97, 100, 6, '2022-08-21 05:47:31', '2022-08-21 05:47:31', 'products_only', NULL, NULL),
+(27, 1, NULL, 1, 103, 108, 7, '2022-08-21 05:48:58', '2022-08-21 05:48:58', 'products_only', NULL, NULL),
+(28, 1, NULL, 1, 109, 116, 7, '2022-08-21 05:50:10', '2022-08-21 05:50:10', 'products_only', NULL, NULL),
+(29, 1, NULL, 1, 121, 126, 9, '2022-08-21 05:51:21', '2022-08-21 05:51:21', 'products_only', NULL, NULL),
+(30, 2, NULL, 1, 127, 132, 9, '2022-08-21 05:53:08', '2022-08-21 05:53:08', 'products_only', NULL, NULL),
+(31, 1, NULL, 1, 122, 123, 29, '2022-08-21 07:45:40', '2022-08-21 07:45:40', 'products_only', NULL, NULL),
+(32, 1, NULL, 1, 124, 125, 29, '2022-08-21 07:46:24', '2022-08-21 07:46:24', 'products_only', NULL, NULL),
+(33, 1, NULL, 1, 128, 129, 30, '2022-08-21 07:47:31', '2022-08-21 07:47:31', 'products_only', NULL, NULL),
+(34, 1, NULL, 1, 130, 131, 30, '2022-08-21 07:48:11', '2022-08-21 07:48:11', 'products_only', NULL, NULL),
+(35, 1, NULL, 1, 104, 105, 27, '2022-08-21 07:49:20', '2022-08-21 07:49:20', 'products_only', NULL, NULL),
+(36, 1, NULL, 1, 106, 107, 27, '2022-08-21 07:49:55', '2022-08-21 07:49:55', 'products_only', NULL, NULL),
+(37, 1, NULL, 1, 110, 111, 28, '2022-08-21 07:51:20', '2022-08-21 07:51:20', 'products_only', NULL, NULL),
+(38, 1, NULL, 1, 112, 113, 28, '2022-08-21 07:52:06', '2022-08-21 07:52:06', 'products_only', NULL, NULL),
+(39, 1, NULL, 1, 114, 115, 28, '2022-08-21 07:52:46', '2022-08-21 07:52:46', 'products_only', NULL, NULL),
+(40, 1, NULL, 1, 84, 85, 24, '2022-08-21 07:53:34', '2022-08-21 07:53:34', 'products_only', NULL, NULL),
+(41, 1, NULL, 1, 86, 87, 24, '2022-08-21 07:54:28', '2022-08-21 07:54:28', 'products_only', NULL, NULL),
+(42, 1, NULL, 1, 88, 89, 24, '2022-08-21 07:55:40', '2022-08-21 07:55:40', 'products_only', NULL, NULL),
+(43, 1, NULL, 1, 92, 93, 25, '2022-08-21 07:56:14', '2022-08-21 07:56:14', 'products_only', NULL, NULL),
+(44, 1, NULL, 1, 94, 95, 25, '2022-08-21 07:57:11', '2022-08-21 07:57:11', 'products_only', NULL, NULL),
+(45, 1, NULL, 1, 98, 99, 26, '2022-08-21 07:58:03', '2022-08-21 07:58:03', 'products_only', NULL, NULL),
+(46, 1, NULL, 1, 64, 65, 21, '2022-08-21 08:01:00', '2022-08-21 08:01:00', 'products_only', NULL, NULL),
+(47, 1, NULL, 1, 66, 67, 21, '2022-08-21 08:01:53', '2022-08-21 08:01:53', 'products_only', NULL, NULL),
+(48, 1, NULL, 1, 70, 71, 22, '2022-08-21 08:03:00', '2022-08-21 08:03:00', 'products_only', NULL, NULL),
+(49, 1, NULL, 1, 72, 73, 22, '2022-08-21 08:03:54', '2022-08-21 08:03:54', 'products_only', NULL, NULL),
+(50, 1, NULL, 1, 76, 77, 23, '2022-08-21 08:05:28', '2022-08-21 08:05:28', 'products_only', NULL, NULL),
+(51, 1, NULL, 1, 78, 79, 23, '2022-08-21 08:06:23', '2022-08-21 08:06:23', 'products_only', NULL, NULL),
+(52, 1, NULL, 1, 16, 17, 17, '2022-08-21 08:07:39', '2022-08-21 08:07:39', 'products_only', NULL, NULL),
+(53, 1, NULL, 1, 18, 19, 17, '2022-08-21 08:10:22', '2022-08-21 08:10:22', 'products_only', NULL, NULL),
+(54, 1, NULL, 1, 22, 23, 18, '2022-08-21 08:11:04', '2022-08-21 08:11:04', 'products_only', NULL, NULL),
+(55, 1, NULL, 1, 24, 25, 18, '2022-08-21 08:11:38', '2022-08-21 08:11:38', 'products_only', NULL, NULL),
+(56, 1, NULL, 1, 28, 29, 19, '2022-08-21 08:12:16', '2022-08-21 08:12:16', 'products_only', NULL, NULL),
+(57, 1, NULL, 1, 30, 31, 19, '2022-08-21 08:12:55', '2022-08-21 08:12:55', 'products_only', NULL, NULL),
+(58, 1, NULL, 1, 34, 35, 20, '2022-08-21 08:13:33', '2022-08-21 08:13:33', 'products_only', NULL, NULL),
+(59, 1, NULL, 1, 36, 37, 20, '2022-08-21 08:14:19', '2022-08-21 08:14:19', 'products_only', NULL, NULL),
+(60, 1, NULL, 1, 42, 43, 13, '2022-08-21 08:15:20', '2022-08-21 08:15:20', 'products_only', NULL, NULL),
+(61, 1, NULL, 1, 44, 45, 13, '2022-08-21 08:15:54', '2022-08-21 08:15:54', 'products_only', NULL, NULL),
+(62, 1, NULL, 1, 48, 49, 14, '2022-08-21 08:16:49', '2022-08-21 08:16:49', 'products_only', NULL, NULL),
+(63, 1, NULL, 1, 50, 51, 14, '2022-08-21 08:17:32', '2022-08-21 08:17:32', 'products_only', NULL, NULL),
+(64, 1, NULL, 1, 54, 55, 15, '2022-08-21 08:18:24', '2022-08-21 08:18:24', 'products_only', NULL, NULL),
+(65, 1, NULL, 1, 56, 57, 15, '2022-08-21 08:19:12', '2022-08-21 08:19:12', 'products_only', NULL, NULL);
 
 --
 -- Triggers `categories`
@@ -1033,17 +1127,17 @@ CREATE TABLE `category_filterable_attributes` (
 
 CREATE TABLE `category_translations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` text NOT NULL,
+  `slug` varchar(191) NOT NULL,
+  `description` text DEFAULT NULL,
+  `meta_title` text DEFAULT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
   `category_id` int(10) UNSIGNED NOT NULL,
-  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locale` varchar(191) NOT NULL,
   `locale_id` int(10) UNSIGNED DEFAULT NULL,
-  `url_path` varchar(2048) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'maintained by database triggers'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+  `url_path` varchar(2048) NOT NULL COMMENT 'maintained by database triggers'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `category_translations`
@@ -1054,7 +1148,317 @@ INSERT INTO `category_translations` (`id`, `name`, `slug`, `description`, `meta_
 (2, 'Raíz', 'root', 'Raíz', '', '', '', 1, 'es', NULL, ''),
 (3, 'Racine', 'root', 'Racine', '', '', '', 1, 'fr', NULL, ''),
 (4, 'Hoofdcategorie', 'root', 'Hoofdcategorie', '', '', '', 1, 'nl', NULL, ''),
-(5, 'Kök', 'root', 'Kök', '', '', '', 1, 'tr', NULL, '');
+(5, 'Kök', 'root', 'Kök', '', '', '', 1, 'tr', NULL, ''),
+(11, 'Home & Kitchen', 'home-kitchen', '', '', '', '', 3, 'en', 1, 'home-kitchen'),
+(12, 'Home & Kitchen', 'home-kitchen', '', '', '', '', 3, 'nl', 3, 'home-kitchen'),
+(13, 'Home & Kitchen', 'home-kitchen', '', '', '', '', 3, 'es', 5, 'home-kitchen'),
+(14, 'Home & Kitchen', 'home-kitchen', '', '', '', '', 3, 'fr', 2, 'home-kitchen'),
+(15, 'Home & Kitchen', 'home-kitchen', '', '', '', '', 3, 'tr', 4, 'home-kitchen'),
+(16, 'Women', 'women', '', '', '', '', 4, 'en', 1, 'women'),
+(17, 'Women', 'women', '', '', '', '', 4, 'nl', 3, 'women'),
+(18, 'Women', 'women', '', '', '', '', 4, 'es', 5, 'women'),
+(19, 'Women', 'women', '', '', '', '', 4, 'fr', 2, 'women'),
+(20, 'Women', 'women', '', '', '', '', 4, 'tr', 4, 'women'),
+(21, 'Men', 'men', '', '', '', '', 5, 'en', 1, 'men'),
+(22, 'Men', 'men', '', '', '', '', 5, 'nl', 3, 'men'),
+(23, 'Men', 'men', '', '', '', '', 5, 'es', 5, 'men'),
+(24, 'Men', 'men', '', '', '', '', 5, 'fr', 2, 'men'),
+(25, 'Men', 'men', '', '', '', '', 5, 'tr', 4, 'men'),
+(26, 'Kids', 'kids', '', '', '', '', 6, 'en', 1, 'kids'),
+(27, 'Kids', 'kids', '', '', '', '', 6, 'nl', 3, 'kids'),
+(28, 'Kids', 'kids', '', '', '', '', 6, 'es', 5, 'kids'),
+(29, 'Kids', 'kids', '', '', '', '', 6, 'fr', 2, 'kids'),
+(30, 'Kids', 'kids', '', '', '', '', 6, 'tr', 4, 'kids'),
+(31, 'Mobile', 'mobile', '', '', '', '', 7, 'en', 1, 'mobile'),
+(32, 'Mobile', 'mobile', '', '', '', '', 7, 'nl', 3, 'mobile'),
+(33, 'Mobile', 'mobile', '', '', '', '', 7, 'es', 5, 'mobile'),
+(34, 'Mobile', 'mobile', '', '', '', '', 7, 'fr', 2, 'mobile'),
+(35, 'Mobile', 'mobile', '', '', '', '', 7, 'tr', 4, 'mobile'),
+(36, 'Beauty & More', 'beauty-more', '', '', '', '', 8, 'en', 1, 'beauty-more'),
+(37, 'Beauty & More', 'beauty-more', '', '', '', '', 8, 'nl', 3, 'beauty-more'),
+(38, 'Beauty & More', 'beauty-more', '', '', '', '', 8, 'es', 5, 'beauty-more'),
+(39, 'Beauty & More', 'beauty-more', '', '', '', '', 8, 'fr', 2, 'beauty-more'),
+(40, 'Beauty & More', 'beauty-more', '', '', '', '', 8, 'tr', 4, 'beauty-more'),
+(41, 'Gifts & Toys', 'gifts-toys', '', '', '', '', 9, 'en', 1, 'gifts-toys'),
+(42, 'Gifts & Toys', 'gifts-toys', '', '', '', '', 9, 'nl', 3, 'gifts-toys'),
+(43, 'Gifts & Toys', 'gifts-toys', '', '', '', '', 9, 'es', 5, 'gifts-toys'),
+(44, 'Gifts & Toys', 'gifts-toys', '', '', '', '', 9, 'fr', 2, 'gifts-toys'),
+(45, 'Gifts & Toys', 'gifts-toys', '', '', '', '', 9, 'tr', 4, 'gifts-toys'),
+(46, 'Grocery', 'grocery', '', '', '', '', 10, 'en', 1, 'grocery'),
+(47, 'Grocery', 'grocery', '', '', '', '', 10, 'nl', 3, 'grocery'),
+(48, 'Grocery', 'grocery', '', '', '', '', 10, 'es', 5, 'grocery'),
+(49, 'Grocery', 'grocery', '', '', '', '', 10, 'fr', 2, 'grocery'),
+(50, 'Grocery', 'grocery', '', '', '', '', 10, 'tr', 4, 'grocery'),
+(51, 'New Releases', 'new-releases', '', '', '', '', 11, 'en', 1, 'new-releases'),
+(52, 'New Releases', 'new-releases', '', '', '', '', 11, 'nl', 3, 'new-releases'),
+(53, 'New Releases', 'new-releases', '', '', '', '', 11, 'es', 5, 'new-releases'),
+(54, 'New Releases', 'new-releases', '', '', '', '', 11, 'fr', 2, 'new-releases'),
+(55, 'New Releases', 'new-releases', '', '', '', '', 11, 'tr', 4, 'new-releases'),
+(56, 'Home', 'home', '', '', '', '', 12, 'en', 1, 'home'),
+(57, 'Home', 'home', '', '', '', '', 12, 'nl', 3, 'home'),
+(58, 'Home', 'home', '', '', '', '', 12, 'es', 5, 'home'),
+(59, 'Home', 'home', '', '', '', '', 12, 'fr', 2, 'home'),
+(60, 'Home', 'home', '', '', '', '', 12, 'tr', 4, 'home'),
+(61, 'Home Furnishings', 'home-furnishings', '', '', '', '', 13, 'en', 1, 'home-kitchen/home-furnishings'),
+(62, 'Home Furnishings', 'home-furnishings', '', '', '', '', 13, 'nl', 3, 'home-kitchen/home-furnishings'),
+(63, 'Home Furnishings', 'home-furnishings', '', '', '', '', 13, 'es', 5, 'home-kitchen/home-furnishings'),
+(64, 'Home Furnishings', 'home-furnishings', '', '', '', '', 13, 'fr', 2, 'home-kitchen/home-furnishings'),
+(65, 'Home Furnishings', 'home-furnishings', '', '', '', '', 13, 'tr', 4, 'home-kitchen/home-furnishings'),
+(66, 'Kitchen & Dining', 'kitchen-dining', '', '', '', '', 14, 'en', 1, 'home-kitchen/kitchen-dining'),
+(67, 'Kitchen & Dining', 'kitchen-dining', '', '', '', '', 14, 'nl', 3, 'home-kitchen/kitchen-dining'),
+(68, 'Kitchen & Dining', 'kitchen-dining', '', '', '', '', 14, 'es', 5, 'home-kitchen/kitchen-dining'),
+(69, 'Kitchen & Dining', 'kitchen-dining', '', '', '', '', 14, 'fr', 2, 'home-kitchen/kitchen-dining'),
+(70, 'Kitchen & Dining', 'kitchen-dining', '', '', '', '', 14, 'tr', 4, 'home-kitchen/kitchen-dining'),
+(71, 'Home Decor', 'home-decor', '', '', '', '', 15, 'en', 1, 'home-kitchen/home-decor'),
+(72, 'Home Decor', 'home-decor', '', '', '', '', 15, 'nl', 3, 'home-kitchen/home-decor'),
+(73, 'Home Decor', 'home-decor', '', '', '', '', 15, 'es', 5, 'home-kitchen/home-decor'),
+(74, 'Home Decor', 'home-decor', '', '', '', '', 15, 'fr', 2, 'home-kitchen/home-decor'),
+(75, 'Home Decor', 'home-decor', '', '', '', '', 15, 'tr', 4, 'home-kitchen/home-decor'),
+(81, 'Women Ethnic', 'women-ethnic', '', '', '', '', 17, 'en', 1, 'women/women-ethnic'),
+(82, 'Women Ethnic', 'women-ethnic', '', '', '', '', 17, 'nl', 3, 'women/women-ethnic'),
+(83, 'Women Ethnic', 'women-ethnic', '', '', '', '', 17, 'es', 5, 'women/women-ethnic'),
+(84, 'Women Ethnic', 'women-ethnic', '', '', '', '', 17, 'fr', 2, 'women/women-ethnic'),
+(85, 'Women Ethnic', 'women-ethnic', '', '', '', '', 17, 'tr', 4, 'women/women-ethnic'),
+(86, 'Women Western', 'women-western', '', '', '', '', 18, 'en', 1, 'women/women-western'),
+(87, 'Women Western', 'women-western', '', '', '', '', 18, 'nl', 3, 'women/women-western'),
+(88, 'Women Western', 'women-western', '', '', '', '', 18, 'es', 5, 'women/women-western'),
+(89, 'Women Western', 'women-western', '', '', '', '', 18, 'fr', 2, 'women/women-western'),
+(90, 'Women Western', 'women-western', '', '', '', '', 18, 'tr', 4, 'women/women-western'),
+(91, 'Women Footwear', 'women-footwear', '', '', '', '', 19, 'en', 1, 'women/women-footwear'),
+(92, 'Women Footwear', 'women-footwear', '', '', '', '', 19, 'nl', 3, 'women/women-footwear'),
+(93, 'Women Footwear', 'women-footwear', '', '', '', '', 19, 'es', 5, 'women/women-footwear'),
+(94, 'Women Footwear', 'women-footwear', '', '', '', '', 19, 'fr', 2, 'women/women-footwear'),
+(95, 'Women Footwear', 'women-footwear', '', '', '', '', 19, 'tr', 4, 'women/women-footwear'),
+(96, 'Women Accessories', 'women-accessories', '', '', '', '', 20, 'en', 1, 'women/women-accessories'),
+(97, 'Women Accessories', 'women-accessories', '', '', '', '', 20, 'nl', 3, 'women/women-accessories'),
+(98, 'Women Accessories', 'women-accessories', '', '', '', '', 20, 'es', 5, 'women/women-accessories'),
+(99, 'Women Accessories', 'women-accessories', '', '', '', '', 20, 'fr', 2, 'women/women-accessories'),
+(100, 'Women Accessories', 'women-accessories', '', '', '', '', 20, 'tr', 4, 'women/women-accessories'),
+(101, 'Mens Topwear', 'mens-topwear', '', '', '', '', 21, 'en', 1, 'men/mens-topwear'),
+(102, 'Mens Topwear', 'mens-topwear', '', '', '', '', 21, 'nl', 3, 'men/mens-topwear'),
+(103, 'Mens Topwear', 'mens-topwear', '', '', '', '', 21, 'es', 5, 'men/mens-topwear'),
+(104, 'Mens Topwear', 'mens-topwear', '', '', '', '', 21, 'fr', 2, 'men/mens-topwear'),
+(105, 'Mens Topwear', 'mens-topwear', '', '', '', '', 21, 'tr', 4, 'men/mens-topwear'),
+(106, 'Mens Footwear', 'mens-footwear', '', '', '', '', 22, 'en', 1, 'men/mens-footwear'),
+(107, 'Mens Footwear', 'mens-footwear', '', '', '', '', 22, 'nl', 3, 'men/mens-footwear'),
+(108, 'Mens Footwear', 'mens-footwear', '', '', '', '', 22, 'es', 5, 'men/mens-footwear'),
+(109, 'Mens Footwear', 'mens-footwear', '', '', '', '', 22, 'fr', 2, 'men/mens-footwear'),
+(110, 'Mens Footwear', 'mens-footwear', '', '', '', '', 22, 'tr', 4, 'men/mens-footwear'),
+(111, 'Mens Winter', 'mens-winter', '', '', '', '', 23, 'en', 1, 'men/mens-winter'),
+(112, 'Mens Winter', 'mens-winter', '', '', '', '', 23, 'nl', 3, 'men/mens-winter'),
+(113, 'Mens Winter', 'mens-winter', '', '', '', '', 23, 'es', 5, 'men/mens-winter'),
+(114, 'Mens Winter', 'mens-winter', '', '', '', '', 23, 'fr', 2, 'men/mens-winter'),
+(115, 'Mens Winter', 'mens-winter', '', '', '', '', 23, 'tr', 4, 'men/mens-winter'),
+(116, 'Kids Fashion', 'kids-fashion', '', '', '', '', 24, 'en', 1, 'kids/kids-fashion'),
+(117, 'Kids Fashion', 'kids-fashion', '', '', '', '', 24, 'nl', 3, 'kids/kids-fashion'),
+(118, 'Kids Fashion', 'kids-fashion', '', '', '', '', 24, 'es', 5, 'kids/kids-fashion'),
+(119, 'Kids Fashion', 'kids-fashion', '', '', '', '', 24, 'fr', 2, 'kids/kids-fashion'),
+(120, 'Kids Fashion', 'kids-fashion', '', '', '', '', 24, 'tr', 4, 'kids/kids-fashion'),
+(121, 'Kids Footwear', 'kids-footwear', '', '', '', '', 25, 'en', 1, 'kids/kids-footwear'),
+(122, 'Kids Footwear', 'kids-footwear', '', '', '', '', 25, 'nl', 3, 'kids/kids-footwear'),
+(123, 'Kids Footwear', 'kids-footwear', '', '', '', '', 25, 'es', 5, 'kids/kids-footwear'),
+(124, 'Kids Footwear', 'kids-footwear', '', '', '', '', 25, 'fr', 2, 'kids/kids-footwear'),
+(125, 'Kids Footwear', 'kids-footwear', '', '', '', '', 25, 'tr', 4, 'kids/kids-footwear'),
+(126, 'Kids Essentials', 'kids-essentials', '', '', '', '', 26, 'en', 1, 'kids/kids-essentials'),
+(127, 'Kids Essentials', 'kids-essentials', '', '', '', '', 26, 'nl', 3, 'kids/kids-essentials'),
+(128, 'Kids Essentials', 'kids-essentials', '', '', '', '', 26, 'es', 5, 'kids/kids-essentials'),
+(129, 'Kids Essentials', 'kids-essentials', '', '', '', '', 26, 'fr', 2, 'kids/kids-essentials'),
+(130, 'Kids Essentials', 'kids-essentials', '', '', '', '', 26, 'tr', 4, 'kids/kids-essentials'),
+(131, 'Mobile Accessory', 'mobile-accessory', '', '', '', '', 27, 'en', 1, 'mobile/mobile-accessory'),
+(132, 'Mobile Accessory', 'mobile-accessory', '', '', '', '', 27, 'nl', 3, 'mobile/mobile-accessory'),
+(133, 'Mobile Accessory', 'mobile-accessory', '', '', '', '', 27, 'es', 5, 'mobile/mobile-accessory'),
+(134, 'Mobile Accessory', 'mobile-accessory', '', '', '', '', 27, 'fr', 2, 'mobile/mobile-accessory'),
+(135, 'Mobile Accessory', 'mobile-accessory', '', '', '', '', 27, 'tr', 4, 'mobile/mobile-accessory'),
+(136, 'Mobile Phone', 'mobile-phone', '', '', '', '', 28, 'en', 1, 'mobile/mobile-phone'),
+(137, 'Mobile Phone', 'mobile-phone', '', '', '', '', 28, 'nl', 3, 'mobile/mobile-phone'),
+(138, 'Mobile Phone', 'mobile-phone', '', '', '', '', 28, 'es', 5, 'mobile/mobile-phone'),
+(139, 'Mobile Phone', 'mobile-phone', '', '', '', '', 28, 'fr', 2, 'mobile/mobile-phone'),
+(140, 'Mobile Phone', 'mobile-phone', '', '', '', '', 28, 'tr', 4, 'mobile/mobile-phone'),
+(141, 'Toys', 'toys', '', '', '', '', 29, 'en', 1, 'gifts-toys/toys'),
+(142, 'Toys', 'toys', '', '', '', '', 29, 'nl', 3, 'gifts-toys/toys'),
+(143, 'Toys', 'toys', '', '', '', '', 29, 'es', 5, 'gifts-toys/toys'),
+(144, 'Toys', 'toys', '', '', '', '', 29, 'fr', 2, 'gifts-toys/toys'),
+(145, 'Toys', 'toys', '', '', '', '', 29, 'tr', 4, 'gifts-toys/toys'),
+(146, 'Gifts', 'gifts', '', '', '', '', 30, 'en', 1, 'gifts-toys/gifts'),
+(147, 'Gifts', 'gifts', '', '', '', '', 30, 'nl', 3, 'gifts-toys/gifts'),
+(148, 'Gifts', 'gifts', '', '', '', '', 30, 'es', 5, 'gifts-toys/gifts'),
+(149, 'Gifts', 'gifts', '', '', '', '', 30, 'fr', 2, 'gifts-toys/gifts'),
+(150, 'Gifts', 'gifts', '', '', '', '', 30, 'tr', 4, 'gifts-toys/gifts'),
+(151, 'Remote Control Toys', 'remote-control-toys', '', '', '', '', 31, 'en', 1, 'gifts-toys/toys/remote-control-toys'),
+(152, 'Remote Control Toys', 'remote-control-toys', '', '', '', '', 31, 'nl', 3, 'gifts-toys/toys/remote-control-toys'),
+(153, 'Remote Control Toys', 'remote-control-toys', '', '', '', '', 31, 'es', 5, 'gifts-toys/toys/remote-control-toys'),
+(154, 'Remote Control Toys', 'remote-control-toys', '', '', '', '', 31, 'fr', 2, 'gifts-toys/toys/remote-control-toys'),
+(155, 'Remote Control Toys', 'remote-control-toys', '', '', '', '', 31, 'tr', 4, 'gifts-toys/toys/remote-control-toys'),
+(156, 'Puzzles', 'puzzles', '', '', '', '', 32, 'en', 1, 'gifts-toys/toys/puzzles'),
+(157, 'Puzzles', 'puzzles', '', '', '', '', 32, 'nl', 3, 'gifts-toys/toys/puzzles'),
+(158, 'Puzzles', 'puzzles', '', '', '', '', 32, 'es', 5, 'gifts-toys/toys/puzzles'),
+(159, 'Puzzles', 'puzzles', '', '', '', '', 32, 'fr', 2, 'gifts-toys/toys/puzzles'),
+(160, 'Puzzles', 'puzzles', '', '', '', '', 32, 'tr', 4, 'gifts-toys/toys/puzzles'),
+(161, 'Gifting Toys', 'gifting-toys', '', '', '', '', 33, 'en', 1, 'gifts-toys/gifts/gifting-toys'),
+(162, 'Gifting Toys', 'gifting-toys', '', '', '', '', 33, 'nl', 3, 'gifts-toys/gifts/gifting-toys'),
+(163, 'Gifting Toys', 'gifting-toys', '', '', '', '', 33, 'es', 5, 'gifts-toys/gifts/gifting-toys'),
+(164, 'Gifting Toys', 'gifting-toys', '', '', '', '', 33, 'fr', 2, 'gifts-toys/gifts/gifting-toys'),
+(165, 'Gifting Toys', 'gifting-toys', '', '', '', '', 33, 'tr', 4, 'gifts-toys/gifts/gifting-toys'),
+(166, 'All Exclusive Gifts', 'all-exclusive-gifts', '', '', '', '', 34, 'en', 1, 'gifts-toys/gifts/all-exclusive-gifts'),
+(167, 'All Exclusive Gifts', 'all-exclusive-gifts', '', '', '', '', 34, 'nl', 3, 'gifts-toys/gifts/all-exclusive-gifts'),
+(168, 'All Exclusive Gifts', 'all-exclusive-gifts', '', '', '', '', 34, 'es', 5, 'gifts-toys/gifts/all-exclusive-gifts'),
+(169, 'All Exclusive Gifts', 'all-exclusive-gifts', '', '', '', '', 34, 'fr', 2, 'gifts-toys/gifts/all-exclusive-gifts'),
+(170, 'All Exclusive Gifts', 'all-exclusive-gifts', '', '', '', '', 34, 'tr', 4, 'gifts-toys/gifts/all-exclusive-gifts'),
+(171, 'Plain Cases', 'plain-cases', '', '', '', '', 35, 'en', 1, 'mobile/mobile-accessory/plain-cases'),
+(172, 'Plain Cases', 'plain-cases', '', '', '', '', 35, 'nl', 3, 'mobile/mobile-accessory/plain-cases'),
+(173, 'Plain Cases', 'plain-cases', '', '', '', '', 35, 'es', 5, 'mobile/mobile-accessory/plain-cases'),
+(174, 'Plain Cases', 'plain-cases', '', '', '', '', 35, 'fr', 2, 'mobile/mobile-accessory/plain-cases'),
+(175, 'Plain Cases', 'plain-cases', '', '', '', '', 35, 'tr', 4, 'mobile/mobile-accessory/plain-cases'),
+(176, 'Designer Cases', 'designer-cases', '', '', '', '', 36, 'en', 1, 'mobile/mobile-accessory/designer-cases'),
+(177, 'Designer Cases', 'designer-cases', '', '', '', '', 36, 'nl', 3, 'mobile/mobile-accessory/designer-cases'),
+(178, 'Designer Cases', 'designer-cases', '', '', '', '', 36, 'es', 5, 'mobile/mobile-accessory/designer-cases'),
+(179, 'Designer Cases', 'designer-cases', '', '', '', '', 36, 'fr', 2, 'mobile/mobile-accessory/designer-cases'),
+(180, 'Designer Cases', 'designer-cases', '', '', '', '', 36, 'tr', 4, 'mobile/mobile-accessory/designer-cases'),
+(181, 'Redmi', 'redmi', '', '', '', '', 37, 'en', 1, 'mobile/mobile-phone/redmi'),
+(182, 'Redmi', 'redmi', '', '', '', '', 37, 'nl', 3, 'mobile/mobile-phone/redmi'),
+(183, 'Redmi', 'redmi', '', '', '', '', 37, 'es', 5, 'mobile/mobile-phone/redmi'),
+(184, 'Redmi', 'redmi', '', '', '', '', 37, 'fr', 2, 'mobile/mobile-phone/redmi'),
+(185, 'Redmi', 'redmi', '', '', '', '', 37, 'tr', 4, 'mobile/mobile-phone/redmi'),
+(186, 'Samsung', 'samsung', '', '', '', '', 38, 'en', 1, 'mobile/mobile-phone/samsung'),
+(187, 'Samsung', 'samsung', '', '', '', '', 38, 'nl', 3, 'mobile/mobile-phone/samsung'),
+(188, 'Samsung', 'samsung', '', '', '', '', 38, 'es', 5, 'mobile/mobile-phone/samsung'),
+(189, 'Samsung', 'samsung', '', '', '', '', 38, 'fr', 2, 'mobile/mobile-phone/samsung'),
+(190, 'Samsung', 'samsung', '', '', '', '', 38, 'tr', 4, 'mobile/mobile-phone/samsung'),
+(191, 'Realme', 'realme', '', '', '', '', 39, 'en', 1, 'mobile/mobile-phone/realme'),
+(192, 'Realme', 'realme', '', '', '', '', 39, 'nl', 3, 'mobile/mobile-phone/realme'),
+(193, 'Realme', 'realme', '', '', '', '', 39, 'es', 5, 'mobile/mobile-phone/realme'),
+(194, 'Realme', 'realme', '', '', '', '', 39, 'fr', 2, 'mobile/mobile-phone/realme'),
+(195, 'Realme', 'realme', '', '', '', '', 39, 'tr', 4, 'mobile/mobile-phone/realme'),
+(196, 'Kids Girl Dressess', 'kids-girl-dressess', '', '', '', '', 40, 'en', 1, 'kids/kids-fashion/kids-girl-dressess'),
+(197, 'Kids Girl Dressess', 'kids-girl-dressess', '', '', '', '', 40, 'nl', 3, 'kids/kids-fashion/kids-girl-dressess'),
+(198, 'Kids Girl Dressess', 'kids-girl-dressess', '', '', '', '', 40, 'es', 5, 'kids/kids-fashion/kids-girl-dressess'),
+(199, 'Kids Girl Dressess', 'kids-girl-dressess', '', '', '', '', 40, 'fr', 2, 'kids/kids-fashion/kids-girl-dressess'),
+(200, 'Kids Girl Dressess', 'kids-girl-dressess', '', '', '', '', 40, 'tr', 4, 'kids/kids-fashion/kids-girl-dressess'),
+(201, 'Kid Boy & Girl Dressess', 'kid-boy-girl-dressess', '', '', '', '', 41, 'en', 1, 'kids/kids-fashion/kid-boy-girl-dressess'),
+(202, 'Kid Boy & Girl Dressess', 'kid-boy-girl-dressess', '', '', '', '', 41, 'nl', 3, 'kids/kids-fashion/kid-boy-girl-dressess'),
+(203, 'Kid Boy & Girl Dressess', 'kid-boy-girl-dressess', '', '', '', '', 41, 'es', 5, 'kids/kids-fashion/kid-boy-girl-dressess'),
+(204, 'Kid Boy & Girl Dressess', 'kid-boy-girl-dressess', '', '', '', '', 41, 'fr', 2, 'kids/kids-fashion/kid-boy-girl-dressess'),
+(205, 'Kid Boy & Girl Dressess', 'kid-boy-girl-dressess', '', '', '', '', 41, 'tr', 4, 'kids/kids-fashion/kid-boy-girl-dressess'),
+(206, 'Kids Boys & Girls Dresses', 'kids-boys-girls-dresses', '', '', '', '', 42, 'en', 1, 'kids/kids-fashion/kids-boys-girls-dresses'),
+(207, 'Kids Boys & Girls Dresses', 'kids-boys-girls-dresses', '', '', '', '', 42, 'nl', 3, 'kids/kids-fashion/kids-boys-girls-dresses'),
+(208, 'Kids Boys & Girls Dresses', 'kids-boys-girls-dresses', '', '', '', '', 42, 'es', 5, 'kids/kids-fashion/kids-boys-girls-dresses'),
+(209, 'Kids Boys & Girls Dresses', 'kids-boys-girls-dresses', '', '', '', '', 42, 'fr', 2, 'kids/kids-fashion/kids-boys-girls-dresses'),
+(210, 'Kids Boys & Girls Dresses', 'kids-boys-girls-dresses', '', '', '', '', 42, 'tr', 4, 'kids/kids-fashion/kids-boys-girls-dresses'),
+(211, 'Kids Shoes', 'kids-shoes', '', '', '', '', 43, 'en', 1, 'kids/kids-footwear/kids-shoes'),
+(212, 'Kids Shoes', 'kids-shoes', '', '', '', '', 43, 'nl', 3, 'kids/kids-footwear/kids-shoes'),
+(213, 'Kids Shoes', 'kids-shoes', '', '', '', '', 43, 'es', 5, 'kids/kids-footwear/kids-shoes'),
+(214, 'Kids Shoes', 'kids-shoes', '', '', '', '', 43, 'fr', 2, 'kids/kids-footwear/kids-shoes'),
+(215, 'Kids Shoes', 'kids-shoes', '', '', '', '', 43, 'tr', 4, 'kids/kids-footwear/kids-shoes'),
+(216, 'Kids Sports Shoes', 'kids-sports-shoes', '', '', '', '', 44, 'en', 1, 'kids/kids-footwear/kids-sports-shoes'),
+(217, 'Kids Sports Shoes', 'kids-sports-shoes', '', '', '', '', 44, 'nl', 3, 'kids/kids-footwear/kids-sports-shoes'),
+(218, 'Kids Sports Shoes', 'kids-sports-shoes', '', '', '', '', 44, 'es', 5, 'kids/kids-footwear/kids-sports-shoes'),
+(219, 'Kids Sports Shoes', 'kids-sports-shoes', '', '', '', '', 44, 'fr', 2, 'kids/kids-footwear/kids-sports-shoes'),
+(220, 'Kids Sports Shoes', 'kids-sports-shoes', '', '', '', '', 44, 'tr', 4, 'kids/kids-footwear/kids-sports-shoes'),
+(221, 'Infant Wear', 'infant-wear', '', '', '', '', 45, 'en', 1, 'kids/kids-essentials/infant-wear'),
+(222, 'Infant Wear', 'infant-wear', '', '', '', '', 45, 'nl', 3, 'kids/kids-essentials/infant-wear'),
+(223, 'Infant Wear', 'infant-wear', '', '', '', '', 45, 'es', 5, 'kids/kids-essentials/infant-wear'),
+(224, 'Infant Wear', 'infant-wear', '', '', '', '', 45, 'fr', 2, 'kids/kids-essentials/infant-wear'),
+(225, 'Infant Wear', 'infant-wear', '', '', '', '', 45, 'tr', 4, 'kids/kids-essentials/infant-wear'),
+(226, 'Mens TShirts', 'mens-tshirts', '', '', '', '', 46, 'en', 1, 'men/mens-topwear/mens-tshirts'),
+(227, 'Mens TShirts', 'mens-tshirts', '', '', '', '', 46, 'nl', 3, 'men/mens-topwear/mens-tshirts'),
+(228, 'Mens TShirts', 'mens-tshirts', '', '', '', '', 46, 'es', 5, 'men/mens-topwear/mens-tshirts'),
+(229, 'Mens TShirts', 'mens-tshirts', '', '', '', '', 46, 'fr', 2, 'men/mens-topwear/mens-tshirts'),
+(230, 'Mens TShirts', 'mens-tshirts', '', '', '', '', 46, 'tr', 4, 'men/mens-topwear/mens-tshirts'),
+(231, 'Mens Kurta', 'mens-kurta', '', '', '', '', 47, 'en', 1, 'men/mens-topwear/mens-kurta'),
+(232, 'Mens Kurta', 'mens-kurta', '', '', '', '', 47, 'nl', 3, 'men/mens-topwear/mens-kurta'),
+(233, 'Mens Kurta', 'mens-kurta', '', '', '', '', 47, 'es', 5, 'men/mens-topwear/mens-kurta'),
+(234, 'Mens Kurta', 'mens-kurta', '', '', '', '', 47, 'fr', 2, 'men/mens-topwear/mens-kurta'),
+(235, 'Mens Kurta', 'mens-kurta', '', '', '', '', 47, 'tr', 4, 'men/mens-topwear/mens-kurta'),
+(236, 'Mens Casual Shoes', 'mens-casual-shoes', '', '', '', '', 48, 'en', 1, 'men/mens-footwear/mens-casual-shoes'),
+(237, 'Mens Casual Shoes', 'mens-casual-shoes', '', '', '', '', 48, 'nl', 3, 'men/mens-footwear/mens-casual-shoes'),
+(238, 'Mens Casual Shoes', 'mens-casual-shoes', '', '', '', '', 48, 'es', 5, 'men/mens-footwear/mens-casual-shoes'),
+(239, 'Mens Casual Shoes', 'mens-casual-shoes', '', '', '', '', 48, 'fr', 2, 'men/mens-footwear/mens-casual-shoes'),
+(240, 'Mens Casual Shoes', 'mens-casual-shoes', '', '', '', '', 48, 'tr', 4, 'men/mens-footwear/mens-casual-shoes'),
+(241, 'Mens Sports Shoes', 'mens-sports-shoes', '', '', '', '', 49, 'en', 1, 'men/mens-footwear/mens-sports-shoes'),
+(242, 'Mens Sports Shoes', 'mens-sports-shoes', '', '', '', '', 49, 'nl', 3, 'men/mens-footwear/mens-sports-shoes'),
+(243, 'Mens Sports Shoes', 'mens-sports-shoes', '', '', '', '', 49, 'es', 5, 'men/mens-footwear/mens-sports-shoes'),
+(244, 'Mens Sports Shoes', 'mens-sports-shoes', '', '', '', '', 49, 'fr', 2, 'men/mens-footwear/mens-sports-shoes'),
+(245, 'Mens Sports Shoes', 'mens-sports-shoes', '', '', '', '', 49, 'tr', 4, 'men/mens-footwear/mens-sports-shoes'),
+(246, 'Men Jackets', 'men-jackets', '', '', '', '', 50, 'en', 1, 'men/mens-winter/men-jackets'),
+(247, 'Men Jackets', 'men-jackets', '', '', '', '', 50, 'nl', 3, 'men/mens-winter/men-jackets'),
+(248, 'Men Jackets', 'men-jackets', '', '', '', '', 50, 'es', 5, 'men/mens-winter/men-jackets'),
+(249, 'Men Jackets', 'men-jackets', '', '', '', '', 50, 'fr', 2, 'men/mens-winter/men-jackets'),
+(250, 'Men Jackets', 'men-jackets', '', '', '', '', 50, 'tr', 4, 'men/mens-winter/men-jackets'),
+(251, 'Men Sweaters', 'men-sweaters', '', '', '', '', 51, 'en', 1, 'men/mens-winter/men-sweaters'),
+(252, 'Men Sweaters', 'men-sweaters', '', '', '', '', 51, 'nl', 3, 'men/mens-winter/men-sweaters'),
+(253, 'Men Sweaters', 'men-sweaters', '', '', '', '', 51, 'es', 5, 'men/mens-winter/men-sweaters'),
+(254, 'Men Sweaters', 'men-sweaters', '', '', '', '', 51, 'fr', 2, 'men/mens-winter/men-sweaters'),
+(255, 'Men Sweaters', 'men-sweaters', '', '', '', '', 51, 'tr', 4, 'men/mens-winter/men-sweaters'),
+(256, 'Saress', 'saress', '', '', '', '', 52, 'en', 1, 'women/women-ethnic/saress'),
+(257, 'Saress', 'saress', '', '', '', '', 52, 'nl', 3, 'women/women-ethnic/saress'),
+(258, 'Saress', 'saress', '', '', '', '', 52, 'es', 5, 'women/women-ethnic/saress'),
+(259, 'Saress', 'saress', '', '', '', '', 52, 'fr', 2, 'women/women-ethnic/saress'),
+(260, 'Saress', 'saress', '', '', '', '', 52, 'tr', 4, 'women/women-ethnic/saress'),
+(261, 'Kurtas And Kurti', 'kurtas-and-kurti', '', '', '', '', 53, 'en', 1, 'women/women-ethnic/kurtas-and-kurti'),
+(262, 'Kurtas And Kurti', 'kurtas-and-kurti', '', '', '', '', 53, 'nl', 3, 'women/women-ethnic/kurtas-and-kurti'),
+(263, 'Kurtas And Kurti', 'kurtas-and-kurti', '', '', '', '', 53, 'es', 5, 'women/women-ethnic/kurtas-and-kurti'),
+(264, 'Kurtas And Kurti', 'kurtas-and-kurti', '', '', '', '', 53, 'fr', 2, 'women/women-ethnic/kurtas-and-kurti'),
+(265, 'Kurtas And Kurti', 'kurtas-and-kurti', '', '', '', '', 53, 'tr', 4, 'women/women-ethnic/kurtas-and-kurti'),
+(266, 'Tops', 'tops', '', '', '', '', 54, 'en', 1, 'women/women-western/tops'),
+(267, 'Tops', 'tops', '', '', '', '', 54, 'nl', 3, 'women/women-western/tops'),
+(268, 'Tops', 'tops', '', '', '', '', 54, 'es', 5, 'women/women-western/tops'),
+(269, 'Tops', 'tops', '', '', '', '', 54, 'fr', 2, 'women/women-western/tops'),
+(270, 'Tops', 'tops', '', '', '', '', 54, 'tr', 4, 'women/women-western/tops'),
+(271, 'Dressess', 'dressess', '', '', '', '', 55, 'en', 1, 'women/women-western/dressess'),
+(272, 'Dressess', 'dressess', '', '', '', '', 55, 'nl', 3, 'women/women-western/dressess'),
+(273, 'Dressess', 'dressess', '', '', '', '', 55, 'es', 5, 'women/women-western/dressess'),
+(274, 'Dressess', 'dressess', '', '', '', '', 55, 'fr', 2, 'women/women-western/dressess'),
+(275, 'Dressess', 'dressess', '', '', '', '', 55, 'tr', 4, 'women/women-western/dressess'),
+(276, 'Flats', 'flats', '', '', '', '', 56, 'en', 1, 'women/women-footwear/flats'),
+(277, 'Flats', 'flats', '', '', '', '', 56, 'nl', 3, 'women/women-footwear/flats'),
+(278, 'Flats', 'flats', '', '', '', '', 56, 'es', 5, 'women/women-footwear/flats'),
+(279, 'Flats', 'flats', '', '', '', '', 56, 'fr', 2, 'women/women-footwear/flats'),
+(280, 'Flats', 'flats', '', '', '', '', 56, 'tr', 4, 'women/women-footwear/flats'),
+(281, 'Heels', 'heels', '', '', '', '', 57, 'en', 1, 'women/women-footwear/heels'),
+(282, 'Heels', 'heels', '', '', '', '', 57, 'nl', 3, 'women/women-footwear/heels'),
+(283, 'Heels', 'heels', '', '', '', '', 57, 'es', 5, 'women/women-footwear/heels'),
+(284, 'Heels', 'heels', '', '', '', '', 57, 'fr', 2, 'women/women-footwear/heels'),
+(285, 'Heels', 'heels', '', '', '', '', 57, 'tr', 4, 'women/women-footwear/heels'),
+(286, 'SunGlasses', 'sunglasses', '', '', '', '', 58, 'en', 1, 'women/women-accessories/sunglasses'),
+(287, 'SunGlasses', 'sunglasses', '', '', '', '', 58, 'nl', 3, 'women/women-accessories/sunglasses'),
+(288, 'SunGlasses', 'sunglasses', '', '', '', '', 58, 'es', 5, 'women/women-accessories/sunglasses'),
+(289, 'SunGlasses', 'sunglasses', '', '', '', '', 58, 'fr', 2, 'women/women-accessories/sunglasses'),
+(290, 'SunGlasses', 'sunglasses', '', '', '', '', 58, 'tr', 4, 'women/women-accessories/sunglasses'),
+(291, 'Watches', 'watches', '', '', '', '', 59, 'en', 1, 'women/women-accessories/watches'),
+(292, 'Watches', 'watches', '', '', '', '', 59, 'nl', 3, 'women/women-accessories/watches'),
+(293, 'Watches', 'watches', '', '', '', '', 59, 'es', 5, 'women/women-accessories/watches'),
+(294, 'Watches', 'watches', '', '', '', '', 59, 'fr', 2, 'women/women-accessories/watches'),
+(295, 'Watches', 'watches', '', '', '', '', 59, 'tr', 4, 'women/women-accessories/watches'),
+(296, 'Bath Linnen', 'bath-linnen', '', '', '', '', 60, 'en', 1, 'home-kitchen/home-furnishings/bath-linnen'),
+(297, 'Bath Linnen', 'bath-linnen', '', '', '', '', 60, 'nl', 3, 'home-kitchen/home-furnishings/bath-linnen'),
+(298, 'Bath Linnen', 'bath-linnen', '', '', '', '', 60, 'es', 5, 'home-kitchen/home-furnishings/bath-linnen'),
+(299, 'Bath Linnen', 'bath-linnen', '', '', '', '', 60, 'fr', 2, 'home-kitchen/home-furnishings/bath-linnen'),
+(300, 'Bath Linnen', 'bath-linnen', '', '', '', '', 60, 'tr', 4, 'home-kitchen/home-furnishings/bath-linnen'),
+(301, 'Bedsheets', 'bedsheets', '', '', '', '', 61, 'en', 1, 'home-kitchen/home-furnishings/bedsheets'),
+(302, 'Bedsheets', 'bedsheets', '', '', '', '', 61, 'nl', 3, 'home-kitchen/home-furnishings/bedsheets'),
+(303, 'Bedsheets', 'bedsheets', '', '', '', '', 61, 'es', 5, 'home-kitchen/home-furnishings/bedsheets'),
+(304, 'Bedsheets', 'bedsheets', '', '', '', '', 61, 'fr', 2, 'home-kitchen/home-furnishings/bedsheets'),
+(305, 'Bedsheets', 'bedsheets', '', '', '', '', 61, 'tr', 4, 'home-kitchen/home-furnishings/bedsheets'),
+(306, 'CookWear', 'cookwear', '', '', '', '', 62, 'en', 1, 'home-kitchen/kitchen-dining/cookwear'),
+(307, 'CookWear', 'cookwear', '', '', '', '', 62, 'nl', 3, 'home-kitchen/kitchen-dining/cookwear'),
+(308, 'CookWear', 'cookwear', '', '', '', '', 62, 'es', 5, 'home-kitchen/kitchen-dining/cookwear'),
+(309, 'CookWear', 'cookwear', '', '', '', '', 62, 'fr', 2, 'home-kitchen/kitchen-dining/cookwear'),
+(310, 'CookWear', 'cookwear', '', '', '', '', 62, 'tr', 4, 'home-kitchen/kitchen-dining/cookwear'),
+(311, 'LunchBoxes', 'lunchboxes', '', '', '', '', 63, 'en', 1, 'home-kitchen/kitchen-dining/lunchboxes'),
+(312, 'LunchBoxes', 'lunchboxes', '', '', '', '', 63, 'nl', 3, 'home-kitchen/kitchen-dining/lunchboxes'),
+(313, 'LunchBoxes', 'lunchboxes', '', '', '', '', 63, 'es', 5, 'home-kitchen/kitchen-dining/lunchboxes'),
+(314, 'LunchBoxes', 'lunchboxes', '', '', '', '', 63, 'fr', 2, 'home-kitchen/kitchen-dining/lunchboxes'),
+(315, 'LunchBoxes', 'lunchboxes', '', '', '', '', 63, 'tr', 4, 'home-kitchen/kitchen-dining/lunchboxes'),
+(316, 'Lightings', 'lightings', '', '', '', '', 64, 'en', 1, 'home-kitchen/home-decor/lightings'),
+(317, 'Lightings', 'lightings', '', '', '', '', 64, 'nl', 3, 'home-kitchen/home-decor/lightings'),
+(318, 'Lightings', 'lightings', '', '', '', '', 64, 'es', 5, 'home-kitchen/home-decor/lightings'),
+(319, 'Lightings', 'lightings', '', '', '', '', 64, 'fr', 2, 'home-kitchen/home-decor/lightings'),
+(320, 'Lightings', 'lightings', '', '', '', '', 64, 'tr', 4, 'home-kitchen/home-decor/lightings'),
+(321, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'en', 1, 'home-kitchen/home-decor/wall-decor'),
+(322, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'nl', 3, 'home-kitchen/home-decor/wall-decor'),
+(323, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'es', 5, 'home-kitchen/home-decor/wall-decor'),
+(324, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'fr', 2, 'home-kitchen/home-decor/wall-decor'),
+(325, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'tr', 4, 'home-kitchen/home-decor/wall-decor');
 
 --
 -- Triggers `category_translations`
@@ -1174,7 +1578,7 @@ CREATE TABLE `channels` (
 --
 
 INSERT INTO `channels` (`id`, `code`, `timezone`, `theme`, `hostname`, `logo`, `favicon`, `is_maintenance_on`, `allowed_ips`, `default_locale_id`, `base_currency_id`, `created_at`, `updated_at`, `root_category_id`) VALUES
-(1, 'default', NULL, 'martfury', 'http://localhost', NULL, NULL, 0, '', 1, 1, NULL, '2022-08-10 11:04:34', 1);
+(1, 'default', NULL, 'ekart', 'http://localhost', 'channel/1/qm1ktxmujTHaakC4JjHrfdSeFh9O7IEm1ZLQERzI.webp', 'channel/1/ZUcAA4dbj4TLCzJP6b3KGDvqkpncrSqB17G0u6CE.webp', 0, '', 1, 1, NULL, '2022-08-25 07:55:43', 1);
 
 -- --------------------------------------------------------
 
@@ -1249,6 +1653,12 @@ CREATE TABLE `channel_translations` (
   `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `home_page_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `footer_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook_link` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram_link` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `maintenance_mode_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `home_seo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_seo`)),
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1259,12 +1669,12 @@ CREATE TABLE `channel_translations` (
 -- Dumping data for table `channel_translations`
 --
 
-INSERT INTO `channel_translations` (`id`, `channel_id`, `locale`, `name`, `description`, `home_page_content`, `footer_content`, `maintenance_mode_text`, `home_seo`, `created_at`, `updated_at`) VALUES
-(1, 1, 'en', 'Default', '', '<p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>\r\n<div class=\"banner-container\">\r\n<div class=\"left-banner\"><img src=\"http://localhost/themes/default/assets/images/1.webp\" data-src=\"http://localhost/themes/default/assets/images/1.webp\" class=\"lazyload\" alt=\"test\" width=\"720\" height=\"720\" /></div>\r\n<div class=\"right-banner\"><img src=\"http://localhost/themes/default/assets/images/2.webp\" data-src=\"http://localhost/themes/default/assets/images/2.webp\" class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" /> <img src=\"http://localhost/themes/default/assets/images/3.webp\" data-src=\"http://localhost/themes/default/assets/images/3.webp\" class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" /></div>\r\n</div>', '<div class=\"list-container\"><span class=\"list-heading\">Quick Links</span>\r\n<ul class=\"list-group\">\r\n<li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n<li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n<li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n<li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n<li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n<li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n</ul>\r\n</div>\r\n<div class=\"list-container\"><span class=\"list-heading\">Connect With Us</span>\r\n<ul class=\"list-group\">\r\n<li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n<li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n<li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n<li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n<li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n</ul>\r\n</div>', '', '{\"meta_title\":\"Demo store\",\"meta_description\":\"Demo store meta description\",\"meta_keywords\":\"Demo store meta keyword\"}', NULL, '2022-08-10 07:36:05'),
-(2, 1, 'fr', 'Default', NULL, '\r\n                    <p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>\r\n                        <div class=\"banner-container\">\r\n                        <div class=\"left-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/1.webp data-src=http://localhost/themes/default/assets/images/1.webp class=\"lazyload\" alt=\"test\" width=\"720\" height=\"720\" />\r\n                        </div>\r\n                        <div class=\"right-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/2.webp data-src=http://localhost/themes/default/assets/images/2.webp class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                            <img src=http://localhost/themes/default/assets/images/3.webp data-src=http://localhost/themes/default/assets/images/3.webp  class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                        </div>\r\n                    </div>\r\n                ', '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
-(3, 1, 'nl', 'Default', NULL, '\r\n                    <p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>\r\n                        <div class=\"banner-container\">\r\n                        <div class=\"left-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/1.webp data-src=http://localhost/themes/default/assets/images/1.webp class=\"lazyload\" alt=\"test\" width=\"720\" height=\"720\" />\r\n                        </div>\r\n                        <div class=\"right-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/2.webp data-src=http://localhost/themes/default/assets/images/2.webp class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                            <img src=http://localhost/themes/default/assets/images/3.webp data-src=http://localhost/themes/default/assets/images/3.webp  class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                        </div>\r\n                    </div>\r\n                ', '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
-(4, 1, 'tr', 'Default', NULL, '\r\n                    <p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>\r\n                        <div class=\"banner-container\">\r\n                        <div class=\"left-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/1.webp data-src=http://localhost/themes/default/assets/images/1.webp class=\"lazyload\" alt=\"test\" width=\"720\" height=\"720\" />\r\n                        </div>\r\n                        <div class=\"right-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/2.webp data-src=http://localhost/themes/default/assets/images/2.webp class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                            <img src=http://localhost/themes/default/assets/images/3.webp data-src=http://localhost/themes/default/assets/images/3.webp  class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                        </div>\r\n                    </div>\r\n                ', '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
-(5, 1, 'es', 'Default', NULL, '\r\n                    <p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>\r\n                        <div class=\"banner-container\">\r\n                        <div class=\"left-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/1.webp data-src=http://localhost/themes/default/assets/images/1.webp class=\"lazyload\" alt=\"test\" width=\"720\" height=\"720\" />\r\n                        </div>\r\n                        <div class=\"right-banner\">\r\n                            <img src=http://localhost/themes/default/assets/images/2.webp data-src=http://localhost/themes/default/assets/images/2.webp class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                            <img src=http://localhost/themes/default/assets/images/3.webp data-src=http://localhost/themes/default/assets/images/3.webp  class=\"lazyload\" alt=\"test\" width=\"460\" height=\"330\" />\r\n                        </div>\r\n                    </div>\r\n                ', '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL);
+INSERT INTO `channel_translations` (`id`, `channel_id`, `locale`, `name`, `description`, `home_page_content`, `footer_content`, `site_name`, `email_address`, `phone_number`, `address`, `facebook_link`, `instagram_link`, `maintenance_mode_text`, `home_seo`, `created_at`, `updated_at`) VALUES
+(1, 1, 'en', 'Default', '', '<p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>', '<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Site Policies</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/privacy-policy\">Privacy Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/terms-conditions\">Term &amp; Condition</a></li>\r\n<li><a href=\"http://localhost:8000/page/return-policy\">Return Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/refund-policy\">Refund Policy</a></li>\r\n</ul>\r\n</aside>\r\n<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Company</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/about-us\">About Us</a></li>\r\n<li><a href=\"http://localhost:8000/contact-us\">Contact Us</a></li>\r\n<li><a href=\"http://localhost:8000/page/become-a-vendor\">Become A Seller</a></li>\r\n<li><a href=\"http://localhost:8000/track-order\">Track Your Order</a></li>\r\n</ul>\r\n</aside>', 'World Ekart', 'ekart@infoo.com', '1234567890', 'Mumbai India.', 'https://facebook.com', 'https://instagram.com', '', '{\"meta_title\":\"World Ekart Store\",\"meta_description\":\"We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.\",\"meta_keywords\":\"ekart, ecommerce, e commerce, e-commerce, world, shopping, marketplace.\"}', NULL, '2022-08-25 10:10:57'),
+(2, 1, 'fr', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
+(3, 1, 'nl', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
+(4, 1, 'tr', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
+(5, 1, 'es', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1338,24 +1748,19 @@ CREATE TABLE `cms_page_translations` (
 --
 
 INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_content`, `meta_title`, `meta_description`, `meta_keywords`, `locale`, `cms_page_id`) VALUES
-(1, 'About Us', 'about-us', '<div class=\"static-container\"><div class=\"mb-5\">About us page content</div></div>', 'about us', '', 'aboutus', 'en', 1),
-(2, 'Return Policy', 'return-policy', '<div class=\"static-container\"><div class=\"mb-5\">Return policy page content</div></div>', 'return policy', '', 'return, policy', 'en', 2),
-(3, 'Refund Policy', 'refund-policy', '<div class=\"static-container\"><div class=\"mb-5\">Refund policy page content</div></div>', 'Refund policy', '', 'refund, policy', 'en', 3),
-(4, 'Terms & Conditions', 'terms-conditions', '<div class=\"static-container\"><div class=\"mb-5\">Terms & conditions page content</div></div>', 'Terms & Conditions', '', 'term, conditions', 'en', 4),
+(1, 'About Us', 'about-us', '<div class=\"ps-page--single static-page\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>About Us</li>\n</ul>\n</div>\n</div>\n<div class=\"container-xl\">\n<h2 class=\"text-center\">About World E-Kart</h2>\n<p>We are Maximizers. We\'re out on our own journeys to maximize - be the best at what we choose and care about the most - whether it be our impact, voice, potential, ideas, influence, well-being or more. Because when we Maximize ourselves in our inclusive teams, Worldekart is able to deliver the best imaginable value for our customers and the planet!<br /><br />We\'re known more by the impact we create than the titles we hold. Impact that is brought by working together on audacious challenges at scale with an aim to revolutionize for the planet customer. We believe great ideas can emerge from anywhere and must be backed. Our people - backed by our culture of end-to-end ownership! <br /><br />The best people make the best teams. And we put all our efforts into finding the right people that fit into our high-performing inclusive teams. Everyone has advice on the table and diversity of thoughts, styles and actions is celebrated. From a category leader to a wish master, we are all bound together and guided by our values of audacity, bias for action, customer-first, integrity and inclusion.</p>\n</div>\n</div>', 'about us', '', 'aboutus', 'en', 1),
+(2, 'Return Policy', 'return-policy', '<div class=\"ps-page--single static-page\">\r\n<div class=\"ps-breadcrumb\">\r\n<div class=\"container\">\r\n<ul class=\"breadcrumb\">\r\n<li><a href=\"http://localhost:8000/\">Home</a></li>\r\n<li>Return Policy</li>\r\n</ul>\r\n</div>\r\n</div>\r\n<div class=\"container-xl\">\r\n<h2 class=\"text-center\">Return Policy</h2>\r\n<p>Returns is a scheme provided by respective sellers directly under this policy in terms of which the option of exchange, replacement and/ or refund is offered by the respective sellers to you. All products listed under a particular category may not have the same returns policy. For all products, the returns/replacement policy provided on the product page shall prevail over the general returns policy. Do refer the respective item\'s applicable return/replacement policy on the product page for any exceptions to this returns policy and the table below <br /><br />The return policy is divided into three parts; Do read all sections carefully to understand the conditions and cases under which returns will be accepted. <br /><br />Part 1 &ndash; Category, Return Window and Actions possible</p>\r\n<table class=\"pt-5 table table-bordered table-hover\">\r\n<tbody>\r\n<tr>\r\n<td>\r\n<p>Category</p>\r\n</td>\r\n<td>\r\n<p>Returns Window, Actions Possible and Conditions (if any)</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>Lifestyle: Jewellery, Footwear Accessories, Travel Accessories, Watch Accessories, etc..</p>\r\n<p>Home: Pet Supplies &amp; Rest of Home. (Except Home d&eacute;cor, Furnishing, Home Improvement Tools, Household Items)</p>\r\n</td>\r\n<td>\r\n<p>10 days</p>\r\n<p>Refund or Replacement</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>Lifestyle: Watch, Winter Wear (Blazer, Sweatshirt, Scarf, Shawl, Jacket, Coat, Sweater, Thermal, Kid&rsquo;s Thermal, Track Pant, Shrugs), etc...</p>\r\n</td>\r\n<td>\r\n<p>10 days</p>\r\n<p>Refund, Replacement or Exchange</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>Lifestyle: T-Shirt, Footwear, Sari, Short, Dress, Kid&rsquo;s (Capri, Shorts &amp; Tops), Men&rsquo;s (Ethnic Wear, Shirt, Formals, Jeans, Clothing Accessory), Women&rsquo;s (Ethnic Wear, Fabric, Blouse, Jean, Skirt, Trousers, Bra), Bags, Raincoat, Sunglass, Belt, Frame, Backpack, Suitcase, Luggage, etc...</p>\r\n</td>\r\n<td>\r\n<p>14 days</p>\r\n<p>Refund, Replacement or Exchange</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>Medicine (Allopathy &amp; Homeopathy)</p>\r\n</td>\r\n<td>\r\n<p>2 days</p>\r\n<p>Refund</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>Home: Home Improvement Tools, Household Items, Home d&eacute;cor, Furnishing</p>\r\n</td>\r\n<td>\r\n<p>7 days</p>\r\n<p>Refund or replacement</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>Books (All books)</p>\r\n<p>Sports&nbsp;Equipment&nbsp;(Racquet, ball, support, gloves, bags etc.)</p>\r\n<p>Exercise &amp; Fitness&nbsp;Equipment\'s&nbsp;(Home Gym combos, dumbbell etc.)</p>\r\n<p>Auto Accessories - Car and Bike accessories (helmets, car kit, media players etc.)</p>\r\n</td>\r\n<td>\r\n<p>7 days Replacement only</p>\r\n<p>Free replacement will be provided within 7 days if the product is delivered in defective/damaged condition or different from the ordered item.</p>\r\n<p>Please keep the product intact, with original accessories, user manual and warranty cards in the original packaging at the time of returning the product.</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>Toys (Remote controlled toys, Learning toys, Stuffed toys etc.)</p>\r\n<p>Stationary (Pens, Diary notebooks, Calculators etc.)</p>\r\n<p>Musical Instruments (Microphones &amp; Accessories, Guitars, Violins etc.)</p>\r\n</td>\r\n<td>\r\n<p>10 days Replacement only</p>\r\n<p>Free replacement will be provided within 10 days if the product is delivered in defective/damaged condition or different from the ordered item.</p>\r\n<p>Please keep the product intact, with original accessories, user manual and warranty cards in the original packaging at the time of returning the product.</p>\r\n<p>Non-Returnable - All Wind Instruments (Harmonicas, Flutes etc.) This item is non-returnable due to hygiene and personal&nbsp;wellness. In&nbsp;case these products are delivered in damaged/defective condition or different from the ordered item, we will provide a free replacement.</p>\r\n</td>\r\n</tr>\r\n<tr>\r\n<td>\r\n<p>All Mobiles (except Apple &amp; Google phones),</p>\r\n<p>Electronics - (except Apple / Beats, Google,&nbsp;Realme, Samsung, JBL&amp; Infinity, Epson, HP, Dell, Canon, MI Products (Tablets, Laptops, Smart Watches)</p>\r\n<p>All Small Home Appliances (Except Chimney, Water Purifier, Fan, Geyser)</p>\r\n<p>Furniture - Hammock Swing &amp; Stool</p>\r\n</td>\r\n<td>\r\n<p>7 days</p>\r\n<p>Replacement only</p>\r\n<p>In order to help you resolve issues with your product, we may troubleshoot your product either through online tools, over the phone, and/or through an in-person technical visit.</p>\r\n<p>If a defect is determined within the Returns Window, a replacement of the same model will be provided at no additional cost. If no defect is confirmed or the issue is not diagnosed within 7 days of delivery, you will be directed to a brand service centre to resolve any subsequent issues.</p>\r\n<p>In any case, only one replacement shall be provided.</p>\r\n</td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n</div>\r\n</div>', 'return policy', '', 'return, policy', 'en', 2),
+(3, 'Refund Policy', 'refund-policy', '<div class=\"ps-page--single static-page\">\r\n<div class=\"ps-breadcrumb\">\r\n<div class=\"container\">\r\n<ul class=\"breadcrumb\">\r\n<li><a href=\"http://localhost:8000/\">Home</a></li>\r\n<li>Refund Policy</li>\r\n</ul>\r\n</div>\r\n</div>\r\n<div class=\"container-xl\">\r\n<h2 class=\"text-center\">Refund Policy</h2>\r\n<p>We have a 2-15 days return policy, which means you have 15 days after receiving your item to request a return.<br /><r>To be eligible for a return, your item must be in the same condition that you received it, unworn or unused, with tags, and in its original packaging. You&rsquo;ll also need the receipt or proof of purchase.<br /><br />To start a return, you can contact us at sales@worldekart.com. If your return is accepted, we&rsquo;ll send you a return shipping label, as well as instructions on how and where to send your package. Items sent back to us without first requesting a return will not be accepted.<br /><br />You can always contact us for any return question at sales@worldekart.com.</r></p>\r\n<h2>Damages and Issues</h2>\r\n<p>Please inspect your order upon reception and contact us immediately if the item is defective, damaged or if you receive the wrong item, so that we can evaluate the issue and make it right.</p>\r\n<h2>Exceptions / Non-Returnable Items</h2>\r\n<p>Certain types of items cannot be returned, like perishable goods (such as food, flowers, or plants), custom products (such as special orders or personalized items), and personal care goods (such as beauty products). We also do not accept returns for hazardous materials, flammable liquids, or gases. Please get in touch if you have questions or concerns about your specific item.<br /><br />Unfortunately, we cannot accept returns on sale items or gift cards.</p>\r\n<h2>Exchanges</h2>\r\n<p>The fastest way to ensure you get what you want is to return the item you have, and once the return is accepted, make a separate purchase for the new item.</p>\r\n<h2>Refunds</h2>\r\n<p>We will notify you once we&rsquo;ve received and inspected your return, and let you know if the refund was approved or not. If approved, you&rsquo;ll be automatically refunded on your original payment method. Please remember it can take some time for your bank or credit card company to process and post the refund too.</p>\r\n</div>\r\n</div>', 'Refund policy', '', 'refund, policy', 'en', 3),
+(4, 'Terms & Conditions', 'terms-conditions', '<div class=\"ps-page--single static-page\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Terms and Conditions</li>\n</ul>\n</div>\n</div>\n<div class=\"container-xl\">\n<h2 class=\"text-center\">Terms &amp; Conditions</h2>\n<h3>OVERVIEW</h3>\n<p>This website is operated by World E-Kart. Throughout the site, the terms &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo; refer to World E-Kart. World E-Kart offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.<br /><br />By visiting our site and/ or purchasing something from us, you engage in our &ldquo;Service&rdquo; and agree to be bound by the following terms and conditions (&ldquo;Terms of Service&rdquo;, &ldquo;Terms&rdquo;), including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content.<br /><br />Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service.<br /><br />Any new features or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting of any changes constitutes acceptance of those changes.<br /><br />Our store is hosted on Shopify Inc. They provide us with the online e-commerce platform that allows us to sell our products and services to you.</p>\n<h2>SECTION 1 - ONLINE STORE TERMS</h2>\n<p>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site.<br /> You may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction (including but not limited to copyright laws).<br />You must not transmit any worms or viruses or any code of a destructive nature.<br /> A breach or violation of any of the Terms will result in an immediate termination of your Services.</p>\n<h2>SECTION 2 - GENERAL CONDITIONS</h2>\n<p>We reserve the right to refuse service to anyone for any reason at any time.<br /> You understand that your content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit card information is always encrypted during transfer over networks.<br /> You agree not to reproduce, duplicate, copy, sell, resell or exploit any portion of the Service, use of the Service, or access to the Service or any contact on the website through which the service is provided, without express written permission by us.<br /> The headings used in this agreement are included for convenience only and will not limit or otherwise affect these Terms.</p>\n<h2>SECTION 3 - ACCURACY, COMPLETENESS AND TIMELINESS OF INFORMATION</h2>\n<p>We are not responsible if information made available on this site is not accurate, complete or current. The material on this site is provided for general information only and should not be relied upon or used as the sole basis for making decisions without consulting primary, more accurate, more complete or more timely sources of information. Any reliance on the material on this site is at your own risk.<br /> This site may contain certain historical information. Historical information, necessarily, is not current and is provided for your reference only. We reserve the right to modify the contents of this site at any time, but we have no obligation to update any information on our site. You agree that it is your responsibility to monitor changes to our site.<br /> <br /> SECTION 4 - MODIFICATIONS TO THE SERVICE AND PRICES<br />Prices for our products are subject to change without notice.<br /> We reserve the right at any time to modify or discontinue the Service (or any part or content thereof) without notice at any time.<br /> We shall not be liable to you or to any third-party for any modification, price change, suspension or discontinuance of the Service.</p>\n<h2>SECTION 5 - PRODUCTS OR SERVICES (if applicable)</h2>\n<p>Certain products or services may be available exclusivelyonline through the website. These products or services may have limited quantities and are subject to return or exchange only according to our Return Policy.<br /> We have made every effort to display as accurately as possible the colors and images of our products that appear at the store. We cannot guarantee that your computer monitor\'s display of any color will be accurate.<br /> We reserve the right, but are not obligated, to limit the sales of our products or Services to any person, geographic region or jurisdiction. We may exercise this right on a case-by-case basis. We reserve the right to limit the quantities of any products or services that we offer. All descriptions of products or product pricing are subject to change at anytime without notice, at the sole discretion of us. We reserve the right to discontinue any product at any time. Any offer for any product or service made on this site is void where prohibited.<br /> We do not warrant that the quality of any products, services, information, or other material purchased or obtained by you will meet your expectations, or that any errors in the Service will be corrected.</p>\n<h2>SECTION 6 - ACCURACY OF BILLING AND ACCOUNT INFORMATION</h2>\n<p>We reserve the right to refuse any order you place with us. We may, in our sole discretion, limit or cancel quantities purchased per person, per household or per order. These restrictions may include orders placed by or under the same customer account, the same credit card, and/or orders that use the same billing and/or shipping address. In the event that we make a change to or cancel an order, we may attempt to notify you by contacting the e-mail and/or billing address/phone number provided at the time the order was made. We reserve the right to limit or prohibit orders that, in our sole judgment, appear to be placed by dealers, resellers or distributors.<br /> <br /> You agree to provide current, complete and accurate purchase and account information for all purchases made at our store. You agree to promptly update your account and other information, including your email address and credit card numbers and expiration dates, so that we can complete your transactions and contact you as needed.<br /> <br /> For more detail, please review our Returns Policy.</p>\n<h2>SECTION 7 - OPTIONAL TOOLS</h2>\n<p>We may provide you with access to third-party tools over which we neither monitor nor have any control nor input.<br /> You acknowledge and agree that we provide access to such tools &rdquo;as is&rdquo; and &ldquo;as available&rdquo; without any warranties, representations or conditions of any kind and without any endorsement. We shall have no liability whatsoever arising from or relating to your use of optional third-party tools.<br /> Any use by you of optional tools offered through the site is entirely at your own risk and discretion and you should ensure that you are familiar with and approve of the terms on which tools are provided by the relevant third-party provider(s).<br /> We may also, in the future, offer new services and/or features through the website (including, the release of new tools and resources). Such new features and/or services shall also be subject to these Terms of Service.</p>\n<h2>SECTION 8 - THIRD-PARTY LINKS</h2>\n<p>Certain content, products and services available via our Service may includematerials from third-parties.<br /> Third-party links on this site may direct you to third-party websites that are not affiliated with us. We are not responsible for examining or evaluating the content or accuracy and we do not warrant and will not have any liability or responsibility for any third-party materials or websites, or for any other materials, products, or services of third-parties.<br /> We are not liable for any harm or damages related to the purchase or use of goods, services, resources, content, or any other transactions made in connection with any third-party websites. Please review carefully the third-party\'s policies and practices and make sure you understand them before you engage in any transaction. Complaints, claims, concerns, or questions regarding third-party products should be directed to the third-party.</p>\n<h2>SECTION 9 - USER COMMENTS, FEEDBACK AND OTHER SUBMISSIONS</h2>\n<p>If, at our request, you send certain specific submissions (for example contest entries) or without a request from us you send creative ideas, suggestions, proposals, plans, or other materials, whether online, by email, by postal mail, or otherwise (collectively, \'comments\'), you agree that we may, at any time, without restriction, edit, copy, publish, distribute, translate and otherwise use in any medium any comments that you forward to us. We are and shall be under no obligation (1) to maintain any comments in confidence; (2) to pay compensation for any comments; or (3) to respond to any comments.<br /> We may, but have no obligation to, monitor, edit or remove content that we determine in our sole discretion are unlawful, offensive, threatening, libelous, defamatory, pornographic, obscene or otherwise objectionable or violates any party&rsquo;s intellectual property or these Terms of Service.<br /> You agree that your comments will not violate any right of any third-party, including copyright, trademark, privacy, personality or other personal or proprietary right. You further agree that your comments will not contain libelous or otherwise unlawful, abusive or obscene material, or contain any computer virus or other malware that could in any way affect the operation of the Service or any related website. You may not use a false e-mail address, pretend to be someone other than yourself, or otherwise mislead us or third-parties as to the origin of any comments. You are solely responsible for any comments you make and their accuracy. We take no responsibility and assume no liability for any comments posted by you or any third-party.</p>\n<h2>SECTION 10 - PERSONAL INFORMATION</h2>\n<p>Your submission of personal information through the store is governed by our Privacy Policy.</p>\n<h2>SECTION 11 - ERRORS, INACCURACIES AND OMISSIONS</h2>\n<p>Occasionally there may be information on our site or in the Service that contains typographical errors, inaccuracies or omissions that may relate to product descriptions, pricing, promotions, offers, product shipping charges, transit times and availability. We reserve the right to correct any errors, inaccuracies or omissions, and to change or update information or cancel orders if any information in the Service or on any related website is inaccurate at any time without prior notice (including after you have submitted your order).<br /><br />We undertake no obligation to update, amend or clarify information in the Service or on any related website, including without limitation, pricing information, except as required by law. No specified update or refresh date applied in the Service or on any related website, should be taken to indicate that all information in the Service or on any related website has been modified or updated.</p>\n<h2>SECTION 12 - PROHIBITED USES</h2>\n<p>In addition to other prohibitions as set forth in the Terms of Service, you are prohibited from using the site or its content: (a) for any unlawful purpose; (b) to solicit others to perform or participate in any unlawful acts; (c) to violate any international, federal, provincial or state regulations, rules, laws, or local ordinances; (d) to infringe upon or violate our intellectual property rights or the intellectual property rights of others; (e) to harass, abuse, insult, harm, defame, slander, disparage, intimidate, or discriminate based on gender, sexual orientation, religion, ethnicity, race, age, national origin, or disability; (f) to submit false or misleading information; (g) to upload or transmit viruses or any other type of malicious code that will or may be used in any way that will affect the functionality or operation of the Service or of any related website, other websites, or the Internet; (h) to collect or track the personal information of others; (i) to spam, phish, pharm, pretext, spider, crawl, or scrape; (j) for any obscene or immoral purpose; or (k) to interfere with or circumvent the security features of the Service or any related website, other websites, or the Internet. We reserve the right to terminate your use of the Service or any related website for violating any of the prohibited uses.</p>\n<h2>SECTION 13 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY</h2>\n<p>We do not guarantee, represent or warrant that your use of our service will be uninterrupted, timely, secure or error-free.<br /> We do not warrant that the results that may be obtained from the use of the service will be accurate or reliable.<br /> You agree that from time to time we may remove the service for indefinite periods of time or cancel the service at any time, without notice to you.<br /> You expressly agree that your use of, or inability to use, the service is at your sole risk. The service and all products and services delivered to you through the service are (except as expressly stated by us) provided \'as is\' and \'as available\' for your use, without any representation, warranties or conditions of any kind, either express or implied, including all implied warranties or conditions of merchantability, merchantable quality, fitness for a particular purpose, durability, title, and non-infringement.<br /> In no case shall World E-Kart, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content, or any loss or damage of any kind incurred as a result of the use of the service or any content (or product) posted, transmitted, or otherwise made available via the service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum extent permitted by law.</p>\n<h2>SECTION 14 - INDEMNIFICATION</h2>\n<p>You agree to indemnify, defend and hold harmless World E-Kart and our parent, subsidiaries, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and employees, harmless from any claim or demand, including reasonable attorneys&rsquo; fees, made by any third-party due to or arising out of your breach of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party.</p>\n<h2>SECTION 15 - SEVERABILITY</h2>\n<p>In the event that any provision of these Terms of Service is determined to be unlawful, void or unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall be deemed to be severed from these Terms of Service, such determination shall not affect the validity and enforceability of any other remaining provisions.</p>\n<h2>SECTION 16 - TERMINATION</h2>\n<p>The obligations and liabilities of the parties incurred prior to the termination date shall survive the termination of this agreement for all purposes.<br /> These Terms of Service are effective unless and until terminated by either you or us. You may terminate these Terms of Service at any time by notifying us that you no longer wish to use our Services, or when you cease using our site.<br /> If in our sole judgment you fail, or we suspect that you have failed, to comply with any term or provision of these Terms of Service, we also may terminate this agreement at any time without notice and you will remain liable for all amounts due up to and including the date of termination; and/or accordingly may deny you access to our Services (or any part thereof).</p>\n<h2>SECTION 17 - ENTIRE AGREEMENT</h2>\n<p>The failure of us to exercise or enforce any right or provision of these Terms of Service shall not constitute a waiver of such right or provision.<br /> These Terms of Service and any policies or operating rules posted by us on this site or in respect to The Service constitutes the entire agreement and understanding between you and us and govern your use of the Service, superseding any prior or contemporaneous agreements, communications and proposals, whether oral or written, between you and us (including, but not limited to, any prior versions of the Terms of Service).<br /> Any ambiguities in the interpretation of these Terms of Service shall not be construed against the drafting party.</p>\n<h2>SECTION 18 - GOVERNING LAW</h2>\n<p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of India.</p>\n<h2>SECTION 19 - CHANGES TO TERMS OF SERVICE</h2>\n<p>You can review the most current version of the Terms of Service at any time at this page.<br /> We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website. It is your responsibility to check our website periodically for changes. Your continued use of or access to our website or the Service following the posting of any changes to these Terms of Service constitutes acceptance of those changes.</p>\n<h2>SECTION 20 - CONTACT INFORMATION</h2>\n<p>Questions about the Terms of Service should be sent to us at sales@worldekart.com.</p>\n</div>\n</div>', 'Terms & Conditions', '', 'term, conditions', 'en', 4),
 (5, 'Terms of use', 'terms-of-use', '<div class=\"static-container\"><div class=\"mb-5\">Terms of use page content</div></div>', 'Terms of use', '', 'term, use', 'en', 5),
 (6, 'Contact Us', 'contact-us', '<div class=\"static-container\"><div class=\"mb-5\">Contact us page content</div></div>', 'Contact Us', '', 'contact, us', 'en', 6),
 (7, 'Customer Service', 'cutomer-service', '<div class=\"static-container\"><div class=\"mb-5\">Customer service  page content</div></div>', 'Customer Service', '', 'customer, service', 'en', 7),
 (8, 'What\'s New', 'whats-new', '<div class=\"static-container\"><div class=\"mb-5\">What\'s New page content</div></div>', 'What\'s New', '', 'new', 'en', 8),
 (9, 'Payment Policy', 'payment-policy', '<div class=\"static-container\"><div class=\"mb-5\">Payment Policy page content</div></div>', 'Payment Policy', '', 'payment, policy', 'en', 9),
 (10, 'Shipping Policy', 'shipping-policy', '<div class=\"static-container\"><div class=\"mb-5\">Shipping Policy  page content</div></div>', 'Shipping Policy', '', 'shipping, policy', 'en', 10),
-(11, 'Privacy Policy', 'privacy-policy', '<div class=\"static-container\"><div class=\"mb-5\">Privacy Policy  page content</div></div>', 'Privacy Policy', '', 'privacy, policy', 'en', 11),
-(12, 'Become a Vendor', 'become-a-vendor', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Martfury&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Martfury just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-4.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-4.png\" alt=\"martfury\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Martfury will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Martfury</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Martfury?</figcaption>\n<p>Joining and starting a shop on Martfury is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Martfury. Create an Martfury account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Martfuryfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Martfury will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Martfury?</figcaption>\n</figure>\n<p>Martfury provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n</div>', 'become-a-vendor', '', '', 'en', 12),
-(13, 'Become a Vendor', 'become-a-vendor', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Martfury&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Martfury just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-4.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-4.png\" alt=\"martfury\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Martfury will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Martfury</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Martfury?</figcaption>\n<p>Joining and starting a shop on Martfury is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Martfury. Create an Martfury account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Martfuryfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Martfury will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Martfury?</figcaption>\n</figure>\n<p>Martfury provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n</div>', 'become-a-vendor', '', '', 'nl', 12);
+(11, 'Privacy Policy', 'privacy-policy', '<div class=\"ps-page--single static-page\">\r\n<div class=\"ps-breadcrumb\">\r\n<div class=\"container\">\r\n<ul class=\"breadcrumb\">\r\n<li><a href=\"http://localhost:8000/\">Home</a></li>\r\n<li>Privacy Policy</li>\r\n</ul>\r\n</div>\r\n</div>\r\n<div class=\"container-xl\">\r\n<h2 class=\"text-center\">Privacy Policy</h2>\r\n<p>We at World E-Kart, take data privacy and security extremely seriously and work to ensure that we are fully compliant with the various regulations dealing with privacy.<br /><br /></p>\r\n<ol>\r\n<li>For the purpose of this privacy policy, &ldquo;your&rdquo; and &ldquo;user&rdquo; means any person who accesses or uses the services provided by our website (&ldquo;World E-Kart&rdquo;).</li>\r\n<li>In the course of registering for and availing various services we provide from time to time through World E-Kart (&ldquo;Services&rdquo;) you may be required to give certain details, including your your name, address, contact number, email address (&ldquo;User Information&rdquo;). By using the World E-Kart and/or registering yourself you authorize us to contact you via email or phone call or SMS and offer you Services you have opted for, imparting knowledge about products listed on our application, as well as for web aggregation. Additionally, by registration you authorize us to send SMS/email alerts to you for your login details and any other service requirements or advertising messages/emails.</li>\r\n<li>You acknowledge that you are disclosing User Information voluntarily. Prior to the completion of any registration process on World E-Kart / or prior to availing of any Services offered on our application if you wish not to disclose any User Information you may refrain from doing so; however if you don&rsquo;t provide information that is requested, it is possible that the registration process would be incomplete and/or you may not be able to avail certain of our Services.</li>\r\n<li>We are committed to protecting the privacy and confidentiality of all User Information that you may share as a user of our application. In furtherance of the confidentiality with which we treat User Information we have put in place appropriate physical, electronic, and managerial procedures to safeguard and secure the information we collect from you. To protect your privacy and security, we will also take reasonable steps to verify your identity before granting access or making corrections. We may use third-party advertising companies and/or ad agencies to serve ads when you visit our application. These companies may use information (excluding User Information) about your visits to the application and other Web sites in order to provide advertisements on the application and other sites about goods and services that may be of interest to you. There might be affiliates or other sites linked to our application and information that you provide to those sites are not our property. The affiliated sites may have different privacy practices and we encourage you to read them.</li>\r\n<li>Additionally, when you use the Site, we collect certain non-personal identifiable information through technology and tools, including cookies, etc. We aggregate and analyze this information in order to learn more about how our application is used, to improve our World E-Kart, and to generally promote the World E-Kart and our Services. We may engage the services of a third party for the purposes of collection of such information.</li>\r\n<li>We will not sell or rent User Information to anyone other than as specifically noted. We will share User Information if we have your consent or deemed consent to do so or if we are compelled by law (including court orders) to do so or as specified in the Terms of Use.</li>\r\n<li>Notwithstanding anything mentioned above, we reserve the right to contact you via any mechanisms, not limited to email, SMS, or phone calls, to solicit feedback of your experience and to provide any additional services that you would be eligible for, either as a registered user or as a visitor. We are not liable for any damages occurring to you as part of feedback solicitation and additional service provision.</li>\r\n<li>The User Information is being collected by the Company with its address at at Plot no 1573, 2nd Floor, Sector &ndash; 5, Vasundhara, Ghaziabad, UP-201012, and the Company will delete any User Information upon the User withdrawing the consent in writing, however, upon the withdrawal of the consent by the User, the Company may at its option not provide any services for which the Information was sought and the User shall not claim deficiency of services on the basis of such non provision of goods and services.</li>\r\n<li>We reserve the right to amend this policy from time to time, at our discretion. Any updates will be posted on the application/ and your use of World E-Kart / after such amendment shall constitute your agreement to abide by the amended terms. If you have questions or concerns about our Privacy Policy or any other policies please write to the grievance officer, Saroj Kumar at Plot no 1573, 2nd Floor, Sector &ndash; 5, Vasundhara, Ghaziabad, UP-201012 or through an email signed with electronic signature sent to sales@worldekart.com</li>\r\n</ol>\r\n</div>\r\n</div>', 'Privacy Policy', '', 'privacy, policy', 'en', 11);
 INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_content`, `meta_title`, `meta_description`, `meta_keywords`, `locale`, `cms_page_id`) VALUES
-(14, 'Become a Vendor', 'become-a-vendor', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Martfury&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Martfury just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-4.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-4.png\" alt=\"martfury\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Martfury will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Martfury</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Martfury?</figcaption>\n<p>Joining and starting a shop on Martfury is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Martfury. Create an Martfury account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Martfuryfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Martfury will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Martfury?</figcaption>\n</figure>\n<p>Martfury provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n</div>', 'become-a-vendor', '', '', 'es', 12),
-(15, 'Become a Vendor', 'become-a-vendor', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Martfury&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Martfury just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-4.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-4.png\" alt=\"martfury\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Martfury will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Martfury</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Martfury?</figcaption>\n<p>Joining and starting a shop on Martfury is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Martfury. Create an Martfury account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Martfuryfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Martfury will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Martfury?</figcaption>\n</figure>\n<p>Martfury provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n</div>', 'become-a-vendor', '', '', 'fr', 12);
-INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_content`, `meta_title`, `meta_description`, `meta_keywords`, `locale`, `cms_page_id`) VALUES
-(16, 'Become a Vendor', 'become-a-vendor', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/static/img/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/static/img/icons/vendor-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Martfury&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/static/img/icons/vendor-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/static/img/icons/vendor-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Martfury just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/static/img/vendor/milestone-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/static/img/vendor/milestone-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/static/img/vendor/milestone-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/static/img/vendor/milestone-4.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/static/img/icons/vendor-4.png\" alt=\"martfury\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Martfury will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/static/img/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Martfury</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Martfury?</figcaption>\n<p>Joining and starting a shop on Martfury is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Martfury. Create an Martfury account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Martfuryfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Martfury will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Martfury?</figcaption>\n</figure>\n<p>Martfury provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/static/img/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n</div><div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Martfury&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Martfury just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-1.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-3.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/martfury/assets/images/vendor/milestone-4.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/martfury/assets/images/icons/vendor-4.png\" alt=\"martfury\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Martfury will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/1.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/2.png\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/martfury/assets/images/users/3.jpg\" alt=\"martfury\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Martfury</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Martfury?</figcaption>\n<p>Joining and starting a shop on Martfury is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Martfury. Create an Martfury account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Martfuryfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Martfury will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Martfury?</figcaption>\n</figure>\n<p>Martfury provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"#\">Start Selling</a></div>\n</div>\n</div>\n</div>', 'become-a-vendor', '', '', 'tr', 12);
+(12, 'Become a Vendor', 'become-a-vendor', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/ekart/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"{{ route(\'shop.vendor.index\') }}\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Wolrd Ekart&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Wolrd Ekart just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-4.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-4.png\" alt=\"ekart\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Wolrd Ekart</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Wolrd Ekart?</figcaption>\n<p>Joining and starting a shop on Wolrd Ekart is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Wolrd Ekart. Create an Wolrd Ekart account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Wolrd Ekartfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Wolrd Ekart?</figcaption>\n</figure>\n<p>Wolrd Ekart provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n</div>', 'become-a-vendor', '', '', 'en', 12);
 
 -- --------------------------------------------------------
 
@@ -1367,12 +1772,20 @@ CREATE TABLE `contacts` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` bigint(20) DEFAULT NULL,
   `message_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `message_body` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `message_reply` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `order_id`, `message_title`, `message_body`, `message_reply`, `created_at`, `updated_at`) VALUES
+(1, 'Manu', 'mannukumarshah595@gmail.com', 1, NULL, 'ytgy', NULL, '2022-08-15 04:49:28', '2022-08-15 04:49:28');
 
 -- --------------------------------------------------------
 
@@ -1395,7 +1808,7 @@ CREATE TABLE `core_config` (
 --
 
 INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`, `created_at`, `updated_at`) VALUES
-(1, 'catalog.products.guest-checkout.allow-guest-checkout', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
+(1, 'catalog.products.guest-checkout.allow-guest-checkout', '0', NULL, NULL, '2022-08-10 07:08:12', '2022-08-21 10:59:21'),
 (2, 'emails.general.notifications.emails.general.notifications.verification', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (3, 'emails.general.notifications.emails.general.notifications.registration', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (4, 'emails.general.notifications.emails.general.notifications.customer', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
@@ -1408,11 +1821,11 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (11, 'emails.general.notifications.emails.general.notifications.cancel-order', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (12, 'catalog.products.homepage.out_of_stock_items', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (13, 'customer.settings.social_login.enable_facebook', '1', 'default', NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
-(14, 'customer.settings.social_login.enable_twitter', '1', 'default', NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
+(14, 'customer.settings.social_login.enable_twitter', '0', 'default', NULL, '2022-08-10 07:08:12', '2022-08-21 11:00:11'),
 (15, 'customer.settings.social_login.enable_google', '1', 'default', NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
-(16, 'customer.settings.social_login.enable_linkedin', '1', 'default', NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
-(17, 'customer.settings.social_login.enable_github', '1', 'default', NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
-(18, 'general.content.shop.compare_option', '0', 'default', 'en', '2022-08-10 07:08:12', '2022-08-10 10:16:59'),
+(16, 'customer.settings.social_login.enable_linkedin', '0', 'default', NULL, '2022-08-10 07:08:12', '2022-08-21 11:00:11'),
+(17, 'customer.settings.social_login.enable_github', '0', 'default', NULL, '2022-08-10 07:08:12', '2022-08-21 11:00:11'),
+(18, 'general.content.shop.compare_option', '0', 'default', 'en', '2022-08-10 07:08:12', '2022-08-21 10:58:07'),
 (19, 'general.content.shop.compare_option', '1', 'default', 'fr', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (20, 'general.content.shop.compare_option', '1', 'default', 'ar', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (21, 'general.content.shop.compare_option', '1', 'default', 'de', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
@@ -1436,7 +1849,7 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (39, 'general.content.shop.wishlist_option', '1', 'default', 'pl', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (40, 'general.content.shop.wishlist_option', '1', 'default', 'pt_BR', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (41, 'general.content.shop.wishlist_option', '1', 'default', 'tr', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
-(42, 'general.content.shop.image_search', '0', 'default', 'en', '2022-08-10 07:08:12', '2022-08-10 10:16:59'),
+(42, 'general.content.shop.image_search', '0', 'default', 'en', '2022-08-10 07:08:12', '2022-08-21 10:58:07'),
 (43, 'general.content.shop.image_search', '1', 'default', 'fr', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (44, 'general.content.shop.image_search', '1', 'default', 'ar', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (45, 'general.content.shop.image_search', '1', 'default', 'de', '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
@@ -1456,7 +1869,75 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (59, 'suggestion.suggestion.options.show_products', '5', 'default', NULL, '2022-08-10 10:18:33', '2022-08-10 10:18:33'),
 (60, 'suggestion.suggestion.options.display_terms_toggle', '0', 'default', 'en', '2022-08-10 10:18:33', '2022-08-10 10:18:33'),
 (61, 'suggestion.suggestion.options.display_product_toggle', '1', 'default', 'en', '2022-08-10 10:18:33', '2022-08-10 10:18:33'),
-(62, 'suggestion.suggestion.options.display_categories_toggle', '1', 'default', 'en', '2022-08-10 10:18:33', '2022-08-10 10:18:33');
+(62, 'suggestion.suggestion.options.display_categories_toggle', '1', 'default', 'en', '2022-08-10 10:18:33', '2022-08-10 10:18:33'),
+(63, 'sales.paymentmethods.paypal_smart_button.title', 'PayPal Smart Button', NULL, 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(64, 'sales.paymentmethods.paypal_smart_button.description', 'PayPal', NULL, 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(65, 'sales.paymentmethods.paypal_smart_button.client_id', 'sb', NULL, NULL, '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(66, 'sales.paymentmethods.paypal_smart_button.client_secret', '', NULL, NULL, '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(67, 'sales.paymentmethods.paypal_smart_button.accepted_currencies', '', NULL, NULL, '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(68, 'sales.paymentmethods.paypal_smart_button.active', '0', NULL, 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(69, 'sales.paymentmethods.paypal_smart_button.sandbox', '1', NULL, 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(70, 'sales.paymentmethods.paypal_smart_button.sort', '1', NULL, NULL, '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(71, 'sales.paymentmethods.cashondelivery.title', 'Cash On Delivery', 'default', 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(72, 'sales.paymentmethods.cashondelivery.description', 'Cash On Delivery', 'default', 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
+(73, 'sales.paymentmethods.cashondelivery.instructions', '', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(74, 'sales.paymentmethods.cashondelivery.generate_invoice', '0', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(75, 'sales.paymentmethods.cashondelivery.invoice_status', 'pending', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(76, 'sales.paymentmethods.cashondelivery.order_status', 'pending', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(77, 'sales.paymentmethods.cashondelivery.active', '0', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(78, 'sales.paymentmethods.cashondelivery.sort', '1', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(79, 'sales.paymentmethods.moneytransfer.title', 'Money Transfer', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(80, 'sales.paymentmethods.moneytransfer.description', 'Money Transfer', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(81, 'sales.paymentmethods.moneytransfer.generate_invoice', '0', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(82, 'sales.paymentmethods.moneytransfer.invoice_status', 'pending', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(83, 'sales.paymentmethods.moneytransfer.order_status', 'pending', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(84, 'sales.paymentmethods.moneytransfer.mailing_address', '', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(85, 'sales.paymentmethods.moneytransfer.active', '1', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(86, 'sales.paymentmethods.moneytransfer.sort', '2', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(87, 'sales.paymentmethods.paypal_standard.title', 'PayPal Standard', NULL, 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(88, 'sales.paymentmethods.paypal_standard.description', 'PayPal Standard', NULL, 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(89, 'sales.paymentmethods.paypal_standard.business_account', 'test@webkul.com', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(90, 'sales.paymentmethods.paypal_standard.active', '0', NULL, 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(91, 'sales.paymentmethods.paypal_standard.sandbox', '1', NULL, 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(92, 'sales.paymentmethods.paypal_standard.sort', '3', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(93, 'sales.paymentmethods.paytm.title', 'Paytm', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(94, 'sales.paymentmethods.paytm.description', 'Paytm', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(95, 'sales.paymentmethods.paytm.merchant_id', 'd', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(96, 'sales.paymentmethods.paytm.merchant_key', 'd', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(97, 'sales.paymentmethods.paytm.website', 'WEBSTAGING', NULL, NULL, '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(98, 'sales.paymentmethods.paytm.active', '0', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(99, 'sales.paymentmethods.razorpay.title', 'Razorpay', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(100, 'sales.paymentmethods.razorpay.description', 'Razorpay', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(101, 'sales.paymentmethods.razorpay.key_id', 'rzp_test_4Pu9yomA8quUOv', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(102, 'sales.paymentmethods.razorpay.secret', 'SBEh2FFvF6H1VlbBD6y1jAdr', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(103, 'sales.paymentmethods.razorpay.active', '1', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
+(104, 'catalog.products.size-chart.enable-sizechart', '1', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(105, 'catalog.products.homepage.no_of_new_product_homepage', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(106, 'catalog.products.homepage.no_of_featured_product_homepage', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(107, 'catalog.products.storefront.mode', 'grid', 'default', NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(108, 'catalog.products.storefront.products_per_page', '', 'default', NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(109, 'catalog.products.storefront.sort_by', 'name-desc', 'default', NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(110, 'catalog.products.storefront.buy_now_button_display', '0', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(111, 'catalog.products.cache-small-image.width', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(112, 'catalog.products.cache-small-image.height', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(113, 'catalog.products.cache-medium-image.width', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(114, 'catalog.products.cache-medium-image.height', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(115, 'catalog.products.cache-large-image.width', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(116, 'catalog.products.cache-large-image.height', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(117, 'catalog.products.review.guest_review', '0', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(118, 'catalog.products.attribute.image_attribute_upload_size', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(119, 'catalog.products.attribute.file_attribute_upload_size', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(120, 'catalog.products.social_share.enabled', '1', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(121, 'catalog.products.social_share.facebook', '1', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(122, 'catalog.products.social_share.twitter', '1', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(123, 'catalog.products.social_share.pinterest', '0', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(124, 'catalog.products.social_share.whatsapp', '1', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(125, 'catalog.products.social_share.linkedin', '0', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(126, 'catalog.products.social_share.email', '0', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(127, 'catalog.products.social_share.share_message', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(128, 'customer.settings.wishlist.share', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
+(129, 'customer.settings.newsletter.subscription', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
+(130, 'customer.settings.email.verification', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11');
 
 -- --------------------------------------------------------
 
@@ -5753,6 +6234,16 @@ CREATE TABLE `customers` (
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `gender`, `date_of_birth`, `email`, `image`, `status`, `password`, `api_token`, `customer_group_id`, `subscribed_to_news_letter`, `remember_token`, `created_at`, `updated_at`, `is_verified`, `is_suspended`, `token`, `notes`, `phone`) VALUES
+(1, 'Manu', 'kumar', NULL, NULL, 'mannukumarshah@gmail.com', NULL, 1, NULL, NULL, 2, 0, 'l4AcF71JzeW6m4WD5awWu9WgSk7FaeZLZRqJX7WMB0i8REX4nzIw6PJz7uIS', '2022-08-13 15:16:03', '2022-08-13 15:16:03', 1, 0, NULL, NULL, NULL),
+(2, 'Mannu kumar', 'Shah', NULL, NULL, 'mannukumarshah595@gmail.com', NULL, 1, NULL, NULL, 2, 0, 'eyTqIj6Rc5uAGwQFl2EtzLgw0I6Z5kcI4dvrIopgHa6XHIEob9AmcrdPM6H1', '2022-08-14 10:39:30', '2022-08-14 10:39:30', 1, 0, NULL, NULL, NULL),
+(3, 'Danish', 'Bhatia', NULL, NULL, 'danishbhatia4@gmail.com', NULL, 1, NULL, NULL, 2, 0, '1Yq7HFJD0FFZ9Ficn6D1GWOJTuOfJC88kc3atCIPCIJVQnDBge4gkVK08K6A', '2022-08-19 17:56:20', '2022-08-19 17:56:20', 1, 0, NULL, NULL, NULL),
+(4, 'Danish', 'Bhatia', 'Male', '2022-08-01', 'danishbhatia43@gmail.com', NULL, 1, '$2y$10$cGJsGy5adWgHnXs6Qw7Sdejm2PQxEPzTxlHb2ECENKgRm9odC9.8K', '80rHGgwwJujcTA5XdSMFUUj3m7T54pYglWL0DKHhemFnXHScnZgsSm4FYmJdN4CWb1MJh9lwnWwqf5x4', 2, 0, NULL, '2022-08-20 18:21:08', '2022-08-21 10:06:47', 1, 0, '70aad06e227b264a23e40d064657fddc', NULL, '+917006144050');
+
 -- --------------------------------------------------------
 
 --
@@ -5789,6 +6280,14 @@ CREATE TABLE `customer_password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `customer_password_resets`
+--
+
+INSERT INTO `customer_password_resets` (`email`, `token`, `created_at`) VALUES
+('danishbhatia4@gmail.com', '$2y$10$qb0bOwUrRC/ybKlr8wR/hO7i.Jbz0niayStapNsgfKm32RWHr9FYi', '2022-08-20 18:20:01'),
+('danishbhatia43@gmail.com', '$2y$10$EcllGDxwgcHL4uLQPNZUH.Z3/ETigKbBNYkvixoveDly2GrabYZE.', '2022-08-20 19:15:45');
+
 -- --------------------------------------------------------
 
 --
@@ -5803,6 +6302,15 @@ CREATE TABLE `customer_social_accounts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `customer_social_accounts`
+--
+
+INSERT INTO `customer_social_accounts` (`id`, `provider_name`, `provider_id`, `customer_id`, `created_at`, `updated_at`) VALUES
+(1, 'google', '111744805980564254319', 1, '2022-08-13 15:16:03', '2022-08-13 15:16:03'),
+(2, 'google', '115416541000865032060', 2, '2022-08-14 10:39:30', '2022-08-14 10:39:30'),
+(3, 'google', '114111322891131846318', 3, '2022-08-19 17:56:20', '2022-08-19 17:56:20');
 
 -- --------------------------------------------------------
 
@@ -5943,6 +6451,14 @@ CREATE TABLE `invoices` (
   `next_reminder_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `sub_total`, `base_sub_total`, `grand_total`, `base_grand_total`, `shipping_amount`, `base_shipping_amount`, `tax_amount`, `base_tax_amount`, `discount_amount`, `base_discount_amount`, `order_id`, `order_address_id`, `created_at`, `updated_at`, `transaction_id`, `reminders`, `next_reminder_at`) VALUES
+(1, '1', 'paid', 0, 1, 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 5, '2022-08-13 15:41:35', '2022-08-13 15:41:35', NULL, 0, NULL),
+(2, '2', 'paid', 0, 1, 'USD', 'USD', 'USD', '200.0000', '200.0000', '210.0000', '210.0000', '10.0000', '10.0000', '0.0000', '0.0000', '0.0000', '0.0000', 3, 15, '2022-08-24 20:18:18', '2022-08-24 20:18:18', NULL, 0, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -5973,6 +6489,14 @@ CREATE TABLE `invoice_items` (
   `discount_amount` decimal(12,4) DEFAULT 0.0000,
   `base_discount_amount` decimal(12,4) DEFAULT 0.0000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `invoice_items`
+--
+
+INSERT INTO `invoice_items` (`id`, `name`, `description`, `sku`, `qty`, `price`, `base_price`, `total`, `base_total`, `tax_amount`, `base_tax_amount`, `product_id`, `product_type`, `order_item_id`, `invoice_id`, `parent_id`, `additional`, `created_at`, `updated_at`, `discount_percent`, `discount_amount`, `base_discount_amount`) VALUES
+(1, 'temp1', NULL, 'updatedSKU', 1, '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-13 15:41:35', '2022-08-13 15:41:35', '0.0000', '0.0000', '0.0000'),
+(2, 'temp1sdvc', NULL, 'temp21', 1, '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 4, 2, NULL, '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\",\"locale\":\"en\"}', '2022-08-24 20:18:18', '2022-08-24 20:18:18', '0.0000', '0.0000', '0.0000');
 
 -- --------------------------------------------------------
 
@@ -6315,7 +6839,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (220, '2022_02_03_120502_add_position_column_to_product_videos_table', 1),
 (221, '2022_03_11_133408_add_enable_wysiwyg_column_in_attributes_table', 1),
 (222, '2022_03_15_160510_create_failed_jobs_table', 1),
-(223, '2022_03_22_105355_add_image_column_in_admins_table', 1);
+(223, '2022_03_22_105355_add_image_column_in_admins_table', 1),
+(224, '2020_12_03_113558_create_size_charts_table', 2),
+(225, '2020_12_15_114559_create_template_assign_table', 2);
 
 -- --------------------------------------------------------
 
@@ -6331,6 +6857,15 @@ CREATE TABLE `notifications` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `type`, `read`, `order_id`, `created_at`, `updated_at`) VALUES
+(1, 'order', 1, 1, '2022-08-13 15:41:34', '2022-08-19 19:14:51'),
+(2, 'order', 1, 2, '2022-08-24 19:58:44', '2022-08-25 05:25:22'),
+(3, 'order', 1, 3, '2022-08-24 20:00:31', '2022-08-24 20:17:26');
 
 -- --------------------------------------------------------
 
@@ -6402,6 +6937,15 @@ CREATE TABLE `orders` (
   `base_shipping_discount_amount` decimal(12,4) DEFAULT 0.0000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `increment_id`, `status`, `channel_name`, `is_guest`, `customer_email`, `customer_first_name`, `customer_last_name`, `customer_company_name`, `customer_vat_id`, `shipping_method`, `shipping_title`, `shipping_description`, `coupon_code`, `is_gift`, `total_item_count`, `total_qty_ordered`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `grand_total`, `base_grand_total`, `grand_total_invoiced`, `base_grand_total_invoiced`, `grand_total_refunded`, `base_grand_total_refunded`, `sub_total`, `base_sub_total`, `sub_total_invoiced`, `base_sub_total_invoiced`, `sub_total_refunded`, `base_sub_total_refunded`, `discount_percent`, `discount_amount`, `base_discount_amount`, `discount_invoiced`, `base_discount_invoiced`, `discount_refunded`, `base_discount_refunded`, `tax_amount`, `base_tax_amount`, `tax_amount_invoiced`, `base_tax_amount_invoiced`, `tax_amount_refunded`, `base_tax_amount_refunded`, `shipping_amount`, `base_shipping_amount`, `shipping_invoiced`, `base_shipping_invoiced`, `shipping_refunded`, `base_shipping_refunded`, `customer_id`, `customer_type`, `channel_id`, `channel_type`, `created_at`, `updated_at`, `cart_id`, `applied_cart_rule_ids`, `shipping_discount_amount`, `base_shipping_discount_amount`) VALUES
+(1, '1', 'closed', 'Default', 0, 'mannukumarshah@gmail.com', 'Manu', 'kumar', NULL, NULL, 'free_free', 'Free Shipping - Free Shipping', 'Free Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-13 15:41:30', '2022-08-19 19:16:18', 6, '', '0.0000', '0.0000'),
+(2, '2', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 2, 5, 'USD', 'USD', 'USD', '1650.0000', '1650.0000', '0.0000', '0.0000', '0.0000', '0.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '50.0000', '50.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-24 19:58:42', '2022-08-24 19:58:42', 12, '', '0.0000', '0.0000'),
+(3, '3', 'processing', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '210.0000', '210.0000', '210.0000', '210.0000', '0.0000', '0.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '10.0000', '10.0000', '10.0000', '10.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-24 20:00:31', '2022-08-24 20:18:18', 13, '', '0.0000', '0.0000');
+
 -- --------------------------------------------------------
 
 --
@@ -6417,6 +6961,16 @@ CREATE TABLE `order_brands` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `order_brands`
+--
+
+INSERT INTO `order_brands` (`id`, `order_id`, `order_item_id`, `product_id`, `brand`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, NULL, '2022-08-13 15:41:34', '2022-08-13 15:41:34'),
+(2, 2, 2, 4, 10, '2022-08-24 19:58:44', '2022-08-24 19:58:44'),
+(3, 2, 3, 2, 10, '2022-08-24 19:58:44', '2022-08-24 19:58:44'),
+(4, 3, 4, 2, 10, '2022-08-24 20:00:31', '2022-08-24 20:00:31');
 
 -- --------------------------------------------------------
 
@@ -6483,6 +7037,16 @@ CREATE TABLE `order_items` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `sku`, `type`, `name`, `coupon_code`, `weight`, `total_weight`, `qty_ordered`, `qty_shipped`, `qty_invoiced`, `qty_canceled`, `qty_refunded`, `price`, `base_price`, `total`, `base_total`, `total_invoiced`, `base_total_invoiced`, `amount_refunded`, `base_amount_refunded`, `discount_percent`, `discount_amount`, `base_discount_amount`, `discount_invoiced`, `base_discount_invoiced`, `discount_refunded`, `base_discount_refunded`, `tax_percent`, `tax_amount`, `base_tax_amount`, `tax_amount_invoiced`, `base_tax_amount_invoiced`, `tax_amount_refunded`, `base_tax_amount_refunded`, `product_id`, `product_type`, `order_id`, `parent_id`, `additional`, `created_at`, `updated_at`) VALUES
+(1, 'updatedSKU', 'simple', 'temp1', NULL, '12.0000', '12.0000', 1, 0, 1, 0, 1, '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-13 15:41:30', '2022-08-19 19:16:18'),
+(2, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '36.0000', 3, 0, 0, 0, 0, '400.0000', '400.0000', '1200.0000', '1200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Product\\Models\\Product', 2, NULL, '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"SogHAGSqIwg1aQUeu8ffIHPGQks7ykqvs6wYoNJF\",\"locale\":\"en\"}', '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
+(3, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '24.0000', 2, 0, 0, 0, 0, '200.0000', '200.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 2, NULL, '{\"quantity\":2,\"product_id\":\"2\",\"_token\":\"zwSSEN83KcNKGYwzihNMip1GyFxbS205WezdtRIK\",\"locale\":\"en\"}', '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
+(4, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', 1, 0, 1, 0, 0, '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 3, NULL, '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\",\"locale\":\"en\"}', '2022-08-24 20:00:31', '2022-08-24 20:18:18');
+
 -- --------------------------------------------------------
 
 --
@@ -6498,6 +7062,15 @@ CREATE TABLE `order_payment` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `order_payment`
+--
+
+INSERT INTO `order_payment` (`id`, `method`, `method_title`, `order_id`, `additional`, `created_at`, `updated_at`) VALUES
+(1, 'razorpay', NULL, 1, NULL, '2022-08-13 15:41:30', '2022-08-13 15:41:30'),
+(2, 'moneytransfer', NULL, 2, NULL, '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
+(3, 'moneytransfer', NULL, 3, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31');
 
 -- --------------------------------------------------------
 
@@ -6557,6 +7130,7 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `products` (
   `id` int(10) UNSIGNED NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   `sku` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -6570,10 +7144,17 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `sku`, `type`, `created_at`, `updated_at`, `parent_id`, `attribute_family_id`, `additional`) VALUES
-(1, 'updatedSKU', 'simple', '2022-08-10 07:16:06', '2022-08-10 07:16:06', NULL, 1, NULL),
-(2, 'temp21', 'simple', '2022-08-10 07:16:07', '2022-08-10 07:16:07', NULL, 1, NULL),
-(3, 'temp41', 'simple', '2022-08-10 07:16:09', '2022-08-10 07:16:09', NULL, 1, NULL);
+INSERT INTO `products` (`id`, `user_id`, `sku`, `type`, `created_at`, `updated_at`, `parent_id`, `attribute_family_id`, `additional`) VALUES
+(1, 1, 'updatedSKU', 'simple', '2022-08-10 07:16:06', '2022-08-10 07:16:06', NULL, 1, NULL),
+(2, 1, 'temp21', 'simple', '2022-08-10 07:16:07', '2022-08-21 19:01:52', NULL, 1, NULL),
+(3, 1, 'temp41', 'simple', '2022-08-10 07:16:09', '2022-08-21 19:01:13', NULL, 1, NULL),
+(4, 1, 'temporary-sku-6a87ba', 'simple', '2022-08-12 03:08:32', '2022-08-12 05:23:29', NULL, 1, NULL),
+(5, 1, 'test-2', 'simple', '2022-08-12 06:39:28', '2022-08-12 06:39:28', NULL, 1, NULL),
+(6, 1, 'test-3', 'configurable', '2022-08-13 14:41:12', '2022-08-13 14:41:12', NULL, 1, NULL),
+(7, NULL, 'test-3-variant-1-6', 'simple', '2022-08-13 14:41:12', '2022-08-13 14:41:12', 6, 1, NULL),
+(8, NULL, 'test-3-variant-2-6', 'simple', '2022-08-13 14:41:12', '2022-08-13 14:41:12', 6, 1, NULL),
+(9, NULL, 'test-3-variant-3-6', 'simple', '2022-08-13 14:41:13', '2022-08-13 14:41:13', 6, 1, NULL),
+(10, NULL, 'test-3-variant-4-6', 'simple', '2022-08-13 14:41:13', '2022-08-13 14:41:13', 6, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -6612,7 +7193,7 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (9, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 8),
 (10, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, 23),
 (11, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 1, 24),
-(12, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 26),
+(12, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, 26),
 (13, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 1, 16),
 (14, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 1, 17),
 (15, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 1, 18),
@@ -6635,7 +7216,7 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (32, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 2, 8),
 (33, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 2, 23),
 (34, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 2, 24),
-(35, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 2, 26),
+(35, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 2, 26),
 (36, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 2, 16),
 (37, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 2, 17),
 (38, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 2, 18),
@@ -6658,7 +7239,7 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (55, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 3, 8),
 (56, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, 3, 23),
 (57, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 3, 24),
-(58, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 3, 26),
+(58, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 3, 26),
 (59, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 3, 16),
 (60, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 3, 17),
 (61, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 3, 18),
@@ -6669,7 +7250,150 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (66, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2020-05-20', NULL, 3, 15),
 (67, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 3, 20),
 (68, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 3, 21),
-(69, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 3, 22);
+(69, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 3, 22),
+(70, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 4, 9),
+(71, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 4, 10),
+(72, NULL, NULL, 'temporary-sku-6a87ba', NULL, NULL, NULL, NULL, NULL, NULL, 4, 1),
+(73, 'en', 'default', 'Copy of cbv (babed1)', NULL, NULL, NULL, NULL, NULL, NULL, 4, 2),
+(74, NULL, NULL, 'copy-of-temp3-babed1', NULL, NULL, NULL, NULL, NULL, NULL, 4, 3),
+(75, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 5),
+(76, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 6),
+(77, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 7),
+(78, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 8),
+(79, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, 4, 23),
+(80, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 4, 24),
+(81, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 4, 26),
+(82, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 4, 16),
+(83, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 4, 17),
+(84, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 4, 18),
+(85, NULL, NULL, NULL, NULL, NULL, '400.0000', NULL, NULL, NULL, 4, 11),
+(86, NULL, 'default', NULL, NULL, NULL, '10.0000', NULL, NULL, NULL, 4, 12),
+(87, NULL, NULL, NULL, NULL, NULL, '80.0000', NULL, NULL, NULL, 4, 13),
+(88, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2019-05-02', NULL, 4, 14),
+(89, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2020-05-20', NULL, 4, 15),
+(90, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 4, 20),
+(91, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 4, 21),
+(92, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 4, 22),
+(93, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 4, 4),
+(94, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 4, 27),
+(95, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 4, 19),
+(96, NULL, NULL, 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 1),
+(97, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
+(98, 'en', 'default', 'Test Product v1', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
+(99, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
+(100, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
+(101, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
+(102, NULL, NULL, 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 3),
+(103, 'nl', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
+(104, 'en', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
+(105, 'es', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
+(106, 'fr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
+(107, 'tr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
+(108, 'nl', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
+(109, 'en', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
+(110, 'es', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
+(111, 'fr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
+(112, 'tr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
+(113, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 7, 11),
+(114, NULL, NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, 7, 22),
+(115, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 7, 8),
+(116, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 7, 23),
+(117, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 7, 24),
+(118, NULL, NULL, 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 1),
+(119, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
+(120, 'en', 'default', 'Test Product v2', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
+(121, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
+(122, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
+(123, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
+(124, NULL, NULL, 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 3),
+(125, 'nl', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
+(126, 'en', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
+(127, 'es', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
+(128, 'fr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
+(129, 'tr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
+(130, 'nl', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
+(131, 'en', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
+(132, 'es', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
+(133, 'fr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
+(134, 'tr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
+(135, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 8, 11),
+(136, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 8, 22),
+(137, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 8, 8),
+(138, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 8, 23),
+(139, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 8, 24),
+(140, NULL, NULL, 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 1),
+(141, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
+(142, 'en', 'default', 'Test Product v2', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
+(143, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
+(144, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
+(145, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
+(146, NULL, NULL, 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 3),
+(147, 'nl', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
+(148, 'en', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
+(149, 'es', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
+(150, 'fr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
+(151, 'tr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
+(152, 'nl', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
+(153, 'en', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
+(154, 'es', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
+(155, 'fr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
+(156, 'tr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
+(157, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 9, 11),
+(158, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 9, 22),
+(159, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 9, 8),
+(160, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, 9, 23),
+(161, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 9, 24),
+(162, NULL, NULL, 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 1),
+(163, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
+(164, 'en', 'default', 'Test Product v2', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
+(165, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
+(166, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
+(167, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
+(168, NULL, NULL, 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 3),
+(169, 'nl', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
+(170, 'en', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
+(171, 'es', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
+(172, 'fr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
+(173, 'tr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
+(174, 'nl', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
+(175, 'en', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
+(176, 'es', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
+(177, 'fr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
+(178, 'tr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
+(179, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 10, 11),
+(180, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 10, 22),
+(181, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 10, 8),
+(182, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, 10, 23),
+(183, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 10, 24),
+(536, 'en', 'default', 'jhj', NULL, NULL, NULL, NULL, NULL, NULL, 6, 9),
+(537, 'en', 'default', 'jhj', NULL, NULL, NULL, NULL, NULL, NULL, 6, 10),
+(538, NULL, NULL, 'test-3', NULL, NULL, NULL, NULL, NULL, NULL, 6, 1),
+(539, 'en', 'default', 'Test Product 3', NULL, NULL, NULL, NULL, NULL, NULL, 6, 2),
+(540, NULL, NULL, 'test-product-3', NULL, NULL, NULL, NULL, NULL, NULL, 6, 3),
+(541, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 6, 4),
+(542, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 5),
+(543, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 6),
+(544, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 7),
+(545, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 8),
+(546, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 6, 25),
+(547, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 6, 26),
+(548, NULL, NULL, '01', NULL, NULL, NULL, NULL, NULL, NULL, 6, 27),
+(549, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 16),
+(550, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 17),
+(551, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 18),
+(552, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 4, 25),
+(553, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 3, 4),
+(554, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 3, 25),
+(555, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 3, 27),
+(556, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 3, 19),
+(557, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 2, 4),
+(558, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 2, 25),
+(559, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 2, 27),
+(560, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 2, 19),
+(561, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 1, 4),
+(562, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 1, 25),
+(563, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 27),
+(564, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 19);
 
 -- --------------------------------------------------------
 
@@ -6730,9 +7454,27 @@ CREATE TABLE `product_categories` (
 --
 
 INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
-(1, 1),
+(6, 12),
+(6, 3),
+(6, 14),
+(4, 1),
+(4, 12),
+(4, 3),
+(4, 14),
+(4, 15),
+(3, 1),
+(3, 12),
+(3, 14),
+(3, 15),
+(3, 4),
 (2, 1),
-(3, 1);
+(2, 12),
+(2, 15),
+(2, 4),
+(2, 5),
+(1, 1),
+(1, 12),
+(1, 3);
 
 -- --------------------------------------------------------
 
@@ -6872,17 +7614,56 @@ CREATE TABLE `product_flat` (
   `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `width` decimal(12,4) DEFAULT NULL,
   `height` decimal(12,4) DEFAULT NULL,
-  `depth` decimal(12,4) DEFAULT NULL
+  `depth` decimal(12,4) DEFAULT NULL,
+  `brand` int(11) DEFAULT NULL,
+  `brand_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_flat`
 --
 
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`) VALUES
-(1, 'updatedSKU', NULL, 'temp1', 'temp1', 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, NULL, 7, NULL, '2022-08-10 12:46:06', 'en', 'default', 1, '2022-08-10 12:46:06', NULL, 1, NULL, NULL, 'shortdesc', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL),
-(2, 'temp21', NULL, 'temp1sdvc', 'fdh', 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, NULL, 7, NULL, '2022-08-10 12:46:07', 'en', 'default', 2, '2022-08-10 12:46:07', NULL, 1, NULL, NULL, 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL),
-(3, 'temp41', NULL, 'cbv', 'temp1', 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, NULL, 7, NULL, '2022-08-10 12:46:09', 'en', 'default', 3, '2022-08-10 12:46:09', NULL, 1, NULL, NULL, 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL);
+INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`) VALUES
+(1, 'updatedSKU', '', 'temp1', 'temp1', 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'en', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', 'shortdesc', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
+(2, 'temp21', '', 'temp1sdvc', 'fdh', 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'en', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
+(3, 'temp41', '', 'cbv', 'temp1', 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'en', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
+(4, 'temporary-sku-6a87ba', '', 'Copy of cbv (babed1)', 'temp1', 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'en', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
+(5, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'fr', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(6, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'nl', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(7, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'es', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(8, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'en', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'fr', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'nl', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'es', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 'test-3', '01', 'Test Product 3', 'jhj', 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'en', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', 'jhj', '', '', '', NULL, NULL, NULL, 10, 'Abibas'),
+(13, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'fr', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, ''),
+(14, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'nl', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, ''),
+(15, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'es', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, ''),
+(16, 'test-3-variant-1-6', NULL, 'Test Product v1', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 7, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 7, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 7, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 7, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 'test-3-variant-2-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 8, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 8, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 8, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 8, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 'test-3-variant-3-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 9, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 9, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(26, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 9, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(27, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 9, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 'test-3-variant-4-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 10, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 10, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(30, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 10, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 10, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(96, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'fr', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(97, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'nl', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(98, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'es', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(99, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'fr', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(100, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'nl', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(101, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'es', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(102, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'fr', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(103, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'nl', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
+(104, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'es', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '');
 
 -- --------------------------------------------------------
 
@@ -6912,6 +7693,15 @@ CREATE TABLE `product_images` (
   `position` int(10) UNSIGNED NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `product_images`
+--
+
+INSERT INTO `product_images` (`id`, `type`, `path`, `product_id`, `position`) VALUES
+(1, 'images', 'product/6/UlpMpiT8bZi0nWaq7XBnrRul6qqQIkwNFO5meNNj.jpg', 6, 0),
+(2, 'images', 'product/4/kT4sWtQAkK14RAnKsLu9S7Rs1xMeq5kT8NPfMQvD.jpg', 4, 0),
+(3, 'images', 'product/4/78FwFUNTZ0WIW8s3errHOkkN939XSFOfVSFm5czB.jpg', 4, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -6933,7 +7723,12 @@ CREATE TABLE `product_inventories` (
 INSERT INTO `product_inventories` (`id`, `qty`, `product_id`, `inventory_source_id`, `vendor_id`) VALUES
 (1, 123, 1, 1, 0),
 (2, 124, 2, 1, 0),
-(3, 126, 3, 1, 0);
+(3, 126, 3, 1, 0),
+(4, 126, 4, 1, 0),
+(5, 10, 7, 1, 0),
+(6, 10, 8, 1, 0),
+(7, 10, 9, 1, 0),
+(8, 10, 10, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -6947,6 +7742,15 @@ CREATE TABLE `product_ordered_inventories` (
   `product_id` int(10) UNSIGNED NOT NULL,
   `channel_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `product_ordered_inventories`
+--
+
+INSERT INTO `product_ordered_inventories` (`id`, `qty`, `product_id`, `channel_id`) VALUES
+(1, 0, 1, 1),
+(2, 3, 4, 1),
+(3, 3, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -6978,6 +7782,13 @@ CREATE TABLE `product_reviews` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `product_reviews`
+--
+
+INSERT INTO `product_reviews` (`id`, `title`, `rating`, `comment`, `status`, `created_at`, `updated_at`, `product_id`, `customer_id`, `name`) VALUES
+(4, 'wedsc', 5, 'ervfdcdswde', 'pending', '2022-08-22 07:09:42', '2022-08-22 07:09:42', 6, 4, 'Danish Bhatia');
+
 -- --------------------------------------------------------
 
 --
@@ -7001,6 +7812,14 @@ CREATE TABLE `product_super_attributes` (
   `product_id` int(10) UNSIGNED NOT NULL,
   `attribute_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `product_super_attributes`
+--
+
+INSERT INTO `product_super_attributes` (`product_id`, `attribute_id`) VALUES
+(6, 23),
+(6, 24);
 
 -- --------------------------------------------------------
 
@@ -7062,6 +7881,13 @@ CREATE TABLE `refunds` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `refunds`
+--
+
+INSERT INTO `refunds` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `adjustment_refund`, `base_adjustment_refund`, `adjustment_fee`, `base_adjustment_fee`, `sub_total`, `base_sub_total`, `grand_total`, `base_grand_total`, `shipping_amount`, `base_shipping_amount`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `order_id`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'refunded', 0, 1, 'USD', 'USD', 'USD', '0.0000', '0.0000', '0.0000', '0.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, '2022-08-19 19:16:18', '2022-08-19 19:16:18');
+
 -- --------------------------------------------------------
 
 --
@@ -7092,6 +7918,13 @@ CREATE TABLE `refund_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `refund_items`
+--
+
+INSERT INTO `refund_items` (`id`, `name`, `description`, `sku`, `qty`, `price`, `base_price`, `total`, `base_total`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `product_id`, `product_type`, `order_item_id`, `refund_id`, `parent_id`, `additional`, `created_at`, `updated_at`) VALUES
+(1, 'temp1', NULL, 'updatedSKU', 1, '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-19 19:16:18', '2022-08-19 19:16:18');
 
 -- --------------------------------------------------------
 
@@ -7191,7 +8024,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`, `permission_type`, `permissions`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'Administrator role', 'all', NULL, NULL, NULL);
+(1, 'Administrator', 'Administrator role', 'all', NULL, NULL, NULL),
+(2, 'Vendor', 'Role for Vendor', 'custom', '[\"dashboard\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.families\",\"catalog.families.create\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.addresses\",\"customers.addresses.create\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\",\"contact\"]', '2022-08-12 06:57:20', '2022-08-15 04:54:51');
 
 -- --------------------------------------------------------
 
@@ -7240,6 +8074,24 @@ CREATE TABLE `shipment_items` (
   `order_item_id` int(10) UNSIGNED DEFAULT NULL,
   `shipment_id` int(10) UNSIGNED NOT NULL,
   `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `size_charts`
+--
+
+CREATE TABLE `size_charts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `template_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `template_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `template_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `config_attribute` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size_chart` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -7326,6 +8178,20 @@ CREATE TABLE `tax_rates` (
   `state` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tax_rate` decimal(12,4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `template_assign`
+--
+
+CREATE TABLE `template_assign` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `template_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
@@ -7428,7 +8294,69 @@ CREATE TABLE `velocity_meta_data` (
 --
 
 INSERT INTO `velocity_meta_data` (`id`, `home_page_content`, `footer_left_content`, `footer_middle_content`, `slider`, `advertisement`, `sidebar_category_count`, `featured_product_count`, `new_products_count`, `subscription_bar_content`, `created_at`, `updated_at`, `product_view_images`, `product_policy`, `locale`, `channel`, `header_content_count`) VALUES
-(1, '<p>@include(\'shop::home.advertisements.advertisement-four\')@include(\'shop::home.featured-products\') @include(\'shop::home.product-policy\') @include(\'shop::home.advertisements.advertisement-three\') @include(\'shop::home.new-products\') @include(\'shop::home.advertisements.advertisement-two\')</p>', '<p>We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>', '<div class=\"col-lg-6 col-md-12 col-sm-12 no-padding\"><ul type=\"none\"><li><a href=\"{!! url(\'page/about-us\') !!}\">About Us</a></li><li><a href=\"{!! url(\'page/cutomer-service\') !!}\">Customer Service</a></li><li><a href=\"{!! url(\'page/whats-new\') !!}\">What&rsquo;s New</a></li><li><a href=\"{!! url(\'page/contact-us\') !!}\">Contact Us </a></li></ul></div><div class=\"col-lg-6 col-md-12 col-sm-12 no-padding\"><ul type=\"none\"><li><a href=\"{!! url(\'page/return-policy\') !!}\"> Order and Returns </a></li><li><a href=\"{!! url(\'page/payment-policy\') !!}\"> Payment Policy </a></li><li><a href=\"{!! url(\'page/shipping-policy\') !!}\"> Shipping Policy</a></li><li><a href=\"{!! url(\'page/privacy-policy\') !!}\"> Privacy and Cookies Policy </a></li></ul></div>', 1, NULL, 9, 10, 10, '<div class=\"social-icons col-lg-6\"><a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-facebook\" title=\"facebook\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-twitter\" title=\"twitter\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-linked-in\" title=\"linkedin\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-pintrest\" title=\"Pinterest\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-youtube\" title=\"Youtube\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-instagram\" title=\"instagram\"></i></a></div>', NULL, NULL, NULL, '<div class=\"row col-12 remove-padding-margin\"><div class=\"col-lg-4 col-sm-12 product-policy-wrapper\"><div class=\"card\"><div class=\"policy\"><div class=\"left\"><i class=\"rango-van-ship fs40\"></i></div> <div class=\"right\"><span class=\"font-setting fs20\">Free Shipping on Order $20 or More</span></div></div></div></div> <div class=\"col-lg-4 col-sm-12 product-policy-wrapper\"><div class=\"card\"><div class=\"policy\"><div class=\"left\"><i class=\"rango-exchnage fs40\"></i></div> <div class=\"right\"><span class=\"font-setting fs20\">Product Replace &amp; Return Available </span></div></div></div></div> <div class=\"col-lg-4 col-sm-12 product-policy-wrapper\"><div class=\"card\"><div class=\"policy\"><div class=\"left\"><i class=\"rango-exchnage fs40\"></i></div> <div class=\"right\"><span class=\"font-setting fs20\">Product Exchange and EMI Available </span></div></div></div></div></div>', 'en', 'default', '5');
+(1, '<p>@include(\'shop::home.advertisements.advertisement-four\')@include(\'shop::home.featured-products\') @include(\'shop::home.product-policy\') @include(\'shop::home.advertisements.advertisement-three\') @include(\'shop::home.new-products\') @include(\'shop::home.advertisements.advertisement-two\')</p>', '<p class=\"text-justify\">We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>', '<div class=\"col-lg-6 col-md-12 col-sm-12 no-padding\">\r\n<ul type=\"none\">\r\n<li><a href=\"{!! url(\'page/about-us\') !!}\">About Us</a></li>\r\n<li><a href=\"{!! url(\'page/cutomer-service\') !!}\">Customer Service</a></li>\r\n<li><a href=\"{!! url(\'page/whats-new\') !!}\">What&rsquo;s New</a></li>\r\n<li><a href=\"{!! url(\'page/contact-us\') !!}\">Contact Us </a></li>\r\n</ul>\r\n</div>\r\n<div class=\"col-lg-6 col-md-12 col-sm-12 no-padding\">\r\n<ul type=\"none\">\r\n<li><a href=\"{!! url(\'page/return-policy\') !!}\"> Order and Returns </a></li>\r\n<li><a href=\"{!! url(\'page/payment-policy\') !!}\"> Payment Policy </a></li>\r\n<li><a href=\"{!! url(\'page/shipping-policy\') !!}\"> Shipping Policy</a></li>\r\n<li><a href=\"{!! url(\'page/privacy-policy\') !!}\"> Privacy and Cookies Policy </a></li>\r\n</ul>\r\n</div>', 1, '{\"4\":{\"1\":\"velocity\\/images\\/big-sale-banner.webp\",\"2\":\"velocity\\/images\\/seasons.webp\",\"3\":\"velocity\\/images\\/deals.webp\",\"4\":\"velocity\\/images\\/kids.webp\"},\"3\":{\"1\":\"velocity\\/images\\/headphones.webp\",\"2\":\"velocity\\/images\\/watch.webp\",\"3\":\"velocity\\/images\\/kids-2.webp\"},\"2\":{\"1\":\"velocity\\/images\\/toster.webp\",\"2\":\"velocity\\/images\\/trimmer.webp\"}}', 9, 10, 10, '<div class=\"social-icons col-lg-6\"><a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-facebook\" title=\"facebook\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-twitter\" title=\"twitter\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-linked-in\" title=\"linkedin\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-pintrest\" title=\"Pinterest\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-youtube\" title=\"Youtube\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-instagram\" title=\"instagram\"></i></a></div>', NULL, '2022-08-25 09:15:03', NULL, '<div class=\"row col-12 remove-padding-margin\">\r\n<div class=\"col-lg-4 col-sm-12 product-policy-wrapper\">\r\n<div class=\"card\">\r\n<div class=\"policy\">\r\n<div class=\"left\"><i class=\"rango-van-ship fs40\"></i></div>\r\n<div class=\"right\"><span class=\"font-setting fs20\">Free Shipping on Order $20 or More</span></div>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-lg-4 col-sm-12 product-policy-wrapper\">\r\n<div class=\"card\">\r\n<div class=\"policy\">\r\n<div class=\"left\"><i class=\"rango-exchnage fs40\"></i></div>\r\n<div class=\"right\"><span class=\"font-setting fs20\">Product Replace &amp; Return Available </span></div>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-lg-4 col-sm-12 product-policy-wrapper\">\r\n<div class=\"card\">\r\n<div class=\"policy\">\r\n<div class=\"left\"><i class=\"rango-exchnage fs40\"></i></div>\r\n<div class=\"right\"><span class=\"font-setting fs20\">Product Exchange and EMI Available </span></div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>', 'en', 'default', '5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_registration`
+--
+
+CREATE TABLE `vendor_registration` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `pincode` varchar(10) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `additional_notes` longtext DEFAULT NULL,
+  `facebook_link` varchar(100) DEFAULT NULL,
+  `instagram_link` varchar(100) DEFAULT NULL,
+  `youtube_link` varchar(100) DEFAULT NULL,
+  `twitter_link` varchar(100) DEFAULT NULL,
+  `gstin` varchar(255) NOT NULL,
+  `vat_id` varchar(255) DEFAULT NULL,
+  `gst_certificate` varchar(255) NOT NULL,
+  `mca_certificate` varchar(255) NOT NULL,
+  `other_certificate` varchar(255) DEFAULT NULL,
+  `store_images` longtext DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `owner_name` varchar(255) NOT NULL,
+  `owner_email` varchar(255) NOT NULL,
+  `owner_phone` varchar(20) NOT NULL,
+  `owner_address` longtext NOT NULL,
+  `owner_city` varchar(50) NOT NULL,
+  `owner_state` varchar(50) NOT NULL,
+  `owner_country` varchar(50) NOT NULL,
+  `owner_pincode` varchar(10) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_reviews`
+--
+
+CREATE TABLE `vendor_reviews` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `vendor_id` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- --------------------------------------------------------
 
@@ -7449,6 +8377,13 @@ CREATE TABLE `wishlist` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `wishlist`
+--
+
+INSERT INTO `wishlist` (`id`, `channel_id`, `product_id`, `customer_id`, `item_options`, `moved_to_cart`, `shared`, `time_of_moving`, `created_at`, `updated_at`, `additional`) VALUES
+(3, 1, 4, 4, NULL, NULL, 1, NULL, '2022-08-21 16:07:44', '2022-08-21 16:08:10', NULL);
 
 --
 -- Indexes for dumped tables
@@ -8283,6 +9218,12 @@ ALTER TABLE `shipment_items`
   ADD KEY `shipment_items_shipment_id_foreign` (`shipment_id`);
 
 --
+-- Indexes for table `size_charts`
+--
+ALTER TABLE `size_charts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sliders`
 --
 ALTER TABLE `sliders`
@@ -8320,6 +9261,14 @@ ALTER TABLE `tax_rates`
   ADD UNIQUE KEY `tax_rates_identifier_unique` (`identifier`);
 
 --
+-- Indexes for table `template_assign`
+--
+ALTER TABLE `template_assign`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `template_assign_product_id_foreign` (`product_id`),
+  ADD KEY `template_assign_template_id_foreign` (`template_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -8354,6 +9303,23 @@ ALTER TABLE `velocity_meta_data`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `vendor_registration`
+--
+ALTER TABLE `vendor_registration`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `display_name` (`display_name`),
+  ADD UNIQUE KEY `owner_email` (`owner_email`);
+
+--
+-- Indexes for table `vendor_reviews`
+--
+ALTER TABLE `vendor_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_reviews_product_id_foreign` (`vendor_id`),
+  ADD KEY `product_reviews_customer_id_foreign` (`customer_id`);
+
+--
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
@@ -8370,13 +9336,13 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `attributes`
@@ -8400,19 +9366,19 @@ ALTER TABLE `attribute_groups`
 -- AUTO_INCREMENT for table `attribute_options`
 --
 ALTER TABLE `attribute_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `attribute_option_translations`
 --
 ALTER TABLE `attribute_option_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `attribute_translations`
 --
 ALTER TABLE `attribute_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `bookings`
@@ -8466,19 +9432,19 @@ ALTER TABLE `booking_product_table_slots`
 -- AUTO_INCREMENT for table `bulkupload_data_flow_profiles`
 --
 ALTER TABLE `bulkupload_data_flow_profiles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `cart_item_inventories`
@@ -8490,7 +9456,7 @@ ALTER TABLE `cart_item_inventories`
 -- AUTO_INCREMENT for table `cart_payment`
 --
 ALTER TABLE `cart_payment`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `cart_rules`
@@ -8526,7 +9492,7 @@ ALTER TABLE `cart_rule_translations`
 -- AUTO_INCREMENT for table `cart_shipping_rates`
 --
 ALTER TABLE `cart_shipping_rates`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `catalog_rules`
@@ -8550,13 +9516,13 @@ ALTER TABLE `catalog_rule_product_prices`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `category_translations`
 --
 ALTER TABLE `category_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
 
 --
 -- AUTO_INCREMENT for table `channels`
@@ -8586,13 +9552,13 @@ ALTER TABLE `cms_page_translations`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `core_config`
 --
 ALTER TABLE `core_config`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -8634,7 +9600,7 @@ ALTER TABLE `currency_exchange_rates`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customer_groups`
@@ -8646,7 +9612,7 @@ ALTER TABLE `customer_groups`
 -- AUTO_INCREMENT for table `customer_social_accounts`
 --
 ALTER TABLE `customer_social_accounts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `downloadable_link_purchased`
@@ -8676,13 +9642,13 @@ ALTER TABLE `inventory_sources`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `invoice_items`
 --
 ALTER TABLE `invoice_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -8718,25 +9684,25 @@ ALTER TABLE `marketing_templates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=224;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=226;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_brands`
 --
 ALTER TABLE `order_brands`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_comments`
@@ -8748,13 +9714,13 @@ ALTER TABLE `order_comments`
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `order_payment`
 --
 ALTER TABLE `order_payment`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_transactions`
@@ -8772,13 +9738,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product_attribute_values`
 --
 ALTER TABLE `product_attribute_values`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=565;
 
 --
 -- AUTO_INCREMENT for table `product_bundle_options`
@@ -8832,7 +9798,7 @@ ALTER TABLE `product_downloadable_sample_translations`
 -- AUTO_INCREMENT for table `product_flat`
 --
 ALTER TABLE `product_flat`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- AUTO_INCREMENT for table `product_grouped_products`
@@ -8844,25 +9810,25 @@ ALTER TABLE `product_grouped_products`
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product_inventories`
 --
 ALTER TABLE `product_inventories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_ordered_inventories`
 --
 ALTER TABLE `product_ordered_inventories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `product_reviews`
 --
 ALTER TABLE `product_reviews`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product_review_images`
@@ -8880,13 +9846,13 @@ ALTER TABLE `product_videos`
 -- AUTO_INCREMENT for table `refunds`
 --
 ALTER TABLE `refunds`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `refund_items`
 --
 ALTER TABLE `refund_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rma`
@@ -8922,7 +9888,7 @@ ALTER TABLE `rma_reasons`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `shipments`
@@ -8934,6 +9900,12 @@ ALTER TABLE `shipments`
 -- AUTO_INCREMENT for table `shipment_items`
 --
 ALTER TABLE `shipment_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `size_charts`
+--
+ALTER TABLE `size_charts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -8967,6 +9939,12 @@ ALTER TABLE `tax_rates`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `template_assign`
+--
+ALTER TABLE `template_assign`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -8997,10 +9975,22 @@ ALTER TABLE `velocity_meta_data`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `vendor_registration`
+--
+ALTER TABLE `vendor_registration`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `vendor_reviews`
+--
+ALTER TABLE `vendor_reviews`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -9598,6 +10588,13 @@ ALTER TABLE `subscribers_list`
 ALTER TABLE `tax_categories_tax_rates`
   ADD CONSTRAINT `tax_categories_tax_rates_tax_category_id_foreign` FOREIGN KEY (`tax_category_id`) REFERENCES `tax_categories` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `tax_categories_tax_rates_tax_rate_id_foreign` FOREIGN KEY (`tax_rate_id`) REFERENCES `tax_rates` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `template_assign`
+--
+ALTER TABLE `template_assign`
+  ADD CONSTRAINT `template_assign_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `product_flat` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `template_assign_template_id_foreign` FOREIGN KEY (`template_id`) REFERENCES `size_charts` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `velocity_contents_translations`

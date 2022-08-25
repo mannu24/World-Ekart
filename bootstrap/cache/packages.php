@@ -16,6 +16,16 @@
     array (
     ),
   ),
+  'bagisto/bagisto-package-generator' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Webkul\\PackageGenerator\\Providers\\PackageGeneratorServiceProvider',
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
   'bagisto/bagisto-rma' => 
   array (
     'providers' => 

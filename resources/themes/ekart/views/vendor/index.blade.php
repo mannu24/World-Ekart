@@ -5,12 +5,8 @@
 @endsection
 
 @section('content-wrapper')
-
-
-
 <form method="POST" action="{{route('shop.vendor.save')}}" enctype="multipart/form-data">
     @csrf
-
     <div class="heading mt-10 mb-25">
         <span>{{ __('shop::app.vendor.register-store') }}</span>
     </div>

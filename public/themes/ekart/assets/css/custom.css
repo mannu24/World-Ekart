@@ -587,3 +587,25 @@ a:visited, a:link {
     background-color: #dc3545 !important;
     border-color: #dc3545 !important;
 }
+
+.tabs ul li.active a {
+    border-bottom: 3px solid #fcb800;
+}
+.order-box-container {
+    padding-top: 30px;
+}
+.order-box-container .box .box-title {
+    font-size: 18px;
+    padding: 10px 0;
+    font-weight: 600;
+    color: rgb(158, 158, 158);
+}
+.order-box-container .box {
+    width: calc(33% - 5px);
+    vertical-align: top;
+    display: inline-block;
+}
+
+.order-box-container .box:last-child {
+    text-align: right;
+}
