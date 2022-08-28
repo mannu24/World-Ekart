@@ -16,6 +16,16 @@
     array (
     ),
   ),
+  'bagisto/bagisto-package-generator' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Webkul\\PackageGenerator\\Providers\\PackageGeneratorServiceProvider',
+    ),
+    'aliases' => 
+    array (
+    ),
+  ),
   'bagisto/bagisto-rma' => 
   array (
     'providers' => 
@@ -31,6 +41,16 @@
     'providers' => 
     array (
       0 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
+    ),
+  ),
+  'bagisto/laravel-datafaker' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Webkul\\DataFaker\\Providers\\DataFakerServiceProvider',
+    ),
+    'aliases' => 
+    array (
     ),
   ),
   'bagisto/legacy-api' => 
@@ -136,6 +156,13 @@
     'providers' => 
     array (
       0 => 'Konekt\\Enum\\Eloquent\\EnumServiceProvider',
+    ),
+  ),
+  'laravel/legacy-factories' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Illuminate\\Database\\Eloquent\\LegacyFactoryServiceProvider',
     ),
   ),
   'laravel/sanctum' => 

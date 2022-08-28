@@ -12,6 +12,7 @@ use Webkul\Tax\Http\Controllers\TaxController;
 use Webkul\Tax\Http\Controllers\TaxRateController;
 use Webkul\User\Http\Controllers\RoleController;
 use Webkul\User\Http\Controllers\UserController;
+use Webkul\Admin\Http\Controllers\VendorController;
 
 /**
  * Settings routes.
@@ -172,6 +173,23 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::post('/channels/delete/{id}', [ChannelController::class, 'destroy'])->name('admin.channels.delete');
 
     /**
+     * Vendor routes.
+     */
+    Route::get('/vendors-requests', [VendorController::class, 'index'])->defaults('_config', [
+        'view' => 'admin::users.vendors.index',
+    ])->name('admin.vendors.index');
+
+    Route::get('/vendors/view/{id}', [VendorController::class, 'view'])->defaults('_config', [
+        'view' => 'admin::users.vendors.view',
+    ])->name('admin.vendors.view');
+
+    Route::get('/vendors/approve/{id}', [VendorController::class, 'approve'])->name('admin.vendors.approve');
+    
+    Route::post('/vendors/delete/{id}', [VendorController::class, 'destroy'])->name('admin.vendors.delete');
+
+    Route::get('/vendors/delete-view/{id}', [VendorController::class, 'delete'])->name('admin.vendors.delete.view');
+
+    /**
      * Users routes.
      */
     Route::get('/users', [UserController::class, 'index'])->defaults('_config', [
@@ -189,6 +207,10 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->defaults('_config', [
         'view' => 'admin::users.users.edit',
     ])->name('admin.users.edit');
+
+    Route::get('/users/block/{id}', [UserController::class, 'block'])->defaults('_config', [
+        'redirect' => 'admin.users.index',
+    ])->name('admin.users.block');
 
     Route::put('/users/edit/{id}', [UserController::class, 'update'])->defaults('_config', [
         'redirect' => 'admin.users.index',

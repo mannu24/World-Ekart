@@ -116,6 +116,7 @@ return [
         'channels'                 => 'Channels',
         'users'                    => 'Users',
         'roles'                    => 'Roles',
+        'vendors-requests'         => 'Vendors Requests',
         'sliders'                  => 'Sliders',
         'taxes'                    => 'Taxes',
         'tax-categories'           => 'Tax Categories',

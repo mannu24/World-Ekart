@@ -116,11 +116,19 @@ class UserDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
-            'title'  => trans('admin::app.datagrid.edit'),
+            'title'  => 'Edit',
             'method' => 'GET',
             'route'  => 'admin.users.edit',
             'icon'   => 'icon pencil-lg-icon',
         ]);
+
+        $this->addAction([
+            'title'  => 'Block',
+            'method' => 'GET',
+            'route'  => 'admin.users.block',
+            'icon'   => 'icon fas fa-ban text-secondary',
+        ]);
+
 
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),

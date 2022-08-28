@@ -16,7 +16,7 @@ class NotificationRepository extends Repository
         return 'Webkul\Notification\Contracts\Notification';
     }
 
-    /**
+    /** 
      * Return Filtered Notification resources
      *
      * @return objects

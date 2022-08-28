@@ -43,8 +43,9 @@ class AdminRepository extends Repository
      */
     public function update(array $attributes, $id)
     {
+        dd('hgh');
         Event::dispatch('user.admin.update.before', $id);
-
+        // dd($attributes);
         $admin = parent::update($attributes, $id);
 
         if (isset($attributes['password']) && $attributes['password']) {

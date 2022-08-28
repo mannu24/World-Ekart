@@ -157,6 +157,12 @@ return [
         'route'      => 'admin.roles.index',
         'sort'       => 2,
         'icon-class' => '',
+    ],[
+        'key'        => 'settings.users.vendors-requests',
+        'name'       => 'Vendors Requests',
+        'route'      => 'admin.vendors.index',
+        'sort'       => 3,
+        'icon-class' => '',
     ], [
         'key'        => 'settings.sliders',
         'name'       => 'admin::app.layouts.sliders',

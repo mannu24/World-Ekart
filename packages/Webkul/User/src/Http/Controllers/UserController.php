@@ -9,7 +9,7 @@ use Webkul\Admin\DataGrids\UserDataGrid;
 use Webkul\User\Http\Requests\UserForm;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
-
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     /**
@@ -114,6 +114,17 @@ class UserController extends Controller
         $roles = $this->roleRepository->all();
 
         return view($this->_config['view'], compact('user', 'roles'));
+    }
+
+    public function block($id)
+    {
+        $user = DB::table('admins')->where('id',$id)->update(['status'=>0]);
+        $ids = DB::table('products')->where('user_id',$id)->pluck('id');
+        $pro = DB::table('product_flat')->whereIn('product_id',$ids)->update(['status'=>0]);
+
+        session()->flash('success', 'User Blocked Succesfully');
+
+        return redirect()->route($this->_config['redirect']);
     }
 
     /**
