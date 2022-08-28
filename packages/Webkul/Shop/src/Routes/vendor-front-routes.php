@@ -36,11 +36,15 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
             ->name('shop.productOrCategory.index');
     });
 
-    Route::get('/vendor-register', [VendorController::class, 'index'])->defaults('_config', [
+    Route::get('/seller-registration', [VendorController::class, 'index'])->defaults('_config', [
         'view' => 'shop::vendor.index',
-    ])->name('shop.vendor.index');
+    ])->name('shop.seller.register');
 
-    Route::post('/vendor-save', [VendorController::class, 'save'])->defaults('_config', [
+    Route::post('/store_seller', [VendorController::class, 'save'])->defaults('_config', [
         'view' => 'shop::vendor.save',
     ])->name('shop.vendor.save');
+
+    Route::get('/store/{name}', [VendorController::class, 'store'])->defaults('_config', [
+        'view' => 'shop::vendor.store',
+    ])->name('shop.vendor.page');
 });

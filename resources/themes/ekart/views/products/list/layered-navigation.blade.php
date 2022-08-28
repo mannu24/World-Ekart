@@ -1,101 +1,60 @@
-<div class="layered-filter-wrapper left">
-    {!! view_render_event('bagisto.shop.products.list.layered-nagigation.before') !!}
-
+<div class="ps-layout__left">
+    <h5 class="ps-shop__heading">{{ __('shop::app.products.layered-nav-title') }}</h5>
     <layered-navigation
         attribute-src="{{ route('admin.catalog.products.get-filter-attributes', $category->id ?? null) }}"
         max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id ?? null) }}">
     </layered-navigation>
-
-    {!! view_render_event('bagisto.shop.products.list.layered-nagigation.after') !!}
 </div>
 
 @push('scripts')
     <script type="text/x-template" id="layered-navigation-template">
         <div v-if="attributes.length > 0">
-
-            <h5 class="filter-title fw6 mb20">
-                {{ __('shop::app.products.layered-nav-title') }}
-            </h5>
-
-            <div class="filter-content">
-                <div class="filter-attributes">
-                    <filter-attribute-item
-                        v-for='(attribute, index) in attributes'
-                        :key="index"
-                        :index="index"
-                        :attribute="attribute"
-                        :appliedFilterValues="appliedFilters[attribute.code]"
-                        :max-price-src="maxPriceSrc"
-                        @onFilterAdded="addFilters(attribute.code, $event)">
-                    </filter-attribute-item>
-                </div>
-            </div>
+            <filter-attribute-item
+                v-for='(attribute, index) in attributes'
+                :key="index"
+                :index="index"
+                :attribute="attribute"
+                :appliedFilterValues="appliedFilters[attribute.code]"
+                :max-price-src="maxPriceSrc"
+                @onFilterAdded="addFilters(attribute.code, $event)">
+            </filter-attribute-item>
         </div>
     </script>
 
     <script type="text/x-template" id="filter-attribute-item-template">
-        <div :class="`cursor-pointer filter-attributes-item ${active ? 'active' : ''}`">
-            <div class="filter-attributes-title" @click="active = ! active">
-                <h6 class="fw6 display-inbl">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h6>
-
-                <div class="float-right display-table">
-                    <span class="link-color cursor-pointer" v-if="appliedFilters.length" @click.stop="clearFilters()">
+        <div>
+            <aside class="widget widget_shop widget_shop--brand">
+                <h4 class="widget-title d-inline">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
+                <div class="float-right display-table" style="cursor:pointer;">
+                    <span v-if="appliedFilters.length" @click.stop="clearFilters()">
                         {{ __('shop::app.products.remove-filter-link-title') }}
                     </span>
-
-                    <i :class="`icon fs16 cell ${active ? 'rango-arrow-up' : 'rango-arrow-down'}`"></i>
                 </div>
-            </div>
-
-            <div class="filter-attributes-content">
-                <ul type="none" class="items ml15" v-if="attribute.type != 'price'">
-                    <li
-                        class="item"
-                        v-for='(option, index) in attribute.options'>
-                        <div
-                            class="checkbox"
-                            @click="optionClicked(option.id, $event)">
-                            <input
-                                type="checkbox"
-                                :id="option.id"
-                                v-bind:value="option.id"
-                                v-model="appliedFilters"
-                                @change="addFilter($event)" />
-                            <span>@{{ option.label ? option.label : option.admin_name }}</span>
-                        </div>
-                    </li>
-                </ul>
-
-                <div class="price-range-wrapper" v-if="attribute.type == 'price'">
-                    <vue-slider
-                        ref="slider"
-                        v-model="sliderConfig.value"
-                        :process-style="sliderConfig.processStyle"
-                        :tooltip-style="sliderConfig.tooltipStyle"
-                        :max="sliderConfig.max"
-                        :lazy="true"
-                        @change="priceRangeUpdated($event)"
-                    ></vue-slider>
-
-                    <div class="filter-input row col-12 no-padding">
-                        <input
-                            type="text"
-                            name="price_from"
-                            :value="sliderConfig.priceFrom"
-                            id="price_from"
-                            disabled>
-
-                        <label class="col text-center" for="to">{{ __('shop::app.products.filter-to') }}</label>
-
-                        <input
-                            type="text"
-                            name="price_to"
-                            :value="sliderConfig.priceTo"
-                            id="price_to"
-                            disabled>
+                <figure>
+                    <div class="ant-radio-group ant-radio-group-outline" v-if="attribute.type != 'price'">
+                        <label class="ant-radio-wrapper" v-for='(option, index) in attribute.options'>
+                            <span class="ant-radio" :class="appliedFilters.indexOf(option.id.toString()) != -1 ? 'ant-radio-checked' : ''">
+                                <input type="checkbox" class="ant-radio-input" @change="addFilter($event)" :id="option.id" :value="option.id" v-model="appliedFilters">
+                                <span class="ant-radio-inner"></span>
+                            </span>
+                            <span @click="optionClicked(option.id, $event)">@{{ option.label ? option.label : option.admin_name }}</span>
+                        </label>
                     </div>
-                </div>
-            </div>
+                    <div class="price-range-wrapper" v-if="attribute.type == 'price'">
+                        <vue-slider ref="slider" v-model="sliderConfig.value" :process-style="sliderConfig.processStyle"
+                            :tooltip-style="sliderConfig.tooltipStyle" :max="sliderConfig.max" :lazy="true" @change="priceRangeUpdated($event)"
+                        ></vue-slider>
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center">
+                                {{-- <p class="py-2">Price: @{{ sliderConfig.priceFrom }} - @{{ sliderConfig.priceTo }}</p> --}}
+                                <input type="text" class="price-control" name="price_from" :value="sliderConfig.priceFrom" id="price_from" disabled>
+                                <label class="text-center" for="to">{{ __('shop::app.products.filter-to') }}</label>
+                                <input type="text" class="price-control" name="price_to" :value="sliderConfig.priceTo" id="price_to" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </figure>
+            </aside>
         </div>
     </script>
 

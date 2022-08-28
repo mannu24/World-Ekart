@@ -41,42 +41,28 @@
 <script type="text/x-template" id="product-gallery-template">
     <ul class="thumb-list col-12 row ltr" type="none">
         <li class="arrow left" @click="scroll('prev')" v-if="thumbs.length > 4">
-            <i class="rango-arrow-left fs24"></i>
+            <i class="fas fa-chevron-left h3"></i>
         </li>
 
-        <carousel-component
-            slides-per-page="4"
-            :id="galleryCarouselId"
-            pagination-enabled="hide"
-            navigation-enabled="hide"
-            add-class="product-gallery"
-            :slides-count="thumbs.length">
+        <carousel-component slides-per-page="4" :id="galleryCarouselId" pagination-enabled="hide" navigation-enabled="hide"
+            add-class="product-gallery" :slides-count="thumbs.length">
 
-            <slide :slot="`slide-${index}`" v-for="(thumb, index) in thumbs">
-                <li
-                    @mouseover="changeImage({
-                        largeImageUrl: thumb.large_image_url,
-                        originalImageUrl: thumb.original_image_url,
-                        currentType: thumb.type
-                    })"
-                    :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr5'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`"
-                    >
-
+            <slide :slot="`slide-${index}`" :key="index" v-for="(thumb, index) in thumbs">
+                <li @mouseover="changeImage({ largeImageUrl: thumb.large_image_url, originalImageUrl: thumb.original_image_url, currentType: thumb.type})"
+                    :class="`thumb-frame ${index + 1 == 4 ? '' : 'mr-1'} ${thumb.large_image_url == currentLargeImageUrl ? 'active' : ''}`">
                     <video v-if="thumb.type == 'video'" width="110" height="110" controls>
                         <source :src="thumb.small_image_url" type="video/mp4">
                         {{ __('admin::app.catalog.products.not-support-video') }}
                     </video>
-
-                    <div v-else
-                        class="bg-image"
-                        :style="`background-image: url(${thumb.small_image_url})`">
+                    <div v-else class="bg-image" :style="`background-image: url(${thumb.small_image_url})`">
                     </div>
                 </li>
             </slide>
+
         </carousel-component>
 
         <li class="arrow right" @click="scroll('next')" v-if="thumbs.length > 4">
-            <i class="rango-arrow-right fs24"></i>
+            <i class="fas fa-chevron-right h3"></i>
         </li>
     </ul>
 </script>

@@ -741,14 +741,25 @@ abstract class AbstractType
      *
      * @return string
      */
-    public function getPriceHtml()
-    {
+    // public function getPriceHtml()
+    // {
+    //     if ($this->haveSpecialPrice()) {
+    //         $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
+    //         . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
+    //         . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</span>';
+    //     } else {
+    //         $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
+    //     }
+
+    //     return $html;
+    // }
+
+    public function getPriceHtml() {
+
         if ($this->haveSpecialPrice()) {
-            $html = '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
-            . '<span class="regular-price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>'
-            . '<span class="special-price">' . core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</span>';
+            $html = '<h4 class="ps-product__price sale"><del class="mr-2">' . core()->currency($this->evaluatePrice($this->product->price)) . '</del>'. core()->currency($this->evaluatePrice($this->getSpecialPrice())) . '</h4>';
         } else {
-            $html = '<span>' . core()->currency($this->evaluatePrice($this->product->price)) . '</span>';
+            $html = '<h4 class="ps-product__price">' . core()->currency($this->evaluatePrice($this->product->price)) . '</h4>';
         }
 
         return $html;

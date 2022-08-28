@@ -3,15 +3,15 @@
 <div class="container">
 <ul class="breadcrumb">
 <li><a href="http://localhost:8000/">Home</a></li>
-<li>Become a Vendor</li>
+<li>Become a Seller</li>
 </ul>
 </div>
 </div>
-<div class="ps-vendor-banner bg--cover" style="background-image: url('http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg');">
+<div class="ps-vendor-banner bg--cover" style="background-image: url('http://localhost:8000/themes/ekart/assets/images/bg/vendor.jpg');">
 <div class="ps-vendor-banner">
 <div class="container">
 <h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>
-<a class="ps-btn ps-btn--lg" href="#">Start Selling</a></div>
+<a class="ps-btn ps-btn--lg" href="http://localhost:8000/seller-registration">Start Selling</a></div>
 </div>
 </div>
 <div class="ps-section--vendor ps-vendor-about">
@@ -24,18 +24,18 @@
 <div class="row">
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
 <div class="ps-block--icon-box-2">
-<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/martfury/assets/images/icons/vendor-1.png" alt="martfury" /></div>
+<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-1.png" alt="ekart" /></div>
 <div class="ps-block__content">
 <h4>Low Fees</h4>
 <div class="ps-block__desc" data-mh="about-desc">
-<p>It doesn&rsquo;t take much to list your items and once you make a sale, Martfury&rsquo;s transaction fee is just 2.5%.</p>
+<p>It doesn&rsquo;t take much to list your items and once you make a sale, Wolrd Ekart&rsquo;s transaction fee is just 2.5%.</p>
 </div>
 <a href="#">Learn more</a></div>
 </div>
 </div>
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
 <div class="ps-block--icon-box-2">
-<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/martfury/assets/images/icons/vendor-2.png" alt="martfury" /></div>
+<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-2.png" alt="ekart" /></div>
 <div class="ps-block__content">
 <h4>Powerful Tools</h4>
 <div class="ps-block__desc" data-mh="about-desc">
@@ -46,7 +46,7 @@
 </div>
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
 <div class="ps-block--icon-box-2">
-<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/martfury/assets/images/icons/vendor-3.png" alt="martfury" /></div>
+<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-3.png" alt="ekart" /></div>
 <div class="ps-block__content">
 <h4>Support 24/7</h4>
 <div class="ps-block__desc" data-mh="about-desc">
@@ -63,7 +63,7 @@
 <div class="container">
 <div class="ps-section__header">
 <p>How it works</p>
-<h4>Easy to start selling online on Martfury just 4 simple steps</h4>
+<h4>Easy to start selling online on Wolrd Ekart just 4 simple steps</h4>
 </div>
 <div class="ps-section__content">
 <div class="ps-block--vendor-milestone">
@@ -71,10 +71,10 @@
 <h4>Register and list your products</h4>
 <ul>
 <li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>
-<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>
+<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/martfury/assets/images/vendor/milestone-1.png" alt="martfury" /></div>
+<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-1.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>1</span></div>
 </div>
 <div class="ps-block--vendor-milestone reverse">
@@ -82,10 +82,10 @@
 <h4>Receive orders and sell your product</h4>
 <ul>
 <li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>
-<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>
+<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/martfury/assets/images/vendor/milestone-2.png" alt="martfury" /></div>
+<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-2.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>2</span></div>
 </div>
 <div class="ps-block--vendor-milestone">
@@ -93,10 +93,10 @@
 <h4>Package and ship with ease</h4>
 <ul>
 <li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>
-<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>
+<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/martfury/assets/images/vendor/milestone-3.png" alt="martfury" /></div>
+<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-3.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>3</span></div>
 </div>
 <div class="ps-block--vendor-milestone reverse">
@@ -104,10 +104,10 @@
 <h4>Package and ship with ease</h4>
 <ul>
 <li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>
-<li>Our Martfury Advisors will help you at every step and fully assist you in taking your business online</li>
+<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/martfury/assets/images/vendor/milestone-4.png" alt="martfury" /></div>
+<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-4.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>4</span></div>
 </div>
 </div>
@@ -139,9 +139,9 @@
 </ul>
 </figure>
 </div>
-<div class="ps-section__highlight"><img src="http://localhost:8000/themes/martfury/assets/images/icons/vendor-4.png" alt="martfury" />
+<div class="ps-section__highlight"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-4.png" alt="ekart" />
 <figure>
-<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Martfury will be deposited into your PayPal account.</p>
+<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>
 </figure>
 </div>
 <div class="ps-section__footer">
@@ -163,7 +163,7 @@
 <div data-index="-2" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/2.png" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Anabella Kleva<span>Boss at TocoToco</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -174,7 +174,7 @@
 <div data-index="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/3.jpg" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -185,7 +185,7 @@
 <div data-index="0" class="slick-slide slick-active slick-current" aria-hidden="false" style="outline: none; width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/1.jpg" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/1.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -196,7 +196,7 @@
 <div data-index="1" class="slick-slide slick-active" aria-hidden="false" style="outline: none; width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/2.png" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Anabella Kleva<span>Boss at TocoToco</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -207,7 +207,7 @@
 <div data-index="2" class="slick-slide" aria-hidden="true" style="outline: none; width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/3.jpg" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -218,7 +218,7 @@
 <div data-index="3" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/1.jpg" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/1.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -229,7 +229,7 @@
 <div data-index="4" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/2.png" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Anabella Kleva<span>Boss at TocoToco</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -240,7 +240,7 @@
 <div data-index="5" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/martfury/assets/images/users/3.jpg" alt="martfury" /></div>
+<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -258,26 +258,26 @@
 <div class="container">
 <div class="ps-section__header">
 <p>FREQUENTLY ASKED QUESTIONS</p>
-<h4>Here are some common questions about selling on Martfury</h4>
+<h4>Here are some common questions about selling on Wolrd Ekart</h4>
 </div>
 <div class="ps-section__content">
 <div class="row">
 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ">
 <figure>
-<figcaption>How do fees work on Martfury?</figcaption>
-<p>Joining and starting a shop on Martfury is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>
+<figcaption>How do fees work on Wolrd Ekart?</figcaption>
+<p>Joining and starting a shop on Wolrd Ekart is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>
 <p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>
 <p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>
 </figure>
 <figure>
 <figcaption>What do I need to do to create a shop?</figcaption>
-<p>It&rsquo;s easy to set up a shop on Martfury. Create an Martfury account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Martfuryfees).</p>
+<p>It&rsquo;s easy to set up a shop on Wolrd Ekart. Create an Wolrd Ekart account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Wolrd Ekartfees).</p>
 </figure>
 </div>
 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 ">
 <figure>
 <figcaption>How do I get paid?</figcaption>
-<p>If you accept payments with PayPal, funds from PayPal sales on Martfury will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>
+<p>If you accept payments with PayPal, funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>
 <p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>
 <p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>
 </figure>
@@ -286,9 +286,9 @@
 <p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>
 </figure>
 <figure>
-<figcaption>What can I sell on Martfury?</figcaption>
+<figcaption>What can I sell on Wolrd Ekart?</figcaption>
 </figure>
-<p>Martfury provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>
+<p>Wolrd Ekart provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>
 </div>
 </div>
 </div>
@@ -297,20 +297,4 @@
 <a class="ps-btn" href="#">Contact Us</a></div>
 </div>
 </div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> a3afc2209cc7f508b98ea655af8cc02205df9d36
-<div class="ps-vendor-banner bg--cover" style="background-image: url('http://localhost:8000/themes/martfury/assets/images/bg/vendor.jpg');">
-<div class="ps-vendor-banner">
-<div class="container">
-<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>
-<a class="ps-btn ps-btn--lg" href="#">Start Selling</a></div>
-</div>
-</div>
-<<<<<<< HEAD
-=======
-=======
->>>>>>> ecf387f7f1687544b5dbc1de8ba52fb89f4694b5
->>>>>>> a3afc2209cc7f508b98ea655af8cc02205df9d36
 </div>

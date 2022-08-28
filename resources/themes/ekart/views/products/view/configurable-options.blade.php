@@ -16,84 +16,32 @@
 
     @push('scripts')
         <script type="text/x-template" id="product-options-template">
-            <div class="col-12 attributes" v-if="childAttributes.length > 0">
-                <input
-                    type="hidden"
-                    :value="selectedProductId"
-                    id="selected_configurable_option"
-                    name="selected_configurable_option"/>
-
-                <div
-                    :key="index"
-                    v-for='(attribute, index) in childAttributes'
-                    :class="`attribute control-group ${errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : ''}
-                    `">
+            <div class="col-12 attributes px-0" v-if="childAttributes.length > 0">
+                <input type="hidden" :value="selectedProductId" id="selected_configurable_option" name="selected_configurable_option"/>
+                <div :key="index" v-for='(attribute, index) in childAttributes' :class="`attribute control-group ${errors.has('super_attribute[' + attribute.id + ']') ? 'has-error' : ''}`">
                     <label class="required">@{{ attribute.label }}</label>
-
-                    <span
-                        class="custom-form"
-                        v-if="
-                            ! attribute.swatch_type
-                            || attribute.swatch_type == ''
-                            || attribute.swatch_type == 'dropdown'
-                        ">
-
-                        <select
-                            v-validate="'required'"
-                            class="control styled-select"
-                            :disabled="attribute.disabled"
-                            :id="['attribute_' + attribute.id]"
-                            :name="['super_attribute[' + attribute.id + ']']"
-                            @change="configure(attribute, $event.target.value)"
-                            :data-vv-as="'&quot;' + attribute.label + '&quot;'">
-
-                            <option
-                                :value="option.id"
-                                v-for='(option, index) in attribute.options'
-                                :selected="index == attribute.selectedIndex">
-                                @{{ option.label }}
+                    <span class="custom-form" v-if="! attribute.swatch_type || attribute.swatch_type == '' || attribute.swatch_type == 'dropdown'">
+                        <select v-validate="'required'" class="form-control w-auto styled-select" :disabled="attribute.disabled" :id="['attribute_' + attribute.id]" :name="['super_attribute[' + attribute.id + ']']" @change="configure(attribute, $event.target.value)" :data-vv-as="'&quot;' + attribute.label + '&quot;'">
+                            <option :value="option.id" v-for='(option, index) in attribute.options' :selected="index == attribute.selectedIndex"> @{{ option.label }}
                             </option>
-
                         </select>
-
-                        <div class="select-icon-container">
-                            <span class="select-icon rango-arrow-down"></span>
-                        </div>
                     </span>
-
                     <span class="swatch-container" v-else>
-                        <label class="swatch"
-                            v-for='(option, index) in attribute.options'
-                            v-if="option.id"
-                            :data-id="option.id"
-                            :for="['attribute_' + attribute.id + '_option_' + option.id]">
-
-                            <input
-                                type="radio"
-                                :value="option.id"
-                                v-validate="'required'"
-                                :name="['super_attribute[' + attribute.id + ']']"
-                                :id="['attribute_' + attribute.id + '_option_' + option.id]"
-                                :data-vv-as="'&quot;' + attribute.label + '&quot;'"
-                                @change="configure(attribute, $event.target.value)"
-                                :checked="index == attribute.selectedIndex">
-
-                            <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
-
-                            <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
-
-                            <span v-if="attribute.swatch_type == 'text'">
-                                @{{ option.label }}
-                            </span>
-
+                        <label class="swatch" v-for='(option, index) in attribute.options' v-if="option.id" :data-id="option.id" :for="['attribute_' + attribute.id + '_option_' + option.id]">
+                            <label class="ant-radio-wrapper">
+                                <span class="ant-radio">
+                                    <input type="radio" class="ant-radio-input" :value="option.id" v-validate="'required'" :name="['super_attribute[' + attribute.id + ']']" :id="['attribute_' + attribute.id + '_option_' + option.id]" :data-vv-as="'&quot;' + attribute.label + '&quot;'" @change="configure(attribute, $event.target.value)" :checked="index == attribute.selectedIndex">
+                                    <span class="ant-radio-inner"></span>
+                                </span>
+                                <span v-if="attribute.swatch_type == 'color'" :style="{ background: option.swatch_value }"></span>
+                                <img v-if="attribute.swatch_type == 'image'" :src="option.swatch_value" :title="option.label" alt="" />
+                                <span v-if="attribute.swatch_type == 'text'">@{{ option.label }}</span>
+                            </label>
                         </label>
-
                         <span v-if="! attribute.options.length" class="no-options">{{ __('shop::app.products.select-above-options') }}</span>
                     </span>
-
                     <span class="control-error" v-if="errors.has('super_attribute[' + attribute.id + ']')" v-text="errors.first('super_attribute[' + attribute.id + ']')"></span>
                 </div>
-
             </div>
         </script>
 
@@ -316,7 +264,6 @@
                             let priceLabelElement = document.querySelector('.price-label');
                             let priceElement = document.querySelector('.final-price');
                             let regularPriceElement = document.querySelector('.regular-price');
-
                             if (this.childAttributes.length == selectedOptionCount) {
                                 priceLabelElement.style.display = 'none';
 

@@ -19,11 +19,11 @@ class EventServiceProvider extends ServiceProvider
         });
 
         Event::listen('bagisto.shop.products.view.before', function($viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('sizechart::shop.products.sizechart');
+            // $viewRenderEventManager->addTemplate('sizechart::shop.products.sizechart');
         });
 
         Event::listen('bagisto.shop.products.view.after', function($viewRenderEventManager) {
-            $viewRenderEventManager->addTemplate('sizechart::shop.products.modal');
+            // $viewRenderEventManager->addTemplate('sizechart::shop.products.modal');
         });
         
     }

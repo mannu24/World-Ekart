@@ -52,93 +52,79 @@
 @endphp
 
 @section('content-wrapper')
+    <div class="ps-breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li>{{ $category->name }}</li>
+            </ul>
+        </div>
+    </div>
     <category-component></category-component>
+    {{-- {{ dd(get_defined_vars()['__data']) }} --}}
 @stop
 
 @push('scripts')
     <script type="text/x-template" id="category-template">
-        <section class="row col-12 velocity-divide-page category-page-wrapper">
-            {!! view_render_event('bagisto.shop.productOrCategory.index.before', ['category' => $category]) !!}
-
-            @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
-                @include ('shop::products.list.layered-navigation')
-            @endif
-
-            <div class="category-container right">
-                <div class="row remove-padding-margin">
-                    <div class="pl0 col-12">
-                        <h2 class="fw6 mb10">{{ $category->name }}</h2>
-
-                        @if ($isDescriptionDisplayMode)
-                            @if ($category->description)
-                                <div class="category-description">
-                                    {!! $category->description !!}
+        <div class="container">
+            <div class="ps-layout--shop ps-shop--category">
+                @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+                    @include ('shop::products.list.layered-navigation')
+                @endif
+                <div class="ps-layout__right">
+                    <h3 class="ps-shop__heading">{{ $category->name }}</h3>
+                    @if ($isDescriptionDisplayMode)
+                        @if ($category->description)
+                            <div class="category-description">
+                                {!! $category->description !!}
+                            </div>
+                        @endif
+                    @endif
+                    @if (!is_null($category->image))
+                        <img class="logo" src="{{ $category->image_url }}" alt="" width="20" height="20" />
+                    @endif
+                    <div class="ps-shopping">
+                        @if ($isProductsDisplayMode)
+                            <template v-if="products.length >= 0">
+                                <div class="ps-shopping__header">
+                                    <div class="ps-shopping__actions flex-column flex-md-row">
+                                        <p class="w-100"><strong class="mr-2" v-html="products.length"></strong>Products found</p>
+                                        @include ('shop::products.list.toolbar')
+                                    </div>
                                 </div>
-                            @endif
+                            </template>
+                            <div class="ps-shopping__content" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
+                                <shimmer-component v-if="isLoading" shimmer-count="3"></shimmer-component>
+                                <template v-else-if="products.length > 0">
+                                    @if ($toolbarHelper->getCurrentMode() == 'grid')
+                                        <div class="ps-shop-items">
+                                            <div class="row">
+                                                <product-card :key="index" :product="product" v-for="(product, index) in products">
+                                                </product-card>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <product-card list=true :key="index" :product="product" v-for="(product, index) in products">
+                                        </product-card>
+                                    @endif
+
+                                    {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.before', ['category' => $category]) !!}
+
+                                    <div class="bottom-toolbar" v-html="paginationHTML"></div>
+
+                                    {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.after', ['category' => $category]) !!}
+                                </template>
+                                <div class="product-list empty pl-1" v-else>
+                                    <h2>{{ __('shop::app.products.whoops') }}</h2>
+                                    <p>{{ __('shop::app.products.empty') }}</p>
+                                </div>
+                            </div>
                         @endif
                     </div>
-
-                    <div class="col-12 no-padding">
-                        <div class="hero-image">
-                            @if (!is_null($category->image))
-                                <img class="logo" src="{{ $category->image_url }}" alt="" width="20" height="20" />
-                            @endif
-                        </div>
-                    </div>
                 </div>
-
-                @if ($isProductsDisplayMode)
-                    <div class="filters-container">
-                        <template v-if="products.length >= 0">
-                            @include ('shop::products.list.toolbar')
-                        </template>
-                    </div>
-
-                    <div
-                        class="category-block"
-                        @if ($category->display_mode == 'description_only')
-                            style="width: 100%"
-                        @endif>
-
-                        <shimmer-component v-if="isLoading" shimmer-count="4"></shimmer-component>
-
-                        <template v-else-if="products.length > 0">
-                            @if ($toolbarHelper->getCurrentMode() == 'grid')
-                                <div class="row col-12 remove-padding-margin">
-                                    <product-card
-                                        :key="index"
-                                        :product="product"
-                                        v-for="(product, index) in products">
-                                    </product-card>
-                                </div>
-                            @else
-                                <div class="product-list">
-                                    <product-card
-                                        list=true
-                                        :key="index"
-                                        :product="product"
-                                        v-for="(product, index) in products">
-                                    </product-card>
-                                </div>
-                            @endif
-
-                            {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.before', ['category' => $category]) !!}
-
-                            <div class="bottom-toolbar" v-html="paginationHTML"></div>
-
-                            {!! view_render_event('bagisto.shop.productOrCategory.index.pagination.after', ['category' => $category]) !!}
-                        </template>
-
-                        <div class="product-list empty" v-else>
-                            <h2>{{ __('shop::app.products.whoops') }}</h2>
-                            <p>{{ __('shop::app.products.empty') }}</p>
-                        </div>
-                    </div>
-                @endif
             </div>
-
-            {!! view_render_event('bagisto.shop.productOrCategory.index.after', ['category' => $category]) !!}
-        </section>
+        </div>
     </script>
 
     <script>

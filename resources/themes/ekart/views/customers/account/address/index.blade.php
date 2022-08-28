@@ -38,12 +38,12 @@
                                             </ul>
                                             <div class="control-links mt-20">
                                                 <span>
-                                                    <a href="{{ route('customer.address.edit', $address->id) }}" class="btn btn-warning btn-lg">
+                                                    <a href="{{ route('customer.address.edit', $address->id) }}" class="ps-btn btn-small">
                                                         {{ __('shop::app.customer.account.address.index.edit') }}
                                                     </a>
                                                 </span>
                                                 <span>
-                                                    <a href="javascript:void(0);" class="btn text-white btn-danger btn-lg" onclick="deleteAddress('{{ __('shop::app.customer.account.address.index.confirm-delete') }}')">
+                                                    <a href="javascript:void(0);" class="ps-btn btn-danger btn-small" onclick="deleteAddress('{{ __('shop::app.customer.account.address.index.confirm-delete') }}')">
                                                         {{ __('shop::app.customer.account.address.index.delete') }}
                                                     </a>
                                                     <form id="deleteAddressForm" action="{{ route('address.delete', $address->id) }}" method="post">

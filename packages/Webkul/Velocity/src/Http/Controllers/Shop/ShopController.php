@@ -39,6 +39,7 @@ class ShopController extends Controller
                     'name'         => $product->name,
                     'urlKey'       => $product->url_key,
                     'priceHTML'    => view('shop::products.price', ['product' => $product])->render(),
+                    // 'price'        => core()->currency($this->evaluatePrice($product->base_price)),
                     'totalReviews' => $productReviewHelper->getTotalReviews($product),
                     'rating'       => ceil($productReviewHelper->getAverageRating($product)),
                     'image'        => $galleryImages['small_image_url'],

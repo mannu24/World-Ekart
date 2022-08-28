@@ -127,6 +127,9 @@ vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('mobile-header', function
 vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('sidebar-header', function () {
   return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/header-sidebar */ "./src/Resources/assets/js/UI/components/header-sidebar.vue"));
 });
+vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('mega-menu', function () {
+  return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/mega-menu */ "./src/Resources/assets/js/UI/components/mega-menu.vue"));
+});
 vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('right-side-header', function () {
   return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/header-right-side */ "./src/Resources/assets/js/UI/components/header-right-side.vue"));
 });

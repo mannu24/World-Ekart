@@ -9,7 +9,7 @@
                     <div class="control-error">@{{ error_message }}</div>
                 </div>
                 <div class="form-group">
-                    <button class="ps-btn ps-btn--outline" :disabled="disable_button">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
+                    <button class="ps-btn btn-small ps-btn--outline" :disabled="disable_button">{{ __('shop::app.checkout.onepage.apply-coupon') }}</button>
                 </div>
             </figure>
             <div class="applied-coupon-details" v-if="applied_coupon">

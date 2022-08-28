@@ -2,8 +2,8 @@
     <div>
         <div class="tabs">
             <ul>
-                <li v-for="tab in tabs" :class="{ 'active': tab.isActive }" @click="selectTab(tab)">
-                    <a>{{ tab.name }}</a>
+                <li v-for="(tab,index) in tabs" :key="index" :class="{ 'active': tab.isActive }" @click="selectTab(tab)">
+                    <a :class="{ 'big-tab' : big}">{{ tab.name }}</a>
                 </li>
             </ul>
         </div>
@@ -13,6 +13,17 @@
         </div>
     </div>
 </template>
+<style scoped>
+    .big-tab {
+        color: #888 !important;
+        font-size: 20px!important;
+        font-weight: 600;
+        text-shadow: 0 0 .25px currentcolor;
+    }
+    .active .big-tab {
+        color: #000 !important;
+    }
+</style>
 
 <script>
     export default {
@@ -21,6 +32,7 @@
                 tabs: []
             }
         },
+        props: ['big'],
 
         created() {
             this.tabs = this.$children;
