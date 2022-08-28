@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2022 at 12:20 PM
+-- Generation Time: Aug 28, 2022 at 01:17 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -172,7 +172,9 @@ INSERT INTO `attributes` (`id`, `code`, `admin_name`, `type`, `validation`, `pos
 (24, 'size', 'Size', 'select', NULL, 27, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (25, 'brand', 'Brand', 'select', '', 28, 0, 0, 0, 0, 1, 0, 1, 1, '2022-08-10 07:08:12', '2022-08-13 14:37:41', 'dropdown', 1, 0, 0),
 (26, 'guest_checkout', 'Guest Checkout', 'boolean', NULL, 8, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(27, 'product_number', 'Product Number', 'text', NULL, 2, 0, 1, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0);
+(27, 'product_number', 'Product Number', 'text', NULL, 2, 0, 1, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
+(28, 'RAM', 'RAM', 'select', '', NULL, 1, 0, 0, 0, 1, 1, 1, 1, '2022-08-27 17:44:26', '2022-08-27 19:36:07', 'text', 1, 0, 0),
+(29, 'random', 'Admin', 'boolean', '', NULL, 1, 1, 0, 0, 0, 1, 1, 1, '2022-08-27 18:59:55', '2022-08-27 18:59:55', NULL, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +195,8 @@ CREATE TABLE `attribute_families` (
 --
 
 INSERT INTO `attribute_families` (`id`, `code`, `name`, `status`, `is_user_defined`) VALUES
-(1, 'default', 'Default', 0, 1);
+(1, 'default', 'Default', 0, 1),
+(2, 'mobile', 'MOBILE PHONE', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -218,7 +221,12 @@ INSERT INTO `attribute_groups` (`id`, `name`, `position`, `is_user_defined`, `at
 (2, 'Description', 2, 0, 1),
 (3, 'Meta Description', 3, 0, 1),
 (4, 'Price', 4, 0, 1),
-(5, 'Shipping', 5, 0, 1);
+(5, 'Shipping', 5, 0, 1),
+(6, 'General', 1, 0, 2),
+(7, 'Description', 2, 0, 2),
+(8, 'Meta Description', 3, 0, 2),
+(9, 'Price', 4, 0, 2),
+(10, 'Shipping', 5, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -238,32 +246,58 @@ CREATE TABLE `attribute_group_mappings` (
 
 INSERT INTO `attribute_group_mappings` (`attribute_id`, `attribute_group_id`, `position`) VALUES
 (1, 1, 1),
+(1, 6, 1),
 (2, 1, 3),
+(2, 6, 3),
 (3, 1, 4),
+(3, 6, 4),
 (4, 1, 5),
+(4, 6, 5),
 (5, 1, 6),
+(5, 6, 6),
 (6, 1, 7),
+(6, 6, 7),
 (7, 1, 8),
+(7, 6, 8),
 (8, 1, 10),
+(8, 6, 10),
 (9, 2, 1),
+(9, 7, 1),
 (10, 2, 2),
+(10, 7, 2),
 (11, 4, 1),
+(11, 9, 1),
 (12, 4, 2),
+(12, 9, 2),
 (13, 4, 3),
+(13, 9, 3),
 (14, 4, 4),
+(14, 9, 4),
 (15, 4, 5),
+(15, 9, 5),
 (16, 3, 1),
+(16, 8, 1),
 (17, 3, 2),
+(17, 8, 2),
 (18, 3, 3),
+(18, 8, 3),
 (19, 5, 1),
+(19, 10, 1),
 (20, 5, 2),
+(20, 10, 2),
 (21, 5, 3),
+(21, 10, 3),
 (22, 5, 4),
+(22, 10, 4),
 (23, 1, 11),
 (24, 1, 12),
 (25, 1, 13),
 (26, 1, 9),
-(27, 1, 2);
+(26, 6, 9),
+(27, 1, 2),
+(27, 6, 2),
+(28, 6, 11),
+(29, 6, 12);
 
 -- --------------------------------------------------------
 
@@ -295,7 +329,9 @@ INSERT INTO `attribute_options` (`id`, `admin_name`, `sort_order`, `attribute_id
 (9, 'XL', 4, 24, NULL),
 (10, 'Abibas', 1, 25, NULL),
 (11, 'Puma', 2, 25, NULL),
-(12, 'Nike', 2, 25, NULL);
+(12, 'Nike', 2, 25, NULL),
+(13, '2GB', 1, 28, '#9900ff'),
+(14, '4GB', 2, 28, '#980000');
 
 -- --------------------------------------------------------
 
@@ -338,7 +374,17 @@ INSERT INTO `attribute_option_translations` (`id`, `locale`, `label`, `attribute
 (21, 'fr', '', 12),
 (22, 'nl', '', 12),
 (23, 'tr', '', 12),
-(24, 'es', '', 12);
+(24, 'es', '', 12),
+(25, 'en', '2GB', 13),
+(26, 'fr', '', 13),
+(27, 'nl', '', 13),
+(28, 'tr', '', 13),
+(29, 'es', '', 13),
+(30, 'en', '4GB', 14),
+(31, 'fr', '', 14),
+(32, 'nl', '', 14),
+(33, 'tr', '', 14),
+(34, 'es', '', 14);
 
 -- --------------------------------------------------------
 
@@ -388,7 +434,17 @@ INSERT INTO `attribute_translations` (`id`, `locale`, `name`, `attribute_id`) VA
 (28, 'fr', '', 25),
 (29, 'nl', '', 25),
 (30, 'tr', '', 25),
-(31, 'es', '', 25);
+(31, 'es', '', 25),
+(32, 'en', 'RAM', 28),
+(33, 'fr', '', 28),
+(34, 'nl', '', 28),
+(35, 'tr', '', 28),
+(36, 'es', '', 28),
+(37, 'en', 'Random', 29),
+(38, 'fr', '', 29),
+(39, 'nl', '', 29),
+(40, 'tr', '', 29),
+(41, 'es', '', 29);
 
 -- --------------------------------------------------------
 
@@ -599,7 +655,8 @@ INSERT INTO `cart` (`id`, `customer_email`, `customer_first_name`, `customer_las
 (7, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-19 11:39:21', '2022-08-19 11:39:22', ''),
 (10, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '800.0000', '800.0000', '800.0000', '800.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-20 19:04:17', '2022-08-20 19:04:30', ''),
 (12, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 2, '5.0000', NULL, 'USD', 'USD', 'USD', 'USD', '1650.0000', '1650.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-21 12:06:54', '2022-08-24 19:58:44', ''),
-(13, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '210.0000', '210.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-24 20:00:01', '2022-08-24 20:00:31', '');
+(13, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '210.0000', '210.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-24 20:00:01', '2022-08-24 20:00:31', ''),
+(14, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 1, NULL, 4, 1, '2022-08-27 08:56:32', '2022-08-27 19:37:55', '');
 
 -- --------------------------------------------------------
 
@@ -651,7 +708,10 @@ INSERT INTO `cart_items` (`id`, `quantity`, `sku`, `type`, `name`, `coupon_code`
 (11, 1, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"TUOUpeFEFDKqwVpaiP1MJyRRTQmmQaXM4TrQIOhZ\"}', NULL, 3, 10, NULL, '2022-08-20 19:04:18', '2022-08-20 19:04:30', NULL, ''),
 (15, 3, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '36.0000', '36.0000', '400.0000', '400.0000', '1200.0000', '1200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"SogHAGSqIwg1aQUeu8ffIHPGQks7ykqvs6wYoNJF\"}', NULL, 4, 12, NULL, '2022-08-21 12:06:58', '2022-08-24 19:58:42', NULL, ''),
 (16, 2, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '24.0000', '24.0000', '200.0000', '200.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":2,\"product_id\":\"2\",\"_token\":\"zwSSEN83KcNKGYwzihNMip1GyFxbS205WezdtRIK\"}', NULL, 2, 12, NULL, '2022-08-23 07:43:57', '2022-08-24 19:58:42', NULL, ''),
-(17, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\"}', NULL, 2, 13, NULL, '2022-08-24 20:00:02', '2022-08-24 20:00:30', NULL, '');
+(17, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\"}', NULL, 2, 13, NULL, '2022-08-24 20:00:02', '2022-08-24 20:00:30', NULL, ''),
+(18, 1, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}}}', NULL, 6, 14, NULL, '2022-08-27 08:56:32', '2022-08-27 19:37:55', NULL, ''),
+(19, 0, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', '0.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"product_id\":7,\"parent_id\":6}', 18, 7, 14, NULL, '2022-08-27 08:56:32', '2022-08-27 08:56:32', NULL, NULL),
+(23, 1, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\"}', NULL, 3, 14, NULL, '2022-08-27 19:37:55', '2022-08-27 19:37:55', NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1578,7 +1638,7 @@ CREATE TABLE `channels` (
 --
 
 INSERT INTO `channels` (`id`, `code`, `timezone`, `theme`, `hostname`, `logo`, `favicon`, `is_maintenance_on`, `allowed_ips`, `default_locale_id`, `base_currency_id`, `created_at`, `updated_at`, `root_category_id`) VALUES
-(1, 'default', NULL, 'ekart', 'http://localhost', 'channel/1/qm1ktxmujTHaakC4JjHrfdSeFh9O7IEm1ZLQERzI.webp', 'channel/1/ZUcAA4dbj4TLCzJP6b3KGDvqkpncrSqB17G0u6CE.webp', 0, '', 1, 1, NULL, '2022-08-25 07:55:43', 1);
+(1, 'default', NULL, 'ekart', 'http://localhost', 'channel/1/qm1ktxmujTHaakC4JjHrfdSeFh9O7IEm1ZLQERzI.webp', 'channel/1/ZUcAA4dbj4TLCzJP6b3KGDvqkpncrSqB17G0u6CE.webp', 0, '', 1, 1, NULL, '2022-08-27 20:46:56', 1);
 
 -- --------------------------------------------------------
 
@@ -1670,7 +1730,7 @@ CREATE TABLE `channel_translations` (
 --
 
 INSERT INTO `channel_translations` (`id`, `channel_id`, `locale`, `name`, `description`, `home_page_content`, `footer_content`, `site_name`, `email_address`, `phone_number`, `address`, `facebook_link`, `instagram_link`, `maintenance_mode_text`, `home_seo`, `created_at`, `updated_at`) VALUES
-(1, 1, 'en', 'Default', '', '<p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>', '<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Site Policies</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/privacy-policy\">Privacy Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/terms-conditions\">Term &amp; Condition</a></li>\r\n<li><a href=\"http://localhost:8000/page/return-policy\">Return Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/refund-policy\">Refund Policy</a></li>\r\n</ul>\r\n</aside>\r\n<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Company</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/about-us\">About Us</a></li>\r\n<li><a href=\"http://localhost:8000/contact-us\">Contact Us</a></li>\r\n<li><a href=\"http://localhost:8000/page/become-a-vendor\">Become A Seller</a></li>\r\n<li><a href=\"http://localhost:8000/track-order\">Track Your Order</a></li>\r\n</ul>\r\n</aside>', 'World Ekart', 'ekart@infoo.com', '1234567890', 'Mumbai India.', 'https://facebook.com', 'https://instagram.com', '', '{\"meta_title\":\"World Ekart Store\",\"meta_description\":\"We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.\",\"meta_keywords\":\"ekart, ecommerce, e commerce, e-commerce, world, shopping, marketplace.\"}', NULL, '2022-08-25 10:10:57'),
+(1, 1, 'en', 'Default', '', '<p>@include(\"shop::home.slider\") @include(\"shop::home.featured-products\") @include(\"shop::home.new-products\")</p>', '<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Site Policies</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/privacy-policy\">Privacy Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/terms-conditions\">Term &amp; Condition</a></li>\r\n<li><a href=\"http://localhost:8000/page/return-policy\">Return Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/refund-policy\">Refund Policy</a></li>\r\n</ul>\r\n</aside>\r\n<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Company</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/about-us\">About Us</a></li>\r\n<li><a href=\"http://localhost:8000/contact-us\">Contact Us</a></li>\r\n<li><a href=\"http://localhost:8000/page/become-a-seller\">Become A Seller</a></li>\r\n<li><a href=\"http://localhost:8000/track-order\">Track Your Order</a></li>\r\n</ul>\r\n</aside>', 'World Ekart', 'ekart@infoo.com', '1234567890', 'Mumbai India.', 'https://facebook.com', 'https://instagram.com', '', '{\"meta_title\":\"World Ekart Store\",\"meta_description\":\"We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.\",\"meta_keywords\":\"ekart, ecommerce, e commerce, e-commerce, world, shopping, marketplace.\"}', NULL, '2022-08-28 07:24:10'),
 (2, 1, 'fr', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
 (3, 1, 'nl', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
 (4, 1, 'tr', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
@@ -1760,7 +1820,7 @@ INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_conten
 (10, 'Shipping Policy', 'shipping-policy', '<div class=\"static-container\"><div class=\"mb-5\">Shipping Policy  page content</div></div>', 'Shipping Policy', '', 'shipping, policy', 'en', 10),
 (11, 'Privacy Policy', 'privacy-policy', '<div class=\"ps-page--single static-page\">\r\n<div class=\"ps-breadcrumb\">\r\n<div class=\"container\">\r\n<ul class=\"breadcrumb\">\r\n<li><a href=\"http://localhost:8000/\">Home</a></li>\r\n<li>Privacy Policy</li>\r\n</ul>\r\n</div>\r\n</div>\r\n<div class=\"container-xl\">\r\n<h2 class=\"text-center\">Privacy Policy</h2>\r\n<p>We at World E-Kart, take data privacy and security extremely seriously and work to ensure that we are fully compliant with the various regulations dealing with privacy.<br /><br /></p>\r\n<ol>\r\n<li>For the purpose of this privacy policy, &ldquo;your&rdquo; and &ldquo;user&rdquo; means any person who accesses or uses the services provided by our website (&ldquo;World E-Kart&rdquo;).</li>\r\n<li>In the course of registering for and availing various services we provide from time to time through World E-Kart (&ldquo;Services&rdquo;) you may be required to give certain details, including your your name, address, contact number, email address (&ldquo;User Information&rdquo;). By using the World E-Kart and/or registering yourself you authorize us to contact you via email or phone call or SMS and offer you Services you have opted for, imparting knowledge about products listed on our application, as well as for web aggregation. Additionally, by registration you authorize us to send SMS/email alerts to you for your login details and any other service requirements or advertising messages/emails.</li>\r\n<li>You acknowledge that you are disclosing User Information voluntarily. Prior to the completion of any registration process on World E-Kart / or prior to availing of any Services offered on our application if you wish not to disclose any User Information you may refrain from doing so; however if you don&rsquo;t provide information that is requested, it is possible that the registration process would be incomplete and/or you may not be able to avail certain of our Services.</li>\r\n<li>We are committed to protecting the privacy and confidentiality of all User Information that you may share as a user of our application. In furtherance of the confidentiality with which we treat User Information we have put in place appropriate physical, electronic, and managerial procedures to safeguard and secure the information we collect from you. To protect your privacy and security, we will also take reasonable steps to verify your identity before granting access or making corrections. We may use third-party advertising companies and/or ad agencies to serve ads when you visit our application. These companies may use information (excluding User Information) about your visits to the application and other Web sites in order to provide advertisements on the application and other sites about goods and services that may be of interest to you. There might be affiliates or other sites linked to our application and information that you provide to those sites are not our property. The affiliated sites may have different privacy practices and we encourage you to read them.</li>\r\n<li>Additionally, when you use the Site, we collect certain non-personal identifiable information through technology and tools, including cookies, etc. We aggregate and analyze this information in order to learn more about how our application is used, to improve our World E-Kart, and to generally promote the World E-Kart and our Services. We may engage the services of a third party for the purposes of collection of such information.</li>\r\n<li>We will not sell or rent User Information to anyone other than as specifically noted. We will share User Information if we have your consent or deemed consent to do so or if we are compelled by law (including court orders) to do so or as specified in the Terms of Use.</li>\r\n<li>Notwithstanding anything mentioned above, we reserve the right to contact you via any mechanisms, not limited to email, SMS, or phone calls, to solicit feedback of your experience and to provide any additional services that you would be eligible for, either as a registered user or as a visitor. We are not liable for any damages occurring to you as part of feedback solicitation and additional service provision.</li>\r\n<li>The User Information is being collected by the Company with its address at at Plot no 1573, 2nd Floor, Sector &ndash; 5, Vasundhara, Ghaziabad, UP-201012, and the Company will delete any User Information upon the User withdrawing the consent in writing, however, upon the withdrawal of the consent by the User, the Company may at its option not provide any services for which the Information was sought and the User shall not claim deficiency of services on the basis of such non provision of goods and services.</li>\r\n<li>We reserve the right to amend this policy from time to time, at our discretion. Any updates will be posted on the application/ and your use of World E-Kart / after such amendment shall constitute your agreement to abide by the amended terms. If you have questions or concerns about our Privacy Policy or any other policies please write to the grievance officer, Saroj Kumar at Plot no 1573, 2nd Floor, Sector &ndash; 5, Vasundhara, Ghaziabad, UP-201012 or through an email signed with electronic signature sent to sales@worldekart.com</li>\r\n</ol>\r\n</div>\r\n</div>', 'Privacy Policy', '', 'privacy, policy', 'en', 11);
 INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_content`, `meta_title`, `meta_description`, `meta_keywords`, `locale`, `cms_page_id`) VALUES
-(12, 'Become a Vendor', 'become-a-vendor', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Vendor</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/ekart/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"{{ route(\'shop.vendor.index\') }}\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Wolrd Ekart&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Wolrd Ekart just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-4.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-4.png\" alt=\"ekart\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Wolrd Ekart</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Wolrd Ekart?</figcaption>\n<p>Joining and starting a shop on Wolrd Ekart is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Wolrd Ekart. Create an Wolrd Ekart account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Wolrd Ekartfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Wolrd Ekart?</figcaption>\n</figure>\n<p>Wolrd Ekart provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n</div>', 'become-a-vendor', '', '', 'en', 12);
+(12, 'Become a Seller', 'become-a-seller', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Seller</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/ekart/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"http://localhost:8000/seller-registration\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Wolrd Ekart&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Wolrd Ekart just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-4.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-4.png\" alt=\"ekart\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Wolrd Ekart</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Wolrd Ekart?</figcaption>\n<p>Joining and starting a shop on Wolrd Ekart is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Wolrd Ekart. Create an Wolrd Ekart account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Wolrd Ekartfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Wolrd Ekart?</figcaption>\n</figure>\n<p>Wolrd Ekart provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n</div>', 'become-a-seller', '', '', 'en', 12);
 
 -- --------------------------------------------------------
 
@@ -1937,7 +1997,11 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (127, 'catalog.products.social_share.share_message', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
 (128, 'customer.settings.wishlist.share', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
 (129, 'customer.settings.newsletter.subscription', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
-(130, 'customer.settings.email.verification', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11');
+(130, 'customer.settings.email.verification', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
+(131, 'taxes.catalogue.pricing.tax_inclusive', '1', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
+(132, 'taxes.catalogue.default-location-calculation.country', 'IN', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
+(133, 'taxes.catalogue.default-location-calculation.state', 'JK', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
+(134, 'taxes.catalogue.default-location-calculation.post_code', '180010', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16');
 
 -- --------------------------------------------------------
 
@@ -7150,11 +7214,16 @@ INSERT INTO `products` (`id`, `user_id`, `sku`, `type`, `created_at`, `updated_a
 (3, 1, 'temp41', 'simple', '2022-08-10 07:16:09', '2022-08-21 19:01:13', NULL, 1, NULL),
 (4, 1, 'temporary-sku-6a87ba', 'simple', '2022-08-12 03:08:32', '2022-08-12 05:23:29', NULL, 1, NULL),
 (5, 1, 'test-2', 'simple', '2022-08-12 06:39:28', '2022-08-12 06:39:28', NULL, 1, NULL),
-(6, 1, 'test-3', 'configurable', '2022-08-13 14:41:12', '2022-08-13 14:41:12', NULL, 1, NULL),
+(6, 1, 'test-3', 'configurable', '2022-08-13 14:41:12', '2022-08-27 07:53:24', NULL, 1, '{\"default_variant_id\":\"7\"}'),
 (7, NULL, 'test-3-variant-1-6', 'simple', '2022-08-13 14:41:12', '2022-08-13 14:41:12', 6, 1, NULL),
 (8, NULL, 'test-3-variant-2-6', 'simple', '2022-08-13 14:41:12', '2022-08-13 14:41:12', 6, 1, NULL),
 (9, NULL, 'test-3-variant-3-6', 'simple', '2022-08-13 14:41:13', '2022-08-13 14:41:13', 6, 1, NULL),
-(10, NULL, 'test-3-variant-4-6', 'simple', '2022-08-13 14:41:13', '2022-08-13 14:41:13', 6, 1, NULL);
+(10, NULL, 'test-3-variant-4-6', 'simple', '2022-08-13 14:41:13', '2022-08-13 14:41:13', 6, 1, NULL),
+(11, 1, 'abcd12', 'downloadable', '2022-08-27 17:12:25', '2022-08-27 17:12:25', NULL, 1, NULL),
+(12, 1, 'NOTE-20', 'configurable', '2022-08-27 17:46:57', '2022-08-27 17:49:16', NULL, 2, '{\"default_variant_id\":\"14\"}'),
+(13, NULL, 'NOTE-20-variant-13', 'simple', '2022-08-27 17:46:57', '2022-08-27 17:46:57', 12, 2, NULL),
+(14, 1, 'NOTE-20-variant-14', 'simple', '2022-08-27 17:46:57', '2022-08-27 17:48:53', 12, 2, NULL),
+(18, 1, '12', 'grouped', '2022-08-27 19:32:05', '2022-08-27 19:32:05', NULL, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -7251,10 +7320,10 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (67, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 3, 20),
 (68, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 3, 21),
 (69, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 3, 22),
-(70, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 4, 9),
-(71, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 4, 10),
+(70, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 4, 9),
+(71, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL, NULL, NULL, NULL, NULL, NULL, 4, 10),
 (72, NULL, NULL, 'temporary-sku-6a87ba', NULL, NULL, NULL, NULL, NULL, NULL, 4, 1),
-(73, 'en', 'default', 'Copy of cbv (babed1)', NULL, NULL, NULL, NULL, NULL, NULL, 4, 2),
+(73, 'en', 'default', 'Prodcut With Price', NULL, NULL, NULL, NULL, NULL, NULL, 4, 2),
 (74, NULL, NULL, 'copy-of-temp3-babed1', NULL, NULL, NULL, NULL, NULL, NULL, 4, 3),
 (75, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 5),
 (76, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 6),
@@ -7269,8 +7338,8 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (85, NULL, NULL, NULL, NULL, NULL, '400.0000', NULL, NULL, NULL, 4, 11),
 (86, NULL, 'default', NULL, NULL, NULL, '10.0000', NULL, NULL, NULL, 4, 12),
 (87, NULL, NULL, NULL, NULL, NULL, '80.0000', NULL, NULL, NULL, 4, 13),
-(88, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2019-05-02', NULL, 4, 14),
-(89, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2020-05-20', NULL, 4, 15),
+(88, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2022-08-27', NULL, 4, 14),
+(89, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2022-10-30', NULL, 4, 15),
 (90, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 4, 20),
 (91, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 4, 21),
 (92, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 4, 22),
@@ -7381,7 +7450,7 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (549, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 16),
 (550, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 17),
 (551, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 18),
-(552, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 4, 25),
+(552, NULL, NULL, NULL, NULL, 11, NULL, NULL, NULL, NULL, 4, 25),
 (553, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 3, 4),
 (554, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 3, 25),
 (555, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 3, 27),
@@ -7393,7 +7462,120 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (561, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 1, 4),
 (562, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 1, 25),
 (563, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 27),
-(564, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 19);
+(564, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 19),
+(565, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 11, 9),
+(566, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL, NULL, NULL, NULL, NULL, NULL, 11, 10),
+(567, NULL, NULL, 'abcd12', NULL, NULL, NULL, NULL, NULL, NULL, 11, 1),
+(568, 'en', 'default', 'New Downloadable Product', NULL, NULL, NULL, NULL, NULL, NULL, 11, 2),
+(569, NULL, NULL, 'new-downloadable-product', NULL, NULL, NULL, NULL, NULL, NULL, 11, 3),
+(570, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 11, 4),
+(571, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 5),
+(572, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 6),
+(573, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 7),
+(574, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 8),
+(575, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, 11, 23),
+(576, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 11, 24),
+(577, NULL, NULL, NULL, NULL, 11, NULL, NULL, NULL, NULL, 11, 25),
+(578, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 11, 26),
+(579, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, 11, 27),
+(580, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 11, 16),
+(581, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 11, 17),
+(582, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 11, 18),
+(583, NULL, NULL, NULL, NULL, NULL, '2000.0000', NULL, NULL, NULL, 11, 11),
+(584, NULL, 'default', NULL, NULL, NULL, '100.0000', NULL, NULL, NULL, 11, 12),
+(585, NULL, NULL, NULL, NULL, NULL, '1500.0000', NULL, NULL, NULL, 11, 13),
+(586, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 14),
+(587, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 15),
+(588, NULL, NULL, 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 1),
+(589, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
+(590, 'en', 'default', 'Note 20 2GB', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
+(591, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
+(592, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
+(593, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
+(594, NULL, NULL, 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 3),
+(595, 'nl', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
+(596, 'en', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
+(597, 'es', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
+(598, 'fr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
+(599, 'tr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
+(600, 'nl', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
+(601, 'en', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
+(602, 'es', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
+(603, 'fr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
+(604, 'tr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
+(605, NULL, NULL, NULL, NULL, NULL, '80000.0000', NULL, NULL, NULL, 13, 11),
+(606, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 13, 22),
+(607, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 13, 8),
+(608, NULL, NULL, NULL, NULL, 13, NULL, NULL, NULL, NULL, 13, 28),
+(609, NULL, NULL, 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 1),
+(610, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
+(611, 'en', 'default', 'Note 20 4GB', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
+(612, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
+(613, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
+(614, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
+(615, NULL, NULL, 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 3),
+(616, 'nl', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
+(617, 'en', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
+(618, 'es', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
+(619, 'fr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
+(620, 'tr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
+(621, 'nl', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
+(622, 'en', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
+(623, 'es', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
+(624, 'fr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
+(625, 'tr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
+(626, NULL, NULL, NULL, NULL, NULL, '100000.0000', NULL, NULL, NULL, 14, 11),
+(627, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 14, 22),
+(628, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 14, 8),
+(629, NULL, NULL, NULL, NULL, 14, NULL, NULL, NULL, NULL, 14, 28),
+(630, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 12, 9),
+(631, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL, NULL, NULL, NULL, NULL, NULL, 12, 10),
+(632, NULL, NULL, 'NOTE-20', NULL, NULL, NULL, NULL, NULL, NULL, 12, 1),
+(633, 'en', 'default', 'Note 20', NULL, NULL, NULL, NULL, NULL, NULL, 12, 2),
+(634, NULL, NULL, 'note-20', NULL, NULL, NULL, NULL, NULL, NULL, 12, 3),
+(635, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 12, 4),
+(636, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 5),
+(637, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 6),
+(638, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 7),
+(639, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 8),
+(640, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 12, 26),
+(641, NULL, NULL, '123456789343', NULL, NULL, NULL, NULL, NULL, NULL, 12, 27),
+(642, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 12, 16),
+(643, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 12, 17),
+(644, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 12, 18),
+(645, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 14, 4),
+(646, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 5),
+(647, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 6),
+(648, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 7),
+(649, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 26),
+(650, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 27),
+(651, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 16),
+(652, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 17),
+(653, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 18),
+(654, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 12),
+(655, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 13),
+(656, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 14),
+(657, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 15),
+(658, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 19),
+(659, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 20),
+(660, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 21),
+(703, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 18, 9),
+(704, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummyLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 18, 10),
+(705, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 18, 1),
+(706, 'en', 'default', 'Danish Bhatia', NULL, NULL, NULL, NULL, NULL, NULL, 18, 2),
+(707, NULL, NULL, 'danish-bhatia', NULL, NULL, NULL, NULL, NULL, NULL, 18, 3),
+(708, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 18, 4),
+(709, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 5),
+(710, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 6),
+(711, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 7),
+(712, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 8),
+(713, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 18, 26),
+(714, NULL, NULL, '12345678934344', NULL, NULL, NULL, NULL, NULL, NULL, 18, 27),
+(715, NULL, NULL, NULL, NULL, 14, NULL, NULL, NULL, NULL, 18, 28),
+(716, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 29),
+(717, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 18, 16),
+(718, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 18, 17),
+(719, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 18, 18);
 
 -- --------------------------------------------------------
 
@@ -7474,7 +7656,14 @@ INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
 (2, 5),
 (1, 1),
 (1, 12),
-(1, 3);
+(1, 3),
+(11, 1),
+(11, 12),
+(11, 13),
+(11, 14),
+(12, 1),
+(12, 12),
+(12, 13);
 
 -- --------------------------------------------------------
 
@@ -7528,6 +7717,14 @@ CREATE TABLE `product_downloadable_links` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `product_downloadable_links`
+--
+
+INSERT INTO `product_downloadable_links` (`id`, `url`, `file`, `file_name`, `type`, `price`, `sample_url`, `sample_file`, `sample_file_name`, `sample_type`, `downloads`, `sort_order`, `product_id`, `created_at`, `updated_at`) VALUES
+(1, 'https://google.com', NULL, NULL, 'url', '2000.0000', NULL, '', '', 'file', 10, 1, 11, '2022-08-27 17:19:12', '2022-08-27 17:19:12'),
+(2, 'https://fb.com', NULL, NULL, 'url', '1800.0000', NULL, '', '', 'file', 20, 2, 11, '2022-08-27 17:19:12', '2022-08-27 17:19:12');
+
 -- --------------------------------------------------------
 
 --
@@ -7540,6 +7737,14 @@ CREATE TABLE `product_downloadable_link_translations` (
   `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_downloadable_link_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `product_downloadable_link_translations`
+--
+
+INSERT INTO `product_downloadable_link_translations` (`id`, `locale`, `title`, `product_downloadable_link_id`) VALUES
+(1, 'en', 'Product 1', 1),
+(2, 'en', 'Product 2', 2);
 
 -- --------------------------------------------------------
 
@@ -7559,6 +7764,13 @@ CREATE TABLE `product_downloadable_samples` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `product_downloadable_samples`
+--
+
+INSERT INTO `product_downloadable_samples` (`id`, `url`, `file`, `file_name`, `type`, `sort_order`, `product_id`, `created_at`, `updated_at`) VALUES
+(1, NULL, 'product_downloadable_links/11/zsjc5VHhuPHMLtRvelJyut8h4Yo08BschouWYdvH.jpg', '[019046].jpg', 'file', 0, 11, '2022-08-27 17:25:36', '2022-08-27 17:25:36');
+
 -- --------------------------------------------------------
 
 --
@@ -7571,6 +7783,13 @@ CREATE TABLE `product_downloadable_sample_translations` (
   `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_downloadable_sample_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `product_downloadable_sample_translations`
+--
+
+INSERT INTO `product_downloadable_sample_translations` (`id`, `locale`, `title`, `product_downloadable_sample_id`) VALUES
+(1, 'en', 'Sample - 1', 1);
 
 -- --------------------------------------------------------
 
@@ -7616,54 +7835,77 @@ CREATE TABLE `product_flat` (
   `height` decimal(12,4) DEFAULT NULL,
   `depth` decimal(12,4) DEFAULT NULL,
   `brand` int(11) DEFAULT NULL,
-  `brand_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `brand_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `RAM` int(11) DEFAULT NULL,
+  `RAM_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `random` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_flat`
 --
 
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`) VALUES
-(1, 'updatedSKU', '', 'temp1', 'temp1', 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'en', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', 'shortdesc', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
-(2, 'temp21', '', 'temp1sdvc', 'fdh', 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'en', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
-(3, 'temp41', '', 'cbv', 'temp1', 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'en', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
-(4, 'temporary-sku-6a87ba', '', 'Copy of cbv (babed1)', 'temp1', 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'en', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas'),
-(5, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'fr', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(6, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'nl', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(7, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'es', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(8, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'en', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'fr', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'nl', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'es', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, 'test-3', '01', 'Test Product 3', 'jhj', 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'en', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', 'jhj', '', '', '', NULL, NULL, NULL, 10, 'Abibas'),
-(13, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'fr', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, ''),
-(14, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'nl', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, ''),
-(15, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'es', 'default', 6, '2022-08-13 20:11:12', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, ''),
-(16, 'test-3-variant-1-6', NULL, 'Test Product v1', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 7, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 7, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 7, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 7, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(20, 'test-3-variant-2-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 8, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 8, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 8, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 8, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 'test-3-variant-3-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 9, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(25, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 9, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(26, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 9, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(27, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 9, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(28, 'test-3-variant-4-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 10, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(29, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 10, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(30, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 10, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 10, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(96, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'fr', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(97, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'nl', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(98, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'es', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(99, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'fr', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(100, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'nl', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(101, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'es', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(102, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'fr', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(103, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'nl', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, ''),
-(104, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'es', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '');
+INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
+(1, 'updatedSKU', '', 'temp1', 'temp1', 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'en', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', 'shortdesc', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas', NULL, NULL, NULL),
+(2, 'temp21', '', 'temp1sdvc', 'fdh', 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'en', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas', NULL, NULL, NULL),
+(3, 'temp41', '', 'cbv', 'temp1', 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'en', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas', NULL, NULL, NULL),
+(4, 'temporary-sku-6a87ba', '', 'Prodcut With Price', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'en', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 11, 'Puma', NULL, NULL, NULL),
+(5, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'fr', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 11, '', NULL, NULL, NULL),
+(6, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'nl', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 11, '', NULL, NULL, NULL),
+(7, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'es', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 11, '', NULL, NULL, NULL),
+(8, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'en', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'fr', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'nl', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 12:09:28', 'es', 'default', 5, '2022-08-12 12:09:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 'test-3', '01', 'Test Product 3', 'jhj', 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'en', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', 'jhj', '', '', '', NULL, NULL, NULL, 10, 'Abibas', NULL, NULL, NULL),
+(13, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'fr', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, '', NULL, NULL, NULL),
+(14, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'nl', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, '', NULL, NULL, NULL),
+(15, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'es', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, '', NULL, NULL, NULL),
+(16, 'test-3-variant-1-6', NULL, 'Test Product v1', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 7, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(17, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 7, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 7, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 7, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(20, 'test-3-variant-2-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 8, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(21, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 8, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 8, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 8, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(24, 'test-3-variant-3-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 9, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(25, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 9, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(26, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 9, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(27, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 9, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 'test-3-variant-4-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 10, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 10, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(30, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 10, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 10, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(96, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'fr', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(97, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'nl', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(98, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'es', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(99, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'fr', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(100, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'nl', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(101, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'es', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(102, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'fr', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(103, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'nl', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(104, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'es', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
+(105, 'abcd12', '1234567890', 'New Downloadable Product', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'en', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, 11, 'Puma', NULL, NULL, NULL),
+(106, 'abcd12', '1234567890', NULL, NULL, 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'fr', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, '', NULL, NULL, NULL),
+(107, 'abcd12', '1234567890', NULL, NULL, 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'nl', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, '', NULL, NULL, NULL),
+(108, 'abcd12', '1234567890', NULL, NULL, 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'es', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, '', NULL, NULL, NULL),
+(109, 'NOTE-20', '123456789343', 'Note 20', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'en', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(110, 'NOTE-20', '123456789343', NULL, NULL, 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'fr', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(111, 'NOTE-20', '123456789343', NULL, NULL, 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'nl', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(112, 'NOTE-20', '123456789343', NULL, NULL, 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'es', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(113, 'NOTE-20-variant-13', NULL, 'Note 20 2GB', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'en', 'default', 13, '2022-08-27 23:16:57', 109, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '2GB', NULL),
+(114, 'NOTE-20-variant-13', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'fr', 'default', 13, '2022-08-27 23:16:57', 110, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '', NULL),
+(115, 'NOTE-20-variant-13', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'nl', 'default', 13, '2022-08-27 23:16:57', 111, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '', NULL),
+(116, 'NOTE-20-variant-13', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'es', 'default', 13, '2022-08-27 23:16:57', 112, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '', NULL),
+(117, 'NOTE-20-variant-14', '', 'Note 20 4GB', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'en', 'default', 14, '2022-08-27 23:18:53', 109, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', '', '', '', '0.0000', '0.0000', NULL, NULL, NULL, 14, '4GB', NULL),
+(118, 'NOTE-20-variant-14', '', '', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'fr', 'default', 14, '2022-08-27 23:18:53', 110, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', NULL, NULL, NULL, '0.0000', '0.0000', NULL, NULL, NULL, 14, '', NULL),
+(119, 'NOTE-20-variant-14', '', '', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'nl', 'default', 14, '2022-08-27 23:18:53', 111, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', NULL, NULL, NULL, '0.0000', '0.0000', NULL, NULL, NULL, 14, '', NULL),
+(120, 'NOTE-20-variant-14', '', '', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'es', 'default', 14, '2022-08-27 23:18:53', 112, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', NULL, NULL, NULL, '0.0000', '0.0000', NULL, NULL, NULL, 14, '', NULL),
+(133, '12', '12345678934344', 'Danish Bhatia', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummyLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'en', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, NULL, NULL, 14, '4GB', 1),
+(134, '12', '12345678934344', NULL, NULL, 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'fr', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, '', 1),
+(135, '12', '12345678934344', NULL, NULL, 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'nl', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, '', 1),
+(136, '12', '12345678934344', NULL, NULL, 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'es', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, '', 1);
 
 -- --------------------------------------------------------
 
@@ -7698,9 +7940,13 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `type`, `path`, `product_id`, `position`) VALUES
-(1, 'images', 'product/6/UlpMpiT8bZi0nWaq7XBnrRul6qqQIkwNFO5meNNj.jpg', 6, 0),
 (2, 'images', 'product/4/kT4sWtQAkK14RAnKsLu9S7Rs1xMeq5kT8NPfMQvD.jpg', 4, 0),
-(3, 'images', 'product/4/78FwFUNTZ0WIW8s3errHOkkN939XSFOfVSFm5czB.jpg', 4, 1);
+(3, 'images', 'product/4/78FwFUNTZ0WIW8s3errHOkkN939XSFOfVSFm5czB.jpg', 4, 1),
+(4, 'images', 'product/6/9upgwwL6YQEJS2ttvTJkzDiHdvagAgkCqajfjYIM.jpg', 6, 0),
+(5, 'images', 'product/6/26KmR73Vla97OKwbD5qquxrXftJErtvrq270nCRl.jpg', 6, 1),
+(6, 'images', 'product/6/FaQyNoKtiqvGajGg6QYBCZb3XH9YC4D3g8DJy31h.jpg', 6, 2),
+(7, 'images', 'product/11/ctiwkAoX19uTnHI0AU9EfGbOl3ob5jPVRznwHwnk.jpg', 11, 0),
+(8, 'images', 'product/12/Ftc5DaQj7jXgsvQbHieV8sr6SeCUms7aetZLv7nh.jpg', 12, 0);
 
 -- --------------------------------------------------------
 
@@ -7728,7 +7974,9 @@ INSERT INTO `product_inventories` (`id`, `qty`, `product_id`, `inventory_source_
 (5, 10, 7, 1, 0),
 (6, 10, 8, 1, 0),
 (7, 10, 9, 1, 0),
-(8, 10, 10, 1, 0);
+(8, 10, 10, 1, 0),
+(9, 10, 13, 1, 0),
+(10, 10, 14, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -7763,6 +8011,15 @@ CREATE TABLE `product_relations` (
   `child_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
+--
+-- Dumping data for table `product_relations`
+--
+
+INSERT INTO `product_relations` (`parent_id`, `child_id`) VALUES
+(6, 11),
+(6, 18),
+(6, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -7787,7 +8044,7 @@ CREATE TABLE `product_reviews` (
 --
 
 INSERT INTO `product_reviews` (`id`, `title`, `rating`, `comment`, `status`, `created_at`, `updated_at`, `product_id`, `customer_id`, `name`) VALUES
-(4, 'wedsc', 5, 'ervfdcdswde', 'pending', '2022-08-22 07:09:42', '2022-08-22 07:09:42', 6, 4, 'Danish Bhatia');
+(4, 'wedsc', 4, 'ervfdcdswde', 'approved', '2022-08-22 07:09:42', '2022-08-27 05:56:45', 6, 4, 'Danish Bhatia');
 
 -- --------------------------------------------------------
 
@@ -7819,7 +8076,8 @@ CREATE TABLE `product_super_attributes` (
 
 INSERT INTO `product_super_attributes` (`product_id`, `attribute_id`) VALUES
 (6, 23),
-(6, 24);
+(6, 24),
+(12, 28);
 
 -- --------------------------------------------------------
 
@@ -8383,7 +8641,8 @@ CREATE TABLE `wishlist` (
 --
 
 INSERT INTO `wishlist` (`id`, `channel_id`, `product_id`, `customer_id`, `item_options`, `moved_to_cart`, `shared`, `time_of_moving`, `created_at`, `updated_at`, `additional`) VALUES
-(3, 1, 4, 4, NULL, NULL, 1, NULL, '2022-08-21 16:07:44', '2022-08-21 16:08:10', NULL);
+(3, 1, 4, 4, NULL, NULL, 1, NULL, '2022-08-21 16:07:44', '2022-08-21 16:08:10', NULL),
+(8, 1, 6, 4, NULL, NULL, NULL, NULL, '2022-08-27 08:56:38', '2022-08-27 08:56:38', NULL);
 
 --
 -- Indexes for dumped tables
@@ -9348,37 +9607,37 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `attributes`
 --
 ALTER TABLE `attributes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `attribute_families`
 --
 ALTER TABLE `attribute_families`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `attribute_groups`
 --
 ALTER TABLE `attribute_groups`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `attribute_options`
 --
 ALTER TABLE `attribute_options`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `attribute_option_translations`
 --
 ALTER TABLE `attribute_option_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `attribute_translations`
 --
 ALTER TABLE `attribute_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `bookings`
@@ -9438,13 +9697,13 @@ ALTER TABLE `bulkupload_data_flow_profiles`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `cart_item_inventories`
@@ -9558,7 +9817,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `core_config`
 --
 ALTER TABLE `core_config`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -9738,13 +9997,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `product_attribute_values`
 --
 ALTER TABLE `product_attribute_values`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=565;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=720;
 
 --
 -- AUTO_INCREMENT for table `product_bundle_options`
@@ -9774,31 +10033,31 @@ ALTER TABLE `product_customer_group_prices`
 -- AUTO_INCREMENT for table `product_downloadable_links`
 --
 ALTER TABLE `product_downloadable_links`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_downloadable_link_translations`
 --
 ALTER TABLE `product_downloadable_link_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product_downloadable_samples`
 --
 ALTER TABLE `product_downloadable_samples`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_downloadable_sample_translations`
 --
 ALTER TABLE `product_downloadable_sample_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product_flat`
 --
 ALTER TABLE `product_flat`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `product_grouped_products`
@@ -9810,13 +10069,13 @@ ALTER TABLE `product_grouped_products`
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `product_inventories`
 --
 ALTER TABLE `product_inventories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product_ordered_inventories`
@@ -9990,7 +10249,7 @@ ALTER TABLE `vendor_reviews`
 -- AUTO_INCREMENT for table `wishlist`
 --
 ALTER TABLE `wishlist`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
