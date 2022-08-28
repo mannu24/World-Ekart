@@ -95,12 +95,12 @@
                                 </div>
                             </template>
                             <div class="ps-shopping__content" @if ($category->display_mode == 'description_only') style="width: 100%" @endif>
-                                <shimmer-component v-if="isLoading" shimmer-count="4"></shimmer-component>
+                                <shimmer-component v-if="isLoading" shimmer-count="3"></shimmer-component>
                                 <template v-else-if="products.length > 0">
                                     @if ($toolbarHelper->getCurrentMode() == 'grid')
                                         <div class="ps-shop-items">
                                             <div class="row">
-                                                <product-card :key="index":product="product" v-for="(product, index) in products">
+                                                <product-card :key="index" :product="product" v-for="(product, index) in products">
                                                 </product-card>
                                             </div>
                                         </div>

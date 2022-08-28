@@ -197,7 +197,7 @@ class Grouped extends AbstractType
 
         $html .= '<span class="price-label">' . trans('shop::app.products.starting-at') . '</span>'
         . ' '
-        . '<span class="final-price">' . core()->currency($this->getMinimalPrice()) . '</span>';
+            . '<h4 class="ps-product__price final-price d-inline">' . core()->currency($this->getMinimalPrice()) . '</h4>';
 
         return $html;
     }

@@ -1,10 +1,10 @@
 <template>
     <form method="POST" @submit.prevent="addToCart" class="d-flex justify-content-center">
-        <a :href="wishlistMoveRoute" :disabled="isButtonEnable == 'false' || isButtonEnable == false" :class="`ps-btn btn-small ${addClassToBtn}`" v-if="moveToCart">
+        <a :href="wishlistMoveRoute" :disabled="isButtonEnable == 'false' || isButtonEnable == false" :class="`ps-btn ${addClassToBtn} ${detail_mobile}`" v-if="moveToCart">
             <i class="fa fa-shopping-cart pr-2" v-if="showCartIcon"></i>
             {{btnText}}
         </a>
-        <button type="submit" :disabled="isButtonEnable == 'false' || isButtonEnable == false" :class="`ps-btn btn-small ${addClassToBtn}`" v-else >
+        <button type="submit" :disabled="isButtonEnable == 'false' || isButtonEnable == false" :class="`ps-btn ${addClassToBtn} ${detail_mobile}`" v-else >
             <i class="fa fa-shopping-cart pr-2" v-if="showCartIcon"></i>
             {{btnText}}
         </button>
@@ -15,6 +15,7 @@
     export default {
         props: [
             'form',
+            'detail_mobile',
             'btnText',
             'isEnable',
             'csrfToken',

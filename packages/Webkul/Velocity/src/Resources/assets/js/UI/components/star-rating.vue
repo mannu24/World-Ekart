@@ -14,11 +14,14 @@
 </template>
 
 <style lang="scss">
-/**
- * Font size 18px till 420px screen width.
- */
+.ps-rating .fa {
+    font-size: 16px;
+}
+.ps-rating.fs24 .fa {
+    font-size: 24px;
+}
 @media only screen and (max-width: 420px) {
-    .stars .material-icons {
+    .ps-rating .fa {
         font-size: 18px;
     }
 }
@@ -27,7 +30,7 @@
  * Font size 12px till 322px screen width.
  */
 @media only screen and (max-width: 322px) {
-    .stars .material-icons {
+    .ps-rating .fa {
         font-size: 12px;
     }
 }

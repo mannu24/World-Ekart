@@ -1,6 +1,6 @@
 <template>
     <i
-        :class="`fa-heart ${addClass ? addClass : ''}  ${isActive ? 'far' : 'fas'}`"
+        :class="`fa-heart ${addClass ? addClass : ''}  ${isActive ? 'far' : 'fas text-danger'}`"
         >
         <!-- @mouseover="isActive ? isActive = !isActive : ''"
         @mouseout="active !== '' && !isActive ? isActive = !isActive : ''" -->

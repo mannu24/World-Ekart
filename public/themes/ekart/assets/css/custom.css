@@ -609,3 +609,95 @@ a:visited, a:link {
 .order-box-container .box:last-child {
     text-align: right;
 }
+
+.bb-social-share__item a svg {
+    width: 3.5rem !important; 
+    height: 3.5rem !important;
+    margin-right: 15px;
+}
+
+.text-primary {
+    color: #fcb800 !important;
+} 
+@media(min-width:1100px) {
+    .ps-product__content.w-60 {
+        width: 65%;
+    }
+    .ps-product__content.w-60 .ps-product__desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+    }
+}
+.review-block {
+    margin-bottom: 20px;
+    padding: 15px 10px;
+    border: 1px solid #eaeaea;
+    transition: all .4s ease;
+}
+.review-block:hover {
+    border-color: silver;
+}
+
+.product-image-group {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 70px;
+}
+.product-image-group>div {
+    margin: 0;
+    padding: 0;
+}
+
+.outer-assets-container .video-container {
+    max-height: 420px;
+    min-height: 420px;
+    position: relative;
+}
+
+.outer-assets-container .video-container video {
+    max-height: 420px;
+}
+
+.thumb-list {
+    left: 15px;
+    margin-top: 10px;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.VueCarousel {
+    cursor: pointer;
+    width: 100%;
+}
+
+.VueCarousel .VueCarousel-inner {
+    padding-top: 5px;
+    justify-content: center;
+}
+
+.ps-related-products .VueCarousel .VueCarousel-inner {
+    justify-content: flex-start;
+}
+
+.thumb-list .thumb-frame {
+    border: 1px solid transparent;
+    padding: 2px;
+}
+
+.thumb-list .thumb-frame>.bg-image {
+    background-position-y: center;
+    background-size: 100% 100%;
+    height: 110px;
+    width: 100%;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+.thumb-list .thumb-frame.active {
+    border: 2px solid #fcb800;
+}
+.carousel-products .VueCarousel-slide {
+    cursor: default;
+}

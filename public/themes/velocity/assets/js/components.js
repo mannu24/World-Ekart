@@ -2587,7 +2587,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['form', 'btnText', 'isEnable', 'csrfToken', 'productId', 'reloadPage', 'moveToCart', 'wishlistMoveRoute', 'showCartIcon', 'addClassToBtn', 'productFlatId'],
+  props: ['form', 'detail_mobile', 'btnText', 'isEnable', 'csrfToken', 'productId', 'reloadPage', 'moveToCart', 'wishlistMoveRoute', 'showCartIcon', 'addClassToBtn', 'productFlatId'],
   data: function data() {
     return {
       'isButtonEnable': this.isEnable,
@@ -4246,7 +4246,7 @@ var render = function render() {
       }
     }
   }, [_vm.moveToCart ? _c("a", {
-    "class": "ps-btn btn-small ".concat(_vm.addClassToBtn),
+    "class": "ps-btn ".concat(_vm.addClassToBtn, " ").concat(_vm.detail_mobile),
     attrs: {
       href: _vm.wishlistMoveRoute,
       disabled: _vm.isButtonEnable == "false" || _vm.isButtonEnable == false
@@ -4254,7 +4254,7 @@ var render = function render() {
   }, [_vm.showCartIcon ? _c("i", {
     staticClass: "fa fa-shopping-cart pr-2"
   }) : _vm._e(), _vm._v("\n        " + _vm._s(_vm.btnText) + "\n    ")]) : _c("button", {
-    "class": "ps-btn btn-small ".concat(_vm.addClassToBtn),
+    "class": "ps-btn ".concat(_vm.addClassToBtn, " ").concat(_vm.detail_mobile),
     attrs: {
       type: "submit",
       disabled: _vm.isButtonEnable == "false" || _vm.isButtonEnable == false
@@ -5823,7 +5823,7 @@ var render = function render() {
   }, [_vm._v(_vm._s(_vm.product["new"]))]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__container"
   }, [_c("div", {
-    staticClass: "ps-product__content"
+    staticClass: "ps-product__content w-60"
   }, [_c("a", {
     staticClass: "ps-product__title",
     attrs: {
@@ -6332,64 +6332,52 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("div", {
-    "class": _vm.addClass
-  }, [_c("div", {
-    staticClass: "row remove-padding-margin"
-  }, [_c("div", {
-    staticClass: "col-12 no-padding"
-  }, [_c("h2", {
-    staticClass: "fs20 fw6 mb15",
+  return _c("aside", {
+    staticClass: "widget widget_same-brand"
+  }, [_c("h3", {
     domProps: {
       textContent: _vm._s(_vm.title)
     }
-  })])]), _vm._v(" "), _c("div", {
-    "class": "recently-viewed-products-wrapper ".concat(_vm.addClassWrapper)
-  }, [_vm._l(_vm.recentlyViewed, function (product, index) {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "widget__content"
+  }, _vm._l(_vm.recentlyViewed, function (product, index) {
     return _c("div", {
-      key: Math.random(),
-      staticClass: "row small-card-container"
+      key: index,
+      staticClass: "ps-product"
     }, [_c("div", {
-      staticClass: "col-4 product-image-container mr15"
+      staticClass: "ps-product__thumbnail"
     }, [_c("a", {
-      staticClass: "unset",
       attrs: {
         href: "".concat(_vm.baseUrl, "/").concat(product.urlKey)
       }
+    }, [_c("img", {
+      attrs: {
+        src: product.image,
+        alt: product.name
+      }
+    })])]), _vm._v(" "), _c("div", {
+      staticClass: "ps-product__container"
     }, [_c("div", {
-      staticClass: "product-image",
-      style: "background-image: url(".concat(product.image, ")")
-    })])]), _vm._v(" "), product.urlKey ? _c("div", {
-      staticClass: "col-8 no-padding card-body align-vertical-top"
+      staticClass: "ps-product__content"
     }, [_c("a", {
-      staticClass: "unset no-padding",
+      staticClass: "ps-product__title",
       attrs: {
         href: "".concat(_vm.baseUrl, "/").concat(product.urlKey)
-      }
-    }, [_c("div", {
-      staticClass: "product-name"
-    }, [_c("span", {
-      staticClass: "fs16 text-nowrap",
+      },
       domProps: {
         textContent: _vm._s(product.name)
       }
-    })]), _vm._v(" "), _c("div", {
-      staticClass: "fs18 card-current-price fw6",
+    }), _vm._v(" "), product.rating > 0 ? _c("star-ratings", {
+      attrs: {
+        ratings: product.rating
+      }
+    }) : _vm._e(), _vm._v(" "), _c("p", {
+      staticClass: "ps-product__price",
       domProps: {
         innerHTML: _vm._s(product.priceHTML)
       }
-    }), _vm._v(" "), product.rating > 0 ? _c("star-ratings", {
-      attrs: {
-        "push-class": "display-inbl",
-        ratings: product.rating
-      }
-    }) : _vm._e()], 1)]) : _vm._e()]);
-  }), _vm._v(" "), !_vm.recentlyViewed || _vm.recentlyViewed && Object.keys(_vm.recentlyViewed).length == 0 ? _c("span", {
-    staticClass: "fs16",
-    domProps: {
-      textContent: _vm._s(_vm.noDataText)
-    }
-  }) : _vm._e()], 2)]);
+    })], 1)])]);
+  }), 0)]);
 };
 
 var staticRenderFns = [];
@@ -6719,7 +6707,7 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("i", {
-    "class": "fa-heart ".concat(_vm.addClass ? _vm.addClass : "", "  ").concat(_vm.isActive ? "far" : "fas")
+    "class": "fa-heart ".concat(_vm.addClass ? _vm.addClass : "", "  ").concat(_vm.isActive ? "far" : "fas text-danger")
   });
 };
 
@@ -9464,7 +9452,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/**\n * Font size 18px till 420px screen width.\n */\n@media only screen and (max-width: 420px) {\n.stars .material-icons {\n    font-size: 18px;\n}\n}\n/**\n * Font size 12px till 322px screen width.\n */\n@media only screen and (max-width: 322px) {\n.stars .material-icons {\n    font-size: 12px;\n}\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".ps-rating .fa {\n  font-size: 16px;\n}\n.ps-rating.fs24 .fa {\n  font-size: 24px;\n}\n@media only screen and (max-width: 420px) {\n.ps-rating .fa {\n    font-size: 18px;\n}\n}\n/**\n * Font size 12px till 322px screen width.\n */\n@media only screen and (max-width: 322px) {\n.ps-rating .fa {\n    font-size: 12px;\n}\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

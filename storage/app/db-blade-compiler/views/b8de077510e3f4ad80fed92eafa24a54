@@ -3,7 +3,7 @@
 <div class="container">
 <ul class="breadcrumb">
 <li><a href="http://localhost:8000/">Home</a></li>
-<li>Become a Vendor</li>
+<li>Become a Seller</li>
 </ul>
 </div>
 </div>
@@ -11,7 +11,7 @@
 <div class="ps-vendor-banner">
 <div class="container">
 <h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>
-<a class="ps-btn ps-btn--lg" href="<?php echo e(route('shop.vendor.index')); ?>">Start Selling</a></div>
+<a class="ps-btn ps-btn--lg" href="http://localhost:8000/seller-registration">Start Selling</a></div>
 </div>
 </div>
 <div class="ps-section--vendor ps-vendor-about">

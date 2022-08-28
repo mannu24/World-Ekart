@@ -1,24 +1,9 @@
 <template>
     <div>
-        <div class="image-wrapper">
-            <image-item
-                v-for="image in items"
-                :key="image.id"
-                :image="image"
-                :input-name="inputName"
-                :required="required"
-                :remove-button-label="removeButtonLabel"
-                @onRemoveImage="removeImage($event)"
-            ></image-item>
+        <div class="image-wrapper mb-0">
+            <image-item v-for="image in items" :key="image.id" :image="image" :input-name="inputName" :required="required" :remove-button-label="removeButtonLabel" @onRemoveImage="removeImage($event)"></image-item>
         </div>
-
-        <label
-            class="btn btn-lg btn-primary"
-            style="display: inline-block; width: auto"
-            @click="createFileType"
-            v-if="!hideButton"
-            >{{ buttonLabel }}</label
-        >
+        <label class="ps-btn btn-small ps-btn--outline mb-20" style="display: inline-block; width: auto" @click="createFileType" v-if="!hideButton">{{ buttonLabel }}</label>
     </div>
 </template>
 

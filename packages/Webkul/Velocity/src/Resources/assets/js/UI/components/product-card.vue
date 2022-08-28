@@ -8,7 +8,7 @@
             <span class="ps-product__badge new" v-if="product.new">{{ product.new }}</span>
         </div>
         <div class="ps-product__container">
-            <div class="ps-product__content">
+            <div class="ps-product__content w-60">
                 <a :href="`${baseUrl}/${product.slug}`" :title="product.name" class="ps-product__title">{{product.name}}</a>
                 <p class="ps-product__vendor">Sold by: {{ product.brand }}</p>
                 <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">
