@@ -1112,6 +1112,7 @@
       63 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
       64 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
       65 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
+      66 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
     ),
     'aliases' => 
     array (
@@ -3459,23 +3460,23 @@
         0 => 
         array (
           'name' => 'show_terms',
-          'title' => 'Show Categories',
+          'title' => 'suggestion::app.admin.configuration.show-categories',
           'type' => 'text',
-          'validation' => 'required|numeric',
+          'validation' => 'required|numeric|min:1|max:5',
           'channel_based' => true,
         ),
         1 => 
         array (
           'name' => 'show_products',
-          'title' => 'Show Products ',
+          'title' => 'suggestion::app.admin.configuration.show-products',
           'type' => 'text',
-          'validation' => 'required|numeric',
+          'validation' => 'required|numeric|min:1|max:5',
           'channel_based' => true,
         ),
         2 => 
         array (
           'name' => 'display_terms_toggle',
-          'title' => 'Display Terms',
+          'title' => 'suggestion::app.admin.configuration.display-terms',
           'type' => 'boolean',
           'locale_based' => true,
           'channel_based' => true,
@@ -3483,7 +3484,7 @@
         3 => 
         array (
           'name' => 'display_product_toggle',
-          'title' => 'Display Product',
+          'title' => 'suggestion::app.admin.configuration.display-product',
           'type' => 'boolean',
           'locale_based' => true,
           'channel_based' => true,
@@ -3491,7 +3492,7 @@
         4 => 
         array (
           'name' => 'display_categories_toggle',
-          'title' => 'Display Categories',
+          'title' => 'suggestion::app.admin.configuration.display-categories',
           'type' => 'boolean',
           'locale_based' => true,
           'channel_based' => true,

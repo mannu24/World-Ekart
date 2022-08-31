@@ -99,6 +99,7 @@
     95 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
     96 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
     97 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
+    98 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
   ),
   'eager' => 
   array (
@@ -185,6 +186,7 @@
     80 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
     81 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
     82 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
+    83 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
   ),
   'deferred' => 
   array (

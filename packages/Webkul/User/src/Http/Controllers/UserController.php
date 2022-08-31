@@ -127,6 +127,17 @@ class UserController extends Controller
         return redirect()->route($this->_config['redirect']);
     }
 
+    public function unblock($id)
+    {
+        $user = DB::table('admins')->where('id',$id)->update(['status'=>1]);
+        $ids = DB::table('products')->where('user_id',$id)->pluck('id');
+        $pro = DB::table('product_flat')->whereIn('product_id',$ids)->update(['status'=>1]);
+
+        session()->flash('success', 'User UnBlocked Succesfully');
+
+        return redirect()->route($this->_config['redirect']);
+    }
+
     /**
      * Update the specified resource in storage.
      *

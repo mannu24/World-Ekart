@@ -293,6 +293,9 @@ return [
 
         //Contact
         RKREZA\Contact\Providers\ContactServiceProvider::class,
+        
+        //Search Suggestion
+        Webkul\suggestion\Providers\suggestionServiceProvider::class,
 
     ],
 

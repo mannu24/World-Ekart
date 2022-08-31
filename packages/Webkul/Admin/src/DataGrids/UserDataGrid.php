@@ -123,14 +123,6 @@ class UserDataGrid extends DataGrid
         ]);
 
         $this->addAction([
-            'title'  => 'Block',
-            'method' => 'GET',
-            'route'  => 'admin.users.block',
-            'icon'   => 'icon fas fa-ban text-secondary',
-        ]);
-
-
-        $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',
             'route'  => 'admin.users.delete',

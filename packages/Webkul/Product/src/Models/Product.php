@@ -36,6 +36,7 @@ class Product extends Model implements ProductContract
         'sku',
         'parent_id',
         'user_id',
+        'country',
     ];
 
     /**

@@ -3,6 +3,7 @@
 namespace Webkul\Product\Http\Controllers;
 
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\ProductDataGrid;
@@ -154,7 +155,9 @@ class ProductController extends Controller
             $configurableFamily = $this->attributeFamilyRepository->find($familyId);
         }
 
-        return view($this->_config['view'], compact('families', 'configurableFamily'));
+        $countries = DB::table('countries')->orderBy('name','ASC')->get();
+
+        return view($this->_config['view'], compact('families', 'configurableFamily','countries'));
     }
 
     /**
@@ -185,6 +188,7 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
+            'country' => 'required',
             'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
 
@@ -210,7 +214,10 @@ class ProductController extends Controller
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
         // // $user = auth;
         // dd(auth()->guard('admin')->user()->id);
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources'));
+        $countries = DB::table('countries')->orderBy('name','ASC')->get();
+        // return $product;
+        $c_count = 1;
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources','countries','c_count'));
     }
 
     /**

@@ -15,11 +15,21 @@
                         {{ __('admin::app.users.users.edit-user-title') }}
                     </h1>
                 </div>
-
                 <div class="page-action">
                     <button type="submit" class="btn btn-lg btn-primary">
                         {{ __('admin::app.users.users.save-btn-title') }}
                     </button>
+                    @if($user->status==1)
+                    <button type="button" class="btn btn-lg btn-danger">
+                       <a href="{{route('admin.users.block',$user->id)}}" style="color:white;">Block</a>
+                    </button>
+                    @endif
+ 
+                    @if($user->status==0)
+                    <button type="button" class="btn btn-lg btn-primary">
+                       <a href="{{route('admin.users.unblock',$user->id)}}" style="color:white;">UnBlock</a>
+                    </button>
+                    @endif
                 </div>
             </div>
 
@@ -71,19 +81,6 @@
                                 </select>
                                 <span class="control-error" v-if="errors.has('role_id')">@{{ errors.first('role_id') }}</span>
                             </div>
-
-                            @if (auth()->guard('admin')->user()->id !== $user->id)
-                                <div class="control-group">
-                                    <label for="status">{{ __('admin::app.users.users.status') }}</label>
-
-                                    <label class="switch">
-                                        <input type="checkbox" id="status" name="status" value="{{ $user->status }}" {{ $user->status ? 'checked' : '' }}>
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-                            @else
-                                <input type="hidden" name="status" value="{{ $user->status }}">
-                            @endif
                         </div>
                     </accordian>
                 </div>

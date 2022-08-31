@@ -114,7 +114,8 @@
             "Webkul\\Notification\\": "packages/Webkul/Notification/src",
             "Webkul\\Bulkupload\\": "packages/Webkul/Bulkupload",
             "Webkul\\SizeChart\\": "packages/Webkul/SizeChart/src",
-            "RKREZA\\Contact\\": "packages/Webkul/RKREZA/Contact/src"
+            "RKREZA\\Contact\\": "packages/Webkul/RKREZA/Contact/src",
+            "Webkul\\suggestion\\": "packages/Webkul/suggestion/src"
         }
     },
     "autoload-dev": {

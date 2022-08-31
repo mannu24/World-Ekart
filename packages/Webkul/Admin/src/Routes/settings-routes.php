@@ -212,6 +212,10 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         'redirect' => 'admin.users.index',
     ])->name('admin.users.block');
 
+    Route::get('/users/unblock/{id}', [UserController::class, 'unblock'])->defaults('_config', [
+        'redirect' => 'admin.users.index',
+    ])->name('admin.users.unblock');
+
     Route::put('/users/edit/{id}', [UserController::class, 'update'])->defaults('_config', [
         'redirect' => 'admin.users.index',
     ])->name('admin.users.update');
