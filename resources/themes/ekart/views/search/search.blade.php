@@ -47,9 +47,21 @@
 @endpush
 
 @section('content-wrapper')
-    <div class="container category-page-wrapper">
+    
+<div class="ps-page--shop">
+    <div class="ps-breadcrumb border-bottom">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="/">{{ __('shop::app.home.home-title') }}</a></li>
+                <li>{{ __('shop::app.search.page-title') }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container pt-50">
         <search-component></search-component>
     </div>
+</div>
+
 @endsection
 
 @push('scripts')
@@ -72,36 +84,34 @@
             </div>
         </div>
     </script>
-
     <script type="text/x-template" id="seach-component-template">
-        <section class="search-container row category-container">
+        <section class="search-container row category-container ps-shopping justify-content-center">
             @if (request('image-search'))
                 <image-search-result-component></image-search-result-component>
             @endif
 
-            @if ($results && $results->count())
-                <div class="filters-container col-12" style="
-                    margin-top: 20px;
-                    padding-left: 0px !important;
-                    padding-bottom: 10px !important;
-                ">
-                    @include ('shop::products.list.toolbar')
+            {{-- @if ($results && $results->count())
+                <div class="ps-shopping__header">
+                    <div class="ps-shopping__actions flex-column flex-md-row">
+                        <p class="w-100"><strong class="mr-2">{{ $results->total() }}</strong>{{ __('shop::app.search.found-result') }}</p>
+                        @include ('shop::products.list.toolbar')
+                    </div>
                 </div>
-            @endif
+            @endif --}}
 
             @if (! $results)
-                <h2 class="fw6 col-12">{{ __('shop::app.search.no-results') }}</h2>
+                <h2 class="col-12">{{ __('shop::app.search.no-results') }}</h2>
             @else
                 @if ($results->isEmpty())
-                    <h2 class="fw6 col-12">{{ __('shop::app.products.whoops') }}</h2>
+                    <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
                     <span class="col-12">{{ __('shop::app.search.no-results') }}</span>
                 @else
                     @if ($results->total() == 1)
-                        <h5 class="fw6 col-12 mb20">
+                        <h5 class="col-12 mb-20">
                             {{ $results->total() }} {{ __('shop::app.search.found-result') }}
                         </h5>
                     @else
-                        <h2 class="fw6 col-12 mb20">
+                        <h2 class="col-12 mb-20">
                             {{ $results->total() }} {{ __('shop::app.search.found-results') }}
                         </h2>
                     @endif

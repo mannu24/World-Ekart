@@ -1,6 +1,6 @@
 <template>
     <form method="GET" role="search" id="search-form" class="ps-form--quick-search" :action="route">
-        <div class="ps-form__categories">
+        <div class="ps-form__categories" v-if="!isMobile()">
             <select class="form-control" name="category" aria-label="Category" @change="focusInput($event)">
                 <option value="" v-text="__('header.all-categories')"></option>
                 <template v-for="(category, index) in $root.sharedRootCategories">
@@ -66,7 +66,16 @@ export default {
                 $('input[name=term]').val(this.inputVal);
                 $('#search-form').submit();
             }
+        },
+
+        'isMobile': function () {
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                return true;
+            } else {
+                return false;
+            }
         }
+
     }
 };
 </script>

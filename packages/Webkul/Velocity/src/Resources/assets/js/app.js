@@ -64,6 +64,7 @@ Vue.component('wishlist-component-with-badge', () => import('@components/header-
 Vue.component('mobile-header', () => import('@components/header-mobile'));
 Vue.component('sidebar-header', () => import('@components/header-sidebar'));
 Vue.component('mega-menu', () => import('@components/mega-menu'));
+Vue.component('menu-item', () => import('@components/menu-item'));
 Vue.component('right-side-header', () => import('@components/header-right-side'));
 Vue.component('sidebar-component', () => import('@components/sidebar'));
 Vue.component('product-card', () => import('@components/product-card'));

@@ -204,13 +204,14 @@ foreach ($images as $key => $image) {
                                                 'form' => false,
                                                 'product' => $product,
                                                 'showCartIcon' => false,
+                                                'addToCartBtnClass' => 'btn-small',
                                                 'detail_mobile' => true ,
                                                 'showCompare' =>
                                                     core()->getConfigData('general.content.shop.compare_option') == '1'
                                                         ? true
                                                         : false,
                                             ])
-                                            <button type="submit" class="ps-btn" {{ ! $product->isSaleable(1) ? 'disabled' : '' }}>{{ __('shop::app.products.buy-now') }}</button>
+                                            <button type="submit" class="ps-btn btn-small" {{ ! $product->isSaleable(1) ? 'disabled' : '' }}>{{ __('shop::app.products.buy-now') }}</button>
                                         </div>
                                     </div>
                                 </div>
