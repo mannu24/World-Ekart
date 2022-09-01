@@ -1,10 +1,9 @@
 @extends('shop::layouts.master')
 
-@section('page_title')
-{{ __('shop::app.search.page-title') }}
-@endsection
+@section('page_title') Seller Registration Form @endsection
 
 @section('content-wrapper')
+
 <div class="ps-page--my-account">
     <div class="ps-breadcrumb border-bottom">
         <div class="container">

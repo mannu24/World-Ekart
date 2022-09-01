@@ -1012,7 +1012,7 @@
   ),
   'app' => 
   array (
-    'name' => 'Bagisto',
+    'name' => 'WorldEkart',
     'env' => 'local',
     'debug' => true,
     'url' => 'http://localhost:8000',
@@ -1324,7 +1324,7 @@
         'connection' => 'cache',
       ),
     ),
-    'prefix' => 'bagisto_cache',
+    'prefix' => 'worldekart_cache',
   ),
   'carriers' => 
   array (
@@ -5098,7 +5098,7 @@
       0 => 2,
       1 => 100,
     ),
-    'cookie' => 'bagisto_session',
+    'cookie' => 'worldekart_session',
     'path' => '/',
     'domain' => NULL,
     'secure' => NULL,

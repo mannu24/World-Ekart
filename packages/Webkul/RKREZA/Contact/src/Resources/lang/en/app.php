@@ -37,7 +37,8 @@ return [
         'delete-failed'         => 'Contact Delete Failed',
 
 
-        'message-send-success'  => 'Thankyou for your message.',
+        'message-send-success'  => 'Message Submitted Successfully!',
+        // 'message-send-success'  => 'Thankyou for your message.',
     ],
 
     'acl' => [

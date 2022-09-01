@@ -118,6 +118,20 @@
 
         {{-- alert container --}}
         <div id="alert-container"></div>
+        @if (core()->getCurrentChannel()->currencies->count() > 1)
+            <div class="left-corner-dropdown">
+                <select class="form-control shadow text-uppercase" onchange="window.location.href = this.value" aria-label="Locale">
+                    @foreach (core()->getCurrentChannel()->currencies as $currency)
+                        @if (isset($searchQuery) && $searchQuery)
+                            <option value="?{{ $searchQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                        @else
+                            <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
+                        @endif
+                    @endforeach
+                </select>
+                <div class="select-icon-container"><span class="select-icon rango-arrow-down"></span></div>
+            </div>
+        @endif
 
         {{-- all scripts --}}
         @include('shop::layouts.scripts')

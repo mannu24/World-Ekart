@@ -64,7 +64,7 @@
         <div class="ps-product">
             <div class="ps-product__thumbnail">
                 <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
-                    <img loading="lazy" alt="{{ $product->name }}" src="{{ $productBaseImage['large_image_url'] }}" :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                    <img loading="lazy" class="logo" alt="{{ $product->name }}" src="{{ $productBaseImage['large_image_url'] }}" :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
                 </a>
                 @if (!$product->getTypeInstance()->haveSpecialPrice() && $product->new)
                     <span class="ps-product__badge new">New</span>

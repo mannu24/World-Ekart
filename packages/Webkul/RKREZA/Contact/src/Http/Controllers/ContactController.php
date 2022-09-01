@@ -72,7 +72,8 @@ class ContactController extends Controller
         $this->validate(request(), [
             'name'              => 'required',
             'email'             => 'required',
-            'message_body'      => 'required'
+            'message_body'      => 'required',
+            'product_id'        => 'nullable',
         ]);
 
         $data = request()->all();
@@ -83,7 +84,8 @@ class ContactController extends Controller
             $contact = $this->contact->create([
                 'name'          => $data['name'],
                 'email'         => $data['email'],
-                'message_body'  => $data['message_body']
+                'message_body'  => $data['message_body'],
+                'product_id'    => $data['product_id']
             ]);
 
             if ($contact) {
