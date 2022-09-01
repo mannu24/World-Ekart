@@ -20,71 +20,7 @@
                         <img class="logo" src="{{ bagisto_asset('images/logo_light.png') }}" alt="" />
                     @endif
                 </a>
-                <div class="menu--product-categories">
-                    <div class="menu__toggle"><i class="icon-menu"></i><span>Shop by Department</span></div>
-                    <div class="menu__content">
-                        <ul class="menu--dropdown">
-                            <li><a href="/shop"><i class="icon-star"></i>Hot Promotions</a></li>
-                            <li class="menu-item-has-children has-mega-menu"><a href="/shop"><i
-                                        class="icon-laundry"></i>Consumer Electronic</a>
-                                <div class="mega-menu">
-                                    <div class="mega-menu__column">
-                                        <h4>Electronic</h4>
-                                        <ul class="mega-menu__list">
-                                            <li><a href="/shop">Home Audio &amp; Theathers</a></li>
-                                            <li><a href="/shop">TV &amp; Videos</a></li>
-                                            <li><a href="/shop">Camera, Photos &amp; Videos</a></li>
-                                            <li><a href="/shop">Cellphones &amp; Accessories</a></li>
-                                            <li><a href="/shop">Headphones</a></li>
-                                            <li><a href="/shop">Videosgames</a></li>
-                                            <li><a href="/shop">Wireless Speakers</a></li>
-                                            <li><a href="/shop">Office Electronic</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="mega-menu__column">
-                                        <h4>Accessories &amp; Parts</h4>
-                                        <ul class="mega-menu__list">
-                                            <li><a href="/shop">Digital Cables</a></li>
-                                            <li><a href="/shop">Audio &amp; Video Cables</a></li>
-                                            <li><a href="/shop">Batteries</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li><a href="/shop"><i class="icon-shirt"></i>Clothing &amp; Apparel</a></li>
-                            <li><a href="/shop"><i class="icon-lampshade"></i>Home, Garden &amp; Kitchen</a>
-                            </li>
-                            <li><a href="/shop"><i class="icon-heart-pulse"></i>Health &amp; Beauty</a></li>
-                            <li><a href="/shop"><i class="icon-diamond2"></i>Yewelry &amp; Watches</a></li>
-                            <li class="menu-item-has-children has-mega-menu"><a href="/shop"><i
-                                        class="icon-desktop"></i>Computer &amp; Technology</a>
-                                <div class="mega-menu">
-                                    <div class="mega-menu__column">
-                                        <h4>Computer &amp; Technologies</h4>
-                                        <ul class="mega-menu__list">
-                                            <li><a href="/shop">Computer &amp; Tablets</a></li>
-                                            <li><a href="/shop">Laptop</a></li>
-                                            <li><a href="/shop">Monitors</a></li>
-                                            <li><a href="/shop">Networking</a></li>
-                                            <li><a href="/shop">Drive &amp; Storages</a></li>
-                                            <li><a href="/shop">Computer Components</a></li>
-                                            <li><a href="/shop">Security &amp; Protection</a></li>
-                                            <li><a href="/shop">Gaming Laptop</a></li>
-                                            <li><a href="/shop">Accessories</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
-                            <li><a href="/shop"><i class="icon-baby-bottle"></i>Babies &amp; Moms</a></li>
-                            <li><a href="/shop"><i class="icon-baseball"></i>Sport &amp; Outdoor</a></li>
-                            <li><a href="/shop"><i class="icon-smartphone"></i>Phones &amp; Accessories</a></li>
-                            <li><a href="/shop"><i class="icon-book2"></i>Books &amp; Office</a></li>
-                            <li><a href="/shop"><i class="icon-car-siren"></i>Cars &amp; Motocycles</a></li>
-                            <li><a href="/shop"><i class="icon-wrench"></i>Home Improments</a></li>
-                            <li><a href="/shop"><i class="icon-tag"></i>Vouchers &amp; Services</a></li>
-                        </ul>
-                    </div>
-                </div>
+                <mega-menu :mobile="false" :vertical="true"></mega-menu>
             </div>
             <div class="header__center">
                 {{-- @include('shop::layouts.particals.search-bar') --}}
@@ -153,7 +89,7 @@
     <nav class="navigation">
         <div class="ps-container">
             <div class="navigation__right justify-content-center">
-                <mega-menu :mobile="false"></mega-menu>
+                <mega-menu :mobile="false" :vertical="false"></mega-menu>
             </div>
         </div>
     </nav>

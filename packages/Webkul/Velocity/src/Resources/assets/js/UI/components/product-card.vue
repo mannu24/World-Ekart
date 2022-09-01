@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 col-6" v-else>
+    <div :class="!col && col==true ?  'col-lg-4 col-6' : ''" v-else>
         <div class="ps-product">
             <div class="ps-product__thumbnail">
                 <a :href="`${baseUrl}/${product.slug}`" :title="product.name">
@@ -85,6 +85,7 @@
         props: [
             'list',
             'product',
+            'col',
         ],
         data: function () {
             return {

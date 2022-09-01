@@ -737,3 +737,20 @@ a:visited, a:link {
     height: 40px;
     border-radius: 15%;
 }
+.slides-container .VueCarousel .VueCarousel-inner {
+    padding-top: 0;
+    justify-content: start;
+}
+
+.VueCarousel-dot[data-v-438fd353]:focus {
+    outline: 1px solid #fcb800;
+}
+
+.VueCarousel-dot--active {
+    background-color: #fcb800 !important;
+}
+
+.banner-icon {
+    height: 70vh !important;
+    object-fit: cover;
+}

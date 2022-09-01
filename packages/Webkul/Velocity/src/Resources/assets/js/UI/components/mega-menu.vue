@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul class="menu" v-if="!mobile">
+        <ul class="menu" v-if="!mobile && !vertical">
             <li v-for="(item,index) in $root.sharedRootCategories" :key="index" :class="item.children.length > 0 ? 'menu-item-has-children has-mega-menu' : ''">
                 <a :href="`/${item.slug}`">{{ item.name }}</a>
                 <div class="mega-menu" v-if="item.children.length > 0">
@@ -8,12 +8,36 @@
                     <div class="mega-menu__column" v-for="(child,index1) in item.children" :key="index1">
                         <a :href="`/${item.slug}/${child.slug}`"><h4>{{ child.name }}</h4></a>
                         <ul class="mega-menu__list" v-if="child.children.length > 0">
-                            <li v-for="(sub,index2) in child.children" :key="index2"><a :href="`/${item.slug}/${child.slug}/${sub.slug}`">{{ sub.name }}</a></li>
+                            <li v-for="(sub,index2) in child.children" :key="index2">
+                                <a :href="`/${item.slug}/${child.slug}/${sub.slug}`">{{ sub.name }}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </li>
         </ul>
+        <div class="menu--product-categories" v-else-if="!mobile && vertical">
+            <div class="menu__toggle"><i class="icon-menu"></i><span>Menu</span></div>
+            <div class="menu__content">
+                <ul class="menu--dropdown">
+                    <li v-for="(item,index) in $root.sharedRootCategories" :key="index" :class="item.children.length > 0 ? 'menu-item-has-children has-mega-menu' : ''">
+                        <a :href="`/${item.slug}`" class="d-flex">
+                            <i class="far fa-star"></i>{{ item.name }}<i class="fas fa-chevron-right ml-auto"></i>
+                        </a>
+                        <div class="mega-menu" v-if="item.children.length > 0">
+                            <div class="mega-menu__column" v-for="(child,index1) in item.children" :key="index1">
+                                <a :href="`/${item.slug}/${child.slug}`"><h4>{{ child.name }}</h4></a>
+                                <ul class="mega-menu__list" v-if="child.children.length > 0">
+                                    <li v-for="(sub,index2) in child.children" :key="index2">
+                                        <a :href="`/${item.slug}/${child.slug}/${sub.slug}`">{{ sub.name }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-light menu--mobile-2" v-else>
             <li class="ant-menu-submenu ant-menu-submenu-inline" v-for="(item,index) in $root.sharedRootCategories" :key="index">
                 <div role="menuitem" class="ant-menu-submenu-title" style="padding-left: 24px;" @click="toggleChild(index)">
@@ -42,7 +66,7 @@
 
 <script>
 export default {
-    props: ['mobile'],
+    props: ['mobile','vertical'],
     methods: {
         toggleChild(id) {
             $(".menuChild-"+id).toggleClass('ant-menu-hidden')

@@ -25,7 +25,7 @@
                         "
                     >
                         <img
-                            class="col-12 no-padding banner-icon"
+                            class="col-12 px-0 banner-icon"
                             :src="
                                 banner.image_url != ''
                                     ? banner.image_url
@@ -45,7 +45,7 @@
                 <slide slot="slide-0">
                     <img
                         loading="lazy"
-                        class="col-12 no-padding banner-icon"
+                        class="col-12 px-0 banner-icon"
                         :src="defaultBanner"
                         alt=""
                     />

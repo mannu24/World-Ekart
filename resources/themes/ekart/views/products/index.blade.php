@@ -100,7 +100,7 @@
                                     @if ($toolbarHelper->getCurrentMode() == 'grid')
                                         <div class="ps-shop-items">
                                             <div class="row">
-                                                <product-card :key="index" :product="product" v-for="(product, index) in products">
+                                                <product-card :key="index" col=true :product="product" v-for="(product, index) in products">
                                                 </product-card>
                                             </div>
                                         </div>

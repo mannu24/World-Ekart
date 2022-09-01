@@ -81,19 +81,24 @@
             </div>
         </div>
     </div>
-@endsection
-@section('full-content-wrapper')
-<div class="full-content-wrapper">
-    @if ($velocityMetaData)
+{{-- @endsection
+@section('full-content-wrapper') --}}
+    {{-- @if ($velocityMetaData)
         {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
-    @else
-        @include('shop::home.advertisements.advertisement-four')
+    @else --}}
+        <div class="col-12 py-5">
+            @include('shop::home.advertisements.advertisement-four')
+        </div>
         @include('shop::home.featured-products')
-        @include('shop::home.advertisements.advertisement-three')
+        <div class="col-12 py-5">
+            @include('shop::home.advertisements.advertisement-three')
+        </div>
         @include('shop::home.new-products')
-        @include('shop::home.advertisements.advertisement-two')
-    @endif
-</div>
-
+        <div class="col-12 py-5">
+            @include('shop::home.advertisements.advertisement-two')
+        </div>
+        @include('shop::home.customer-reviews')
+        {{-- @include('shop::home.hot-categories') --}}
+        {{-- @endif --}}
 @endsection
 

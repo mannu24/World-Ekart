@@ -2,49 +2,74 @@
     $reviews = app('Webkul\Velocity\Helpers\Helper')->getShopRecentReviews(4);
     $reviewCount = count($reviews);
 @endphp
-
-<div class="container-fluid reviews-container">
-    @if ($reviewCount)
-        <card-list-header
-            heading="{{ __('velocity::app.home.customer-reviews') }}"
-        ></card-list-header>
-
-        <div class="row">
-            @foreach ($reviews as $key => $review)
-                <div class="col-lg-3 col-md-12 review-wrapper">
-                    <div class="card no-padding">
-                        <div class="review-info">
-                            <div class="customer-info">
-                                <div class="align-vertical-top">
-                                    <span class="customer-name fs20 display-inbl">
-                                        {{ strtoupper(substr( $review['name'], 0, 1 )) }}
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <h3 class="fs20 fw6 no-margin display-block">
-                                        {{ $review['name'] }}
-                                    </h3>
-
-                                    <div class="product-info fs16">
-                                        <span>{{ __('velocity::app.products.reviewed') }}- <a class="remove-decoration link-color" href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}">{{$review->product->name}}</a></span>
-                                    </div>
-                                </div>
+<div class="ps-product-list">
+    <div class="ps-container">
+        @if ($reviewCount)
+            <card-list-header heading="{{ __('velocity::app.home.customer-reviews') }}"></card-list-header>
+            <div class="row">
+                @foreach ($reviews as $review)
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <div class="review-block mt-5">
+                            <h4 class="col-12">{{ $review->title }}</h4>
+                            <star-ratings :ratings="{{ $review->rating }}" push-class="mr-10 h4 col-lg-12"></star-ratings>
+                            <div class="review-description col-lg-12">
+                                <span>{{ $review->comment }}</span>
                             </div>
-
-                            <div class="star-ratings fs16">
-                                <star-ratings :ratings="{{ $review['rating'] }}"></star-ratings>
+                            <div class="image col-lg-12">
+                                @if (count($review->images) > 0)
+                                    @foreach ($review->images as $image)
+                                        <img class="image" src="{{ $image->url }}" style="height: 50px; width: 50px; margin: 5px;">
+                                    @endforeach
+                                @endif
                             </div>
-
-                            <div class="review-description">
-                                <p class="review-content fs16">{{ $review['comment'] }}</p>
+                            <div class="col-lg-12 mt-5">
+                                @if ("{{ $review->name }}")
+                                    <span>{{ __('velocity::app.products.review-by') }} -</span>
+                                    <label>{{ $review->name }},</label>
+                                @endif
+    
+                                <span>{{ core()->formatDate($review->created_at, 'F d, Y') }}
+                                </span>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-    @endif
+                @endforeach
+                {{-- @foreach ($reviews as $key => $review)
+                    <div class="col-lg-3 col-md-12 review-wrapper">
+                        <div class="card no-padding">
+                            <div class="review-info">
+                                <div class="customer-info">
+                                    <div class="align-vertical-top">
+                                        <span class="customer-name fs20 display-inbl">
+                                            {{ strtoupper(substr( $review['name'], 0, 1 )) }}
+                                        </span>
+                                    </div>
+
+                                    <div>
+                                        <h3 class="fs20 fw6 no-margin display-block">
+                                            {{ $review['name'] }}
+                                        </h3>
+
+                                        <div class="product-info fs16">
+                                            <span>{{ __('velocity::app.products.reviewed') }}- <a class="remove-decoration link-color" href="{{ route('shop.productOrCategory.index', $review->product->url_key) }}">{{$review->product->name}}</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="star-ratings fs16">
+                                    <star-ratings :ratings="{{ $review['rating'] }}"></star-ratings>
+                                </div>
+
+                                <div class="review-description">
+                                    <p class="review-content fs16">{{ $review['comment'] }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach --}}
+            </div>
+        @endif
+    </div>
 </div>
 
 @push('scripts')

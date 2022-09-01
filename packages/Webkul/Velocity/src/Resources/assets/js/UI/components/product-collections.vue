@@ -1,47 +1,40 @@
 <template>
-    <div class="container-fluid">
-        <shimmer-component v-if="isLoading"></shimmer-component>
-
-        <template v-else-if="productCollections.length > 0">
-            <card-list-header
-                :heading="isCategory ? categoryDetails.name : productTitle"
+    <div class="ps-product-list">
+        <div class="ps-container">
+            <shimmer-component v-if="isLoading"></shimmer-component>
+            <template v-else-if="productCollections.length > 0">
+                <card-list-header :heading="isCategory ? categoryDetails.name : productTitle" 
                 :view-all="isCategory ? `${this.baseUrl}/${categoryDetails.url_path}` : ''">
-            </card-list-header>
+                </card-list-header>
+                <div class="row" :class="localeDirection">
+                    <div
+                        class="col-md-12 no-padding carousel-products"
+                        :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
+                        <carousel-component
+                            :slides-per-page="slidesPerPage"
+                            pagination-enabled="hide"
+                            :id="isCategory ? `${categoryDetails.name}-carousel` : productId"
+                            :locale-direction="localeDirection"
+                            :slides-count="productCollections.length"
+                            v-if="count != 0">
 
-            <div class="row" :class="localeDirection">
-                <div
-                    class="col-md-12 no-padding carousel-products"
-                    :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
-                    <carousel-component
-                        :slides-per-page="slidesPerPage"
-                        pagination-enabled="hide"
-                        :id="isCategory ? `${categoryDetails.name}-carousel` : productId"
-                        :locale-direction="localeDirection"
-                        :slides-count="productCollections.length"
-                        v-if="count != 0">
+                            <slide :key="index" :slot="`slide-${index}`" v-for="(product, index) in productCollections">
+                                <product-card :list="list" col=false :product="product"></product-card>
+                            </slide>
+                        </carousel-component>
+                    </div>
 
-                        <slide
-                            :key="index"
-                            :slot="`slide-${index}`"
-                            v-for="(product, index) in productCollections">
-                            <product-card
-                                :list="list"
-                                :product="product">
-                            </product-card>
-                        </slide>
-                    </carousel-component>
+                    <recently-viewed
+                        :title="recentlyViewedTitle"
+                        :no-data-text="noDataText"
+                        :add-class="`col-lg-3 col-md-12 ${localeDirection}`"
+                        quantity="3"
+                        add-class-wrapper=""
+                        v-if="showRecentlyViewed === 'true'">
+                    </recently-viewed>
                 </div>
-
-                <recently-viewed
-                    :title="recentlyViewedTitle"
-                    :no-data-text="noDataText"
-                    :add-class="`col-lg-3 col-md-12 ${localeDirection}`"
-                    quantity="3"
-                    add-class-wrapper=""
-                    v-if="showRecentlyViewed === 'true'">
-                </recently-viewed>
-            </div>
-        </template>
+            </template>
+        </div>
     </div>
 </template>
 
