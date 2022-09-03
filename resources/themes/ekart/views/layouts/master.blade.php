@@ -1,61 +1,135 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 
-    <head>
-        {{-- title --}}
-        <title>@yield('page_title')</title>
+<head>
+    {{-- title --}}
+    <title>@yield('page_title')</title>
 
-        {{-- meta data --}}
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta name="base-url" content="{{ url()->to('/') }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{-- meta data --}}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="base-url" content="{{ url()->to('/') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script>
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
 
-        {!! view_render_event('bagisto.shop.layout.head') !!}
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
 
-        {{-- for extra head data --}}
-        @yield('head')
+    function fetch_country() {
+        var fetch_status = localStorage.getItem('fetch_status')
+        // alert('here1')
+        if (fetch_status == undefined || fetch_status == false) {
 
-        {{-- seo meta data --}}
-        @yield('seo')
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
 
-        {{-- fav icon --}}
-        @if ($favicon = core()->getCurrentChannel()->favicon_url)
-            <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
-        @else
-            <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" />
-        @endif
+            function showPosition(position) {
 
-        {{-- all styles --}}
-        @include('shop::layouts.styles')
-    </head>
+                localStorage.setItem('lat', position.coords.latitude)
+                localStorage.setItem('long', position.coords.longitude)
+                // this.long =  position.coords.longitude
+            }
+            // alert('here2')
 
-    <body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction === 'rtl') class="rtl" @endif>
-        {!! view_render_event('bagisto.shop.layout.body.before') !!}
+            get_loc_info()
+        }
 
-        {{-- main app --}}
-        <div id="app">
-            <product-quick-view v-if="$root.quickView"></product-quick-view>
+    }
 
-            <div class="main-container-wrapper">
+    async function get_loc_info() {
+        // alert('here')
+        //    delete axios.defaults.headers.common["X-Requested-With"];
+        //    await axios.get("https://us1.locationiq.com/v1/reverse.php?key=pk.ccd52f9f8b4fee4e363dc8cad72e1c8e&lat=" +
+        //        localStorage.getItem('lat') + "&lon=" + localStorage.getItem('long') + "&format=json").then((
+        //        res) => {
 
-                @section('body-header')
-                    {{-- top nav which contains currency, locale and login header --}}
-                    {{-- @include('shop::layouts.top-nav.index') --}}
+        //        var country_code = res.data.address.country_code.toUpperCase()
+        //        // localStorage.setItem('fetched_country', country_code)
+        //        setCookie('country', country_code, 30)
+        //        localStorage.setItem('fetch_status', true)
+        //        window.location.reload()
+        //    })
 
-                    {!! view_render_event('bagisto.shop.layout.header.before') !!}
+        const response = await fetch(
+            "https://us1.locationiq.com/v1/reverse.php?key=pk.ccd52f9f8b4fee4e363dc8cad72e1c8e&lat=" +
+            localStorage.getItem('lat') + "&lon=" + localStorage.getItem('long') + "&format=json");
+        const myJson = await response.json(); //extract JSON from the http response
+        var country_code = myJson.address.country_code.toUpperCase()
+        setCookie('country', country_code, 30)
+        localStorage.setItem('fetch_status', true)
+        window.location.reload()
+    }
 
-                        {{-- primary header after top nav --}}
-                        @include('shop::layouts.header.index')
+    function c_data() {
+        // alert('jhgfdg')
+        if (getCookie('country') == undefined) {
+            setCookie('country', 'IN', 30)
 
-                    {!! view_render_event('bagisto.shop.layout.header.after') !!}
+        }
+        fetch_country()
 
-                    <div class="main-content-wrapper">
+    }
+    window.onpaint = c_data()
+    </script>
+    {!! view_render_event('bagisto.shop.layout.head') !!}
 
-                        {{-- secondary header --}}
-                        {{-- <header class="row velocity-divide-page vc-header header-shadow active">
+    {{-- for extra head data --}}
+    @yield('head')
+
+    {{-- seo meta data --}}
+    @yield('seo')
+
+    {{-- fav icon --}}
+    @if ($favicon = core()->getCurrentChannel()->favicon_url)
+    <link rel="icon" sizes="16x16" href="{{ $favicon }}" />
+    @else
+    <link rel="icon" sizes="16x16" href="{{ bagisto_asset('images/favicon.ico') }}" />
+    @endif
+
+    {{-- all styles --}}
+    @include('shop::layouts.styles')
+
+</head>
+
+<body @if (core()->getCurrentLocale() && core()->getCurrentLocale()->direction === 'rtl') class="rtl" @endif>
+    {!! view_render_event('bagisto.shop.layout.body.before') !!}
+
+    {{-- main app --}}
+    <div id="app">
+        <product-quick-view v-if="$root.quickView"></product-quick-view>
+
+        <div class="main-container-wrapper">
+
+            @section('body-header')
+            {{-- top nav which contains currency, locale and login header --}}
+            {{-- @include('shop::layouts.top-nav.index') --}}
+
+            {!! view_render_event('bagisto.shop.layout.header.before') !!}
+
+            {{-- primary header after top nav --}}
+            @include('shop::layouts.header.index')
+
+            {!! view_render_event('bagisto.shop.layout.header.after') !!}
+
+            <div class="main-content-wrapper">
+
+                {{-- secondary header --}}
+                {{-- <header class="row velocity-divide-page vc-header header-shadow active">
 
                             mobile header
                             <div class="vc-small-screen container">
@@ -68,72 +142,78 @@
 
                         </header> --}}
 
-                        <div class="row no-gutters">
-                            {{-- <sidebar-component
+                <div class="row no-gutters">
+                    {{-- <sidebar-component
                                 main-sidebar=true
                                 id="sidebar-level-0"
                                 url="{{ url()->to('/') }}"
-                                category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
-                                add-class="category-list-container pt10">
-                            </sidebar-component> --}}
+                    category-count="{{ $velocityMetaData ? $velocityMetaData->sidebar_category_count : 10 }}"
+                    add-class="category-list-container pt10">
+                    </sidebar-component> --}}
 
-                            <div class="col-12 no-padding content" id="home-right-bar-container">
-                                {{-- <div class="container-right row no-margin col-12 no-padding"> --}}
-                                    {!! view_render_event('bagisto.shop.layout.content.before') !!}
+                    <div class="col-12 no-padding content" id="home-right-bar-container">
+                        {{-- <div class="container-right row no-margin col-12 no-padding"> --}}
+                        {!! view_render_event('bagisto.shop.layout.content.before') !!}
 
-                                        @yield('content-wrapper')
+                        @yield('content-wrapper')
 
-                                    {!! view_render_event('bagisto.shop.layout.content.after') !!}
-                                {{-- </div> --}}
-                            </div>
-                        </div>
+                        {!! view_render_event('bagisto.shop.layout.content.after') !!}
+                        {{-- </div> --}}
                     </div>
-                @show
-
-                <div class="container">
-                    {!! view_render_event('bagisto.shop.layout.full-content.before') !!}
-
-                        @yield('full-content-wrapper')
-
-                    {!! view_render_event('bagisto.shop.layout.full-content.after') !!}
                 </div>
             </div>
+            @show
 
-            {{-- overlay loader --}}
-            <velocity-overlay-loader></velocity-overlay-loader>
+            <div class="container">
+                {!! view_render_event('bagisto.shop.layout.full-content.before') !!}
 
-            <go-top bg-color="#fff" :radius="0" fg-color="#333" box-shadow="0px 0px 10px rgba(0, 0, 0, .2)"></go-top>
+                @yield('full-content-wrapper')
+
+                {!! view_render_event('bagisto.shop.layout.full-content.after') !!}
+            </div>
         </div>
 
-        {{-- footer --}}
-        @section('footer')
-            {!! view_render_event('bagisto.shop.layout.footer.before') !!}
+        {{-- overlay loader --}}
+        <velocity-overlay-loader></velocity-overlay-loader>
 
-                @include('shop::layouts.footer.index')
+        <go-top bg-color="#fff" :radius="0" fg-color="#333" box-shadow="0px 0px 10px rgba(0, 0, 0, .2)"></go-top>
+    </div>
 
-            {!! view_render_event('bagisto.shop.layout.footer.after') !!}
-        @show
+    {{-- footer --}}
+    @section('footer')
+    {!! view_render_event('bagisto.shop.layout.footer.before') !!}
 
-        {!! view_render_event('bagisto.shop.layout.body.after') !!}
+    @include('shop::layouts.footer.index')
 
-        {{-- alert container --}}
-        <div id="alert-container"></div>
-        @if (core()->getCurrentChannel()->currencies->count() > 1)
-            <div class="left-corner-dropdown">
-                <select class="form-control shadow text-uppercase" onchange="window.location.href = this.value" aria-label="Locale">
-                    @foreach (core()->getCurrentChannel()->currencies as $currency)
-                        @if (isset($searchQuery) && $searchQuery)
-                            <option value="?{{ $searchQuery }}&currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
-                        @else
-                            <option value="?currency={{ $currency->code }}" {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}</option>
-                        @endif
-                    @endforeach
-                </select>
-                <div class="select-icon-container"><span class="select-icon rango-arrow-down"></span></div>
-            </div>
-        @endif
+    {!! view_render_event('bagisto.shop.layout.footer.after') !!}
+    @show
 
-        {{-- all scripts --}}
-        @include('shop::layouts.scripts')
-    </body>
+    {!! view_render_event('bagisto.shop.layout.body.after') !!}
+
+    {{-- alert container --}}
+    <div id="alert-container"></div>
+    @if (core()->getCurrentChannel()->currencies->count() > 1)
+    <div class="left-corner-dropdown">
+        <select class="form-control shadow text-uppercase" onchange="window.location.href = this.value"
+            aria-label="Locale">
+            @foreach (core()->getCurrentChannel()->currencies as $currency)
+            @if (isset($searchQuery) && $searchQuery)
+            <option value="?{{ $searchQuery }}&currency={{ $currency->code }}"
+                {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}
+            </option>
+            @else
+            <option value="?currency={{ $currency->code }}"
+                {{ $currency->code == core()->getCurrentCurrencyCode() ? 'selected' : '' }}>{{ $currency->code }}
+            </option>
+            @endif
+            @endforeach
+        </select>
+        <div class="select-icon-container"><span class="select-icon rango-arrow-down"></span></div>
+    </div>
+    @endif
+
+    {{-- all scripts --}}
+    @include('shop::layouts.scripts')
+</body>
+
 </html>

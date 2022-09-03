@@ -20,6 +20,7 @@ class ProductRepository extends Repository
      */
     protected $attributeRepository;
 
+
     /**
      * Create a new controller instance.
      *
@@ -32,6 +33,7 @@ class ProductRepository extends Repository
         App $app
     )
     {
+        $this->country = $_COOKIE['country'];
         $this->attributeRepository = $attributeRepository;
 
         parent::__construct($app);
@@ -61,6 +63,7 @@ class ProductRepository extends Repository
             $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
+                        ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
                          ->addSelect('product_flat.*')
                          ->where('product_flat.status', 1)
                          ->where('product_flat.visible_individually', 1)
@@ -87,10 +90,12 @@ class ProductRepository extends Repository
             $locale = core()->getRequestedLocaleCode();
 
             return $query->distinct()
+                        ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
                          ->addSelect('product_flat.*')
                          ->where('product_flat.status', 1)
                          ->where('product_flat.visible_individually', 1)
                          ->where('product_flat.new', 1)
+                         ->where('products.country', $this->country)
                          ->where('product_flat.channel', $channel)
                          ->where('product_flat.locale', $locale)
                          ->orderBy('product_id', 'desc');
