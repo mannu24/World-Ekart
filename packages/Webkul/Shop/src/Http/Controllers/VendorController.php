@@ -61,7 +61,7 @@ class VendorController extends Controller
             'twitter_link' => 'required',
             'youtube_link' => 'required',
             'gstin' => 'required',
-            'vat_id' => 'required',
+            // 'vat_id' => 'required',
             'owner_name' => 'required',
             'owner_email' => 'required|email',
             'owner_phone' => 'required',
