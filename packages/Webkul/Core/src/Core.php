@@ -673,10 +673,17 @@ class Core
      */
     public function currencySymbol($code)
     {
-        // dd(\NumberFormatter::CURRENCY);
-        // $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
+        $type = gettype($code);
+        // dd($type);
+        if($type == 'string'){
+            $formatter = new \NumberFormatter(app()->getLocale() . '@currency=' . $code, \NumberFormatter::CURRENCY);
+            // dd(\NumberFormatter::CURRENCY_SYMBOL);
+            return $formatter;
+        }
+        else{
 
-        return $code->symbol;
+            return $code->symbol;
+        }
     }
 
     /**

@@ -98,7 +98,7 @@
             @include('shop::home.advertisements.advertisement-two')
         </div>
         @include('shop::home.customer-reviews')
-        {{-- @include('shop::home.hot-categories') --}}
+        @include('shop::home.hot-categories')
         {{-- @endif --}}
 @endsection
 
