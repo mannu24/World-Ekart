@@ -64,14 +64,15 @@ class ProductRepository extends Repository
 
             return $query->distinct()
                         ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
-                         ->addSelect('product_flat.*')
-                         ->where('product_flat.status', 1)
-                         ->where('product_flat.visible_individually', 1)
-                         ->where('product_flat.featured', 1)
-                         ->where('product_flat.channel', $channel)
-                         ->where('product_flat.locale', $locale)
-                         ->orderBy('product_id', 'desc');
-        })->paginate($count);
+                        ->addSelect('product_flat.*')
+                        ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
+                        ->where('product_flat.featured', 1)
+                        ->where('products.country', $this->country)
+                        ->where('product_flat.channel', $channel)
+                        ->where('product_flat.locale', $locale)
+                        ->orderBy('product_id', 'desc');
+                        })->paginate($count);
 
         return $results;
     }

@@ -3091,26 +3091,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['slug'],
-  data: function data() {
-    return {
-      hotCategoryDetails: null
-    };
-  },
-  mounted: function mounted() {
-    this.getHotCategories();
-  },
-  methods: {
-    getHotCategories: function getHotCategories() {
-      var _this = this;
-
-      this.$http.get("".concat(this.baseUrl, "/fancy-category-details/").concat(this.slug)).then(function (response) {
-        if (response.data.status) _this.hotCategoryDetails = response.data.categoryDetails;
-      })["catch"](function (error) {
-        console.log('something went wrong');
-      });
-    }
-  }
+  props: ['cat']
 });
 
 /***/ }),
@@ -5220,21 +5201,37 @@ var render = function render() {
       _c = _vm._self._c;
 
   return _c("div", {
-    staticClass: "container-fluid hot-categories-container"
+    staticClass: "ps-product-list"
+  }, [_c("div", {
+    staticClass: "ps-container"
   }, [_c("card-list-header", {
     attrs: {
       heading: _vm.heading
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "row"
-  }, _vm._l(_vm.categories, function (category, index) {
-    return _c("hot-category", {
+  }), _vm._v(" "), _c("div", {
+    staticClass: "row mt-4"
+  }, [_c("div", {
+    staticClass: "col-md-12 no-padding carousel-products"
+  }, [_c("carousel-component", {
+    attrs: {
+      "slides-per-page": 5,
+      "slides-count": _vm.categories.length
+    }
+  }, _vm._l(_vm.categories.slice(0, 5), function (category, index) {
+    return _c("slide", {
       key: index,
       attrs: {
-        slug: category
+        slot: "slide-".concat(index)
+      },
+      slot: "slide-".concat(index)
+    }, [_c("hot-category", {
+      attrs: {
+        cat: category
       }
-    });
-  }), 1)], 1);
+    })], 1);
+  }), 1)], 1)])], 1)]);
 };
 
 var staticRenderFns = [];
@@ -5259,42 +5256,26 @@ var render = function render() {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _vm.hotCategoryDetails ? _c("div", {
-    staticClass: "col-lg-3 col-md-12 hot-category-wrapper"
+  return _c("div", {
+    staticClass: "px-2"
   }, [_c("div", {
-    staticClass: "card"
-  }, [_c("div", {
-    staticClass: "row velocity-divide-page"
-  }, [_c("div", {
-    staticClass: "left"
-  }, [_c("img", {
-    attrs: {
-      src: _vm.hotCategoryDetails.category_icon_url,
-      alt: ""
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "right"
-  }, [_c("h3", {
-    staticClass: "fs20 clr-light text-uppercase"
+    staticClass: "ps-block--category"
   }, [_c("a", {
-    staticClass: "unset",
+    staticClass: "ps-block__overlay",
     attrs: {
-      href: "${slug}"
+      href: "".concat(_vm.baseUrl, "/").concat(_vm.cat.slug)
     }
-  }, [_vm._v("\n                        " + _vm._s(_vm.hotCategoryDetails.name) + "\n                    ")])]), _vm._v(" "), _c("ul", {
+  }), _vm._v(" "), _vm.cat.image_path ? _c("img", {
     attrs: {
-      type: "none"
+      src: _vm.cat.image_path,
+      alt: "martfury"
     }
-  }, _vm._l(_vm.hotCategoryDetails.children, function (subCategory, index) {
-    return _c("li", {
-      key: index
-    }, [_c("a", {
-      staticClass: "remove-decoration normal-text",
-      attrs: {
-        href: "".concat(_vm.slug, "/").concat(subCategory.slug)
-      }
-    }, [_vm._v("\n                            " + _vm._s(subCategory.name) + "\n                        ")])]);
-  }), 0)])])])]) : _vm._e();
+  }) : _c("img", {
+    attrs: {
+      src: "".concat(_vm.baseUrl, "/themes/ekart/assets/images/not-found.jpg"),
+      alt: "martfury"
+    }
+  }), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.cat.name))])])]);
 };
 
 var staticRenderFns = [];
@@ -6210,7 +6191,7 @@ var render = function render() {
     staticClass: "row",
     "class": _vm.localeDirection
   }, [_c("div", {
-    staticClass: "col-md-12 no-padding carousel-products",
+    staticClass: "col-md-12 px-0 carousel-products",
     "class": _vm.showRecentlyViewed === "true" ? "with-recent-viewed col-lg-9" : "without-recent-viewed col-lg-12"
   }, [_vm.count != 0 ? _c("carousel-component", {
     attrs: {
