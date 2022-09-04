@@ -48,8 +48,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     //     'view' => 'shop::vendor.stores',
     // ])->name('shop.vendor.stores');
 
-    Route::get('/vendor-products/{vendorId}', [VendorController::class, 'getProducts'])
-    ->name('velocity.category.products');
 
 
     Route::get('/store/{name}', [VendorController::class, 'view_store'])->defaults('_config', [

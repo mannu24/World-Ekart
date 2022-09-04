@@ -53,7 +53,7 @@
                 <div class="ps-section__left">
                     <div class="ps-block--vendor">
                         <div class="ps-block__thumbnail">
-                            @if (file_exists($vendor->profile_image))
+                            @if (file_exists(public_path($vendor->profile_image)))
                                 <img src="{{ asset($vendor->profile_image) }}" alt="martfury">
                             @else
                                 <img src="{{ asset('themes/ekart/assets/images/not-found.jpg') }}" alt="martfury">

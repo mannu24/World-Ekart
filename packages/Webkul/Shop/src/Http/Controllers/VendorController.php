@@ -133,9 +133,10 @@ class VendorController extends Controller
     public function getTopSellingProducts($id) {
         $p_ids = DB::table('products')->where('user_id', $id)->pluck('id');    
         return $this->orderItemRepository->getModel()
-            // ->leftJoin('product_flat','product_flat.product_id','=','product.id')
+            ->leftJoin('product_flat','product_flat.product_id','=','products.id')
             ->whereIn('product_id',$p_ids)
             ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect('id', 'product_id', 'product_type', 'name')
             ->addSelect('id', 'product_id', 'product_type', 'name')
             ->whereNull('parent_id')
             ->groupBy('product_id')

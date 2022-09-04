@@ -188,12 +188,12 @@
                                 
                                     <div class="control-group form-group custom-file col-md-6 col-lg-4" :class="[errors.has('profile_image') ? 'has-error' : '']">
                                         <label for="profile_image" class="text-uppercase mr-md-5 custom-file-label" style="padding-top: 8px">profile image</label>
-                                        <input type="file" accept="" class="custom-file-input" name="profile_image" v-validate="'required'" value="{{ old('profile_image') }}">
+                                        <input type="file" accept="image/*" class="custom-file-input" name="profile_image" v-validate="'required'" value="{{ old('profile_image') }}">
                                         <span class="control-error" v-if="errors.has('profile_image')">@{{ errors.first('profile_image') }}</span>
                                     </div>
                                     <div class="control-group form-group custom-file col-md-6 col-lg-4" :class="[errors.has('store_images') ? 'has-error' : '']">
                                         <label for="store_images" class="text-uppercase mr-md-5 custom-file-label" style="padding-top: 8px">store images</label>
-                                        <input type="file" accept="" multiple class="custom-file-input" name="store_images[]" v-validate="'required'" value="{{ old('store_images') }}">
+                                        <input type="file" accept="image/*" multiple class="custom-file-input" name="store_images[]" v-validate="'required'" value="{{ old('store_images') }}">
                                         <span class="control-error" v-if="errors.has('store_images')">@{{ errors.first('store_images') }}</span>
                                     </div>
                                 </div>
