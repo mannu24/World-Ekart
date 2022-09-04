@@ -50,10 +50,11 @@
                 localStorage.getItem('lat') + "&lon=" + localStorage.getItem('long') + "&format=json");
 
             const myJson = await response.json(); //extract JSON from the http response
+            console.log(myJson);
             var country_code = myJson.address.country_code.toUpperCase()
             setCookie('country', country_code, 30)
             localStorage.setItem('fetch_status', true)
-            window.location.reload()
+            // window.location.reload()
         }
 
         function c_data() {
@@ -173,8 +174,7 @@
     <div id="alert-container"></div>
     @if (core()->getCurrentChannel()->currencies->count() > 1)
     <div class="left-corner-dropdown">
-        <select class="form-control shadow text-uppercase" onchange="window.location.href = this.value"
-            aria-label="Locale">
+        <select class="form-control shadow text-uppercase" onchange="window.location.href = this.value" aria-label="Locale">
             @foreach (core()->getCurrentChannel()->currencies as $currency)
             @if (isset($searchQuery) && $searchQuery)
             <option value="?{{ $searchQuery }}&currency={{ $currency->code }}"

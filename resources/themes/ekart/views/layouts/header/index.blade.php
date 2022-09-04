@@ -1,15 +1,4 @@
 <header class="header header--1" id="headerSticky">
-    {{-- <nav class="navigation">
-        <div class="ps-container">
-            <div class="navigation__right justify-content-end">
-                <ul class="navigation__extra">
-                    <li><a href="{{ route('shop.cms.page', 'become-a-vendor') }}">Sell on WorldEkart</a></li>
-                    <li><a href="{{ route('track-order') }}">Track your Order</a></li>
-                    @include('shop::layouts.top-nav.locale-currency')
-                </ul>
-            </div>
-        </div>
-    </nav> --}}
     <div class="header__top">
         <div class="ps-container">
             <div class="header__left">
@@ -23,23 +12,12 @@
                 <mega-menu :mobile="false" :vertical="true"></mega-menu>
             </div>
             <div class="header__center">
-                {{-- @include('shop::layouts.particals.search-bar') --}}
                 <searchbar-component route="{{ route('shop.search.index') }}"></searchbar-component>
             </div>
             <div class="header__right">
                 <div class="header__actions">
-                    {{-- <a class="header__extra" href="/account/compare"><i class="icon-chart-bars"></i><span><i>0</i></span></a> --}}
-                    {{-- <a class="header__extra" href="/account/wishlist"><i class="icon-heart"></i><span><i>0</i></span></a> --}}
-                    {{-- @include('shop::partials.wishlist', ['isText' => false])
-                    @include('shop::checkout.cart.mini-cart') --}}
                     @include('shop::layouts.particals.wishlist', ['isText' => true])
                     @include('shop::checkout.cart.mini-cart')
-                    {{-- <div class="ps-cart--mini">
-                        <a class="header__extra" href="#"><i class="icon-bag2"></i><span><i>0</i></span></a>
-                        <div class="ps-cart__content">
-                            <div class="ps-cart__items"><span>No products in cart</span></div>
-                        </div>
-                    </div> --}}
                     @guest('customer')
                         <div class="ps-block--user-header">
                             <div class="ps-block__left"><i class="icon-user"></i></div>

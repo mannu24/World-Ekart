@@ -89,51 +89,43 @@
             @if (request('image-search'))
                 <image-search-result-component></image-search-result-component>
             @endif
-
-            {{-- @if ($results && $results->count())
-                <div class="ps-shopping__header">
-                    <div class="ps-shopping__actions flex-column flex-md-row">
-                        <p class="w-100"><strong class="mr-2">{{ $results->total() }}</strong>{{ __('shop::app.search.found-result') }}</p>
-                        @include ('shop::products.list.toolbar')
-                    </div>
-                </div>
-            @endif --}}
-
-            @if (! $results)
-                <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
-                <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
-            @else
-                @if ($results->isEmpty())
-                    <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
-                    <span class="col-12">{{ __('shop::app.search.no-results') }}</span>
-                @else
-                    @if ($results->total() == 1)
-                        <h5 class="col-12 mb-20">
-                            {{ $results->total() }} {{ __('shop::app.search.found-result') }}
-                        </h5>
-                    @else
-                        <h2 class="col-12 mb-20">
-                            {{ $results->total() }} {{ __('shop::app.search.found-results') }}
-                        </h2>
-                    @endif
-
-                    @foreach ($results as $productFlat)
-                        @if ($toolbarHelper->getCurrentMode() == 'grid')
-                            @include('shop::products.list.card', [
-                                'cardClass' => 'category-product-image-container',
-                                'product' => $productFlat->product,
-                            ])
+            <div class="ps-shopping__header">
+                <div class="ps-shopping__actions flex-column flex-md-row">
+                    <p class="w-100"><strong class="mr-2">{{ $results->total() }}</strong>
+                        @if ($results->total() == 1)
+                            {{ __('shop::app.search.found-result') }}
                         @else
-                            @include('shop::products.list.card', [
-                                'list' => true,
-                                'product' => $productFlat->product,
-                            ])
-                        @endif
-                    @endforeach
-
-                    @include('ui::datagrid.pagination')
-                @endif
-            @endif
+                            {{ __('shop::app.search.found-results') }}
+                        @endif    
+                    </p>
+                    @include ('shop::products.list.toolbar')
+                </div>
+            </div>
+            <div class="ps-shopping__content vendor-store">
+                <div class="row no-gutters">
+                    @if (!$results->count())
+                        <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
+                        <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
+                    @else
+                        @foreach ($results as $productFlat)
+                            @if ($toolbarHelper->getCurrentMode() == 'grid')
+                                @include('shop::products.list.card', [
+                                    'cardClass' => 'category-product-image-container',
+                                    'product' => $productFlat->product,
+                                ])
+                            @else
+                                <div class="col-12">
+                                    @include('shop::products.list.card', [
+                                        'list' => true,
+                                        'product' => $productFlat->product,
+                                    ])
+                                </div>
+                            @endif
+                        @endforeach
+                        @include('ui::datagrid.pagination')
+                    @endif
+                </div>
+            </div>
         </section>
     </script>
 
