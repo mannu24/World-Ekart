@@ -308,28 +308,26 @@ class DashboardController extends Controller
             ->orderBy('total_qty_ordered', 'DESC')
             ->limit(5)
             ->get();
+        }
+        else{
+            if (auth()->guard('admin')->user()->role_id != 1) {
+                $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');    
             }
             else{
-                if (auth()->guard('admin')->user()->role_id != 1) {
-                    $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
-        
-                }
-                else{
-                    $p_ids = DB::table('products')->pluck('id');
-                }
-                return $this->orderItemRepository->getModel()
-                    ->whereIn('product_id',$p_ids)
-                    ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
-                    ->addSelect('id', 'product_id', 'product_type', 'name')
-                    ->where('order_items.created_at', '>=', $this->startDate)
-                    ->where('order_items.created_at', '<=', $this->endDate)
-                    ->whereNull('parent_id')
-                    ->groupBy('product_id')
-                    ->orderBy('total_qty_ordered', 'DESC')
-                    ->limit(5)
-                    ->get();
+                $p_ids = DB::table('products')->pluck('id');
             }
-        
+            return $this->orderItemRepository->getModel()
+                ->whereIn('product_id',$p_ids)
+                ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+                ->addSelect('id', 'product_id', 'product_type', 'name')
+                ->where('order_items.created_at', '>=', $this->startDate)
+                ->where('order_items.created_at', '<=', $this->endDate)
+                ->whereNull('parent_id')
+                ->groupBy('product_id')
+                ->orderBy('total_qty_ordered', 'DESC')
+                ->limit(5)
+                ->get();
+        }
     }
 
     /**

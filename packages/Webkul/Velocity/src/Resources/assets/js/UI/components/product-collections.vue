@@ -8,7 +8,7 @@
                 </card-list-header>
                 <div class="row" :class="localeDirection">
                     <div
-                        class="col-md-12 px-0 carousel-products"
+                        class="col-md-12 carousel-products"
                         :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
                         <carousel-component
                             :slides-per-page="slidesPerPage"

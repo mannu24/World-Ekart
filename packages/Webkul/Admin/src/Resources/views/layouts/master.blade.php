@@ -2,7 +2,7 @@
 <html lang="{{ config('app.locale') }}">
     <head>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <title>@yield('page_title')</title>
 
         <meta charset="utf-8">
@@ -95,9 +95,7 @@
                 listLastElement = $('.menubar li:last-child').offset();
 
                 if (listLastElement) {
-                    alert('here1')
                     lastElementOfNavBar = listLastElement.top;
-                    console.log("kjhjkh");
                 }
 
                 navbarTop = $('.navbar-left').css("top");
@@ -114,17 +112,12 @@
                 pageContentHeight = $('.page-content').height();
 
                 if (menubarHeight <= windowHeight) {
-                    alert('here2')
-
                     differenceInHeight = windowHeight - menubarHeight;
                 } else {
-                    alert('here3')
-
                     differenceInHeight = menubarHeight - windowHeight;
                 }
 
                 if (menubarHeight > windowHeight) {
-                    alert('her4')
                     document.addEventListener("keydown", function(event) {
                         if ((event.keyCode == 38) && count <= 0) {
                             count = count + moveDown;

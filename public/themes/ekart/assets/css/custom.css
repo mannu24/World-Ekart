@@ -727,7 +727,7 @@ a:visited, a:link {
 
 .left-corner-dropdown {
     position: fixed;
-    bottom: 5%;
+    bottom: 30px;
     left: 5%;
 }
 
@@ -735,7 +735,7 @@ a:visited, a:link {
     background-color: #fff;
     padding: 5px 10px;
     height: 40px;
-    border-radius: 15%;
+    border-radius: 10px;
 }
 .slides-container .VueCarousel .VueCarousel-inner {
     padding-top: 0;
@@ -757,4 +757,21 @@ a:visited, a:link {
 
 .ps-block--category {
     position: relative;
+}
+.ps-list--social-color li a.youtube {
+    background-color: #ff0000;
+}
+
+.ps-list--social-color li a.youtube:hover {
+    background-color: #ff0000bb;
+}
+.ps-list--social-color li a.instagram {
+    background-color: #ff00ff;
+}
+
+.ps-list--social-color li a.instagram:hover {
+    background-color: #ff00ffbb;
+}
+.hot-cat .VueCarousel .VueCarousel-inner {
+    justify-content: start;
 }

@@ -155,7 +155,7 @@
         {{-- overlay loader --}}
         <velocity-overlay-loader></velocity-overlay-loader>
 
-        <go-top bg-color="#fff" :radius="0" fg-color="#333" box-shadow="0px 0px 10px rgba(0, 0, 0, .2)"></go-top>
+        <go-top bg-color="#fff" :bottom="30" :radius="10" fg-color="#333" box-shadow="0px 0px 10px rgba(0, 0, 0, .2)"></go-top>
     </div>
 
     {{-- footer --}}

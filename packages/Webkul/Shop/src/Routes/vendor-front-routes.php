@@ -44,7 +44,15 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::vendor.save',
     ])->name('shop.vendor.save');
 
-    Route::get('/store/{name}', [VendorController::class, 'store'])->defaults('_config', [
-        'view' => 'shop::vendor.store',
-    ])->name('shop.vendor.page');
+    // Route::get('/stores', [VendorController::class, 'stores'])->defaults('_config', [
+    //     'view' => 'shop::vendor.stores',
+    // ])->name('shop.vendor.stores');
+
+    Route::get('/vendor-products/{vendorId}', [VendorController::class, 'getProducts'])
+    ->name('velocity.category.products');
+
+
+    Route::get('/store/{name}', [VendorController::class, 'view_store'])->defaults('_config', [
+        'view' => 'shop::vendor.store-page',
+    ])->name('shop.vendor.store-page');
 });
