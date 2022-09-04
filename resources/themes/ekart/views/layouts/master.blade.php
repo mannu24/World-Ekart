@@ -13,78 +13,57 @@
     <meta name="base-url" content="{{ url()->to('/') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script>
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-    }
-
-    function setCookie(name, value, days) {
-        var expires = "";
-        if (days) {
-            var date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            expires = "; expires=" + date.toUTCString();
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
         }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
-    }
 
-    function fetch_country() {
-        var fetch_status = localStorage.getItem('fetch_status')
-        // alert('here1')
-        if (fetch_status == undefined || fetch_status == false) {
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition);
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
             }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
 
-            function showPosition(position) {
+        function fetch_country() {
+            var fetch_status = localStorage.getItem('fetch_status')
+            if (fetch_status == undefined || fetch_status == false) {
 
-                localStorage.setItem('lat', position.coords.latitude)
-                localStorage.setItem('long', position.coords.longitude)
-                // this.long =  position.coords.longitude
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                }
+                function showPosition(position) {
+                    localStorage.setItem('lat', position.coords.latitude)
+                    localStorage.setItem('long', position.coords.longitude)
+                }
+                get_loc_info()
             }
-            // alert('here2')
-
-            get_loc_info()
         }
 
-    }
+        async function get_loc_info() {
+            const response = await fetch(
+                "https://us1.locationiq.com/v1/reverse.php?key=pk.ccd52f9f8b4fee4e363dc8cad72e1c8e&lat=" +
+                localStorage.getItem('lat') + "&lon=" + localStorage.getItem('long') + "&format=json");
 
-    async function get_loc_info() {
-        // alert('here')
-        //    delete axios.defaults.headers.common["X-Requested-With"];
-        //    await axios.get("https://us1.locationiq.com/v1/reverse.php?key=pk.ccd52f9f8b4fee4e363dc8cad72e1c8e&lat=" +
-        //        localStorage.getItem('lat') + "&lon=" + localStorage.getItem('long') + "&format=json").then((
-        //        res) => {
-
-        //        var country_code = res.data.address.country_code.toUpperCase()
-        //        // localStorage.setItem('fetched_country', country_code)
-        //        setCookie('country', country_code, 30)
-        //        localStorage.setItem('fetch_status', true)
-        //        window.location.reload()
-        //    })
-
-        const response = await fetch(
-            "https://us1.locationiq.com/v1/reverse.php?key=pk.ccd52f9f8b4fee4e363dc8cad72e1c8e&lat=" +
-            localStorage.getItem('lat') + "&lon=" + localStorage.getItem('long') + "&format=json");
-        const myJson = await response.json(); //extract JSON from the http response
-        var country_code = myJson.address.country_code.toUpperCase()
-        setCookie('country', country_code, 30)
-        localStorage.setItem('fetch_status', true)
-        window.location.reload()
-    }
-
-    function c_data() {
-        // alert('jhgfdg')
-        if (getCookie('country') == undefined) {
-            setCookie('country', 'IN', 30)
-
+            const myJson = await response.json(); //extract JSON from the http response
+            var country_code = myJson.address.country_code.toUpperCase()
+            setCookie('country', country_code, 30)
+            localStorage.setItem('fetch_status', true)
+            window.location.reload()
         }
-        fetch_country()
 
-    }
-    window.onpaint = c_data()
+        function c_data() {
+            if (getCookie('country') == undefined) {
+                setCookie('country', 'IN', 30)
+            }
+            fetch_country()
+        }
+        window.onpaint = c_data()
+
     </script>
     {!! view_render_event('bagisto.shop.layout.head') !!}
 

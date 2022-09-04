@@ -27,11 +27,13 @@
     @endauth
 
     @guest('customer')
-        <form id="wishlist-{{ $product->product_id }}" action="{{ route('customer.wishlist.add', $product->product_id) }}" method="POST">
-            @csrf
-        </form>
-        <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
-            onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
-            <wishlist-component active="false"></wishlist-component>
-        </a>
+        <div>
+            <form id="wishlist-{{ $product->product_id }}" action="{{ route('customer.wishlist.add', $product->product_id) }}" method="POST">
+                @csrf
+            </form>
+            <a href="javascript:void(0);" data-toggle="tooltip" data-placement="top" title="{{ __('velocity::app.shop.wishlist.add-wishlist-text') }}"
+                onclick="document.getElementById('wishlist-{{ $product->product_id }}').submit();">
+                <wishlist-component active="false"></wishlist-component>
+            </a>
+        </div>
     @endauth

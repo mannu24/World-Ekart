@@ -754,3 +754,7 @@ a:visited, a:link {
     height: 70vh !important;
     object-fit: cover;
 }
+
+.ps-block--category {
+    position: relative;
+}
