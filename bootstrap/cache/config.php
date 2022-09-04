@@ -5454,8 +5454,8 @@
     ),
     'google' => 
     array (
-      'client_id' => '1081777222813-5ljc0s0kls4ojeglmfgtgq9i2pq0vaqs.apps.googleusercontent.com',
-      'client_secret' => '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',
+      'client_id' => '906960171751-457onoth2mj1s2v2md0ja89cdn100fks.apps.googleusercontent.com',
+      'client_secret' => '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',
       'redirect' => 'http://localhost:8000/customer/social-login/google/callback',
     ),
     'linkedin' => 

@@ -2,9 +2,9 @@
     display: none;
     min-width: 200px;
     position: fixed;
-    top: auto;
-    bottom:5px;
-    /* height: calc( 100vh - 20px ); */
+    top: 10px;
+    /* bottom:5px; */
+    height: calc( 100vh - 20px );
     left: 56px;
     z-index: 1000;
     background-color: #fff;
