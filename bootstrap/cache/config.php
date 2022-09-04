@@ -1347,6 +1347,16 @@
       'default_rate' => '0',
       'class' => 'Webkul\\Shipping\\Carriers\\Free',
     ),
+    'dhl' => 
+    array (
+      'code' => 'dhl',
+      'title' => 'DHL Shipping',
+      'description' => 'DHL Shipping',
+      'active' => true,
+      'default_rate' => '15',
+      'type' => 'per_unit',
+      'class' => 'Webkul\\DHLShipping\\Carriers\\Dhl',
+    ),
   ),
   'concord' => 
   array (
@@ -3548,17 +3558,395 @@
     ),
     74 => 
     array (
+      'key' => 'sales',
+      'name' => 'admin::app.admin.system.sales',
+      'sort' => 5,
+    ),
+    75 => 
+    array (
+      'key' => 'sales.carriers',
+      'name' => 'admin::app.admin.system.shipping-methods',
+      'sort' => 1,
+    ),
+    76 => 
+    array (
+      'key' => 'sales.carriers.dhl',
+      'name' => 'dhl::app.admin.system.dhl',
+      'sort' => 3,
+      'fields' => 
+      array (
+        0 => 
+        array (
+          'name' => 'title',
+          'title' => 'dhl::app.admin.system.title',
+          'type' => 'depends',
+          'depend' => 'active:1',
+          'validation' => 'required_if:active,1',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        1 => 
+        array (
+          'name' => 'description',
+          'title' => 'admin::app.admin.system.description',
+          'type' => 'textarea',
+          'channel_based' => true,
+          'locale_based' => false,
+        ),
+        2 => 
+        array (
+          'name' => 'active',
+          'title' => 'dhl::app.admin.system.enable-checkout',
+          'type' => 'boolean',
+          'validation' => 'required',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'is_calculate_tax',
+          'title' => 'admin::app.admin.system.calculate-tax',
+          'type' => 'boolean',
+          'validation' => 'required',
+          'channel_based' => false,
+          'locale_based' => false,
+        ),
+        4 => 
+        array (
+          'name' => 'sandbox_mode',
+          'title' => 'dhl::app.admin.system.sandbox-mode',
+          'type' => 'boolean',
+          'validation' => 'required',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        5 => 
+        array (
+          'name' => 'access_id',
+          'title' => 'dhl::app.admin.system.access-id',
+          'type' => 'depends',
+          'depend' => 'active:1',
+          'validation' => 'required_if:active,1',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        6 => 
+        array (
+          'name' => 'password',
+          'title' => 'dhl::app.admin.system.password',
+          'type' => 'depends',
+          'depend' => 'active:1',
+          'validation' => 'required_if:active,1',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        7 => 
+        array (
+          'name' => 'account_number',
+          'title' => 'dhl::app.admin.system.account-number',
+          'type' => 'depends',
+          'depend' => 'active:1',
+          'validation' => 'required_if:active,1',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        8 => 
+        array (
+          'name' => 'weight_unit',
+          'title' => 'dhl::app.admin.system.weight-unit',
+          'type' => 'select',
+          'channel_based' => false,
+          'locale_based' => true,
+          'options' => 
+          array (
+            0 => 
+            array (
+              'title' => 'dhl::app.admin.system.kilograms',
+              'value' => 'KG',
+            ),
+            1 => 
+            array (
+              'title' => 'dhl::app.admin.system.pounds',
+              'value' => 'LB',
+            ),
+          ),
+        ),
+        9 => 
+        array (
+          'name' => 'dimension_unit',
+          'title' => 'dhl::app.admin.system.dimension-unit',
+          'type' => 'select',
+          'channel_based' => false,
+          'locale_based' => true,
+          'options' => 
+          array (
+            0 => 
+            array (
+              'title' => 'dhl::app.admin.system.inches',
+              'value' => 'IN',
+            ),
+            1 => 
+            array (
+              'title' => 'dhl::app.admin.system.cms',
+              'value' => 'CM',
+            ),
+          ),
+        ),
+        10 => 
+        array (
+          'name' => 'height',
+          'title' => 'dhl::app.admin.system.height',
+          'type' => 'text',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        11 => 
+        array (
+          'name' => 'depth',
+          'title' => 'dhl::app.admin.system.depth',
+          'type' => 'text',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        12 => 
+        array (
+          'name' => 'width',
+          'title' => 'dhl::app.admin.system.width',
+          'type' => 'text',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        13 => 
+        array (
+          'name' => 'content_type',
+          'title' => 'dhl::app.admin.system.content-type',
+          'type' => 'select',
+          'channel_based' => false,
+          'locale_based' => true,
+          'options' => 
+          array (
+            0 => 
+            array (
+              'title' => 'dhl::app.admin.system.documents',
+              'value' => 'documents',
+            ),
+            1 => 
+            array (
+              'title' => 'dhl::app.admin.system.non-documents',
+              'value' => 'non documents',
+            ),
+          ),
+        ),
+        14 => 
+        array (
+          'name' => 'allowed_methods',
+          'title' => 'dhl::app.admin.system.allowed-methods',
+          'type' => 'multiselect',
+          'depend' => 'content_type:documents',
+          'channel_based' => false,
+          'locale_based' => true,
+          'options' => 
+          array (
+            0 => 
+            array (
+              'title' => 'Easy shop',
+              'value' => 'Easy shop',
+            ),
+            1 => 
+            array (
+              'title' => 'Sprintline',
+              'value' => 'Sprintline',
+            ),
+            2 => 
+            array (
+              'title' => 'Secureline',
+              'value' => 'Secureline',
+            ),
+            3 => 
+            array (
+              'title' => 'Express easy',
+              'value' => 'Express easy',
+            ),
+            4 => 
+            array (
+              'title' => 'Europack',
+              'value' => 'Europack',
+            ),
+            5 => 
+            array (
+              'title' => 'Break bulk express',
+              'value' => 'Break bulk express',
+            ),
+            6 => 
+            array (
+              'title' => 'Medical express',
+              'value' => 'Medical express',
+            ),
+            7 => 
+            array (
+              'title' => 'Express worldwide',
+              'value' => 'Express worldwide',
+            ),
+            8 => 
+            array (
+              'title' => 'Express worldwide',
+              'value' => 'Express worldwide',
+            ),
+            9 => 
+            array (
+              'title' => 'Express 9:00',
+              'value' => 'Express 9:00',
+            ),
+            10 => 
+            array (
+              'title' => 'Express 10:30',
+              'value' => 'Express 10:30',
+            ),
+            11 => 
+            array (
+              'title' => 'Domestic economy select',
+              'value' => 'Domestic economy select',
+            ),
+            12 => 
+            array (
+              'title' => 'Economy select',
+              'value' => 'Economy select',
+            ),
+            13 => 
+            array (
+              'title' => 'Domestic express 9:00',
+              'value' => 'Domestic express 9:00',
+            ),
+            14 => 
+            array (
+              'title' => 'Domestic express',
+              'value' => 'Domestic express',
+            ),
+            15 => 
+            array (
+              'title' => 'Others',
+              'value' => 'Others',
+            ),
+            16 => 
+            array (
+              'title' => 'Globalmail business',
+              'value' => 'Globalmail business',
+            ),
+            17 => 
+            array (
+              'title' => 'Same day',
+              'value' => 'Same day',
+            ),
+            18 => 
+            array (
+              'title' => 'Express 12:00',
+              'value' => 'Express 12:00',
+            ),
+            19 => 
+            array (
+              'title' => 'Express envelope',
+              'value' => 'Express envelope',
+            ),
+            20 => 
+            array (
+              'title' => 'Domestic express 12:00 (Doc)',
+              'value' => 'Domestic express 12:00 (Doc)',
+            ),
+            21 => 
+            array (
+              'title' => 'Easy shop (Doc)',
+              'value' => 'Easy shop (Doc)',
+            ),
+            22 => 
+            array (
+              'title' => 'Jetline (Doc)',
+              'value' => 'Jetline (Doc)',
+            ),
+            23 => 
+            array (
+              'title' => 'Express easy',
+              'value' => 'Express easy (Doc)',
+            ),
+            24 => 
+            array (
+              'title' => 'Express worldwide (Doc)',
+              'value' => 'Express worldwide (Doc)',
+            ),
+            25 => 
+            array (
+              'title' => 'Medical express (Doc)',
+              'value' => 'Medical express (Doc)',
+            ),
+            26 => 
+            array (
+              'title' => 'Express 9:00',
+              'value' => 'Express 9:00 (Doc)',
+            ),
+            27 => 
+            array (
+              'title' => 'Freight worldwide (Doc)',
+              'value' => 'Freight worldwide (Doc)',
+            ),
+            28 => 
+            array (
+              'title' => 'Economy select (Doc)',
+              'value' => 'Economy select (Doc)',
+            ),
+            29 => 
+            array (
+              'title' => 'Jumbo box (Doc)',
+              'value' => 'Jumbo box (Doc)',
+            ),
+            30 => 
+            array (
+              'title' => 'Express 10:30 (Doc)',
+              'value' => 'Express 10:30 (Doc)',
+            ),
+            31 => 
+            array (
+              'title' => 'Europack (Doc)',
+              'value' => 'Europack (Doc)',
+            ),
+            32 => 
+            array (
+              'title' => 'Express 12:00 (Doc)',
+              'value' => 'Express 12:00 (Doc)',
+            ),
+          ),
+        ),
+        15 => 
+        array (
+          'name' => 'ready_time',
+          'title' => 'dhl::app.admin.system.ready-time',
+          'type' => 'text',
+          'info' => 'dhl::app.admin.system.note',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        16 => 
+        array (
+          'name' => 'allowed_country',
+          'title' => 'dhl::app.admin.system.allow-country',
+          'type' => 'multiselect',
+          'channel_based' => true,
+          'locale_based' => true,
+          'repository' => 'Webkul\\DHLShipping\\Repositories\\DhlDetailRepository@getCountries',
+        ),
+      ),
+    ),
+    77 => 
+    array (
       'key' => 'bulkupload',
       'name' => 'bulkupload::app.admin.system.bulkupload',
       'sort' => 5,
     ),
-    75 => 
+    78 => 
     array (
       'key' => 'bulkupload.settings',
       'name' => 'bulkupload::app.admin.system.settings',
       'sort' => 1,
     ),
-    76 => 
+    79 => 
     array (
       'key' => 'bulkupload.settings.general',
       'name' => 'bulkupload::app.admin.system.general',
