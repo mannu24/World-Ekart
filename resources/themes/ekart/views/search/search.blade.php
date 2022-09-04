@@ -100,7 +100,8 @@
             @endif --}}
 
             @if (! $results)
-                <h2 class="col-12">{{ __('shop::app.search.no-results') }}</h2>
+                <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
+                <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
             @else
                 @if ($results->isEmpty())
                     <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>

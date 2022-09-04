@@ -6,6 +6,10 @@ use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Webkul\Shop\Models\Vendor;
+use Webkul\Velocity\Helpers\Helper;
+use Webkul\Sales\Repositories\OrderItemRepository;
+use Webkul\Product\Repositories\ProductRepository;
+use DB ;
 
 class VendorController extends Controller
 {
@@ -17,14 +21,19 @@ class VendorController extends Controller
      * @var array
      */
     protected $_config;
+    protected $orderItemRepository;
+    protected $productRepository;
+    protected $velocityHelper;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(OrderItemRepository $orderItemRepository, ProductRepository $productRepository, Helper $velocityHelper) {
+        $this->orderItemRepository = $orderItemRepository;
+        $this->productRepository = $productRepository;
+        $this->velocityHelper = $velocityHelper;
         $this->_config = request('_config');
     }
 
@@ -39,11 +48,8 @@ class VendorController extends Controller
         return view($this->_config['view']);
     }
 
-    public function save()
-    {
-        
+    public function save() {
 
-        // dd(request()->all());
         $this->validate(request(), [
             'name' => 'required',
             'email' => 'required',
@@ -115,5 +121,26 @@ class VendorController extends Controller
         $vendor->save();
 
         return view($this->_config['view']);
+    }
+
+    public function view_store($name) {
+        $vendor = Vendor::where('display_name',$name)->first() ;
+        $top_products = $this->getTopSellingProducts($vendor->id) ;
+        if($vendor) return view($this->_config['view'],compact('vendor','top_products'));
+        else return view('shop::errors.404');
+    }
+
+    public function getTopSellingProducts($id) {
+        $p_ids = DB::table('products')->where('user_id', $id)->pluck('id');    
+        return $this->orderItemRepository->getModel()
+            // ->leftJoin('product_flat','product_flat.product_id','=','product.id')
+            ->whereIn('product_id',$p_ids)
+            ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
+            ->addSelect('id', 'product_id', 'product_type', 'name')
+            ->whereNull('parent_id')
+            ->groupBy('product_id')
+            ->orderBy('total_qty_ordered', 'DESC')
+            ->limit(10)
+            ->get();
     }
 }

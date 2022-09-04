@@ -20,15 +20,10 @@
                         {{ __('admin::app.users.users.save-btn-title') }}
                     </button>
                     @if($user->status==1)
-                    <button type="button" class="btn btn-lg btn-danger">
-                       <a href="{{route('admin.users.block',$user->id)}}" style="color:white;">Block</a>
-                    </button>
+                        <a href="{{route('admin.users.block',$user->id)}}" style="color:white;" class="btn btn-lg btn-danger">Block</a>
                     @endif
- 
                     @if($user->status==0)
-                    <button type="button" class="btn btn-lg btn-primary">
-                       <a href="{{route('admin.users.unblock',$user->id)}}" style="color:white;">UnBlock</a>
-                    </button>
+                        <a class="btn btn-lg btn-primary" href="{{route('admin.users.unblock',$user->id)}}">Unblock</a>
                     @endif
                 </div>
             </div>

@@ -56,7 +56,7 @@
         <div class="container">
             <ul class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li><a href="/shop">Shop</a></li>
+                <li>Shop</li>
                 <li>{{ $category->name }}</li>
             </ul>
         </div>

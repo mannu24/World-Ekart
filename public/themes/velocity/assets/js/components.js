@@ -5213,7 +5213,7 @@ var render = function render() {
   }), _vm._v(" "), _c("div", {
     staticClass: "row mt-4"
   }, [_c("div", {
-    staticClass: "col-md-12 no-padding carousel-products"
+    staticClass: "col-md-12 hot-cat"
   }, [_c("carousel-component", {
     attrs: {
       "slides-per-page": 5,
@@ -6191,7 +6191,7 @@ var render = function render() {
     staticClass: "row",
     "class": _vm.localeDirection
   }, [_c("div", {
-    staticClass: "col-md-12 px-0 carousel-products",
+    staticClass: "col-md-12 carousel-products",
     "class": _vm.showRecentlyViewed === "true" ? "with-recent-viewed col-lg-9" : "without-recent-viewed col-lg-12"
   }, [_vm.count != 0 ? _c("carousel-component", {
     attrs: {
