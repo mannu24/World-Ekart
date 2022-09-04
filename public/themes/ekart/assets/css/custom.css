@@ -187,8 +187,8 @@ a:visited, a:link {
 }
 
 .ps-product .ps-product__thumbnail img {
-    width: 250px;
-    aspect-ratio: 1/1;
+    width: 100%;
+    aspect-ratio: 4/3;
     object-fit: cover;
 }
 
@@ -690,9 +690,10 @@ a:visited, a:link {
 
 .thumb-list .thumb-frame>.bg-image {
     background-position-y: center;
-    background-size: 100% 100%;
-    width: 100px;
+    /* background-size: 100% 100%; */
+    /* width: 100px; */
     aspect-ratio: 1/1;
+    background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
 }
@@ -775,8 +776,11 @@ a:visited, a:link {
 .hot-cat .VueCarousel .VueCarousel-inner {
     justify-content: start;
 }
-.vendor-store .ps-product .ps-product__container {
+/* .vendor-store .ps-product .ps-product__container {
     padding: 10px;
+} */
+.vendor-store .ps-product .ps-product__thumbnail img {
+    width: 250px;
 }
 .ps-btn:active, .ps-btn:hover, button.ps-btn:active, button.ps-btn:hover {
     border: none;

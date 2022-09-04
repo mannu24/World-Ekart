@@ -925,27 +925,27 @@
                                 </div>
                             </div>
                             <div class="ps-shopping__content vendor-store">
-                                <div class="ps-shop-items">
-                                    <div class="row">
-                                        @if (!$products->count())
-                                            <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
-                                            <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
-                                        @else
-                                            @foreach ($products as $productFlat)
-                                                @if ($toolbarHelper->getCurrentMode() == 'grid')
-                                                    @include('shop::products.list.card', [
-                                                        'cardClass' => 'category-product-image-container',
-                                                        'product' => $productFlat->product_flats->first(),
-                                                    ])
-                                                @else
+                                <div class="row justify-content-start">
+                                    @if (!$products->count())
+                                        <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
+                                        <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
+                                    @else
+                                        @foreach ($products as $productFlat)
+                                            @if ($toolbarHelper->getCurrentMode() == 'grid')
+                                                @include('shop::products.list.card', [
+                                                    'cardClass' => 'category-product-image-container',
+                                                    'product' => $productFlat->product_flats->first(),
+                                                ])
+                                            @else
+                                                <div class="col-12">
                                                     @include('shop::products.list.card', [
                                                         'list' => true,
                                                         'product' => $productFlat->product_flats->first(),
                                                     ])
-                                                @endif
-                                            @endforeach
-                                        @endif
-                                    </div>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
                         </div>
