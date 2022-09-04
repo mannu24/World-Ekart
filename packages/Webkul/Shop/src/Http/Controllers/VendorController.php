@@ -125,7 +125,7 @@ class VendorController extends Controller
 
     public function view_store($name) {
         $vendor = Vendor::where('display_name',$name)->first() ;
-        $top_products = $this->getTopSellingProducts($vendor->id) ;
+        $top_products = $this->getTopSellingProducts($vendor->user->id) ;
         if($vendor) return view($this->_config['view'],compact('vendor','top_products'));
         else return view('shop::errors.404');
     }
@@ -133,7 +133,7 @@ class VendorController extends Controller
     public function getTopSellingProducts($id) {
         $p_ids = DB::table('products')->where('user_id', $id)->pluck('id');    
         return $this->orderItemRepository->getModel()
-            ->leftJoin('product_flat','product_flat.product_id','=','products.id')
+            // ->leftJoin('product_flat','product_flat.product_id','=','products.id')
             ->whereIn('product_id',$p_ids)
             ->select(DB::raw('SUM(qty_ordered) as total_qty_ordered'))
             ->addSelect('id', 'product_id', 'product_type', 'name')

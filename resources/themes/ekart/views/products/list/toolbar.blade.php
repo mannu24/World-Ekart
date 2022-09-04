@@ -8,24 +8,26 @@
     <script type="text/x-template" id="toolbar-template">
 
         <div class="d-flex w-100 justify-content-between justify-content-md-end flex-wrap-reverse">
-            <select class="selective-div border-normal styled-select ps-select form-control" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
+            @if(!isset($hide))
+                <select class="selective-div border-normal styled-select ps-select form-control" onchange="window.location.href = this.value" style="width: 57px;" aria-label="Show">
 
-                @foreach ($toolbarHelper->getAvailableLimits() as $limit)
+                    @foreach ($toolbarHelper->getAvailableLimits() as $limit)
 
-                    <option value="{{ $toolbarHelper->getLimitUrl($limit) }}" {{ $toolbarHelper->isLimitCurrent($limit) ? 'selected' : '' }}>
-                        {{ $limit }}
-                    </option>
+                        <option value="{{ $toolbarHelper->getLimitUrl($limit) }}" {{ $toolbarHelper->isLimitCurrent($limit) ? 'selected' : '' }}>
+                            {{ $limit }}
+                        </option>
 
-                @endforeach
+                    @endforeach
 
-            </select>
-            <select class="selective-div ps-select form-control" onchange="window.location.href = this.value" aria-label="Sort By">
-                @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
-                    <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
-                        {{ __('shop::app.products.' . $order) }}
-                    </option>
-                @endforeach
-            </select>
+                </select>
+                <select class="selective-div ps-select form-control" onchange="window.location.href = this.value" aria-label="Sort By">
+                    @foreach ($toolbarHelper->getAvailableOrders() as $key => $order)
+                        <option value="{{ $toolbarHelper->getOrderUrl($key) }}" {{ $toolbarHelper->isOrderCurrent($key) ? 'selected' : '' }}>
+                            {{ __('shop::app.products.' . $order) }}
+                        </option>
+                    @endforeach
+                </select>
+            @endif
             <div class="ps-shopping__view pl-0">
                 <ul class="ps-tab-list">
                     @php $viewOption = $toolbarHelper->getViewOption(); @endphp

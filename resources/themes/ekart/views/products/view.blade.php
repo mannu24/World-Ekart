@@ -17,7 +17,7 @@ $avgStarRating = round($avgRatings);
 $percentageRatings = $reviewHelper->getPercentageRating($product);
 
 $productImages = [];
-$images = productimage()->getGalleryImages($product);
+$images = productimage()->getGalleryImages($product);   
 
 foreach ($images as $key => $image) {
     array_push($productImages, $image['medium_image_url']);
@@ -116,8 +116,8 @@ foreach ($images as $key => $image) {
                                             <h1>{{ $product->name }}</h1>
                                             <div class="ps-product__meta flex-wrap flex-md-nowrap">
                                                 @if ($product->brand)
-                                                    <p>Brand:
-                                                        <a class="ml-2 text-capitalize" href="{{ route('shop.vendor.page',['name' => strtolower($product->brand_label) ]) }}">{{ $product->brand_label }}</a>
+                                                    <p>Seller:
+                                                        <a class="ml-2 text-capitalize" href="{{ route('shop.vendor.store-page',['name' => $product->product->vendor->display_name ]) }}">{{ $product->product->vendor->display_name }}</a>
                                                     </p>
                                                 @endif
                                                 @include ('shop::products.view.stock', ['product' => $product])
@@ -141,8 +141,8 @@ foreach ($images as $key => $image) {
                                         </header>
                                         <div class="ps-product__desc">
                                             @if ($product->brand)
-                                                <p>Sold By:<a href="{{ route('shop.vendor.page',['name' => strtolower($product->brand_label) ]) }}">
-                                                    <strong class="ml-2">{{ $product->brand_label }}</strong>
+                                                <p>Sold By:<a href="{{ route('shop.vendor.store-page',['name' => $product->product->vendor->display_name ]) }}">
+                                                    <strong class="ml-2">{{ $product->product->vendor->display_name }}</strong>
                                                 </a></p>
                                             @endif
                                             @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)

@@ -3,7 +3,7 @@
 namespace Webkul\Shop\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Webkul\Product\Models\Product;
+use Webkul\User\Models\Admin;
 use Webkul\Shop\Contracts\Vendor as VendorContract;
 
 class Vendor extends Model implements VendorContract
@@ -36,7 +36,7 @@ class Vendor extends Model implements VendorContract
     ];
     protected $table = 'vendor_registration';
 
-    public function products() {
-        return $this->hasMany(Product::class,'user_id','id');
+    public function user() {
+        return $this->hasOne(Admin::class,'vendor_id','id');
     }
 }

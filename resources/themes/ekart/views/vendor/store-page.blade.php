@@ -1,5 +1,6 @@
-@inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 @extends('shop::layouts.master')
+@inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
+@inject ('reviewHelper', 'Webkul\Product\Helpers\Review')
 
 @section('page_title')
     {{ $vendor->display_name }} - Seller
@@ -43,8 +44,17 @@
         }
     </style>
 @endpush
-@php 
-    $products = $vendor->products ;
+@php
+    $products = $vendor->user->products ;
+    if($products){
+        $total = $avgStarRating = $percentageRatings = 0 ;
+        foreach ($products as $key => $product) {
+            $total += $reviewHelper->getTotalReviews($product);
+            $avgRatings = $reviewHelper->getAverageRating($product);
+            $avgStarRating += round($avgRatings);
+        }
+        $avgStarRating = round($avgStarRating/($total !=0 ? $total : 1) ) ;
+    }
 @endphp
 @section('content-wrapper')
     <div class="ps-vendor-store">
@@ -62,14 +72,14 @@
                         <div class="ps-block__container">
                             <div class="ps-block__header">
                                 <h4>{{ $vendor->display_name }}</h4>
-                                {{-- <span class="ps-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </span>
-                                <p><strong>85% Positive</strong> (562 rating)</p> --}}
+                                @if ($products->count())
+                                    @if ($total)
+                                        <div class="ps-product__rating">
+                                            <star-ratings ratings="{{ $avgStarRating }}"></star-ratings><br>
+                                            <p>{{ __('velocity::app.products.ratings', ['totalRatings' => $total ]) }}</p>
+                                        </div>
+                                    @endif
+                                @endif
                             </div>
                             <div class="ps-block__divider"></div>
                             <div class="ps-block__content">
@@ -908,7 +918,36 @@
                             </div> --}}
                         </div>
                         <div class="ps-shopping">
-                            <products-component></products-component>
+                            <div class="ps-shopping__header">
+                                <div class="ps-shopping__actions flex-column flex-md-row">
+                                    <p class="w-100"><strong class="mr-2">{{ $products->count() }}</strong>Products found</p>
+                                    @include ('shop::products.list.toolbar',['hide' => true])
+                                </div>
+                            </div>
+                            <div class="ps-shopping__content vendor-store">
+                                <div class="ps-shop-items">
+                                    <div class="row">
+                                        @if (!$products->count())
+                                            <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
+                                            <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
+                                        @else
+                                            @foreach ($products as $productFlat)
+                                                @if ($toolbarHelper->getCurrentMode() == 'grid')
+                                                    @include('shop::products.list.card', [
+                                                        'cardClass' => 'category-product-image-container',
+                                                        'product' => $productFlat->product_flats->first(),
+                                                    ])
+                                                @else
+                                                    @include('shop::products.list.card', [
+                                                        'list' => true,
+                                                        'product' => $productFlat->product_flats->first(),
+                                                    ])
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -916,43 +955,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script type="text/x-template" id="product-component-template">
-        <section class="search-container row category-container">
-            {{-- @if ($products && $products->count()) --}}
-                <div class="ps-shopping__header">
-                    <div class="ps-shopping__actions flex-column flex-md-row">
-                        <p class="w-100"><strong class="mr-2">{{ $products->count() }}</strong>Products found</p>
-                        @include ('shop::products.list.toolbar')
-                    </div>
-                </div>
-            {{-- @endif --}}
-
-            @if (!$products->count())
-                <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
-                <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
-            @else
-                @foreach ($products as $productFlat)
-                    @if ($toolbarHelper->getCurrentMode() == 'grid')
-                        @include('shop::products.list.card', [
-                            'cardClass' => 'category-product-image-container',
-                            'product' => $productFlat->product_flats->first(),
-                        ])
-                    @else
-                        @include('shop::products.list.card', [
-                            'list' => true,
-                            'product' => $productFlat->product_flats->first(),
-                        ])
-                    @endif
-                @endforeach
-            @endif
-        </section>
-    </script>
-
-    <script>
-        Vue.component('products-component', {
-            template: '#product-component-template',
-        });
-    </script>
-@endpush

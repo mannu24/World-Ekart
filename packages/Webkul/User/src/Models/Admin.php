@@ -12,6 +12,8 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Webkul\User\Contracts\Admin as AdminContract;
 use Webkul\User\Database\Factories\AdminFactory;
 use Webkul\User\Notifications\AdminResetPassword;
+use Webkul\Product\Models\Product;
+use Webkul\Shop\Models\Vendor;
 
 class Admin extends Authenticatable implements AdminContract, JWTSubject
 {
@@ -36,12 +38,20 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
      * The attributes that should be hidden for arrays.
      *
      * @var array
-     */
+    */
     protected $hidden = [
         'password',
         'api_token',
         'remember_token',
     ];
+
+    public function products() {
+        return $this->hasMany(Product::class,'user_id','id');
+    }
+
+    public function vendor() {
+        return $this->belongsTo(Vendor::class,'vendor_id','id');
+    }
 
     /**
      * Get image url for the product image.

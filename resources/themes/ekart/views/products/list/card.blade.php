@@ -2,9 +2,7 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
 @php
-    $list = $toolbarHelper->getCurrentMode() == 'list'
-        ? true
-        : false;
+    $list = $toolbarHelper->getCurrentMode() == 'list' ? true : false;
 
     $productBaseImage = productimage()->getProductBaseImage($product);
 
