@@ -1,0 +1,15 @@
+.navbar-left ul.menubar li.menu-item ul.sub-menubar {
+    display: none;
+    min-width: 200px;
+    position: fixed;
+    top: auto;
+    bottom:5px;
+    /* height: calc( 100vh - 20px ); */
+    left: 56px;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: 2px 1px 3px #cdcecf;
+    border: 1px solid #eee;
+    border-left: 0;
+    border-radius: 0 3px 3px 0;
+}

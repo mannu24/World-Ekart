@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="{{ asset('vendor/webkul/ui/assets/css/ui.css') }}">
         <link rel="stylesheet" href="{{ asset('vendor/webkul/admin/assets/css/admin.css') }}">
+        <link rel="stylesheet" href="{{ asset('vendor/webkul/admin/assets/css/custom-admin.css') }}">
 
         @yield('head')
 
@@ -94,6 +95,7 @@
                 listLastElement = $('.menubar li:last-child').offset();
 
                 if (listLastElement) {
+                    alert('here1')
                     lastElementOfNavBar = listLastElement.top;
                     console.log("kjhjkh");
                 }
@@ -112,12 +114,17 @@
                 pageContentHeight = $('.page-content').height();
 
                 if (menubarHeight <= windowHeight) {
+                    alert('here2')
+
                     differenceInHeight = windowHeight - menubarHeight;
                 } else {
+                    alert('here3')
+
                     differenceInHeight = menubarHeight - windowHeight;
                 }
 
                 if (menubarHeight > windowHeight) {
+                    alert('her4')
                     document.addEventListener("keydown", function(event) {
                         if ((event.keyCode == 38) && count <= 0) {
                             count = count + moveDown;

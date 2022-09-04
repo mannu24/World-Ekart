@@ -61,6 +61,7 @@ class HomeController extends Controller
             ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
             ->leftJoin('category_translations', 'categories.id', 'category_translations.category_id')
             ->where('category_translations.locale', app()->getLocale())
+            ->where('categories.parent_id', 1)
             ->addSelect('category_translations.slug','category_translations.name','categories.image as image_path')
             ->groupBy('categories.id')
             ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
