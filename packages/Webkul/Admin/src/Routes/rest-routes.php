@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\DashboardController;
+use Webkul\Admin\Http\Controllers\AnalyticsController;
 use Webkul\Admin\Http\Controllers\ExportController;
 use Webkul\Admin\Http\Controllers\TinyMCEController;
 use Webkul\User\Http\Controllers\AccountController;
@@ -41,4 +42,12 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
      * DataGrid export.
      */
     Route::post('/export', [ExportController::class, 'export'])->name('admin.datagrid.export');
+
+    /**
+     * Analytics and Comissions.
+     */
+    Route::get('analytics', [AnalyticsController::class, 'index'])->defaults('_config', [
+        'view' => 'admin::analytics.index',
+    ])->name('admin.analytics.index');
+
 });

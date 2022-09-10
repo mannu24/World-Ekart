@@ -2,9 +2,7 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 
 @php
-    $list = $toolbarHelper->getCurrentMode() == 'list'
-        ? true
-        : false;
+    $list = $toolbarHelper->getCurrentMode() == 'list' ? true : false;
 
     $productBaseImage = productimage()->getProductBaseImage($product);
 
@@ -79,7 +77,6 @@
                 </ul>
             </div>
             <div class="ps-product__container">
-                <div class="ps-product__vendor">{{ $product->brand_label }}</div>
                 <div class="ps-product__content">
                     <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}" class="ps-product__title">{{ $product->name }}</a>
                     @if ($totalReviews)

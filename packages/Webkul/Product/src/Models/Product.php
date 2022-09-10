@@ -20,6 +20,8 @@ use Webkul\Product\Contracts\Product as ProductContract;
 use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Product\Database\Factories\ProductFactory;
 use Webkul\Product\Type\AbstractType;
+use Webkul\Shop\Models\Vendor;
+
 
 class Product extends Model implements ProductContract
 {
@@ -82,6 +84,10 @@ class Product extends Model implements ProductContract
                 }
             }
         });
+    }
+
+    public function vendor(): BelongsTo {
+        return $this->belongsTo(Vendor::class,'user_id','id') ;
     }
 
     /**

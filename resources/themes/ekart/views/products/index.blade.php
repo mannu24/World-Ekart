@@ -62,7 +62,6 @@
         </div>
     </div>
     <category-component></category-component>
-    {{-- {{ dd(get_defined_vars()['__data']) }} --}}
 @stop
 
 @push('scripts')
