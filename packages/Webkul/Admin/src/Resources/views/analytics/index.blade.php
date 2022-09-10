@@ -9,16 +9,12 @@
     <div class="content full-page dashboard">
         <div class="page-header">
             <div class="page-title">
-                <h1>{{ __('admin::app.dashboard.title') }}</h1>
+                <h1>Comissions and Analytics</h1>
             </div>
 
             <div class="page-action">
-                <a href="{{ route('admin.analytics.index') }}" class="btn btn-lg btn-primary">
-                    Comissions
-                </a>
-            </div>
-            <div class="page-action">
                 <date-filter></date-filter>
+               
             </div>
 
             <date-mobile-filter></date-mobile-filter>
