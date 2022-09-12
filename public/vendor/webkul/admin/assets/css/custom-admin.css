@@ -18,3 +18,16 @@
         display: none !important;
     }
 }
+
+.text-grey {
+    color: #9497b8 ;
+}
+
+.fa-24x {
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.dark-mode .accordian .accordian-header .accordian-down-icon {
+    background-image: url('../images/Accordion-Dark-Arrow-Down.svg')
+}

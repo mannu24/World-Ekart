@@ -14,6 +14,7 @@ use Webkul\User\Database\Factories\AdminFactory;
 use Webkul\User\Notifications\AdminResetPassword;
 use Webkul\Product\Models\Product;
 use Webkul\Shop\Models\Vendor;
+use Webkul\Shop\Models\VendorPayment;
 
 class Admin extends Authenticatable implements AdminContract, JWTSubject
 {
@@ -32,6 +33,11 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
         'api_token',
         'role_id',
         'status',
+        'bank_name',
+        'acc_name',
+        'acc_no',
+        'ifsc_code',
+        'upi_id',
     ];
 
     /**
@@ -52,6 +58,11 @@ class Admin extends Authenticatable implements AdminContract, JWTSubject
     public function vendor() {
         return $this->belongsTo(Vendor::class,'vendor_id','id');
     }
+    
+    public function payments() {
+        return $this->hasMany(VendorPayment::class,'vendor_id','id');
+    }
+
 
     /**
      * Get image url for the product image.

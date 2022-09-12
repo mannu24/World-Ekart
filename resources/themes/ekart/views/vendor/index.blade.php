@@ -90,25 +90,25 @@
                                 
                                     <div class="control-group form-group col-md-6 col-lg-3" :class="[errors.has('facebook_link') ? 'has-error' : '']">
                                         <label for="facebook_link" class="text-capitalize">facebook link</label>
-                                        <input type="text" class="form-control" name="facebook_link" value="{{ old('facebook_link') }}">
+                                        <input type="url" v-validate="'url'" class="form-control" name="facebook_link" value="{{ old('facebook_link') }}">
                                         <span class="control-error" v-if="errors.has('facebook_link')">@{{ errors.first('facebook_link') }}</span>
                                     </div>
                                 
                                     <div class="control-group form-group col-md-6 col-lg-3" :class="[errors.has('instagram_link') ? 'has-error' : '']">
                                         <label for="instagram_link" class="text-capitalize">instagram link</label>
-                                        <input type="text" class="form-control" name="instagram_link" value="{{ old('instagram_link') }}">
+                                        <input type="url" v-validate="'url'" class="form-control" name="instagram_link" value="{{ old('instagram_link') }}">
                                         <span class="control-error" v-if="errors.has('instagram_link')">@{{ errors.first('instagram_link') }}</span>
                                     </div>
                                 
                                     <div class="control-group form-group col-md-6 col-lg-3" :class="[errors.has('twitter_link') ? 'has-error' : '']">
                                         <label for="twitter_link" class="text-capitalize">twitter link</label>
-                                        <input type="text" class="form-control" name="twitter_link" value="{{ old('twitter_link') }}">
+                                        <input type="url" v-validate="'url'" class="form-control" name="twitter_link" value="{{ old('twitter_link') }}">
                                         <span class="control-error" v-if="errors.has('twitter_link')">@{{ errors.first('twitter_link') }}</span>
                                     </div>
                                 
                                     <div class="control-group form-group col-md-6 col-lg-3" :class="[errors.has('youtube_link') ? 'has-error' : '']">
                                         <label for="youtube_link" class="text-capitalize">youtube link</label>
-                                        <input type="text" class="form-control" name="youtube_link" value="{{ old('youtube_link') }}">
+                                        <input type="url" v-validate="'url'" class="form-control" name="youtube_link" value="{{ old('youtube_link') }}">
                                         <span class="control-error" v-if="errors.has('youtube_link')">@{{ errors.first('youtube_link') }}</span>
                                     </div>
                                 </div>
@@ -208,20 +208,23 @@
         </div>
     </div>
 </div>
-<script>
-    function validate(evt) {
-        var theEvent = evt || window.event;
-        if (theEvent.type === 'paste')
-            key = event.clipboardData.getData('text/plain');
-        else {
-            var key = theEvent.keyCode || theEvent.which;
-            key = String.fromCharCode(key);
-        }
-        var regex = /[0-9]|\./;
-        if (!regex.test(key)) {
-            theEvent.returnValue = false;
-            if (theEvent.preventDefault) theEvent.preventDefault();
-        }
-    }
-</script>
 @endsection
+
+@push('scripts')
+    <script>
+        function validate(evt) {
+            var theEvent = evt || window.event;
+            if (theEvent.type === 'paste')
+                key = event.clipboardData.getData('text/plain');
+            else {
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
+@endpush

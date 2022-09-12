@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\CMS\Http\Controllers\Shop\PagePresenterController;
-use Webkul\Shop\Http\Controllers\HomeController;
-use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\ReviewController;
-use Webkul\Shop\Http\Controllers\SearchController;
-use Webkul\Shop\Http\Controllers\SubscriptionController;
 use Webkul\Shop\Http\Controllers\VendorController;
 
 Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function () {
@@ -47,8 +42,6 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
     // Route::get('/stores', [VendorController::class, 'stores'])->defaults('_config', [
     //     'view' => 'shop::vendor.stores',
     // ])->name('shop.vendor.stores');
-
-
 
     Route::get('/store/{name}', [VendorController::class, 'view_store'])->defaults('_config', [
         'view' => 'shop::vendor.store-page',

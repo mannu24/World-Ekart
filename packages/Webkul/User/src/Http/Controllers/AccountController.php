@@ -4,6 +4,9 @@ namespace Webkul\User\Http\Controllers;
 
 use Hash;
 use Illuminate\Support\Facades\Event;
+use DB ;
+use Webkul\Shop\Models\Vendor;
+
 
 class AccountController extends Controller
 {
@@ -32,8 +35,8 @@ class AccountController extends Controller
     public function edit()
     {
         $user = auth()->guard('admin')->user();
-
-        return view($this->_config['view'], compact('user'));
+        $vendor = Vendor::where('id',$user->vendor_id)->first();
+        return view($this->_config['view'], compact('user','vendor'));
     }
 
     /**
@@ -45,13 +48,40 @@ class AccountController extends Controller
     {
         $isPasswordChanged = false;
         $user = auth()->guard('admin')->user();
+        $vendor = Vendor::where('id',$user->vendor_id)->first();
 
         $this->validate(request(), [
             'name'             => 'required',
             'email'            => 'email|unique:admins,email,' . $user->id,
             'password'         => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6',
+            'bank_name'        => 'required',
+            'acc_name'         => 'required',
+            'acc_no'           => 'required|numeric',
+            'ifsc_code'        => 'required',
+            'upi_id'           => 'required',
         ]);
+        if($user->role_id==2) {
+            $data_v = request()->validate([
+                'store_name'       => 'required',
+                'store_email'      => 'required|email',
+                'phone'            => 'required|numeric',
+                'address'          => 'required',
+                'city'             => 'required',
+                'state'            => 'required',
+                'pincode'          => 'required|numeric',
+                'country'          => 'required',
+                'gstin'            => 'required',
+                'description'      => 'nullable',
+                'display_name'     => 'required',
+                'additional_notes' => 'nullable',
+                'facebook_link'    => 'nullable|url',
+                'instagram_link'   => 'nullable|url',
+                'twitter_link'     => 'nullable|url',
+                'youtube_link'     => 'nullable|url',
+            ]) ; 
+            $vendor->update($data_v);
+        }
 
         $data = request()->input();
 

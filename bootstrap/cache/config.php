@@ -696,318 +696,434 @@
     ),
     99 => 
     array (
+      'key' => 'payment-request',
+      'name' => 'Payment Requests',
+      'route' => 'admin.payment-request.index',
+      'sort' => 1,
+    ),
+    100 => 
+    array (
+      'key' => 'payment-request.create',
+      'name' => 'Requests Create',
+      'route' => 'admin.payment-request.create',
+      'sort' => 2,
+    ),
+    101 => 
+    array (
+      'key' => 'payment-request.cancel',
+      'name' => 'Cancel Request',
+      'route' => 'admin.payment-request.cancel',
+      'sort' => 3,
+    ),
+    102 => 
+    array (
+      'key' => 'payment-request.delete',
+      'name' => 'Delete Request',
+      'route' => 'admin.payment-request.delete',
+      'sort' => 4,
+    ),
+    103 => 
+    array (
+      'key' => 'customers.payment-request',
+      'name' => 'View Requests',
+      'route' => 'admin.payment-request.view',
+      'sort' => 5,
+    ),
+    104 => 
+    array (
+      'key' => 'customers.payment-request.edit',
+      'name' => 'Edit Request',
+      'route' => 'admin.payment-request.edit',
+      'sort' => 6,
+    ),
+    105 => 
+    array (
+      'key' => 'customers.payment-request.update',
+      'name' => 'Update Request',
+      'route' => 'admin.payment-request.update',
+      'sort' => 7,
+    ),
+    106 => 
+    array (
+      'key' => 'customers.payment-history',
+      'name' => 'Payment History',
+      'route' => 'admin.payment-request.history',
+      'sort' => 8,
+    ),
+    107 => 
+    array (
       'key' => 'settings',
       'name' => 'admin::app.acl.settings',
       'route' => 'admin.users.index',
       'sort' => 8,
     ),
-    100 => 
+    108 => 
     array (
       'key' => 'settings.locales',
       'name' => 'admin::app.acl.locales',
       'route' => 'admin.locales.index',
       'sort' => 1,
     ),
-    101 => 
+    109 => 
     array (
       'key' => 'settings.locales.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.locales.create',
       'sort' => 1,
     ),
-    102 => 
+    110 => 
     array (
       'key' => 'settings.locales.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.locales.edit',
       'sort' => 2,
     ),
-    103 => 
+    111 => 
     array (
       'key' => 'settings.locales.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.locales.delete',
       'sort' => 3,
     ),
-    104 => 
+    112 => 
     array (
       'key' => 'settings.currencies',
       'name' => 'admin::app.acl.currencies',
       'route' => 'admin.currencies.index',
       'sort' => 2,
     ),
-    105 => 
+    113 => 
     array (
       'key' => 'settings.currencies.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.currencies.create',
       'sort' => 1,
     ),
-    106 => 
+    114 => 
     array (
       'key' => 'settings.currencies.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.currencies.edit',
       'sort' => 2,
     ),
-    107 => 
+    115 => 
     array (
       'key' => 'settings.currencies.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.currencies.delete',
       'sort' => 3,
     ),
-    108 => 
+    116 => 
     array (
       'key' => 'settings.exchange_rates',
       'name' => 'admin::app.acl.exchange-rates',
       'route' => 'admin.exchange_rates.index',
       'sort' => 3,
     ),
-    109 => 
+    117 => 
     array (
       'key' => 'settings.exchange_rates.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.exchange_rates.create',
       'sort' => 1,
     ),
-    110 => 
+    118 => 
     array (
       'key' => 'settings.exchange_rates.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.exchange_rates.edit',
       'sort' => 2,
     ),
-    111 => 
+    119 => 
     array (
       'key' => 'settings.exchange_rates.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.exchange_rates.delete',
       'sort' => 3,
     ),
-    112 => 
+    120 => 
     array (
       'key' => 'settings.inventory_sources',
       'name' => 'admin::app.acl.inventory-sources',
       'route' => 'admin.inventory_sources.index',
       'sort' => 4,
     ),
-    113 => 
+    121 => 
     array (
       'key' => 'settings.inventory_sources.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.inventory_sources.create',
       'sort' => 1,
     ),
-    114 => 
+    122 => 
     array (
       'key' => 'settings.inventory_sources.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.inventory_sources.edit',
       'sort' => 2,
     ),
-    115 => 
+    123 => 
     array (
       'key' => 'settings.inventory_sources.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.inventory_sources.delete',
       'sort' => 3,
     ),
-    116 => 
+    124 => 
     array (
       'key' => 'settings.channels',
       'name' => 'admin::app.acl.channels',
       'route' => 'admin.channels.index',
       'sort' => 5,
     ),
-    117 => 
+    125 => 
     array (
       'key' => 'settings.channels.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.channels.create',
       'sort' => 1,
     ),
-    118 => 
+    126 => 
     array (
       'key' => 'settings.channels.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.channels.edit',
       'sort' => 2,
     ),
-    119 => 
+    127 => 
     array (
       'key' => 'settings.channels.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.channels.delete',
       'sort' => 3,
     ),
-    120 => 
+    128 => 
     array (
       'key' => 'settings.users',
       'name' => 'admin::app.acl.users',
       'route' => 'admin.users.index',
       'sort' => 6,
     ),
-    121 => 
+    129 => 
     array (
       'key' => 'settings.users.users',
       'name' => 'admin::app.acl.users',
       'route' => 'admin.users.index',
       'sort' => 1,
     ),
-    122 => 
+    130 => 
     array (
       'key' => 'settings.users.users.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.users.create',
       'sort' => 1,
     ),
-    123 => 
+    131 => 
     array (
       'key' => 'settings.users.users.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.users.edit',
       'sort' => 2,
     ),
-    124 => 
+    132 => 
     array (
       'key' => 'settings.users.users.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.users.delete',
       'sort' => 3,
     ),
-    125 => 
+    133 => 
     array (
       'key' => 'settings.users.roles',
       'name' => 'admin::app.acl.roles',
       'route' => 'admin.roles.index',
       'sort' => 2,
     ),
-    126 => 
+    134 => 
     array (
       'key' => 'settings.users.roles.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.roles.create',
       'sort' => 1,
     ),
-    127 => 
+    135 => 
     array (
       'key' => 'settings.users.roles.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.roles.edit',
       'sort' => 2,
     ),
-    128 => 
+    136 => 
     array (
       'key' => 'settings.users.roles.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.roles.delete',
       'sort' => 3,
     ),
-    129 => 
+    137 => 
+    array (
+      'key' => 'settings.users.vendors',
+      'name' => 'Vendor Requests',
+      'route' => 'admin.vendors.index',
+      'sort' => 3,
+    ),
+    138 => 
+    array (
+      'key' => 'settings.users.vendors.view',
+      'name' => 'View Vendor Profile',
+      'route' => 'admin.vendors.view',
+      'sort' => 1,
+    ),
+    139 => 
+    array (
+      'key' => 'settings.users.vendors.approve',
+      'name' => 'Approve Vendor Request',
+      'route' => 'admin.vendors.approve',
+      'sort' => 2,
+    ),
+    140 => 
+    array (
+      'key' => 'settings.users.vendors.delete',
+      'name' => 'Delete Vendor Request',
+      'route' => 'admin.vendors.delete',
+      'sort' => 3,
+    ),
+    141 => 
     array (
       'key' => 'settings.sliders',
       'name' => 'admin::app.acl.sliders',
       'route' => 'admin.sliders.index',
       'sort' => 7,
     ),
-    130 => 
+    142 => 
     array (
       'key' => 'settings.sliders.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.sliders.create',
       'sort' => 1,
     ),
-    131 => 
+    143 => 
     array (
       'key' => 'settings.sliders.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.sliders.edit',
       'sort' => 2,
     ),
-    132 => 
+    144 => 
     array (
       'key' => 'settings.sliders.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.sliders.delete',
       'sort' => 3,
     ),
-    133 => 
+    145 => 
     array (
       'key' => 'settings.taxes',
       'name' => 'admin::app.acl.taxes',
       'route' => 'admin.tax-categories.index',
       'sort' => 8,
     ),
-    134 => 
+    146 => 
     array (
       'key' => 'settings.taxes.tax-categories',
       'name' => 'admin::app.acl.tax-categories',
       'route' => 'admin.tax-categories.index',
       'sort' => 1,
     ),
-    135 => 
+    147 => 
     array (
       'key' => 'settings.taxes.tax-categories.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.tax-categories.create',
       'sort' => 1,
     ),
-    136 => 
+    148 => 
     array (
       'key' => 'settings.taxes.tax-categories.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.tax-categories.edit',
       'sort' => 2,
     ),
-    137 => 
+    149 => 
     array (
       'key' => 'settings.taxes.tax-categories.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.tax-categories.delete',
       'sort' => 3,
     ),
-    138 => 
+    150 => 
     array (
       'key' => 'settings.taxes.tax-rates',
       'name' => 'admin::app.acl.tax-rates',
       'route' => 'admin.tax-rates.index',
       'sort' => 2,
     ),
-    139 => 
+    151 => 
     array (
       'key' => 'settings.taxes.tax-rates.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.tax-rates.create',
       'sort' => 1,
     ),
-    140 => 
+    152 => 
     array (
       'key' => 'settings.taxes.tax-rates.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.tax-rates.edit',
       'sort' => 2,
     ),
-    141 => 
+    153 => 
     array (
       'key' => 'settings.taxes.tax-rates.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.tax-rates.delete',
       'sort' => 3,
     ),
-    142 => 
+    154 => 
     array (
       'key' => 'configuration',
       'name' => 'admin::app.acl.configure',
       'route' => 'admin.configuration.index',
       'sort' => 9,
     ),
-    143 => 
+    155 => 
     array (
       'key' => 'suggestion',
       'name' => 'Suggestion',
       'route' => 'suggestion.admin.index',
       'sort' => 2,
+    ),
+    156 => 
+    array (
+      'key' => 'catalog.bulkupload',
+      'name' => 'bulkupload::app.admin.bulk-upload.manage-bulk-upload',
+      'route' => 'admin.dataflow-profile.index',
+      'sort' => 5,
+      'icon-class' => '',
+    ),
+    157 => 
+    array (
+      'key' => 'catalog.bulkupload.data-flow-profile',
+      'name' => 'bulkupload::app.admin.bulk-upload.data-flow-profile.index',
+      'route' => 'admin.dataflow-profile.index',
+      'sort' => 1,
+      'icon-class' => '',
+    ),
+    158 => 
+    array (
+      'key' => 'catalog.bulkupload.upload-files',
+      'name' => 'bulkupload::app.admin.bulk-upload.upload-files.index',
+      'route' => 'admin.bulk-upload.index',
+      'sort' => 2,
+      'icon-class' => '',
+    ),
+    159 => 
+    array (
+      'key' => 'catalog.bulkupload.run-profile',
+      'name' => 'bulkupload::app.admin.bulk-upload.run-profile.index',
+      'route' => 'admin.run-profile.index',
+      'sort' => 3,
+      'icon-class' => '',
     ),
   ),
   'app' => 
@@ -4707,13 +4823,21 @@
       ),
       9 => 
       array (
+        'key' => 'payment-request',
+        'name' => 'Payment Requests',
+        'route' => 'admin.payment-request.index',
+        'sort' => 5,
+        'icon-class' => 'dashboard-icon',
+      ),
+      10 => 
+      array (
         'key' => 'sales',
         'name' => 'admin::app.layouts.sales',
         'route' => 'admin.sales.orders.index',
         'sort' => 2,
         'icon-class' => 'sales-icon',
       ),
-      10 => 
+      11 => 
       array (
         'key' => 'sales.orders',
         'name' => 'admin::app.layouts.orders',
@@ -4721,7 +4845,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      11 => 
+      12 => 
       array (
         'key' => 'sales.shipments',
         'name' => 'admin::app.layouts.shipments',
@@ -4729,7 +4853,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      12 => 
+      13 => 
       array (
         'key' => 'sales.invoices',
         'name' => 'admin::app.layouts.invoices',
@@ -4737,7 +4861,7 @@
         'sort' => 3,
         'icon-class' => '',
       ),
-      13 => 
+      14 => 
       array (
         'key' => 'sales.refunds',
         'name' => 'admin::app.layouts.refunds',
@@ -4745,7 +4869,7 @@
         'sort' => 4,
         'icon-class' => '',
       ),
-      14 => 
+      15 => 
       array (
         'key' => 'sales.transactions',
         'name' => 'admin::app.layouts.transactions',
@@ -4753,7 +4877,7 @@
         'sort' => 5,
         'icon-class' => '',
       ),
-      15 => 
+      16 => 
       array (
         'key' => 'catalog',
         'name' => 'admin::app.layouts.catalog',
@@ -4761,7 +4885,7 @@
         'sort' => 3,
         'icon-class' => 'catalog-icon',
       ),
-      16 => 
+      17 => 
       array (
         'key' => 'catalog.products',
         'name' => 'admin::app.layouts.products',
@@ -4769,7 +4893,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      17 => 
+      18 => 
       array (
         'key' => 'catalog.categories',
         'name' => 'admin::app.layouts.categories',
@@ -4777,7 +4901,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      18 => 
+      19 => 
       array (
         'key' => 'catalog.attributes',
         'name' => 'admin::app.layouts.attributes',
@@ -4785,7 +4909,7 @@
         'sort' => 3,
         'icon-class' => '',
       ),
-      19 => 
+      20 => 
       array (
         'key' => 'catalog.families',
         'name' => 'admin::app.layouts.attribute-families',
@@ -4793,7 +4917,7 @@
         'sort' => 4,
         'icon-class' => '',
       ),
-      20 => 
+      21 => 
       array (
         'key' => 'customers',
         'name' => 'admin::app.layouts.customers',
@@ -4801,7 +4925,7 @@
         'sort' => 4,
         'icon-class' => 'customer-icon',
       ),
-      21 => 
+      22 => 
       array (
         'key' => 'customers.customers',
         'name' => 'admin::app.layouts.customers',
@@ -4809,7 +4933,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      22 => 
+      23 => 
       array (
         'key' => 'customers.groups',
         'name' => 'admin::app.layouts.groups',
@@ -4817,7 +4941,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      23 => 
+      24 => 
       array (
         'key' => 'customers.reviews',
         'name' => 'admin::app.layouts.reviews',
@@ -4825,7 +4949,23 @@
         'sort' => 3,
         'icon-class' => '',
       ),
-      24 => 
+      25 => 
+      array (
+        'key' => 'customers.payment-request',
+        'name' => 'Vendors Payment Requests',
+        'route' => 'admin.payment-request.view',
+        'sort' => 4,
+        'icon-class' => '',
+      ),
+      26 => 
+      array (
+        'key' => 'customers.payment-history',
+        'name' => 'Vendors Payment History',
+        'route' => 'admin.payment-request.history',
+        'sort' => 5,
+        'icon-class' => '',
+      ),
+      27 => 
       array (
         'key' => 'configuration',
         'name' => 'admin::app.layouts.configure',
@@ -4833,7 +4973,7 @@
         'sort' => 7,
         'icon-class' => 'configuration-icon',
       ),
-      25 => 
+      28 => 
       array (
         'key' => 'settings',
         'name' => 'admin::app.layouts.settings',
@@ -4841,7 +4981,7 @@
         'sort' => 6,
         'icon-class' => 'settings-icon',
       ),
-      26 => 
+      29 => 
       array (
         'key' => 'settings.locales',
         'name' => 'admin::app.layouts.locales',
@@ -4849,7 +4989,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      27 => 
+      30 => 
       array (
         'key' => 'settings.currencies',
         'name' => 'admin::app.layouts.currencies',
@@ -4857,7 +4997,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      28 => 
+      31 => 
       array (
         'key' => 'settings.exchange_rates',
         'name' => 'admin::app.layouts.exchange-rates',
@@ -4865,7 +5005,7 @@
         'sort' => 3,
         'icon-class' => '',
       ),
-      29 => 
+      32 => 
       array (
         'key' => 'settings.inventory_sources',
         'name' => 'admin::app.layouts.inventory-sources',
@@ -4873,7 +5013,7 @@
         'sort' => 4,
         'icon-class' => '',
       ),
-      30 => 
+      33 => 
       array (
         'key' => 'settings.channels',
         'name' => 'admin::app.layouts.channels',
@@ -4881,7 +5021,7 @@
         'sort' => 5,
         'icon-class' => '',
       ),
-      31 => 
+      34 => 
       array (
         'key' => 'settings.users',
         'name' => 'admin::app.layouts.users',
@@ -4889,7 +5029,7 @@
         'sort' => 6,
         'icon-class' => '',
       ),
-      32 => 
+      35 => 
       array (
         'key' => 'settings.users.users',
         'name' => 'admin::app.layouts.users',
@@ -4897,7 +5037,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      33 => 
+      36 => 
       array (
         'key' => 'settings.users.roles',
         'name' => 'admin::app.layouts.roles',
@@ -4905,15 +5045,15 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      34 => 
+      37 => 
       array (
-        'key' => 'settings.users.vendors-requests',
+        'key' => 'settings.users.vendors',
         'name' => 'Vendors Requests',
         'route' => 'admin.vendors.index',
         'sort' => 3,
         'icon-class' => '',
       ),
-      35 => 
+      38 => 
       array (
         'key' => 'settings.sliders',
         'name' => 'admin::app.layouts.sliders',
@@ -4921,7 +5061,7 @@
         'sort' => 7,
         'icon-class' => '',
       ),
-      36 => 
+      39 => 
       array (
         'key' => 'settings.taxes',
         'name' => 'admin::app.layouts.taxes',
@@ -4929,7 +5069,7 @@
         'sort' => 8,
         'icon-class' => '',
       ),
-      37 => 
+      40 => 
       array (
         'key' => 'settings.taxes.tax-categories',
         'name' => 'admin::app.layouts.tax-categories',
@@ -4937,7 +5077,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      38 => 
+      41 => 
       array (
         'key' => 'settings.taxes.tax-rates',
         'name' => 'admin::app.layouts.tax-rates',
@@ -4945,7 +5085,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      39 => 
+      42 => 
       array (
         'key' => 'marketing',
         'name' => 'admin::app.layouts.marketing',
@@ -4953,7 +5093,7 @@
         'sort' => 5,
         'icon-class' => 'promotion-icon',
       ),
-      40 => 
+      43 => 
       array (
         'key' => 'marketing.promotions',
         'name' => 'admin::app.layouts.promotions',
@@ -4961,7 +5101,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      41 => 
+      44 => 
       array (
         'key' => 'marketing.promotions.catalog-rules',
         'name' => 'admin::app.promotions.catalog-rules.title',
@@ -4969,7 +5109,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      42 => 
+      45 => 
       array (
         'key' => 'marketing.promotions.cart-rules',
         'name' => 'admin::app.promotions.cart-rules.title',
@@ -4977,7 +5117,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      43 => 
+      46 => 
       array (
         'key' => 'marketing.email-marketing',
         'name' => 'admin::app.layouts.email-marketing',
@@ -4985,7 +5125,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      44 => 
+      47 => 
       array (
         'key' => 'marketing.email-marketing.email-templates',
         'name' => 'admin::app.layouts.email-templates',
@@ -4993,7 +5133,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      45 => 
+      48 => 
       array (
         'key' => 'marketing.email-marketing.events',
         'name' => 'admin::app.layouts.events',
@@ -5001,7 +5141,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      46 => 
+      49 => 
       array (
         'key' => 'marketing.email-marketing.campaigns',
         'name' => 'admin::app.layouts.campaigns',
@@ -5009,7 +5149,7 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      47 => 
+      50 => 
       array (
         'key' => 'marketing.email-marketing.subscribers',
         'name' => 'admin::app.layouts.newsletter-subscriptions',
@@ -5017,7 +5157,7 @@
         'sort' => 3,
         'icon-class' => '',
       ),
-      48 => 
+      51 => 
       array (
         'key' => 'cms',
         'name' => 'admin::app.layouts.cms',
@@ -5025,7 +5165,7 @@
         'sort' => 5,
         'icon-class' => 'cms-icon',
       ),
-      49 => 
+      52 => 
       array (
         'key' => 'cms.pages',
         'name' => 'admin::app.cms.pages.pages',
@@ -5033,14 +5173,14 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      50 => 
+      53 => 
       array (
         'key' => 'sales.rma',
         'name' => 'rma::app.admin.layouts.rma',
         'route' => 'admin.rma.index',
         'sort' => 6,
       ),
-      51 => 
+      54 => 
       array (
         'key' => 'sales.rma.index',
         'name' => 'rma::app.admin.rma-tab.heading',
@@ -5048,7 +5188,7 @@
         'sort' => 1,
         'icon-class' => '',
       ),
-      52 => 
+      55 => 
       array (
         'key' => 'sales.rma.reason',
         'name' => 'rma::app.admin.tabs.reasons',
@@ -5056,36 +5196,12 @@
         'sort' => 2,
         'icon-class' => '',
       ),
-      53 => 
+      56 => 
       array (
         'key' => 'catalog.bulkupload',
         'name' => 'bulkupload::app.admin.bulk-upload.manage-bulk-upload',
         'route' => 'admin.dataflow-profile.index',
         'sort' => 5,
-        'icon-class' => '',
-      ),
-      54 => 
-      array (
-        'key' => 'catalog.bulkupload.data-flow-profile',
-        'name' => 'bulkupload::app.admin.bulk-upload.data-flow-profile.index',
-        'route' => 'admin.dataflow-profile.index',
-        'sort' => 1,
-        'icon-class' => '',
-      ),
-      55 => 
-      array (
-        'key' => 'catalog.bulkupload.upload-files',
-        'name' => 'bulkupload::app.admin.bulk-upload.upload-files.index',
-        'route' => 'admin.bulk-upload.index',
-        'sort' => 2,
-        'icon-class' => '',
-      ),
-      56 => 
-      array (
-        'key' => 'catalog.bulkupload.run-profile',
-        'name' => 'bulkupload::app.admin.bulk-upload.run-profile.index',
-        'route' => 'admin.run-profile.index',
-        'sort' => 3,
         'icon-class' => '',
       ),
     ),
