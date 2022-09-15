@@ -1109,10 +1109,11 @@
       60 => 'Webkul\\Notification\\Providers\\NotificationServiceProvider',
       61 => 'Webkul\\SizeChart\\Providers\\SizeChartServiceProvider',
       62 => 'Wontonee\\Razorpay\\Providers\\RazorpayServiceProvider',
-      63 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
-      64 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
-      65 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
-      66 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
+      63 => 'Webkul\\CashFree\\Providers\\CashFreeServiceProvider',
+      64 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
+      65 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
+      66 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
+      67 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
     ),
     'aliases' => 
     array (
@@ -1233,7 +1234,7 @@
   'breadcrumbs' => 
   array (
     'view' => 'breadcrumbs::bootstrap5',
-    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\routes/breadcrumbs.php',
+    'files' => 'C:\\xampp\\htdocs\\World_Ekart\\routes/breadcrumbs.php',
     'unnamed-route-exception' => true,
     'missing-route-bound-breadcrumb-exception' => true,
     'invalid-named-breadcrumb-exception' => true,
@@ -1294,7 +1295,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -1454,6 +1455,66 @@
     ),
     1 => 
     array (
+      'key' => 'sales.paymentmethods.cashfree',
+      'name' => 'Cashfree',
+      'sort' => 7,
+      'fields' => 
+      array (
+        0 => 
+        array (
+          'name' => 'title',
+          'title' => 'admin::app.admin.system.title',
+          'type' => 'text',
+          'validation' => 'required',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        1 => 
+        array (
+          'name' => 'description',
+          'title' => 'admin::app.admin.system.description',
+          'type' => 'textarea',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        2 => 
+        array (
+          'name' => 'app_id',
+          'title' => 'App Id',
+          'type' => 'text',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        3 => 
+        array (
+          'name' => 'key_secret',
+          'title' => 'Key Secret',
+          'type' => 'text',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        4 => 
+        array (
+          'name' => 'active',
+          'title' => 'admin::app.admin.system.status',
+          'type' => 'boolean',
+          'validation' => 'required',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+        5 => 
+        array (
+          'name' => 'test_mode',
+          'title' => 'Test Mode',
+          'type' => 'boolean',
+          'validation' => 'required',
+          'channel_based' => false,
+          'locale_based' => true,
+        ),
+      ),
+    ),
+    2 => 
+    array (
       'key' => 'catalog.products.size-chart',
       'name' => 'sizechart::app.admin.system.size-chart',
       'sort' => 1,
@@ -1467,7 +1528,7 @@
         ),
       ),
     ),
-    2 => 
+    3 => 
     array (
       'key' => 'customer.settings.social_login',
       'name' => 'sociallogin::app.admin.system.social-login',
@@ -1511,19 +1572,19 @@
         ),
       ),
     ),
-    3 => 
+    4 => 
     array (
       'key' => 'taxes',
       'name' => 'tax::app.admin.system.taxes.taxes',
       'sort' => 6,
     ),
-    4 => 
+    5 => 
     array (
       'key' => 'taxes.catalogue',
       'name' => 'tax::app.admin.system.taxes.catalogue',
       'sort' => 1,
     ),
-    5 => 
+    6 => 
     array (
       'key' => 'taxes.catalogue.pricing',
       'name' => 'tax::app.admin.system.taxes.pricing',
@@ -1540,7 +1601,7 @@
         ),
       ),
     ),
-    6 => 
+    7 => 
     array (
       'key' => 'taxes.catalogue.default-location-calculation',
       'name' => 'tax::app.admin.system.taxes.default-location-calculation',
@@ -1570,19 +1631,19 @@
         ),
       ),
     ),
-    7 => 
+    8 => 
     array (
       'key' => 'sales',
       'name' => 'admin::app.admin.system.sales',
       'sort' => 5,
     ),
-    8 => 
+    9 => 
     array (
       'key' => 'sales.orderSettings',
       'name' => 'admin::app.admin.system.order-settings',
       'sort' => 4,
     ),
-    9 => 
+    10 => 
     array (
       'key' => 'sales.orderSettings.order_number',
       'name' => 'admin::app.admin.system.orderNumber',
@@ -1627,7 +1688,7 @@
         ),
       ),
     ),
-    10 => 
+    11 => 
     array (
       'key' => 'sales.orderSettings.minimum-order',
       'name' => 'admin::app.admin.system.minimum-order',
@@ -1645,13 +1706,13 @@
         ),
       ),
     ),
-    11 => 
+    12 => 
     array (
       'key' => 'sales.invoice_setttings',
       'name' => 'admin::app.admin.system.invoice-settings',
       'sort' => 5,
     ),
-    12 => 
+    13 => 
     array (
       'key' => 'sales.invoice_setttings.invoice_number',
       'name' => 'admin::app.admin.system.invoice-number',
@@ -1696,7 +1757,7 @@
         ),
       ),
     ),
-    13 => 
+    14 => 
     array (
       'key' => 'sales.invoice_setttings.payment_terms',
       'name' => 'admin::app.admin.system.payment-terms',
@@ -1713,7 +1774,7 @@
         ),
       ),
     ),
-    14 => 
+    15 => 
     array (
       'key' => 'sales.invoice_setttings.invoice_slip_design',
       'name' => 'admin::app.admin.system.invoice-slip-design',
@@ -1730,7 +1791,7 @@
         ),
       ),
     ),
-    15 => 
+    16 => 
     array (
       'key' => 'sales.invoice_setttings.invoice_reminders',
       'name' => 'admin::app.admin.system.invoice-reminders',
@@ -1806,7 +1867,7 @@
         ),
       ),
     ),
-    16 => 
+    17 => 
     array (
       'key' => 'sales.paymentmethods.paypal_standard',
       'name' => 'admin::app.admin.system.paypal-standard',
@@ -1887,7 +1948,7 @@
         ),
       ),
     ),
-    17 => 
+    18 => 
     array (
       'key' => 'sales.paymentmethods.paypal_smart_button',
       'name' => 'admin::app.admin.system.paypal-smart-button',
@@ -1987,13 +2048,13 @@
         ),
       ),
     ),
-    18 => 
+    19 => 
     array (
       'key' => 'sales.paymentmethods',
       'name' => 'admin::app.admin.system.payment-methods',
       'sort' => 3,
     ),
-    19 => 
+    20 => 
     array (
       'key' => 'sales.paymentmethods.cashondelivery',
       'name' => 'admin::app.admin.system.cash-on-delivery',
@@ -2125,7 +2186,7 @@
         ),
       ),
     ),
-    20 => 
+    21 => 
     array (
       'key' => 'sales.paymentmethods.moneytransfer',
       'name' => 'admin::app.admin.system.money-transfer',
@@ -2252,13 +2313,13 @@
         ),
       ),
     ),
-    21 => 
+    22 => 
     array (
       'key' => 'sales.shipping',
       'name' => 'admin::app.admin.system.shipping',
       'sort' => 1,
     ),
-    22 => 
+    23 => 
     array (
       'key' => 'sales.shipping.origin',
       'name' => 'admin::app.admin.system.origin',
@@ -2340,13 +2401,13 @@
         ),
       ),
     ),
-    23 => 
+    24 => 
     array (
       'key' => 'sales.carriers',
       'name' => 'admin::app.admin.system.shipping-methods',
       'sort' => 2,
     ),
-    24 => 
+    25 => 
     array (
       'key' => 'sales.carriers.free',
       'name' => 'admin::app.admin.system.free-shipping',
@@ -2382,7 +2443,7 @@
         ),
       ),
     ),
-    25 => 
+    26 => 
     array (
       'key' => 'sales.carriers.flatrate',
       'name' => 'admin::app.admin.system.flate-rate-shipping',
@@ -2447,13 +2508,13 @@
         ),
       ),
     ),
-    26 => 
+    27 => 
     array (
       'key' => 'customer.captcha',
       'name' => 'customer::app.admin.system.captcha.title',
       'sort' => 2,
     ),
-    27 => 
+    28 => 
     array (
       'key' => 'customer.captcha.credentials',
       'name' => 'customer::app.admin.system.captcha.credentials',
@@ -2483,7 +2544,7 @@
         ),
       ),
     ),
-    28 => 
+    29 => 
     array (
       'key' => 'general.content.shop',
       'name' => 'shop::app.products.settings',
@@ -2516,7 +2577,7 @@
         ),
       ),
     ),
-    29 => 
+    30 => 
     array (
       'key' => 'sales.paymentmethods.paypal_standard',
       'name' => 'admin::app.admin.system.paypal-standard',
@@ -2596,19 +2657,19 @@
         ),
       ),
     ),
-    30 => 
+    31 => 
     array (
       'key' => 'general',
       'name' => 'admin::app.admin.system.general',
       'sort' => 1,
     ),
-    31 => 
+    32 => 
     array (
       'key' => 'general.general',
       'name' => 'admin::app.admin.system.general',
       'sort' => 1,
     ),
-    32 => 
+    33 => 
     array (
       'key' => 'general.general.locale_options',
       'name' => 'admin::app.admin.system.locale-options',
@@ -2637,13 +2698,13 @@
         ),
       ),
     ),
-    33 => 
+    34 => 
     array (
       'key' => 'general.content',
       'name' => 'admin::app.admin.system.content',
       'sort' => 2,
     ),
-    34 => 
+    35 => 
     array (
       'key' => 'general.content.footer',
       'name' => 'admin::app.admin.system.footer',
@@ -2668,7 +2729,7 @@
         ),
       ),
     ),
-    35 => 
+    36 => 
     array (
       'key' => 'general.content.custom_scripts',
       'name' => 'admin::app.admin.system.custom-scripts',
@@ -2693,13 +2754,13 @@
         ),
       ),
     ),
-    36 => 
+    37 => 
     array (
       'key' => 'general.design',
       'name' => 'admin::app.admin.system.design',
       'sort' => 3,
     ),
-    37 => 
+    38 => 
     array (
       'key' => 'general.design.admin_logo',
       'name' => 'admin::app.admin.system.admin-logo',
@@ -2724,19 +2785,19 @@
         ),
       ),
     ),
-    38 => 
+    39 => 
     array (
       'key' => 'catalog',
       'name' => 'admin::app.admin.system.catalog',
       'sort' => 2,
     ),
-    39 => 
+    40 => 
     array (
       'key' => 'catalog.products',
       'name' => 'admin::app.admin.system.products',
       'sort' => 2,
     ),
-    40 => 
+    41 => 
     array (
       'key' => 'catalog.products.guest-checkout',
       'name' => 'admin::app.admin.system.guest-checkout',
@@ -2751,7 +2812,7 @@
         ),
       ),
     ),
-    41 => 
+    42 => 
     array (
       'key' => 'catalog.products.homepage',
       'name' => 'admin::app.admin.system.homepage',
@@ -2780,7 +2841,7 @@
         ),
       ),
     ),
-    42 => 
+    43 => 
     array (
       'key' => 'catalog.products.storefront',
       'name' => 'admin::app.admin.system.storefront',
@@ -2863,7 +2924,7 @@
         ),
       ),
     ),
-    43 => 
+    44 => 
     array (
       'key' => 'catalog.products.cache-small-image',
       'name' => 'admin::app.admin.system.cache-small-image',
@@ -2884,7 +2945,7 @@
         ),
       ),
     ),
-    44 => 
+    45 => 
     array (
       'key' => 'catalog.products.cache-medium-image',
       'name' => 'admin::app.admin.system.cache-medium-image',
@@ -2905,7 +2966,7 @@
         ),
       ),
     ),
-    45 => 
+    46 => 
     array (
       'key' => 'catalog.products.cache-large-image',
       'name' => 'admin::app.admin.system.cache-large-image',
@@ -2926,7 +2987,7 @@
         ),
       ),
     ),
-    46 => 
+    47 => 
     array (
       'key' => 'catalog.products.review',
       'name' => 'admin::app.admin.system.review',
@@ -2941,7 +3002,7 @@
         ),
       ),
     ),
-    47 => 
+    48 => 
     array (
       'key' => 'catalog.products.attribute',
       'name' => 'admin::app.admin.system.attribute',
@@ -2962,13 +3023,13 @@
         ),
       ),
     ),
-    48 => 
+    49 => 
     array (
       'key' => 'catalog.inventory',
       'name' => 'admin::app.admin.system.inventory',
       'sort' => 1,
     ),
-    49 => 
+    50 => 
     array (
       'key' => 'catalog.inventory.stock_options',
       'name' => 'admin::app.admin.system.stock-options',
@@ -2984,13 +3045,13 @@
         ),
       ),
     ),
-    50 => 
+    51 => 
     array (
       'key' => 'catalog.rich_snippets',
       'name' => 'admin::app.admin.system.rich-snippets',
       'sort' => 3,
     ),
-    51 => 
+    52 => 
     array (
       'key' => 'catalog.rich_snippets.products',
       'name' => 'admin::app.admin.system.products',
@@ -3047,7 +3108,7 @@
         ),
       ),
     ),
-    52 => 
+    53 => 
     array (
       'key' => 'catalog.rich_snippets.categories',
       'name' => 'admin::app.admin.system.categories',
@@ -3068,19 +3129,19 @@
         ),
       ),
     ),
-    53 => 
+    54 => 
     array (
       'key' => 'customer',
       'name' => 'admin::app.admin.system.customer',
       'sort' => 3,
     ),
-    54 => 
+    55 => 
     array (
       'key' => 'customer.address',
       'name' => 'admin::app.admin.system.address',
       'sort' => 1,
     ),
-    55 => 
+    56 => 
     array (
       'key' => 'customer.address.requirements',
       'name' => 'admin::app.admin.system.requirements',
@@ -3113,7 +3174,7 @@
         ),
       ),
     ),
-    56 => 
+    57 => 
     array (
       'key' => 'customer.address.information',
       'name' => 'Information',
@@ -3130,13 +3191,13 @@
         ),
       ),
     ),
-    57 => 
+    58 => 
     array (
       'key' => 'customer.settings',
       'name' => 'admin::app.admin.system.settings',
       'sort' => 3,
     ),
-    58 => 
+    59 => 
     array (
       'key' => 'customer.settings.wishlist',
       'name' => 'admin::app.admin.system.wishlist',
@@ -3151,7 +3212,7 @@
         ),
       ),
     ),
-    59 => 
+    60 => 
     array (
       'key' => 'customer.settings.newsletter',
       'name' => 'admin::app.admin.system.newsletter',
@@ -3166,7 +3227,7 @@
         ),
       ),
     ),
-    60 => 
+    61 => 
     array (
       'key' => 'customer.settings.email',
       'name' => 'admin::app.admin.system.email',
@@ -3181,19 +3242,19 @@
         ),
       ),
     ),
-    61 => 
+    62 => 
     array (
       'key' => 'emails',
       'name' => 'admin::app.admin.emails.email',
       'sort' => 4,
     ),
-    62 => 
+    63 => 
     array (
       'key' => 'emails.configure',
       'name' => 'admin::app.admin.system.email-settings',
       'sort' => 1,
     ),
-    63 => 
+    64 => 
     array (
       'key' => 'emails.configure.email_settings',
       'name' => 'admin::app.admin.system.email-settings',
@@ -3208,7 +3269,7 @@
           'info' => 'admin::app.admin.system.email-sender-name-tip',
           'validation' => 'required|max:50',
           'channel_based' => true,
-          'default_value' => '',
+          'default_value' => 'WorldEkart',
         ),
         1 => 
         array (
@@ -3218,7 +3279,7 @@
           'info' => 'admin::app.admin.system.shop-email-from-tip',
           'validation' => 'required|email',
           'channel_based' => true,
-          'default_value' => '',
+          'default_value' => 'mannukumarshah@gmail.com',
         ),
         2 => 
         array (
@@ -3238,17 +3299,17 @@
           'info' => 'admin::app.admin.system.admin-email-tip',
           'validation' => 'required|email',
           'channel_based' => true,
-          'default_value' => '',
+          'default_value' => 'mannukumarshah@gmail.com',
         ),
       ),
     ),
-    64 => 
+    65 => 
     array (
       'key' => 'emails.general',
       'name' => 'admin::app.admin.emails.notification_label',
       'sort' => 1,
     ),
-    65 => 
+    66 => 
     array (
       'key' => 'emails.general.notifications',
       'name' => 'admin::app.admin.emails.notification_label',
@@ -3323,7 +3384,7 @@
         ),
       ),
     ),
-    66 => 
+    67 => 
     array (
       'key' => 'sales.paymentmethods.razorpay',
       'name' => 'Razorpay',
@@ -3376,7 +3437,7 @@
         ),
       ),
     ),
-    67 => 
+    68 => 
     array (
       'key' => 'sales.paymentmethods.paytm',
       'name' => 'Paytm',
@@ -3448,19 +3509,19 @@
         ),
       ),
     ),
-    68 => 
+    69 => 
     array (
       'key' => 'suggestion',
       'name' => 'Search Suggestion',
       'sort' => 1,
     ),
-    69 => 
+    70 => 
     array (
       'key' => 'suggestion.suggestion',
       'name' => 'Search Suggestion Settings',
       'sort' => 1,
     ),
-    70 => 
+    71 => 
     array (
       'key' => 'suggestion.suggestion.options',
       'name' => 'Options',
@@ -3509,19 +3570,19 @@
         ),
       ),
     ),
-    71 => 
+    72 => 
     array (
       'key' => 'rma',
       'name' => 'rma::app.admin.admin-name.rma',
       'sort' => 2,
     ),
-    72 => 
+    73 => 
     array (
       'key' => 'rma.settings',
       'name' => 'rma::app.admin.setting.settings',
       'sort' => 1,
     ),
-    73 => 
+    74 => 
     array (
       'key' => 'rma.settings.general',
       'name' => 'rma::app.admin.setting.general',
@@ -3556,19 +3617,19 @@
         ),
       ),
     ),
-    74 => 
+    75 => 
     array (
       'key' => 'sales',
       'name' => 'admin::app.admin.system.sales',
       'sort' => 5,
     ),
-    75 => 
+    76 => 
     array (
       'key' => 'sales.carriers',
       'name' => 'admin::app.admin.system.shipping-methods',
       'sort' => 1,
     ),
-    76 => 
+    77 => 
     array (
       'key' => 'sales.carriers.dhl',
       'name' => 'dhl::app.admin.system.dhl',
@@ -3934,19 +3995,19 @@
         ),
       ),
     ),
-    77 => 
+    78 => 
     array (
       'key' => 'bulkupload',
       'name' => 'bulkupload::app.admin.system.bulkupload',
       'sort' => 5,
     ),
-    78 => 
+    79 => 
     array (
       'key' => 'bulkupload.settings',
       'name' => 'bulkupload::app.admin.system.settings',
       'sort' => 1,
     ),
-    79 => 
+    80 => 
     array (
       'key' => 'bulkupload.settings.general',
       'name' => 'bulkupload::app.admin.system.general',
@@ -4088,7 +4149,7 @@
     array (
       'enabled' => true,
       'driver' => 'file',
-      'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\debugbar',
+      'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\debugbar',
       'connection' => NULL,
       'provider' => '',
       'hostname' => '127.0.0.1',
@@ -4192,10 +4253,10 @@
     'convert_entities' => true,
     'defines' => 
     array (
-      'font_dir' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
-      'font_cache' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
-      'temp_dir' => 'C:\\Users\\coolp\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
+      'font_dir' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
+      'font_cache' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
+      'temp_dir' => 'C:\\Users\\Manu24\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\xampp\\htdocs\\World_Ekart',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -4314,7 +4375,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/laravel-excel',
+      'local_path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -4329,17 +4390,17 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app',
       ),
       'private' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/private',
+        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/private',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
         'url' => 'http://localhost:8000/storage',
         'visibility' => 'public',
       ),
@@ -4441,7 +4502,7 @@
     array (
     ),
     'enable_runnable_solutions' => true,
-    'remote_sites_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
+    'remote_sites_path' => 'C:\\xampp\\htdocs\\World_Ekart',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
@@ -4455,8 +4516,8 @@
     'route' => 'cache',
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
-      1 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\public\\storage',
+      0 => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
+      1 => 'C:\\xampp\\htdocs\\World_Ekart\\public\\storage',
     ),
     'templates' => 
     array (
@@ -4519,13 +4580,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 7,
       ),
@@ -4569,8 +4630,8 @@
         'host' => 'smtp.mailtrap.io',
         'port' => '2525',
         'encryption' => 'tls',
-        'username' => '',
-        'password' => '',
+        'username' => 'c20cf43ddfbd04',
+        'password' => '95374027a33dfa',
         'timeout' => NULL,
         'verify_peer' => false,
       ),
@@ -4612,12 +4673,12 @@
     ),
     'from' => 
     array (
-      'address' => '',
-      'name' => '',
+      'address' => 'mannukumarshah@gmail.com',
+      'name' => 'WorldEkart',
     ),
     'admin' => 
     array (
-      'address' => '',
+      'address' => 'mannukumarshah@gmail.com',
       'name' => 'Admin',
     ),
     'markdown' => 
@@ -4625,7 +4686,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -5158,6 +5219,16 @@
   ),
   'paymentmethods' => 
   array (
+    'cashfree' => 
+    array (
+      'code' => 'cashfree',
+      'title' => 'Cashfree',
+      'description' => 'Cashfree',
+      'class' => 'Webkul\\CashFree\\Payment\\Cashfree',
+      'sandbox' => true,
+      'active' => true,
+      'sort' => 3,
+    ),
     'paypal_smart_button' => 
     array (
       'code' => 'paypal_smart_button',
@@ -5340,9 +5411,9 @@
     ),
     'generator' => 
     array (
-      'basePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
+      'basePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
       'rootNamespace' => 'App\\',
-      'stubsOverridePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
+      'stubsOverridePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
       'paths' => 
       array (
         'models' => 'Entities',
@@ -5477,7 +5548,7 @@
     'lifetime' => '120',
     'expire_on_close' => true,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/sessions',
     'connection' => 'session',
     'table' => 'sessions',
     'store' => NULL,
@@ -5583,9 +5654,9 @@
     'tracer' => false,
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework\\views',
   ),
   'product_types' => 
   array (

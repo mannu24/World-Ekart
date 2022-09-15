@@ -37,9 +37,25 @@
                             <div slot="place-order-btn">
                                 <div class="mb-20">
                                     <button type="button" class="ps-btn" @click="placeOrder()" :disabled="!isPlaceOrderEnabled" 
-                                        v-if="selected_payment_method.method != 'paypal_smart_button'" id="checkout-place-order-button">
+                                        v-if="selected_payment_method.method != 'paypal_smart_button' && selected_payment_method.method != 'cashfree'" id="checkout-place-order-button">
                                         {{ __('shop::app.checkout.onepage.place-order') }}
                                     </button>
+                                    <strong>{{ core()->currency($cart->base_grand_total) }}</strong>
+                                    <form v-if="selected_payment_method.method == 'cashfree'" id="redirectForm" method="post" action="{{ route('cashfree')}}">
+                                        @csrf
+                                    <input class="d-none" name="appId" :value="selected_payment_method.method" />
+                                    <input class="d-none" name="orderId" />
+                                    <input class="d-none" name="orderAmount" />
+                                    <input class="d-none" name="orderCurrency" />
+                                    <input class="d-none" name="orderNote" />
+                                    <input class="d-none" name="customerName" />
+                                    <input class="d-none" name="customerEmail" />
+                                    <input class="d-none" name="customerPhone" />
+                                    <input class="d-none" name="returnUrl" />
+                                    <input class="d-none" name="notifyUrl" />
+                                    <p :value="selected_payment_method"></p>
+                                        <button trpe="submit" class="ps-btn" :value="selected_payment_method.method" >Pay Now</button>
+                                    </form>
                                 </div>
                             </div>
                         </review-section>
@@ -521,6 +537,7 @@
 
                     paymentMethodSelected: function (paymentMethod) {
                         this.selected_payment_method = paymentMethod;
+                        console.log(this.selected_payment_method);
                     },
 
                     newBillingAddress: function () {

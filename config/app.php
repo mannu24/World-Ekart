@@ -285,6 +285,9 @@ return [
         // Razorpay provider
         Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
 
+        // Cashfree provider
+        Webkul\CashFree\Providers\CashFreeServiceProvider::class,
+
         // Paytm provider
         Wontonee\Paytm\Providers\PaytmServiceProvider::class,
         

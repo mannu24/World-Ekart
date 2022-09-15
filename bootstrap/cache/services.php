@@ -97,10 +97,11 @@
     93 => 'Webkul\\Notification\\Providers\\NotificationServiceProvider',
     94 => 'Webkul\\SizeChart\\Providers\\SizeChartServiceProvider',
     95 => 'Wontonee\\Razorpay\\Providers\\RazorpayServiceProvider',
-    96 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
-    97 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
-    98 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
-    99 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
+    96 => 'Webkul\\CashFree\\Providers\\CashFreeServiceProvider',
+    97 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
+    98 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
+    99 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
+    100 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
   ),
   'eager' => 
   array (
@@ -185,10 +186,11 @@
     78 => 'Webkul\\Notification\\Providers\\NotificationServiceProvider',
     79 => 'Webkul\\SizeChart\\Providers\\SizeChartServiceProvider',
     80 => 'Wontonee\\Razorpay\\Providers\\RazorpayServiceProvider',
-    81 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
-    82 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
-    83 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
-    84 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
+    81 => 'Webkul\\CashFree\\Providers\\CashFreeServiceProvider',
+    82 => 'Wontonee\\Paytm\\Providers\\PaytmServiceProvider',
+    83 => 'Webkul\\Bulkupload\\Providers\\BulkUploadServiceProvider',
+    84 => 'RKREZA\\Contact\\Providers\\ContactServiceProvider',
+    85 => 'Webkul\\suggestion\\Providers\\suggestionServiceProvider',
   ),
   'deferred' => 
   array (

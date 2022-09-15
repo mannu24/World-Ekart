@@ -8,6 +8,7 @@ use Webkul\Checkout\Http\Requests\CustomerAddressForm;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
 
@@ -19,6 +20,9 @@ class OnepageController extends Controller
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
+
+
+    protected $invoiceRepository;
 
     /**
      * Customer repository instance.
@@ -36,11 +40,13 @@ class OnepageController extends Controller
      */
     public function __construct(
         OrderRepository $orderRepository,
-        CustomerRepository $customerRepository
+        CustomerRepository $customerRepository,
+        InvoiceRepository $invoiceRepository
     ) {
         $this->orderRepository = $orderRepository;
 
         $this->customerRepository = $customerRepository;
+        $this->invoiceRepository = $invoiceRepository;
 
         parent::__construct();
     }
@@ -54,7 +60,7 @@ class OnepageController extends Controller
     {
         Event::dispatch('checkout.load.index');
 
-        if (! auth()->guard('customer')->check() && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+        if (!auth()->guard('customer')->check() && !core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
             return redirect()->route('customer.session.index');
         }
 
@@ -71,15 +77,15 @@ class OnepageController extends Controller
         $cart = Cart::getCart();
 
         if (
-            (! auth()->guard('customer')->check() && $cart->hasDownloadableItems())
-            || (! auth()->guard('customer')->check() && ! $cart->hasGuestCheckoutItems())
+            (!auth()->guard('customer')->check() && $cart->hasDownloadableItems())
+            || (!auth()->guard('customer')->check() && !$cart->hasGuestCheckoutItems())
         ) {
             return redirect()->route('customer.session.index');
         }
 
         $minimumOrderAmount = (float) core()->getConfigData('sales.orderSettings.minimum-order.minimum_order_amount') ?? 0;
 
-        if (! $cart->checkMinimumOrder()) {
+        if (!$cart->checkMinimumOrder()) {
             session()->flash('warning', trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
 
             return redirect()->back();
@@ -114,14 +120,14 @@ class OnepageController extends Controller
     {
         $data = $request->all();
 
-        if (! auth()->guard('customer')->check() && ! Cart::getCart()->hasGuestCheckoutItems()) {
+        if (!auth()->guard('customer')->check() && !Cart::getCart()->hasGuestCheckoutItems()) {
             return response()->json(['redirect_url' => route('customer.session.index')], 403);
         }
 
         $data['billing']['address1'] = implode(PHP_EOL, array_filter($data['billing']['address1']));
         $data['shipping']['address1'] = implode(PHP_EOL, array_filter($data['shipping']['address1']));
 
-        if (Cart::hasError() || ! Cart::saveCustomerAddress($data)) {
+        if (Cart::hasError() || !Cart::saveCustomerAddress($data)) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
         }
 
@@ -130,7 +136,7 @@ class OnepageController extends Controller
         Cart::collectTotals();
 
         if ($cart->haveStockableItems()) {
-            if (! $rates = Shipping::collectRates()) {
+            if (!$rates = Shipping::collectRates()) {
                 return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
             }
 
@@ -149,7 +155,7 @@ class OnepageController extends Controller
     {
         $shippingMethod = request()->get('shipping_method');
 
-        if (Cart::hasError() || ! $shippingMethod || ! Cart::saveShippingMethod($shippingMethod)) {
+        if (Cart::hasError() || !$shippingMethod || !Cart::saveShippingMethod($shippingMethod)) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
         }
 
@@ -167,7 +173,7 @@ class OnepageController extends Controller
     {
         $payment = request()->get('payment');
 
-        if (Cart::hasError() || ! $payment || ! Cart::savePaymentMethod($payment)) {
+        if (Cart::hasError() || !$payment || !Cart::savePaymentMethod($payment)) {
             return response()->json(['redirect_url' => route('shop.checkout.cart.index')], 403);
         }
 
@@ -225,7 +231,7 @@ class OnepageController extends Controller
      */
     public function success()
     {
-        if (! $order = session('order')) {
+        if (!$order = session('order')) {
             return redirect()->route('shop.checkout.cart.index');
         }
 
@@ -247,23 +253,23 @@ class OnepageController extends Controller
             throw new \Exception(trans('shop::app.checkout.cart.suspended-account-message'));
         }
 
-        if (! $cart->checkMinimumOrder()) {
+        if (!$cart->checkMinimumOrder()) {
             throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 
-        if ($cart->haveStockableItems() && ! $cart->shipping_address) {
+        if ($cart->haveStockableItems() && !$cart->shipping_address) {
             throw new \Exception(trans('shop::app.checkout.cart.check-shipping-address'));
         }
 
-        if (! $cart->billing_address) {
+        if (!$cart->billing_address) {
             throw new \Exception(trans('shop::app.checkout.cart.check-billing-address'));
         }
 
-        if ($cart->haveStockableItems() && ! $cart->selected_shipping_rate) {
+        if ($cart->haveStockableItems() && !$cart->selected_shipping_rate) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-shipping-method'));
         }
 
-        if (! $cart->payment) {
+        if (!$cart->payment) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
     }
@@ -279,7 +285,7 @@ class OnepageController extends Controller
             'email' => request()->email,
         ]);
 
-        if (! is_null($customer)) {
+        if (!is_null($customer)) {
             return 'true';
         }
 
@@ -297,7 +303,7 @@ class OnepageController extends Controller
             'email' => 'required|email',
         ]);
 
-        if (! auth()->guard('customer')->attempt(request(['email', 'password']))) {
+        if (!auth()->guard('customer')->attempt(request(['email', 'password']))) {
             return response()->json(['error' => trans('shop::app.customer.login-form.invalid-creds')]);
         }
 
@@ -378,8 +384,84 @@ class OnepageController extends Controller
         $status = Cart::checkMinimumOrder();
 
         return response()->json([
-            'status'  => ! $status ? false : true,
-            'message' => ! $status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
+            'status'  => !$status ? false : true,
+            'message' => !$status ? trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]) : 'Success',
         ]);
+    }
+
+    public function cashfree_pay()
+    {
+        $domain = 'http://localhost:8000';
+        // $domain = env('APP_URL');
+        // dd($domain);
+        $cart = Cart::getCart();
+        $billingAddress = $cart->billing_address;
+        $shipping_rate = $cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0; // shipping rate
+        $discount_amount = $cart->discount_amount; // discount amount
+        $total_amount =  ($cart->sub_total + $cart->tax_total + $shipping_rate) - $discount_amount; // total amount
+
+        // $pay_data = Payment::getSupportedPaymentMethods();
+        // dd($pay_data);
+        if(core()->getConfigData('sales.paymentmethods.cashfree.test_mode') == true){
+
+            $mode = "test"; //<------------ Change to TEST for test server, PROD for production
+        }
+        else{
+            $mode = "PROD";
+        }
+
+        // extract($_POST);
+        $secretKey = core()->getConfigData('sales.paymentmethods.cashfree.key_secret');
+        $postData = array(
+            "appId" => core()->getConfigData('sales.paymentmethods.cashfree.app_id'),
+            "orderId" => str_random(10),
+            "orderAmount" => $total_amount,
+            "orderCurrency" => 'INR',
+            "orderNote" => 'Cashfree Payment',
+            "customerName" => $billingAddress->name,
+            "customerPhone" => $billingAddress->phone,
+            "customerEmail" => $billingAddress->email,
+            "returnUrl" => $domain.'/cashfree-save',
+            "notifyUrl" => '',
+        );
+        ksort($postData);
+        $signatureData = "";
+        foreach ($postData as $key => $value) {
+            $signatureData .= $key . $value;
+        }
+        $signature = hash_hmac('sha256', $signatureData, $secretKey, true);
+        $signature = base64_encode($signature);
+
+        if ($mode == "PROD") {
+            $url = "https://www.cashfree.com/checkout/post/submit";
+        } else {
+            $url = "https://test.cashfree.com/billpay/checkout/post/submit";
+        }
+
+        return view('shop::checkout.cashfree-pay',compact('url','signature','postData'));
+    }
+
+    public function cashfree_save(){
+        // dd('Success');
+        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
+            if ($order->canInvoice()) {
+                $this->invoiceRepository->create($this->prepareInvoiceData($order));
+            }
+            Cart::deActivateCart();
+            session()->flash('order', $order);
+            // Order and prepare invoice
+            return redirect()->route('shop.checkout.success');
+    }
+
+    protected function prepareInvoiceData($order)
+    {
+        $invoiceData = ["order_id" => $order->id,];
+
+        foreach ($order->items as $item) {
+            $invoiceData['invoice']['items'][$item->id] = $item->qty_to_invoice;
+        }
+
+        return $invoiceData;
     }
 }

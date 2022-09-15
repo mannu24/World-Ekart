@@ -73,6 +73,10 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::checkout.success'
     ])->name('shop.checkout.success');
 
+    Route::post('/cashfree-pay', [OnepageController::class, 'cashfree_pay'])->name('cashfree');
+    Route::post('/cashfree-save', [OnepageController::class, 'cashfree_save'])->name('cashfree_save');
+
+
     Route::prefix('customer')->group(function () {
         /**
          * For customer exist check.

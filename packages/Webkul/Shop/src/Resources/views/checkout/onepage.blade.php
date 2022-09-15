@@ -94,6 +94,9 @@
                             {{ __('shop::app.checkout.onepage.place-order') }}
                         </button>
 
+                        <button  v-if="selected_payment_method.method == 'cashfree'">Cshfree Button</button>
+                        hello
+
                         <div class="paypal-button-container"></div>
                     </div>
                 </div>
