@@ -11,12 +11,13 @@
             <div class="page-title">
                 <h1>{{ __('admin::app.dashboard.title') }}</h1>
             </div>
-
-            <div class="page-action">
-                <a href="{{ route('admin.analytics.index') }}" class="btn btn-lg btn-primary">
-                    Comissions
-                </a>
-            </div>
+            @if (auth()->guard('admin')->user()->role['name'] != 'Vendor')
+                <div class="page-action">
+                    <a href="{{ route('admin.analytics.index') }}" class="btn btn-lg btn-primary">
+                        Earnings
+                    </a>
+                </div>
+            @endif
             <div class="page-action">
                 <date-filter></date-filter>
             </div>

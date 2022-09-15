@@ -1,8 +1,6 @@
 @extends('admin::layouts.content')
 
-@section('page_title')
-    {{ __('admin::app.users.users.title') }}
-@stop
+@section('page_title') Pending Vendors Requests @stop
 
 @section('content')
     <div class="content">
@@ -14,7 +12,7 @@
         </div>
 
         <div class="page-content">
-        <datagrid-plus src="{{ route('admin.vendors.index') }}"></datagrid-plus>
+            <datagrid-plus src="{{ route('admin.vendors.index') }}"></datagrid-plus>
         </div>
     </div>
 @stop

@@ -2,11 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
-use Illuminate\Support\Facades\Storage;
-use Webkul\Admin\Http\Requests\ConfigurationForm;
-use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Admin\DataGrids\VendorRequestsDataGrid;
-use Webkul\Core\Tree;
+use Webkul\Admin\DataGrids\PaymentEarningsDataGrid;
+use Webkul\Admin\DataGrids\PaymentEarningsAdminDataGrid;
+use Webkul\Admin\DataGrids\PaymentHistoryAdminDataGrid;
 use Webkul\User\Repositories\AdminRepository;
 use Webkul\User\Repositories\RoleRepository;
 use Illuminate\Support\Facades\DB;
@@ -54,26 +53,22 @@ class VendorController extends Controller
         $this->middleware('guest', ['except' => 'destroy']);
     }
 
-    public function index()
-    {
+    public function index() {
         if (request()->ajax()) {
-            // return "hello";
             return app(VendorRequestsDataGrid::class)->toJson();
         }
 
         return view($this->_config['view']);
     }
 
-    public function view($id)
-    {
+    public function view($id) {
         $vendor = DB::table('vendor_registration')->where('id',$id)->first();
 
 
         return view($this->_config['view'], compact('vendor'));
     }
 
-    public function approve($id)
-    {
+    public function approve($id) {
         $vendor = DB::table('vendor_registration')->where('id',$id)->update(['status'=>1]);
         $vendor = DB::table('vendor_registration')->where('id',$id)->first();
 
@@ -97,8 +92,7 @@ class VendorController extends Controller
         return redirect('/admin/vendors-requests');
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         $vendor = DB::table('vendor_registration')->where('id',$id)->update(['status'=>2]);
        
 
@@ -106,29 +100,109 @@ class VendorController extends Controller
         return redirect('/admin/vendors-requests');
     }
 
-    public function destroy($id)
-    {
-        // $this->adminRepository->findOrFail($id);
-
-        // if ($this->adminRepository->count() == 1) {
-        //     return response()->json(['message' => trans('admin::app.response.last-delete-error', ['name' => 'Admin'])], 400);
-        // }
-
-        // if (auth()->guard('admin')->user()->id == $id) {
-        //     return response()->json([
-        //         'redirect' => route('super.users.confirm', ['id' => $id]),
-        //     ]);
-        // }
-
+    public function destroy($id) {
         try {
-
-            $item = DB::table('vendor_registration')->where('id',$id)->update(['status'=>2]);
-            // $item->status = 2;
-            // $item->save();
-
+            DB::table('vendor_registration')->where('id',$id)->update(['status'=>2]);
             return response()->json(['message' => 'Deleted Successfully']);
         } catch (\Exception $e) {}
 
         return response()->json(['message' => 'Deletion Failed'], 500);
     }
+
+    public function payment_earnings() {
+        if (request()->ajax()) {
+            return app(PaymentEarningsDataGrid::class)->toJson();
+        }
+        
+        return view($this->_config['view']);
+    }
+
+    public function view_admin($id=null) {
+        if (request()->ajax()) {
+            return app(PaymentEarningsAdminDataGrid::class)->toJson();
+        }
+        
+        return view($this->_config['view']);
+    }
+
+    public function request_payment() {
+
+        $data = request()->validate([
+            'amount_requested' => 'required|numeric',
+        ]);
+        $user = auth()->guard('admin')->user() ;
+        if(is_null($user->bank_name) || is_null($user->ifsc_code) || is_null($user->upi_id) || is_null($user->acc_no) || is_null($user->acc_name)){
+            session()->flash('error','Complete Bank Details in Profile!') ;
+            return redirect()->back();
+        }
+
+        $data['status'] = 'Pending' ;
+        $data['vendor_id'] = $user->id ;
+        try {
+            DB::table('vendor_payment_request')->insert($data) ;
+            session()->flash('success', 'Request Submitted Succesfully!');
+            return redirect()->back();
+        } catch (\Exception $e) {}
+        session()->flash('error','Request Failed') ;
+        return redirect()->back();
+    }
+
+    public function cancel_payment($id)
+    {
+        $payment = DB::table('vendor_payment_request')->where('id',$id)->first() ;
+
+        if($payment->status == 'Pending'){ 
+            DB::table('vendor_payment_request')->where('id',$id)->update(['status'=>'Cancelled']) ;
+            session()->flash('success', 'Cancelled Succesfully');
+            return redirect()->back() ;
+        }
+        session()->flash('error', 'Cancellation Failed!');
+        return redirect()->back() ;
+    }
+
+    public function delete_payment($id)
+    {
+        $del = DB::table('vendor_payment_request')->where('id',$id)->delete() ;
+        if($del) return response()->json(['message' => 'Deleted Successfully!']);
+
+        return response()->json(['message' => 'Deletion Failed'], 500);
+
+    }
+
+    
+    public function edit($id)
+    {
+        $request = DB::table('vendor_payment_request')->where('id',$id)->first();
+        return view($this->_config['view'], compact('request'));
+    }
+
+    public function payment_paid() {
+        
+        $data = request()->validate([
+            'amount_requested' => 'required|numeric',
+            'amount_paid' => 'required|numeric|lte:amount_requested',
+            'transaction_no' => 'required|string',
+            'payment_via' => 'required|string',
+        ]);
+        $id = request()->input('id') ;
+        $data['status'] = 'Approved' ;
+        $data['paid_at'] = now() ;
+        $data['updated_at'] = now() ;
+        try{
+            DB::table('vendor_payment_request')->where('id',$id)->update($data) ;
+            session()->flash('success', 'Request Approved!');
+            return redirect()->route('admin.payment-request.history') ;
+        } catch(e) {}
+        session()->flash('failed', 'Error Occured!');
+        return redirect()->back() ;
+    }
+    
+    public function history_admin() {
+        if (request()->ajax()) {
+            return app(PaymentHistoryAdminDataGrid::class)->toJson();
+        }
+        
+        return view($this->_config['view']);
+    }
+
 }

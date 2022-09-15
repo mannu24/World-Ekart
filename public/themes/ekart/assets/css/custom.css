@@ -790,3 +790,6 @@ a:visited, a:link {
     aspect-ratio: 4/3;
     object-fit: cover;
 }
+.menu>li.has-mega-menu .mega-menu {
+    transform: translateX(-34%) !important;
+}

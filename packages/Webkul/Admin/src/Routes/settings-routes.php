@@ -190,6 +190,34 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::get('/vendors/delete-view/{id}', [VendorController::class, 'delete'])->name('admin.vendors.delete.view');
 
     /**
+     * Vendor and Admin Payment Routes
+    */
+    
+    Route::get('/payment-earnings', [VendorController::class, 'payment_earnings'])->defaults('_config', [
+        'view' => 'admin::users.vendors.payment-request',
+    ])->name('admin.payment-request.index');
+
+    Route::post('/request-payment', [VendorController::class, 'request_payment'])->name('admin.payment-request.create');
+
+    Route::get('/payment-request/cancel/{id}', [VendorController::class, 'cancel_payment'])->name('admin.payment-request.cancel');
+    
+    Route::post('/payment-request/delete/{id}', [VendorController::class, 'delete_payment'])->name('admin.payment-request.delete');
+    
+    Route::get('/payment-request/view/{id?}', [VendorController::class, 'view_admin'])->defaults('_config', [
+        'view' => 'admin::users.vendors.view-payment-request',
+    ])->name('admin.payment-request.view');
+    
+    Route::get('/payment-request/edit/{id}', [VendorController::class, 'edit'])->defaults('_config', [
+        'view' => 'admin::users.vendors.edit-payment-request',
+    ])->name('admin.payment-request.edit');
+
+    Route::post('/payment-paid', [VendorController::class, 'payment_paid'])->name('admin.payment-request.update');
+    
+    Route::get('/payment-request/history', [VendorController::class, 'history_admin'])->defaults('_config', [
+        'view' => 'admin::users.vendors.history-payment-request',
+    ])->name('admin.payment-request.history');
+
+    /**
      * Users routes.
      */
     Route::get('/users', [UserController::class, 'index'])->defaults('_config', [

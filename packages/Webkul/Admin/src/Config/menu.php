@@ -8,6 +8,12 @@ return [
         'sort'       => 1,
         'icon-class' => 'dashboard-icon',
     ], [
+        'key'        => 'payment-request',
+        'name'       => 'Payment Requests',
+        'route'      => 'admin.payment-request.index',
+        'sort'       => 5,
+        'icon-class' => 'dashboard-icon',
+    ], [
         'key'        => 'sales',
         'name'       => 'admin::app.layouts.sales',
         'route'      => 'admin.sales.orders.index',
@@ -98,6 +104,18 @@ return [
         'sort'       => 3,
         'icon-class' => '',
     ], [
+        'key'        => 'customers.payment-request',
+        'name'       => 'Vendors Payment Requests',
+        'route'      => 'admin.payment-request.view',
+        'sort'       => 4,
+        'icon-class' => '',
+    ], [
+        'key'        => 'customers.payment-history',
+        'name'       => 'Vendors Payment History',
+        'route'      => 'admin.payment-request.history',
+        'sort'       => 5,
+        'icon-class' => '',
+    ], [
         'key'        => 'configuration',
         'name'       => 'admin::app.layouts.configure',
         'route'      => 'admin.configuration.index',
@@ -158,7 +176,7 @@ return [
         'sort'       => 2,
         'icon-class' => '',
     ],[
-        'key'        => 'settings.users.vendors-requests',
+        'key'        => 'settings.users.vendors',
         'name'       => 'Vendors Requests',
         'route'      => 'admin.vendors.index',
         'sort'       => 3,

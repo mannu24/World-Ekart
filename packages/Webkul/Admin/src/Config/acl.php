@@ -25,7 +25,7 @@ return [
     | All ACLs related to sales will be placed here.
     |
     */
-    [
+    [   
         'key'   => 'sales',
         'name'  => 'admin::app.acl.sales',
         'route' => 'admin.sales.orders.index',
@@ -519,6 +519,57 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Payment Requests
+    |--------------------------------------------------------------------------
+    |
+    | All ACLs related to vendor payment requests will be placed here.
+    |
+    */
+    [
+        'key'   => 'payment-request',
+        'name'  => 'Payment Requests',
+        'route' => 'admin.payment-request.index',
+        'sort'  => 1,
+    ], [
+        'key'   => 'payment-request.create',
+        'name'  => 'Requests Create',
+        'route' => 'admin.payment-request.create',
+        'sort'  => 2,
+    ], [
+        'key'   => 'payment-request.cancel',
+        'name'  => 'Cancel Request',
+        'route' => 'admin.payment-request.cancel',
+        'sort'  => 3,
+    ], [
+        'key'   => 'payment-request.delete',
+        'name'  => 'Delete Request',
+        'route' => 'admin.payment-request.delete',
+        'sort'  => 4,
+    ], [
+        'key'   => 'customers.payment-request',
+        'name'  => 'View Requests',
+        'route' => 'admin.payment-request.view',
+        'sort'  => 5,
+    ], [
+        'key'   => 'customers.payment-request.edit',
+        'name'  => 'Edit Request',
+        'route' => 'admin.payment-request.edit',
+        'sort'  => 6,
+    ], [
+        'key'   => 'customers.payment-request.update',
+        'name'  => 'Update Request',
+        'route' => 'admin.payment-request.update',
+        'sort'  => 7,
+    ], [
+        'key'   => 'customers.payment-history',
+        'name'  => 'Payment History',
+        'route' => 'admin.payment-request.history',
+        'sort'  => 8,
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
     | Settings
     |--------------------------------------------------------------------------
     |
@@ -674,6 +725,26 @@ return [
         'key'   => 'settings.users.roles.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.roles.delete',
+        'sort'  => 3,
+    ], [
+        'key'   => 'settings.users.vendors',
+        'name'  => 'Vendor Requests',
+        'route' => 'admin.vendors.index',
+        'sort'  => 3,
+    ], [
+        'key'   => 'settings.users.vendors.view',
+        'name'  => 'View Vendor Profile',
+        'route' => 'admin.vendors.view',
+        'sort'  => 1,
+    ], [
+        'key'   => 'settings.users.vendors.approve',
+        'name'  => 'Approve Vendor Request',
+        'route' => 'admin.vendors.approve',
+        'sort'  => 2,
+    ], [
+        'key'   => 'settings.users.vendors.delete',
+        'name'  => 'Delete Vendor Request',
+        'route' => 'admin.vendors.delete',
         'sort'  => 3,
     ], [
         'key'   => 'settings.sliders',

@@ -91,7 +91,11 @@
                                             title="{{ $action['title'] }}"
                                         @endif
                                     >
-                                        <span class="{{ $action['icon'] }}"></span>
+                                    @if (stripos($action['icon'], 'fa-') !== false)
+                                        <i class="{{ $action['icon'] }} text-grey" style="font-size: 24px;padding-right:5px;"></i>
+                                    @else
+                                        <span class="{{ $action['icon'] }}" style="padding-right:5px"></span>
+                                    @endif
                                     </a>
                                 @endif
                             @endforeach
