@@ -242,7 +242,7 @@ class AnalyticsController extends Controller
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
             ->leftJoin('categories', 'product_categories.category_id', 'categories.id')
             ->leftJoin('category_translations', 'categories.id', 'category_translations.category_id')
-            ->where('products.user_id',auth()->guard('admin')->user()->role_id)
+            ->where('products.user_id',auth()->guard('admin')->user()->id)
             ->where('category_translations.locale', app()->getLocale())
             ->where('order_items.created_at', '>=', $this->startDate)
             ->where('order_items.created_at', '<=', $this->endDate)
@@ -279,7 +279,7 @@ class AnalyticsController extends Controller
         else{
             return $this->productInventoryRepository->getModel()
             ->leftJoin('products', 'product_inventories.product_id', 'products.id')
-            ->where('products.user_id',auth()->guard('admin')->user()->role_id)
+            ->where('products.user_id',auth()->guard('admin')->user()->id)
             ->select(DB::raw('SUM(qty) as total_qty'))
             ->addSelect('product_inventories.product_id')
             ->groupBy('product_id')
@@ -311,7 +311,7 @@ class AnalyticsController extends Controller
         }
         else{
             if (auth()->guard('admin')->user()->role_id != 1) {
-                $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');    
+                $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->id)->pluck('id');    
             }
             else{
                 $p_ids = DB::table('products')->pluck('id');
@@ -338,7 +338,7 @@ class AnalyticsController extends Controller
     public function getCustomerWithMostSales()
     {
         if (auth()->guard('admin')->user()->role_id != 1) {
-            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->id)->pluck('id');
 
             $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
         }
@@ -394,7 +394,7 @@ class AnalyticsController extends Controller
     private function getOrdersBetweenDate($start, $end)
     {
         if (auth()->guard('admin')->user()->role_id != 1) {
-            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->id)->pluck('id');
 
             $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
         }

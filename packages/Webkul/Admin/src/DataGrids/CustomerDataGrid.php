@@ -36,7 +36,7 @@ class CustomerDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         if (auth()->guard('admin')->user()->role_id != 1) {
-            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->role_id)->pluck('id');
+            $p_ids = DB::table('products')->where('user_id', auth()->guard('admin')->user()->id)->pluck('id');
 
             $o_ids = DB::table('order_items')->whereIn('product_id', $p_ids)->pluck('order_id');
 
