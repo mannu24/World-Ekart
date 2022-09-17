@@ -35,3 +35,7 @@
 .navbar-top .navbar-top-right .profile-info .profile-info-div .profile-info-icon img, .image-upload-brick img {
     object-fit: cover;
 }
+.dashboard .card .card-info ul li .image img {
+    height: 100%;
+    object-fit: cover;
+}

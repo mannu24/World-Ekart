@@ -5020,7 +5020,7 @@
       25 => 
       array (
         'key' => 'customers.payment-request',
-        'name' => 'Vendors Payment Requests',
+        'name' => 'Payment Requests',
         'route' => 'admin.payment-request.view',
         'sort' => 4,
         'icon-class' => '',
@@ -5028,7 +5028,7 @@
       26 => 
       array (
         'key' => 'customers.payment-history',
-        'name' => 'Vendors Payment History',
+        'name' => 'Payment History',
         'route' => 'admin.payment-request.history',
         'sort' => 5,
         'icon-class' => '',

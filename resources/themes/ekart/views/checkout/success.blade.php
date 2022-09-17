@@ -7,11 +7,11 @@
 @section('content-wrapper')
     <div class="container">
         <div class="order-success-content row col-12 offset-1">
-            <h1 class="row col-12">{{ __('shop::app.checkout.success.thanks') }}</h1>
-            <p class="row col-12 h4 pt-30">
+            <h1 class="row col-12">Thank you for placing order with World E-kart!</h1>
+            <p class="row col-12 h3 pt-30">
                 {{ __('shop::app.checkout.success.order-id-info', ['order_id' => $order->increment_id]) }}
             </p>
-            <p class="row col-12 h4">
+            <p class="row col-12 h3">
                 {{ __('shop::app.checkout.success.info') }}
             </p>
             {{ view_render_event('bagisto.shop.checkout.continue-shopping.before', ['order' => $order]) }}
