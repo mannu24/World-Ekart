@@ -741,7 +741,7 @@
                                                     : ''
                                             "
                                         >
-                                            <span :class="action.icon"></span>
+                                            <span :class="action.icon" style="margin-right:10px"></span>
                                         </a>
                                     </div>
                                 </td>

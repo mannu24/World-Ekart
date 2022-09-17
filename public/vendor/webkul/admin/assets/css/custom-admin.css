@@ -31,3 +31,7 @@
 .dark-mode .accordian .accordian-header .accordian-down-icon {
     background-image: url('../images/Accordion-Dark-Arrow-Down.svg')
 }
+
+.navbar-top .navbar-top-right .profile-info .profile-info-div .profile-info-icon img, .image-upload-brick img {
+    object-fit: cover;
+}

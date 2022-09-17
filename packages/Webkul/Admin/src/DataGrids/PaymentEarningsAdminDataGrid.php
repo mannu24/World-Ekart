@@ -30,10 +30,18 @@ class PaymentEarningsAdminDataGrid extends DataGrid
     public function prepareQueryBuilder()
     {
         $id = request()->route('id') ;
+        $vendor = request()->route('v') ;
         if($id!=null) {
-            $vendor = DB::table('vendor_payment_request')->where('id',$id)->first() ;
-            $queryBuilder = DB::table('vendor_payment_request')->where('vendor_id',$vendor->vendor_id)->whereNot('id',$id)
-            ->addSelect('id', 'amount_requested', 'created_at', 'status', 'amount_paid', 'paid_at','payment_via');
+            if($vendor!=null) {
+                $queryBuilder = DB::table('vendor_payment_request as a')->join('admins as b','a.vendor_id','b.id')
+                ->where('a.status','Approved')->orderBy('a.paid_at','DESC')->where('b.vendor_id',$vendor)
+                ->addSelect('a.id', 'a.amount_requested', 'a.created_at', 'b.name', 'a.status', 'a.amount_paid','a.paid_at','a.payment_via','a.transaction_no');
+            }
+            else {
+                $vendor = DB::table('vendor_payment_request')->where('id',$id)->first() ;
+                $queryBuilder = DB::table('vendor_payment_request')->where('vendor_id',$vendor->vendor_id)->whereNot('id',$id)
+                ->addSelect('id', 'amount_requested', 'created_at', 'status', 'amount_paid', 'paid_at','payment_via');
+            }
         }
         else {
             $queryBuilder = DB::table('vendor_payment_request as a')->join('admins as b','a.vendor_id','b.id')

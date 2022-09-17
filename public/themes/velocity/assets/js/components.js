@@ -3692,6 +3692,9 @@ __webpack_require__.r(__webpack_exports__);
       'addToCartHtml': ''
     };
   },
+  mounted: function mounted() {
+    console.log(this.product);
+  },
   methods: {
     'isMobile': function isMobile() {
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -5752,7 +5755,7 @@ var render = function render() {
       domProps: {
         innerHTML: _vm._s(item.name)
       }
-    }), _vm._v(" "), _c("p", [_c("small", [_vm._v("\n                            " + _vm._s(_vm.isTaxInclusive == "1" ? item.base_total_with_tax : item.base_total) + "\n                             ")])]), _vm._v(" "), _c("a", {
+    }), _vm._v(" "), _c("p", [_c("small", [_vm._v("\n                            " + _vm._s(_vm.isTaxInclusive == "1" ? item.base_total_with_tax : item.base_total) + "\n                             x " + _vm._s(item.quantity) + "\n                        ")])]), _vm._v(" "), _c("a", {
       staticClass: "ps-product__remove",
       on: {
         click: function click($event) {
@@ -6068,7 +6071,7 @@ var render = function render() {
   }, [_c("p", {
     staticClass: "ps-product__price text-center",
     domProps: {
-      innerHTML: _vm._s(_vm.product.price)
+      innerHTML: _vm._s(_vm.product.priceHTML)
     }
   }), _vm._v(" "), _c("vnode-injector", {
     attrs: {
@@ -6147,7 +6150,7 @@ var render = function render() {
   })]), _vm._v(" "), _c("p", {
     staticClass: "ps-product__price",
     domProps: {
-      innerHTML: _vm._s(_vm.product.price)
+      innerHTML: _vm._s(_vm.product.priceHTML)
     }
   }), _vm._v(" "), _c("vnode-injector", {
     attrs: {

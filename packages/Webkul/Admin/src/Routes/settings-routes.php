@@ -203,7 +203,7 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     
     Route::post('/payment-request/delete/{id}', [VendorController::class, 'delete_payment'])->name('admin.payment-request.delete');
     
-    Route::get('/payment-request/view/{id?}', [VendorController::class, 'view_admin'])->defaults('_config', [
+    Route::get('/payment-request/view/{id?}/{v?}', [VendorController::class, 'view_admin'])->defaults('_config', [
         'view' => 'admin::users.vendors.view-payment-request',
     ])->name('admin.payment-request.view');
     
@@ -231,6 +231,10 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
     Route::post('/users/create', [UserController::class, 'store'])->defaults('_config', [
         'redirect' => 'admin.users.index',
     ])->name('admin.users.store');
+
+    Route::get('/vendor/view/{id}', [VendorController::class, 'view_user'])->defaults('_config', [
+        'view' => 'admin::users.users.view',
+    ])->name('admin.vendor.view');
 
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->defaults('_config', [
         'view' => 'admin::users.users.edit',

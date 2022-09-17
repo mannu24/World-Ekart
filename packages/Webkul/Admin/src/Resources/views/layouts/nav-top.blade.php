@@ -90,7 +90,7 @@
                         <div class="profile-info-div">
                             @if (auth()->guard('admin')->user()->image)
                                 <div class="profile-info-icon">
-                                    <img src="{{ auth()->guard('admin')->user()->image_url }}"/>
+                                    <img src="{{ asset(auth()->guard('admin')->user()->image) }}"/>
                                 </div>
                             @else
                                 <div class="profile-info-icon">

@@ -99,7 +99,9 @@ class AccountController extends Controller
         }
 
         if (request()->hasFile('image')) {
-            $data['image'] = request()->file('image')->store('admins/' . $user->id);
+            $image = request()->file('image')->store('admins/' . $user->id);
+            $data['image'] = '/storage/'.$image ;
+            if(file_exists(public_path($user->image)) && !is_null($user->image)) unlink(public_path($user->image)) ;
         }
         
         if (isset($data['remove_image']) && $data['remove_image'] !== '') {

@@ -5,13 +5,43 @@
 @section('content')
 <form method="POST" action="{{ route('admin.payment-request.create') }}">
     @csrf
-    <div class="content">
+    <div class="content dashboard">
         <div class="page-header">
             <div class="page-title">
                 <h1>Payments and Earnings</h1>
             </div>
         </div>
         <div class="page-content">
+            <div class="dashboard-stats mb-30">
+                <div class="dashboard-card">
+                    <div class="title">Total Sale</div>
+                    <div class="data">
+                        {{ core()->formatBasePrice($statistics['total_sales']) }}
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="title">This Month Sale</div>
+                    <div class="data">
+                        {{ core()->formatBasePrice($statistics['this_month_sales']) }}
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="title">Total Payout Received</div>
+                    <div class="data">
+                        {{ core()->formatBasePrice($statistics['payout_received']) }}
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="title">Total Balance</div>
+                    <div class="data">
+                        {{ core()->formatBasePrice($statistics['balance_left']) }}
+                    </div>
+                </div>
+
+            </div>
             <accordian :title="'Create New Payment Request'" :active="true">
                 <div slot="body">
                     <div class="control-group {{ $errors->first('amount_requested') ? 'has-error' :'' }}">
