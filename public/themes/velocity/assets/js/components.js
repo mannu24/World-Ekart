@@ -5767,7 +5767,7 @@ var render = function render() {
     })])])]);
   }), 0) : _c("span", [_vm._v("No products in cart")])]), _vm._v(" "), _vm.cartItems.length != 0 ? _c("div", {
     staticClass: "ps-cart__footer"
-  }, [_c("h3", [_vm._v(" " + _vm._s(_vm.subtotalText) + ":\n                "), _c("strong", [_vm._v(_vm._s(_vm.isTaxInclusive == "1" ? _vm.cartInformation.base_grand_total : _vm.cartInformation.base_sub_total))])]), _vm._v(" "), _c("figure", [_c("a", {
+  }, [_c("h3", [_vm._v(" " + _vm._s(_vm.subtotalText) + ":\n                "), _c("strong", [_vm._v(_vm._s(_vm.isTaxInclusive == "1" ? _vm.cartInformation.base_sub_total : _vm.cartInformation.base_sub_total))])]), _vm._v(" "), _c("figure", [_c("a", {
     staticClass: "ps-btn",
     attrs: {
       href: _vm.viewCartRoute

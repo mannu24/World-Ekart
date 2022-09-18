@@ -8,7 +8,7 @@
                 <div class="ps-widget__header">
                     <figure>
                         <figcaption>Hello</figcaption>
-                        <p>{{ $customer->email }}</p>
+                        <p>{{ $customer->name }}</p>
                     </figure>
                 </div>
                 @foreach ($menu->items as $menuItem)
