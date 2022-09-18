@@ -128,11 +128,11 @@ class Cart extends Model implements CartContract
      */
     public function haveStockableItems(): bool
     {
-        foreach ($this->items as $item) {
-            if ($item->product->isStockable()) {
-                return true;
-            }
-        }
+        // foreach ($this->items as $item) {
+        //     if ($item->product->isStockable()) {
+        //         return true;
+        //     }
+        // }
 
         return false;
     }

@@ -32,7 +32,7 @@
                     <div class="step-content review" id="summary-section" v-if="showSummarySection">
                         <review-section :key="reviewComponentKey">
                             <div slot="summary-section">
-                                <summary-section discount="1" :key="summaryComponentKey" @onApplyCoupon="getOrderSummary" @onRemoveCoupon="getOrderSummary"></summary-section>
+                                {{-- <summary-section discount="1" :key="summaryComponentKey" @onApplyCoupon="getOrderSummary" @onRemoveCoupon="getOrderSummary"></summary-section> --}}
                             </div>
                             <div slot="place-order-btn">
                                 <div class="mb-20">
@@ -40,7 +40,6 @@
                                         v-if="selected_payment_method.method != 'paypal_smart_button' && selected_payment_method.method != 'cashfree'" id="checkout-place-order-button">
                                         {{ __('shop::app.checkout.onepage.place-order') }}
                                     </button>
-                                    <strong>{{ core()->currency($cart->base_grand_total) }}</strong>
                                     <form v-if="selected_payment_method.method == 'cashfree'" id="redirectForm" method="post" action="{{ route('cashfree')}}">
                                         @csrf
                                     <input class="d-none" name="appId" :value="selected_payment_method.method" />
@@ -398,7 +397,7 @@
                             .then(response => {
                                 this.disable_button = false;
                                 this.isPlaceOrderEnabled = true;
-
+                                console.log(response);
                                 if (this.step_numbers[response.data.jump_to_section] == 2) {
                                     this.showShippingSection = true;
                                     shippingHtml = Vue.compile(response.data.html);

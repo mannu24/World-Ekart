@@ -5493,9 +5493,9 @@ var render = function render() {
       }
     }, [_c("i", {
       staticClass: "far fa-star"
-    }), _vm._v(_vm._s(item.name)), _c("i", {
+    }), _vm._v(_vm._s(item.name)), item.children.length > 0 ? _c("i", {
       staticClass: "fas fa-chevron-right ml-auto"
-    })]), _vm._v(" "), item.children.length > 0 ? _c("div", {
+    }) : _vm._e()]), _vm._v(" "), item.children.length > 0 ? _c("div", {
       staticClass: "mega-menu"
     }, _vm._l(item.children, function (child, index1) {
       return _c("div", {
