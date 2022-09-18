@@ -8,73 +8,74 @@ return [
     /**
      * Shipping.
      */
-    [
-        'key'  => 'sales.shipping',
-        'name' => 'admin::app.admin.system.shipping',
-        'sort' => 1,
-    ], [
-        'key'    => 'sales.shipping.origin',
-        'name'   => 'admin::app.admin.system.origin',
-        'sort'   => 0,
-        'fields' => [
-            [
-                'name'          => 'country',
-                'title'         => 'admin::app.admin.system.country',
-                'type'          => 'country',
-                'validation'    => 'required',
-                'channel_based' => true,
-                'locale_based'  => true,
-            ], [
-                'name'          => 'state',
-                'title'         => 'admin::app.admin.system.state',
-                'type'          => 'state',
-                'validation'    => 'required',
-                'channel_based' => true,
-                'locale_based'  => true,
-            ], [
-                'name'          => 'city',
-                'title'         => 'admin::app.admin.system.city',
-                'type'          => 'text',
-                'validation'    => 'required',
-                'channel_based' => true,
-                'locale_based'  => false,
-            ], [
-                'name'          => 'address1',
-                'title'         => 'admin::app.admin.system.street-address',
-                'type'          => 'text',
-                'validation'    => 'required',
-                'channel_based' => true,
-                'locale_based'  => false,
-            ], [
-                'name'          => 'zipcode',
-                'title'         => 'admin::app.admin.system.zip',
-                'type'          => 'text',
-                'validation'    => 'required',
-                'channel_based' => true,
-                'locale_based'  => false,
-            ], [
-                'name'          => 'store_name',
-                'title'         => 'admin::app.admin.system.store-name',
-                'type'          => 'text',
-                'channel_based' => true,
-            ], [
-                'name'          => 'vat_number',
-                'title'         => 'admin::app.admin.system.vat-number',
-                'type'          => 'text',
-                'channel_based' => true,
-            ], [
-                'name'          => 'contact',
-                'title'         => 'admin::app.admin.system.contact-number',
-                'type'          => 'text',
-                'channel_based' => true,
-            ], [
-                'name'          => 'bank_details',
-                'title'         => 'admin::app.admin.system.bank-details',
-                'type'          => 'textarea',
-                'channel_based' => true,
-            ],
-        ],
-    ],
+    // [
+    //     'key'  => 'sales.shipping',
+    //     'name' => 'admin::app.admin.system.shipping',
+    //     'sort' => 1,
+    // ], 
+    // [
+    //     'key'    => 'sales.shipping.origin',
+    //     'name'   => 'admin::app.admin.system.origin',
+    //     'sort'   => 0,
+    //     'fields' => [
+    //         [
+    //             'name'          => 'country',
+    //             'title'         => 'admin::app.admin.system.country',
+    //             'type'          => 'country',
+    //             'validation'    => 'required',
+    //             'channel_based' => true,
+    //             'locale_based'  => true,
+    //         ], [
+    //             'name'          => 'state',
+    //             'title'         => 'admin::app.admin.system.state',
+    //             'type'          => 'state',
+    //             'validation'    => 'required',
+    //             'channel_based' => true,
+    //             'locale_based'  => true,
+    //         ], [
+    //             'name'          => 'city',
+    //             'title'         => 'admin::app.admin.system.city',
+    //             'type'          => 'text',
+    //             'validation'    => 'required',
+    //             'channel_based' => true,
+    //             'locale_based'  => false,
+    //         ], [
+    //             'name'          => 'address1',
+    //             'title'         => 'admin::app.admin.system.street-address',
+    //             'type'          => 'text',
+    //             'validation'    => 'required',
+    //             'channel_based' => true,
+    //             'locale_based'  => false,
+    //         ], [
+    //             'name'          => 'zipcode',
+    //             'title'         => 'admin::app.admin.system.zip',
+    //             'type'          => 'text',
+    //             'validation'    => 'required',
+    //             'channel_based' => true,
+    //             'locale_based'  => false,
+    //         ], [
+    //             'name'          => 'store_name',
+    //             'title'         => 'admin::app.admin.system.store-name',
+    //             'type'          => 'text',
+    //             'channel_based' => true,
+    //         ], [
+    //             'name'          => 'vat_number',
+    //             'title'         => 'admin::app.admin.system.vat-number',
+    //             'type'          => 'text',
+    //             'channel_based' => true,
+    //         ], [
+    //             'name'          => 'contact',
+    //             'title'         => 'admin::app.admin.system.contact-number',
+    //             'type'          => 'text',
+    //             'channel_based' => true,
+    //         ], [
+    //             'name'          => 'bank_details',
+    //             'title'         => 'admin::app.admin.system.bank-details',
+    //             'type'          => 'textarea',
+    //             'channel_based' => true,
+    //         ],
+    //     ],
+    // ],
 
     /**
      * Shipping method.
@@ -83,7 +84,7 @@ return [
         'key'  => 'sales.carriers',
         'name' => 'admin::app.admin.system.shipping-methods',
         'sort' => 2,
-    ], [
+    ],    [
         'key'    => 'sales.carriers.free',
         'name'   => 'admin::app.admin.system.free-shipping',
         'sort'   => 1,

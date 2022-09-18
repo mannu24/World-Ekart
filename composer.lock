@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c34164d3aa1028fb62c37e7a46af3b0",
+    "content-hash": "4eab1217231be288c52b254d3bad9207",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -227,59 +227,6 @@
                 "source": "https://github.com/bagisto/bagisto-bulk-upload/tree/master"
             },
             "time": "2022-01-12T09:12:07+00:00"
-        },
-        {
-            "name": "bagisto/bagisto-dhl-shipping",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/bagisto/bagisto-dhl-shipping.git",
-                "reference": "b2e72628cb4146be56150725d998566caa1b2632"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/bagisto/bagisto-dhl-shipping/zipball/b2e72628cb4146be56150725d998566caa1b2632",
-                "reference": "b2e72628cb4146be56150725d998566caa1b2632",
-                "shasum": ""
-            },
-            "require": {
-                "konekt/concord": "^1.2"
-            },
-            "default-branch": true,
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Webkul\\DHLShipping\\Providers\\DHLShippingServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Webkul\\DHLShipping\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Bagisto"
-                }
-            ],
-            "description": "Provides DHL Shipping methods for shipping the product.",
-            "homepage": "https://github.com/bagisto/bagisto-dhl-shipping",
-            "keywords": [
-                "bagisto",
-                "dhl",
-                "dhl shipping"
-            ],
-            "support": {
-                "issues": "https://github.com/bagisto/bagisto-dhl-shipping/issues",
-                "source": "https://github.com/bagisto/bagisto-dhl-shipping/tree/master"
-            },
-            "time": "2022-01-17T12:53:01+00:00"
         },
         {
             "name": "bagisto/bagisto-package-generator",
@@ -12735,7 +12682,6 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "bagisto/bagisto-bulk-upload": 20,
-        "bagisto/bagisto-dhl-shipping": 20,
         "bagisto/bagisto-package-generator": 20,
         "bagisto/bagisto-rma": 20,
         "bagisto/bagisto-search-suggestion": 20,
@@ -12751,5 +12697,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.1.0"
 }

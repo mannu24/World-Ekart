@@ -1,5 +1,7 @@
-/vendor/
+!vendor/bagisto/*
+vendor/*
 node_modules/
+bootstrap/cache/
 npm-debug.log
 yarn-error.log
 
