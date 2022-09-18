@@ -23,7 +23,7 @@
                 <div class="ps-product__desc"><span>Description:</span> {{ product.shortDescription }}</div>
             </div>
             <div class="ps-product__shopping">
-                <p class="ps-product__price text-center" v-html="product.price"></p>
+                <p class="ps-product__price text-center" v-html="product.priceHTML"></p>
                 <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
                 <ul class="ps-product__actions justify-content-around">
                     <li>
@@ -67,7 +67,7 @@
                     <div class="ps-product__rating" v-else>
                         <span v-text="product.firstReviewText"></span>
                     </div>
-                    <p class="ps-product__price" v-html="product.price"></p>
+                    <p class="ps-product__price" v-html="product.priceHTML"></p>
                     <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
                 </div>
                 <!-- <div class="ps-product__content hover">
@@ -92,6 +92,10 @@
                 'addToCart': 0,
                 'addToCartHtml': '',
             }
+        },
+
+        mounted() {
+            console.log(this.product);
         },
 
         methods: {

@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="content">
+    <div class="content dashboard">
         <form method="POST" action="{{ route('admin.payment-request.update') }}" @submit.prevent="onSubmit">
             <div class="page-header">
                 <div class="page-title">
@@ -17,8 +17,62 @@
             </div>
 
             <div class="page-content">
+                <div class="dashboard-stats mb-30">
+                    <div class="dashboard-card">
+                        <div class="title">Total Sale</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['total_sales']) }}
+                        </div>
+                    </div>
+    
+                    <div class="dashboard-card">
+                        <div class="title">This Month Sale</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['this_month_sales']) }}
+                        </div>
+                    </div>
+    
+                    <div class="dashboard-card">
+                        <div class="title">Total Payout Received</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['payout_received']) }}
+                        </div>
+                    </div>
+    
+                    <div class="dashboard-card">
+                        <div class="title">Total Balance</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['balance_left']) }}
+                        </div>
+                    </div>
+    
+                </div>
                 <div class="form-container">
                     @csrf()
+                    <accordian title="Vendor Bank Details" :active="false">
+                        <div slot="body">
+                            <div class="control-group">
+                                <label>Bank Name</label>
+                                <input class="control" type="text" readonly value="{{ $vendor->bank_name }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>Account Holder Name</label>
+                                <input class="control" type="text" readonly value="{{ $vendor->acc_name }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>Account Number</label>
+                                <input class="control" type="text" readonly value="{{ $vendor->acc_no }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>IFSC Code</label>
+                                <input class="control" type="text" readonly value="{{ $vendor->ifsc_code }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>UPI ID</label>
+                                <input class="control" type="text" readonly value="{{ $vendor->upi_id }}" />
+                            </div>
+                        </div>
+                    </accordian>
                     <accordian title="Payment Section" :active="true">
                         <div slot="body">
                             <div class="control-group">

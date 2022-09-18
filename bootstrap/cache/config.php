@@ -927,172 +927,309 @@
     ),
     132 => 
     array (
+<<<<<<< HEAD
+=======
+      'key' => 'settings.users.users.view',
+      'name' => 'admin::app.acl.view',
+      'route' => 'admin.vendor.view',
+      'sort' => 2,
+    ),
+    133 => 
+    array (
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       'key' => 'settings.users.users.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.users.delete',
       'sort' => 3,
     ),
+<<<<<<< HEAD
     133 => 
+=======
+    134 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.roles',
       'name' => 'admin::app.acl.roles',
       'route' => 'admin.roles.index',
       'sort' => 2,
     ),
+<<<<<<< HEAD
     134 => 
+=======
+    135 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.roles.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.roles.create',
       'sort' => 1,
     ),
+<<<<<<< HEAD
     135 => 
+=======
+    136 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.roles.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.roles.edit',
       'sort' => 2,
     ),
+<<<<<<< HEAD
     136 => 
+=======
+    137 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.roles.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.roles.delete',
       'sort' => 3,
     ),
+<<<<<<< HEAD
     137 => 
+=======
+    138 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.vendors',
       'name' => 'Vendor Requests',
       'route' => 'admin.vendors.index',
       'sort' => 3,
     ),
+<<<<<<< HEAD
     138 => 
+=======
+    139 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.vendors.view',
       'name' => 'View Vendor Profile',
       'route' => 'admin.vendors.view',
       'sort' => 1,
     ),
+<<<<<<< HEAD
     139 => 
+=======
+    140 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.vendors.approve',
       'name' => 'Approve Vendor Request',
       'route' => 'admin.vendors.approve',
       'sort' => 2,
     ),
+<<<<<<< HEAD
     140 => 
+=======
+    141 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.users.vendors.delete',
       'name' => 'Delete Vendor Request',
       'route' => 'admin.vendors.delete',
       'sort' => 3,
     ),
+<<<<<<< HEAD
     141 => 
+=======
+    142 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.sliders',
       'name' => 'admin::app.acl.sliders',
       'route' => 'admin.sliders.index',
       'sort' => 7,
     ),
+<<<<<<< HEAD
     142 => 
+=======
+    143 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.sliders.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.sliders.create',
       'sort' => 1,
     ),
+<<<<<<< HEAD
     143 => 
+=======
+    144 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.sliders.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.sliders.edit',
       'sort' => 2,
     ),
+<<<<<<< HEAD
     144 => 
+=======
+    145 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.sliders.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.sliders.delete',
       'sort' => 3,
     ),
+<<<<<<< HEAD
     145 => 
+=======
+    146 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes',
       'name' => 'admin::app.acl.taxes',
       'route' => 'admin.tax-categories.index',
       'sort' => 8,
     ),
+<<<<<<< HEAD
     146 => 
+=======
+    147 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-categories',
       'name' => 'admin::app.acl.tax-categories',
       'route' => 'admin.tax-categories.index',
       'sort' => 1,
     ),
+<<<<<<< HEAD
     147 => 
+=======
+    148 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-categories.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.tax-categories.create',
       'sort' => 1,
     ),
+<<<<<<< HEAD
     148 => 
+=======
+    149 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-categories.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.tax-categories.edit',
       'sort' => 2,
     ),
+<<<<<<< HEAD
     149 => 
+=======
+    150 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-categories.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.tax-categories.delete',
       'sort' => 3,
     ),
+<<<<<<< HEAD
     150 => 
+=======
+    151 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-rates',
       'name' => 'admin::app.acl.tax-rates',
       'route' => 'admin.tax-rates.index',
       'sort' => 2,
     ),
+<<<<<<< HEAD
     151 => 
+=======
+    152 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-rates.create',
       'name' => 'admin::app.acl.create',
       'route' => 'admin.tax-rates.create',
       'sort' => 1,
     ),
+<<<<<<< HEAD
     152 => 
+=======
+    153 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-rates.edit',
       'name' => 'admin::app.acl.edit',
       'route' => 'admin.tax-rates.edit',
       'sort' => 2,
     ),
+<<<<<<< HEAD
     153 => 
+=======
+    154 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'settings.taxes.tax-rates.delete',
       'name' => 'admin::app.acl.delete',
       'route' => 'admin.tax-rates.delete',
       'sort' => 3,
     ),
+<<<<<<< HEAD
     154 => 
+=======
+    155 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'configuration',
       'name' => 'admin::app.acl.configure',
       'route' => 'admin.configuration.index',
       'sort' => 9,
     ),
+<<<<<<< HEAD
     155 => 
+=======
+    156 => 
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     array (
       'key' => 'suggestion',
       'name' => 'Suggestion',
       'route' => 'suggestion.admin.index',
       'sort' => 2,
     ),
+<<<<<<< HEAD
+=======
+    157 => 
+    array (
+      'key' => 'catalog.bulkupload',
+      'name' => 'bulkupload::app.admin.bulk-upload.manage-bulk-upload',
+      'route' => 'admin.dataflow-profile.index',
+      'sort' => 5,
+      'icon-class' => '',
+    ),
+    158 => 
+    array (
+      'key' => 'catalog.bulkupload.data-flow-profile',
+      'name' => 'bulkupload::app.admin.bulk-upload.data-flow-profile.index',
+      'route' => 'admin.dataflow-profile.index',
+      'sort' => 1,
+      'icon-class' => '',
+    ),
+    159 => 
+    array (
+      'key' => 'catalog.bulkupload.upload-files',
+      'name' => 'bulkupload::app.admin.bulk-upload.upload-files.index',
+      'route' => 'admin.bulk-upload.index',
+      'sort' => 2,
+      'icon-class' => '',
+    ),
+    160 => 
+    array (
+      'key' => 'catalog.bulkupload.run-profile',
+      'name' => 'bulkupload::app.admin.bulk-upload.run-profile.index',
+      'route' => 'admin.run-profile.index',
+      'sort' => 3,
+      'icon-class' => '',
+    ),
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
   ),
   'app' => 
   array (
@@ -1318,7 +1455,11 @@
   'breadcrumbs' => 
   array (
     'view' => 'breadcrumbs::bootstrap5',
+<<<<<<< HEAD
     'files' => 'C:\\xampp\\htdocs\\World_Ekart\\routes/breadcrumbs.php',
+=======
+    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\routes/breadcrumbs.php',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     'unnamed-route-exception' => true,
     'missing-route-bound-breadcrumb-exception' => true,
     'invalid-named-breadcrumb-exception' => true,
@@ -1379,7 +1520,11 @@
       'file' => 
       array (
         'driver' => 'file',
+<<<<<<< HEAD
         'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/data',
+=======
+        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/data',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       ),
       'memcached' => 
       array (
@@ -4233,7 +4378,11 @@
     array (
       'enabled' => true,
       'driver' => 'file',
+<<<<<<< HEAD
       'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\debugbar',
+=======
+      'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\debugbar',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       'connection' => NULL,
       'provider' => '',
       'hostname' => '127.0.0.1',
@@ -4337,10 +4486,17 @@
     'convert_entities' => true,
     'defines' => 
     array (
+<<<<<<< HEAD
       'font_dir' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
       'font_cache' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
       'temp_dir' => 'C:\\Users\\Manu24\\AppData\\Local\\Temp',
       'chroot' => 'C:\\xampp\\htdocs\\World_Ekart',
+=======
+      'font_dir' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
+      'font_cache' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
+      'temp_dir' => 'C:\\Users\\coolp\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -4459,7 +4615,11 @@
     ),
     'temporary_files' => 
     array (
+<<<<<<< HEAD
       'local_path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/laravel-excel',
+=======
+      'local_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/laravel-excel',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -4474,17 +4634,29 @@
       'local' => 
       array (
         'driver' => 'local',
+<<<<<<< HEAD
         'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app',
+=======
+        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       ),
       'private' => 
       array (
         'driver' => 'local',
+<<<<<<< HEAD
         'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/private',
+=======
+        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/private',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       ),
       'public' => 
       array (
         'driver' => 'local',
+<<<<<<< HEAD
         'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
+=======
+        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
         'url' => 'http://localhost:8000/storage',
         'visibility' => 'public',
       ),
@@ -4586,7 +4758,11 @@
     array (
     ),
     'enable_runnable_solutions' => true,
+<<<<<<< HEAD
     'remote_sites_path' => 'C:\\xampp\\htdocs\\World_Ekart',
+=======
+    'remote_sites_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
@@ -4600,8 +4776,13 @@
     'route' => 'cache',
     'paths' => 
     array (
+<<<<<<< HEAD
       0 => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
       1 => 'C:\\xampp\\htdocs\\World_Ekart\\public\\storage',
+=======
+      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
+      1 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\public\\storage',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     ),
     'templates' => 
     array (
@@ -4664,13 +4845,21 @@
       'single' => 
       array (
         'driver' => 'single',
+<<<<<<< HEAD
         'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
+=======
+        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
+<<<<<<< HEAD
         'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
+=======
+        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
         'level' => 'debug',
         'days' => 7,
       ),
@@ -4770,7 +4959,11 @@
       'theme' => 'default',
       'paths' => 
       array (
+<<<<<<< HEAD
         0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views/vendor/mail',
+=======
+        0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views/vendor/mail',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       ),
     ),
   ),
@@ -4981,7 +5174,11 @@
       25 => 
       array (
         'key' => 'customers.payment-request',
+<<<<<<< HEAD
         'name' => 'Vendors Payment Requests',
+=======
+        'name' => 'Payment Requests',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
         'route' => 'admin.payment-request.view',
         'sort' => 4,
         'icon-class' => '',
@@ -4989,7 +5186,11 @@
       26 => 
       array (
         'key' => 'customers.payment-history',
+<<<<<<< HEAD
         'name' => 'Vendors Payment History',
+=======
+        'name' => 'Payment History',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
         'route' => 'admin.payment-request.history',
         'sort' => 5,
         'icon-class' => '',
@@ -5233,6 +5434,7 @@
         'sort' => 5,
         'icon-class' => '',
       ),
+<<<<<<< HEAD
       57 => 
       array (
         'key' => 'catalog.bulkupload.data-flow-profile',
@@ -5257,6 +5459,8 @@
         'sort' => 3,
         'icon-class' => '',
       ),
+=======
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     ),
     'customer' => 
     array (
@@ -5519,9 +5723,15 @@
     ),
     'generator' => 
     array (
+<<<<<<< HEAD
       'basePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
       'rootNamespace' => 'App\\',
       'stubsOverridePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
+=======
+      'basePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
+      'rootNamespace' => 'App\\',
+      'stubsOverridePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
       'paths' => 
       array (
         'models' => 'Entities',
@@ -5656,7 +5866,11 @@
     'lifetime' => '120',
     'expire_on_close' => true,
     'encrypt' => false,
+<<<<<<< HEAD
     'files' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/sessions',
+=======
+    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/sessions',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
     'connection' => 'session',
     'table' => 'sessions',
     'store' => NULL,
@@ -5762,9 +5976,15 @@
     'tracer' => false,
     'paths' => 
     array (
+<<<<<<< HEAD
       0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views',
     ),
     'compiled' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework\\views',
+=======
+      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views',
+    ),
+    'compiled' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework\\views',
+>>>>>>> 3e2a6733db9617b239362e52c4fcf46d2267d9e0
   ),
   'product_types' => 
   array (

@@ -702,6 +702,11 @@ return [
         'route' => 'admin.users.edit',
         'sort'  => 2,
     ], [
+        'key'   => 'settings.users.users.view',
+        'name'  => 'admin::app.acl.view',
+        'route' => 'admin.vendor.view',
+        'sort'  => 2,
+    ], [
         'key'   => 'settings.users.users.delete',
         'name'  => 'admin::app.acl.delete',
         'route' => 'admin.users.delete',

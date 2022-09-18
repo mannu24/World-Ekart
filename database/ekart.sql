@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2022 at 12:02 PM
+-- Generation Time: Sep 17, 2022 at 12:16 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,37 @@ SET time_zone = "+00:00";
 --
 -- Database: `ekart`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addresses`
+--
+
+CREATE TABLE `addresses` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `address_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `customer_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'null if guest checkout',
+  `cart_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'only for cart_addresses',
+  `order_id` int(10) UNSIGNED DEFAULT NULL COMMENT 'only for order_addresses',
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `company_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address1` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address2` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `postcode` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `vat_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `default_address` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'only for customer_addresses',
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `addresses`
@@ -39,7 +70,39 @@ INSERT INTO `addresses` (`id`, `address_type`, `customer_id`, `cart_id`, `order_
 (12, 'cart_billing', 4, 13, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:16', '2022-08-24 20:00:16'),
 (13, 'cart_shipping', 4, 13, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:16', '2022-08-24 20:00:16'),
 (14, 'order_shipping', 4, NULL, 3, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
-(15, 'order_billing', 4, NULL, 3, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31');
+(15, 'order_billing', 4, NULL, 3, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
+(16, 'cart_billing', 4, 14, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:10:31', '2022-09-17 07:10:31'),
+(17, 'cart_shipping', 4, 14, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:10:31', '2022-09-17 07:10:31'),
+(18, 'order_shipping', 4, NULL, 4, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
+(19, 'order_billing', 4, NULL, 4, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
+(20, 'order_shipping', 4, NULL, 5, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:28:06', '2022-09-17 07:28:06'),
+(21, 'order_billing', 4, NULL, 5, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:28:06', '2022-09-17 07:28:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `vendor_id` bigint(11) UNSIGNED DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `api_token` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `role_id` int(10) UNSIGNED NOT NULL,
+  `bank_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ifsc_code` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `acc_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `acc_no` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `upi_id` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `admins`
@@ -48,8 +111,49 @@ INSERT INTO `addresses` (`id`, `address_type`, `customer_id`, `cart_id`, `order_
 INSERT INTO `admins` (`id`, `vendor_id`, `name`, `email`, `password`, `api_token`, `status`, `role_id`, `bank_name`, `ifsc_code`, `acc_name`, `acc_no`, `upi_id`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
 (1, NULL, 'Example', 'admin@example.com', '$2y$10$EpOvWIS0zC2GFot3UHGJqu1Mqlr20jR9Fq8zIk8w5zojdryW.w.DO', 'Un0PX1XRd57lkt8aE7xXgJWRNlq3xBVpCJB01lZFud0LCU1D81qKW2I0rC9dYPeB4gXKgwOhpMzjpzVi', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL),
 (2, NULL, 'Admin 2', 'admin2@ekart.com', '$2y$10$Pg.aRv88Ww0bUaGfcUoM9OS2HZLSS49lg7wSCWJ9rES9jVeelD/Wm', '2YGja6kVifqtNeIzAnAIUxUXsHKKhkJe8ek3sdGRuBwIHCuuegPXI4FfTTtinauzHBWAvwzZdi6dIw1O', 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 06:55:26', '2022-08-12 06:59:19', NULL),
-(3, 3, 'Danish Bhatia', 'danishbhatia4@gmail.com', '$2y$10$j639sfZyvK.rjuPcUe5Qs.DQrN48j04T5n8U83e6u4Q7vj523RBBq', '2T62pbcUVjjhWiN1HgKx8riZ8VfbAcUv68NAUI68ks6DJ0TvmWmo2OCmPWnxwxzzZAPjUw7MmAt0Pjoe', 1, 2, 'pnb', 'abcd1244', '3245678mbsdskdbc', '23456789087654', 'abcdasas', NULL, '2022-09-04 06:21:27', '2022-09-12 08:28:25', NULL),
-(4, 1, 'Archies Gallery', 'archies.gallery@gmail.com', '$2y$10$.YU22O99KpbK/U7yoHbmLONGd.DMLAxT97iIkqHMmnKK1RC/cbR8C', 'ayeoHhHTOJkK46rESEhF2yIKq4OyHaGO1LmyMIUOKWOyCArkG1wQCDVnt3LclKZCcIQH2nE7QBKijDdx', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-04 09:00:12', '2022-09-04 09:00:12', NULL);
+(3, 3, 'Danish Bhatia', 'danishbhatia4@gmail.com', '$2y$10$j639sfZyvK.rjuPcUe5Qs.DQrN48j04T5n8U83e6u4Q7vj523RBBq', '2T62pbcUVjjhWiN1HgKx8riZ8VfbAcUv68NAUI68ks6DJ0TvmWmo2OCmPWnxwxzzZAPjUw7MmAt0Pjoe', 1, 2, 'pnb', 'abcd1244', '3245678mbsdskdbc', '23456789087654', 'abcdasas', NULL, '2022-09-04 06:21:27', '2022-09-12 08:28:25', 'storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg'),
+(4, 1, 'Archies Gallery', 'archies.gallery@gmail.com', '$2y$10$.YU22O99KpbK/U7yoHbmLONGd.DMLAxT97iIkqHMmnKK1RC/cbR8C', 'ayeoHhHTOJkK46rESEhF2yIKq4OyHaGO1LmyMIUOKWOyCArkG1wQCDVnt3LclKZCcIQH2nE7QBKijDdx', 1, 2, 'ASDAS', 'abcd1244', '1234567890', '1234567890', 'osdnw212', NULL, '2022-09-04 09:00:12', '2022-09-17 07:05:44', '/storage/admins/4/cRC1nGH4BkOZpMKqZvsSqSCc6DxTI4rembJSsdiW.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_password_resets`
+--
+
+CREATE TABLE `admin_password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attributes`
+--
+
+CREATE TABLE `attributes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `admin_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `validation` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` int(11) DEFAULT NULL,
+  `is_required` tinyint(1) NOT NULL DEFAULT 0,
+  `is_unique` tinyint(1) NOT NULL DEFAULT 0,
+  `value_per_locale` tinyint(1) NOT NULL DEFAULT 0,
+  `value_per_channel` tinyint(1) NOT NULL DEFAULT 0,
+  `is_filterable` tinyint(1) NOT NULL DEFAULT 0,
+  `is_configurable` tinyint(1) NOT NULL DEFAULT 0,
+  `is_user_defined` tinyint(1) NOT NULL DEFAULT 1,
+  `is_visible_on_front` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `swatch_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `use_in_flat` tinyint(1) NOT NULL DEFAULT 1,
+  `is_comparable` tinyint(1) NOT NULL DEFAULT 0,
+  `enable_wysiwyg` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `attributes`
@@ -86,6 +190,20 @@ INSERT INTO `attributes` (`id`, `code`, `admin_name`, `type`, `validation`, `pos
 (28, 'RAM', 'RAM', 'select', '', NULL, 1, 0, 0, 0, 1, 1, 1, 1, '2022-08-27 17:44:26', '2022-08-27 19:36:07', 'text', 1, 0, 0),
 (29, 'random', 'Admin', 'boolean', '', NULL, 1, 1, 0, 0, 0, 1, 1, 1, '2022-08-27 18:59:55', '2022-08-27 18:59:55', NULL, 1, 0, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_families`
+--
+
+CREATE TABLE `attribute_families` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `is_user_defined` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `attribute_families`
 --
@@ -93,6 +211,20 @@ INSERT INTO `attributes` (`id`, `code`, `admin_name`, `type`, `validation`, `pos
 INSERT INTO `attribute_families` (`id`, `code`, `name`, `status`, `is_user_defined`) VALUES
 (1, 'default', 'Default', 0, 1),
 (2, 'mobile', 'MOBILE PHONE', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_groups`
+--
+
+CREATE TABLE `attribute_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `position` int(11) NOT NULL,
+  `is_user_defined` tinyint(1) NOT NULL DEFAULT 1,
+  `attribute_family_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `attribute_groups`
@@ -109,6 +241,18 @@ INSERT INTO `attribute_groups` (`id`, `name`, `position`, `is_user_defined`, `at
 (8, 'Meta Description', 3, 0, 2),
 (9, 'Price', 4, 0, 2),
 (10, 'Shipping', 5, 0, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_group_mappings`
+--
+
+CREATE TABLE `attribute_group_mappings` (
+  `attribute_id` int(10) UNSIGNED NOT NULL,
+  `attribute_group_id` int(10) UNSIGNED NOT NULL,
+  `position` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `attribute_group_mappings`
@@ -169,6 +313,20 @@ INSERT INTO `attribute_group_mappings` (`attribute_id`, `attribute_group_id`, `p
 (28, 6, 11),
 (29, 6, 12);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_options`
+--
+
+CREATE TABLE `attribute_options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `admin_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `attribute_id` int(10) UNSIGNED NOT NULL,
+  `swatch_value` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `attribute_options`
 --
@@ -188,6 +346,19 @@ INSERT INTO `attribute_options` (`id`, `admin_name`, `sort_order`, `attribute_id
 (12, 'Nike', 2, 25, NULL),
 (13, '2GB', 1, 28, '#9900ff'),
 (14, '4GB', 2, 28, '#980000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_option_translations`
+--
+
+CREATE TABLE `attribute_option_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attribute_option_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `attribute_option_translations`
@@ -228,6 +399,19 @@ INSERT INTO `attribute_option_translations` (`id`, `locale`, `label`, `attribute
 (32, 'nl', '', 14),
 (33, 'tr', '', 14),
 (34, 'es', '', 14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attribute_translations`
+--
+
+CREATE TABLE `attribute_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `attribute_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `attribute_translations`
@@ -276,6 +460,153 @@ INSERT INTO `attribute_translations` (`id`, `locale`, `name`, `attribute_id`) VA
 (40, 'tr', '', 29),
 (41, 'es', '', 29);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `qty` int(11) DEFAULT 0,
+  `from` int(11) DEFAULT NULL,
+  `to` int(11) DEFAULT NULL,
+  `order_item_id` int(10) UNSIGNED DEFAULT NULL,
+  `booking_product_event_ticket_id` int(10) UNSIGNED DEFAULT NULL,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_id` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_products`
+--
+
+CREATE TABLE `booking_products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `qty` int(11) DEFAULT 0,
+  `location` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `show_location` tinyint(1) NOT NULL DEFAULT 0,
+  `available_every_week` tinyint(1) DEFAULT NULL,
+  `available_from` datetime DEFAULT NULL,
+  `available_to` datetime DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_product_appointment_slots`
+--
+
+CREATE TABLE `booking_product_appointment_slots` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `break_time` int(11) DEFAULT NULL,
+  `same_slot_all_days` tinyint(1) DEFAULT NULL,
+  `slots` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`slots`)),
+  `booking_product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_product_default_slots`
+--
+
+CREATE TABLE `booking_product_default_slots` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `booking_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duration` int(11) DEFAULT NULL,
+  `break_time` int(11) DEFAULT NULL,
+  `slots` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`slots`)),
+  `booking_product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_product_event_tickets`
+--
+
+CREATE TABLE `booking_product_event_tickets` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `price` decimal(12,4) DEFAULT 0.0000,
+  `qty` int(11) DEFAULT 0,
+  `special_price` decimal(12,4) DEFAULT NULL,
+  `special_price_from` datetime DEFAULT NULL,
+  `special_price_to` datetime DEFAULT NULL,
+  `booking_product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_product_event_ticket_translations`
+--
+
+CREATE TABLE `booking_product_event_ticket_translations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `booking_product_event_ticket_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_product_rental_slots`
+--
+
+CREATE TABLE `booking_product_rental_slots` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `renting_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `daily_price` decimal(12,4) DEFAULT 0.0000,
+  `hourly_price` decimal(12,4) DEFAULT 0.0000,
+  `same_slot_all_days` tinyint(1) DEFAULT NULL,
+  `slots` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`slots`)),
+  `booking_product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_product_table_slots`
+--
+
+CREATE TABLE `booking_product_table_slots` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `price_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guest_limit` int(11) NOT NULL DEFAULT 0,
+  `duration` int(11) NOT NULL,
+  `break_time` int(11) NOT NULL,
+  `prevent_scheduling_before` int(11) NOT NULL,
+  `same_slot_all_days` tinyint(1) DEFAULT NULL,
+  `slots` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`slots`)),
+  `booking_product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bulkupload_data_flow_profiles`
+--
+
+CREATE TABLE `bulkupload_data_flow_profiles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attribute_family_id` int(10) UNSIGNED NOT NULL,
+  `run_status` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `locale_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `bulkupload_data_flow_profiles`
 --
@@ -283,6 +614,46 @@ INSERT INTO `attribute_translations` (`id`, `locale`, `name`, `attribute_id`) VA
 INSERT INTO `bulkupload_data_flow_profiles` (`id`, `name`, `attribute_family_id`, `run_status`, `created_at`, `updated_at`, `locale_code`) VALUES
 (1, 'Test', 1, 1, '2022-08-10 07:09:40', '2022-08-10 07:16:04', 'en'),
 (2, 'test profile', 1, 0, '2022-08-21 15:39:41', '2022-08-21 15:39:41', 'en');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `customer_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_method` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0,
+  `items_count` int(11) DEFAULT NULL,
+  `items_qty` decimal(12,4) DEFAULT NULL,
+  `exchange_rate` decimal(12,4) DEFAULT NULL,
+  `global_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `base_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cart_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grand_total` decimal(12,4) DEFAULT 0.0000,
+  `base_grand_total` decimal(12,4) DEFAULT 0.0000,
+  `sub_total` decimal(12,4) DEFAULT 0.0000,
+  `base_sub_total` decimal(12,4) DEFAULT 0.0000,
+  `tax_total` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_total` decimal(12,4) DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `checkout_method` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_guest` tinyint(1) DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT 1,
+  `conversion_time` datetime DEFAULT NULL,
+  `customer_id` int(10) UNSIGNED DEFAULT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `applied_cart_rule_ids` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `cart`
@@ -299,9 +670,47 @@ INSERT INTO `cart` (`id`, `customer_email`, `customer_first_name`, `customer_las
 (10, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '800.0000', '800.0000', '800.0000', '800.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-20 19:04:17', '2022-08-20 19:04:30', ''),
 (12, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 2, '5.0000', NULL, 'USD', 'USD', 'USD', 'USD', '1650.0000', '1650.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-21 12:06:54', '2022-08-24 19:58:44', ''),
 (13, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '210.0000', '210.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-24 20:00:01', '2022-08-24 20:00:31', ''),
-(14, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 1, NULL, 4, 1, '2022-08-27 08:56:32', '2022-08-30 10:44:39', ''),
+(14, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'free_free', NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'INR', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-27 08:56:32', '2022-09-17 07:28:12', ''),
 (15, NULL, NULL, NULL, NULL, NULL, 0, 1, '3.0000', NULL, 'USD', 'USD', 'USD', 'USD', '300000.0000', '300000.0000', '300000.0000', '300000.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-31 10:16:18', '2022-08-31 10:16:32', ''),
-(17, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-09-04 19:07:22', '2022-09-04 19:07:22', '');
+(17, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-09-04 19:07:22', '2022-09-04 19:07:22', ''),
+(18, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'INR', 'INR', '80.0000', '80.0000', '80.0000', '80.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-09-16 18:23:59', '2022-09-16 18:25:23', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_items`
+--
+
+CREATE TABLE `cart_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `quantity` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `sku` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `weight` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `total_weight` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_total_weight` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `price` decimal(12,4) NOT NULL DEFAULT 1.0000,
+  `base_price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `tax_percent` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `discount_percent` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `cart_id` int(10) UNSIGNED NOT NULL,
+  `tax_category_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `custom_price` decimal(12,4) DEFAULT NULL,
+  `applied_cart_rule_ids` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `cart_items`
@@ -317,12 +726,43 @@ INSERT INTO `cart_items` (`id`, `quantity`, `sku`, `type`, `name`, `coupon_code`
 (15, 3, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '36.0000', '36.0000', '400.0000', '400.0000', '1200.0000', '1200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"SogHAGSqIwg1aQUeu8ffIHPGQks7ykqvs6wYoNJF\"}', NULL, 4, 12, NULL, '2022-08-21 12:06:58', '2022-08-24 19:58:42', NULL, ''),
 (16, 2, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '24.0000', '24.0000', '200.0000', '200.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":2,\"product_id\":\"2\",\"_token\":\"zwSSEN83KcNKGYwzihNMip1GyFxbS205WezdtRIK\"}', NULL, 2, 12, NULL, '2022-08-23 07:43:57', '2022-08-24 19:58:42', NULL, ''),
 (17, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\"}', NULL, 2, 13, NULL, '2022-08-24 20:00:02', '2022-08-24 20:00:30', NULL, ''),
-(18, 1, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}}}', NULL, 6, 14, NULL, '2022-08-27 08:56:32', '2022-08-30 10:44:39', NULL, ''),
+(18, 1, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}}}', NULL, 6, 14, NULL, '2022-08-27 08:56:32', '2022-09-17 07:28:06', NULL, ''),
 (19, 0, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', '0.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"product_id\":7,\"parent_id\":6}', 18, 7, 14, NULL, '2022-08-27 08:56:32', '2022-08-27 08:56:32', NULL, NULL),
-(23, 1, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\"}', NULL, 3, 14, NULL, '2022-08-27 19:37:55', '2022-08-30 10:44:39', NULL, ''),
+(23, 1, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\"}', NULL, 3, 14, NULL, '2022-08-27 19:37:55', '2022-09-17 07:28:06', NULL, ''),
 (24, 3, 'NOTE-20', 'configurable', 'Note 20', NULL, '0.0000', '0.0000', '0.0000', '100000.0000', '100000.0000', '300000.0000', '300000.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"jv7xHlLj5WL3ot40TEjJJ0EjUhwBAeQJtdystyye\",\"product_id\":\"12\",\"selected_configurable_option\":\"14\",\"super_attribute\":{\"28\":\"14\"},\"quantity\":3,\"attributes\":{\"RAM\":{\"attribute_name\":\"RAM\",\"option_id\":14,\"option_label\":\"4GB\"}}}', NULL, 12, 15, NULL, '2022-08-31 10:16:18', '2022-08-31 10:16:32', NULL, ''),
 (25, 0, 'NOTE-20-variant-14', 'simple', 'Note 20 4GB', NULL, '0.0000', '0.0000', '0.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"product_id\":14,\"parent_id\":12}', 24, 14, 15, NULL, '2022-08-31 10:16:18', '2022-08-31 10:16:18', NULL, NULL),
-(26, 1, 'abcd12', 'downloadable', 'New Downloadable Product', NULL, '0.0000', '0.0000', '0.0000', '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"voD0YSIeMogT1M48GFPrQiFZCef4GsVAyBdeMTCl\",\"product_id\":\"11\",\"links\":[\"1\"],\"quantity\":1,\"attributes\":[{\"attribute_name\":\"Downloads\",\"option_id\":0,\"option_label\":\"Product 1\"}]}', NULL, 11, 17, NULL, '2022-09-04 19:07:22', '2022-09-04 19:07:22', NULL, '');
+(26, 1, 'abcd12', 'downloadable', 'New Downloadable Product', NULL, '0.0000', '0.0000', '0.0000', '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"voD0YSIeMogT1M48GFPrQiFZCef4GsVAyBdeMTCl\",\"product_id\":\"11\",\"links\":[\"1\"],\"quantity\":1,\"attributes\":[{\"attribute_name\":\"Downloads\",\"option_id\":0,\"option_label\":\"Product 1\"}]}', NULL, 11, 17, NULL, '2022-09-04 19:07:22', '2022-09-04 19:07:22', NULL, ''),
+(27, 1, 'temporary-sku-6a87ba', 'simple', 'Prodcut With Price', NULL, '12.0000', '12.0000', '12.0000', '80.0000', '80.0000', '80.0000', '80.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"CGv4h9L8Bsn2V9zG704GXbq9raIOB6qpeAILrhrP\"}', NULL, 4, 18, NULL, '2022-09-16 18:24:00', '2022-09-16 18:25:23', NULL, '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_item_inventories`
+--
+
+CREATE TABLE `cart_item_inventories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `qty` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `inventory_source_id` int(10) UNSIGNED DEFAULT NULL,
+  `cart_item_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_payment`
+--
+
+CREATE TABLE `cart_payment` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `method` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cart_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `cart_payment`
@@ -331,7 +771,145 @@ INSERT INTO `cart_items` (`id`, `quantity`, `sku`, `type`, `name`, `coupon_code`
 INSERT INTO `cart_payment` (`id`, `method`, `method_title`, `cart_id`, `created_at`, `updated_at`) VALUES
 (1, 'razorpay', NULL, 6, '2022-08-13 15:35:57', '2022-08-13 15:35:57'),
 (17, 'moneytransfer', NULL, 12, '2022-08-24 19:58:37', '2022-08-24 19:58:37'),
-(18, 'moneytransfer', NULL, 13, '2022-08-24 20:00:25', '2022-08-24 20:00:25');
+(18, 'moneytransfer', NULL, 13, '2022-08-24 20:00:25', '2022-08-24 20:00:25'),
+(24, 'cashondelivery', NULL, 14, '2022-09-17 07:27:58', '2022-09-17 07:27:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_rules`
+--
+
+CREATE TABLE `cart_rules` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `starts_from` datetime DEFAULT NULL,
+  `ends_till` datetime DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `coupon_type` int(11) NOT NULL DEFAULT 1,
+  `use_auto_generation` tinyint(1) NOT NULL DEFAULT 0,
+  `usage_per_customer` int(11) NOT NULL DEFAULT 0,
+  `uses_per_coupon` int(11) NOT NULL DEFAULT 0,
+  `times_used` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `condition_type` tinyint(1) NOT NULL DEFAULT 1,
+  `conditions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`conditions`)),
+  `end_other_rules` tinyint(1) NOT NULL DEFAULT 0,
+  `uses_attribute_conditions` tinyint(1) NOT NULL DEFAULT 0,
+  `action_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_amount` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `discount_quantity` int(11) NOT NULL DEFAULT 1,
+  `discount_step` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `apply_to_shipping` tinyint(1) NOT NULL DEFAULT 0,
+  `free_shipping` tinyint(1) NOT NULL DEFAULT 0,
+  `sort_order` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_rule_channels`
+--
+
+CREATE TABLE `cart_rule_channels` (
+  `cart_rule_id` int(10) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_rule_coupons`
+--
+
+CREATE TABLE `cart_rule_coupons` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `usage_limit` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `usage_per_customer` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `times_used` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `type` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `is_primary` tinyint(1) NOT NULL DEFAULT 0,
+  `expired_at` date DEFAULT NULL,
+  `cart_rule_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_rule_coupon_usage`
+--
+
+CREATE TABLE `cart_rule_coupon_usage` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `times_used` int(11) NOT NULL DEFAULT 0,
+  `cart_rule_coupon_id` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_rule_customers`
+--
+
+CREATE TABLE `cart_rule_customers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `times_used` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `cart_rule_id` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_rule_customer_groups`
+--
+
+CREATE TABLE `cart_rule_customer_groups` (
+  `cart_rule_id` int(10) UNSIGNED NOT NULL,
+  `customer_group_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_rule_translations`
+--
+
+CREATE TABLE `cart_rule_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cart_rule_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_shipping_rates`
+--
+
+CREATE TABLE `cart_shipping_rates` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `carrier` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `carrier_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method_description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` double DEFAULT 0,
+  `base_price` double DEFAULT 0,
+  `cart_address_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `discount_amount` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `is_calculate_tax` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `cart_shipping_rates`
@@ -343,7 +921,113 @@ INSERT INTO `cart_shipping_rates` (`id`, `carrier`, `carrier_title`, `method`, `
 (77, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 50, 50, 9, '2022-08-24 19:58:32', '2022-08-24 19:58:42', '0.0000', '0.0000', 1),
 (78, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 9, '2022-08-24 19:58:32', '2022-08-24 19:58:32', '0.0000', '0.0000', 1),
 (81, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 10, 10, 13, '2022-08-24 20:00:20', '2022-08-24 20:00:30', '0.0000', '0.0000', 1),
-(82, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 13, '2022-08-24 20:00:20', '2022-08-24 20:00:20', '0.0000', '0.0000', 1);
+(82, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 13, '2022-08-24 20:00:20', '2022-08-24 20:00:20', '0.0000', '0.0000', 1),
+(89, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 20, 20, 17, '2022-09-17 07:27:52', '2022-09-17 07:27:52', '0.0000', '0.0000', 1),
+(90, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 17, '2022-09-17 07:27:52', '2022-09-17 07:28:06', '0.0000', '0.0000', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `catalog_rules`
+--
+
+CREATE TABLE `catalog_rules` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `starts_from` date DEFAULT NULL,
+  `ends_till` date DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `condition_type` tinyint(1) NOT NULL DEFAULT 1,
+  `conditions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`conditions`)),
+  `end_other_rules` tinyint(1) NOT NULL DEFAULT 0,
+  `action_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_amount` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `sort_order` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `catalog_rule_channels`
+--
+
+CREATE TABLE `catalog_rule_channels` (
+  `catalog_rule_id` int(10) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `catalog_rule_customer_groups`
+--
+
+CREATE TABLE `catalog_rule_customer_groups` (
+  `catalog_rule_id` int(10) UNSIGNED NOT NULL,
+  `customer_group_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `catalog_rule_products`
+--
+
+CREATE TABLE `catalog_rule_products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `starts_from` datetime DEFAULT NULL,
+  `ends_till` datetime DEFAULT NULL,
+  `end_other_rules` tinyint(1) NOT NULL DEFAULT 0,
+  `action_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `discount_amount` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `sort_order` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `customer_group_id` int(10) UNSIGNED NOT NULL,
+  `catalog_rule_id` int(10) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `catalog_rule_product_prices`
+--
+
+CREATE TABLE `catalog_rule_product_prices` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `rule_date` date NOT NULL,
+  `starts_from` datetime DEFAULT NULL,
+  `ends_till` datetime DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `customer_group_id` int(10) UNSIGNED NOT NULL,
+  `catalog_rule_id` int(10) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `position` int(11) NOT NULL DEFAULT 0,
+  `image` varchar(191) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `_lft` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `_rgt` int(10) UNSIGNED NOT NULL DEFAULT 0,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `display_mode` varchar(191) DEFAULT 'products_and_description',
+  `category_icon_path` text DEFAULT NULL,
+  `additional` longtext DEFAULT NULL CHECK (json_valid(`additional`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `categories`
@@ -413,6 +1097,131 @@ INSERT INTO `categories` (`id`, `position`, `image`, `status`, `_lft`, `_rgt`, `
 (63, 1, NULL, 1, 50, 51, 14, '2022-08-21 08:17:32', '2022-08-21 08:17:32', 'products_only', NULL, NULL),
 (64, 1, NULL, 1, 54, 55, 15, '2022-08-21 08:18:24', '2022-08-21 08:18:24', 'products_only', NULL, NULL),
 (65, 1, NULL, 1, 56, 57, 15, '2022-08-21 08:19:12', '2022-08-21 08:19:12', 'products_only', NULL, NULL);
+
+--
+-- Triggers `categories`
+--
+DELIMITER $$
+CREATE TRIGGER `trig_categories_insert` AFTER INSERT ON `categories` FOR EACH ROW BEGIN
+                            DECLARE urlPath VARCHAR(255);
+            DECLARE localeCode VARCHAR(255);
+            DECLARE done INT;
+            DECLARE curs CURSOR FOR (SELECT category_translations.locale
+                    FROM category_translations
+                    WHERE category_id = NEW.id);
+            DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+
+            IF EXISTS (
+                SELECT *
+                FROM category_translations
+                WHERE category_id = NEW.id
+            )
+            THEN
+
+                OPEN curs;
+
+            	SET done = 0;
+                REPEAT
+                	FETCH curs INTO localeCode;
+
+                    SELECT get_url_path_of_category(NEW.id, localeCode) INTO urlPath;
+
+                    IF NEW.parent_id IS NULL
+                    THEN
+                        SET urlPath = '';
+                    END IF;
+
+                    UPDATE category_translations
+                    SET url_path = urlPath
+                    WHERE
+                        category_translations.category_id = NEW.id
+                        AND category_translations.locale = localeCode;
+
+                UNTIL done END REPEAT;
+
+                CLOSE curs;
+
+            END IF;
+            END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trig_categories_update` AFTER UPDATE ON `categories` FOR EACH ROW BEGIN
+                            DECLARE urlPath VARCHAR(255);
+            DECLARE localeCode VARCHAR(255);
+            DECLARE done INT;
+            DECLARE curs CURSOR FOR (SELECT category_translations.locale
+                    FROM category_translations
+                    WHERE category_id = NEW.id);
+            DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+
+            IF EXISTS (
+                SELECT *
+                FROM category_translations
+                WHERE category_id = NEW.id
+            )
+            THEN
+
+                OPEN curs;
+
+            	SET done = 0;
+                REPEAT
+                	FETCH curs INTO localeCode;
+
+                    SELECT get_url_path_of_category(NEW.id, localeCode) INTO urlPath;
+
+                    IF NEW.parent_id IS NULL
+                    THEN
+                        SET urlPath = '';
+                    END IF;
+
+                    UPDATE category_translations
+                    SET url_path = urlPath
+                    WHERE
+                        category_translations.category_id = NEW.id
+                        AND category_translations.locale = localeCode;
+
+                UNTIL done END REPEAT;
+
+                CLOSE curs;
+
+            END IF;
+            END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_filterable_attributes`
+--
+
+CREATE TABLE `category_filterable_attributes` (
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `attribute_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_translations`
+--
+
+CREATE TABLE `category_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` text NOT NULL,
+  `slug` varchar(191) NOT NULL,
+  `description` text DEFAULT NULL,
+  `meta_title` text DEFAULT NULL,
+  `meta_description` text DEFAULT NULL,
+  `meta_keywords` text DEFAULT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) NOT NULL,
+  `locale_id` int(10) UNSIGNED DEFAULT NULL,
+  `url_path` varchar(2048) NOT NULL COMMENT 'maintained by database triggers'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `category_translations`
@@ -736,11 +1545,135 @@ INSERT INTO `category_translations` (`id`, `name`, `slug`, `description`, `meta_
 (325, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'tr', 4, 'home-kitchen/home-decor/wall-decor');
 
 --
+-- Triggers `category_translations`
+--
+DELIMITER $$
+CREATE TRIGGER `trig_category_translations_insert` BEFORE INSERT ON `category_translations` FOR EACH ROW BEGIN
+                            DECLARE parentUrlPath varchar(255);
+            DECLARE urlPath varchar(255);
+
+            IF NOT EXISTS (
+                SELECT id
+                FROM categories
+                WHERE
+                    id = NEW.category_id
+                    AND parent_id IS NULL
+            )
+            THEN
+
+                SELECT
+                    GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO parentUrlPath
+                FROM
+                    categories AS node,
+                    categories AS parent
+                    JOIN category_translations AS parent_translations ON parent.id = parent_translations.category_id
+                WHERE
+                    node._lft >= parent._lft
+                    AND node._rgt <= parent._rgt
+                    AND node.id = (SELECT parent_id FROM categories WHERE id = NEW.category_id)
+                    AND node.parent_id IS NOT NULL
+                    AND parent.parent_id IS NOT NULL
+                    AND parent_translations.locale = NEW.locale
+                GROUP BY
+                    node.id;
+
+                IF parentUrlPath IS NULL
+                THEN
+                    SET urlPath = NEW.slug;
+                ELSE
+                    SET urlPath = concat(parentUrlPath, '/', NEW.slug);
+                END IF;
+
+                SET NEW.url_path = urlPath;
+
+            END IF;
+            END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `trig_category_translations_update` BEFORE UPDATE ON `category_translations` FOR EACH ROW BEGIN
+                            DECLARE parentUrlPath varchar(255);
+            DECLARE urlPath varchar(255);
+
+            IF NOT EXISTS (
+                SELECT id
+                FROM categories
+                WHERE
+                    id = NEW.category_id
+                    AND parent_id IS NULL
+            )
+            THEN
+
+                SELECT
+                    GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO parentUrlPath
+                FROM
+                    categories AS node,
+                    categories AS parent
+                    JOIN category_translations AS parent_translations ON parent.id = parent_translations.category_id
+                WHERE
+                    node._lft >= parent._lft
+                    AND node._rgt <= parent._rgt
+                    AND node.id = (SELECT parent_id FROM categories WHERE id = NEW.category_id)
+                    AND node.parent_id IS NOT NULL
+                    AND parent.parent_id IS NOT NULL
+                    AND parent_translations.locale = NEW.locale
+                GROUP BY
+                    node.id;
+
+                IF parentUrlPath IS NULL
+                THEN
+                    SET urlPath = NEW.slug;
+                ELSE
+                    SET urlPath = concat(parentUrlPath, '/', NEW.slug);
+                END IF;
+
+                SET NEW.url_path = urlPath;
+
+            END IF;
+            END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `channels`
+--
+
+CREATE TABLE `channels` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `timezone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `theme` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hostname` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `logo` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `favicon` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_maintenance_on` tinyint(1) NOT NULL DEFAULT 0,
+  `allowed_ips` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `default_locale_id` int(10) UNSIGNED NOT NULL,
+  `base_currency_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `root_category_id` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
 -- Dumping data for table `channels`
 --
 
 INSERT INTO `channels` (`id`, `code`, `timezone`, `theme`, `hostname`, `logo`, `favicon`, `is_maintenance_on`, `allowed_ips`, `default_locale_id`, `base_currency_id`, `created_at`, `updated_at`, `root_category_id`) VALUES
 (1, 'default', NULL, 'ekart', 'http://localhost', 'channel/1/qm1ktxmujTHaakC4JjHrfdSeFh9O7IEm1ZLQERzI.webp', 'channel/1/ZUcAA4dbj4TLCzJP6b3KGDvqkpncrSqB17G0u6CE.webp', 0, '', 1, 3, NULL, '2022-09-05 18:07:31', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `channel_currencies`
+--
+
+CREATE TABLE `channel_currencies` (
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `currency_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `channel_currencies`
@@ -751,12 +1684,34 @@ INSERT INTO `channel_currencies` (`channel_id`, `currency_id`) VALUES
 (1, 2),
 (1, 3);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `channel_inventory_sources`
+--
+
+CREATE TABLE `channel_inventory_sources` (
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `inventory_source_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `channel_inventory_sources`
 --
 
 INSERT INTO `channel_inventory_sources` (`channel_id`, `inventory_source_id`) VALUES
 (1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `channel_locales`
+--
+
+CREATE TABLE `channel_locales` (
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `locale_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `channel_locales`
@@ -768,6 +1723,32 @@ INSERT INTO `channel_locales` (`channel_id`, `locale_id`) VALUES
 (1, 3),
 (1, 5);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `channel_translations`
+--
+
+CREATE TABLE `channel_translations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `home_page_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `footer_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `site_name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone_number` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `facebook_link` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `instagram_link` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `maintenance_mode_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `home_seo` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`home_seo`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `channel_translations`
 --
@@ -778,6 +1759,19 @@ INSERT INTO `channel_translations` (`id`, `channel_id`, `locale`, `name`, `descr
 (3, 1, 'nl', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
 (4, 1, 'tr', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
 (5, 1, 'es', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_pages`
+--
+
+CREATE TABLE `cms_pages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `layout` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `cms_pages`
@@ -797,12 +1791,41 @@ INSERT INTO `cms_pages` (`id`, `layout`, `created_at`, `updated_at`) VALUES
 (11, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (12, NULL, '2022-08-10 10:36:00', '2022-08-10 10:36:00');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_page_channels`
+--
+
+CREATE TABLE `cms_page_channels` (
+  `cms_page_id` int(10) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `cms_page_channels`
 --
 
 INSERT INTO `cms_page_channels` (`cms_page_id`, `channel_id`) VALUES
 (12, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cms_page_translations`
+--
+
+CREATE TABLE `cms_page_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `page_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `url_key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `html_content` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cms_page_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `cms_page_translations`
@@ -823,6 +1846,24 @@ INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_conten
 INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_content`, `meta_title`, `meta_description`, `meta_keywords`, `locale`, `cms_page_id`) VALUES
 (12, 'Become a Seller', 'become-a-seller', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Seller</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/ekart/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"http://localhost:8000/seller-registration\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Wolrd Ekart&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Wolrd Ekart just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-4.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-4.png\" alt=\"ekart\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Wolrd Ekart</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Wolrd Ekart?</figcaption>\n<p>Joining and starting a shop on Wolrd Ekart is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Wolrd Ekart. Create an Wolrd Ekart account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Wolrd Ekartfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Wolrd Ekart?</figcaption>\n</figure>\n<p>Wolrd Ekart provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n</div>', 'become-a-seller', '', '', 'en', 12);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_id` bigint(20) DEFAULT NULL,
+  `message_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message_body` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message_reply` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `contacts`
 --
@@ -831,6 +1872,22 @@ INSERT INTO `contacts` (`id`, `name`, `email`, `product_id`, `message_title`, `m
 (1, 'Manu', 'mannukumarshah595@gmail.com', 1, NULL, 'ytgy', NULL, '2022-08-15 04:49:28', '2022-08-15 04:49:28'),
 (5, 'Danish Bhatia', 'danishbhatia4@gmail.com', NULL, NULL, '\r\nsfvs', NULL, '2022-08-29 12:02:33', '2022-08-29 12:02:33'),
 (6, 'Danish', 'danishbhatia4@gmail.com', NULL, NULL, 'wedcdc', NULL, '2022-08-29 12:03:54', '2022-08-29 12:03:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `core_config`
+--
+
+CREATE TABLE `core_config` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `channel_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locale_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `core_config`
@@ -913,7 +1970,7 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (74, 'sales.paymentmethods.cashondelivery.generate_invoice', '0', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (75, 'sales.paymentmethods.cashondelivery.invoice_status', 'pending', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (76, 'sales.paymentmethods.cashondelivery.order_status', 'pending', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
-(77, 'sales.paymentmethods.cashondelivery.active', '0', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(77, 'sales.paymentmethods.cashondelivery.active', '1', 'default', 'en', '2022-08-13 15:40:42', '2022-09-17 07:11:40'),
 (78, 'sales.paymentmethods.cashondelivery.sort', '1', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (79, 'sales.paymentmethods.moneytransfer.title', 'Money Transfer', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (80, 'sales.paymentmethods.moneytransfer.description', 'Money Transfer', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
@@ -972,7 +2029,25 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (133, 'taxes.catalogue.default-location-calculation.state', 'JK', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
 (134, 'taxes.catalogue.default-location-calculation.post_code', '180010', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
 (135, 'general.design.admin_logo.logo_image', 'configuration/YCXUbfaalcR0r02xNK07uJJsNQkC3zb0FEFOTpOC.webp', 'default', NULL, '2022-09-11 11:05:20', '2022-09-11 11:05:20'),
-(136, 'general.design.admin_logo.favicon', 'configuration/GLH102FfSJmwiDX36doHf9ZOdZEtL7aDspcGSySv.webp', 'default', NULL, '2022-09-11 11:05:20', '2022-09-11 11:05:20');
+(136, 'general.design.admin_logo.favicon', 'configuration/GLH102FfSJmwiDX36doHf9ZOdZEtL7aDspcGSySv.webp', 'default', NULL, '2022-09-11 11:05:20', '2022-09-11 11:05:20'),
+(137, 'sales.paymentmethods.cashfree.title', 'Cashfree', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40'),
+(138, 'sales.paymentmethods.cashfree.description', 'Cashfree', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40'),
+(139, 'sales.paymentmethods.cashfree.app_id', '', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40'),
+(140, 'sales.paymentmethods.cashfree.key_secret', '', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40'),
+(141, 'sales.paymentmethods.cashfree.active', '1', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40'),
+(142, 'sales.paymentmethods.cashfree.test_mode', '0', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `countries`
+--
+
+CREATE TABLE `countries` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `countries`
@@ -1234,6 +2309,20 @@ INSERT INTO `countries` (`id`, `code`, `name`) VALUES
 (253, 'YE', 'Yemen'),
 (254, 'ZM', 'Zambia'),
 (255, 'ZW', 'Zimbabwe');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_states`
+--
+
+CREATE TABLE `country_states` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `country_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `default_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_id` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `country_states`
@@ -1826,6 +2915,19 @@ INSERT INTO `country_states` (`id`, `country_code`, `code`, `default_name`, `cou
 (584, 'PY', 'PY-15', 'Presidente Hayes', 176),
 (585, 'PY', 'PY-2', 'San Pedro', 176),
 (586, 'PY', 'PY-12', 'Ñeembucú', 176);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_state_translations`
+--
+
+CREATE TABLE `country_state_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `default_name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_state_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `country_state_translations`
@@ -4124,6 +5226,19 @@ INSERT INTO `country_state_translations` (`id`, `locale`, `default_name`, `count
 (2289, 'pt_BR', 'Uttarakhand', 567),
 (2290, 'pt_BR', 'Bengala Ocidental', 568);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `country_translations`
+--
+
+CREATE TABLE `country_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `country_translations`
 --
@@ -5150,6 +6265,21 @@ INSERT INTO `country_translations` (`id`, `locale`, `name`, `country_id`) VALUES
 (1019, 'pt_BR', 'Zâmbia', 254),
 (1020, 'pt_BR', 'Zimbábue', 255);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `currencies`
+--
+
+CREATE TABLE `currencies` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `symbol` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `currencies`
 --
@@ -5158,6 +6288,49 @@ INSERT INTO `currencies` (`id`, `code`, `name`, `created_at`, `updated_at`, `sym
 (1, 'USD', 'US Dollar', NULL, NULL, '$'),
 (2, 'EUR', 'Euro', NULL, NULL, '€'),
 (3, 'INR', 'Indian Rupees', '2022-08-10 08:20:26', '2022-08-10 08:20:26', '₹');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `currency_exchange_rates`
+--
+
+CREATE TABLE `currency_exchange_rates` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `rate` decimal(24,12) NOT NULL,
+  `target_currency` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `api_token` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_group_id` int(10) UNSIGNED DEFAULT NULL,
+  `subscribed_to_news_letter` tinyint(1) NOT NULL DEFAULT 0,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `is_verified` tinyint(1) NOT NULL DEFAULT 0,
+  `is_suspended` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `customers`
@@ -5169,6 +6342,21 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `gender`, `date_of_bir
 (3, 'Danish', 'Bhatia', NULL, NULL, 'danishbhatia4@gmail.com', NULL, 1, NULL, NULL, 2, 0, '1Yq7HFJD0FFZ9Ficn6D1GWOJTuOfJC88kc3atCIPCIJVQnDBge4gkVK08K6A', '2022-08-19 17:56:20', '2022-08-19 17:56:20', 1, 0, NULL, NULL, NULL),
 (4, 'Danish', 'Bhatia', 'Male', '2022-08-01', 'danishbhatia43@gmail.com', NULL, 1, '$2y$10$cGJsGy5adWgHnXs6Qw7Sdejm2PQxEPzTxlHb2ECENKgRm9odC9.8K', '80rHGgwwJujcTA5XdSMFUUj3m7T54pYglWL0DKHhemFnXHScnZgsSm4FYmJdN4CWb1MJh9lwnWwqf5x4', 2, 0, NULL, '2022-08-20 18:21:08', '2022-08-21 10:06:47', 1, 0, '70aad06e227b264a23e40d064657fddc', NULL, '+917006144050');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_groups`
+--
+
+CREATE TABLE `customer_groups` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_user_defined` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `customer_groups`
 --
@@ -5178,6 +6366,18 @@ INSERT INTO `customer_groups` (`id`, `name`, `is_user_defined`, `created_at`, `u
 (2, 'General', 0, NULL, NULL, 'general'),
 (3, 'Wholesale', 0, NULL, NULL, 'wholesale');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_password_resets`
+--
+
+CREATE TABLE `customer_password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `customer_password_resets`
 --
@@ -5185,6 +6385,21 @@ INSERT INTO `customer_groups` (`id`, `name`, `is_user_defined`, `created_at`, `u
 INSERT INTO `customer_password_resets` (`email`, `token`, `created_at`) VALUES
 ('danishbhatia4@gmail.com', '$2y$10$qb0bOwUrRC/ybKlr8wR/hO7i.Jbz0niayStapNsgfKm32RWHr9FYi', '2022-08-20 18:20:01'),
 ('danishbhatia43@gmail.com', '$2y$10$EcllGDxwgcHL4uLQPNZUH.Z3/ETigKbBNYkvixoveDly2GrabYZE.', '2022-08-20 19:15:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_social_accounts`
+--
+
+CREATE TABLE `customer_social_accounts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `provider_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `customer_social_accounts`
@@ -5195,6 +6410,69 @@ INSERT INTO `customer_social_accounts` (`id`, `provider_name`, `provider_id`, `c
 (2, 'google', '115416541000865032060', 2, '2022-08-14 10:39:30', '2022-08-14 10:39:30'),
 (3, 'google', '114111322891131846318', 3, '2022-08-19 17:56:20', '2022-08-19 17:56:20');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `downloadable_link_purchased`
+--
+
+CREATE TABLE `downloadable_link_purchased` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `download_bought` int(11) NOT NULL DEFAULT 0,
+  `download_used` int(11) NOT NULL DEFAULT 0,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `order_item_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `download_canceled` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `import_products`
+--
+
+CREATE TABLE `import_products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `attribute_family_id` int(10) UNSIGNED NOT NULL,
+  `data_flow_profile_id` int(10) UNSIGNED NOT NULL,
+  `is_downloadable` tinyint(1) NOT NULL DEFAULT 0,
+  `upload_link_files` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_links_have_samples` tinyint(1) NOT NULL DEFAULT 0,
+  `upload_link_sample_files` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_samples_available` tinyint(1) NOT NULL DEFAULT 0,
+  `upload_sample_files` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `import_products`
 --
@@ -5202,12 +6480,74 @@ INSERT INTO `customer_social_accounts` (`id`, `provider_name`, `provider_id`, `c
 INSERT INTO `import_products` (`id`, `attribute_family_id`, `data_flow_profile_id`, `is_downloadable`, `upload_link_files`, `is_links_have_samples`, `upload_link_sample_files`, `is_samples_available`, `upload_sample_files`, `file_path`, `image_path`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 0, '', 0, '', 0, '', 'imported-products/admin/files/62f35b2ba47c5.xlsx', '', '2022-08-10 07:15:55', '2022-08-10 07:15:55');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory_sources`
+--
+
+CREATE TABLE `inventory_sources` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `contact_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_number` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_fax` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postcode` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `priority` int(11) NOT NULL DEFAULT 0,
+  `latitude` decimal(10,5) DEFAULT NULL,
+  `longitude` decimal(10,5) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `inventory_sources`
 --
 
 INSERT INTO `inventory_sources` (`id`, `code`, `name`, `description`, `contact_name`, `contact_email`, `contact_number`, `contact_fax`, `country`, `state`, `city`, `street`, `postcode`, `priority`, `latitude`, `longitude`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'default', 'Default', NULL, 'Detroit Warehouse', 'warehouse@example.com', '1234567899', NULL, 'US', 'MI', 'Detroit', '12th Street', '48127', 0, NULL, NULL, 1, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `increment_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `total_qty` int(11) DEFAULT NULL,
+  `base_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sub_total` decimal(12,4) DEFAULT 0.0000,
+  `base_sub_total` decimal(12,4) DEFAULT 0.0000,
+  `grand_total` decimal(12,4) DEFAULT 0.0000,
+  `base_grand_total` decimal(12,4) DEFAULT 0.0000,
+  `shipping_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_shipping_amount` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `order_address_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `transaction_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reminders` int(11) NOT NULL DEFAULT 0,
+  `next_reminder_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `invoices`
@@ -5217,6 +6557,37 @@ INSERT INTO `invoices` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`
 (1, '1', 'paid', 0, 1, 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 5, '2022-08-13 15:41:35', '2022-08-13 15:41:35', NULL, 0, NULL),
 (2, '2', 'paid', 0, 1, 'USD', 'USD', 'USD', '200.0000', '200.0000', '210.0000', '210.0000', '10.0000', '10.0000', '0.0000', '0.0000', '0.0000', '0.0000', 3, 15, '2022-08-24 20:18:18', '2022-08-24 20:18:18', NULL, 0, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice_items`
+--
+
+CREATE TABLE `invoice_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sku` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_item_id` int(10) UNSIGNED DEFAULT NULL,
+  `invoice_id` int(10) UNSIGNED DEFAULT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `discount_percent` decimal(12,4) DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) DEFAULT 0.0000
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `invoice_items`
 --
@@ -5224,6 +6595,38 @@ INSERT INTO `invoices` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`
 INSERT INTO `invoice_items` (`id`, `name`, `description`, `sku`, `qty`, `price`, `base_price`, `total`, `base_total`, `tax_amount`, `base_tax_amount`, `product_id`, `product_type`, `order_item_id`, `invoice_id`, `parent_id`, `additional`, `created_at`, `updated_at`, `discount_percent`, `discount_amount`, `base_discount_amount`) VALUES
 (1, 'temp1', NULL, 'updatedSKU', 1, '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-13 15:41:35', '2022-08-13 15:41:35', '0.0000', '0.0000', '0.0000'),
 (2, 'temp1sdvc', NULL, 'temp21', 1, '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 4, 2, NULL, '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\",\"locale\":\"en\"}', '2022-08-24 20:18:18', '2022-08-24 20:18:18', '0.0000', '0.0000', '0.0000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `queue` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint(3) UNSIGNED NOT NULL,
+  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
+  `available_at` int(10) UNSIGNED NOT NULL,
+  `created_at` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `locales`
+--
+
+CREATE TABLE `locales` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `direction` enum('ltr','rtl') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ltr',
+  `locale_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `locales`
@@ -5236,12 +6639,76 @@ INSERT INTO `locales` (`id`, `code`, `name`, `created_at`, `updated_at`, `direct
 (4, 'tr', 'Türkçe', NULL, NULL, 'ltr', NULL),
 (5, 'es', 'Español', NULL, NULL, 'ltr', NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `marketing_campaigns`
+--
+
+CREATE TABLE `marketing_campaigns` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subject` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_to` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `spooling` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_id` int(10) UNSIGNED DEFAULT NULL,
+  `customer_group_id` int(10) UNSIGNED DEFAULT NULL,
+  `marketing_template_id` int(10) UNSIGNED DEFAULT NULL,
+  `marketing_event_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `marketing_events`
+--
+
+CREATE TABLE `marketing_events` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `marketing_events`
 --
 
 INSERT INTO `marketing_events` (`id`, `name`, `description`, `date`, `created_at`, `updated_at`) VALUES
 (1, 'Birthday', 'Birthday', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `marketing_templates`
+--
+
+CREATE TABLE `marketing_templates` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `migrations`
@@ -5474,6 +6941,21 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (224, '2020_12_03_113558_create_size_charts_table', 2),
 (225, '2020_12_15_114559_create_template_assign_table', 2);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read` tinyint(1) NOT NULL DEFAULT 0,
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `notifications`
 --
@@ -5481,16 +6963,107 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 INSERT INTO `notifications` (`id`, `type`, `read`, `order_id`, `created_at`, `updated_at`) VALUES
 (1, 'order', 1, 1, '2022-08-13 15:41:34', '2022-08-19 19:14:51'),
 (2, 'order', 1, 2, '2022-08-24 19:58:44', '2022-08-25 05:25:22'),
-(3, 'order', 1, 3, '2022-08-24 20:00:31', '2022-08-24 20:17:26');
+(3, 'order', 1, 3, '2022-08-24 20:00:31', '2022-08-24 20:17:26'),
+(4, 'order', 1, 4, '2022-09-17 07:27:03', '2022-09-17 07:33:06'),
+(5, 'order', 1, 5, '2022-09-17 07:28:12', '2022-09-17 07:33:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `increment_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_guest` tinyint(1) DEFAULT NULL,
+  `customer_email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_first_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_last_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_company_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `customer_vat_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_method` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_gift` tinyint(1) NOT NULL DEFAULT 0,
+  `total_item_count` int(11) DEFAULT NULL,
+  `total_qty_ordered` int(11) DEFAULT NULL,
+  `base_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `grand_total` decimal(12,4) DEFAULT 0.0000,
+  `base_grand_total` decimal(12,4) DEFAULT 0.0000,
+  `grand_total_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `base_grand_total_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `grand_total_refunded` decimal(12,4) DEFAULT 0.0000,
+  `base_grand_total_refunded` decimal(12,4) DEFAULT 0.0000,
+  `sub_total` decimal(12,4) DEFAULT 0.0000,
+  `base_sub_total` decimal(12,4) DEFAULT 0.0000,
+  `sub_total_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `base_sub_total_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `sub_total_refunded` decimal(12,4) DEFAULT 0.0000,
+  `base_sub_total_refunded` decimal(12,4) DEFAULT 0.0000,
+  `discount_percent` decimal(12,4) DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `discount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `discount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `shipping_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_shipping_amount` decimal(12,4) DEFAULT 0.0000,
+  `shipping_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `base_shipping_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `shipping_refunded` decimal(12,4) DEFAULT 0.0000,
+  `base_shipping_refunded` decimal(12,4) DEFAULT 0.0000,
+  `customer_id` int(10) UNSIGNED DEFAULT NULL,
+  `customer_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_id` int(10) UNSIGNED DEFAULT NULL,
+  `channel_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `cart_id` int(11) DEFAULT NULL,
+  `applied_cart_rule_ids` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_shipping_discount_amount` decimal(12,4) DEFAULT 0.0000
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `increment_id`, `status`, `channel_name`, `is_guest`, `customer_email`, `customer_first_name`, `customer_last_name`, `customer_company_name`, `customer_vat_id`, `shipping_method`, `shipping_title`, `shipping_description`, `coupon_code`, `is_gift`, `total_item_count`, `total_qty_ordered`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `grand_total`, `base_grand_total`, `grand_total_invoiced`, `base_grand_total_invoiced`, `grand_total_refunded`, `base_grand_total_refunded`, `sub_total`, `base_sub_total`, `sub_total_invoiced`, `base_sub_total_invoiced`, `sub_total_refunded`, `base_sub_total_refunded`, `discount_percent`, `discount_amount`, `base_discount_amount`, `discount_invoiced`, `base_discount_invoiced`, `discount_refunded`, `base_discount_refunded`, `tax_amount`, `base_tax_amount`, `tax_amount_invoiced`, `base_tax_amount_invoiced`, `tax_amount_refunded`, `base_tax_amount_refunded`, `shipping_amount`, `base_shipping_amount`, `shipping_invoiced`, `base_shipping_invoiced`, `shipping_refunded`, `base_shipping_refunded`, `customer_id`, `customer_type`, `channel_id`, `channel_type`, `created_at`, `updated_at`, `cart_id`, `applied_cart_rule_ids`, `shipping_discount_amount`, `base_shipping_discount_amount`) VALUES
-(1, '1', 'closed', 'Default', 0, 'mannukumarshah@gmail.com', 'Manu', 'kumar', NULL, NULL, 'free_free', 'Free Shipping - Free Shipping', 'Free Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-13 15:41:30', '2022-08-19 19:16:18', 6, '', '0.0000', '0.0000'),
-(2, '2', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 2, 5, 'USD', 'USD', 'USD', '1650.0000', '1650.0000', '0.0000', '0.0000', '0.0000', '0.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '50.0000', '50.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-24 19:58:42', '2022-08-24 19:58:42', 12, '', '0.0000', '0.0000'),
-(3, '3', 'processing', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '210.0000', '210.0000', '210.0000', '210.0000', '0.0000', '0.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '10.0000', '10.0000', '10.0000', '10.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-24 20:00:31', '2022-08-24 20:18:18', 13, '', '0.0000', '0.0000');
+INSERT INTO `orders` (`id`, `user_id`, `increment_id`, `status`, `channel_name`, `is_guest`, `customer_email`, `customer_first_name`, `customer_last_name`, `customer_company_name`, `customer_vat_id`, `shipping_method`, `shipping_title`, `shipping_description`, `coupon_code`, `is_gift`, `total_item_count`, `total_qty_ordered`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `grand_total`, `base_grand_total`, `grand_total_invoiced`, `base_grand_total_invoiced`, `grand_total_refunded`, `base_grand_total_refunded`, `sub_total`, `base_sub_total`, `sub_total_invoiced`, `base_sub_total_invoiced`, `sub_total_refunded`, `base_sub_total_refunded`, `discount_percent`, `discount_amount`, `base_discount_amount`, `discount_invoiced`, `base_discount_invoiced`, `discount_refunded`, `base_discount_refunded`, `tax_amount`, `base_tax_amount`, `tax_amount_invoiced`, `base_tax_amount_invoiced`, `tax_amount_refunded`, `base_tax_amount_refunded`, `shipping_amount`, `base_shipping_amount`, `shipping_invoiced`, `base_shipping_invoiced`, `shipping_refunded`, `base_shipping_refunded`, `customer_id`, `customer_type`, `channel_id`, `channel_type`, `created_at`, `updated_at`, `cart_id`, `applied_cart_rule_ids`, `shipping_discount_amount`, `base_shipping_discount_amount`) VALUES
+(1, 0, '1', 'closed', 'Default', 0, 'mannukumarshah@gmail.com', 'Manu', 'kumar', NULL, NULL, 'free_free', 'Free Shipping - Free Shipping', 'Free Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-13 15:41:30', '2022-08-19 19:16:18', 6, '', '0.0000', '0.0000'),
+(2, 3, '2', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 2, 5, 'USD', 'USD', 'USD', '1650.0000', '1650.0000', '1650.0000', '1650.0000', '0.0000', '0.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '50.0000', '50.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-09-14 19:58:42', '2022-08-24 19:58:42', 12, '', '0.0000', '0.0000'),
+(3, 0, '3', 'processing', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '210.0000', '210.0000', '210.0000', '210.0000', '0.0000', '0.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '10.0000', '10.0000', '10.0000', '10.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-24 20:00:31', '2022-08-24 20:18:18', 13, '', '0.0000', '0.0000'),
+(4, 3, '4', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 2, 2, 'USD', 'USD', 'INR', '420.0000', '420.0000', '0.0000', '0.0000', '0.0000', '0.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '20.0000', '20.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-09-17 07:26:56', '2022-09-17 07:26:56', 14, '', '0.0000', '0.0000'),
+(5, 3, '5', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'free_free', 'Free Shipping - Free Shipping', 'Free Shipping', NULL, 0, 2, 2, 'USD', 'USD', 'INR', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-09-17 07:28:06', '2022-09-17 07:28:06', 14, '', '0.0000', '0.0000');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_brands`
+--
+
+CREATE TABLE `order_brands` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `order_item_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `brand` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `order_brands`
@@ -5500,7 +7073,76 @@ INSERT INTO `order_brands` (`id`, `order_id`, `order_item_id`, `product_id`, `br
 (1, 1, 1, 1, NULL, '2022-08-13 15:41:34', '2022-08-13 15:41:34'),
 (2, 2, 2, 4, 10, '2022-08-24 19:58:44', '2022-08-24 19:58:44'),
 (3, 2, 3, 2, 10, '2022-08-24 19:58:44', '2022-08-24 19:58:44'),
-(4, 3, 4, 2, 10, '2022-08-24 20:00:31', '2022-08-24 20:00:31');
+(4, 3, 4, 2, 10, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
+(5, 4, 5, 6, 10, '2022-09-17 07:27:03', '2022-09-17 07:27:03'),
+(6, 4, 7, 3, 10, '2022-09-17 07:27:03', '2022-09-17 07:27:03'),
+(7, 5, 8, 6, 10, '2022-09-17 07:28:12', '2022-09-17 07:28:12'),
+(8, 5, 10, 3, 10, '2022-09-17 07:28:12', '2022-09-17 07:28:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_comments`
+--
+
+CREATE TABLE `order_comments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `customer_notified` tinyint(1) NOT NULL DEFAULT 0,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `sku` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `coupon_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `weight` decimal(12,4) DEFAULT 0.0000,
+  `total_weight` decimal(12,4) DEFAULT 0.0000,
+  `qty_ordered` int(11) DEFAULT 0,
+  `qty_shipped` int(11) DEFAULT 0,
+  `qty_invoiced` int(11) DEFAULT 0,
+  `qty_canceled` int(11) DEFAULT 0,
+  `qty_refunded` int(11) DEFAULT 0,
+  `price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `total_invoiced` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_total_invoiced` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `amount_refunded` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_amount_refunded` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `discount_percent` decimal(12,4) DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `discount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `discount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `tax_percent` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount_invoiced` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount_refunded` decimal(12,4) DEFAULT 0.0000,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `order_items`
@@ -5510,7 +7152,29 @@ INSERT INTO `order_items` (`id`, `sku`, `type`, `name`, `coupon_code`, `weight`,
 (1, 'updatedSKU', 'simple', 'temp1', NULL, '12.0000', '12.0000', 1, 0, 1, 0, 1, '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-13 15:41:30', '2022-08-19 19:16:18'),
 (2, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '36.0000', 3, 0, 0, 0, 0, '400.0000', '400.0000', '1200.0000', '1200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Product\\Models\\Product', 2, NULL, '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"SogHAGSqIwg1aQUeu8ffIHPGQks7ykqvs6wYoNJF\",\"locale\":\"en\"}', '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
 (3, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '24.0000', 2, 0, 0, 0, 0, '200.0000', '200.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 2, NULL, '{\"quantity\":2,\"product_id\":\"2\",\"_token\":\"zwSSEN83KcNKGYwzihNMip1GyFxbS205WezdtRIK\",\"locale\":\"en\"}', '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
-(4, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', 1, 0, 1, 0, 0, '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 3, NULL, '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\",\"locale\":\"en\"}', '2022-08-24 20:00:31', '2022-08-24 20:18:18');
+(4, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', 1, 0, 1, 0, 0, '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 3, NULL, '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\",\"locale\":\"en\"}', '2022-08-24 20:00:31', '2022-08-24 20:18:18'),
+(5, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', 1, 0, 0, 0, 0, '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 6, 'Webkul\\Product\\Models\\Product', 4, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}},\"locale\":\"en\"}', '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
+(6, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', 1, 0, 0, 0, 0, '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 7, 'Webkul\\Product\\Models\\Product', 4, 5, '{\"product_id\":7,\"parent_id\":6,\"locale\":\"en\"}', '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
+(7, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', 1, 0, 0, 0, 0, '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 3, 'Webkul\\Product\\Models\\Product', 4, NULL, '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\",\"locale\":\"en\"}', '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
+(8, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', 1, 0, 0, 0, 0, '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 6, 'Webkul\\Product\\Models\\Product', 5, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}},\"locale\":\"en\"}', '2022-09-17 07:28:06', '2022-09-17 07:28:06'),
+(9, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', 1, 0, 0, 0, 0, '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 7, 'Webkul\\Product\\Models\\Product', 5, 8, '{\"product_id\":7,\"parent_id\":6,\"locale\":\"en\"}', '2022-09-17 07:28:06', '2022-09-17 07:28:06'),
+(10, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', 1, 0, 0, 0, 0, '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 3, 'Webkul\\Product\\Models\\Product', 5, NULL, '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\",\"locale\":\"en\"}', '2022-09-17 07:28:06', '2022-09-17 07:28:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_payment`
+--
+
+CREATE TABLE `order_payment` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `method` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `order_payment`
@@ -5519,7 +7183,78 @@ INSERT INTO `order_items` (`id`, `sku`, `type`, `name`, `coupon_code`, `weight`,
 INSERT INTO `order_payment` (`id`, `method`, `method_title`, `order_id`, `additional`, `created_at`, `updated_at`) VALUES
 (1, 'razorpay', NULL, 1, NULL, '2022-08-13 15:41:30', '2022-08-13 15:41:30'),
 (2, 'moneytransfer', NULL, 2, NULL, '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
-(3, 'moneytransfer', NULL, 3, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31');
+(3, 'moneytransfer', NULL, 3, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
+(4, 'cashondelivery', NULL, 4, NULL, '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
+(5, 'cashondelivery', NULL, 5, NULL, '2022-09-17 07:28:06', '2022-09-17 07:28:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_transactions`
+--
+
+CREATE TABLE `order_transactions` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `transaction_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_method` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`data`)),
+  `invoice_id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `amount` decimal(12,4) DEFAULT 0.0000
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  `sku` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `attribute_family_id` int(10) UNSIGNED DEFAULT NULL,
+  `country` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `products`
@@ -5542,6 +7277,27 @@ INSERT INTO `products` (`id`, `user_id`, `sku`, `type`, `created_at`, `updated_a
 (14, 1, 'NOTE-20-variant-14', 'simple', '2022-08-27 17:46:57', '2022-08-27 17:48:53', 12, 2, 'IN', NULL),
 (18, 1, '12', 'grouped', '2022-08-27 19:32:05', '2022-08-27 19:32:05', NULL, 2, 'IN', NULL),
 (20, 1, 'temporary-sku-456948', 'grouped', '2022-09-11 20:39:08', '2022-09-11 20:39:08', NULL, 2, 'IN', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_attribute_values`
+--
+
+CREATE TABLE `product_attribute_values` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `text_value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `boolean_value` tinyint(1) DEFAULT NULL,
+  `integer_value` int(11) DEFAULT NULL,
+  `float_value` decimal(12,4) DEFAULT NULL,
+  `datetime_value` datetime DEFAULT NULL,
+  `date_value` date DEFAULT NULL,
+  `json_value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`json_value`)),
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `attribute_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_attribute_values`
@@ -5891,6 +7647,60 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (735, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 20, 17),
 (736, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 20, 18);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_bundle_options`
+--
+
+CREATE TABLE `product_bundle_options` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_required` tinyint(1) NOT NULL DEFAULT 1,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_bundle_option_products`
+--
+
+CREATE TABLE `product_bundle_option_products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `qty` int(11) NOT NULL DEFAULT 0,
+  `is_user_defined` tinyint(1) NOT NULL DEFAULT 1,
+  `is_default` tinyint(1) NOT NULL DEFAULT 0,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `product_bundle_option_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_bundle_option_translations`
+--
+
+CREATE TABLE `product_bundle_option_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_bundle_option_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_categories`
+--
+
+CREATE TABLE `product_categories` (
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `category_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `product_categories`
 --
@@ -5925,6 +7735,58 @@ INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
 (12, 12),
 (12, 13);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_cross_sells`
+--
+
+CREATE TABLE `product_cross_sells` (
+  `parent_id` int(10) UNSIGNED NOT NULL,
+  `child_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_customer_group_prices`
+--
+
+CREATE TABLE `product_customer_group_prices` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `qty` int(11) NOT NULL DEFAULT 0,
+  `value_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `customer_group_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_downloadable_links`
+--
+
+CREATE TABLE `product_downloadable_links` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `sample_url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sample_file` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sample_file_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sample_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `downloads` int(11) NOT NULL DEFAULT 0,
+  `sort_order` int(11) DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `product_downloadable_links`
 --
@@ -5932,6 +7794,19 @@ INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
 INSERT INTO `product_downloadable_links` (`id`, `url`, `file`, `file_name`, `type`, `price`, `sample_url`, `sample_file`, `sample_file_name`, `sample_type`, `downloads`, `sort_order`, `product_id`, `created_at`, `updated_at`) VALUES
 (1, 'https://google.com', NULL, NULL, 'url', '2000.0000', NULL, '', '', 'file', 10, 1, 11, '2022-08-27 17:19:12', '2022-08-27 17:19:12'),
 (2, 'https://fb.com', NULL, NULL, 'url', '1800.0000', NULL, '', '', 'file', 20, 2, 11, '2022-08-27 17:19:12', '2022-08-27 17:19:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_downloadable_link_translations`
+--
+
+CREATE TABLE `product_downloadable_link_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_downloadable_link_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_downloadable_link_translations`
@@ -5941,6 +7816,24 @@ INSERT INTO `product_downloadable_link_translations` (`id`, `locale`, `title`, `
 (1, 'en', 'Product 1', 1),
 (2, 'en', 'Product 2', 2);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_downloadable_samples`
+--
+
+CREATE TABLE `product_downloadable_samples` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `url` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `product_downloadable_samples`
 --
@@ -5948,12 +7841,75 @@ INSERT INTO `product_downloadable_link_translations` (`id`, `locale`, `title`, `
 INSERT INTO `product_downloadable_samples` (`id`, `url`, `file`, `file_name`, `type`, `sort_order`, `product_id`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'product_downloadable_links/11/zsjc5VHhuPHMLtRvelJyut8h4Yo08BschouWYdvH.jpg', '[019046].jpg', 'file', 0, 11, '2022-08-27 17:25:36', '2022-08-27 17:25:36');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_downloadable_sample_translations`
+--
+
+CREATE TABLE `product_downloadable_sample_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_downloadable_sample_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `product_downloadable_sample_translations`
 --
 
 INSERT INTO `product_downloadable_sample_translations` (`id`, `locale`, `title`, `product_downloadable_sample_id`) VALUES
 (1, 'en', 'Sample - 1', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_flat`
+--
+
+CREATE TABLE `product_flat` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `sku` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `url_key` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `new` tinyint(1) DEFAULT NULL,
+  `featured` tinyint(1) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `thumbnail` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` decimal(12,4) DEFAULT NULL,
+  `cost` decimal(12,4) DEFAULT NULL,
+  `special_price` decimal(12,4) DEFAULT NULL,
+  `special_price_from` date DEFAULT NULL,
+  `special_price_to` date DEFAULT NULL,
+  `weight` decimal(12,4) DEFAULT NULL,
+  `color` int(11) DEFAULT NULL,
+  `color_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size` int(11) DEFAULT NULL,
+  `size_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `visible_individually` tinyint(1) DEFAULT NULL,
+  `min_price` decimal(12,4) DEFAULT NULL,
+  `max_price` decimal(12,4) DEFAULT NULL,
+  `short_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `width` decimal(12,4) DEFAULT NULL,
+  `height` decimal(12,4) DEFAULT NULL,
+  `depth` decimal(12,4) DEFAULT NULL,
+  `brand` int(11) DEFAULT NULL,
+  `brand_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `RAM` int(11) DEFAULT NULL,
+  `RAM_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `random` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_flat`
@@ -6022,6 +7978,34 @@ INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`
 (136, '12', '12345678934344', NULL, NULL, 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'es', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, '', 1),
 (137, 'temporary-sku-456948', 'copy-of-12345678934344-ed774b', 'Copy of Danish Bhatia (ed774b)', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummyLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'copy-of-danish-bhatia-ed774b', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'en', 'default', 20, NULL, NULL, 1, '0.0000', '0.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, NULL, NULL, 14, '4GB', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_grouped_products`
+--
+
+CREATE TABLE `product_grouped_products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `qty` int(11) NOT NULL DEFAULT 0,
+  `sort_order` int(11) NOT NULL DEFAULT 0,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `associated_product_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_images`
+--
+
+CREATE TABLE `product_images` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `position` int(10) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `product_images`
 --
@@ -6034,6 +8018,20 @@ INSERT INTO `product_images` (`id`, `type`, `path`, `product_id`, `position`) VA
 (6, 'images', 'product/6/FaQyNoKtiqvGajGg6QYBCZb3XH9YC4D3g8DJy31h.jpg', 6, 2),
 (7, 'images', 'product/11/ctiwkAoX19uTnHI0AU9EfGbOl3ob5jPVRznwHwnk.jpg', 11, 0),
 (8, 'images', 'product/12/Ftc5DaQj7jXgsvQbHieV8sr6SeCUms7aetZLv7nh.jpg', 12, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_inventories`
+--
+
+CREATE TABLE `product_inventories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `qty` int(11) NOT NULL DEFAULT 0,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `inventory_source_id` int(10) UNSIGNED NOT NULL,
+  `vendor_id` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_inventories`
@@ -6051,6 +8049,19 @@ INSERT INTO `product_inventories` (`id`, `qty`, `product_id`, `inventory_source_
 (9, 10, 13, 1, 0),
 (10, 10, 14, 1, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_ordered_inventories`
+--
+
+CREATE TABLE `product_ordered_inventories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `qty` int(11) NOT NULL DEFAULT 0,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `product_ordered_inventories`
 --
@@ -6058,7 +8069,20 @@ INSERT INTO `product_inventories` (`id`, `qty`, `product_id`, `inventory_source_
 INSERT INTO `product_ordered_inventories` (`id`, `qty`, `product_id`, `channel_id`) VALUES
 (1, 0, 1, 1),
 (2, 3, 4, 1),
-(3, 3, 2, 1);
+(3, 3, 2, 1),
+(4, 2, 7, 1),
+(5, 2, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_relations`
+--
+
+CREATE TABLE `product_relations` (
+  `parent_id` int(10) UNSIGNED NOT NULL,
+  `child_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_relations`
@@ -6069,12 +8093,55 @@ INSERT INTO `product_relations` (`parent_id`, `child_id`) VALUES
 (6, 18),
 (6, 12);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_reviews`
+--
+
+CREATE TABLE `product_reviews` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `product_reviews`
 --
 
 INSERT INTO `product_reviews` (`id`, `title`, `rating`, `comment`, `status`, `created_at`, `updated_at`, `product_id`, `customer_id`, `name`) VALUES
 (4, 'wedsc', 4, 'ervfdcdswde', 'approved', '2022-08-22 07:09:42', '2022-08-27 05:56:45', 6, 4, 'Danish Bhatia');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_review_images`
+--
+
+CREATE TABLE `product_review_images` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `review_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_super_attributes`
+--
+
+CREATE TABLE `product_super_attributes` (
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `attribute_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_super_attributes`
@@ -6085,12 +8152,103 @@ INSERT INTO `product_super_attributes` (`product_id`, `attribute_id`) VALUES
 (6, 24),
 (12, 28);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_up_sells`
+--
+
+CREATE TABLE `product_up_sells` (
+  `parent_id` int(10) UNSIGNED NOT NULL,
+  `child_id` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_videos`
+--
+
+CREATE TABLE `product_videos` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `position` int(10) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `refunds`
+--
+
+CREATE TABLE `refunds` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `increment_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `total_qty` int(11) DEFAULT NULL,
+  `base_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_currency_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `adjustment_refund` decimal(12,4) DEFAULT 0.0000,
+  `base_adjustment_refund` decimal(12,4) DEFAULT 0.0000,
+  `adjustment_fee` decimal(12,4) DEFAULT 0.0000,
+  `base_adjustment_fee` decimal(12,4) DEFAULT 0.0000,
+  `sub_total` decimal(12,4) DEFAULT 0.0000,
+  `base_sub_total` decimal(12,4) DEFAULT 0.0000,
+  `grand_total` decimal(12,4) DEFAULT 0.0000,
+  `base_grand_total` decimal(12,4) DEFAULT 0.0000,
+  `shipping_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_shipping_amount` decimal(12,4) DEFAULT 0.0000,
+  `tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `discount_percent` decimal(12,4) DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `refunds`
 --
 
 INSERT INTO `refunds` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `adjustment_refund`, `base_adjustment_refund`, `adjustment_fee`, `base_adjustment_fee`, `sub_total`, `base_sub_total`, `grand_total`, `base_grand_total`, `shipping_amount`, `base_shipping_amount`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `order_id`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'refunded', 0, 1, 'USD', 'USD', 'USD', '0.0000', '0.0000', '0.0000', '0.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, '2022-08-19 19:16:18', '2022-08-19 19:16:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `refund_items`
+--
+
+CREATE TABLE `refund_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sku` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_price` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `base_total` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_tax_amount` decimal(12,4) DEFAULT 0.0000,
+  `discount_percent` decimal(12,4) DEFAULT 0.0000,
+  `discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `base_discount_amount` decimal(12,4) DEFAULT 0.0000,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_item_id` int(10) UNSIGNED DEFAULT NULL,
+  `refund_id` int(10) UNSIGNED DEFAULT NULL,
+  `parent_id` int(10) UNSIGNED DEFAULT NULL,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `refund_items`
@@ -6099,13 +8257,368 @@ INSERT INTO `refunds` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`,
 INSERT INTO `refund_items` (`id`, `name`, `description`, `sku`, `qty`, `price`, `base_price`, `total`, `base_total`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `product_id`, `product_type`, `order_item_id`, `refund_id`, `parent_id`, `additional`, `created_at`, `updated_at`) VALUES
 (1, 'temp1', NULL, 'updatedSKU', 1, '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-19 19:16:18', '2022-08-19 19:16:18');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rma`
+--
+
+CREATE TABLE `rma` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `resolution` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `information` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rma_status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `status` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rma_images`
+--
+
+CREATE TABLE `rma_images` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `rma_id` int(10) UNSIGNED NOT NULL,
+  `path` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rma_items`
+--
+
+CREATE TABLE `rma_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `rma_id` int(10) UNSIGNED NOT NULL,
+  `order_item_id` int(10) UNSIGNED NOT NULL,
+  `quantity` int(10) UNSIGNED NOT NULL,
+  `rma_reason_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rma_messages`
+--
+
+CREATE TABLE `rma_messages` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `message` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rma_id` int(10) UNSIGNED NOT NULL,
+  `is_admin` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rma_reasons`
+--
+
+CREATE TABLE `rma_reasons` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `permission_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `permissions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`permissions`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
 --
 -- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`, `permission_type`, `permissions`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'Administrator role', 'custom', '[\"dashboard\", \"payment-request\", \"payment-request.cancel\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"suggestion\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.categories.edit\",\"catalog.categories.delete\",\"catalog.categories.mass-delete\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.attributes.edit\",\"catalog.attributes.delete\",\"catalog.attributes.mass-delete\",\"catalog.families\",\"catalog.families.create\",\"catalog.families.edit\",\"catalog.families.delete\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.customers.edit\",\"customers.customers.delete\",\"customers.customers.mass-update\",\"customers.customers.mass-delete\",\"customers.addresses\",\"customers.addresses.create\",\"customers.addresses.edit\",\"customers.addresses.delete\",\"customers.note\",\"customers.groups\",\"customers.groups.create\",\"customers.groups.edit\",\"customers.groups.delete\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\",\"customers.payment-request\",\"customers.payment-request.edit\",\"customers.payment-request.update\",\"customers.orders\",\"customers.payment-history\",\"velocity\",\"velocity.meta-data\",\"velocity.meta-data.edit\",\"velocity.header\",\"velocity.header.create\",\"velocity.header.edit\",\"velocity.header.delete\",\"marketing\",\"marketing.promotions\",\"marketing.promotions.cart-rules\",\"marketing.promotions.cart-rules.create\",\"marketing.promotions.cart-rules.copy\",\"marketing.promotions.cart-rules.edit\",\"marketing.promotions.cart-rules.delete\",\"marketing.promotions.catalog-rules\",\"marketing.promotions.catalog-rules.create\",\"marketing.promotions.catalog-rules.edit\",\"marketing.promotions.catalog-rules.delete\",\"marketing.email-marketing\",\"marketing.email-marketing.email-templates\",\"marketing.email-marketing.email-templates.create\",\"marketing.email-marketing.email-templates.edit\",\"marketing.email-marketing.email-templates.delete\",\"marketing.email-marketing.events\",\"marketing.email-marketing.events.create\",\"marketing.email-marketing.events.edit\",\"marketing.email-marketing.events.delete\",\"marketing.email-marketing.campaigns\",\"marketing.email-marketing.campaigns.create\",\"marketing.email-marketing.campaigns.edit\",\"marketing.email-marketing.campaigns.delete\",\"marketing.email-marketing.subscribers\",\"marketing.email-marketing.subscribers.edit\",\"marketing.email-marketing.subscribers.delete\",\"cms\",\"cms.pages\",\"cms.pages.create\",\"cms.pages.edit\",\"cms.pages.delete\",\"cms.pages.mass-delete\",\"settings\",\"settings.locales\",\"settings.locales.create\",\"settings.locales.edit\",\"settings.locales.delete\",\"settings.currencies\",\"settings.currencies.create\",\"settings.currencies.edit\",\"settings.currencies.delete\",\"settings.exchange_rates\",\"settings.exchange_rates.create\",\"settings.exchange_rates.edit\",\"settings.exchange_rates.delete\",\"settings.inventory_sources\",\"settings.inventory_sources.create\",\"settings.inventory_sources.edit\",\"settings.inventory_sources.delete\",\"settings.channels\",\"settings.channels.create\",\"settings.channels.edit\",\"settings.channels.delete\",\"settings.users\",\"settings.users.users\",\"settings.users.users.create\",\"settings.users.users.edit\",\"settings.users.users.delete\",\"settings.users.roles\",\"settings.users.roles.create\",\"settings.users.roles.edit\",\"settings.users.roles.delete\",\"settings.users.vendors\",\"settings.users.vendors.view\",\"settings.users.vendors.approve\",\"settings.users.vendors.delete\",\"settings.sliders\",\"settings.sliders.create\",\"settings.sliders.edit\",\"settings.sliders.delete\",\"settings.taxes\",\"settings.taxes.tax-categories\",\"settings.taxes.tax-categories.create\",\"settings.taxes.tax-categories.edit\",\"settings.taxes.tax-categories.delete\",\"settings.taxes.tax-rates\",\"settings.taxes.tax-rates.create\",\"settings.taxes.tax-rates.edit\",\"settings.taxes.tax-rates.delete\",\"configuration\",\"contact\"]', NULL, '2022-09-12 07:23:16'),
-(2, 'Vendor', 'Role for Vendor', 'custom', '[\"dashboard\",\"payment-request\",\"payment-request.create\",\"payment-request.cancel\",\"payment-request.delete\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.families\",\"catalog.families.create\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.addresses\",\"customers.addresses.create\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\"]', '2022-08-12 06:57:20', '2022-09-11 17:24:38');
+(1, 'Administrator', 'Administrator role', 'custom', '[\"dashboard\",\"payment-request\",\"payment-request.cancel\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"suggestion\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.categories.edit\",\"catalog.categories.delete\",\"catalog.categories.mass-delete\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.attributes.edit\",\"catalog.attributes.delete\",\"catalog.attributes.mass-delete\",\"catalog.families\",\"catalog.families.create\",\"catalog.families.edit\",\"catalog.families.delete\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.customers.edit\",\"customers.customers.delete\",\"customers.customers.mass-update\",\"customers.customers.mass-delete\",\"customers.addresses\",\"customers.addresses.create\",\"customers.addresses.edit\",\"customers.addresses.delete\",\"customers.note\",\"customers.groups\",\"customers.groups.create\",\"customers.groups.edit\",\"customers.groups.delete\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\",\"customers.payment-request\",\"customers.payment-request.edit\",\"customers.payment-request.update\",\"customers.orders\",\"customers.payment-history\",\"velocity\",\"velocity.meta-data\",\"velocity.meta-data.edit\",\"velocity.header\",\"velocity.header.create\",\"velocity.header.edit\",\"velocity.header.delete\",\"marketing\",\"marketing.promotions\",\"marketing.promotions.cart-rules\",\"marketing.promotions.cart-rules.create\",\"marketing.promotions.cart-rules.copy\",\"marketing.promotions.cart-rules.edit\",\"marketing.promotions.cart-rules.delete\",\"marketing.promotions.catalog-rules\",\"marketing.promotions.catalog-rules.create\",\"marketing.promotions.catalog-rules.edit\",\"marketing.promotions.catalog-rules.delete\",\"marketing.email-marketing\",\"marketing.email-marketing.email-templates\",\"marketing.email-marketing.email-templates.create\",\"marketing.email-marketing.email-templates.edit\",\"marketing.email-marketing.email-templates.delete\",\"marketing.email-marketing.events\",\"marketing.email-marketing.events.create\",\"marketing.email-marketing.events.edit\",\"marketing.email-marketing.events.delete\",\"marketing.email-marketing.campaigns\",\"marketing.email-marketing.campaigns.create\",\"marketing.email-marketing.campaigns.edit\",\"marketing.email-marketing.campaigns.delete\",\"marketing.email-marketing.subscribers\",\"marketing.email-marketing.subscribers.edit\",\"marketing.email-marketing.subscribers.delete\",\"cms\",\"cms.pages\",\"cms.pages.create\",\"cms.pages.edit\",\"cms.pages.delete\",\"cms.pages.mass-delete\",\"settings\",\"settings.locales\",\"settings.locales.create\",\"settings.locales.edit\",\"settings.locales.delete\",\"settings.currencies\",\"settings.currencies.create\",\"settings.currencies.edit\",\"settings.currencies.delete\",\"settings.exchange_rates\",\"settings.exchange_rates.create\",\"settings.exchange_rates.edit\",\"settings.exchange_rates.delete\",\"settings.inventory_sources\",\"settings.inventory_sources.create\",\"settings.inventory_sources.edit\",\"settings.inventory_sources.delete\",\"settings.channels\",\"settings.channels.create\",\"settings.channels.edit\",\"settings.channels.delete\",\"settings.users\",\"settings.users.users\",\"settings.users.users.create\",\"settings.users.users.edit\",\"settings.users.users.view\",\"settings.users.users.delete\",\"settings.users.roles\",\"settings.users.roles.create\",\"settings.users.roles.edit\",\"settings.users.roles.delete\",\"settings.users.vendors\",\"settings.users.vendors.view\",\"settings.users.vendors.approve\",\"settings.users.vendors.delete\",\"settings.sliders\",\"settings.sliders.create\",\"settings.sliders.edit\",\"settings.sliders.delete\",\"settings.taxes\",\"settings.taxes.tax-categories\",\"settings.taxes.tax-categories.create\",\"settings.taxes.tax-categories.edit\",\"settings.taxes.tax-categories.delete\",\"settings.taxes.tax-rates\",\"settings.taxes.tax-rates.create\",\"settings.taxes.tax-rates.edit\",\"settings.taxes.tax-rates.delete\",\"configuration\",\"contact\"]', NULL, '2022-09-16 19:43:06'),
+(2, 'Vendor', 'Role for Vendor', 'custom', '[\"dashboard\",\"payment-request.create\",\"payment-request.cancel\",\"payment-request.delete\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.families\",\"catalog.families.create\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.addresses\",\"customers.addresses.create\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\"]', '2022-08-12 06:57:20', '2022-09-11 17:24:38');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipments`
+--
+
+CREATE TABLE `shipments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_qty` int(11) DEFAULT NULL,
+  `total_weight` int(11) DEFAULT NULL,
+  `carrier_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `carrier_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `track_number` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email_sent` tinyint(1) NOT NULL DEFAULT 0,
+  `customer_id` int(10) UNSIGNED DEFAULT NULL,
+  `customer_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `order_address_id` int(10) UNSIGNED DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `inventory_source_id` int(10) UNSIGNED DEFAULT NULL,
+  `inventory_source_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipment_items`
+--
+
+CREATE TABLE `shipment_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sku` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `qty` int(11) DEFAULT NULL,
+  `weight` int(11) DEFAULT NULL,
+  `price` decimal(12,4) DEFAULT 0.0000,
+  `base_price` decimal(12,4) DEFAULT 0.0000,
+  `total` decimal(12,4) DEFAULT 0.0000,
+  `base_total` decimal(12,4) DEFAULT 0.0000,
+  `product_id` int(10) UNSIGNED DEFAULT NULL,
+  `product_type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order_item_id` int(10) UNSIGNED DEFAULT NULL,
+  `shipment_id` int(10) UNSIGNED NOT NULL,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`)),
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `size_charts`
+--
+
+CREATE TABLE `size_charts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `template_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `template_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `template_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `config_attribute` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size_chart` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image_path` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sliders`
+--
+
+CREATE TABLE `sliders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `slider_path` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expired_at` date DEFAULT NULL,
+  `sort_order` int(10) UNSIGNED NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscribers_list`
+--
+
+CREATE TABLE `subscribers_list` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_subscribed` tinyint(1) NOT NULL DEFAULT 0,
+  `token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `customer_id` int(10) UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tax_categories`
+--
+
+CREATE TABLE `tax_categories` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tax_categories_tax_rates`
+--
+
+CREATE TABLE `tax_categories_tax_rates` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `tax_category_id` int(10) UNSIGNED NOT NULL,
+  `tax_rate_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tax_rates`
+--
+
+CREATE TABLE `tax_rates` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `identifier` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_zip` tinyint(1) NOT NULL DEFAULT 0,
+  `zip_code` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip_from` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip_to` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `state` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tax_rate` decimal(12,4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `template_assign`
+--
+
+CREATE TABLE `template_assign` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `template_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `velocity_contents`
+--
+
+CREATE TABLE `velocity_contents` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `content_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position` int(10) UNSIGNED DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `velocity_contents_translations`
+--
+
+CREATE TABLE `velocity_contents_translations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `content_id` int(10) UNSIGNED DEFAULT NULL,
+  `title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `custom_title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `custom_heading` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `page_link` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `link_target` tinyint(1) NOT NULL DEFAULT 0,
+  `catalog_type` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `products` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locale` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `velocity_customer_compare_products`
+--
+
+CREATE TABLE `velocity_customer_compare_products` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_flat_id` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `velocity_meta_data`
+--
+
+CREATE TABLE `velocity_meta_data` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `home_page_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `footer_left_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `footer_middle_content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slider` tinyint(1) NOT NULL DEFAULT 0,
+  `advertisement` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`advertisement`)),
+  `sidebar_category_count` int(11) NOT NULL DEFAULT 9,
+  `featured_product_count` int(11) NOT NULL DEFAULT 10,
+  `new_products_count` int(11) NOT NULL DEFAULT 10,
+  `subscription_bar_content` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `product_view_images` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`product_view_images`)),
+  `product_policy` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `locale` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `channel` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `header_content_count` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `velocity_meta_data`
@@ -6114,22 +8627,123 @@ INSERT INTO `roles` (`id`, `name`, `description`, `permission_type`, `permission
 INSERT INTO `velocity_meta_data` (`id`, `home_page_content`, `footer_left_content`, `footer_middle_content`, `slider`, `advertisement`, `sidebar_category_count`, `featured_product_count`, `new_products_count`, `subscription_bar_content`, `created_at`, `updated_at`, `product_view_images`, `product_policy`, `locale`, `channel`, `header_content_count`) VALUES
 (1, '<p>@include(\'shop::home.advertisements.advertisement-four\')@include(\'shop::home.featured-products\') @include(\'shop::home.product-policy\') @include(\'shop::home.advertisements.advertisement-three\') @include(\'shop::home.new-products\') @include(\'shop::home.advertisements.advertisement-two\')</p>', '<p class=\"text-justify\">We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.</p>', '<div class=\"col-lg-6 col-md-12 col-sm-12 no-padding\">\r\n<ul type=\"none\">\r\n<li><a href=\"{!! url(\'page/about-us\') !!}\">About Us</a></li>\r\n<li><a href=\"{!! url(\'page/cutomer-service\') !!}\">Customer Service</a></li>\r\n<li><a href=\"{!! url(\'page/whats-new\') !!}\">What&rsquo;s New</a></li>\r\n<li><a href=\"{!! url(\'page/contact-us\') !!}\">Contact Us </a></li>\r\n</ul>\r\n</div>\r\n<div class=\"col-lg-6 col-md-12 col-sm-12 no-padding\">\r\n<ul type=\"none\">\r\n<li><a href=\"{!! url(\'page/return-policy\') !!}\"> Order and Returns </a></li>\r\n<li><a href=\"{!! url(\'page/payment-policy\') !!}\"> Payment Policy </a></li>\r\n<li><a href=\"{!! url(\'page/shipping-policy\') !!}\"> Shipping Policy</a></li>\r\n<li><a href=\"{!! url(\'page/privacy-policy\') !!}\"> Privacy and Cookies Policy </a></li>\r\n</ul>\r\n</div>', 1, '{\"4\":{\"1\":\"velocity\\/images\\/big-sale-banner.webp\",\"2\":\"velocity\\/images\\/seasons.webp\",\"3\":\"velocity\\/images\\/deals.webp\",\"4\":\"velocity\\/images\\/kids.webp\"},\"3\":{\"1\":\"velocity\\/images\\/headphones.webp\",\"2\":\"velocity\\/images\\/watch.webp\",\"3\":\"velocity\\/images\\/kids-2.webp\"},\"2\":{\"1\":\"velocity\\/images\\/toster.webp\",\"2\":\"velocity\\/images\\/trimmer.webp\"}}', 9, 10, 10, '<div class=\"social-icons col-lg-6\"><a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-facebook\" title=\"facebook\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-twitter\" title=\"twitter\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-linked-in\" title=\"linkedin\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-pintrest\" title=\"Pinterest\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-youtube\" title=\"Youtube\"></i> </a> <a href=\"https://webkul.com\" target=\"_blank\" class=\"unset\" rel=\"noopener noreferrer\"><i class=\"fs24 within-circle rango-instagram\" title=\"instagram\"></i></a></div>', NULL, '2022-08-25 09:15:03', NULL, '<div class=\"row col-12 remove-padding-margin\">\r\n<div class=\"col-lg-4 col-sm-12 product-policy-wrapper\">\r\n<div class=\"card\">\r\n<div class=\"policy\">\r\n<div class=\"left\"><i class=\"rango-van-ship fs40\"></i></div>\r\n<div class=\"right\"><span class=\"font-setting fs20\">Free Shipping on Order $20 or More</span></div>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-lg-4 col-sm-12 product-policy-wrapper\">\r\n<div class=\"card\">\r\n<div class=\"policy\">\r\n<div class=\"left\"><i class=\"rango-exchnage fs40\"></i></div>\r\n<div class=\"right\"><span class=\"font-setting fs20\">Product Replace &amp; Return Available </span></div>\r\n</div>\r\n</div>\r\n</div>\r\n<div class=\"col-lg-4 col-sm-12 product-policy-wrapper\">\r\n<div class=\"card\">\r\n<div class=\"policy\">\r\n<div class=\"left\"><i class=\"rango-exchnage fs40\"></i></div>\r\n<div class=\"right\"><span class=\"font-setting fs20\">Product Exchange and EMI Available </span></div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>', 'en', 'default', '5');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_payment_request`
+--
+
+CREATE TABLE `vendor_payment_request` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `vendor_id` bigint(20) NOT NULL COMMENT 'primary id of vendor from admins table',
+  `status` varchar(50) NOT NULL,
+  `amount_requested` int(11) NOT NULL,
+  `amount_paid` varchar(10) DEFAULT 'TBD',
+  `transaction_no` int(11) DEFAULT NULL,
+  `payment_via` varchar(100) DEFAULT NULL,
+  `paid_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Dumping data for table `vendor_payment_request`
 --
 
 INSERT INTO `vendor_payment_request` (`id`, `vendor_id`, `status`, `amount_requested`, `amount_paid`, `transaction_no`, `payment_via`, `paid_at`, `created_at`, `updated_at`) VALUES
 (2, 3, 'Pending', 4000, '4000', 324567, 'paytm', '2022-09-12 06:50:48', '2022-09-11 17:26:48', '2022-09-12 06:50:48'),
-(3, 3, 'Approved', 3000, '3000', 324567, 'paytm', '2022-09-12 07:43:07', '2022-09-11 17:28:19', '2022-09-12 07:43:07');
+(3, 3, 'Approved', 3000, '3000', 324567, 'paytm', '2022-09-12 07:43:07', '2022-09-11 17:28:19', '2022-09-12 07:43:07'),
+(7, 4, 'Approved', 1500, '1500', 234567890, 'paytm', '2022-09-16 19:22:18', '2022-09-16 19:14:31', '2022-09-16 19:22:18');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_registration`
+--
+
+CREATE TABLE `vendor_registration` (
+  `id` bigint(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `address` text NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `state` varchar(50) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `pincode` varchar(10) NOT NULL,
+  `display_name` varchar(255) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `additional_notes` longtext DEFAULT NULL,
+  `facebook_link` varchar(100) DEFAULT NULL,
+  `instagram_link` varchar(100) DEFAULT NULL,
+  `youtube_link` varchar(100) DEFAULT NULL,
+  `twitter_link` varchar(100) DEFAULT NULL,
+  `gstin` varchar(255) NOT NULL,
+  `gst_certificate` varchar(255) NOT NULL,
+  `mca_certificate` varchar(255) NOT NULL,
+  `other_certificate` varchar(255) DEFAULT NULL,
+  `store_images` longtext DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `owner_name` varchar(255) NOT NULL,
+  `owner_email` varchar(255) NOT NULL,
+  `owner_phone` varchar(20) NOT NULL,
+  `owner_address` longtext NOT NULL,
+  `owner_city` varchar(50) NOT NULL,
+  `owner_state` varchar(50) NOT NULL,
+  `owner_country` varchar(50) NOT NULL,
+  `owner_pincode` varchar(10) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `vendor_registration`
 --
 
 INSERT INTO `vendor_registration` (`id`, `name`, `email`, `phone`, `address`, `city`, `state`, `country`, `pincode`, `display_name`, `description`, `additional_notes`, `facebook_link`, `instagram_link`, `youtube_link`, `twitter_link`, `gstin`, `gst_certificate`, `mca_certificate`, `other_certificate`, `store_images`, `profile_image`, `status`, `owner_name`, `owner_email`, `owner_phone`, `owner_address`, `owner_city`, `owner_state`, `owner_country`, `owner_pincode`, `created_at`, `updated_at`) VALUES
-(1, 'Archies Gallery', 'archies.gallery@gmail.com', '1234567890', 'Gandhi Nagar', 'Jammu', '', 'IN', '', 'Archies Gallery', 'ARCHIES BEAUTY is the perfect Online Beauty Gifting Destination, a combination of Cosmetics, Fragrance, Bath & Body, Skincare… much more!\n\nAs a widely appreciated and the most preferred brand for over 42 years now, Archies has a well-established gifting market with a wide range of products to offer.\n\nSimilar to that, Archies Beauty will be following the same concept and offer Beauty based Gifting items…\n\nWe have exclusive gifting sets especially designed for Archies Beauty by our brand partners available at both online and offline market through our state of the art website and 200+ ARCHIES Stores.', 'Nothing...', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', '1234567890lkjhg', '/storage/vendor/mannukumarshah595@gmail.com/xEtPQLCOz7C9DVemoVlYiH30ZsXDShx2H2H1tBBM.jpg', '/storage/vendor/mannukumarshah595@gmail.com/jPyjLYsm5Sn8DnijsCoEXdJC7NXo5ofw9IDHC5v7.jpg', '/storage/vendor/mannukumarshah595@gmail.com/Ig209n1jr73320MLlVcW99uVsoxonmtFKop4q13i.jpg', '/storage/vendor/mannukumarshah595@gmail.com/eizv3RUv7JWJ8UXjtEqpmfeisLQSelCLZ1jBN0Pv.jpg,/storage/vendor/mannukumarshah595@gmail.com/WRMkZdLMlbtrwAUqeg91X37QghrtACpCNRvAuhrQ.jpg', '/storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg', 1, 'David George', 'David@gmail', '1234567890', 'Gandhi Nagar', 'Jammu', 'JK', 'IN', '123456', '2022-09-03 07:54:18', '2022-09-03 07:54:18'),
+(1, 'Archies Gallery', 'archies.gallery@gmail.com', '1234567890', 'Gandhi Nagar', 'Jammu', 'J&K', 'IN', '180010', 'Archies Gallery', 'ARCHIES BEAUTY is the perfect Online Beauty Gifting Destination, a combination of Cosmetics, Fragrance, Bath & Body, Skincare… much more!As a widely appreciated and the most preferred brand for over 42 years now, Archies has a well-established gifting market with a wide range of products to offer.Similar to that, Archies Beauty will be following the same concept and offer Beauty based Gifting items…We have exclusive gifting sets especially designed for Archies Beauty by our brand partners available at both online and offline market through our state of the art website and 200+ ARCHIES Stores.', 'Nothing...', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', '1234567890lkjhg', '/storage/vendor/mannukumarshah595@gmail.com/xEtPQLCOz7C9DVemoVlYiH30ZsXDShx2H2H1tBBM.jpg', '/storage/vendor/mannukumarshah595@gmail.com/jPyjLYsm5Sn8DnijsCoEXdJC7NXo5ofw9IDHC5v7.jpg', '/storage/vendor/mannukumarshah595@gmail.com/Ig209n1jr73320MLlVcW99uVsoxonmtFKop4q13i.jpg', '/storage/vendor/mannukumarshah595@gmail.com/eizv3RUv7JWJ8UXjtEqpmfeisLQSelCLZ1jBN0Pv.jpg,/storage/vendor/mannukumarshah595@gmail.com/WRMkZdLMlbtrwAUqeg91X37QghrtACpCNRvAuhrQ.jpg', '/storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg', 1, 'David George', 'David@gmail', '1234567890', 'Gandhi Nagar', 'Jammu', 'JK', 'IN', '123456', '2022-09-03 07:54:18', '2022-09-16 19:13:55'),
 (2, 'Perfect Phone', 'perfect.phone@gmail.com', '1234567890', 'Gandhi Nagar', 'Jammu', 'JK', 'IN', '', 'Perfect Mobile', 'I’m going to assume that you meant to ask for a method of decrypting your phone’s data without a password (correct me if I’m wrong).\r\n\r\nFor most modern smartphones running Android or iOS, there is no feasible way to decrypt your phone data other than knowing the password to it. Both operating systems lock down their system (and sdcard if you are on Android) partitions such that they can only be accessed after a correct passcode is entered.', 'Nothing..', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', '345678jhgfghjk', '', '', NULL, NULL, NULL, 0, 'Alok Singh', 'alok@gmail.com', '1234567890', 'gandhi Nagar', 'Jmkjhj', 'JK', 'IN', '123456', '2022-09-03 07:58:02', '2022-09-03 07:58:02'),
 (3, 'Danish Bhatia', 'danishbhatia4@gmail.com', '7006144050', 'HNo 208/C Uttam Nagar Near Shiv Mandir Opp. Vishal Mega Mart Bye Pass Road Kunjwani', 'Jammu', 'Jammu and Kashmir', 'India', '180010', 'DB Store', 'ARCHIES BEAUTY is the perfect Online Beauty Gifting Destination, a combination of Cosmetics, Fragrance, Bath & Body, Skincare… much more!As a widely appreciated and the most preferred brand for over 42 years now, Archies has a well-established gifting market with a wide range of products to offer.Similar to that, Archies Beauty will be following the same concept and offer Beauty based Gifting items…We have exclusive gifting sets especially designed for Archies Beauty by our brand partners available at both online and offline market through our state of the art website and 200+ ARCHIES Stores.', 'sdsdvdfvdsf', '', '', '', '', 'sd2ewd23', '/storage/vendor/danishbhatia4@gmail.com/j9034Rb0MkSTEH7b6Zr2Jsqzw7nHAfzROu72FGKs.docx', '/storage/vendor/danishbhatia4@gmail.com/qHAQ13MAtNOj8uKOqukcIRoXzpQuWHp4qKQQ1MVY.xlsx', '/storage/vendor/danishbhatia4@gmail.com/9bIIYPBu9yh7jfQvQdYsdnMijLlwy1MzzB3dr4DB.xlsx', '/storage/vendor/danishbhatia4@gmail.com/7n124fyPmKsXw72J55fyZGT7jfvEJDa811QoqdYQ.jpg,/storage/vendor/danishbhatia4@gmail.com/zHDtFNZSsHbYmw20Etjjw1zp4oeAyj6CB6mxF8g0.jpg', '/storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg', 1, 'db', 'db@db.com', '324234234234', 'wdfswqedwdas', 'Jammu', 'JK', 'IN', '180010', '2022-09-03 19:28:41', '2022-09-10 19:37:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_reviews`
+--
+
+CREATE TABLE `vendor_reviews` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `vendor_id` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `channel_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `customer_id` int(10) UNSIGNED NOT NULL,
+  `item_options` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`item_options`)),
+  `moved_to_cart` date DEFAULT NULL,
+  `shared` tinyint(1) DEFAULT NULL,
+  `time_of_moving` date DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `wishlist`
@@ -6138,6 +8752,2250 @@ INSERT INTO `vendor_registration` (`id`, `name`, `email`, `phone`, `address`, `c
 INSERT INTO `wishlist` (`id`, `channel_id`, `product_id`, `customer_id`, `item_options`, `moved_to_cart`, `shared`, `time_of_moving`, `created_at`, `updated_at`, `additional`) VALUES
 (3, 1, 4, 4, NULL, NULL, 1, NULL, '2022-08-21 16:07:44', '2022-08-21 16:08:10', NULL),
 (8, 1, 6, 4, NULL, NULL, NULL, NULL, '2022-08-27 08:56:38', '2022-08-27 08:56:38', NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `addresses_customer_id_foreign` (`customer_id`),
+  ADD KEY `addresses_cart_id_foreign` (`cart_id`),
+  ADD KEY `addresses_order_id_foreign` (`order_id`);
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admins_email_unique` (`email`),
+  ADD UNIQUE KEY `admins_api_token_unique` (`api_token`);
+
+--
+-- Indexes for table `admin_password_resets`
+--
+ALTER TABLE `admin_password_resets`
+  ADD KEY `admin_password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `attributes`
+--
+ALTER TABLE `attributes`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `attributes_code_unique` (`code`);
+
+--
+-- Indexes for table `attribute_families`
+--
+ALTER TABLE `attribute_families`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attribute_groups`
+--
+ALTER TABLE `attribute_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `attribute_groups_attribute_family_id_name_unique` (`attribute_family_id`,`name`);
+
+--
+-- Indexes for table `attribute_group_mappings`
+--
+ALTER TABLE `attribute_group_mappings`
+  ADD PRIMARY KEY (`attribute_id`,`attribute_group_id`),
+  ADD KEY `attribute_group_mappings_attribute_group_id_foreign` (`attribute_group_id`);
+
+--
+-- Indexes for table `attribute_options`
+--
+ALTER TABLE `attribute_options`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `attribute_options_attribute_id_foreign` (`attribute_id`);
+
+--
+-- Indexes for table `attribute_option_translations`
+--
+ALTER TABLE `attribute_option_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `attribute_option_translations_attribute_option_id_locale_unique` (`attribute_option_id`,`locale`);
+
+--
+-- Indexes for table `attribute_translations`
+--
+ALTER TABLE `attribute_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `attribute_translations_attribute_id_locale_unique` (`attribute_id`,`locale`);
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bookings_order_id_foreign` (`order_id`),
+  ADD KEY `bookings_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `booking_products`
+--
+ALTER TABLE `booking_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `booking_products_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `booking_product_appointment_slots`
+--
+ALTER TABLE `booking_product_appointment_slots`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `booking_product_appointment_slots_booking_product_id_foreign` (`booking_product_id`);
+
+--
+-- Indexes for table `booking_product_default_slots`
+--
+ALTER TABLE `booking_product_default_slots`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `booking_product_default_slots_booking_product_id_foreign` (`booking_product_id`);
+
+--
+-- Indexes for table `booking_product_event_tickets`
+--
+ALTER TABLE `booking_product_event_tickets`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `booking_product_event_tickets_booking_product_id_foreign` (`booking_product_id`);
+
+--
+-- Indexes for table `booking_product_event_ticket_translations`
+--
+ALTER TABLE `booking_product_event_ticket_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `booking_product_event_ticket_translations_locale_unique` (`booking_product_event_ticket_id`,`locale`);
+
+--
+-- Indexes for table `booking_product_rental_slots`
+--
+ALTER TABLE `booking_product_rental_slots`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `booking_product_rental_slots_booking_product_id_foreign` (`booking_product_id`);
+
+--
+-- Indexes for table `booking_product_table_slots`
+--
+ALTER TABLE `booking_product_table_slots`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `booking_product_table_slots_booking_product_id_foreign` (`booking_product_id`);
+
+--
+-- Indexes for table `bulkupload_data_flow_profiles`
+--
+ALTER TABLE `bulkupload_data_flow_profiles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `bulkupload_foreign_attribute_family_id` (`attribute_family_id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_customer_id_foreign` (`customer_id`),
+  ADD KEY `cart_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `cart_items`
+--
+ALTER TABLE `cart_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_items_product_id_foreign` (`product_id`),
+  ADD KEY `cart_items_cart_id_foreign` (`cart_id`),
+  ADD KEY `cart_items_tax_category_id_foreign` (`tax_category_id`),
+  ADD KEY `cart_items_parent_id_foreign` (`parent_id`);
+
+--
+-- Indexes for table `cart_item_inventories`
+--
+ALTER TABLE `cart_item_inventories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cart_payment`
+--
+ALTER TABLE `cart_payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_payment_cart_id_foreign` (`cart_id`);
+
+--
+-- Indexes for table `cart_rules`
+--
+ALTER TABLE `cart_rules`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cart_rule_channels`
+--
+ALTER TABLE `cart_rule_channels`
+  ADD PRIMARY KEY (`cart_rule_id`,`channel_id`),
+  ADD KEY `cart_rule_channels_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `cart_rule_coupons`
+--
+ALTER TABLE `cart_rule_coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_rule_coupons_cart_rule_id_foreign` (`cart_rule_id`);
+
+--
+-- Indexes for table `cart_rule_coupon_usage`
+--
+ALTER TABLE `cart_rule_coupon_usage`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_rule_coupon_usage_cart_rule_coupon_id_foreign` (`cart_rule_coupon_id`),
+  ADD KEY `cart_rule_coupon_usage_customer_id_foreign` (`customer_id`);
+
+--
+-- Indexes for table `cart_rule_customers`
+--
+ALTER TABLE `cart_rule_customers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_rule_customers_cart_rule_id_foreign` (`cart_rule_id`),
+  ADD KEY `cart_rule_customers_customer_id_foreign` (`customer_id`);
+
+--
+-- Indexes for table `cart_rule_customer_groups`
+--
+ALTER TABLE `cart_rule_customer_groups`
+  ADD PRIMARY KEY (`cart_rule_id`,`customer_group_id`),
+  ADD KEY `cart_rule_customer_groups_customer_group_id_foreign` (`customer_group_id`);
+
+--
+-- Indexes for table `cart_rule_translations`
+--
+ALTER TABLE `cart_rule_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cart_rule_translations_cart_rule_id_locale_unique` (`cart_rule_id`,`locale`);
+
+--
+-- Indexes for table `cart_shipping_rates`
+--
+ALTER TABLE `cart_shipping_rates`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `cart_shipping_rates_cart_address_id_foreign` (`cart_address_id`);
+
+--
+-- Indexes for table `catalog_rules`
+--
+ALTER TABLE `catalog_rules`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `catalog_rule_channels`
+--
+ALTER TABLE `catalog_rule_channels`
+  ADD PRIMARY KEY (`catalog_rule_id`,`channel_id`),
+  ADD KEY `catalog_rule_channels_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `catalog_rule_customer_groups`
+--
+ALTER TABLE `catalog_rule_customer_groups`
+  ADD PRIMARY KEY (`catalog_rule_id`,`customer_group_id`),
+  ADD KEY `catalog_rule_customer_groups_customer_group_id_foreign` (`customer_group_id`);
+
+--
+-- Indexes for table `catalog_rule_products`
+--
+ALTER TABLE `catalog_rule_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `catalog_rule_products_product_id_foreign` (`product_id`),
+  ADD KEY `catalog_rule_products_customer_group_id_foreign` (`customer_group_id`),
+  ADD KEY `catalog_rule_products_catalog_rule_id_foreign` (`catalog_rule_id`),
+  ADD KEY `catalog_rule_products_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `catalog_rule_product_prices`
+--
+ALTER TABLE `catalog_rule_product_prices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `catalog_rule_product_prices_product_id_foreign` (`product_id`),
+  ADD KEY `catalog_rule_product_prices_customer_group_id_foreign` (`customer_group_id`),
+  ADD KEY `catalog_rule_product_prices_catalog_rule_id_foreign` (`catalog_rule_id`),
+  ADD KEY `catalog_rule_product_prices_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `categories__lft__rgt_parent_id_index` (`_lft`,`_rgt`,`parent_id`);
+
+--
+-- Indexes for table `category_filterable_attributes`
+--
+ALTER TABLE `category_filterable_attributes`
+  ADD KEY `category_filterable_attributes_category_id_foreign` (`category_id`),
+  ADD KEY `category_filterable_attributes_attribute_id_foreign` (`attribute_id`);
+
+--
+-- Indexes for table `category_translations`
+--
+ALTER TABLE `category_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `category_translations_category_id_slug_locale_unique` (`category_id`,`slug`,`locale`),
+  ADD KEY `category_translations_locale_id_foreign` (`locale_id`);
+
+--
+-- Indexes for table `channels`
+--
+ALTER TABLE `channels`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `channels_default_locale_id_foreign` (`default_locale_id`),
+  ADD KEY `channels_base_currency_id_foreign` (`base_currency_id`),
+  ADD KEY `channels_root_category_id_foreign` (`root_category_id`);
+
+--
+-- Indexes for table `channel_currencies`
+--
+ALTER TABLE `channel_currencies`
+  ADD PRIMARY KEY (`channel_id`,`currency_id`),
+  ADD KEY `channel_currencies_currency_id_foreign` (`currency_id`);
+
+--
+-- Indexes for table `channel_inventory_sources`
+--
+ALTER TABLE `channel_inventory_sources`
+  ADD UNIQUE KEY `channel_inventory_sources_channel_id_inventory_source_id_unique` (`channel_id`,`inventory_source_id`),
+  ADD KEY `channel_inventory_sources_inventory_source_id_foreign` (`inventory_source_id`);
+
+--
+-- Indexes for table `channel_locales`
+--
+ALTER TABLE `channel_locales`
+  ADD PRIMARY KEY (`channel_id`,`locale_id`),
+  ADD KEY `channel_locales_locale_id_foreign` (`locale_id`);
+
+--
+-- Indexes for table `channel_translations`
+--
+ALTER TABLE `channel_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `channel_translations_channel_id_locale_unique` (`channel_id`,`locale`),
+  ADD KEY `channel_translations_locale_index` (`locale`);
+
+--
+-- Indexes for table `cms_pages`
+--
+ALTER TABLE `cms_pages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_page_channels`
+--
+ALTER TABLE `cms_page_channels`
+  ADD UNIQUE KEY `cms_page_channels_cms_page_id_channel_id_unique` (`cms_page_id`,`channel_id`),
+  ADD KEY `cms_page_channels_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `cms_page_translations`
+--
+ALTER TABLE `cms_page_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `cms_page_translations_cms_page_id_url_key_locale_unique` (`cms_page_id`,`url_key`,`locale`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `core_config`
+--
+ALTER TABLE `core_config`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_config_channel_id_foreign` (`channel_code`);
+
+--
+-- Indexes for table `countries`
+--
+ALTER TABLE `countries`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `country_states`
+--
+ALTER TABLE `country_states`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `country_states_country_id_foreign` (`country_id`);
+
+--
+-- Indexes for table `country_state_translations`
+--
+ALTER TABLE `country_state_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `country_state_translations_country_state_id_foreign` (`country_state_id`);
+
+--
+-- Indexes for table `country_translations`
+--
+ALTER TABLE `country_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `country_translations_country_id_foreign` (`country_id`);
+
+--
+-- Indexes for table `currencies`
+--
+ALTER TABLE `currencies`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `currency_exchange_rates`
+--
+ALTER TABLE `currency_exchange_rates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `currency_exchange_rates_target_currency_unique` (`target_currency`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `customers_email_unique` (`email`),
+  ADD UNIQUE KEY `customers_api_token_unique` (`api_token`),
+  ADD KEY `customers_customer_group_id_foreign` (`customer_group_id`);
+
+--
+-- Indexes for table `customer_groups`
+--
+ALTER TABLE `customer_groups`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `customer_groups_code_unique` (`code`);
+
+--
+-- Indexes for table `customer_password_resets`
+--
+ALTER TABLE `customer_password_resets`
+  ADD KEY `customer_password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `customer_social_accounts`
+--
+ALTER TABLE `customer_social_accounts`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `customer_social_accounts_provider_id_unique` (`provider_id`),
+  ADD KEY `customer_social_accounts_customer_id_foreign` (`customer_id`);
+
+--
+-- Indexes for table `downloadable_link_purchased`
+--
+ALTER TABLE `downloadable_link_purchased`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `downloadable_link_purchased_customer_id_foreign` (`customer_id`),
+  ADD KEY `downloadable_link_purchased_order_id_foreign` (`order_id`),
+  ADD KEY `downloadable_link_purchased_order_item_id_foreign` (`order_item_id`);
+
+--
+-- Indexes for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `import_products`
+--
+ALTER TABLE `import_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `import_admin_foreign_attribute_family_id` (`attribute_family_id`),
+  ADD KEY `import_admin_foreign_data_flow_profile_id` (`data_flow_profile_id`);
+
+--
+-- Indexes for table `inventory_sources`
+--
+ALTER TABLE `inventory_sources`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `inventory_sources_code_unique` (`code`);
+
+--
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `invoices_order_id_foreign` (`order_id`),
+  ADD KEY `invoices_order_address_id_foreign` (`order_address_id`);
+
+--
+-- Indexes for table `invoice_items`
+--
+ALTER TABLE `invoice_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `invoice_items_invoice_id_foreign` (`invoice_id`),
+  ADD KEY `invoice_items_parent_id_foreign` (`parent_id`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jobs_queue_index` (`queue`);
+
+--
+-- Indexes for table `locales`
+--
+ALTER TABLE `locales`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `locales_code_unique` (`code`);
+
+--
+-- Indexes for table `marketing_campaigns`
+--
+ALTER TABLE `marketing_campaigns`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `marketing_campaigns_channel_id_foreign` (`channel_id`),
+  ADD KEY `marketing_campaigns_customer_group_id_foreign` (`customer_group_id`),
+  ADD KEY `marketing_campaigns_marketing_template_id_foreign` (`marketing_template_id`),
+  ADD KEY `marketing_campaigns_marketing_event_id_foreign` (`marketing_event_id`);
+
+--
+-- Indexes for table `marketing_events`
+--
+ALTER TABLE `marketing_events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `marketing_templates`
+--
+ALTER TABLE `marketing_templates`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `notifications_order_id_foreign` (`order_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `orders_increment_id_unique` (`increment_id`),
+  ADD KEY `orders_customer_id_foreign` (`customer_id`),
+  ADD KEY `orders_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `order_brands`
+--
+ALTER TABLE `order_brands`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_brands_order_id_foreign` (`order_id`),
+  ADD KEY `order_brands_order_item_id_foreign` (`order_item_id`),
+  ADD KEY `order_brands_product_id_foreign` (`product_id`),
+  ADD KEY `order_brands_brand_foreign` (`brand`);
+
+--
+-- Indexes for table `order_comments`
+--
+ALTER TABLE `order_comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_comments_order_id_foreign` (`order_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_items_order_id_foreign` (`order_id`),
+  ADD KEY `order_items_parent_id_foreign` (`parent_id`);
+
+--
+-- Indexes for table `order_payment`
+--
+ALTER TABLE `order_payment`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_payment_order_id_foreign` (`order_id`);
+
+--
+-- Indexes for table `order_transactions`
+--
+ALTER TABLE `order_transactions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_transactions_order_id_foreign` (`order_id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `products_sku_unique` (`sku`),
+  ADD KEY `products_attribute_family_id_foreign` (`attribute_family_id`),
+  ADD KEY `products_parent_id_foreign` (`parent_id`);
+
+--
+-- Indexes for table `product_attribute_values`
+--
+ALTER TABLE `product_attribute_values`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `chanel_locale_attribute_value_index_unique` (`channel`,`locale`,`attribute_id`,`product_id`),
+  ADD KEY `product_attribute_values_product_id_foreign` (`product_id`),
+  ADD KEY `product_attribute_values_attribute_id_foreign` (`attribute_id`);
+
+--
+-- Indexes for table `product_bundle_options`
+--
+ALTER TABLE `product_bundle_options`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_bundle_options_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `product_bundle_option_products`
+--
+ALTER TABLE `product_bundle_option_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_bundle_option_products_product_bundle_option_id_foreign` (`product_bundle_option_id`),
+  ADD KEY `product_bundle_option_products_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `product_bundle_option_translations`
+--
+ALTER TABLE `product_bundle_option_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_bundle_option_translations_option_id_locale_unique` (`product_bundle_option_id`,`locale`);
+
+--
+-- Indexes for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD KEY `product_categories_product_id_foreign` (`product_id`),
+  ADD KEY `product_categories_category_id_foreign` (`category_id`);
+
+--
+-- Indexes for table `product_cross_sells`
+--
+ALTER TABLE `product_cross_sells`
+  ADD KEY `product_cross_sells_parent_id_foreign` (`parent_id`),
+  ADD KEY `product_cross_sells_child_id_foreign` (`child_id`);
+
+--
+-- Indexes for table `product_customer_group_prices`
+--
+ALTER TABLE `product_customer_group_prices`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_customer_group_prices_product_id_foreign` (`product_id`),
+  ADD KEY `product_customer_group_prices_customer_group_id_foreign` (`customer_group_id`);
+
+--
+-- Indexes for table `product_downloadable_links`
+--
+ALTER TABLE `product_downloadable_links`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_downloadable_links_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `product_downloadable_link_translations`
+--
+ALTER TABLE `product_downloadable_link_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `link_translations_link_id_foreign` (`product_downloadable_link_id`);
+
+--
+-- Indexes for table `product_downloadable_samples`
+--
+ALTER TABLE `product_downloadable_samples`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_downloadable_samples_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `product_downloadable_sample_translations`
+--
+ALTER TABLE `product_downloadable_sample_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sample_translations_sample_id_foreign` (`product_downloadable_sample_id`);
+
+--
+-- Indexes for table `product_flat`
+--
+ALTER TABLE `product_flat`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_flat_unique_index` (`product_id`,`channel`,`locale`),
+  ADD KEY `product_flat_parent_id_foreign` (`parent_id`);
+
+--
+-- Indexes for table `product_grouped_products`
+--
+ALTER TABLE `product_grouped_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_grouped_products_product_id_foreign` (`product_id`),
+  ADD KEY `product_grouped_products_associated_product_id_foreign` (`associated_product_id`);
+
+--
+-- Indexes for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_images_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `product_inventories`
+--
+ALTER TABLE `product_inventories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_source_vendor_index_unique` (`product_id`,`inventory_source_id`,`vendor_id`),
+  ADD KEY `product_inventories_inventory_source_id_foreign` (`inventory_source_id`);
+
+--
+-- Indexes for table `product_ordered_inventories`
+--
+ALTER TABLE `product_ordered_inventories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_ordered_inventories_product_id_channel_id_unique` (`product_id`,`channel_id`),
+  ADD KEY `product_ordered_inventories_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `product_relations`
+--
+ALTER TABLE `product_relations`
+  ADD KEY `product_relations_parent_id_foreign` (`parent_id`),
+  ADD KEY `product_relations_child_id_foreign` (`child_id`);
+
+--
+-- Indexes for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_reviews_product_id_foreign` (`product_id`),
+  ADD KEY `product_reviews_customer_id_foreign` (`customer_id`);
+
+--
+-- Indexes for table `product_review_images`
+--
+ALTER TABLE `product_review_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_review_images_review_id_foreign` (`review_id`);
+
+--
+-- Indexes for table `product_super_attributes`
+--
+ALTER TABLE `product_super_attributes`
+  ADD KEY `product_super_attributes_product_id_foreign` (`product_id`),
+  ADD KEY `product_super_attributes_attribute_id_foreign` (`attribute_id`);
+
+--
+-- Indexes for table `product_up_sells`
+--
+ALTER TABLE `product_up_sells`
+  ADD KEY `product_up_sells_parent_id_foreign` (`parent_id`),
+  ADD KEY `product_up_sells_child_id_foreign` (`child_id`);
+
+--
+-- Indexes for table `product_videos`
+--
+ALTER TABLE `product_videos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_videos_product_id_foreign` (`product_id`);
+
+--
+-- Indexes for table `refunds`
+--
+ALTER TABLE `refunds`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `refunds_order_id_foreign` (`order_id`);
+
+--
+-- Indexes for table `refund_items`
+--
+ALTER TABLE `refund_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `refund_items_order_item_id_foreign` (`order_item_id`),
+  ADD KEY `refund_items_refund_id_foreign` (`refund_id`),
+  ADD KEY `refund_items_parent_id_foreign` (`parent_id`);
+
+--
+-- Indexes for table `rma`
+--
+ALTER TABLE `rma`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `rma_images`
+--
+ALTER TABLE `rma_images`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rma_images_rma_id_foreign` (`rma_id`);
+
+--
+-- Indexes for table `rma_items`
+--
+ALTER TABLE `rma_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rma_items_rma_id_foreign` (`rma_id`),
+  ADD KEY `rma_items_rma_reason_id_foreign` (`rma_reason_id`);
+
+--
+-- Indexes for table `rma_messages`
+--
+ALTER TABLE `rma_messages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rma_messages_rma_id_foreign` (`rma_id`);
+
+--
+-- Indexes for table `rma_reasons`
+--
+ALTER TABLE `rma_reasons`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `shipments`
+--
+ALTER TABLE `shipments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shipments_order_id_foreign` (`order_id`),
+  ADD KEY `shipments_inventory_source_id_foreign` (`inventory_source_id`),
+  ADD KEY `shipments_order_address_id_foreign` (`order_address_id`);
+
+--
+-- Indexes for table `shipment_items`
+--
+ALTER TABLE `shipment_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `shipment_items_shipment_id_foreign` (`shipment_id`);
+
+--
+-- Indexes for table `size_charts`
+--
+ALTER TABLE `size_charts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `sliders_channel_id_foreign` (`channel_id`);
+
+--
+-- Indexes for table `subscribers_list`
+--
+ALTER TABLE `subscribers_list`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `subscribers_list_channel_id_foreign` (`channel_id`),
+  ADD KEY `subscribers_list_customer_id_foreign` (`customer_id`);
+
+--
+-- Indexes for table `tax_categories`
+--
+ALTER TABLE `tax_categories`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tax_categories_code_unique` (`code`);
+
+--
+-- Indexes for table `tax_categories_tax_rates`
+--
+ALTER TABLE `tax_categories_tax_rates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tax_map_index_unique` (`tax_category_id`,`tax_rate_id`),
+  ADD KEY `tax_categories_tax_rates_tax_rate_id_foreign` (`tax_rate_id`);
+
+--
+-- Indexes for table `tax_rates`
+--
+ALTER TABLE `tax_rates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `tax_rates_identifier_unique` (`identifier`);
+
+--
+-- Indexes for table `template_assign`
+--
+ALTER TABLE `template_assign`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `template_assign_product_id_foreign` (`product_id`),
+  ADD KEY `template_assign_template_id_foreign` (`template_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indexes for table `velocity_contents`
+--
+ALTER TABLE `velocity_contents`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `velocity_contents_translations`
+--
+ALTER TABLE `velocity_contents_translations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `velocity_contents_translations_content_id_foreign` (`content_id`);
+
+--
+-- Indexes for table `velocity_customer_compare_products`
+--
+ALTER TABLE `velocity_customer_compare_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `velocity_customer_compare_products_product_flat_id_foreign` (`product_flat_id`),
+  ADD KEY `velocity_customer_compare_products_customer_id_foreign` (`customer_id`);
+
+--
+-- Indexes for table `velocity_meta_data`
+--
+ALTER TABLE `velocity_meta_data`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vendor_payment_request`
+--
+ALTER TABLE `vendor_payment_request`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `vendor_registration`
+--
+ALTER TABLE `vendor_registration`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `display_name` (`display_name`),
+  ADD UNIQUE KEY `owner_email` (`owner_email`);
+
+--
+-- Indexes for table `vendor_reviews`
+--
+ALTER TABLE `vendor_reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_reviews_product_id_foreign` (`vendor_id`),
+  ADD KEY `product_reviews_customer_id_foreign` (`customer_id`);
+
+--
+-- Indexes for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `wishlist_channel_id_foreign` (`channel_id`),
+  ADD KEY `wishlist_product_id_foreign` (`product_id`),
+  ADD KEY `wishlist_customer_id_foreign` (`customer_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `attributes`
+--
+ALTER TABLE `attributes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `attribute_families`
+--
+ALTER TABLE `attribute_families`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `attribute_groups`
+--
+ALTER TABLE `attribute_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `attribute_options`
+--
+ALTER TABLE `attribute_options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `attribute_option_translations`
+--
+ALTER TABLE `attribute_option_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `attribute_translations`
+--
+ALTER TABLE `attribute_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_products`
+--
+ALTER TABLE `booking_products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_product_appointment_slots`
+--
+ALTER TABLE `booking_product_appointment_slots`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_product_default_slots`
+--
+ALTER TABLE `booking_product_default_slots`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_product_event_tickets`
+--
+ALTER TABLE `booking_product_event_tickets`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_product_event_ticket_translations`
+--
+ALTER TABLE `booking_product_event_ticket_translations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_product_rental_slots`
+--
+ALTER TABLE `booking_product_rental_slots`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_product_table_slots`
+--
+ALTER TABLE `booking_product_table_slots`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `bulkupload_data_flow_profiles`
+--
+ALTER TABLE `bulkupload_data_flow_profiles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `cart_items`
+--
+ALTER TABLE `cart_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `cart_item_inventories`
+--
+ALTER TABLE `cart_item_inventories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_payment`
+--
+ALTER TABLE `cart_payment`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT for table `cart_rules`
+--
+ALTER TABLE `cart_rules`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_rule_coupons`
+--
+ALTER TABLE `cart_rule_coupons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_rule_coupon_usage`
+--
+ALTER TABLE `cart_rule_coupon_usage`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_rule_customers`
+--
+ALTER TABLE `cart_rule_customers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_rule_translations`
+--
+ALTER TABLE `cart_rule_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_shipping_rates`
+--
+ALTER TABLE `cart_shipping_rates`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+
+--
+-- AUTO_INCREMENT for table `catalog_rules`
+--
+ALTER TABLE `catalog_rules`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `catalog_rule_products`
+--
+ALTER TABLE `catalog_rule_products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `catalog_rule_product_prices`
+--
+ALTER TABLE `catalog_rule_product_prices`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+
+--
+-- AUTO_INCREMENT for table `category_translations`
+--
+ALTER TABLE `category_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
+
+--
+-- AUTO_INCREMENT for table `channels`
+--
+ALTER TABLE `channels`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `channel_translations`
+--
+ALTER TABLE `channel_translations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `cms_pages`
+--
+ALTER TABLE `cms_pages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `cms_page_translations`
+--
+ALTER TABLE `cms_page_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `core_config`
+--
+ALTER TABLE `core_config`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+
+--
+-- AUTO_INCREMENT for table `countries`
+--
+ALTER TABLE `countries`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+
+--
+-- AUTO_INCREMENT for table `country_states`
+--
+ALTER TABLE `country_states`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=587;
+
+--
+-- AUTO_INCREMENT for table `country_state_translations`
+--
+ALTER TABLE `country_state_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2291;
+
+--
+-- AUTO_INCREMENT for table `country_translations`
+--
+ALTER TABLE `country_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1021;
+
+--
+-- AUTO_INCREMENT for table `currencies`
+--
+ALTER TABLE `currencies`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `currency_exchange_rates`
+--
+ALTER TABLE `currency_exchange_rates`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `customer_groups`
+--
+ALTER TABLE `customer_groups`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `customer_social_accounts`
+--
+ALTER TABLE `customer_social_accounts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `downloadable_link_purchased`
+--
+ALTER TABLE `downloadable_link_purchased`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `import_products`
+--
+ALTER TABLE `import_products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `inventory_sources`
+--
+ALTER TABLE `inventory_sources`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `invoice_items`
+--
+ALTER TABLE `invoice_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `locales`
+--
+ALTER TABLE `locales`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `marketing_campaigns`
+--
+ALTER TABLE `marketing_campaigns`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `marketing_events`
+--
+ALTER TABLE `marketing_events`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `marketing_templates`
+--
+ALTER TABLE `marketing_templates`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=226;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `order_brands`
+--
+ALTER TABLE `order_brands`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `order_comments`
+--
+ALTER TABLE `order_comments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `order_payment`
+--
+ALTER TABLE `order_payment`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `order_transactions`
+--
+ALTER TABLE `order_transactions`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `product_attribute_values`
+--
+ALTER TABLE `product_attribute_values`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=737;
+
+--
+-- AUTO_INCREMENT for table `product_bundle_options`
+--
+ALTER TABLE `product_bundle_options`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_bundle_option_products`
+--
+ALTER TABLE `product_bundle_option_products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_bundle_option_translations`
+--
+ALTER TABLE `product_bundle_option_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_customer_group_prices`
+--
+ALTER TABLE `product_customer_group_prices`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_downloadable_links`
+--
+ALTER TABLE `product_downloadable_links`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_downloadable_link_translations`
+--
+ALTER TABLE `product_downloadable_link_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `product_downloadable_samples`
+--
+ALTER TABLE `product_downloadable_samples`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `product_downloadable_sample_translations`
+--
+ALTER TABLE `product_downloadable_sample_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `product_flat`
+--
+ALTER TABLE `product_flat`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+
+--
+-- AUTO_INCREMENT for table `product_grouped_products`
+--
+ALTER TABLE `product_grouped_products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_images`
+--
+ALTER TABLE `product_images`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `product_inventories`
+--
+ALTER TABLE `product_inventories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `product_ordered_inventories`
+--
+ALTER TABLE `product_ordered_inventories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `product_review_images`
+--
+ALTER TABLE `product_review_images`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product_videos`
+--
+ALTER TABLE `product_videos`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `refunds`
+--
+ALTER TABLE `refunds`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `refund_items`
+--
+ALTER TABLE `refund_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `rma`
+--
+ALTER TABLE `rma`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rma_images`
+--
+ALTER TABLE `rma_images`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rma_items`
+--
+ALTER TABLE `rma_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rma_messages`
+--
+ALTER TABLE `rma_messages`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `rma_reasons`
+--
+ALTER TABLE `rma_reasons`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `shipments`
+--
+ALTER TABLE `shipments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `shipment_items`
+--
+ALTER TABLE `shipment_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `size_charts`
+--
+ALTER TABLE `size_charts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sliders`
+--
+ALTER TABLE `sliders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `subscribers_list`
+--
+ALTER TABLE `subscribers_list`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tax_categories`
+--
+ALTER TABLE `tax_categories`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tax_categories_tax_rates`
+--
+ALTER TABLE `tax_categories_tax_rates`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tax_rates`
+--
+ALTER TABLE `tax_rates`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `template_assign`
+--
+ALTER TABLE `template_assign`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `velocity_contents`
+--
+ALTER TABLE `velocity_contents`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `velocity_contents_translations`
+--
+ALTER TABLE `velocity_contents_translations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `velocity_customer_compare_products`
+--
+ALTER TABLE `velocity_customer_compare_products`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `velocity_meta_data`
+--
+ALTER TABLE `velocity_meta_data`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `vendor_payment_request`
+--
+ALTER TABLE `vendor_payment_request`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `vendor_registration`
+--
+ALTER TABLE `vendor_registration`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `vendor_reviews`
+--
+ALTER TABLE `vendor_reviews`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD CONSTRAINT `addresses_cart_id_foreign` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `addresses_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `addresses_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `attribute_groups`
+--
+ALTER TABLE `attribute_groups`
+  ADD CONSTRAINT `attribute_groups_attribute_family_id_foreign` FOREIGN KEY (`attribute_family_id`) REFERENCES `attribute_families` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `attribute_group_mappings`
+--
+ALTER TABLE `attribute_group_mappings`
+  ADD CONSTRAINT `attribute_group_mappings_attribute_group_id_foreign` FOREIGN KEY (`attribute_group_id`) REFERENCES `attribute_groups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `attribute_group_mappings_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `attribute_options`
+--
+ALTER TABLE `attribute_options`
+  ADD CONSTRAINT `attribute_options_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `attribute_option_translations`
+--
+ALTER TABLE `attribute_option_translations`
+  ADD CONSTRAINT `attribute_option_translations_attribute_option_id_foreign` FOREIGN KEY (`attribute_option_id`) REFERENCES `attribute_options` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `attribute_translations`
+--
+ALTER TABLE `attribute_translations`
+  ADD CONSTRAINT `attribute_translations_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `bookings_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `booking_products`
+--
+ALTER TABLE `booking_products`
+  ADD CONSTRAINT `booking_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `booking_product_appointment_slots`
+--
+ALTER TABLE `booking_product_appointment_slots`
+  ADD CONSTRAINT `booking_product_appointment_slots_booking_product_id_foreign` FOREIGN KEY (`booking_product_id`) REFERENCES `booking_products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `booking_product_default_slots`
+--
+ALTER TABLE `booking_product_default_slots`
+  ADD CONSTRAINT `booking_product_default_slots_booking_product_id_foreign` FOREIGN KEY (`booking_product_id`) REFERENCES `booking_products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `booking_product_event_tickets`
+--
+ALTER TABLE `booking_product_event_tickets`
+  ADD CONSTRAINT `booking_product_event_tickets_booking_product_id_foreign` FOREIGN KEY (`booking_product_id`) REFERENCES `booking_products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `booking_product_event_ticket_translations`
+--
+ALTER TABLE `booking_product_event_ticket_translations`
+  ADD CONSTRAINT `booking_product_event_ticket_translations_locale_foreign` FOREIGN KEY (`booking_product_event_ticket_id`) REFERENCES `booking_product_event_tickets` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `booking_product_rental_slots`
+--
+ALTER TABLE `booking_product_rental_slots`
+  ADD CONSTRAINT `booking_product_rental_slots_booking_product_id_foreign` FOREIGN KEY (`booking_product_id`) REFERENCES `booking_products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `booking_product_table_slots`
+--
+ALTER TABLE `booking_product_table_slots`
+  ADD CONSTRAINT `booking_product_table_slots_booking_product_id_foreign` FOREIGN KEY (`booking_product_id`) REFERENCES `booking_products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `bulkupload_data_flow_profiles`
+--
+ALTER TABLE `bulkupload_data_flow_profiles`
+  ADD CONSTRAINT `bulkupload_foreign_attribute_family_id` FOREIGN KEY (`attribute_family_id`) REFERENCES `attribute_families` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart`
+--
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_items`
+--
+ALTER TABLE `cart_items`
+  ADD CONSTRAINT `cart_items_cart_id_foreign` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_items_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `cart_items` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_items_tax_category_id_foreign` FOREIGN KEY (`tax_category_id`) REFERENCES `tax_categories` (`id`);
+
+--
+-- Constraints for table `cart_payment`
+--
+ALTER TABLE `cart_payment`
+  ADD CONSTRAINT `cart_payment_cart_id_foreign` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_rule_channels`
+--
+ALTER TABLE `cart_rule_channels`
+  ADD CONSTRAINT `cart_rule_channels_cart_rule_id_foreign` FOREIGN KEY (`cart_rule_id`) REFERENCES `cart_rules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_rule_channels_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_rule_coupons`
+--
+ALTER TABLE `cart_rule_coupons`
+  ADD CONSTRAINT `cart_rule_coupons_cart_rule_id_foreign` FOREIGN KEY (`cart_rule_id`) REFERENCES `cart_rules` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_rule_coupon_usage`
+--
+ALTER TABLE `cart_rule_coupon_usage`
+  ADD CONSTRAINT `cart_rule_coupon_usage_cart_rule_coupon_id_foreign` FOREIGN KEY (`cart_rule_coupon_id`) REFERENCES `cart_rule_coupons` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_rule_coupon_usage_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_rule_customers`
+--
+ALTER TABLE `cart_rule_customers`
+  ADD CONSTRAINT `cart_rule_customers_cart_rule_id_foreign` FOREIGN KEY (`cart_rule_id`) REFERENCES `cart_rules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_rule_customers_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_rule_customer_groups`
+--
+ALTER TABLE `cart_rule_customer_groups`
+  ADD CONSTRAINT `cart_rule_customer_groups_cart_rule_id_foreign` FOREIGN KEY (`cart_rule_id`) REFERENCES `cart_rules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cart_rule_customer_groups_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_rule_translations`
+--
+ALTER TABLE `cart_rule_translations`
+  ADD CONSTRAINT `cart_rule_translations_cart_rule_id_foreign` FOREIGN KEY (`cart_rule_id`) REFERENCES `cart_rules` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cart_shipping_rates`
+--
+ALTER TABLE `cart_shipping_rates`
+  ADD CONSTRAINT `cart_shipping_rates_cart_address_id_foreign` FOREIGN KEY (`cart_address_id`) REFERENCES `addresses` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `catalog_rule_channels`
+--
+ALTER TABLE `catalog_rule_channels`
+  ADD CONSTRAINT `catalog_rule_channels_catalog_rule_id_foreign` FOREIGN KEY (`catalog_rule_id`) REFERENCES `catalog_rules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_channels_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `catalog_rule_customer_groups`
+--
+ALTER TABLE `catalog_rule_customer_groups`
+  ADD CONSTRAINT `catalog_rule_customer_groups_catalog_rule_id_foreign` FOREIGN KEY (`catalog_rule_id`) REFERENCES `catalog_rules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_customer_groups_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `catalog_rule_products`
+--
+ALTER TABLE `catalog_rule_products`
+  ADD CONSTRAINT `catalog_rule_products_catalog_rule_id_foreign` FOREIGN KEY (`catalog_rule_id`) REFERENCES `catalog_rules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_products_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_products_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `catalog_rule_product_prices`
+--
+ALTER TABLE `catalog_rule_product_prices`
+  ADD CONSTRAINT `catalog_rule_product_prices_catalog_rule_id_foreign` FOREIGN KEY (`catalog_rule_id`) REFERENCES `catalog_rules` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_product_prices_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_product_prices_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `catalog_rule_product_prices_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `category_filterable_attributes`
+--
+ALTER TABLE `category_filterable_attributes`
+  ADD CONSTRAINT `category_filterable_attributes_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `category_filterable_attributes_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `category_translations`
+--
+ALTER TABLE `category_translations`
+  ADD CONSTRAINT `category_translations_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `category_translations_locale_id_foreign` FOREIGN KEY (`locale_id`) REFERENCES `locales` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `channels`
+--
+ALTER TABLE `channels`
+  ADD CONSTRAINT `channels_base_currency_id_foreign` FOREIGN KEY (`base_currency_id`) REFERENCES `currencies` (`id`),
+  ADD CONSTRAINT `channels_default_locale_id_foreign` FOREIGN KEY (`default_locale_id`) REFERENCES `locales` (`id`),
+  ADD CONSTRAINT `channels_root_category_id_foreign` FOREIGN KEY (`root_category_id`) REFERENCES `categories` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `channel_currencies`
+--
+ALTER TABLE `channel_currencies`
+  ADD CONSTRAINT `channel_currencies_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `channel_currencies_currency_id_foreign` FOREIGN KEY (`currency_id`) REFERENCES `currencies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `channel_inventory_sources`
+--
+ALTER TABLE `channel_inventory_sources`
+  ADD CONSTRAINT `channel_inventory_sources_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `channel_inventory_sources_inventory_source_id_foreign` FOREIGN KEY (`inventory_source_id`) REFERENCES `inventory_sources` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `channel_locales`
+--
+ALTER TABLE `channel_locales`
+  ADD CONSTRAINT `channel_locales_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `channel_locales_locale_id_foreign` FOREIGN KEY (`locale_id`) REFERENCES `locales` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `channel_translations`
+--
+ALTER TABLE `channel_translations`
+  ADD CONSTRAINT `channel_translations_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_page_channels`
+--
+ALTER TABLE `cms_page_channels`
+  ADD CONSTRAINT `cms_page_channels_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `cms_page_channels_cms_page_id_foreign` FOREIGN KEY (`cms_page_id`) REFERENCES `cms_pages` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `cms_page_translations`
+--
+ALTER TABLE `cms_page_translations`
+  ADD CONSTRAINT `cms_page_translations_cms_page_id_foreign` FOREIGN KEY (`cms_page_id`) REFERENCES `cms_pages` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `country_states`
+--
+ALTER TABLE `country_states`
+  ADD CONSTRAINT `country_states_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `country_state_translations`
+--
+ALTER TABLE `country_state_translations`
+  ADD CONSTRAINT `country_state_translations_country_state_id_foreign` FOREIGN KEY (`country_state_id`) REFERENCES `country_states` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `country_translations`
+--
+ALTER TABLE `country_translations`
+  ADD CONSTRAINT `country_translations_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `currency_exchange_rates`
+--
+ALTER TABLE `currency_exchange_rates`
+  ADD CONSTRAINT `currency_exchange_rates_target_currency_foreign` FOREIGN KEY (`target_currency`) REFERENCES `currencies` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `customers`
+--
+ALTER TABLE `customers`
+  ADD CONSTRAINT `customers_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `customer_social_accounts`
+--
+ALTER TABLE `customer_social_accounts`
+  ADD CONSTRAINT `customer_social_accounts_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `downloadable_link_purchased`
+--
+ALTER TABLE `downloadable_link_purchased`
+  ADD CONSTRAINT `downloadable_link_purchased_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `downloadable_link_purchased_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `downloadable_link_purchased_order_item_id_foreign` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `import_products`
+--
+ALTER TABLE `import_products`
+  ADD CONSTRAINT `import_admin_foreign_attribute_family_id` FOREIGN KEY (`attribute_family_id`) REFERENCES `attribute_families` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `import_admin_foreign_data_flow_profile_id` FOREIGN KEY (`data_flow_profile_id`) REFERENCES `bulkupload_data_flow_profiles` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD CONSTRAINT `invoices_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `invoice_items`
+--
+ALTER TABLE `invoice_items`
+  ADD CONSTRAINT `invoice_items_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `invoice_items_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `invoice_items` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `marketing_campaigns`
+--
+ALTER TABLE `marketing_campaigns`
+  ADD CONSTRAINT `marketing_campaigns_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `marketing_campaigns_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `marketing_campaigns_marketing_event_id_foreign` FOREIGN KEY (`marketing_event_id`) REFERENCES `marketing_events` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `marketing_campaigns_marketing_template_id_foreign` FOREIGN KEY (`marketing_template_id`) REFERENCES `marketing_templates` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `orders_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `order_brands`
+--
+ALTER TABLE `order_brands`
+  ADD CONSTRAINT `order_brands_brand_foreign` FOREIGN KEY (`brand`) REFERENCES `attribute_options` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_brands_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_brands_order_item_id_foreign` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_brands_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_comments`
+--
+ALTER TABLE `order_comments`
+  ADD CONSTRAINT `order_comments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_items_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `order_items` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_payment`
+--
+ALTER TABLE `order_payment`
+  ADD CONSTRAINT `order_payment_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `order_transactions`
+--
+ALTER TABLE `order_transactions`
+  ADD CONSTRAINT `order_transactions_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_attribute_family_id_foreign` FOREIGN KEY (`attribute_family_id`) REFERENCES `attribute_families` (`id`),
+  ADD CONSTRAINT `products_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_attribute_values`
+--
+ALTER TABLE `product_attribute_values`
+  ADD CONSTRAINT `product_attribute_values_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_attribute_values_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_bundle_options`
+--
+ALTER TABLE `product_bundle_options`
+  ADD CONSTRAINT `product_bundle_options_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_bundle_option_products`
+--
+ALTER TABLE `product_bundle_option_products`
+  ADD CONSTRAINT `product_bundle_option_products_product_bundle_option_id_foreign` FOREIGN KEY (`product_bundle_option_id`) REFERENCES `product_bundle_options` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_bundle_option_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_bundle_option_translations`
+--
+ALTER TABLE `product_bundle_option_translations`
+  ADD CONSTRAINT `product_bundle_option_translations_option_id_foreign` FOREIGN KEY (`product_bundle_option_id`) REFERENCES `product_bundle_options` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_categories`
+--
+ALTER TABLE `product_categories`
+  ADD CONSTRAINT `product_categories_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_categories_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_cross_sells`
+--
+ALTER TABLE `product_cross_sells`
+  ADD CONSTRAINT `product_cross_sells_child_id_foreign` FOREIGN KEY (`child_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_cross_sells_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_customer_group_prices`
+--
+ALTER TABLE `product_customer_group_prices`
+  ADD CONSTRAINT `product_customer_group_prices_customer_group_id_foreign` FOREIGN KEY (`customer_group_id`) REFERENCES `customer_groups` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_customer_group_prices_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_downloadable_links`
+--
+ALTER TABLE `product_downloadable_links`
+  ADD CONSTRAINT `product_downloadable_links_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_downloadable_link_translations`
+--
+ALTER TABLE `product_downloadable_link_translations`
+  ADD CONSTRAINT `link_translations_link_id_foreign` FOREIGN KEY (`product_downloadable_link_id`) REFERENCES `product_downloadable_links` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_downloadable_samples`
+--
+ALTER TABLE `product_downloadable_samples`
+  ADD CONSTRAINT `product_downloadable_samples_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_downloadable_sample_translations`
+--
+ALTER TABLE `product_downloadable_sample_translations`
+  ADD CONSTRAINT `sample_translations_sample_id_foreign` FOREIGN KEY (`product_downloadable_sample_id`) REFERENCES `product_downloadable_samples` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_flat`
+--
+ALTER TABLE `product_flat`
+  ADD CONSTRAINT `product_flat_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `product_flat` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_flat_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_grouped_products`
+--
+ALTER TABLE `product_grouped_products`
+  ADD CONSTRAINT `product_grouped_products_associated_product_id_foreign` FOREIGN KEY (`associated_product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_grouped_products_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_images`
+--
+ALTER TABLE `product_images`
+  ADD CONSTRAINT `product_images_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_inventories`
+--
+ALTER TABLE `product_inventories`
+  ADD CONSTRAINT `product_inventories_inventory_source_id_foreign` FOREIGN KEY (`inventory_source_id`) REFERENCES `inventory_sources` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_inventories_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_ordered_inventories`
+--
+ALTER TABLE `product_ordered_inventories`
+  ADD CONSTRAINT `product_ordered_inventories_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_ordered_inventories_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_relations`
+--
+ALTER TABLE `product_relations`
+  ADD CONSTRAINT `product_relations_child_id_foreign` FOREIGN KEY (`child_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_relations_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_reviews`
+--
+ALTER TABLE `product_reviews`
+  ADD CONSTRAINT `product_reviews_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_review_images`
+--
+ALTER TABLE `product_review_images`
+  ADD CONSTRAINT `product_review_images_review_id_foreign` FOREIGN KEY (`review_id`) REFERENCES `product_reviews` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_super_attributes`
+--
+ALTER TABLE `product_super_attributes`
+  ADD CONSTRAINT `product_super_attributes_attribute_id_foreign` FOREIGN KEY (`attribute_id`) REFERENCES `attributes` (`id`),
+  ADD CONSTRAINT `product_super_attributes_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_up_sells`
+--
+ALTER TABLE `product_up_sells`
+  ADD CONSTRAINT `product_up_sells_child_id_foreign` FOREIGN KEY (`child_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `product_up_sells_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `product_videos`
+--
+ALTER TABLE `product_videos`
+  ADD CONSTRAINT `product_videos_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `refunds`
+--
+ALTER TABLE `refunds`
+  ADD CONSTRAINT `refunds_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `refund_items`
+--
+ALTER TABLE `refund_items`
+  ADD CONSTRAINT `refund_items_order_item_id_foreign` FOREIGN KEY (`order_item_id`) REFERENCES `order_items` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `refund_items_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `refund_items` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `refund_items_refund_id_foreign` FOREIGN KEY (`refund_id`) REFERENCES `refunds` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `rma_images`
+--
+ALTER TABLE `rma_images`
+  ADD CONSTRAINT `rma_images_rma_id_foreign` FOREIGN KEY (`rma_id`) REFERENCES `rma` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `rma_items`
+--
+ALTER TABLE `rma_items`
+  ADD CONSTRAINT `rma_items_rma_id_foreign` FOREIGN KEY (`rma_id`) REFERENCES `rma` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `rma_items_rma_reason_id_foreign` FOREIGN KEY (`rma_reason_id`) REFERENCES `rma_reasons` (`id`);
+
+--
+-- Constraints for table `rma_messages`
+--
+ALTER TABLE `rma_messages`
+  ADD CONSTRAINT `rma_messages_rma_id_foreign` FOREIGN KEY (`rma_id`) REFERENCES `rma` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `shipments`
+--
+ALTER TABLE `shipments`
+  ADD CONSTRAINT `shipments_inventory_source_id_foreign` FOREIGN KEY (`inventory_source_id`) REFERENCES `inventory_sources` (`id`) ON DELETE SET NULL,
+  ADD CONSTRAINT `shipments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `shipment_items`
+--
+ALTER TABLE `shipment_items`
+  ADD CONSTRAINT `shipment_items_shipment_id_foreign` FOREIGN KEY (`shipment_id`) REFERENCES `shipments` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `sliders`
+--
+ALTER TABLE `sliders`
+  ADD CONSTRAINT `sliders_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `subscribers_list`
+--
+ALTER TABLE `subscribers_list`
+  ADD CONSTRAINT `subscribers_list_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `subscribers_list_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE SET NULL;
+
+--
+-- Constraints for table `tax_categories_tax_rates`
+--
+ALTER TABLE `tax_categories_tax_rates`
+  ADD CONSTRAINT `tax_categories_tax_rates_tax_category_id_foreign` FOREIGN KEY (`tax_category_id`) REFERENCES `tax_categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `tax_categories_tax_rates_tax_rate_id_foreign` FOREIGN KEY (`tax_rate_id`) REFERENCES `tax_rates` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `template_assign`
+--
+ALTER TABLE `template_assign`
+  ADD CONSTRAINT `template_assign_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `product_flat` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `template_assign_template_id_foreign` FOREIGN KEY (`template_id`) REFERENCES `size_charts` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `velocity_contents_translations`
+--
+ALTER TABLE `velocity_contents_translations`
+  ADD CONSTRAINT `velocity_contents_translations_content_id_foreign` FOREIGN KEY (`content_id`) REFERENCES `velocity_contents` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `velocity_customer_compare_products`
+--
+ALTER TABLE `velocity_customer_compare_products`
+  ADD CONSTRAINT `velocity_customer_compare_products_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `velocity_customer_compare_products_product_flat_id_foreign` FOREIGN KEY (`product_flat_id`) REFERENCES `product_flat` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `wishlist`
+--
+ALTER TABLE `wishlist`
+  ADD CONSTRAINT `wishlist_channel_id_foreign` FOREIGN KEY (`channel_id`) REFERENCES `channels` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `wishlist_customer_id_foreign` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `wishlist_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

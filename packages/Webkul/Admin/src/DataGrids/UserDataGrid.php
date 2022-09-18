@@ -116,6 +116,16 @@ class UserDataGrid extends DataGrid
     public function prepareActions()
     {
         $this->addAction([
+            'title'  => 'View',
+            'method' => 'GET',
+            'route'  => 'admin.vendor.view',
+            'icon'   => 'icon eye-icon',
+            'condition' => function($data) {
+                return $data->role_name == 'Vendor' ? true : false ;
+            },
+        ]);
+
+        $this->addAction([
             'title'  => 'Edit',
             'method' => 'GET',
             'route'  => 'admin.users.edit',

@@ -28,10 +28,9 @@
 
                     <input name="_method" type="hidden" value="PUT">
 
-                    <accordian title="{{ __('admin::app.account.general') }}" :active="true">
+                    <accordian title="{{ __('admin::app.account.general') }}" :active="false">
                         <div slot="body">
                             <upload-profile-image></upload-profile-image>
-
                             <div class="control-group" :class="[errors.has('name') ? 'has-error' : '']">
                                 <label for="name" class="required">{{ __('admin::app.account.name') }}</label>
                                 <input type="text" v-validate="'required'" class="control" id="name" name="name" value="{{ old('name') ?: $user->name }}"  data-vv-as="&quot;{{ __('admin::app.account.name') }}&quot;"/>
@@ -46,7 +45,7 @@
                         </div>
                     </accordian>
                     @if (auth()->guard('admin')->user()->role_id == 2)
-                        <accordian title="Store Details" :active="true">
+                        <accordian title="Store Details" :active="false">
                             <div slot="body">
                                 <div :class="[errors.has('store_name') ? 'has-error' : '']" class="control-group">
                                     <label class="required" style="text-transform:capitalize;">name</label>
@@ -146,8 +145,7 @@
                                 </div>
                             </div>
                         </accordian>
-
-                        <accordian title="Bank Details" :active="true">
+                        <accordian title="Bank Details" :active="false">
                             <div slot="body">
                                 <div class="control-group" :class="[errors.has('bank_name') ? 'has-error' : '']">
                                     <label for="bank_name" class="required">Bank Name</label>
@@ -178,7 +176,7 @@
                         </accordian>
                     @endif
 
-                    <accordian title="{{ __('admin::app.account.change-password') }}" :active="true">
+                    <accordian title="{{ __('admin::app.account.change-password') }}" :active="false">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
                                 <label for="password">{{ __('admin::app.account.password') }}</label>
@@ -212,6 +210,7 @@
 @push('scripts')
     <script type="text/x-template" id="upload-profile-image-template">
         <div class="form-group" style="margin-bottom: 40px;">
+            <label style="display:block" class="mb-15">Store Profile Image</label>
             <div class="image-upload-brick">
                 <input
                     type="file"
@@ -225,7 +224,6 @@
 
                 <img class="preview" :src="imageData" v-if="imageData.length > 0">
             </div>
-
             <div class="image-info-brick">
                 <span class="field-info">
                     {{ __('admin::app.account.upload-image-info') }}
@@ -268,7 +266,7 @@
 
             data: function() {
                 return {
-                    imageData: "{{ $user->image_url }}",
+                    imageData: "{{ asset($user->image) }}",
                 }
             },
 

@@ -22,7 +22,7 @@
                 <ul class="menu--dropdown">
                     <li v-for="(item,index) in $root.sharedRootCategories" :key="index" :class="item.children.length > 0 ? 'menu-item-has-children has-mega-menu' : ''">
                         <a :href="`/${item.slug}`" class="d-flex">
-                            <i class="far fa-star"></i>{{ item.name }}<i class="fas fa-chevron-right ml-auto"></i>
+                            <i class="far fa-star"></i>{{ item.name }}<i v-if="item.children.length > 0" class="fas fa-chevron-right ml-auto"></i>
                         </a>
                         <div class="mega-menu" v-if="item.children.length > 0">
                             <div class="mega-menu__column" v-for="(child,index1) in item.children" :key="index1">

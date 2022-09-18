@@ -5,22 +5,45 @@
 @stop
 
 @section('content')
-    <div class="content">
+    <div class="content dashboard">
             <div class="page-header">
-                <div class="page-action">
-                    <a  class="btn btn-lg btn-primary" href="{{route('admin.vendors.approve', $vendor->id)}}">
-                        Approve
-                    </a>
-                    <a  class="btn btn-lg btn-danger" style="color:white !important;" href="{{route('admin.vendors.delete.view', $vendor->id)}}">
-                        Delete
-                    </a>
-                </div>
+                <div class="page-title"><h1>View Vendor Details</h1></div>
             </div>
             <div class="page-content">
+                <div class="dashboard-stats mb-30">
+                    <div class="dashboard-card">
+                        <div class="title">Total Sale</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['total_sales']) }}
+                        </div>
+                    </div>
+    
+                    <div class="dashboard-card">
+                        <div class="title">This Month Sale</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['this_month_sales']) }}
+                        </div>
+                    </div>
+    
+                    <div class="dashboard-card">
+                        <div class="title">Total Payout Received</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['payout_received']) }}
+                        </div>
+                    </div>
+    
+                    <div class="dashboard-card">
+                        <div class="title">Total Balance</div>
+                        <div class="data">
+                            {{ core()->formatBasePrice($statistics['balance_left']) }}
+                        </div>
+                    </div>
+    
+                </div>
                 <div class="form-container">
                     @csrf()
                     <input name="_method" type="hidden" value="PUT">
-                    <accordian title="Store Details" :active="true">
+                    <accordian title="Store Details" :active="false">
                         <div slot="body">
                             <div class="control-group">
                                 <label style="text-transform:capitalize;">name</label>
@@ -146,6 +169,30 @@
                             </div>
                         </div>
                     </accordian>
+                    <accordian title="Bank Details" :active="false">
+                        <div slot="body">
+                            <div class="control-group">
+                                <label>Bank Name</label>
+                                <input class="control" type="text" readonly value="{{ $user->bank_name }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>Account Holder Name</label>
+                                <input class="control" type="text" readonly value="{{ $user->acc_name }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>Account Number</label>
+                                <input class="control" type="text" readonly value="{{ $user->acc_no }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>IFSC Code</label>
+                                <input class="control" type="text" readonly value="{{ $user->ifsc_code }}" />
+                            </div>
+                            <div class="control-group">
+                                <label>UPI ID</label>
+                                <input class="control" type="text" readonly value="{{ $user->upi_id }}" />
+                            </div>
+                        </div>
+                    </accordian>
                     <accordian title="Certificate and Images Section" :active="false">
                         <div slot="body">
                             <div class="row" style="flex-wrap:wrap;">
@@ -193,7 +240,12 @@
                                 @endif
                             </div>
                         </div>
-                    </accordian>                    
+                    </accordian>
+                    <accordian title="Vendor Payment History" :active="true">
+                        <div slot="body">
+                            <datagrid-plus src="{{ route('admin.payment-request.view',['id' => $vendor->id,'v' => true]) }}"></datagrid-plus>
+                        </div>
+                    </accordian>
                 </div>
             </div>
     </div>
