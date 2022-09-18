@@ -505,7 +505,12 @@ class Cart
         $cart->grand_total = $cart->sub_total + $cart->tax_total - $cart->discount_amount;
         $cart->base_grand_total = $cart->base_sub_total + $cart->base_tax_total - $cart->base_discount_amount;
 
+        // $cart = Cart::getCart();
+        $products = DB::table('cart_items')->where('cart_id',$cart->id)->pluck('product_id');
+        $vendor_ids = DB::table('products')->whereIn('id',$products)->pluck('user_id');
+
         if ($shipping = $cart->selected_shipping_rate) {
+
             $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
             $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
 

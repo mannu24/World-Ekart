@@ -11,6 +11,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class OnepageController extends Controller
 {
@@ -203,15 +204,50 @@ class OnepageController extends Controller
         $this->validateOrder();
 
         $cart = Cart::getCart();
-
+        $products = DB::table('cart_items')->where('cart_id',$cart->id)->pluck('product_id');
+        $vendor_ids = DB::table('products')->whereIn('id',$products)->pluck('user_id');
+        
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
                 'success'      => true,
                 'redirect_url' => $redirectUrl,
             ]);
         }
+        $step_data = Cart::prepareDataForOrder();
+        $mul_ord_data = [];
+        foreach ($vendor_ids as $key => $vid) {
+            $mul_ord_data[$vid] = $step_data;
+            $mul_ord_data[$vid]['total_item_count'] = 0;
+            $mul_ord_data[$vid]['total_qty_ordered'] = 0;
+            $mul_ord_data[$vid]['grand_total'] = (float) $step_data['shipping_amount'];
+            $mul_ord_data[$vid]['base_grand_total'] = (float) $step_data['shipping_amount'];
+            $mul_ord_data[$vid]['sub_total'] = 0;
+            $mul_ord_data[$vid]['base_sub_total'] = 0;
+            $mul_ord_data[$vid]['items'] = [];
 
-        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+            foreach ($step_data['items'] as $key => $sdi) {
+                if($sdi['product']->user_id == $vid){
+
+                    $mul_ord_data[$vid]['total_item_count'] = $mul_ord_data[$vid]['total_item_count'] + $sdi['qty_ordered'];
+
+                    $mul_ord_data[$vid]['total_qty_ordered'] = $mul_ord_data[$vid]['total_qty_ordered'] + $sdi['qty_ordered'];
+
+                    $mul_ord_data[$vid]['grand_total'] = $mul_ord_data[$vid]['grand_total'] + (float)$sdi['total'];
+
+                    $mul_ord_data[$vid]['base_grand_total'] = $mul_ord_data[$vid]['base_grand_total'] + (float)$sdi['total'];
+
+                    $mul_ord_data[$vid]['sub_total'] = $mul_ord_data[$vid]['sub_total'] + (float)$sdi['total'];
+
+                    $mul_ord_data[$vid]['base_sub_total'] = $mul_ord_data[$vid]['base_sub_total'] + (float)$sdi['total'];
+                    
+                    $mul_ord_data[$vid]['items'][] = $sdi; 
+                }
+            }
+        }
+        // dd($mul_ord_data);
+        foreach ($mul_ord_data as $key => $value) {
+            $order = $this->orderRepository->create($value);
+        }
 
         Cart::deActivateCart();
 
