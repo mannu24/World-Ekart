@@ -1100,38 +1100,6 @@
       'route' => 'suggestion.admin.index',
       'sort' => 2,
     ),
-    157 => 
-    array (
-      'key' => 'catalog.bulkupload',
-      'name' => 'bulkupload::app.admin.bulk-upload.manage-bulk-upload',
-      'route' => 'admin.dataflow-profile.index',
-      'sort' => 5,
-      'icon-class' => '',
-    ),
-    158 => 
-    array (
-      'key' => 'catalog.bulkupload.data-flow-profile',
-      'name' => 'bulkupload::app.admin.bulk-upload.data-flow-profile.index',
-      'route' => 'admin.dataflow-profile.index',
-      'sort' => 1,
-      'icon-class' => '',
-    ),
-    159 => 
-    array (
-      'key' => 'catalog.bulkupload.upload-files',
-      'name' => 'bulkupload::app.admin.bulk-upload.upload-files.index',
-      'route' => 'admin.bulk-upload.index',
-      'sort' => 2,
-      'icon-class' => '',
-    ),
-    160 => 
-    array (
-      'key' => 'catalog.bulkupload.run-profile',
-      'name' => 'bulkupload::app.admin.bulk-upload.run-profile.index',
-      'route' => 'admin.run-profile.index',
-      'sort' => 3,
-      'icon-class' => '',
-    ),
   ),
   'app' => 
   array (
@@ -1357,7 +1325,7 @@
   'breadcrumbs' => 
   array (
     'view' => 'breadcrumbs::bootstrap5',
-    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\routes/breadcrumbs.php',
+    'files' => 'C:\\xampp\\htdocs\\World_Ekart\\routes/breadcrumbs.php',
     'unnamed-route-exception' => true,
     'missing-route-bound-breadcrumb-exception' => true,
     'invalid-named-breadcrumb-exception' => true,
@@ -1418,7 +1386,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -4272,7 +4240,7 @@
     array (
       'enabled' => true,
       'driver' => 'file',
-      'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\debugbar',
+      'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\debugbar',
       'connection' => NULL,
       'provider' => '',
       'hostname' => '127.0.0.1',
@@ -4376,10 +4344,10 @@
     'convert_entities' => true,
     'defines' => 
     array (
-      'font_dir' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
-      'font_cache' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
-      'temp_dir' => 'C:\\Users\\coolp\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
+      'font_dir' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
+      'font_cache' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
+      'temp_dir' => 'C:\\Users\\Manu24\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\xampp\\htdocs\\World_Ekart',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -4498,7 +4466,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/laravel-excel',
+      'local_path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -4513,17 +4481,17 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app',
       ),
       'private' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/private',
+        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/private',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
         'url' => 'http://localhost:8000/storage',
         'visibility' => 'public',
       ),
@@ -4625,7 +4593,7 @@
     array (
     ),
     'enable_runnable_solutions' => true,
-    'remote_sites_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
+    'remote_sites_path' => 'C:\\xampp\\htdocs\\World_Ekart',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
@@ -4639,8 +4607,8 @@
     'route' => 'cache',
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
-      1 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\public\\storage',
+      0 => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
+      1 => 'C:\\xampp\\htdocs\\World_Ekart\\public\\storage',
     ),
     'templates' => 
     array (
@@ -4703,13 +4671,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 7,
       ),
@@ -4809,7 +4777,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -5272,6 +5240,30 @@
         'sort' => 5,
         'icon-class' => '',
       ),
+      57 => 
+      array (
+        'key' => 'catalog.bulkupload.data-flow-profile',
+        'name' => 'bulkupload::app.admin.bulk-upload.data-flow-profile.index',
+        'route' => 'admin.dataflow-profile.index',
+        'sort' => 1,
+        'icon-class' => '',
+      ),
+      58 => 
+      array (
+        'key' => 'catalog.bulkupload.upload-files',
+        'name' => 'bulkupload::app.admin.bulk-upload.upload-files.index',
+        'route' => 'admin.bulk-upload.index',
+        'sort' => 2,
+        'icon-class' => '',
+      ),
+      59 => 
+      array (
+        'key' => 'catalog.bulkupload.run-profile',
+        'name' => 'bulkupload::app.admin.bulk-upload.run-profile.index',
+        'route' => 'admin.run-profile.index',
+        'sort' => 3,
+        'icon-class' => '',
+      ),
     ),
     'customer' => 
     array (
@@ -5534,9 +5526,9 @@
     ),
     'generator' => 
     array (
-      'basePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
+      'basePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
       'rootNamespace' => 'App\\',
-      'stubsOverridePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
+      'stubsOverridePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
       'paths' => 
       array (
         'models' => 'Entities',
@@ -5671,7 +5663,7 @@
     'lifetime' => '120',
     'expire_on_close' => true,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/sessions',
     'connection' => 'session',
     'table' => 'sessions',
     'store' => NULL,
@@ -5777,9 +5769,9 @@
     'tracer' => false,
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework\\views',
   ),
   'product_types' => 
   array (

@@ -122,13 +122,11 @@
                                                 <div class="ps-block__header">
                                                     <p> Subtotal <span> {{ core()->currency($cart->base_sub_total) }}</span> </p>
                                                 </div>
-                                                @if ($cart->selected_shipping_rate)
                                                     <div class="ps-block__header">
                                                         <p>{{ __('shop::app.checkout.total.delivery-charges') }}
-                                                            <span> {{ core()->currency($cart->selected_shipping_rate->base_price) }}</span>
+                                                            <span> {{ core()->currency($cart->total_delivery) }}</span>
                                                         </p>
                                                     </div>
-                                                @endif
                                                 @if ($cart->base_tax_total)
                                                     @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($cart, true) as $taxRate => $baseTaxAmount )
                                                     <div class="ps-block__header">

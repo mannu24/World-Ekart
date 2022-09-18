@@ -33,6 +33,7 @@ use Webkul\Product\Repositories\SearchRepository;
      */
     public function index()
     {
+        // dd(request()->all());
         $results = $this->searchRepository->search(request()->all());
 
         return view($this->_config['view'])->with('results', $results->count() ? $results : null);

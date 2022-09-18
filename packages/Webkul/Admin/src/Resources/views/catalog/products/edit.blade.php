@@ -125,6 +125,17 @@
                     <p style="display:none;">{{$c_count = 0}}</p>
                     @endif
 
+                    @if($d_count==1)
+                    <div class="control-group" :class="[errors.has('delivery_charge') ? 'has-error' : '']">
+                        <label for="delivery_charge" class="required">Delivery Charge</label>
+
+                        <input type="text" class="control" v-validate="'required'" id="delivery_charge" name="delivery_charge"  value="{{ $product->delivery_charge }}">
+
+                        <span class="control-error" v-if="errors.has('delivery_charge')">@{{ errors.first('delivery_charge') }}</span>
+                    </div>
+                    <p style="display:none;">{{$d_count = 0}}</p>
+                    @endif
+
                     <?php
                                         if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
                                             continue;

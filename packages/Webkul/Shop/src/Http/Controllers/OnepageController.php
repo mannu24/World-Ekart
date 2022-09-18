@@ -11,6 +11,7 @@ use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class OnepageController extends Controller
 {
@@ -203,15 +204,64 @@ class OnepageController extends Controller
         $this->validateOrder();
 
         $cart = Cart::getCart();
-
+        $products = DB::table('cart_items')->where('cart_id',$cart->id)->pluck('product_id');
+        $vendor_ids = DB::table('products')->whereIn('id',$products)->pluck('user_id');
+        
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
                 'success'      => true,
                 'redirect_url' => $redirectUrl,
             ]);
         }
+        $step_data = Cart::prepareDataForOrder();
+        $mul_ord_data = [];
+        foreach ($vendor_ids as $key => $vid) {
+            $mul_ord_data[$vid] = $step_data;
+            $mul_ord_data[$vid]['total_item_count'] = 0;
+            $mul_ord_data[$vid]['total_qty_ordered'] = 0;
+            $mul_ord_data[$vid]['grand_total'] = 0 ;
+            $mul_ord_data[$vid]['base_grand_total'] = 0;
+            $mul_ord_data[$vid]['sub_total'] = 0;
+            $mul_ord_data[$vid]['base_sub_total'] = 0;
+            $mul_ord_data[$vid]['items'] = [];
 
-        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+            foreach ($step_data['items'] as $key => $sdi) {
+                if($sdi['product']->user_id == $vid){
+
+                    $mul_ord_data[$vid]['total_item_count'] = $mul_ord_data[$vid]['total_item_count'] + $sdi['qty_ordered'];
+
+                    $mul_ord_data[$vid]['total_qty_ordered'] = $mul_ord_data[$vid]['total_qty_ordered'] + $sdi['qty_ordered'];
+
+                    $mul_ord_data[$vid]['grand_total'] = $mul_ord_data[$vid]['grand_total'] + (float)$sdi['total'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
+
+                    $mul_ord_data[$vid]['base_grand_total'] = $mul_ord_data[$vid]['base_grand_total'] + (float)$sdi['total'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
+
+                    $mul_ord_data[$vid]['sub_total'] = $mul_ord_data[$vid]['sub_total'] + (float)$sdi['total'];
+
+                    $mul_ord_data[$vid]['base_sub_total'] = $mul_ord_data[$vid]['base_sub_total'] + (float)$sdi['total'];
+
+                    $mul_ord_data[$vid]['user_id'] = $vid;
+
+                    $mul_ord_data[$vid]['shipping_amount'] = $mul_ord_data[$vid]['shipping_amount'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
+
+                    $mul_ord_data[$vid]['base_shipping_amount'] = $mul_ord_data[$vid]['base_shipping_amount'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
+
+                    $mul_ord_data[$vid]['shipping_invoiced'] = $mul_ord_data[$vid]['shshipping_invoicedipping_amount'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
+
+                    $mul_ord_data[$vid]['base_shipping_invoiced'] = $mul_ord_data[$vid]['base_shipping_invoiced'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
+
+
+                    $mul_ord_data[$vid]['user_id'] = $vid;
+
+                    
+                    $mul_ord_data[$vid]['items'][] = $sdi; 
+                }
+            }
+        }
+        // dd($mul_ord_data);
+        foreach ($mul_ord_data as $key => $value) {
+            $order = $this->orderRepository->create($value);
+        }
 
         Cart::deActivateCart();
 
@@ -236,6 +286,12 @@ class OnepageController extends Controller
         }
 
         return view($this->_config['view'], compact('order'));
+    }
+
+    public function error($response)
+    {
+        $msg = session('error');
+        return view($this->_config['view'], compact('msg'));
     }
 
     /**
@@ -391,15 +447,13 @@ class OnepageController extends Controller
 
     public function cashfree_pay()
     {
-        $domain = 'http://localhost:8000';
-        // $domain = env('APP_URL');
-        // dd($domain);
+        // $domain = 'http://localhost:8000';
+        $domain = config()['app']['url'];
         $cart = Cart::getCart();
         $billingAddress = $cart->billing_address;
-        $shipping_rate = $cart->selected_shipping_rate ? $cart->selected_shipping_rate->price : 0; // shipping rate
+        $shipping_rate = $cart->total_delivery ; // shipping rate
         $discount_amount = $cart->discount_amount; // discount amount
         $total_amount =  ($cart->sub_total + $cart->tax_total + $shipping_rate) - $discount_amount; // total amount
-
         // $pay_data = Payment::getSupportedPaymentMethods();
         // dd($pay_data);
         if(core()->getConfigData('sales.paymentmethods.cashfree.test_mode') == true){
@@ -422,7 +476,7 @@ class OnepageController extends Controller
             "customerPhone" => $billingAddress->phone,
             "customerEmail" => $billingAddress->email,
             "returnUrl" => $domain.'/cashfree-save',
-            "notifyUrl" => '',
+            "notifyUrl" => $domain.'/checkout/onepage',
         );
         ksort($postData);
         $signatureData = "";
@@ -442,8 +496,11 @@ class OnepageController extends Controller
     }
 
     public function cashfree_save(){
-        // dd('Success');
-        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+        // dd(request()->all());
+        $response = request()->all();
+        if($response['txStatus'] == 'SUCCESS'){
+
+            $order = $this->orderRepository->create(Cart::prepareDataForOrder());
             $this->orderRepository->update(['status' => 'processing'], $order->id);
             if ($order->canInvoice()) {
                 $this->invoiceRepository->create($this->prepareInvoiceData($order));
@@ -452,6 +509,13 @@ class OnepageController extends Controller
             session()->flash('order', $order);
             // Order and prepare invoice
             return redirect()->route('shop.checkout.success');
+        }
+        else{
+            session()->flash('error',$response['txMsg']);
+            // Order and prepare invoice
+            return redirect()->route('shop.checkout.error');
+        }
+
     }
 
     protected function prepareInvoiceData($order)
