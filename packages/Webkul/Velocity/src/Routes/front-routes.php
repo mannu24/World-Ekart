@@ -52,7 +52,7 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         Route::get('/product-details/{slug}', [ShopController::class, 'fetchProductDetails'])
             ->name('velocity.shop.product');
 
-        Route::get('/categorysearch', [ShopController::class, 'search'])
+        Route::get('/ekart-search', [ShopController::class, 'search'])
             ->name('velocity.search.index')
             ->defaults('_config', [
                 'view' => 'shop::search.search'

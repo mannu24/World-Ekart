@@ -73,7 +73,11 @@ Route::group(['middleware' => ['web', 'locale', 'theme', 'currency']], function 
         'view' => 'shop::checkout.success'
     ])->name('shop.checkout.success');
 
-    Route::post('/cashfree-pay', [OnepageController::class, 'cashfree_pay'])->name('cashfree');
+    Route::get('/checkout/error', [OnepageController::class, 'error'])->defaults('_config', [
+        'view' => 'shop::checkout.error'
+    ])->name('shop.checkout.error');
+
+    Route::post('/online/payment', [OnepageController::class, 'cashfree_pay'])->name('cashfree');
     Route::post('/cashfree-save', [OnepageController::class, 'cashfree_save'])->name('cashfree_save');
 
 

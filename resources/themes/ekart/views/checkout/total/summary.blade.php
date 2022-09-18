@@ -11,14 +11,12 @@
                     <small>{{ core()->currency($cart->base_sub_total) }}</small>
                 </figcaption>
             </figure>
-            @if ($cart->selected_shipping_rate)
                 <figure>
                     <figcaption>
                         <strong>{{ __('shop::app.checkout.total.delivery-charges') }}</strong>
-                        <small>{{ core()->currency($cart->selected_shipping_rate->base_price) }}</small>
+                        <small>{{ core()->currency($cart->total_delivery) }}</small>
                     </figcaption>
                 </figure>
-            @endif
             @if ($cart->base_tax_total)
                 @foreach (Webkul\Tax\Helpers\Tax::getTaxRatesWithAmount($cart, true) as $taxRate => $baseTaxAmount)
                     <figure>

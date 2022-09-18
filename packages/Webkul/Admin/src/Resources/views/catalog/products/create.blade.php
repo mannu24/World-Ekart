@@ -133,6 +133,20 @@
                         <span class="control-error" v-if="errors.has('country')">@{{ errors.first('country') }}</span>
                     </div>
 
+                    <div class="control-group" :class="[errors.has('delivery_charge') ? 'has-error' : '']">
+                        <label for="delivery_charge" class="required">Delivery Charge</label>
+
+                        <input type="text" v-validate="{ required: true}"
+                            class="control" id="delivery_charge" name="delivery_charge" value="{{ request()->input('delivery_charge') ?: old('delivery_charge') }}"
+                            data-vv-as="&quot;{{ __('admin::app.catalog.products.delivery_charge') }}&quot;" />
+
+                        @if ($familyId)
+                        <input type="hidden" name="delivery_charge" value="{{ $familyId }}" />
+                        @endif
+
+                        <span class="control-error" v-if="errors.has('delivery_charge')">@{{ errors.first('delivery_charge') }}</span>
+                    </div>
+
                     {!! view_render_event('bagisto.admin.catalog.product.create_form_accordian.general.controls.after')
                     !!}
                 </div>

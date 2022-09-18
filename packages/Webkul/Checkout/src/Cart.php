@@ -20,6 +20,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Tax\Helpers\Tax;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
+use Illuminate\Support\Facades\DB;
 
 class Cart
 {
@@ -490,14 +491,17 @@ class Cart
         $cart->sub_total = $cart->base_sub_total = 0;
         $cart->tax_total = $cart->base_tax_total = 0;
         $cart->discount_amount = $cart->base_discount_amount = 0;
-
+        $total_delivery = 0;
         foreach ($cart->items as $item) {
+            $total_delivery += ($item->product->delivery_charge * $item->quantity);
+
             $cart->discount_amount += $item->discount_amount;
             $cart->base_discount_amount += $item->base_discount_amount;
 
             $cart->sub_total = (float) $cart->sub_total + $item->total;
             $cart->base_sub_total = (float) $cart->base_sub_total + $item->base_total;
         }
+        $cart->total_delivery = $total_delivery;
 
         $cart->tax_total = Tax::getTaxTotal($cart, false);
         $cart->base_tax_total = Tax::getTaxTotal($cart, true);
@@ -509,14 +513,14 @@ class Cart
         $products = DB::table('cart_items')->where('cart_id',$cart->id)->pluck('product_id');
         $vendor_ids = DB::table('products')->whereIn('id',$products)->pluck('user_id');
 
-        if ($shipping = $cart->selected_shipping_rate) {
+        // if ($shipping = $cart->selected_shipping_rate) {
 
-            $cart->grand_total = (float) $cart->grand_total + $shipping->price - $shipping->discount_amount;
-            $cart->base_grand_total = (float) $cart->base_grand_total + $shipping->base_price - $shipping->base_discount_amount;
+            $cart->grand_total = (float) $cart->grand_total + $total_delivery;
+            $cart->base_grand_total = (float) $cart->base_grand_total + $total_delivery ;
 
-            $cart->discount_amount += $shipping->discount_amount;
-            $cart->base_discount_amount += $shipping->base_discount_amount;
-        }
+            // $cart->discount_amount += $shipping->discount_amount;
+            // $cart->base_discount_amount += $shipping->base_discount_amount;
+        // }
 
         $cart = $this->finalizeCartTotals($cart);
 

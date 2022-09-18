@@ -217,7 +217,8 @@ class ProductController extends Controller
         $countries = DB::table('countries')->orderBy('name','ASC')->get();
         // return $product;
         $c_count = 1;
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources','countries','c_count'));
+        $d_count = 1;
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources','countries','c_count','d_count'));
     }
 
     /**

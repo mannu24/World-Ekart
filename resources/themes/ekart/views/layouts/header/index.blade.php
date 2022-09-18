@@ -12,7 +12,7 @@
                 <mega-menu :mobile="false" :vertical="true"></mega-menu>
             </div>
             <div class="header__center">
-                <searchbar-component route="{{ route('shop.search.index') }}"></searchbar-component>
+                <searchbar-component route="{{ route('velocity.search.index') }}"></searchbar-component>
             </div>
             <div class="header__right">
                 <div class="header__actions">
