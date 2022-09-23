@@ -30,7 +30,7 @@
             </div>
             <div class="ps-cart__footer" v-if="cartItems.length != 0">
                 <h3> {{ subtotalText }}:
-                    <strong>{{ isTaxInclusive == '1' ? cartInformation.base_grand_total : cartInformation.base_sub_total }}</strong>
+                    <strong>{{ isTaxInclusive == '1' ? cartInformation.base_sub_total : cartInformation.base_sub_total }}</strong>
                 </h3>
                 <figure>
                     <a class="ps-btn" :href="viewCartRoute">{{ viewCartText }}</a>

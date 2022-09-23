@@ -16,13 +16,6 @@
     array (
     ),
   ),
-  'bagisto/bagisto-dhl-shipping' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Webkul\\DHLShipping\\Providers\\DHLShippingServiceProvider',
-    ),
-  ),
   'bagisto/bagisto-package-generator' => 
   array (
     'providers' => 

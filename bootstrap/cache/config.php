@@ -1100,6 +1100,38 @@
       'route' => 'suggestion.admin.index',
       'sort' => 2,
     ),
+    157 => 
+    array (
+      'key' => 'catalog.bulkupload',
+      'name' => 'bulkupload::app.admin.bulk-upload.manage-bulk-upload',
+      'route' => 'admin.dataflow-profile.index',
+      'sort' => 5,
+      'icon-class' => '',
+    ),
+    158 => 
+    array (
+      'key' => 'catalog.bulkupload.data-flow-profile',
+      'name' => 'bulkupload::app.admin.bulk-upload.data-flow-profile.index',
+      'route' => 'admin.dataflow-profile.index',
+      'sort' => 1,
+      'icon-class' => '',
+    ),
+    159 => 
+    array (
+      'key' => 'catalog.bulkupload.upload-files',
+      'name' => 'bulkupload::app.admin.bulk-upload.upload-files.index',
+      'route' => 'admin.bulk-upload.index',
+      'sort' => 2,
+      'icon-class' => '',
+    ),
+    160 => 
+    array (
+      'key' => 'catalog.bulkupload.run-profile',
+      'name' => 'bulkupload::app.admin.bulk-upload.run-profile.index',
+      'route' => 'admin.run-profile.index',
+      'sort' => 3,
+      'icon-class' => '',
+    ),
   ),
   'app' => 
   array (
@@ -1325,7 +1357,7 @@
   'breadcrumbs' => 
   array (
     'view' => 'breadcrumbs::bootstrap5',
-    'files' => 'C:\\xampp\\htdocs\\World_Ekart\\routes/breadcrumbs.php',
+    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\routes/breadcrumbs.php',
     'unnamed-route-exception' => true,
     'missing-route-bound-breadcrumb-exception' => true,
     'invalid-named-breadcrumb-exception' => true,
@@ -1386,7 +1418,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -1438,16 +1470,6 @@
       'active' => true,
       'default_rate' => '0',
       'class' => 'Webkul\\Shipping\\Carriers\\Free',
-    ),
-    'dhl' => 
-    array (
-      'code' => 'dhl',
-      'title' => 'DHL Shipping',
-      'description' => 'DHL Shipping',
-      'active' => true,
-      'default_rate' => '15',
-      'type' => 'per_unit',
-      'class' => 'Webkul\\DHLShipping\\Carriers\\Dhl',
     ),
   ),
   'concord' => 
@@ -2406,99 +2428,11 @@
     ),
     22 => 
     array (
-      'key' => 'sales.shipping',
-      'name' => 'admin::app.admin.system.shipping',
-      'sort' => 1,
-    ),
-    23 => 
-    array (
-      'key' => 'sales.shipping.origin',
-      'name' => 'admin::app.admin.system.origin',
-      'sort' => 0,
-      'fields' => 
-      array (
-        0 => 
-        array (
-          'name' => 'country',
-          'title' => 'admin::app.admin.system.country',
-          'type' => 'country',
-          'validation' => 'required',
-          'channel_based' => true,
-          'locale_based' => true,
-        ),
-        1 => 
-        array (
-          'name' => 'state',
-          'title' => 'admin::app.admin.system.state',
-          'type' => 'state',
-          'validation' => 'required',
-          'channel_based' => true,
-          'locale_based' => true,
-        ),
-        2 => 
-        array (
-          'name' => 'city',
-          'title' => 'admin::app.admin.system.city',
-          'type' => 'text',
-          'validation' => 'required',
-          'channel_based' => true,
-          'locale_based' => false,
-        ),
-        3 => 
-        array (
-          'name' => 'address1',
-          'title' => 'admin::app.admin.system.street-address',
-          'type' => 'text',
-          'validation' => 'required',
-          'channel_based' => true,
-          'locale_based' => false,
-        ),
-        4 => 
-        array (
-          'name' => 'zipcode',
-          'title' => 'admin::app.admin.system.zip',
-          'type' => 'text',
-          'validation' => 'required',
-          'channel_based' => true,
-          'locale_based' => false,
-        ),
-        5 => 
-        array (
-          'name' => 'store_name',
-          'title' => 'admin::app.admin.system.store-name',
-          'type' => 'text',
-          'channel_based' => true,
-        ),
-        6 => 
-        array (
-          'name' => 'vat_number',
-          'title' => 'admin::app.admin.system.vat-number',
-          'type' => 'text',
-          'channel_based' => true,
-        ),
-        7 => 
-        array (
-          'name' => 'contact',
-          'title' => 'admin::app.admin.system.contact-number',
-          'type' => 'text',
-          'channel_based' => true,
-        ),
-        8 => 
-        array (
-          'name' => 'bank_details',
-          'title' => 'admin::app.admin.system.bank-details',
-          'type' => 'textarea',
-          'channel_based' => true,
-        ),
-      ),
-    ),
-    24 => 
-    array (
       'key' => 'sales.carriers',
       'name' => 'admin::app.admin.system.shipping-methods',
       'sort' => 2,
     ),
-    25 => 
+    23 => 
     array (
       'key' => 'sales.carriers.free',
       'name' => 'admin::app.admin.system.free-shipping',
@@ -2534,7 +2468,7 @@
         ),
       ),
     ),
-    26 => 
+    24 => 
     array (
       'key' => 'sales.carriers.flatrate',
       'name' => 'admin::app.admin.system.flate-rate-shipping',
@@ -2599,13 +2533,13 @@
         ),
       ),
     ),
-    27 => 
+    25 => 
     array (
       'key' => 'customer.captcha',
       'name' => 'customer::app.admin.system.captcha.title',
       'sort' => 2,
     ),
-    28 => 
+    26 => 
     array (
       'key' => 'customer.captcha.credentials',
       'name' => 'customer::app.admin.system.captcha.credentials',
@@ -2635,7 +2569,7 @@
         ),
       ),
     ),
-    29 => 
+    27 => 
     array (
       'key' => 'general.content.shop',
       'name' => 'shop::app.products.settings',
@@ -2668,7 +2602,7 @@
         ),
       ),
     ),
-    30 => 
+    28 => 
     array (
       'key' => 'sales.paymentmethods.paypal_standard',
       'name' => 'admin::app.admin.system.paypal-standard',
@@ -2748,19 +2682,19 @@
         ),
       ),
     ),
-    31 => 
+    29 => 
     array (
       'key' => 'general',
       'name' => 'admin::app.admin.system.general',
       'sort' => 1,
     ),
-    32 => 
+    30 => 
     array (
       'key' => 'general.general',
       'name' => 'admin::app.admin.system.general',
       'sort' => 1,
     ),
-    33 => 
+    31 => 
     array (
       'key' => 'general.general.locale_options',
       'name' => 'admin::app.admin.system.locale-options',
@@ -2789,13 +2723,13 @@
         ),
       ),
     ),
-    34 => 
+    32 => 
     array (
       'key' => 'general.content',
       'name' => 'admin::app.admin.system.content',
       'sort' => 2,
     ),
-    35 => 
+    33 => 
     array (
       'key' => 'general.content.footer',
       'name' => 'admin::app.admin.system.footer',
@@ -2820,7 +2754,7 @@
         ),
       ),
     ),
-    36 => 
+    34 => 
     array (
       'key' => 'general.content.custom_scripts',
       'name' => 'admin::app.admin.system.custom-scripts',
@@ -2845,13 +2779,13 @@
         ),
       ),
     ),
-    37 => 
+    35 => 
     array (
       'key' => 'general.design',
       'name' => 'admin::app.admin.system.design',
       'sort' => 3,
     ),
-    38 => 
+    36 => 
     array (
       'key' => 'general.design.admin_logo',
       'name' => 'admin::app.admin.system.admin-logo',
@@ -2876,19 +2810,19 @@
         ),
       ),
     ),
-    39 => 
+    37 => 
     array (
       'key' => 'catalog',
       'name' => 'admin::app.admin.system.catalog',
       'sort' => 2,
     ),
-    40 => 
+    38 => 
     array (
       'key' => 'catalog.products',
       'name' => 'admin::app.admin.system.products',
       'sort' => 2,
     ),
-    41 => 
+    39 => 
     array (
       'key' => 'catalog.products.guest-checkout',
       'name' => 'admin::app.admin.system.guest-checkout',
@@ -2903,7 +2837,7 @@
         ),
       ),
     ),
-    42 => 
+    40 => 
     array (
       'key' => 'catalog.products.homepage',
       'name' => 'admin::app.admin.system.homepage',
@@ -2932,7 +2866,7 @@
         ),
       ),
     ),
-    43 => 
+    41 => 
     array (
       'key' => 'catalog.products.storefront',
       'name' => 'admin::app.admin.system.storefront',
@@ -3015,7 +2949,7 @@
         ),
       ),
     ),
-    44 => 
+    42 => 
     array (
       'key' => 'catalog.products.cache-small-image',
       'name' => 'admin::app.admin.system.cache-small-image',
@@ -3036,7 +2970,7 @@
         ),
       ),
     ),
-    45 => 
+    43 => 
     array (
       'key' => 'catalog.products.cache-medium-image',
       'name' => 'admin::app.admin.system.cache-medium-image',
@@ -3057,7 +2991,7 @@
         ),
       ),
     ),
-    46 => 
+    44 => 
     array (
       'key' => 'catalog.products.cache-large-image',
       'name' => 'admin::app.admin.system.cache-large-image',
@@ -3078,7 +3012,7 @@
         ),
       ),
     ),
-    47 => 
+    45 => 
     array (
       'key' => 'catalog.products.review',
       'name' => 'admin::app.admin.system.review',
@@ -3093,7 +3027,7 @@
         ),
       ),
     ),
-    48 => 
+    46 => 
     array (
       'key' => 'catalog.products.attribute',
       'name' => 'admin::app.admin.system.attribute',
@@ -3114,13 +3048,13 @@
         ),
       ),
     ),
-    49 => 
+    47 => 
     array (
       'key' => 'catalog.inventory',
       'name' => 'admin::app.admin.system.inventory',
       'sort' => 1,
     ),
-    50 => 
+    48 => 
     array (
       'key' => 'catalog.inventory.stock_options',
       'name' => 'admin::app.admin.system.stock-options',
@@ -3136,13 +3070,13 @@
         ),
       ),
     ),
-    51 => 
+    49 => 
     array (
       'key' => 'catalog.rich_snippets',
       'name' => 'admin::app.admin.system.rich-snippets',
       'sort' => 3,
     ),
-    52 => 
+    50 => 
     array (
       'key' => 'catalog.rich_snippets.products',
       'name' => 'admin::app.admin.system.products',
@@ -3199,7 +3133,7 @@
         ),
       ),
     ),
-    53 => 
+    51 => 
     array (
       'key' => 'catalog.rich_snippets.categories',
       'name' => 'admin::app.admin.system.categories',
@@ -3220,19 +3154,19 @@
         ),
       ),
     ),
-    54 => 
+    52 => 
     array (
       'key' => 'customer',
       'name' => 'admin::app.admin.system.customer',
       'sort' => 3,
     ),
-    55 => 
+    53 => 
     array (
       'key' => 'customer.address',
       'name' => 'admin::app.admin.system.address',
       'sort' => 1,
     ),
-    56 => 
+    54 => 
     array (
       'key' => 'customer.address.requirements',
       'name' => 'admin::app.admin.system.requirements',
@@ -3265,7 +3199,7 @@
         ),
       ),
     ),
-    57 => 
+    55 => 
     array (
       'key' => 'customer.address.information',
       'name' => 'Information',
@@ -3282,13 +3216,13 @@
         ),
       ),
     ),
-    58 => 
+    56 => 
     array (
       'key' => 'customer.settings',
       'name' => 'admin::app.admin.system.settings',
       'sort' => 3,
     ),
-    59 => 
+    57 => 
     array (
       'key' => 'customer.settings.wishlist',
       'name' => 'admin::app.admin.system.wishlist',
@@ -3303,7 +3237,7 @@
         ),
       ),
     ),
-    60 => 
+    58 => 
     array (
       'key' => 'customer.settings.newsletter',
       'name' => 'admin::app.admin.system.newsletter',
@@ -3318,7 +3252,7 @@
         ),
       ),
     ),
-    61 => 
+    59 => 
     array (
       'key' => 'customer.settings.email',
       'name' => 'admin::app.admin.system.email',
@@ -3333,19 +3267,19 @@
         ),
       ),
     ),
-    62 => 
+    60 => 
     array (
       'key' => 'emails',
       'name' => 'admin::app.admin.emails.email',
       'sort' => 4,
     ),
-    63 => 
+    61 => 
     array (
       'key' => 'emails.configure',
       'name' => 'admin::app.admin.system.email-settings',
       'sort' => 1,
     ),
-    64 => 
+    62 => 
     array (
       'key' => 'emails.configure.email_settings',
       'name' => 'admin::app.admin.system.email-settings',
@@ -3394,13 +3328,13 @@
         ),
       ),
     ),
-    65 => 
+    63 => 
     array (
       'key' => 'emails.general',
       'name' => 'admin::app.admin.emails.notification_label',
       'sort' => 1,
     ),
-    66 => 
+    64 => 
     array (
       'key' => 'emails.general.notifications',
       'name' => 'admin::app.admin.emails.notification_label',
@@ -3475,7 +3409,7 @@
         ),
       ),
     ),
-    67 => 
+    65 => 
     array (
       'key' => 'sales.paymentmethods.razorpay',
       'name' => 'Razorpay',
@@ -3528,7 +3462,7 @@
         ),
       ),
     ),
-    68 => 
+    66 => 
     array (
       'key' => 'sales.paymentmethods.paytm',
       'name' => 'Paytm',
@@ -3600,19 +3534,19 @@
         ),
       ),
     ),
-    69 => 
+    67 => 
     array (
       'key' => 'suggestion',
       'name' => 'Search Suggestion',
       'sort' => 1,
     ),
-    70 => 
+    68 => 
     array (
       'key' => 'suggestion.suggestion',
       'name' => 'Search Suggestion Settings',
       'sort' => 1,
     ),
-    71 => 
+    69 => 
     array (
       'key' => 'suggestion.suggestion.options',
       'name' => 'Options',
@@ -3661,19 +3595,19 @@
         ),
       ),
     ),
-    72 => 
+    70 => 
     array (
       'key' => 'rma',
       'name' => 'rma::app.admin.admin-name.rma',
       'sort' => 2,
     ),
-    73 => 
+    71 => 
     array (
       'key' => 'rma.settings',
       'name' => 'rma::app.admin.setting.settings',
       'sort' => 1,
     ),
-    74 => 
+    72 => 
     array (
       'key' => 'rma.settings.general',
       'name' => 'rma::app.admin.setting.general',
@@ -3708,397 +3642,19 @@
         ),
       ),
     ),
-    75 => 
-    array (
-      'key' => 'sales',
-      'name' => 'admin::app.admin.system.sales',
-      'sort' => 5,
-    ),
-    76 => 
-    array (
-      'key' => 'sales.carriers',
-      'name' => 'admin::app.admin.system.shipping-methods',
-      'sort' => 1,
-    ),
-    77 => 
-    array (
-      'key' => 'sales.carriers.dhl',
-      'name' => 'dhl::app.admin.system.dhl',
-      'sort' => 3,
-      'fields' => 
-      array (
-        0 => 
-        array (
-          'name' => 'title',
-          'title' => 'dhl::app.admin.system.title',
-          'type' => 'depends',
-          'depend' => 'active:1',
-          'validation' => 'required_if:active,1',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        1 => 
-        array (
-          'name' => 'description',
-          'title' => 'admin::app.admin.system.description',
-          'type' => 'textarea',
-          'channel_based' => true,
-          'locale_based' => false,
-        ),
-        2 => 
-        array (
-          'name' => 'active',
-          'title' => 'dhl::app.admin.system.enable-checkout',
-          'type' => 'boolean',
-          'validation' => 'required',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        3 => 
-        array (
-          'name' => 'is_calculate_tax',
-          'title' => 'admin::app.admin.system.calculate-tax',
-          'type' => 'boolean',
-          'validation' => 'required',
-          'channel_based' => false,
-          'locale_based' => false,
-        ),
-        4 => 
-        array (
-          'name' => 'sandbox_mode',
-          'title' => 'dhl::app.admin.system.sandbox-mode',
-          'type' => 'boolean',
-          'validation' => 'required',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        5 => 
-        array (
-          'name' => 'access_id',
-          'title' => 'dhl::app.admin.system.access-id',
-          'type' => 'depends',
-          'depend' => 'active:1',
-          'validation' => 'required_if:active,1',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        6 => 
-        array (
-          'name' => 'password',
-          'title' => 'dhl::app.admin.system.password',
-          'type' => 'depends',
-          'depend' => 'active:1',
-          'validation' => 'required_if:active,1',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        7 => 
-        array (
-          'name' => 'account_number',
-          'title' => 'dhl::app.admin.system.account-number',
-          'type' => 'depends',
-          'depend' => 'active:1',
-          'validation' => 'required_if:active,1',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        8 => 
-        array (
-          'name' => 'weight_unit',
-          'title' => 'dhl::app.admin.system.weight-unit',
-          'type' => 'select',
-          'channel_based' => false,
-          'locale_based' => true,
-          'options' => 
-          array (
-            0 => 
-            array (
-              'title' => 'dhl::app.admin.system.kilograms',
-              'value' => 'KG',
-            ),
-            1 => 
-            array (
-              'title' => 'dhl::app.admin.system.pounds',
-              'value' => 'LB',
-            ),
-          ),
-        ),
-        9 => 
-        array (
-          'name' => 'dimension_unit',
-          'title' => 'dhl::app.admin.system.dimension-unit',
-          'type' => 'select',
-          'channel_based' => false,
-          'locale_based' => true,
-          'options' => 
-          array (
-            0 => 
-            array (
-              'title' => 'dhl::app.admin.system.inches',
-              'value' => 'IN',
-            ),
-            1 => 
-            array (
-              'title' => 'dhl::app.admin.system.cms',
-              'value' => 'CM',
-            ),
-          ),
-        ),
-        10 => 
-        array (
-          'name' => 'height',
-          'title' => 'dhl::app.admin.system.height',
-          'type' => 'text',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        11 => 
-        array (
-          'name' => 'depth',
-          'title' => 'dhl::app.admin.system.depth',
-          'type' => 'text',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        12 => 
-        array (
-          'name' => 'width',
-          'title' => 'dhl::app.admin.system.width',
-          'type' => 'text',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        13 => 
-        array (
-          'name' => 'content_type',
-          'title' => 'dhl::app.admin.system.content-type',
-          'type' => 'select',
-          'channel_based' => false,
-          'locale_based' => true,
-          'options' => 
-          array (
-            0 => 
-            array (
-              'title' => 'dhl::app.admin.system.documents',
-              'value' => 'documents',
-            ),
-            1 => 
-            array (
-              'title' => 'dhl::app.admin.system.non-documents',
-              'value' => 'non documents',
-            ),
-          ),
-        ),
-        14 => 
-        array (
-          'name' => 'allowed_methods',
-          'title' => 'dhl::app.admin.system.allowed-methods',
-          'type' => 'multiselect',
-          'depend' => 'content_type:documents',
-          'channel_based' => false,
-          'locale_based' => true,
-          'options' => 
-          array (
-            0 => 
-            array (
-              'title' => 'Easy shop',
-              'value' => 'Easy shop',
-            ),
-            1 => 
-            array (
-              'title' => 'Sprintline',
-              'value' => 'Sprintline',
-            ),
-            2 => 
-            array (
-              'title' => 'Secureline',
-              'value' => 'Secureline',
-            ),
-            3 => 
-            array (
-              'title' => 'Express easy',
-              'value' => 'Express easy',
-            ),
-            4 => 
-            array (
-              'title' => 'Europack',
-              'value' => 'Europack',
-            ),
-            5 => 
-            array (
-              'title' => 'Break bulk express',
-              'value' => 'Break bulk express',
-            ),
-            6 => 
-            array (
-              'title' => 'Medical express',
-              'value' => 'Medical express',
-            ),
-            7 => 
-            array (
-              'title' => 'Express worldwide',
-              'value' => 'Express worldwide',
-            ),
-            8 => 
-            array (
-              'title' => 'Express worldwide',
-              'value' => 'Express worldwide',
-            ),
-            9 => 
-            array (
-              'title' => 'Express 9:00',
-              'value' => 'Express 9:00',
-            ),
-            10 => 
-            array (
-              'title' => 'Express 10:30',
-              'value' => 'Express 10:30',
-            ),
-            11 => 
-            array (
-              'title' => 'Domestic economy select',
-              'value' => 'Domestic economy select',
-            ),
-            12 => 
-            array (
-              'title' => 'Economy select',
-              'value' => 'Economy select',
-            ),
-            13 => 
-            array (
-              'title' => 'Domestic express 9:00',
-              'value' => 'Domestic express 9:00',
-            ),
-            14 => 
-            array (
-              'title' => 'Domestic express',
-              'value' => 'Domestic express',
-            ),
-            15 => 
-            array (
-              'title' => 'Others',
-              'value' => 'Others',
-            ),
-            16 => 
-            array (
-              'title' => 'Globalmail business',
-              'value' => 'Globalmail business',
-            ),
-            17 => 
-            array (
-              'title' => 'Same day',
-              'value' => 'Same day',
-            ),
-            18 => 
-            array (
-              'title' => 'Express 12:00',
-              'value' => 'Express 12:00',
-            ),
-            19 => 
-            array (
-              'title' => 'Express envelope',
-              'value' => 'Express envelope',
-            ),
-            20 => 
-            array (
-              'title' => 'Domestic express 12:00 (Doc)',
-              'value' => 'Domestic express 12:00 (Doc)',
-            ),
-            21 => 
-            array (
-              'title' => 'Easy shop (Doc)',
-              'value' => 'Easy shop (Doc)',
-            ),
-            22 => 
-            array (
-              'title' => 'Jetline (Doc)',
-              'value' => 'Jetline (Doc)',
-            ),
-            23 => 
-            array (
-              'title' => 'Express easy',
-              'value' => 'Express easy (Doc)',
-            ),
-            24 => 
-            array (
-              'title' => 'Express worldwide (Doc)',
-              'value' => 'Express worldwide (Doc)',
-            ),
-            25 => 
-            array (
-              'title' => 'Medical express (Doc)',
-              'value' => 'Medical express (Doc)',
-            ),
-            26 => 
-            array (
-              'title' => 'Express 9:00',
-              'value' => 'Express 9:00 (Doc)',
-            ),
-            27 => 
-            array (
-              'title' => 'Freight worldwide (Doc)',
-              'value' => 'Freight worldwide (Doc)',
-            ),
-            28 => 
-            array (
-              'title' => 'Economy select (Doc)',
-              'value' => 'Economy select (Doc)',
-            ),
-            29 => 
-            array (
-              'title' => 'Jumbo box (Doc)',
-              'value' => 'Jumbo box (Doc)',
-            ),
-            30 => 
-            array (
-              'title' => 'Express 10:30 (Doc)',
-              'value' => 'Express 10:30 (Doc)',
-            ),
-            31 => 
-            array (
-              'title' => 'Europack (Doc)',
-              'value' => 'Europack (Doc)',
-            ),
-            32 => 
-            array (
-              'title' => 'Express 12:00 (Doc)',
-              'value' => 'Express 12:00 (Doc)',
-            ),
-          ),
-        ),
-        15 => 
-        array (
-          'name' => 'ready_time',
-          'title' => 'dhl::app.admin.system.ready-time',
-          'type' => 'text',
-          'info' => 'dhl::app.admin.system.note',
-          'channel_based' => false,
-          'locale_based' => true,
-        ),
-        16 => 
-        array (
-          'name' => 'allowed_country',
-          'title' => 'dhl::app.admin.system.allow-country',
-          'type' => 'multiselect',
-          'channel_based' => true,
-          'locale_based' => true,
-          'repository' => 'Webkul\\DHLShipping\\Repositories\\DhlDetailRepository@getCountries',
-        ),
-      ),
-    ),
-    78 => 
+    73 => 
     array (
       'key' => 'bulkupload',
       'name' => 'bulkupload::app.admin.system.bulkupload',
       'sort' => 5,
     ),
-    79 => 
+    74 => 
     array (
       'key' => 'bulkupload.settings',
       'name' => 'bulkupload::app.admin.system.settings',
       'sort' => 1,
     ),
-    80 => 
+    75 => 
     array (
       'key' => 'bulkupload.settings.general',
       'name' => 'bulkupload::app.admin.system.general',
@@ -4240,7 +3796,7 @@
     array (
       'enabled' => true,
       'driver' => 'file',
-      'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\debugbar',
+      'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\debugbar',
       'connection' => NULL,
       'provider' => '',
       'hostname' => '127.0.0.1',
@@ -4344,10 +3900,10 @@
     'convert_entities' => true,
     'defines' => 
     array (
-      'font_dir' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
-      'font_cache' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\fonts',
-      'temp_dir' => 'C:\\Users\\Manu24\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\xampp\\htdocs\\World_Ekart',
+      'font_dir' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
+      'font_cache' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\fonts',
+      'temp_dir' => 'C:\\Users\\coolp\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -4466,7 +4022,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/cache/laravel-excel',
+      'local_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/cache/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -4481,17 +4037,17 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app',
       ),
       'private' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/private',
+        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/private',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
         'url' => 'http://localhost:8000/storage',
         'visibility' => 'public',
       ),
@@ -4593,7 +4149,7 @@
     array (
     ),
     'enable_runnable_solutions' => true,
-    'remote_sites_path' => 'C:\\xampp\\htdocs\\World_Ekart',
+    'remote_sites_path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart',
     'local_sites_path' => '',
     'housekeeping_endpoint_prefix' => '_ignition',
     'settings_file_path' => '',
@@ -4607,8 +4163,8 @@
     'route' => 'cache',
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\app/public',
-      1 => 'C:\\xampp\\htdocs\\World_Ekart\\public\\storage',
+      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\app/public',
+      1 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\public\\storage',
     ),
     'templates' => 
     array (
@@ -4671,13 +4227,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 7,
       ),
@@ -4777,7 +4333,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -5240,30 +4796,6 @@
         'sort' => 5,
         'icon-class' => '',
       ),
-      57 => 
-      array (
-        'key' => 'catalog.bulkupload.data-flow-profile',
-        'name' => 'bulkupload::app.admin.bulk-upload.data-flow-profile.index',
-        'route' => 'admin.dataflow-profile.index',
-        'sort' => 1,
-        'icon-class' => '',
-      ),
-      58 => 
-      array (
-        'key' => 'catalog.bulkupload.upload-files',
-        'name' => 'bulkupload::app.admin.bulk-upload.upload-files.index',
-        'route' => 'admin.bulk-upload.index',
-        'sort' => 2,
-        'icon-class' => '',
-      ),
-      59 => 
-      array (
-        'key' => 'catalog.bulkupload.run-profile',
-        'name' => 'bulkupload::app.admin.bulk-upload.run-profile.index',
-        'route' => 'admin.run-profile.index',
-        'sort' => 3,
-        'icon-class' => '',
-      ),
     ),
     'customer' => 
     array (
@@ -5526,9 +5058,9 @@
     ),
     'generator' => 
     array (
-      'basePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
+      'basePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
       'rootNamespace' => 'App\\',
-      'stubsOverridePath' => 'C:\\xampp\\htdocs\\World_Ekart\\app',
+      'stubsOverridePath' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\app',
       'paths' => 
       array (
         'models' => 'Entities',
@@ -5663,7 +5195,7 @@
     'lifetime' => '120',
     'expire_on_close' => true,
     'encrypt' => false,
-    'files' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework/sessions',
     'connection' => 'session',
     'table' => 'sessions',
     'store' => NULL,
@@ -5769,9 +5301,9 @@
     'tracer' => false,
     'paths' => 
     array (
-      0 => 'C:\\xampp\\htdocs\\World_Ekart\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\resources\\views',
     ),
-    'compiled' => 'C:\\xampp\\htdocs\\World_Ekart\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\Self+Manu\\World-Ekart\\storage\\framework\\views',
   ),
   'product_types' => 
   array (
