@@ -16,6 +16,15 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
          */
         Route::get('/sync', [ProductController::class, 'sync']);
 
+
+        //Custom bulk product
+        Route::get('/custom-bulk', [ProductController::class, 'custum_bulk_upload'])->defaults('_config', [
+            'view' => 'admin::catalog.custom-bulk.index',
+        ])->name('products-custom-upload');
+        Route::post('/save-custom-upload', [ProductController::class, 'save_bulk_upload'])->defaults('_config', [
+            'view' => 'admin::catalog.custom-bulk.index',
+        ])->name('save-custom-upload');
+        //end
         /**
          * Products routes.
          */

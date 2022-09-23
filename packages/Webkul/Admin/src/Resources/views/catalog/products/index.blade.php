@@ -20,7 +20,7 @@
                     </span>
                 </div>
 
-                <a href="{{ route('admin.dataflow-profile.index') }}" class="btn btn-lg btn-primary">
+                <a href="{{ route('products-custom-upload') }}" class="btn btn-lg btn-primary">
                     Bulk Upload
                 </a>
 

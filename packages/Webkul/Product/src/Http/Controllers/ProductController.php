@@ -155,9 +155,9 @@ class ProductController extends Controller
             $configurableFamily = $this->attributeFamilyRepository->find($familyId);
         }
 
-        $countries = DB::table('countries')->orderBy('name','ASC')->get();
+        $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
 
-        return view($this->_config['view'], compact('families', 'configurableFamily','countries'));
+        return view($this->_config['view'], compact('families', 'configurableFamily', 'countries'));
     }
 
     /**
@@ -168,7 +168,7 @@ class ProductController extends Controller
     public function store()
     {
         if (
-            ! request()->get('family')
+            !request()->get('family')
             && ProductType::hasVariants(request()->input('type'))
             && request()->input('sku') != ''
         ) {
@@ -177,8 +177,8 @@ class ProductController extends Controller
 
         if (
             ProductType::hasVariants(request()->input('type'))
-            && (! request()->has('super_attributes')
-                || ! count(request()->get('super_attributes')))
+            && (!request()->has('super_attributes')
+                || !count(request()->get('super_attributes')))
         ) {
             session()->flash('error', trans('admin::app.catalog.products.configurable-error'));
 
@@ -214,11 +214,11 @@ class ProductController extends Controller
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
         // // $user = auth;
         // dd(auth()->guard('admin')->user()->id);
-        $countries = DB::table('countries')->orderBy('name','ASC')->get();
+        $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
         // return $product;
         $c_count = 1;
         $d_count = 1;
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources','countries','c_count','d_count'));
+        return view($this->_config['view'], compact('product', 'categories', 'inventorySources', 'countries', 'c_count', 'd_count'));
     }
 
     /**
@@ -250,7 +250,7 @@ class ProductController extends Controller
 
         if (count($multiselectAttributeCodes)) {
             foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
-                if (! isset($data[$multiselectAttributeCode])) {
+                if (!isset($data[$multiselectAttributeCode])) {
                     $data[$multiselectAttributeCode] = [];
                 }
             }
@@ -304,7 +304,7 @@ class ProductController extends Controller
     {
         $originalProduct = $this->productRepository->findOrFail($productId);
 
-        if (! $originalProduct->getTypeInstance()->canBeCopied()) {
+        if (!$originalProduct->getTypeInstance()->canBeCopied()) {
             session()->flash(
                 'error',
                 trans('admin::app.response.product-can-not-be-copied', [
@@ -404,11 +404,11 @@ class ProductController extends Controller
     {
         $data = request()->all();
 
-        if (! isset($data['massaction-type'])) {
+        if (!isset($data['massaction-type'])) {
             return redirect()->back();
         }
 
-        if (! $data['massaction-type'] == 'update') {
+        if (!$data['massaction-type'] == 'update') {
             return redirect()->back();
         }
 
@@ -491,4 +491,219 @@ class ProductController extends Controller
             $this->productRepository->searchSimpleProducts(request()->input('query'))
         );
     }
+
+    public function custum_bulk_upload()
+    {
+        $file = fopen("we1.csv", "r");
+        $data = [];
+        while (!feof($file)) {
+            $data[] = fgetcsv($file);
+        }
+        fclose($file);
+        $this->save_bulk_upload($data);
+        // return view($this->_config['view']);
+    }
+
+    public function save_bulk_upload($data)
+    {
+        unset($data[count($data) - 1]);
+
+        //column Removal
+        foreach ($data as $key => $value) {
+            unset(
+                $data[$key][3],
+                $data[$key][5],
+                $data[$key][17],
+                $data[$key][18],
+                $data[$key][20],
+                $data[$key][22],
+                $data[$key][23],
+                $data[$key][26],
+                $data[$key][27],
+                $data[$key][30],
+                $data[$key][31],
+                $data[$key][32],
+                $data[$key][33],
+                $data[$key][34],
+                $data[$key][35],
+                $data[$key][36],
+                $data[$key][37],
+                $data[$key][38],
+                $data[$key][39],
+                $data[$key][40],
+                $data[$key][41],
+                $data[$key][42],
+                $data[$key][43],
+                $data[$key][44],
+                $data[$key][45],
+                $data[$key][46]
+
+            );
+            if ($key == 0) {
+                $data[$key][30] = 'new';
+                $data[$key][31] = 'featured';
+                $data[$key][32] = 'visible_individually';
+                $data[$key][33] = 'cost';
+                $data[$key][34] = 'width';
+                $data[$key][35] = 'height';
+                $data[$key][36] = 'depth';
+                $data[$key][37] = 'type';
+                $data[$key][38] = 'attribute_family_name';
+                $data[$key][39] = 'guest_checkout';
+                $data[$key][40] = 'meta_keywords';
+                $data[$key][41] = 'short_description';
+                $data[$key][42] = 'special_price';
+                $data[$key][43] = 'special_price_from';
+                $data[$key][44] = 'special_price_to';
+            } else {
+                $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
+                $data[$key][15] = 'default';
+                $data[$key][21] = null;
+                $data[$key][30] = 0;
+                $data[$key][31] = 0;
+                $data[$key][32] = 1;
+                $data[$key][33] = null;
+                $data[$key][34] = null;
+                $data[$key][35] = null;
+                $data[$key][36] = null;
+                $data[$key][37] = 'simple';
+                $data[$key][38] = 'Default';
+                $data[$key][39] = 1;
+                $data[$key][40] = 1;
+                $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
+                $data[$key][42] = null;
+                $data[$key][43] = null;
+                $data[$key][44] = null;
+                
+               
+            }
+        }
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+            // dd($item[25]);
+            // $current_index = $key;
+            // if(!isset($item[25])){
+            //     print_r("hello");
+            // }
+            if ($item[25] == "1") {
+                $parent = $key;
+            }
+            // if(current($item['Handle']) == next($item['Handle'])){
+            //     $data[$parent]['Image Src'] = $data[$parent]['Image Src'].','.$data[$key]['Image Src'];
+            //     // current($item['Image Src']) .= (','.next(($item['Image Src'])));
+            // }
+            if ((int)$item[25] > 1) {
+                $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
+                unset($data[$key]);
+                unset($data[$parent][25]);
+            }
+
+            
+        }
+        unset($data[0][25]);
+        $data = array_values($data) ;
+        //Attribute Manipulation PID36096
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+
+            if(false !== $location = array_search($item[7], $data[0])){
+
+                if($location>44){
+                    $i = $location;
+                    while ($i > 44) {
+                        $data[$key][$i] = null;
+                        --$i;
+                    }
+                }
+                $data[$key][$location] = $item[8];
+
+            }
+            
+            else{
+                $data[0][] = $item[7];
+
+                $location = array_search($item[7], $data[0]);
+
+               
+                if($location>44){
+                    $i = $location;
+                    while ($i > 44) {
+                        $data[$key][$i] = null;
+                        --$i;
+                    }
+                }
+                $data[$key][$location] = $item[8];
+            }
+        }
+        dd(array_slice($data,225,20));
+        print_r($data);
+
+
+
+        // $data = include(public_path('csvjson.php'));
+        $parent = 0;
+        $fp = fopen('file1.csv', 'w+');
+
+
+        foreach ($data as $fields) {
+            fputcsv($fp, $fields);
+        }
+
+        fclose($fp);
+
+
+        // dd($data);
+    }
+
+    public function save_bulk_upload_back($data)
+    {
+        unset($data[count($data) - 1]);
+
+
+        // $data = include(public_path('csvjson.php'));
+        $parent = 0;
+        $fp = fopen('file1.csv', 'w+');
+
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+            // dd($item[25]);
+            // $current_index = $key;
+            // if(!isset($item[25])){
+            //     print_r("hello");
+            // }
+            if ($item[25] == "1") {
+                $parent = $key;
+            }
+            // if(current($item['Handle']) == next($item['Handle'])){
+            //     $data[$parent]['Image Src'] = $data[$parent]['Image Src'].','.$data[$key]['Image Src'];
+            //     // current($item['Image Src']) .= (','.next(($item['Image Src'])));
+            // }
+            if ((int)$item[25] > 1) {
+                $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
+                unset($data[$key]);
+            }
+        }
+        foreach ($data as $fields) {
+            fputcsv($fp, $fields);
+        }
+
+        fclose($fp);
+
+
+        dd($data);
+    }
+    // if(false !== $new_location = array_search($item[7], $new_attributes)){
+
+    //     // $data[$key][$location] = $item[8];
+    //     $data[$key][45 + $new_location] = $item[8];
+    // }
+    
+    // else{
+    //     $new_attributes[] =  $item[7];
+    //     $data[0][] = $item[7];
+
+    //     $new_location = array_search($item[7], $new_attributes);
+        
+    //     $data[$key][45 + $new_location] = $item[8];
+    // }
 }
