@@ -1,8 +1,5 @@
+!vendor/bagisto/*
 vendor/*
-vendor/bagisto/*
-!vendor/bagisto/
-!vendor/bagisto/bagisto-bulk-upload/
-!vendor/bagisto/bagisto-bulk-upload/*
 node_modules/
 bootstrap/cache/
 npm-debug.log
