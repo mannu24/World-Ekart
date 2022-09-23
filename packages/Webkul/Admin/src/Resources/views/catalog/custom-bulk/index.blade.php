@@ -19,7 +19,7 @@
                         @csrf
                     <div class="col-md-12 control-group">
                         <label for="">Select File to Upload</label>
-                        <input type="file" class="control" name="csv-file">
+                        <input type="file" class="control" accept=".csv" name="csv-file">
                     </div>
                     <div class="col-md-12 control-group">
                         <button class="btn btn-primary btn-lg">Submit</button>

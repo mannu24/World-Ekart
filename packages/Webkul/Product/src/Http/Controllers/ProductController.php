@@ -503,13 +503,29 @@ class ProductController extends Controller
     public function save_bulk_upload() {
         // dd(request()->file('csv-file')) ;
         $name = request()->file('csv-file')->getClientOriginalName() ;
+        $check = DB::table('shopify_file_csv')->where('file_name',"converted_csv/$name")->get()->count() ;
+        if($check>0) {
+            session()->flash('error','File Name Already Exists!') ;
+            return redirect()->back() ;
+        }
         $file = fopen(request()->file('csv-file'), "r");
         $data = [];
         while (!feof($file)) {
             $data[] = fgetcsv($file);
         }
         fclose($file);
-        $this->manipulate_file($data,$name);
+        $completed = $this->manipulate_file($data,$name);
+        if($completed) {
+            $upload['vendor_id'] = auth()->guard('admin')->user()->id ;
+            $upload['file_name'] = "converted_csv/$name" ;
+    
+            $check = DB::table('shopify_file_csv')->insert($upload) ;
+    
+            if($check) session()->flash('success','File Converted Successfully!') ;
+            else session()->flash('failed','File Conversion Unsuccessful!') ;
+            
+            return redirect()->back() ;
+        }
 
     }
 
@@ -527,11 +543,12 @@ class ProductController extends Controller
             if ((int)$item[25] > 1) {
                 $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
                 unset($data[$key]);
-                unset($data[$parent][25]);
+                // unset($data[$parent][25]);
             }
         }
-        unset($data[0][25]);
-
+        foreach ($data as $key => $item) {
+            unset($data[$key][25]) ;
+        }
         //Column Removal
         foreach ($data as $key => $value) {
             unset(
@@ -571,7 +588,7 @@ class ProductController extends Controller
                 $data[$key][37] = 'simple';
                 $data[$key][38] = 'Default';
                 $data[$key][39] = 1;
-                $data[$key][40] = 1;
+                $data[$key][40] = null;
                 $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
                 $data[$key][42] = null;
                 $data[$key][43] = null;
@@ -580,6 +597,7 @@ class ProductController extends Controller
                
             }
         }
+
 
         //Parent Array Reindexing
         $data = array_values($data) ;
@@ -601,7 +619,6 @@ class ProductController extends Controller
         //All Attributes Null
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
-
             $len = key(array_slice($data[0], -1, 1, true)); ;
             if($len>34){
                 $i = 34+1;
@@ -613,6 +630,8 @@ class ProductController extends Controller
 
         }
         
+        dd($data) ;
+
         // Updating Attribute Values
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
@@ -621,7 +640,26 @@ class ProductController extends Controller
             if(false !== $location = array_search(strtolower($item[7]), $data[0])) if(strtolower($item[7+1])!='') $data[$key][$location] = $item[7+1] ;
             if(false !== $location = array_search(strtolower($item[9]), $data[0])) if(strtolower($item[9+1])!='') $data[$key][$location] = $item[9+1] ;
         }
-        // dd($data);
+        
+        //User ID Addition 
+        foreach ($data as $key => $item) {
+            if($key == 0 ) $data[0][] = 'user_id' ;
+            else $data[$key][] = auth()->guard('admin')->user()->id ;
+        }
+        
+        //Deleting Original Attributes Column
+        foreach ($data as $key => $item) {
+            unset($data[$key][5],$data[$key][6],$data[$key][7],$data[$key][8],$data[$key][9],$data[$key][10]) ;
+        }
+
+
+        //Item Array Reindexing
+        foreach ($data as $key => $item) {
+            $data[$key] = array_values($item) ;
+        }
+        
+
+        dd($data);
 
         // $data = include(public_path('csvjson.php'));
         $fp = fopen("converted_csv/$name", 'w+');
@@ -630,19 +668,10 @@ class ProductController extends Controller
         }
         fclose($fp);
 
-        $upload['vendor_id'] = auth()->guard('admin')->user()->id ;
-        $upload['file_name'] = "converted_csv/$name" ;
-
-        $check = DB::table('shopify_file_csv')->insert($upload) ;
-
-        if($check) session()->flash('success','File Converted Successfully!') ;
-        else session()->flash('failed','File Conversion Unsuccessful!') ;
-        
-        return view($this->_config['view']);
+        return true ;
     }
 
-    public function save_bulk_upload_back($data)
-    {
+    public function save_bulk_upload_back($data) {
         unset($data[count($data) - 1]);
 
 

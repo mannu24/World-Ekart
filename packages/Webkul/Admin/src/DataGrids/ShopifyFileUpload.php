@@ -31,7 +31,7 @@ class ShopifyFileUpload extends DataGrid
     {
 
         $queryBuilder = DB::table('shopify_file_csv as a')->leftJoin('admins as b','b.id','a.vendor_id')
-        ->addSelect('a.id', 'a.file_name', 'a.created_at')->where('a.vendor_id',auth()->guard('admin')->user()->id) ;
+        ->addSelect('a.id', 'a.file_name', 'a.file_name as download', 'a.created_at')->where('a.vendor_id',auth()->guard('admin')->user()->id) ;
 
         $this->setQueryBuilder($queryBuilder);
     }
@@ -73,20 +73,17 @@ class ShopifyFileUpload extends DataGrid
                 return date( 'M d, y H:i' , strtotime($data->created_at)) ;
             },
         ]);
-    }
-
-    /**
-     * Prepare actions.
-     *
-     * @return void
-     */
-    public function prepareActions()
-    {
-        $this->addAction([
-            'title'  => trans('admin::app.datagrid.view'),
-            'method' => 'GET',
-            'route'  => 'admin.payment-request.cancel',
-            'icon'   => 'fas fa-download fa-24x text-grey',
+        
+        $this->addColumn([
+            'index'      => 'download',
+            'label'      => 'Download File',
+            'type'       => 'html',
+            'searchable' => false,
+            'sortable'   => false,
+            'filterable' => false,
+            'closure'    => function($data) {
+                return '<a href="/'.$data->file_name.'"><i class="fas fa-file-download fa-24x text-grey"></i></a>' ;
+            },
         ]);
     }
 }
