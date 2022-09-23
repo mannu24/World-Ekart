@@ -21,7 +21,7 @@
                 </div>
 
                 <a href="{{ route('products-custom-upload') }}" class="btn btn-lg btn-primary">
-                    Bulk Upload
+                    Shopify Upload
                 </a>
 
                 <a href="{{ route('admin.catalog.products.create') }}" class="btn btn-lg btn-primary">

@@ -52,10 +52,10 @@
             <aside class="widget widget_footer text-center text-md-left">
                 <h4 class="widget-title">Company</h4>
                 <ul class="ps-list--link">
-                <li><a href="http://localhost:8000/page/about-us">About Us</a></li>
-                <li><a href="http://localhost:8000/contact-us">Contact Us</a></li>
-                <li><a href="http://localhost:8000/page/become-a-seller">Become A Seller</a></li>
-                <li><a href="http://localhost:8000/track-order">Track Your Order</a></li>
+                    <li><a href="/page/about-us">About Us</a></li>
+                    <li><a href="/contact-us">Contact Us</a></li>
+                    <li><a href="/page/become-a-seller">Become A Seller</a></li>
+                    {{-- <li><a href="/track-order">Track Your Order</a></li> --}}
                 </ul>
             </aside>
             <aside class="col-md-3 widget widget_footer widget_contact-us text-center text-md-left">

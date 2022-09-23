@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\DataGrids\ProductDataGrid;
+use Webkul\Admin\DataGrids\ShopifyFileUpload;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Contracts\Validations\Slug;
@@ -492,52 +493,53 @@ class ProductController extends Controller
         );
     }
 
-    public function custum_bulk_upload()
-    {
-        $file = fopen("we1.csv", "r");
+    public function custum_bulk_upload() {
+        
+        if (request()->ajax()) {
+            return app(ShopifyFileUpload::class)->toJson();
+        }
+        return view($this->_config['view']);
+    }
+    public function save_bulk_upload() {
+        // dd(request()->file('csv-file')) ;
+        $name = request()->file('csv-file')->getClientOriginalName() ;
+        $file = fopen(request()->file('csv-file'), "r");
         $data = [];
         while (!feof($file)) {
             $data[] = fgetcsv($file);
         }
         fclose($file);
-        $this->save_bulk_upload($data);
-        // return view($this->_config['view']);
+        $this->manipulate_file($data,$name);
+
     }
 
-    public function save_bulk_upload($data)
-    {
-        unset($data[count($data) - 1]);
+    public function manipulate_file($data,$name) {
+        if(!$data[count($data) - 1]) unset($data[count($data) - 1]);
 
-        //column Removal
+        //Image Implode and Extra Row Removal
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+            
+            if ($item[25] == "1") {
+                $parent = $key;
+            }
+
+            if ((int)$item[25] > 1) {
+                $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
+                unset($data[$key]);
+                unset($data[$parent][25]);
+            }
+        }
+        unset($data[0][25]);
+
+        //Column Removal
         foreach ($data as $key => $value) {
             unset(
-                $data[$key][3],
-                $data[$key][5],
-                $data[$key][17],
-                $data[$key][18],
-                $data[$key][20],
-                $data[$key][22],
-                $data[$key][23],
-                $data[$key][26],
-                $data[$key][27],
-                $data[$key][30],
-                $data[$key][31],
-                $data[$key][32],
-                $data[$key][33],
-                $data[$key][34],
-                $data[$key][35],
-                $data[$key][36],
-                $data[$key][37],
-                $data[$key][38],
-                $data[$key][39],
-                $data[$key][40],
-                $data[$key][41],
-                $data[$key][42],
-                $data[$key][43],
-                $data[$key][44],
-                $data[$key][45],
-                $data[$key][46]
-
+                $data[$key][3], $data[$key][5], $data[$key][17], $data[$key][18], $data[$key][20], $data[$key][22],
+                $data[$key][23], $data[$key][26], $data[$key][27], $data[$key][30], $data[$key][31], $data[$key][32],
+                $data[$key][33], $data[$key][34], $data[$key][35], $data[$key][36], $data[$key][37], $data[$key][38],
+                $data[$key][39], $data[$key][40], $data[$key][41], $data[$key][42], $data[$key][43], $data[$key][44],
+                $data[$key][45], $data[$key][46]
             );
             if ($key == 0) {
                 $data[$key][30] = 'new';
@@ -578,81 +580,65 @@ class ProductController extends Controller
                
             }
         }
-        foreach ($data as $key => $item) {
-            if ($key == 0) continue;
-            // dd($item[25]);
-            // $current_index = $key;
-            // if(!isset($item[25])){
-            //     print_r("hello");
-            // }
-            if ($item[25] == "1") {
-                $parent = $key;
-            }
-            // if(current($item['Handle']) == next($item['Handle'])){
-            //     $data[$parent]['Image Src'] = $data[$parent]['Image Src'].','.$data[$key]['Image Src'];
-            //     // current($item['Image Src']) .= (','.next(($item['Image Src'])));
-            // }
-            if ((int)$item[25] > 1) {
-                $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
-                unset($data[$key]);
-                unset($data[$parent][25]);
-            }
 
-            
-        }
-        unset($data[0][25]);
+        //Parent Array Reindexing
         $data = array_values($data) ;
-        //Attribute Manipulation PID36096
+
+        //Item Array Reindexing
+        foreach ($data as $key => $item) {
+            $data[$key] = array_values($item) ;
+        }
+
+        //Attribute Header Set
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
 
-            if(false !== $location = array_search($item[7], $data[0])){
-
-                if($location>44){
-                    $i = $location;
-                    while ($i > 44) {
-                        $data[$key][$i] = null;
-                        --$i;
-                    }
-                }
-                $data[$key][$location] = $item[8];
-
-            }
-            
-            else{
-                $data[0][] = $item[7];
-
-                $location = array_search($item[7], $data[0]);
-
-               
-                if($location>44){
-                    $i = $location;
-                    while ($i > 44) {
-                        $data[$key][$i] = null;
-                        --$i;
-                    }
-                }
-                $data[$key][$location] = $item[8];
-            }
+            if(false == $location = array_search(strtolower($item[5]), $data[0])) if(strtolower($item[5])!='') $data[0][] = strtolower($item[5]);
+            if(false == $location = array_search(strtolower($item[7]), $data[0])) if(strtolower($item[7])!='') $data[0][] = strtolower($item[7]);
+            if(false == $location = array_search(strtolower($item[9]), $data[0])) if(strtolower($item[9])!='') $data[0][] = strtolower($item[9]);
         }
-        dd(array_slice($data,225,20));
-        print_r($data);
 
+        //All Attributes Null
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
 
+            $len = key(array_slice($data[0], -1, 1, true)); ;
+            if($len>34){
+                $i = 34+1;
+                while ($i < $len) {
+                    $data[$key][$i] = null;
+                    $i++;
+                }
+            }
+
+        }
+        
+        // Updating Attribute Values
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+
+            if(false !== $location = array_search(strtolower($item[5]), $data[0])) if(strtolower($item[5+1])!='') $data[$key][$location] = $item[5+1] ;
+            if(false !== $location = array_search(strtolower($item[7]), $data[0])) if(strtolower($item[7+1])!='') $data[$key][$location] = $item[7+1] ;
+            if(false !== $location = array_search(strtolower($item[9]), $data[0])) if(strtolower($item[9+1])!='') $data[$key][$location] = $item[9+1] ;
+        }
+        // dd($data);
 
         // $data = include(public_path('csvjson.php'));
-        $parent = 0;
-        $fp = fopen('file1.csv', 'w+');
-
-
+        $fp = fopen("converted_csv/$name", 'w+');
         foreach ($data as $fields) {
             fputcsv($fp, $fields);
         }
-
         fclose($fp);
 
+        $upload['vendor_id'] = auth()->guard('admin')->user()->id ;
+        $upload['file_name'] = "converted_csv/$name" ;
 
-        // dd($data);
+        $check = DB::table('shopify_file_csv')->insert($upload) ;
+
+        if($check) session()->flash('success','File Converted Successfully!') ;
+        else session()->flash('failed','File Conversion Unsuccessful!') ;
+        
+        return view($this->_config['view']);
     }
 
     public function save_bulk_upload_back($data)
