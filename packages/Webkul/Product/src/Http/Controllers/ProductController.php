@@ -530,7 +530,8 @@ class ProductController extends Controller
     }
 
     public function manipulate_file($data,$name) {
-        // dd($data[0]);
+
+        //Change Header for Bulk Upload
         $data[0][0] = 'url_key'; 
         $data[0][1] = 'name'; 
         $data[0][2] = 'description'; 
@@ -541,10 +542,12 @@ class ProductController extends Controller
         $data[0][15] = 'inventory_sources'; 
         $data[0][16] = 'inventories'; 
         $data[0][19] = 'price'; 
+        $data[0][21] = 'tax_category_id'; 
         $data[0][24] = 'images'; 
         $data[0][28] = 'meta_title'; 
         $data[0][29] = 'meta_description'; 
         
+        //Remove Null Value Record
         if(!$data[count($data) - 1]) unset($data[count($data) - 1]);
 
         //Image Implode and Extra Row Removal
@@ -564,6 +567,7 @@ class ProductController extends Controller
         foreach ($data as $key => $item) {
             unset($data[$key][25]) ;
         }
+
         //Column Removal
         foreach ($data as $key => $value) {
             unset(
@@ -590,6 +594,7 @@ class ProductController extends Controller
                 $data[$key][43] = 'special_price_from';
                 $data[$key][44] = 'special_price_to';
             } else {
+                $data[$key][4] = strtolower(str_replace(" ","_",$data[$key][4])) ;
                 $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
                 $data[$key][15] = 'default';
                 $data[$key][21] = null;
@@ -612,7 +617,6 @@ class ProductController extends Controller
                
             }
         }
-
 
         //Parent Array Reindexing
         $data = array_values($data) ;
@@ -645,8 +649,6 @@ class ProductController extends Controller
 
         }
         
-        // dd($data) ;
-
         // Updating Attribute Values
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
@@ -655,11 +657,19 @@ class ProductController extends Controller
             if(false !== $location = array_search(strtolower($item[7]), $data[0])) if(strtolower($item[7+1])!='') $data[$key][$location] = $item[7+1] ;
             if(false !== $location = array_search(strtolower($item[9]), $data[0])) if(strtolower($item[9+1])!='') $data[$key][$location] = $item[9+1] ;
         }
-        
-        //User ID Addition 
+
+        //User ID + Country + Delivery Charge Column Addition 
         foreach ($data as $key => $item) {
-            if($key == 0 ) $data[0][] = 'user_id' ;
-            else $data[$key][] = auth()->guard('admin')->user()->id ;
+            if($key == 0 ) {
+                $data[0][] = 'user_id' ;
+                $data[0][] = 'country' ;
+                $data[0][] = 'delivery_charge' ;
+            }
+            else {
+                $data[$key][] = auth()->guard('admin')->user()->id ;
+                $data[$key][] = 'IN' ;
+                $data[$key][] =  0.0000 ;
+            } 
         }
         
         //Deleting Original Attributes Column
@@ -685,6 +695,17 @@ class ProductController extends Controller
 
         return true ;
     }
+
+    public function delete_shopify_file($id) {
+        $check = DB::table('shopify_file_csv')->find($id) ;
+        if(file_exists($file =  public_path($check->file_name))) {
+            unlink($file) ;
+            $flag = DB::table('shopify_file_csv')->delete($id) ;
+        }
+        if($flag) return response()->json(['message'=>'File Deleted Successfully!']) ;
+        else return response()->json(['message'=>'File Deletion Unsuccessful!'],500) ;
+        
+}
 
     public function save_bulk_upload_back($data) {
         unset($data[count($data) - 1]);

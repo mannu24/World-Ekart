@@ -25,6 +25,9 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         Route::post('/save-custom-upload', [ProductController::class, 'save_bulk_upload'])->defaults('_config', [
             'view' => 'admin::catalog.custom-bulk.index',
         ])->name('save-custom-upload');
+        Route::post('/shopify_file/delete/{id}', [ProductController::class, 'delete_shopify_file'])
+        ->name('admin.catalog.shopify.delete');
+
         
         //end
         /**

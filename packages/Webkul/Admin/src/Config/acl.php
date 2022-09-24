@@ -525,7 +525,13 @@ return [
     | All ACLs related to vendor payment requests will be placed here.
     |
     */
+
     [
+        'key'   => 'shopify-delete',
+        'name'  => 'Shopify File Delete',
+        'route' => 'admin.catalog.shopify.delete',
+        'sort'  => 1,
+    ], [
         'key'   => 'payment-request',
         'name'  => 'Payment Requests',
         'route' => 'admin.payment-request.index',

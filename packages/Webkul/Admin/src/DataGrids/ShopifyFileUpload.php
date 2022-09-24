@@ -86,4 +86,20 @@ class ShopifyFileUpload extends DataGrid
             },
         ]);
     }
+
+    /**
+     * Prepare actions.
+     *
+     * @return void
+     */
+    public function prepareActions() 
+    {
+        $this->addAction([
+            'title'  => trans('admin::app.datagrid.delete'),
+            'method' => 'POST',
+            'route'  => 'admin.catalog.shopify.delete',
+            'icon'   => 'icon trash-icon',
+        ]);
+    }
+
 }
