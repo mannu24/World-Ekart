@@ -530,6 +530,21 @@ class ProductController extends Controller
     }
 
     public function manipulate_file($data,$name) {
+        // dd($data[0]);
+        $data[0][0] = 'url_key'; 
+        $data[0][1] = 'name'; 
+        $data[0][2] = 'description'; 
+        $data[0][4] = 'categories_slug'; 
+        $data[0][6] = 'status'; 
+        $data[0][13] = 'sku'; 
+        $data[0][14] = 'weight'; 
+        $data[0][15] = 'inventory_sources'; 
+        $data[0][16] = 'inventories'; 
+        $data[0][19] = 'price'; 
+        $data[0][24] = 'images'; 
+        $data[0][28] = 'meta_title'; 
+        $data[0][29] = 'meta_description'; 
+        
         if(!$data[count($data) - 1]) unset($data[count($data) - 1]);
 
         //Image Implode and Extra Row Removal
@@ -619,7 +634,7 @@ class ProductController extends Controller
         //All Attributes Null
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
-            $len = key(array_slice($data[0], -1, 1, true)); ;
+            $len = count($data[0]) ;
             if($len>34){
                 $i = 34+1;
                 while ($i < $len) {
@@ -630,7 +645,7 @@ class ProductController extends Controller
 
         }
         
-        dd($data) ;
+        // dd($data) ;
 
         // Updating Attribute Values
         foreach ($data as $key => $item) {
@@ -659,7 +674,7 @@ class ProductController extends Controller
         }
         
 
-        dd($data);
+        // dd($data);
 
         // $data = include(public_path('csvjson.php'));
         $fp = fopen("converted_csv/$name", 'w+');
