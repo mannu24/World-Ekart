@@ -603,6 +603,7 @@ class ProductController extends Controller
                 $data[$key][44] = 'special_price_to';
             } else {
                 // $data[$key][4] = strtolower(str_replace(" ","-",$data[$key][4])) ;
+                $data[$key][0] = strtolower($value[0]) ;
                 $data[$key][4] = $d['categories'] ;
                 $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
                 $data[$key][15] = 'default';

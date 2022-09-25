@@ -21,6 +21,7 @@ use Webkul\Product\Database\Eloquent\Builder;
 use Webkul\Product\Database\Factories\ProductFactory;
 use Webkul\Product\Type\AbstractType;
 use Webkul\Shop\Models\Vendor;
+use Webkul\User\Models\Admin;
 
 
 class Product extends Model implements ProductContract
@@ -89,6 +90,10 @@ class Product extends Model implements ProductContract
 
     public function vendor(): BelongsTo {
         return $this->belongsTo(Vendor::class,'user_id','id') ;
+    }
+
+    public function admin(): BelongsTo {
+        return $this->belongsTo(Admin::class,'user_id','id') ;
     }
 
     /**

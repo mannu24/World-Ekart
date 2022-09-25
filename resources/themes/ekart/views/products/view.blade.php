@@ -115,9 +115,9 @@ foreach ($images as $key => $image) {
                                         <header>
                                             <h1>{{ $product->name }}</h1>
                                             <div class="ps-product__meta flex-wrap flex-md-nowrap">
-                                                @if ($product->product->vendor)
+                                                @if ($product->product->admin->vendor)
                                                     <p>Seller:
-                                                        <a class="ml-2 text-capitalize" href="{{ route('shop.vendor.store-page',['name' => $product->product->vendor->display_name ]) }}">{{ $product->product->vendor->display_name }}</a>
+                                                        <a class="ml-2 text-capitalize" href="{{ route('shop.vendor.store-page',['name' => $product->product->admin->vendor->display_name ]) }}">{{ $product->product->admin->vendor->display_name }}</a>
                                                     </p>
                                                 @endif
                                                 @include ('shop::products.view.stock', ['product' => $product])
@@ -140,9 +140,9 @@ foreach ($images as $key => $image) {
                                             {!! $product->getTypeInstance()->getPriceHtml() !!}
                                         </header>
                                         <div class="ps-product__desc">
-                                            @if ($product->product->vendor)
-                                                <p>Sold By:<a href="{{ route('shop.vendor.store-page',['name' => $product->product->vendor->display_name ]) }}">
-                                                    <strong class="ml-2">{{ $product->product->vendor->display_name }}</strong>
+                                            @if ($product->product->admin->vendor)
+                                                <p>Sold By:<a href="{{ route('shop.vendor.store-page',['name' => $product->product->admin->vendor->display_name ]) }}">
+                                                    <strong class="ml-2">{{ $product->product->admin->vendor->display_name }}</strong>
                                                 </a></p>
                                             @endif
                                             @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
