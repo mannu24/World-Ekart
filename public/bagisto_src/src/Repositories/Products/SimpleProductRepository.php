@@ -17,6 +17,8 @@ use Webkul\Bulkupload\Repositories\Products\HelperRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Bulkupload\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class SimpleProductRepository extends Repository
 {
@@ -209,7 +211,6 @@ class SimpleProductRepository extends Repository
 
             return $dataToBeReturn;
         } catch (\Exception $e) {
-            Log::error('simple create product log: '. $e->getMessage());
 
             $categoryError = explode('[' ,$e->getMessage());
             $categorySlugError = explode(']' ,$e->getMessage());
@@ -293,13 +294,60 @@ class SimpleProductRepository extends Repository
             $data = [];
             $attributeCode = [];
             $attributeValue = [];
+            
+            // dd($csvData);
+            // $keys = array_keys($csvData) ;
+            // $csvAttributes = array_splice($keys,array_search('special_price_to', $keys)+1,-3) ;
+            // $attributeArray = array_column($simpleproductData->getTypeInstance()->getEditableAttributes()->toArray(),'code') ; 
+            
+            // Log::info($csvAttributes,$attributeArray);
+            // Log::info($attribute_fam_groups = DB::table('attributes_groups')->where('id',$data['attribute_family_id'])->pluck('id')) ;
+            // Log::info($all_fam_attributes = DB::table('attributes_group_mappings')->whereIn('attribute_group_id',$attribute_fam_groups)->pluck('attribute_id')) ;
+            // Log::info($all_fam_att_codes = DB::table('attributes')->whereIn('id',$all_fam_attributes)->pluck('code')) ;
+            // Log::info($fam_gen = DB::table('attributes_groups')->where('id',$data['attribute_family_id'])->where('name','General')->first()) ;
+          
 
+            // foreach ($csvAttributes as $key => $value) {
+            //     if (array_search($value, $attributeArray)) {
+            //         if(array_search($value,$all_fam_att_codes)){
+            //             Log::info('All condition satistfies' );
+
+            //         }
+            //         else{
+            //             Log::info('Second condition fails' );
+
+            //             $att_to_add = DB::table('attributes')->where('code',$value)->first();
+            //             DB::table('attributes_group_mappings')->insert([
+            //                 'attribute_id' => $att_to_add->id,
+            //                 'attribute_group_id' => $fam_gen->id
+            //             ]);
+            //         }
+            //     }
+            //     else {
+            //             $id = DB::table('attributes')->insertGetId([
+            //                 'code' => $value,
+            //                 'admin_name' => ucwords(str_replace("_", " ", $value)),
+            //                 'type' => 'text',
+            //             ]);
+            //             DB::table('attributes_group_mappings')->insert([
+            //                 'attribute_id' => $id,
+            //                 'attribute_group_id' => $fam_gen->id
+            //             ]);
+            //             Log::info('Fam Gen '.$fam_gen->id );
+
+            //             Log::info('Attribute Created '.$id );
+            //     }
+            // }
+    
+            //attribute check and addition 
+            // foreach()
             //default attributes
             foreach ($simpleproductData->getTypeInstance()->getEditableAttributes()->toArray() as $key => $value) {
                 $attributeOptionArray = array();
                 $searchIndex = strtolower($value['code']);
 
                 if (array_key_exists($searchIndex, $csvData)) {
+
 
                     if (is_null($csvData[$searchIndex])) {
                         continue;
@@ -308,10 +356,12 @@ class SimpleProductRepository extends Repository
                     array_push($attributeCode, $searchIndex);
 
                     if ($value['type'] == "select") {
+
                         $attributeOption = $this->attributeOptionRepository->findOneByField(['admin_name' => $csvData[$searchIndex]]);
 
                         array_push($attributeValue, $attributeOption['id']);
                     } else if ($value['type'] == "checkbox") {
+
                         $attributeOption = $this->attributeOptionRepository->findOneByField(['attribute_id' => $value['id'], 'admin_name' => $csvData[$searchIndex]]);
 
                         array_push($attributeOptionArray, $attributeOption['id']);
@@ -319,10 +369,14 @@ class SimpleProductRepository extends Repository
                         array_push($attributeValue, $attributeOptionArray);
                         unset($attributeOptionArray);
                     } else {
+
                         array_push($attributeValue, $csvData[$searchIndex]);
                     }
 
+                    // Log::info($data) ;
+
                     $data = array_combine($attributeCode, $attributeValue);
+
                 }
             }
 
@@ -331,9 +385,11 @@ class SimpleProductRepository extends Repository
             $inventorySource = $csvData['inventory_sources'];
             $inventoryCode = explode(',', $inventorySource);
 
+
             foreach ($inventoryCode as $key => $value) {
                 $inventoryId = $this->inventorySourceRepository->findOneByfield(['code' => trim($value)])->pluck('id')->toArray();
             }
+            // dd($csvData);
 
             $inventoryData[] = (string)$csvData['inventories'];
 
@@ -355,8 +411,9 @@ class SimpleProductRepository extends Repository
                 $categoryID = $this->categoryRepository->findBySlugOrFail('root')->id;
             } else {
                 foreach ($categoryData as $key => $value) {
-                    $categoryID[$key] = $this->categoryRepository->findBySlugOrFail($categoryData[$key])->id;
+                    $categoryID[$key] = $this->categoryRepository->findBySlugOrFail($categoryData[$key]) ? $this->categoryRepository->findBySlugOrFail($categoryData[$key])->id:$this->categoryRepository->findBySlugOrFail('root')->id;
                 }
+
             }
 
             $data['categories'] = $categoryID;
@@ -385,6 +442,7 @@ class SimpleProductRepository extends Repository
                         $data['images'][$imageArraykey] = $imagePath;
                     }
                 }
+
             } else if (isset($csvData['images'])) {
                 foreach ($individualProductimages as $imageArraykey => $imageURL)
                 {
@@ -402,6 +460,7 @@ class SimpleProductRepository extends Repository
                         $data['images'][$imageArraykey] = $imageFile;
                     }
                 }
+
             }
 
             $returnRules = $this->helperRepository->validateCSV($requestData['data_flow_profile_id'], $data, $dataFlowProfileRecord, $simpleproductData);
@@ -441,15 +500,19 @@ class SimpleProductRepository extends Repository
                 return $dataToBeReturn;
             }
 
+
+            // Log::info($data);
+            // dd($data, $simpleproductData->id);
+Log::info('Before fn call');
             $configSimpleProductAttributeStore = $this->productRepository->update($data, $simpleproductData->id);
 
             if (isset($imageZipName)) {
                 $this->productImageRepository->bulkuploadImages($data, $simpleproductData, $imageZipName);
             } else if (isset($csvData['images'])) {
+
                 $this->productImageRepository->bulkuploadImages($data, $simpleproductData, $imageZipName = null);
             }
         } catch(\Exception $e) {
-            \Log::error('simple product store function'. $e->getMessage());
         }
     }
 }

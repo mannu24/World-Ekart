@@ -755,8 +755,8 @@ class Core
         }
 
         $formater = new \NumberFormatter(app()->getLocale(), \NumberFormatter::CURRENCY);
-
-        if ($symbol = $this->getBaseCurrency()->symbol) {
+        $symbol = $this->getCurrentCurrency()->symbol ;
+        if ($symbol) {
             if ($this->currencySymbol($this->getBaseCurrencyCode()) == $symbol) {
                 $content = $formater->formatCurrency($price, $this->getBaseCurrencyCode());
             } else {

@@ -202,6 +202,7 @@ class CategoryRepository extends Repository
         if ($category) {
             return $category;
         }
+        return false;
 
         throw (new ModelNotFoundException)->setModel(
             get_class($this->model), $slug

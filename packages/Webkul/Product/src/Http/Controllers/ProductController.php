@@ -494,30 +494,38 @@ class ProductController extends Controller
     }
 
     public function custum_bulk_upload() {
-        
+        $attribute_families = DB::table('attribute_families')->get();
+        $categories = $this->categoryRepository->get() ;
+
         if (request()->ajax()) {
             return app(ShopifyFileUpload::class)->toJson();
         }
-        return view($this->_config['view']);
+        return view($this->_config['view'], compact('attribute_families','categories'));
     }
     public function save_bulk_upload() {
         // dd(request()->file('csv-file')) ;
+        $d = request()->validate([
+            'categories' => 'required|array',
+            'attribute_families' => 'required|string',
+        ]) ;
         $name = request()->file('csv-file')->getClientOriginalName() ;
-        $check = DB::table('shopify_file_csv')->where('file_name',"converted_csv/$name")->get()->count() ;
+        $check = DB::table('shopify_file_csv')->where('file_name',"converted_csv/converted-$name")->get()->count() ;
         if($check>0) {
             session()->flash('error','File Name Already Exists!') ;
             return redirect()->back() ;
         }
+        $d['categories'] = implode(',',$d['categories']) ;
+
         $file = fopen(request()->file('csv-file'), "r");
         $data = [];
         while (!feof($file)) {
             $data[] = fgetcsv($file);
         }
         fclose($file);
-        $completed = $this->manipulate_file($data,$name);
+        $completed = $this->manipulate_file($data,$name,$d);
         if($completed) {
             $upload['vendor_id'] = auth()->guard('admin')->user()->id ;
-            $upload['file_name'] = "converted_csv/$name" ;
+            $upload['file_name'] = "converted_csv/converted-$name" ;
     
             $check = DB::table('shopify_file_csv')->insert($upload) ;
     
@@ -529,7 +537,7 @@ class ProductController extends Controller
 
     }
 
-    public function manipulate_file($data,$name) {
+    public function manipulate_file($data,$name,$d) {
 
         //Change Header for Bulk Upload
         $data[0][0] = 'url_key'; 
@@ -594,7 +602,8 @@ class ProductController extends Controller
                 $data[$key][43] = 'special_price_from';
                 $data[$key][44] = 'special_price_to';
             } else {
-                $data[$key][4] = strtolower(str_replace(" ","_",$data[$key][4])) ;
+                // $data[$key][4] = strtolower(str_replace(" ","-",$data[$key][4])) ;
+                $data[$key][4] = $d['categories'] ;
                 $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
                 $data[$key][15] = 'default';
                 $data[$key][21] = null;
@@ -606,7 +615,7 @@ class ProductController extends Controller
                 $data[$key][35] = null;
                 $data[$key][36] = null;
                 $data[$key][37] = 'simple';
-                $data[$key][38] = 'Default';
+                $data[$key][38] = $d['attribute_families'] ;
                 $data[$key][39] = 1;
                 $data[$key][40] = null;
                 $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
@@ -682,12 +691,18 @@ class ProductController extends Controller
         foreach ($data as $key => $item) {
             $data[$key] = array_values($item) ;
         }
-        
+
+        //Attributes header Style FORMATTING 
+        foreach ($data[0] as $key => $value) {
+            if($key > 28 && $key < (count($data[0]) -3)) {
+                $data[0][$key] = str_replace(' ', '_', $value) ;
+            }
+        }
 
         // dd($data);
 
         // $data = include(public_path('csvjson.php'));
-        $fp = fopen("converted_csv/$name", 'w+');
+        $fp = fopen("converted_csv/converted-$name", 'w+');
         foreach ($data as $fields) {
             fputcsv($fp, $fields);
         }

@@ -17,7 +17,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Product\Models\ProductFlat;
-
+Use Log;
 class ProductRepository extends Repository
 {
     /**
@@ -83,15 +83,21 @@ class ProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
+        Log::info('Product st1');
         Event::dispatch('catalog.product.update.before', $id);
 
         $product = $this->find($id);
-
+        Log::info('Product st2');
+        Log::info($data);
+        Log::info($id);
+        Log::info($attribute);
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
+        Log::info('Product st3');
 
         if (isset($data['channels'])) {
             $product['channels'] = $data['channels'];
         }
+        Log::info('Product st4');
 
         Event::dispatch('catalog.product.update.after', $product);
 

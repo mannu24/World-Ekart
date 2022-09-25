@@ -22,6 +22,24 @@
                         <input type="file" class="control" accept=".csv" name="csv-file">
                     </div>
                     <div class="col-md-12 control-group">
+                        <label>Select Categories</label>
+                        <select name="categories[]" multiple class="control" required>
+                            <option value=""></option>
+                            @foreach($categories as $key => $value)
+                                <option value="{{ $value->slug }}">{{ $value->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-12 control-group">
+                        <label>Select Attribute Family</label>
+                        <select name="attribute_families" class="control" required>
+                            <option value=""></option>
+                            @foreach($attribute_families as $key => $value)
+                                <option value="{{ $value->name }}">{{ $value->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-12 control-group">
                         <button class="btn btn-primary btn-lg">Submit</button>
                     </div>
                     </form>
