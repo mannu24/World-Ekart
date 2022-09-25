@@ -1,7 +1,7 @@
 vendor/*
 !vendor/bagisto/
 vendor/bagisto/*
-!vendor/bagisto/bagisto-bulk-upload
+!vendor/bagisto/bagisto-bulk-upload/
 !vendor/bagisto/bagisto-bulk-upload/*
 
 node_modules/

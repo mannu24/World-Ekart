@@ -10,6 +10,7 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
         \Webkul\Attribute\Models\Attribute::class,
         \Webkul\Attribute\Models\AttributeFamily::class,
         \Webkul\Attribute\Models\AttributeGroup::class,
+        \Webkul\Attribute\Models\AttributeGroupMap::class,
         \Webkul\Attribute\Models\AttributeOption::class,
         \Webkul\Attribute\Models\AttributeOptionTranslation::class,
         \Webkul\Attribute\Models\AttributeTranslation::class,
