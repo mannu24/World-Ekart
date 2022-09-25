@@ -284,12 +284,12 @@
                             </div>
 
                             <div class="control-group" :class="[errors.has('{{$locale}}[seo_description]') ? 'has-error' : '']">
-                                <label for="seo_description" class="required">
+                                <label for="seo_description">
                                     {{ __('admin::app.settings.channels.seo-description') }}
                                     <span class="locale">[{{ $locale }}]</span>
                                 </label>
 
-                                <textarea v-validate="'required'" class="control" id="seo_description" name="{{$locale}}[seo_description]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? (old($locale)['seo_description'] ?? '') }}</textarea>
+                                <textarea class="control" id="seo_description" name="{{$locale}}[seo_description]" data-vv-as="&quot;{{ __('admin::app.settings.channels.seo-description') }}&quot;">{{ $seo->meta_description ?? (old($locale)['seo_description'] ?? '') }}</textarea>
 
                                 <span class="control-error" v-if="errors.has('{{$locale}}[seo_description]')">@{{ errors.first('{!!$locale!!}[page_title]') }}</span>
                             </div>
