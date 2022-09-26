@@ -61,12 +61,11 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="right-card-container category">
                     <div class="card">
                         <div class="card-title">Top Performing Vendors</div>
-
                         <div class="card-info {{ !count($statistics['top_vendors']) ? 'center' : '' }}">
+                            @if (count($statistics['top_vendors']))
                             <ul>
 
                                 @foreach ($statistics['top_vendors'] as $item)
@@ -91,7 +90,7 @@
 
                             </ul>
 
-                            @if (! count($statistics['top_vendors']))
+                            @else
 
                                 <div class="no-result-found">
 

@@ -20,6 +20,10 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Attribute\Repositories\AttributeGroupRepository;
+use Webkul\Attribute\Repositories\AttributeGroupMapRepository;
+use Webkul\Attribute\Repositories\AttributeRepository;
+
 
 class ProductController extends Controller
 {
@@ -64,6 +68,9 @@ class ProductController extends Controller
      * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
+    protected $attributeRepository;
+    protected $attributeGroupRepository;
+    protected $attributeGroupMapRepository;
 
     /**
      * Inventory source repository instance.
@@ -104,6 +111,9 @@ class ProductController extends Controller
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         AttributeFamilyRepository $attributeFamilyRepository,
+        AttributeGroupRepository $attributeGroupRepository,
+        AttributeGroupMapRepository $attributeGroupMapRepository,
+        AttributeRepository $attributeRepository,
         InventorySourceRepository $inventorySourceRepository,
         ProductAttributeValueRepository $productAttributeValueRepository,
         ProductInventoryRepository $productInventoryRepository
@@ -119,6 +129,12 @@ class ProductController extends Controller
         $this->productDownloadableSampleRepository = $productDownloadableSampleRepository;
 
         $this->attributeFamilyRepository = $attributeFamilyRepository;
+
+        $this->attributeGroupRepository = $attributeGroupRepository;
+
+        $this->attributeGroupMapRepository = $attributeGroupMapRepository;
+
+        $this->attributeRepository = $attributeRepository;
 
         $this->inventorySourceRepository = $inventorySourceRepository;
 
@@ -495,17 +511,17 @@ class ProductController extends Controller
 
     public function custum_bulk_upload() {
         $attribute_families = DB::table('attribute_families')->get();
-        $categories = $this->categoryRepository->get() ;
+        // $categories = $this->categoryRepository->get() ;
 
         if (request()->ajax()) {
             return app(ShopifyFileUpload::class)->toJson();
         }
-        return view($this->_config['view'], compact('attribute_families','categories'));
+        return view($this->_config['view'], compact('attribute_families'));
     }
     public function save_bulk_upload() {
         // dd(request()->file('csv-file')) ;
         $d = request()->validate([
-            'categories' => 'required|array',
+            // 'categories' => 'required|array',
             'attribute_families' => 'required|string',
         ]) ;
         $name = request()->file('csv-file')->getClientOriginalName() ;
@@ -514,7 +530,7 @@ class ProductController extends Controller
             session()->flash('error','File Name Already Exists!') ;
             return redirect()->back() ;
         }
-        $d['categories'] = implode(',',$d['categories']) ;
+        // $d['categories'] = implode(',',$d['categories']) ;
 
         $file = fopen(request()->file('csv-file'), "r");
         $data = [];
@@ -522,7 +538,9 @@ class ProductController extends Controller
             $data[] = fgetcsv($file);
         }
         fclose($file);
+
         $completed = $this->manipulate_file($data,$name,$d);
+        
         if($completed) {
             $upload['vendor_id'] = auth()->guard('admin')->user()->id ;
             $upload['file_name'] = "converted_csv/converted-$name" ;
@@ -555,7 +573,7 @@ class ProductController extends Controller
         $data[0][28] = 'meta_title'; 
         $data[0][29] = 'meta_description'; 
         
-        //Remove Null Value Record
+        //Remove Null Value Record at Last
         if(!$data[count($data) - 1]) unset($data[count($data) - 1]);
 
         //Image Implode and Extra Row Removal
@@ -576,7 +594,7 @@ class ProductController extends Controller
             unset($data[$key][25]) ;
         }
 
-        //Column Removal
+        //Column Removal and Updation
         foreach ($data as $key => $value) {
             unset(
                 $data[$key][3], $data[$key][5], $data[$key][17], $data[$key][18], $data[$key][20], $data[$key][22],
@@ -602,9 +620,9 @@ class ProductController extends Controller
                 $data[$key][43] = 'special_price_from';
                 $data[$key][44] = 'special_price_to';
             } else {
-                // $data[$key][4] = strtolower(str_replace(" ","-",$data[$key][4])) ;
                 $data[$key][0] = strtolower($value[0]) ;
-                $data[$key][4] = $d['categories'] ;
+                $category = $this->categoryCheck($data[$key][4]) ;
+                $data[$key][4] = $category ;
                 $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
                 $data[$key][15] = 'default';
                 $data[$key][21] = null;
@@ -687,7 +705,6 @@ class ProductController extends Controller
             unset($data[$key][5],$data[$key][6],$data[$key][7],$data[$key][8],$data[$key][9],$data[$key][10]) ;
         }
 
-
         //Item Array Reindexing
         foreach ($data as $key => $item) {
             $data[$key] = array_values($item) ;
@@ -700,6 +717,8 @@ class ProductController extends Controller
             }
         }
 
+        $this->attributeCheck($data[0],$d['attribute_families']) ;
+
         // dd($data);
 
         // $data = include(public_path('csvjson.php'));
@@ -710,6 +729,70 @@ class ProductController extends Controller
         fclose($fp);
 
         return true ;
+    }
+
+    public function categoryCheck($category) {
+        $cat = strtolower(str_replace(" ","-",$category)) ;
+        // $check = DB::table('category_translations')->where('slug', $cat)->first() ;
+        $check = DB::table('category_translations')->where('slug', 'like' , "%$cat%")->first() ;
+        if(isset($check)) return $check->slug ;
+        else {
+            $data['position'] = 1 ;
+            $data['status'] = 0 ;
+            $data['parent_id'] = 1 ;
+            $data['display_mode'] = 'products_only' ;
+            $insert = $this->categoryRepository->create($data) ;
+            if($insert) {
+                $newCat['name'] = $category ;
+                $newCat['slug'] = $cat ;
+                $newCat['category_id'] = $insert->id ;
+                $newCat['locale'] = 'en' ;
+                $newCat['locale_id'] = 1 ;
+                DB::table('category_translations')->insertGetId($newCat) ;
+            }
+
+            return $cat ;
+        }
+    }
+
+    public function attributeCheck($data,$af) {
+
+        // dd($data,$af) ;
+        // attribute check and addition 
+        $keys = $data ;
+        $csvAttributes = array_splice($keys,array_search('special_price_to', $data)+1,-3) ;
+        $aFamily = $this->attributeFamilyRepository->findOneByfield(['name' => $af]) ; 
+        $attributeArray = $this->attributeRepository->pluck('code')->toArray() ;
+
+        
+        $attribute_fam_groups = $this->attributeGroupRepository->where('attribute_family_id',$aFamily->id)->pluck('id') ;
+        $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id',$attribute_fam_groups)->pluck('attribute_id') ;
+        $all_fam_att_codes = $this->attributeRepository->whereIn('id',$all_fam_attributes)->pluck('code')->toArray() ;
+        $fam_gen = $this->attributeGroupRepository->where('id',$aFamily->id)->where('name','General')->first() ;
+        // dd($attribute_fam_groups,$all_fam_att_codes,$all_fam_attributes, $fam_gen) ;
+
+        foreach ($csvAttributes as $key => $value) {
+            if (in_array($value, $attributeArray)) {
+                if(!in_array($value,$all_fam_att_codes)){
+                    $att_to_add = $this->attributeRepository->where('code',$value)->first();
+                    DB::table('attribute_group_mappings')->insert([
+                        'attribute_id' => $att_to_add->id,
+                        'attribute_group_id' => $fam_gen->id
+                    ]);
+                }
+            }
+            else {
+                    $id = $this->attributeRepository->insertGetId([
+                        'code' => $value,
+                        'admin_name' => ucwords(str_replace("_", " ", $value)),
+                        'type' => 'text',
+                    ]);
+                    DB::table('attribute_group_mappings')->insert([
+                        'attribute_id' => $id,
+                        'attribute_group_id' => $fam_gen->id
+                    ]);
+            }
+        }
     }
 
     public function delete_shopify_file($id) {

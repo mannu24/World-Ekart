@@ -18,10 +18,10 @@
                     <form action="{{ route('save-custom-upload') }}" method="post" enctype="multipart/form-data">
                         @csrf
                     <div class="col-md-12 control-group">
-                        <label for="">Select File to Upload</label>
+                        <label class="required">Select File to Upload</label>
                         <input type="file" class="control" accept=".csv" name="csv-file">
                     </div>
-                    <div class="col-md-12 control-group">
+                    {{-- <div class="col-md-12 control-group">
                         <label>Select Categories</label>
                         <select name="categories[]" multiple class="control" required>
                             <option value=""></option>
@@ -29,13 +29,12 @@
                                 <option value="{{ $value->slug }}">{{ $value->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="col-md-12 control-group">
-                        <label>Select Attribute Family</label>
+                        <label class="required">Select Attribute Family</label>
                         <select name="attribute_families" class="control" required>
-                            <option value=""></option>
                             @foreach($attribute_families as $key => $value)
-                                <option value="{{ $value->name }}">{{ $value->name }}</option>
+                                <option @if($key==0) selected @endif value="{{ $value->name }}">{{ $value->name }}</option>
                             @endforeach
                         </select>
                     </div>

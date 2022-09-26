@@ -126,7 +126,7 @@ class AnalyticsController extends Controller {
             'month_sales'          => $this->total_sales(date('m')),
             'total_commissions'    => ($this->total_sales() * 5)/100,
             'month_commissions'    => ($this->total_sales(date('m')) * 5)/100,
-            'top_vendors'          => $this->getTopVendors(),
+            'top_vendors'          => $this->orderRepository->getModel()->get()->count() ? $this->getTopVendors() : [],
         ];
 
         foreach (core()->getTimeInterval($this->startDate, $this->endDate) as $interval) {

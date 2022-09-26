@@ -67,6 +67,7 @@ class HomeController extends Controller
             ->havingRaw('SUM(qty_invoiced - qty_refunded) > 0')
             ->limit(10)
             ->get();
+        $category = [] ;
         foreach ($cat_data as $key => $value) {
             $category[] = ['slug'=>$value->slug,'name'=>$value->name,'image_path'=>$value->image_path,];
         }
