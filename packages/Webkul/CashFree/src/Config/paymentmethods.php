@@ -4,7 +4,7 @@
                 'code'        => 'cashfree',
                 'title'       => 'Cashfree',
                 'description' => 'Cashfree',
-                'class'       => 'Webkul\CashFree\Payment\Cashfree',
+                'class'       => 'Webkul\CashFree\Payment\CashFree',
                 'sandbox'     => true,
                 'active'      => true,
                 'sort'        => 3,

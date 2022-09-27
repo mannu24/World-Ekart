@@ -29,6 +29,7 @@ class ProductDataGrid extends DataGrid
      * @var int
      */
     protected $itemsPerPage = 10;
+    protected $itemsPerOptions = [10,20,30,40,50,60];
 
     /**
      * Locale.
@@ -173,7 +174,7 @@ class ProductDataGrid extends DataGrid
                 'index'      => 'vendor_name',
                 'label'      => 'Vendor',
                 'type'       => 'string',
-                'searchable' => true,
+                'searchable' => false,
                 'sortable'   => false,
                 'filterable' => true,
             ]);

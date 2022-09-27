@@ -53,7 +53,7 @@
 
 @section('content-wrapper')
     <div class="ps-breadcrumb">
-        <div class="container">
+        <div class="container-fluid">
             <ul class="breadcrumb">
                 <li><a href="/">Home</a></li>
                 <li>Shop</li>
@@ -66,7 +66,7 @@
 
 @push('scripts')
     <script type="text/x-template" id="category-template">
-        <div class="container">
+        <div class="container-fluid">
             <div class="ps-layout--shop ps-shop--category">
                 @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                     @include ('shop::products.list.layered-navigation')

@@ -18,7 +18,7 @@
 @php $categories = $helper->getRootCategories()->toArray() ;@endphp
     {{-- {{ dd(get_defined_vars()['__data']) }} --}}
 @php $site_data = core()->getCurrentChannel()->translate(core()->getRequestedLocaleCode()) ; @endphp 
-<footer class="ps-footer">
+<footer class="ps-footer pt-5">
     <div class="container">
         <div class="ps-footer__widgets pb-0">
             {{-- <aside class="col-md-4 widget widget_footer widget_contact-us">
