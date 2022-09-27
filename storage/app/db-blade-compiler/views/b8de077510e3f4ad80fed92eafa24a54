@@ -2,16 +2,16 @@
 <div class="ps-breadcrumb">
 <div class="container">
 <ul class="breadcrumb">
-<li><a href="http://localhost:8000/">Home</a></li>
+<li><a href="/">Home</a></li>
 <li>Become a Seller</li>
 </ul>
 </div>
 </div>
-<div class="ps-vendor-banner bg--cover" style="background-image: url('http://localhost:8000/themes/ekart/assets/images/bg/vendor.jpg');">
+<div class="ps-vendor-banner bg--cover" style="background-image: url('/themes/ekart/assets/images/bg/vendor.jpg');">
 <div class="ps-vendor-banner">
 <div class="container">
 <h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>
-<a class="ps-btn ps-btn--lg" href="http://localhost:8000/seller-registration">Start Selling</a></div>
+<a class="ps-btn ps-btn--lg" href="/seller-registration">Start Selling</a></div>
 </div>
 </div>
 <div class="ps-section--vendor ps-vendor-about">
@@ -24,7 +24,7 @@
 <div class="row">
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
 <div class="ps-block--icon-box-2">
-<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-1.png" alt="ekart" /></div>
+<div class="ps-block__thumbnail"><img src="/themes/ekart/assets/images/icons/vendor-1.png" alt="ekart" /></div>
 <div class="ps-block__content">
 <h4>Low Fees</h4>
 <div class="ps-block__desc" data-mh="about-desc">
@@ -35,7 +35,7 @@
 </div>
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
 <div class="ps-block--icon-box-2">
-<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-2.png" alt="ekart" /></div>
+<div class="ps-block__thumbnail"><img src="/themes/ekart/assets/images/icons/vendor-2.png" alt="ekart" /></div>
 <div class="ps-block__content">
 <h4>Powerful Tools</h4>
 <div class="ps-block__desc" data-mh="about-desc">
@@ -46,7 +46,7 @@
 </div>
 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 ">
 <div class="ps-block--icon-box-2">
-<div class="ps-block__thumbnail"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-3.png" alt="ekart" /></div>
+<div class="ps-block__thumbnail"><img src="/themes/ekart/assets/images/icons/vendor-3.png" alt="ekart" /></div>
 <div class="ps-block__content">
 <h4>Support 24/7</h4>
 <div class="ps-block__desc" data-mh="about-desc">
@@ -74,7 +74,7 @@
 <li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-1.png" alt="ekart" /></div>
+<div class="ps-block__right"><img src="/themes/ekart/assets/images/vendor/milestone-1.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>1</span></div>
 </div>
 <div class="ps-block--vendor-milestone reverse">
@@ -85,7 +85,7 @@
 <li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-2.png" alt="ekart" /></div>
+<div class="ps-block__right"><img src="/themes/ekart/assets/images/vendor/milestone-2.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>2</span></div>
 </div>
 <div class="ps-block--vendor-milestone">
@@ -96,7 +96,7 @@
 <li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-3.png" alt="ekart" /></div>
+<div class="ps-block__right"><img src="/themes/ekart/assets/images/vendor/milestone-3.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>3</span></div>
 </div>
 <div class="ps-block--vendor-milestone reverse">
@@ -107,7 +107,7 @@
 <li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>
 </ul>
 </div>
-<div class="ps-block__right"><img src="http://localhost:8000/themes/ekart/assets/images/vendor/milestone-4.png" alt="ekart" /></div>
+<div class="ps-block__right"><img src="/themes/ekart/assets/images/vendor/milestone-4.png" alt="ekart" /></div>
 <div class="ps-block__number"><span>4</span></div>
 </div>
 </div>
@@ -139,7 +139,7 @@
 </ul>
 </figure>
 </div>
-<div class="ps-section__highlight"><img src="http://localhost:8000/themes/ekart/assets/images/icons/vendor-4.png" alt="ekart" />
+<div class="ps-section__highlight"><img src="/themes/ekart/assets/images/icons/vendor-4.png" alt="ekart" />
 <figure>
 <p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>
 </figure>
@@ -163,7 +163,7 @@
 <div data-index="-2" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Anabella Kleva<span>Boss at TocoToco</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -174,7 +174,7 @@
 <div data-index="-1" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -185,7 +185,7 @@
 <div data-index="0" class="slick-slide slick-active slick-current" aria-hidden="false" style="outline: none; width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/1.jpg" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/1.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -196,7 +196,7 @@
 <div data-index="1" class="slick-slide slick-active" aria-hidden="false" style="outline: none; width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Anabella Kleva<span>Boss at TocoToco</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -207,7 +207,7 @@
 <div data-index="2" class="slick-slide" aria-hidden="true" style="outline: none; width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -218,7 +218,7 @@
 <div data-index="3" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/1.jpg" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/1.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -229,7 +229,7 @@
 <div data-index="4" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/2.png" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>Anabella Kleva<span>Boss at TocoToco</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>
@@ -240,7 +240,7 @@
 <div data-index="5" class="slick-slide slick-cloned" aria-hidden="true" style="width: 12.5%;" tabindex="-1">
 <div>
 <div class="ps-block--testimonial" style="width: 100%; display: inline-block;" tabindex="-1">
-<div class="ps-block__header"><img src="http://localhost:8000/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
+<div class="ps-block__header"><img src="/themes/ekart/assets/images/users/3.jpg" alt="ekart" /></div>
 <div class="ps-block__content"><i class="icon-quote-close"></i>
 <h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>
 <p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>

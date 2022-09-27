@@ -10,6 +10,7 @@ use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductReviewRepository;
 use Webkul\Velocity\Repositories\OrderBrandsRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Velocity\Repositories\VelocityMetadataRepository;
 
 class Helper extends Review
@@ -34,6 +35,7 @@ class Helper extends Review
      * @var \Webkul\Product\Repositories\ProductRepository
      */
     protected $productRepository;
+    protected $categoryRepo ;
 
     /**
      * Product flat repository instance.
@@ -80,7 +82,8 @@ class Helper extends Review
         ProductFlatRepository $productFlatRepository,
         OrderBrandsRepository $orderBrandsRepository,
         ProductReviewRepository $productReviewRepository,
-        VelocityMetadataRepository $velocityMetadataRepository
+        VelocityMetadataRepository $velocityMetadataRepository,
+        CategoryRepository $categoryRepo
     ) {
         $this->productModel = $productModel;
 
@@ -95,6 +98,7 @@ class Helper extends Review
         $this->productReviewRepository = $productReviewRepository;
 
         $this->velocityMetadataRepository = $velocityMetadataRepository;
+        $this->categoryRepo = $categoryRepo;
     }
 
     /**
@@ -121,6 +125,10 @@ class Helper extends Review
             } catch (\Exception $exception) {
             }
         }
+    }
+
+    public function getRootCategories() {
+        return $this->categoryRepo->where('parent_id', 1)->inRandomOrder()->limit(8)->get();
     }
 
     /**

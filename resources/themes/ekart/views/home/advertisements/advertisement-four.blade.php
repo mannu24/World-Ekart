@@ -20,7 +20,7 @@
 
         <div class="container-fluid advertisement-four-container">
             <div class="row">
-                <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+                <div class="col-lg-4 col-12 advertisement-container-block px-0">
                     @if (isset($advertisementFour[0]))
                         <a @if (isset($one)) href="{{ $one }}" @endif aria-label="Advertisement">
                             <img
@@ -33,7 +33,7 @@
 
                 <div class="col-lg-4 col-12 advertisement-container-block offers-ct-panel">
                     @if (isset($advertisementFour[1]))
-                        <a @if (isset($two)) href="{{ $two }}" @endif class="row col-12 remove-padding-margin" aria-label="Advertisement">
+                        <a @if (isset($two)) href="{{ $two }}" @endif class="row col-12 px-0 mx-0 mt-10 mt-md-0" aria-label="Advertisement">
                             <img
                                 class="offers-ct-top {{ $isLazyLoad ? 'lazyload' : '' }}"
                                 @if (! $isLazyLoad) src="{{ Storage::url($advertisementFour[1]) }}" @endif
@@ -44,7 +44,7 @@
                     <div style="height: 10px;"></div>
 
                     @if (isset($advertisementFour[2]))
-                        <a @if (isset($three)) href="{{ $three }}" @endif class="row col-12 remove-padding-margin" aria-label="Advertisement">
+                        <a @if (isset($three)) href="{{ $three }}" @endif class="row col-12 px-0 mx-0 mb-10 mb-md-0" aria-label="Advertisement">
                             <img
                                 class="offers-ct-bottom {{ $isLazyLoad ? 'lazyload' : '' }}"
                                 @if (! $isLazyLoad) src="{{ Storage::url($advertisementFour[2]) }}" @endif
@@ -53,7 +53,7 @@
                     @endif
                 </div>
 
-                <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+                <div class="col-lg-4 col-12 advertisement-container-block px-0">
                     @if (isset($advertisementFour[3]))
                         <a @if (isset($four)) href="{{ $four }}" @endif aria-label="Advertisement">
                             <img
@@ -71,7 +71,7 @@
 @if (! $isRendered)
     <div class="container-fluid advertisement-four-container">
         <div class="row">
-            <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+            <div class="col-lg-4 col-12 advertisement-container-block px-0">
                 <a @if (isset($one)) href="{{ $one }}" @endif aria-label="Advertisement">
                     <img
                         class="{{ $isLazyLoad ? 'lazyload' : '' }}"
@@ -98,7 +98,7 @@
                 </a>
             </div>
 
-            <div class="col-lg-4 col-12 advertisement-container-block no-padding">
+            <div class="col-lg-4 col-12 advertisement-container-block px-0">
                 <a @if (isset($four)) href="{{ $four }}" @endif aria-label="Advertisement">
                     <img
                         class="{{ $isLazyLoad ? 'lazyload' : '' }}"

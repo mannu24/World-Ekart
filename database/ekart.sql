@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2022 at 02:48 PM
+-- Generation Time: Sep 27, 2022 at 04:42 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -52,33 +52,6 @@ CREATE TABLE `addresses` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `addresses`
---
-
-INSERT INTO `addresses` (`id`, `address_type`, `customer_id`, `cart_id`, `order_id`, `first_name`, `last_name`, `gender`, `company_name`, `address1`, `address2`, `postcode`, `city`, `state`, `country`, `email`, `phone`, `vat_id`, `default_address`, `additional`, `created_at`, `updated_at`) VALUES
-(1, 'customer', 1, NULL, NULL, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:35:23', '2022-08-13 15:35:23'),
-(2, 'cart_billing', 1, 6, NULL, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:35:23', '2022-08-13 15:35:23'),
-(3, 'cart_shipping', 1, 6, NULL, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:35:23', '2022-08-13 15:35:23'),
-(4, 'order_shipping', 1, NULL, 1, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:41:30', '2022-08-13 15:41:30'),
-(5, 'order_billing', 1, NULL, 1, 'Mannu', 'kumar', NULL, NULL, '28 A/C Gandhi Nagar', NULL, '180004', 'Jammu', 'JK', 'IN', 'mannukumarshah595@gmail.com', '09682150294', NULL, 0, NULL, '2022-08-13 15:41:30', '2022-08-13 15:41:30'),
-(7, 'customer', 4, NULL, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', NULL, '+917006022977', NULL, 0, NULL, '2022-08-21 10:28:50', '2022-08-21 10:34:10'),
-(8, 'cart_billing', 4, 12, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-21 12:17:33', '2022-08-21 12:17:33'),
-(9, 'cart_shipping', 4, 12, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-21 12:17:33', '2022-08-21 12:17:33'),
-(10, 'order_shipping', 4, NULL, 2, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
-(11, 'order_billing', 4, NULL, 2, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
-(12, 'cart_billing', 4, 13, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:16', '2022-08-24 20:00:16'),
-(13, 'cart_shipping', 4, 13, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:16', '2022-08-24 20:00:16'),
-(14, 'order_shipping', 4, NULL, 3, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
-(15, 'order_billing', 4, NULL, 3, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
-(16, 'cart_billing', 4, 14, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:10:31', '2022-09-17 07:10:31'),
-(17, 'cart_shipping', 4, 14, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:10:31', '2022-09-17 07:10:31'),
-(18, 'order_shipping', 4, NULL, 4, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
-(19, 'order_billing', 4, NULL, 4, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
-(20, 'order_shipping', 4, NULL, 5, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:28:06', '2022-09-17 07:28:06'),
-(21, 'order_billing', 4, NULL, 5, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-17 07:28:06', '2022-09-17 07:28:06'),
-(22, 'cart_billing', 4, 19, NULL, 'Danish', 'Bhatia', NULL, '', 'HNo 208 C Uttam Nagar Near Shiv Mandir Opposite Vishal Mega Mart Bye Pass Kunjwani', NULL, '180010', 'Jammu', 'JK', 'IN', 'danishbhatia43@gmail.com', '+917006022977', NULL, 0, NULL, '2022-09-18 07:28:36', '2022-09-18 07:28:36');
-
 -- --------------------------------------------------------
 
 --
@@ -110,10 +83,10 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`id`, `vendor_id`, `name`, `email`, `password`, `api_token`, `status`, `role_id`, `bank_name`, `ifsc_code`, `acc_name`, `acc_no`, `upi_id`, `remember_token`, `created_at`, `updated_at`, `image`) VALUES
-(1, NULL, 'Example', 'admin@example.com', '$2y$10$EpOvWIS0zC2GFot3UHGJqu1Mqlr20jR9Fq8zIk8w5zojdryW.w.DO', 'Un0PX1XRd57lkt8aE7xXgJWRNlq3xBVpCJB01lZFud0LCU1D81qKW2I0rC9dYPeB4gXKgwOhpMzjpzVi', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL),
-(2, NULL, 'Admin 2', 'admin2@ekart.com', '$2y$10$Pg.aRv88Ww0bUaGfcUoM9OS2HZLSS49lg7wSCWJ9rES9jVeelD/Wm', '2YGja6kVifqtNeIzAnAIUxUXsHKKhkJe8ek3sdGRuBwIHCuuegPXI4FfTTtinauzHBWAvwzZdi6dIw1O', 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 06:55:26', '2022-08-12 06:59:19', NULL),
-(3, 3, 'Danish Bhatia', 'danishbhatia4@gmail.com', '$2y$10$j639sfZyvK.rjuPcUe5Qs.DQrN48j04T5n8U83e6u4Q7vj523RBBq', '2T62pbcUVjjhWiN1HgKx8riZ8VfbAcUv68NAUI68ks6DJ0TvmWmo2OCmPWnxwxzzZAPjUw7MmAt0Pjoe', 1, 2, 'pnb', 'abcd1244', '3245678mbsdskdbc', '23456789087654', 'abcdasas', NULL, '2022-09-04 06:21:27', '2022-09-12 08:28:25', 'storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg'),
-(4, 1, 'Archies Gallery', 'archies.gallery@gmail.com', '$2y$10$.YU22O99KpbK/U7yoHbmLONGd.DMLAxT97iIkqHMmnKK1RC/cbR8C', 'ayeoHhHTOJkK46rESEhF2yIKq4OyHaGO1LmyMIUOKWOyCArkG1wQCDVnt3LclKZCcIQH2nE7QBKijDdx', 1, 2, 'ASDAS', 'abcd1244', '1234567890', '1234567890', 'osdnw212', NULL, '2022-09-04 09:00:12', '2022-09-17 07:05:44', '/storage/admins/4/cRC1nGH4BkOZpMKqZvsSqSCc6DxTI4rembJSsdiW.jpg');
+(1, 0, 'Example', 'admin@example.com', '$2y$10$EpOvWIS0zC2GFot3UHGJqu1Mqlr20jR9Fq8zIk8w5zojdryW.w.DO', 'Un0PX1XRd57lkt8aE7xXgJWRNlq3xBVpCJB01lZFud0LCU1D81qKW2I0rC9dYPeB4gXKgwOhpMzjpzVi', 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL),
+(2, 0, 'Admin 2', 'admin2@ekart.com', '$2y$10$Pg.aRv88Ww0bUaGfcUoM9OS2HZLSS49lg7wSCWJ9rES9jVeelD/Wm', '2YGja6kVifqtNeIzAnAIUxUXsHKKhkJe8ek3sdGRuBwIHCuuegPXI4FfTTtinauzHBWAvwzZdi6dIw1O', 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-12 06:55:26', '2022-08-12 06:59:19', NULL),
+(3, 3, 'Danish Bhatia Lol', 'danishbhatia4@gmail.com', '$2y$10$j639sfZyvK.rjuPcUe5Qs.DQrN48j04T5n8U83e6u4Q7vj523RBBq', '2T62pbcUVjjhWiN1HgKx8riZ8VfbAcUv68NAUI68ks6DJ0TvmWmo2OCmPWnxwxzzZAPjUw7MmAt0Pjoe', 1, 2, 'pnb', 'abcd1244', '3245678mbsdskdbc', '23456789087654', 'abcdasas', NULL, '2022-09-04 06:21:27', '2022-09-16 14:54:17', NULL),
+(4, 1, 'Archies Gallery', 'archies.gallery@gmail.com', '$2y$10$.YU22O99KpbK/U7yoHbmLONGd.DMLAxT97iIkqHMmnKK1RC/cbR8C', 'ayeoHhHTOJkK46rESEhF2yIKq4OyHaGO1LmyMIUOKWOyCArkG1wQCDVnt3LclKZCcIQH2nE7QBKijDdx', 1, 2, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-04 09:00:12', '2022-09-04 09:00:12', NULL);
 
 -- --------------------------------------------------------
 
@@ -183,13 +156,20 @@ INSERT INTO `attributes` (`id`, `code`, `admin_name`, `type`, `validation`, `pos
 (20, 'width', 'Width', 'text', 'decimal', 23, 0, 0, 0, 0, 0, 0, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (21, 'height', 'Height', 'text', 'decimal', 24, 0, 0, 0, 0, 0, 0, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (22, 'weight', 'Weight', 'text', 'decimal', 25, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(23, 'color', 'Color', 'select', NULL, 26, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(24, 'size', 'Size', 'select', NULL, 27, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(25, 'brand', 'Brand', 'select', '', 28, 0, 0, 0, 0, 1, 0, 1, 1, '2022-08-10 07:08:12', '2022-08-13 14:37:41', 'dropdown', 1, 0, 0),
+(23, 'color', 'Color', 'text', '', 26, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-09-24 19:10:18', 'text', 1, 0, 0),
+(24, 'size', 'Size', 'text', NULL, 27, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
+(25, 'brand', 'Brand', 'text', '', 28, 0, 0, 0, 0, 1, 0, 1, 1, '2022-08-10 07:08:12', '2022-08-13 14:37:41', 'dropdown', 1, 0, 0),
 (26, 'guest_checkout', 'Guest Checkout', 'boolean', NULL, 8, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (27, 'product_number', 'Product Number', 'text', NULL, 2, 0, 1, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(28, 'RAM', 'RAM', 'select', '', NULL, 1, 0, 0, 0, 1, 1, 1, 1, '2022-08-27 17:44:26', '2022-08-27 19:36:07', 'text', 1, 0, 0),
-(29, 'random', 'Admin', 'boolean', '', NULL, 1, 1, 0, 0, 0, 1, 1, 1, '2022-08-27 18:59:55', '2022-08-27 18:59:55', NULL, 1, 0, 0);
+(28, 'RAM', 'RAM', 'select', '', NULL, 1, 0, 0, 0, 1, 1, 1, 1, '2022-08-27 17:44:26', '2022-09-26 18:24:07', 'text', 0, 0, 0),
+(29, 'random', 'Admin', 'boolean', '', NULL, 1, 1, 0, 0, 0, 1, 1, 1, '2022-08-27 18:59:55', '2022-08-27 18:59:55', NULL, 1, 0, 0),
+(30, 'material', 'Material', 'text', '', NULL, 0, 0, 0, 0, 0, 0, 1, 0, '2022-09-24 06:00:33', '2022-09-24 06:00:33', NULL, 1, 0, 0),
+(31, 'product_type', 'Product Type', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
+(32, 'pattern', 'Pattern', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
+(33, 'gender', 'Gender', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
+(34, 'package_contains', 'Package Contains', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
+(35, 'model', 'Model', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
+(36, 'style', 'Style', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -296,7 +276,6 @@ INSERT INTO `attribute_group_mappings` (`attribute_id`, `attribute_group_id`, `p
 (17, 8, 2),
 (18, 3, 3),
 (18, 8, 3),
-(19, 5, 1),
 (19, 10, 1),
 (20, 5, 2),
 (20, 10, 2),
@@ -304,15 +283,23 @@ INSERT INTO `attribute_group_mappings` (`attribute_id`, `attribute_group_id`, `p
 (21, 10, 3),
 (22, 5, 4),
 (22, 10, 4),
-(23, 1, 11),
-(24, 1, 12),
-(25, 1, 13),
+(23, 1, NULL),
+(23, 6, 12),
+(24, 1, NULL),
+(24, 6, 13),
+(25, 6, 14),
 (26, 1, 9),
 (26, 6, 9),
 (27, 1, 2),
 (27, 6, 2),
 (28, 6, 11),
-(29, 6, 12);
+(30, 1, NULL),
+(31, 1, NULL),
+(32, 1, NULL),
+(33, 1, NULL),
+(34, 1, NULL),
+(35, 1, NULL),
+(36, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -333,11 +320,6 @@ CREATE TABLE `attribute_options` (
 --
 
 INSERT INTO `attribute_options` (`id`, `admin_name`, `sort_order`, `attribute_id`, `swatch_value`) VALUES
-(1, 'Red', 1, 23, NULL),
-(2, 'Green', 2, 23, NULL),
-(3, 'Yellow', 3, 23, NULL),
-(4, 'Black', 4, 23, NULL),
-(5, 'White', 5, 23, NULL),
 (6, 'S', 1, 24, NULL),
 (7, 'M', 2, 24, NULL),
 (8, 'L', 3, 24, NULL),
@@ -366,11 +348,6 @@ CREATE TABLE `attribute_option_translations` (
 --
 
 INSERT INTO `attribute_option_translations` (`id`, `locale`, `label`, `attribute_option_id`) VALUES
-(1, 'en', 'Red', 1),
-(2, 'en', 'Green', 2),
-(3, 'en', 'Yellow', 3),
-(4, 'en', 'Black', 4),
-(5, 'en', 'White', 5),
 (6, 'en', 'S', 6),
 (7, 'en', 'M', 7),
 (8, 'en', 'L', 8),
@@ -459,7 +436,8 @@ INSERT INTO `attribute_translations` (`id`, `locale`, `name`, `attribute_id`) VA
 (38, 'fr', '', 29),
 (39, 'nl', '', 29),
 (40, 'tr', '', 29),
-(41, 'es', '', 29);
+(41, 'es', '', 29),
+(42, 'en', 'Material', 30);
 
 -- --------------------------------------------------------
 
@@ -613,8 +591,10 @@ CREATE TABLE `bulkupload_data_flow_profiles` (
 --
 
 INSERT INTO `bulkupload_data_flow_profiles` (`id`, `name`, `attribute_family_id`, `run_status`, `created_at`, `updated_at`, `locale_code`) VALUES
-(1, 'Test', 1, 1, '2022-08-10 07:09:40', '2022-09-23 11:48:14', 'en'),
-(2, 'test profile', 1, 0, '2022-08-21 15:39:41', '2022-08-21 15:39:41', 'en');
+(1, 'Test', 1, 1, '2022-08-10 07:09:40', '2022-09-26 10:17:35', 'en'),
+(2, 'test profile', 1, 0, '2022-08-21 15:39:41', '2022-08-21 15:39:41', 'en'),
+(3, 'def1', 1, 1, '2022-09-16 18:07:21', '2022-09-16 18:12:12', 'en'),
+(4, 'Mobile', 2, 1, '2022-09-25 11:56:47', '2022-09-25 11:57:25', 'en');
 
 -- --------------------------------------------------------
 
@@ -667,16 +647,11 @@ INSERT INTO `cart` (`id`, `customer_email`, `customer_first_name`, `customer_las
 (3, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 07:57:34', '2022-08-10 07:57:34', ''),
 (4, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '500.0000', '500.0000', '500.0000', '500.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 08:01:54', '2022-08-10 08:02:05', ''),
 (5, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '300.0000', '300.0000', '300.0000', '300.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-10 08:06:01', '2022-08-10 08:06:10', ''),
-(6, 'mannukumarshah@gmail.com', 'Manu', 'kumar', 'free_free', NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 1, 1, '2022-08-13 15:27:26', '2022-08-13 15:41:36', ''),
 (7, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-19 11:39:21', '2022-08-19 11:39:22', ''),
 (10, NULL, NULL, NULL, NULL, NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '800.0000', '800.0000', '800.0000', '800.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-20 19:04:17', '2022-08-20 19:04:30', ''),
-(12, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 2, '5.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '1650.0000', '1650.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-21 12:06:54', '2022-08-24 19:58:44', ''),
-(13, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'flatrate_flatrate', NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '210.0000', '210.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-24 20:00:01', '2022-08-24 20:00:31', ''),
-(14, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', 'free_free', NULL, 0, 2, '2.0000', NULL, 'USD', 'USD', 'USD', 'INR', NULL, '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 0, NULL, 4, 1, '2022-08-27 08:56:32', '2022-09-17 07:28:12', ''),
 (15, NULL, NULL, NULL, NULL, NULL, 0, 1, '3.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '300000.0000', '300000.0000', '300000.0000', '300000.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-08-31 10:16:18', '2022-08-31 10:16:32', ''),
 (17, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'USD', 'USD', NULL, '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-09-04 19:07:22', '2022-09-04 19:07:22', ''),
-(18, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'INR', 'INR', NULL, '80.0000', '80.0000', '80.0000', '80.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-09-16 18:23:59', '2022-09-16 18:25:23', ''),
-(19, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 0, 2, '3.0000', NULL, 'USD', 'USD', 'INR', 'INR', NULL, '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 0, 1, NULL, 4, 1, '2022-09-18 07:28:12', '2022-09-18 14:55:23', '');
+(19, NULL, NULL, NULL, NULL, NULL, 0, 1, '1.0000', NULL, 'USD', 'USD', 'INR', 'INR', NULL, '80.0000', '80.0000', '80.0000', '80.0000', '0.0000', '0.0000', '0.0000', '0.0000', NULL, 1, 1, NULL, NULL, 1, '2022-09-16 18:02:29', '2022-09-16 18:02:30', '');
 
 -- --------------------------------------------------------
 
@@ -715,31 +690,6 @@ CREATE TABLE `cart_items` (
   `applied_cart_rule_ids` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `cart_items`
---
-
-INSERT INTO `cart_items` (`id`, `quantity`, `sku`, `type`, `name`, `coupon_code`, `weight`, `total_weight`, `base_total_weight`, `price`, `base_price`, `total`, `base_total`, `tax_percent`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `additional`, `parent_id`, `product_id`, `cart_id`, `tax_category_id`, `created_at`, `updated_at`, `custom_price`, `applied_cart_rule_ids`) VALUES
-(5, 1, 'updatedSKU', 'simple', 'temp1', NULL, '12.0000', '12.0000', '12.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"_token\":\"zskDc40k5hBXBLsFZchls2bt3oxzoX3XtXKWtxFl\",\"product_id\":\"1\",\"quantity\":1}', NULL, 1, 4, NULL, '2022-08-10 08:02:05', '2022-08-10 08:02:05', NULL, ''),
-(7, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"_token\":\"zskDc40k5hBXBLsFZchls2bt3oxzoX3XtXKWtxFl\",\"product_id\":\"2\",\"quantity\":1}', NULL, 2, 5, NULL, '2022-08-10 08:06:10', '2022-08-10 08:06:10', NULL, ''),
-(8, 1, 'updatedSKU', 'simple', 'temp1', NULL, '12.0000', '12.0000', '12.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1}', NULL, 1, 6, NULL, '2022-08-13 15:27:26', '2022-08-13 15:36:14', NULL, ''),
-(9, 1, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"4\",\"_token\":\"0CYrb05jHQrInn2HfjvPuybK1xk9DynYuAbYXUKH\"}', NULL, 4, 7, NULL, '2022-08-19 11:39:22', '2022-08-19 11:39:22', NULL, ''),
-(10, 1, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"4\",\"_token\":\"TUOUpeFEFDKqwVpaiP1MJyRRTQmmQaXM4TrQIOhZ\"}', NULL, 4, 10, NULL, '2022-08-20 19:04:17', '2022-08-20 19:04:30', NULL, ''),
-(11, 1, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"TUOUpeFEFDKqwVpaiP1MJyRRTQmmQaXM4TrQIOhZ\"}', NULL, 3, 10, NULL, '2022-08-20 19:04:18', '2022-08-20 19:04:30', NULL, ''),
-(15, 3, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '36.0000', '36.0000', '400.0000', '400.0000', '1200.0000', '1200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"SogHAGSqIwg1aQUeu8ffIHPGQks7ykqvs6wYoNJF\"}', NULL, 4, 12, NULL, '2022-08-21 12:06:58', '2022-08-24 19:58:42', NULL, ''),
-(16, 2, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '24.0000', '24.0000', '200.0000', '200.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":2,\"product_id\":\"2\",\"_token\":\"zwSSEN83KcNKGYwzihNMip1GyFxbS205WezdtRIK\"}', NULL, 2, 12, NULL, '2022-08-23 07:43:57', '2022-08-24 19:58:42', NULL, ''),
-(17, 1, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', '12.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\"}', NULL, 2, 13, NULL, '2022-08-24 20:00:02', '2022-08-24 20:00:30', NULL, ''),
-(18, 1, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}}}', NULL, 6, 14, NULL, '2022-08-27 08:56:32', '2022-09-17 07:28:06', NULL, ''),
-(19, 0, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', '0.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"product_id\":7,\"parent_id\":6}', 18, 7, 14, NULL, '2022-08-27 08:56:32', '2022-08-27 08:56:32', NULL, NULL),
-(23, 1, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', '12.0000', '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\"}', NULL, 3, 14, NULL, '2022-08-27 19:37:55', '2022-09-17 07:28:06', NULL, ''),
-(24, 3, 'NOTE-20', 'configurable', 'Note 20', NULL, '0.0000', '0.0000', '0.0000', '100000.0000', '100000.0000', '300000.0000', '300000.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"jv7xHlLj5WL3ot40TEjJJ0EjUhwBAeQJtdystyye\",\"product_id\":\"12\",\"selected_configurable_option\":\"14\",\"super_attribute\":{\"28\":\"14\"},\"quantity\":3,\"attributes\":{\"RAM\":{\"attribute_name\":\"RAM\",\"option_id\":14,\"option_label\":\"4GB\"}}}', NULL, 12, 15, NULL, '2022-08-31 10:16:18', '2022-08-31 10:16:32', NULL, ''),
-(25, 0, 'NOTE-20-variant-14', 'simple', 'Note 20 4GB', NULL, '0.0000', '0.0000', '0.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"product_id\":14,\"parent_id\":12}', 24, 14, 15, NULL, '2022-08-31 10:16:18', '2022-08-31 10:16:18', NULL, NULL),
-(26, 1, 'abcd12', 'downloadable', 'New Downloadable Product', NULL, '0.0000', '0.0000', '0.0000', '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"voD0YSIeMogT1M48GFPrQiFZCef4GsVAyBdeMTCl\",\"product_id\":\"11\",\"links\":[\"1\"],\"quantity\":1,\"attributes\":[{\"attribute_name\":\"Downloads\",\"option_id\":0,\"option_label\":\"Product 1\"}]}', NULL, 11, 17, NULL, '2022-09-04 19:07:22', '2022-09-04 19:07:22', NULL, ''),
-(27, 1, 'temporary-sku-6a87ba', 'simple', 'Prodcut With Price', NULL, '12.0000', '12.0000', '12.0000', '80.0000', '80.0000', '80.0000', '80.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"CGv4h9L8Bsn2V9zG704GXbq9raIOB6qpeAILrhrP\"}', NULL, 4, 18, NULL, '2022-09-16 18:24:00', '2022-09-16 18:25:23', NULL, ''),
-(28, 2, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '2.0000', '2.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"quantity\":2,\"product_id\":\"6\",\"_token\":\"rYFFwePJR5ZiJXVPxSiZdFoZrLEMXoHi7TKAwtLR\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}}}', NULL, 6, 19, NULL, '2022-09-18 07:28:12', '2022-09-18 14:55:23', NULL, ''),
-(29, 0, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', '0.0000', '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"product_id\":7,\"parent_id\":6}', 28, 7, 19, NULL, '2022-09-18 07:28:12', '2022-09-18 07:28:12', NULL, NULL),
-(30, 1, 'abcd12', 'downloadable', 'New Downloadable Product', NULL, '0.0000', '0.0000', '0.0000', '3500.0000', '3500.0000', '3500.0000', '3500.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '{\"is_buy_now\":\"0\",\"_token\":\"nxHKdrBWuO367HSq4892iifjphm3AdZhka4tjMCy\",\"product_id\":\"11\",\"links\":[\"1\"],\"quantity\":1,\"attributes\":[{\"attribute_name\":\"Downloads\",\"option_id\":0,\"option_label\":\"Product 1\"}]}', NULL, 11, 19, NULL, '2022-09-18 07:28:22', '2022-09-18 14:55:23', NULL, '');
-
 -- --------------------------------------------------------
 
 --
@@ -769,17 +719,6 @@ CREATE TABLE `cart_payment` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `cart_payment`
---
-
-INSERT INTO `cart_payment` (`id`, `method`, `method_title`, `cart_id`, `created_at`, `updated_at`) VALUES
-(1, 'razorpay', NULL, 6, '2022-08-13 15:35:57', '2022-08-13 15:35:57'),
-(17, 'moneytransfer', NULL, 12, '2022-08-24 19:58:37', '2022-08-24 19:58:37'),
-(18, 'moneytransfer', NULL, 13, '2022-08-24 20:00:25', '2022-08-24 20:00:25'),
-(24, 'cashondelivery', NULL, 14, '2022-09-17 07:27:58', '2022-09-17 07:27:58'),
-(26, 'cashondelivery', NULL, 19, '2022-09-18 07:29:49', '2022-09-18 07:29:49');
 
 -- --------------------------------------------------------
 
@@ -918,20 +857,6 @@ CREATE TABLE `cart_shipping_rates` (
   `is_calculate_tax` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `cart_shipping_rates`
---
-
-INSERT INTO `cart_shipping_rates` (`id`, `carrier`, `carrier_title`, `method`, `method_title`, `method_description`, `price`, `base_price`, `cart_address_id`, `created_at`, `updated_at`, `discount_amount`, `base_discount_amount`, `is_calculate_tax`) VALUES
-(1, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 10, 10, 3, '2022-08-13 15:35:24', '2022-08-13 15:35:24', '0.0000', '0.0000', 1),
-(2, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 3, '2022-08-13 15:35:24', '2022-08-13 15:36:14', '0.0000', '0.0000', 1),
-(77, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 50, 50, 9, '2022-08-24 19:58:32', '2022-08-24 19:58:42', '0.0000', '0.0000', 1),
-(78, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 9, '2022-08-24 19:58:32', '2022-08-24 19:58:32', '0.0000', '0.0000', 1),
-(81, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 10, 10, 13, '2022-08-24 20:00:20', '2022-08-24 20:00:30', '0.0000', '0.0000', 1),
-(82, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 13, '2022-08-24 20:00:20', '2022-08-24 20:00:20', '0.0000', '0.0000', 1),
-(89, 'flatrate', 'Flat Rate', 'flatrate_flatrate', 'Flat Rate', 'Flat Rate Shipping', 20, 20, 17, '2022-09-17 07:27:52', '2022-09-17 07:27:52', '0.0000', '0.0000', 1),
-(90, 'free', 'Free Shipping', 'free_free', 'Free Shipping', 'Free Shipping', 0, 0, 17, '2022-09-17 07:27:52', '2022-09-17 07:28:06', '0.0000', '0.0000', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -1041,7 +966,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `position`, `image`, `status`, `_lft`, `_rgt`, `parent_id`, `created_at`, `updated_at`, `display_mode`, `category_icon_path`, `additional`) VALUES
-(1, 1, NULL, 1, 1, 140, NULL, '2022-08-10 01:38:11', '2022-08-10 01:38:11', 'products_and_description', NULL, NULL),
+(1, 1, NULL, 1, 1, 154, NULL, '2022-08-10 01:38:11', '2022-08-10 01:38:11', 'products_and_description', NULL, NULL),
 (3, 2, NULL, 1, 40, 61, 1, '2022-08-21 05:07:28', '2022-08-21 05:10:13', 'products_only', NULL, NULL),
 (4, 3, NULL, 1, 14, 39, 1, '2022-08-21 05:08:38', '2022-08-21 05:09:44', 'products_only', NULL, NULL),
 (5, 4, NULL, 1, 62, 81, 1, '2022-08-21 05:11:30', '2022-08-21 05:11:30', 'products_only', NULL, NULL),
@@ -1051,7 +976,6 @@ INSERT INTO `categories` (`id`, `position`, `image`, `status`, `_lft`, `_rgt`, `
 (9, 8, NULL, 1, 120, 133, 1, '2022-08-21 05:15:32', '2022-08-21 05:15:32', 'products_only', NULL, NULL),
 (10, 9, NULL, 1, 134, 135, 1, '2022-08-21 05:16:15', '2022-08-21 05:16:15', 'products_only', NULL, NULL),
 (11, 10, NULL, 1, 136, 137, 1, '2022-08-21 05:17:07', '2022-08-21 05:17:07', 'products_only', NULL, NULL),
-(12, 1, NULL, 0, 138, 139, 1, '2022-08-21 05:18:49', '2022-09-18 07:23:13', 'products_only', NULL, NULL),
 (13, 1, NULL, 1, 41, 46, 3, '2022-08-21 05:24:51', '2022-08-21 05:24:51', 'products_only', NULL, NULL),
 (14, 1, NULL, 1, 47, 52, 3, '2022-08-21 05:25:56', '2022-08-21 05:25:56', 'products_only', NULL, NULL),
 (15, 1, NULL, 1, 53, 58, 3, '2022-08-21 05:27:27', '2022-08-21 05:27:27', 'products_only', NULL, NULL),
@@ -1103,7 +1027,14 @@ INSERT INTO `categories` (`id`, `position`, `image`, `status`, `_lft`, `_rgt`, `
 (62, 1, NULL, 1, 48, 49, 14, '2022-08-21 08:16:49', '2022-08-21 08:16:49', 'products_only', NULL, NULL),
 (63, 1, NULL, 1, 50, 51, 14, '2022-08-21 08:17:32', '2022-08-21 08:17:32', 'products_only', NULL, NULL),
 (64, 1, NULL, 1, 54, 55, 15, '2022-08-21 08:18:24', '2022-08-21 08:18:24', 'products_only', NULL, NULL),
-(65, 1, NULL, 1, 56, 57, 15, '2022-08-21 08:19:12', '2022-08-21 08:19:12', 'products_only', NULL, NULL);
+(65, 1, NULL, 0, 56, 57, 15, '2022-08-21 08:19:12', '2022-09-18 07:17:23', 'products_only', NULL, NULL),
+(69, 1, NULL, 0, 140, 141, 1, '2022-09-26 09:24:08', '2022-09-26 09:24:08', 'products_only', NULL, NULL),
+(70, 1, NULL, 0, 142, 143, 1, '2022-09-26 09:24:08', '2022-09-26 09:24:08', 'products_only', NULL, NULL),
+(71, 1, NULL, 0, 144, 145, 1, '2022-09-26 09:24:08', '2022-09-26 09:24:08', 'products_only', NULL, NULL),
+(72, 1, NULL, 0, 146, 147, 1, '2022-09-26 09:24:08', '2022-09-26 09:24:08', 'products_only', NULL, NULL),
+(73, 1, NULL, 0, 148, 149, 1, '2022-09-26 09:24:09', '2022-09-26 09:24:09', 'products_only', NULL, NULL),
+(74, 1, NULL, 0, 150, 151, 1, '2022-09-26 09:24:09', '2022-09-26 09:24:09', 'products_only', NULL, NULL),
+(75, 1, NULL, 0, 152, 153, 1, '2022-09-26 09:24:09', '2022-09-26 09:24:09', 'products_only', NULL, NULL);
 
 --
 -- Triggers `categories`
@@ -1215,11 +1146,7 @@ CREATE TABLE `category_filterable_attributes` (
 --
 
 INSERT INTO `category_filterable_attributes` (`category_id`, `attribute_id`) VALUES
-(12, 11),
-(12, 23),
-(12, 24),
-(12, 25),
-(12, 28);
+(65, 24);
 
 -- --------------------------------------------------------
 
@@ -1260,7 +1187,6 @@ INSERT INTO `category_translations` (`id`, `name`, `slug`, `description`, `meta_
 (41, 'Gifts & Toys', 'gifts-toys', '', '', '', '', 9, 'en', 1, 'gifts-toys'),
 (46, 'Grocery', 'grocery', '', '', '', '', 10, 'en', 1, 'grocery'),
 (51, 'New Releases', 'new-releases', '', '', '', '', 11, 'en', 1, 'new-releases'),
-(56, 'Home', 'home', '', '', '', '', 12, 'en', 1, 'home'),
 (61, 'Home Furnishings', 'home-furnishings', '', '', '', '', 13, 'en', 1, 'home-kitchen/home-furnishings'),
 (66, 'Kitchen & Dining', 'kitchen-dining', '', '', '', '', 14, 'en', 1, 'home-kitchen/kitchen-dining'),
 (71, 'Home Decor', 'home-decor', '', '', '', '', 15, 'en', 1, 'home-kitchen/home-decor'),
@@ -1312,7 +1238,14 @@ INSERT INTO `category_translations` (`id`, `name`, `slug`, `description`, `meta_
 (306, 'CookWear', 'cookwear', '', '', '', '', 62, 'en', 1, 'home-kitchen/kitchen-dining/cookwear'),
 (311, 'LunchBoxes', 'lunchboxes', '', '', '', '', 63, 'en', 1, 'home-kitchen/kitchen-dining/lunchboxes'),
 (316, 'Lightings', 'lightings', '', '', '', '', 64, 'en', 1, 'home-kitchen/home-decor/lightings'),
-(321, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'en', 1, 'home-kitchen/home-decor/wall-decor');
+(321, 'Wall Decor', 'wall-decor', '', '', '', '', 65, 'en', 1, 'home-kitchen/home-decor/wall-decor'),
+(327, 'Night Lamps', 'night-lamps', NULL, NULL, NULL, NULL, 69, 'en', 1, 'night-lamps'),
+(328, 'Mugs', 'mugs', NULL, NULL, NULL, NULL, 70, 'en', 1, 'mugs'),
+(329, 'Home Accessories', 'home-accessories', NULL, NULL, NULL, NULL, 71, 'en', 1, 'home-accessories'),
+(330, 'Kitchenware', 'kitchenware', NULL, NULL, NULL, NULL, 72, 'en', 1, 'kitchenware'),
+(331, 'Personal Care', 'personal-care', NULL, NULL, NULL, NULL, 73, 'en', 1, 'personal-care'),
+(332, 'Keychain Holders', 'keychain-holders', NULL, NULL, NULL, NULL, 74, 'en', 1, 'keychain-holders'),
+(333, 'Hanging Wall Art', 'hanging-wall-art', NULL, NULL, NULL, NULL, 75, 'en', 1, 'hanging-wall-art');
 
 --
 -- Triggers `category_translations`
@@ -1432,7 +1365,7 @@ CREATE TABLE `channels` (
 --
 
 INSERT INTO `channels` (`id`, `code`, `timezone`, `theme`, `hostname`, `logo`, `favicon`, `is_maintenance_on`, `allowed_ips`, `default_locale_id`, `base_currency_id`, `created_at`, `updated_at`, `root_category_id`) VALUES
-(1, 'default', NULL, 'ekart', 'http://localhost', 'channel/1/qm1ktxmujTHaakC4JjHrfdSeFh9O7IEm1ZLQERzI.webp', 'channel/1/ZUcAA4dbj4TLCzJP6b3KGDvqkpncrSqB17G0u6CE.webp', 0, '', 1, 3, NULL, '2022-09-05 18:07:31', 1);
+(1, 'default', NULL, 'ekart', 'http://localhost', 'channel/1/qm1ktxmujTHaakC4JjHrfdSeFh9O7IEm1ZLQERzI.webp', 'channel/1/ZUcAA4dbj4TLCzJP6b3KGDvqkpncrSqB17G0u6CE.webp', 0, '', 1, 3, NULL, '2022-09-18 17:53:09', 1);
 
 -- --------------------------------------------------------
 
@@ -1450,7 +1383,6 @@ CREATE TABLE `channel_currencies` (
 --
 
 INSERT INTO `channel_currencies` (`channel_id`, `currency_id`) VALUES
-(1, 1),
 (1, 3);
 
 -- --------------------------------------------------------
@@ -1520,7 +1452,7 @@ CREATE TABLE `channel_translations` (
 --
 
 INSERT INTO `channel_translations` (`id`, `channel_id`, `locale`, `name`, `description`, `home_page_content`, `footer_content`, `site_name`, `email_address`, `phone_number`, `address`, `facebook_link`, `instagram_link`, `maintenance_mode_text`, `home_seo`, `created_at`, `updated_at`) VALUES
-(1, 1, 'en', 'Default', '', '<p>@include(\"shop::home.slider\")</p>\r\n<p>@include(\"shop::home.featured-products\")</p>\r\n<p>@include(\"shop::home.new-products\")</p>', '<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Site Policies</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/privacy-policy\">Privacy Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/terms-conditions\">Term &amp; Condition</a></li>\r\n<li><a href=\"http://localhost:8000/page/return-policy\">Return Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/refund-policy\">Refund Policy</a></li>\r\n</ul>\r\n</aside>\r\n<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Company</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/about-us\">About Us</a></li>\r\n<li><a href=\"http://localhost:8000/contact-us\">Contact Us</a></li>\r\n<li><a href=\"http://localhost:8000/page/become-a-seller\">Become A Seller</a></li>\r\n<li><a href=\"http://localhost:8000/track-order\">Track Your Order</a></li>\r\n</ul>\r\n</aside>', 'World Ekart', 'ekart@infoo.com', '1234567890', 'Mumbai India.', 'https://facebook.com', 'https://instagram.com', '', '{\"meta_title\":\"World Ekart Store\",\"meta_description\":\"We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.\",\"meta_keywords\":\"ekart, ecommerce, e commerce, e-commerce, world, shopping, marketplace.\"}', NULL, '2022-09-03 10:38:50'),
+(1, 1, 'en', 'Default', '', '<p>@include(\"shop::home.slider\")</p>\r\n<p>@include(\"shop::home.featured-products\")</p>\r\n<p>@include(\"shop::home.new-products\")</p>', '<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Site Policies</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/privacy-policy\">Privacy Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/terms-conditions\">Term &amp; Condition</a></li>\r\n<li><a href=\"http://localhost:8000/page/return-policy\">Return Policy</a></li>\r\n<li><a href=\"http://localhost:8000/page/refund-policy\">Refund Policy</a></li>\r\n</ul>\r\n</aside>\r\n<aside class=\"widget widget_footer\">\r\n<h4 class=\"widget-title\">Company</h4>\r\n<ul class=\"ps-list--link\">\r\n<li><a href=\"http://localhost:8000/page/about-us\">About Us</a></li>\r\n<li><a href=\"http://localhost:8000/contact-us\">Contact Us</a></li>\r\n<li><a href=\"http://localhost:8000/page/become-a-seller\">Become A Seller</a></li>\r\n<li><a href=\"http://localhost:8000/track-order\">Track Your Order</a></li>\r\n</ul>\r\n</aside>', 'World Ekart', 'info@worldekart.com', '+911203677101', 'INDIA.', 'https://facebook.com', 'https://instagram.com', '', '{\"meta_title\":\"World Ekart Store\",\"meta_description\":\"We love to craft softwares and solve the real world problems with the binaries. We are highly committed to our goals. We invest our resources to create world class easy to use softwares and applications for the enterprise business with the top notch, on the edge technology expertise.\",\"meta_keywords\":\"ekart, ecommerce, e commerce, e-commerce, world, shopping, marketplace.\"}', NULL, '2022-09-26 18:36:15'),
 (2, 1, 'fr', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
 (3, 1, 'nl', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
 (4, 1, 'tr', 'Default', NULL, NULL, '\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Quick Links</span>\r\n                        <ul class=\"list-group\">\r\n                            <li><a href=\"http://localhost/page/about-us\">About Us</a></li>\r\n                            <li><a href=\"http://localhost/page/return-policy\">Return Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/refund-policy\">Refund Policy</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-conditions\">Terms and conditions</a></li>\r\n                            <li><a href=\"http://localhost/page/terms-of-use\">Terms of Use</a></li>\r\n                            <li><a href=\"http://localhost/page/contact-us\">Contact Us</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"list-container\">\r\n                        <span class=\"list-heading\">Connect With Us</span>\r\n                            <ul class=\"list-group\">\r\n                                <li><a href=\"#\"><span class=\"icon icon-facebook\"></span>Facebook </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-twitter\"></span> Twitter </a></li>\r\n                                <li><a href=\"#\"><span class=\"icon icon-instagram\"></span> Instagram </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-google-plus\"></span>Google+ </a></li>\r\n                                <li><a href=\"#\"> <span class=\"icon icon-linkedin\"></span>LinkedIn </a></li>\r\n                            </ul>\r\n                        </div>\r\n                ', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '{\"meta_title\": \"Demo store\", \"meta_keywords\": \"Demo store meta keyword\", \"meta_description\": \"Demo store meta description\"}', NULL, NULL),
@@ -1610,7 +1542,7 @@ INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_conten
 (10, 'Shipping Policy', 'shipping-policy', '<div class=\"static-container\"><div class=\"mb-5\">Shipping Policy  page content</div></div>', 'Shipping Policy', '', 'shipping, policy', 'en', 10),
 (11, 'Privacy Policy', 'privacy-policy', '<div class=\"ps-page--single static-page\">\r\n<div class=\"ps-breadcrumb\">\r\n<div class=\"container\">\r\n<ul class=\"breadcrumb\">\r\n<li><a href=\"http://localhost:8000/\">Home</a></li>\r\n<li>Privacy Policy</li>\r\n</ul>\r\n</div>\r\n</div>\r\n<div class=\"container-xl\">\r\n<h2 class=\"text-center\">Privacy Policy</h2>\r\n<p>We at World E-Kart, take data privacy and security extremely seriously and work to ensure that we are fully compliant with the various regulations dealing with privacy.<br /><br /></p>\r\n<ol>\r\n<li>For the purpose of this privacy policy, &ldquo;your&rdquo; and &ldquo;user&rdquo; means any person who accesses or uses the services provided by our website (&ldquo;World E-Kart&rdquo;).</li>\r\n<li>In the course of registering for and availing various services we provide from time to time through World E-Kart (&ldquo;Services&rdquo;) you may be required to give certain details, including your your name, address, contact number, email address (&ldquo;User Information&rdquo;). By using the World E-Kart and/or registering yourself you authorize us to contact you via email or phone call or SMS and offer you Services you have opted for, imparting knowledge about products listed on our application, as well as for web aggregation. Additionally, by registration you authorize us to send SMS/email alerts to you for your login details and any other service requirements or advertising messages/emails.</li>\r\n<li>You acknowledge that you are disclosing User Information voluntarily. Prior to the completion of any registration process on World E-Kart / or prior to availing of any Services offered on our application if you wish not to disclose any User Information you may refrain from doing so; however if you don&rsquo;t provide information that is requested, it is possible that the registration process would be incomplete and/or you may not be able to avail certain of our Services.</li>\r\n<li>We are committed to protecting the privacy and confidentiality of all User Information that you may share as a user of our application. In furtherance of the confidentiality with which we treat User Information we have put in place appropriate physical, electronic, and managerial procedures to safeguard and secure the information we collect from you. To protect your privacy and security, we will also take reasonable steps to verify your identity before granting access or making corrections. We may use third-party advertising companies and/or ad agencies to serve ads when you visit our application. These companies may use information (excluding User Information) about your visits to the application and other Web sites in order to provide advertisements on the application and other sites about goods and services that may be of interest to you. There might be affiliates or other sites linked to our application and information that you provide to those sites are not our property. The affiliated sites may have different privacy practices and we encourage you to read them.</li>\r\n<li>Additionally, when you use the Site, we collect certain non-personal identifiable information through technology and tools, including cookies, etc. We aggregate and analyze this information in order to learn more about how our application is used, to improve our World E-Kart, and to generally promote the World E-Kart and our Services. We may engage the services of a third party for the purposes of collection of such information.</li>\r\n<li>We will not sell or rent User Information to anyone other than as specifically noted. We will share User Information if we have your consent or deemed consent to do so or if we are compelled by law (including court orders) to do so or as specified in the Terms of Use.</li>\r\n<li>Notwithstanding anything mentioned above, we reserve the right to contact you via any mechanisms, not limited to email, SMS, or phone calls, to solicit feedback of your experience and to provide any additional services that you would be eligible for, either as a registered user or as a visitor. We are not liable for any damages occurring to you as part of feedback solicitation and additional service provision.</li>\r\n<li>The User Information is being collected by the Company with its address at at Plot no 1573, 2nd Floor, Sector &ndash; 5, Vasundhara, Ghaziabad, UP-201012, and the Company will delete any User Information upon the User withdrawing the consent in writing, however, upon the withdrawal of the consent by the User, the Company may at its option not provide any services for which the Information was sought and the User shall not claim deficiency of services on the basis of such non provision of goods and services.</li>\r\n<li>We reserve the right to amend this policy from time to time, at our discretion. Any updates will be posted on the application/ and your use of World E-Kart / after such amendment shall constitute your agreement to abide by the amended terms. If you have questions or concerns about our Privacy Policy or any other policies please write to the grievance officer, Saroj Kumar at Plot no 1573, 2nd Floor, Sector &ndash; 5, Vasundhara, Ghaziabad, UP-201012 or through an email signed with electronic signature sent to sales@worldekart.com</li>\r\n</ol>\r\n</div>\r\n</div>', 'Privacy Policy', '', 'privacy, policy', 'en', 11);
 INSERT INTO `cms_page_translations` (`id`, `page_title`, `url_key`, `html_content`, `meta_title`, `meta_description`, `meta_keywords`, `locale`, `cms_page_id`) VALUES
-(12, 'Become a Seller', 'become-a-seller', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"http://localhost:8000/\">Home</a></li>\n<li>Become a Seller</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'http://localhost:8000/themes/ekart/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"http://localhost:8000/seller-registration\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Wolrd Ekart&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Wolrd Ekart just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"http://localhost:8000/themes/ekart/assets/images/vendor/milestone-4.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"http://localhost:8000/themes/ekart/assets/images/icons/vendor-4.png\" alt=\"ekart\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"http://localhost:8000/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Wolrd Ekart</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Wolrd Ekart?</figcaption>\n<p>Joining and starting a shop on Wolrd Ekart is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Wolrd Ekart. Create an Wolrd Ekart account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Wolrd Ekartfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Wolrd Ekart?</figcaption>\n</figure>\n<p>Wolrd Ekart provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n</div>', 'become-a-seller', '', '', 'en', 12);
+(12, 'Become a Seller', 'become-a-seller', '<div class=\"ps-page--single\">\n<div class=\"ps-breadcrumb\">\n<div class=\"container\">\n<ul class=\"breadcrumb\">\n<li><a href=\"/\">Home</a></li>\n<li>Become a Seller</li>\n</ul>\n</div>\n</div>\n<div class=\"ps-vendor-banner bg--cover\" style=\"background-image: url(\'/themes/ekart/assets/images/bg/vendor.jpg\');\">\n<div class=\"ps-vendor-banner\">\n<div class=\"container\">\n<h2>Millions Of Shoppers Can&rsquo;t Wait To See What You Have In Store</h2>\n<a class=\"ps-btn ps-btn--lg\" href=\"/seller-registration\">Start Selling</a></div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-about\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>WHY SELL ON MARTFURY</p>\n<h4>Join a marketplace where nearly 50 million buyers around <br /> the world shop for unique items</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"/themes/ekart/assets/images/icons/vendor-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Low Fees</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>It doesn&rsquo;t take much to list your items and once you make a sale, Wolrd Ekart&rsquo;s transaction fee is just 2.5%.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"/themes/ekart/assets/images/icons/vendor-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Powerful Tools</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n<div class=\"col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 \">\n<div class=\"ps-block--icon-box-2\">\n<div class=\"ps-block__thumbnail\"><img src=\"/themes/ekart/assets/images/icons/vendor-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\">\n<h4>Support 24/7</h4>\n<div class=\"ps-block__desc\" data-mh=\"about-desc\">\n<p>Our tools and services make it easy to manage, promote and grow your business.</p>\n</div>\n<a href=\"#\">Learn more</a></div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-milestone\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>How it works</p>\n<h4>Easy to start selling online on Wolrd Ekart just 4 simple steps</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Register and list your products</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"/themes/ekart/assets/images/vendor/milestone-1.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>1</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Receive orders and sell your product</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"/themes/ekart/assets/images/vendor/milestone-2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>2</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"/themes/ekart/assets/images/vendor/milestone-3.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>3</span></div>\n</div>\n<div class=\"ps-block--vendor-milestone reverse\">\n<div class=\"ps-block__left\">\n<h4>Package and ship with ease</h4>\n<ul>\n<li>Register your business for free and create a product catalogue. Get free training on how to run your online business</li>\n<li>Our Wolrd Ekart Advisors will help you at every step and fully assist you in taking your business online</li>\n</ul>\n</div>\n<div class=\"ps-block__right\"><img src=\"/themes/ekart/assets/images/vendor/milestone-4.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__number\"><span>4</span></div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-best-fees\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>BEST FEES TO START</p>\n<h4>Affordable, transparent, and secure</h4>\n</div>\n<div class=\"ps-section__content\">\n<h5>It doesn&rsquo;t cost a thing to list up to 50 items a month, and you only pay after your stuff sells. It&rsquo;s just a small percent of the money you earn</h5>\n<div class=\"ps-section__numbers\">\n<figure>\n<h3>$0</h3>\n<span>List Fee</span></figure>\n<figure>\n<h3>5%</h3>\n<span>Final Value Fee</span></figure>\n</div>\n<div class=\"ps-section__desc\">\n<figure>\n<figcaption>Here\'s what you get for your fee:</figcaption>\n<ul>\n<li>A worldwide community of more than 160 million shoppers.</li>\n<li>Shipping labels you can print at home, with big discounts on postage.</li>\n<li>Seller protection and customer support to help you sell your stuff.</li>\n</ul>\n</figure>\n</div>\n<div class=\"ps-section__highlight\"><img src=\"/themes/ekart/assets/images/icons/vendor-4.png\" alt=\"ekart\" />\n<figure>\n<p>We process payments with PayPal, an external payments platform that allows you to process transactions with a variety of payment methods. Funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account.</p>\n</figure>\n</div>\n<div class=\"ps-section__footer\">\n<p>Listing fees are billed for 0.20 USD, so if your bank&rsquo;s currency is not USD, the amount in your currency may vary based on changes in the exchange rate.</p>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-client-say\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<h3>What client say</h3>\n<div class=\"ps-section__nav\"><a class=\"ps-carousel__prev\" href=\"#\"><i class=\"icon-chevron-left\"></i></a><a class=\"ps-carousel__next\" href=\"#\"><i class=\"icon-chevron-right\"></i></a></div>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"slick-slider ps-carousel outside slick-initialized\" dir=\"ltr\">\n<div class=\"slick-list\">\n<div class=\"slick-track\" style=\"width: 400%; left: -100%;\">\n<div data-index=\"-2\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"-1\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"0\" class=\"slick-slide slick-active slick-current\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"1\" class=\"slick-slide slick-active\" aria-hidden=\"false\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"2\" class=\"slick-slide\" aria-hidden=\"true\" style=\"outline: none; width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"3\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/1.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Kanye West<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"4\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/2.png\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>Anabella Kleva<span>Boss at TocoToco</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n<div data-index=\"5\" class=\"slick-slide slick-cloned\" aria-hidden=\"true\" style=\"width: 12.5%;\" tabindex=\"-1\">\n<div>\n<div class=\"ps-block--testimonial\" style=\"width: 100%; display: inline-block;\" tabindex=\"-1\">\n<div class=\"ps-block__header\"><img src=\"/themes/ekart/assets/images/users/3.jpg\" alt=\"ekart\" /></div>\n<div class=\"ps-block__content\"><i class=\"icon-quote-close\"></i>\n<h4>William Roles<span>Head Chef at BBQ Restaurant</span></h4>\n<p>Sed elit quam, iaculis sed semper sit amet udin vitae nibh. at magna akal semperFusce commodo molestie luctus.Lorem ipsum Dolor tusima olatiup.</p>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n</div>\n<div class=\"ps-section--vendor ps-vendor-faqs\">\n<div class=\"container\">\n<div class=\"ps-section__header\">\n<p>FREQUENTLY ASKED QUESTIONS</p>\n<h4>Here are some common questions about selling on Wolrd Ekart</h4>\n</div>\n<div class=\"ps-section__content\">\n<div class=\"row\">\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do fees work on Wolrd Ekart?</figcaption>\n<p>Joining and starting a shop on Wolrd Ekart is free. There are three basic selling fees: a listing fee, a transaction fee, and a payment processing fee.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>What do I need to do to create a shop?</figcaption>\n<p>It&rsquo;s easy to set up a shop on Wolrd Ekart. Create an Wolrd Ekart account (if you don&rsquo;t already have one), set your shop location and currency, choose a shop name, create a listing, set a payment method (how you want to be paid), and finally set a billing method (how you want to pay your Wolrd Ekartfees).</p>\n</figure>\n</div>\n<div class=\"col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 \">\n<figure>\n<figcaption>How do I get paid?</figcaption>\n<p>If you accept payments with PayPal, funds from PayPal sales on Wolrd Ekart will be deposited into your PayPal account. We encourage sellers to use a PayPal Business account and not a Personal account, as personal accounts are subject to monthly receiving limits and cannot accept payments from buyers that are funded by a credit card.</p>\n<p>It costs USD 0.20 to publish a listing to the marketplace. A listing lasts for four months or until the item is sold. Once an item sells, there is a 3.5% transaction fee on the sale price (not including shipping costs). If you accept payments with PayPal, there is also a payment processing fee based on their fee structure.</p>\n<p>Listing fees are billed for $0.20 USD, so if your bank&rsquo;s currency is not USD, the amount may differ based on changes in the exchange rate.</p>\n</figure>\n<figure>\n<figcaption>Do I need a credit or debit card to create a shop?</figcaption>\n<p>No, a credit or debit card is not required to create a shop. To be verified as a seller you have the choice to use either a credit card or to register via PayPal. You will not incur any charges until you open your shop and publish your listings.</p>\n</figure>\n<figure>\n<figcaption>What can I sell on Wolrd Ekart?</figcaption>\n</figure>\n<p>Wolrd Ekart provides a marketplace for crafters, artists and collectors to sell their handmade creations, vintage goods (at least 20 years old), and both handmade and non-handmade crafting supplies.</p>\n</div>\n</div>\n</div>\n<div class=\"ps-section__footer\">\n<p>Still have more questions? Feel free to contact us.</p>\n<a class=\"ps-btn\" href=\"#\">Contact Us</a></div>\n</div>\n</div>\n</div>', 'become-a-seller', '', '', 'en', 12);
 
 -- --------------------------------------------------------
 
@@ -1669,9 +1601,9 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (7, 'emails.general.notifications.emails.general.notifications.new-invoice', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (8, 'emails.general.notifications.emails.general.notifications.new-refund', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (9, 'emails.general.notifications.emails.general.notifications.new-shipment', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
-(10, 'emails.general.notifications.emails.general.notifications.new-inventory-source', '0', NULL, NULL, '2022-08-10 07:08:12', '2022-09-18 19:46:24'),
+(10, 'emails.general.notifications.emails.general.notifications.new-inventory-source', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (11, 'emails.general.notifications.emails.general.notifications.cancel-order', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
-(12, 'catalog.products.homepage.out_of_stock_items', '0', NULL, NULL, '2022-08-10 07:08:12', '2022-09-18 19:49:45'),
+(12, 'catalog.products.homepage.out_of_stock_items', '1', NULL, NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (13, 'customer.settings.social_login.enable_facebook', '1', 'default', NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
 (14, 'customer.settings.social_login.enable_twitter', '0', 'default', NULL, '2022-08-10 07:08:12', '2022-08-21 11:00:11'),
 (15, 'customer.settings.social_login.enable_google', '1', 'default', NULL, '2022-08-10 07:08:12', '2022-08-10 07:08:12'),
@@ -1733,10 +1665,10 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (71, 'sales.paymentmethods.cashondelivery.title', 'Cash On Delivery', 'default', 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
 (72, 'sales.paymentmethods.cashondelivery.description', 'Cash On Delivery', 'default', 'en', '2022-08-13 15:40:41', '2022-08-13 15:40:41'),
 (73, 'sales.paymentmethods.cashondelivery.instructions', '', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
-(74, 'sales.paymentmethods.cashondelivery.generate_invoice', '0', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
+(74, 'sales.paymentmethods.cashondelivery.generate_invoice', '1', 'default', NULL, '2022-08-13 15:40:42', '2022-09-16 13:36:23'),
 (75, 'sales.paymentmethods.cashondelivery.invoice_status', 'pending', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (76, 'sales.paymentmethods.cashondelivery.order_status', 'pending', 'default', NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
-(77, 'sales.paymentmethods.cashondelivery.active', '1', 'default', 'en', '2022-08-13 15:40:42', '2022-09-17 07:11:40'),
+(77, 'sales.paymentmethods.cashondelivery.active', '1', 'default', 'en', '2022-08-13 15:40:42', '2022-09-16 13:36:23'),
 (78, 'sales.paymentmethods.cashondelivery.sort', '1', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (79, 'sales.paymentmethods.moneytransfer.title', 'Money Transfer', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (80, 'sales.paymentmethods.moneytransfer.description', 'Money Transfer', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
@@ -1744,7 +1676,7 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (82, 'sales.paymentmethods.moneytransfer.invoice_status', 'pending', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (83, 'sales.paymentmethods.moneytransfer.order_status', 'pending', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (84, 'sales.paymentmethods.moneytransfer.mailing_address', '', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
-(85, 'sales.paymentmethods.moneytransfer.active', '0', 'default', 'en', '2022-08-13 15:40:42', '2022-09-18 19:31:39'),
+(85, 'sales.paymentmethods.moneytransfer.active', '1', 'default', 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (86, 'sales.paymentmethods.moneytransfer.sort', '2', NULL, NULL, '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (87, 'sales.paymentmethods.paypal_standard.title', 'PayPal Standard', NULL, 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
 (88, 'sales.paymentmethods.paypal_standard.description', 'PayPal Standard', NULL, 'en', '2022-08-13 15:40:42', '2022-08-13 15:40:42'),
@@ -1762,14 +1694,14 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (100, 'sales.paymentmethods.razorpay.description', 'Razorpay', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
 (101, 'sales.paymentmethods.razorpay.key_id', 'rzp_test_4Pu9yomA8quUOv', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
 (102, 'sales.paymentmethods.razorpay.secret', 'SBEh2FFvF6H1VlbBD6y1jAdr', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
-(103, 'sales.paymentmethods.razorpay.active', '0', NULL, 'en', '2022-08-13 15:40:43', '2022-09-18 19:31:39'),
+(103, 'sales.paymentmethods.razorpay.active', '1', NULL, 'en', '2022-08-13 15:40:43', '2022-08-13 15:40:43'),
 (104, 'catalog.products.size-chart.enable-sizechart', '1', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
-(105, 'catalog.products.homepage.no_of_new_product_homepage', '10', NULL, NULL, '2022-08-21 10:59:21', '2022-09-18 19:49:45'),
-(106, 'catalog.products.homepage.no_of_featured_product_homepage', '10', NULL, NULL, '2022-08-21 10:59:21', '2022-09-18 19:49:45'),
-(107, 'catalog.products.storefront.mode', 'list', 'default', NULL, '2022-08-21 10:59:21', '2022-09-18 19:49:45'),
+(105, 'catalog.products.homepage.no_of_new_product_homepage', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(106, 'catalog.products.homepage.no_of_featured_product_homepage', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(107, 'catalog.products.storefront.mode', 'grid', 'default', NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
 (108, 'catalog.products.storefront.products_per_page', '', 'default', NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
-(109, 'catalog.products.storefront.sort_by', 'created_at-desc', 'default', NULL, '2022-08-21 10:59:21', '2022-09-18 19:49:45'),
-(110, 'catalog.products.storefront.buy_now_button_display', '1', NULL, NULL, '2022-08-21 10:59:21', '2022-09-18 19:49:45'),
+(109, 'catalog.products.storefront.sort_by', 'name-desc', 'default', NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
+(110, 'catalog.products.storefront.buy_now_button_display', '0', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
 (111, 'catalog.products.cache-small-image.width', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
 (112, 'catalog.products.cache-small-image.height', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
 (113, 'catalog.products.cache-medium-image.width', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
@@ -1788,41 +1720,43 @@ INSERT INTO `core_config` (`id`, `code`, `value`, `channel_code`, `locale_code`,
 (126, 'catalog.products.social_share.email', '0', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
 (127, 'catalog.products.social_share.share_message', '', NULL, NULL, '2022-08-21 10:59:21', '2022-08-21 10:59:21'),
 (128, 'customer.settings.wishlist.share', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
-(129, 'customer.settings.newsletter.subscription', '0', NULL, NULL, '2022-08-21 11:00:11', '2022-09-18 19:46:59'),
+(129, 'customer.settings.newsletter.subscription', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
 (130, 'customer.settings.email.verification', '1', NULL, NULL, '2022-08-21 11:00:11', '2022-08-21 11:00:11'),
 (131, 'taxes.catalogue.pricing.tax_inclusive', '1', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
 (132, 'taxes.catalogue.default-location-calculation.country', 'IN', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
-(133, 'taxes.catalogue.default-location-calculation.state', 'DL', NULL, NULL, '2022-08-27 06:33:16', '2022-09-18 19:44:45'),
-(134, 'taxes.catalogue.default-location-calculation.post_code', '121001', NULL, NULL, '2022-08-27 06:33:16', '2022-09-18 19:44:45'),
+(133, 'taxes.catalogue.default-location-calculation.state', 'JK', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
+(134, 'taxes.catalogue.default-location-calculation.post_code', '180010', NULL, NULL, '2022-08-27 06:33:16', '2022-08-27 06:33:16'),
 (135, 'general.design.admin_logo.logo_image', 'configuration/YCXUbfaalcR0r02xNK07uJJsNQkC3zb0FEFOTpOC.webp', 'default', NULL, '2022-09-11 11:05:20', '2022-09-11 11:05:20'),
 (136, 'general.design.admin_logo.favicon', 'configuration/GLH102FfSJmwiDX36doHf9ZOdZEtL7aDspcGSySv.webp', 'default', NULL, '2022-09-11 11:05:20', '2022-09-11 11:05:20'),
-(137, 'sales.paymentmethods.cashfree.title', 'Online Payment', NULL, 'en', '2022-09-17 07:11:40', '2022-09-18 19:33:18'),
-(138, 'sales.paymentmethods.cashfree.description', 'Pay via UPI/Net Banking/Credit Card/Debit Card', NULL, 'en', '2022-09-17 07:11:40', '2022-09-18 19:33:18'),
-(139, 'sales.paymentmethods.cashfree.app_id', '2486760c0c523371555af3f992676842', NULL, 'en', '2022-09-17 07:11:40', '2022-09-18 19:33:18'),
-(140, 'sales.paymentmethods.cashfree.key_secret', '955df43f13074bcafb77b52cee248687d4550943', NULL, 'en', '2022-09-17 07:11:40', '2022-09-18 19:33:19'),
-(141, 'sales.paymentmethods.cashfree.active', '1', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40'),
-(142, 'sales.paymentmethods.cashfree.test_mode', '0', NULL, 'en', '2022-09-17 07:11:40', '2022-09-17 07:11:40'),
-(143, 'sales.invoice_setttings.invoice_number.invoice_number_prefix', '', 'default', 'en', '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(144, 'sales.invoice_setttings.invoice_number.invoice_number_length', '', 'default', 'en', '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(145, 'sales.invoice_setttings.invoice_number.invoice_number_suffix', '', 'default', 'en', '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(146, 'sales.invoice_setttings.invoice_number.invoice_number_generator_class', '', 'default', 'en', '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(147, 'sales.invoice_setttings.payment_terms.due_duration', '', 'default', NULL, '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(148, 'sales.invoice_setttings.invoice_reminders.reminders_limit', '', 'default', NULL, '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(149, 'sales.invoice_setttings.invoice_reminders.interval_between_reminders', 'P1D', NULL, NULL, '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(150, 'sales.invoice_setttings.invoice_slip_design.logo', 'configuration/6P7ywhj0Ne4itdm6teoomsKNYiVC9BGsHKFtetpe.webp', 'default', NULL, '2022-09-18 19:34:25', '2022-09-18 19:34:25'),
-(151, 'sales.carriers.free.title', 'Free Shipping', NULL, 'en', '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(152, 'sales.carriers.free.description', 'Free Shipping', NULL, 'en', '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(153, 'sales.carriers.free.active', '0', NULL, 'en', '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(154, 'sales.carriers.flatrate.title', 'Flat Rate', 'default', 'en', '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(155, 'sales.carriers.flatrate.description', 'Flat Rate Shipping', 'default', NULL, '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(156, 'sales.carriers.flatrate.default_rate', '10', 'default', NULL, '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(157, 'sales.carriers.flatrate.type', 'per_unit', NULL, NULL, '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(158, 'sales.carriers.flatrate.active', '0', NULL, 'en', '2022-09-18 19:43:42', '2022-09-18 19:43:42'),
-(159, 'bulkupload.settings.general.status', '1', 'default', NULL, '2022-09-18 19:45:15', '2022-09-18 19:45:15'),
-(160, 'emails.general.notifications.emails.general.notifications.customer-registration-confirmation-mail-to-admin', '0', NULL, NULL, '2022-09-18 19:46:24', '2022-09-18 19:46:24'),
-(161, 'rma.settings.general.enable_rma', '1', 'default', NULL, '2022-09-18 19:47:31', '2022-09-18 19:47:31'),
-(162, 'rma.settings.general.default_allow_days', '7', 'default', NULL, '2022-09-18 19:47:31', '2022-09-18 19:47:31'),
-(163, 'rma.settings.general.enable_rma_for_pending_order', '0', 'default', NULL, '2022-09-18 19:47:31', '2022-09-18 19:47:31');
+(137, 'sales.paymentmethods.cashfree.title', 'Cashfree', NULL, 'en', '2022-09-16 13:36:23', '2022-09-16 13:36:23'),
+(138, 'sales.paymentmethods.cashfree.description', 'Cashfree', NULL, 'en', '2022-09-16 13:36:23', '2022-09-16 13:36:23'),
+(139, 'sales.paymentmethods.cashfree.app_id', '2486760c0c523371555af3f992676842', NULL, 'en', '2022-09-16 13:36:23', '2022-09-18 14:10:02'),
+(140, 'sales.paymentmethods.cashfree.key_secret', '955df43f13074bcafb77b52cee248687d4550943', NULL, 'en', '2022-09-16 13:36:23', '2022-09-18 14:34:29'),
+(141, 'sales.paymentmethods.cashfree.active', '1', NULL, 'en', '2022-09-16 13:36:23', '2022-09-16 13:36:23'),
+(142, 'sales.paymentmethods.cashfree.test_mode', '0', NULL, 'en', '2022-09-16 13:36:23', '2022-09-16 13:36:23'),
+(143, 'sales.carriers.free.title', 'Free Shipping', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(144, 'sales.carriers.free.description', 'Free Shipping', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(145, 'sales.carriers.free.active', '0', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(146, 'sales.carriers.flatrate.title', 'Flat Rate', 'default', 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(147, 'sales.carriers.flatrate.description', 'Flat Rate Shipping', 'default', NULL, '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(148, 'sales.carriers.flatrate.default_rate', '10', 'default', NULL, '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(149, 'sales.carriers.flatrate.type', 'per_unit', NULL, NULL, '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(150, 'sales.carriers.flatrate.active', '0', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(151, 'sales.carriers.dhl.title', 'DHL Shipping', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(152, 'sales.carriers.dhl.description', 'DHL Shipping', 'default', NULL, '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(153, 'sales.carriers.dhl.active', '0', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(154, 'sales.carriers.dhl.is_calculate_tax', '0', NULL, NULL, '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(155, 'sales.carriers.dhl.sandbox_mode', '0', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(156, 'sales.carriers.dhl.access_id', '', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(157, 'sales.carriers.dhl.password', '', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(158, 'sales.carriers.dhl.account_number', '', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(159, 'sales.carriers.dhl.weight_unit', 'KG', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(160, 'sales.carriers.dhl.dimension_unit', 'IN', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(161, 'sales.carriers.dhl.height', '', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(162, 'sales.carriers.dhl.depth', '', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(163, 'sales.carriers.dhl.width', '', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(164, 'sales.carriers.dhl.content_type', 'documents', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01'),
+(165, 'sales.carriers.dhl.ready_time', '', NULL, 'en', '2022-09-17 18:03:01', '2022-09-17 18:03:01');
 
 -- --------------------------------------------------------
 
@@ -6073,6 +6007,7 @@ CREATE TABLE `currencies` (
 
 INSERT INTO `currencies` (`id`, `code`, `name`, `created_at`, `updated_at`, `symbol`) VALUES
 (1, 'USD', 'US Dollar', NULL, NULL, '$'),
+(2, 'EUR', 'Euro', NULL, NULL, '€'),
 (3, 'INR', 'Indian Rupees', '2022-08-10 08:20:26', '2022-08-10 08:20:26', '₹');
 
 -- --------------------------------------------------------
@@ -6117,16 +6052,6 @@ CREATE TABLE `customers` (
   `notes` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`id`, `first_name`, `last_name`, `gender`, `date_of_birth`, `email`, `image`, `status`, `password`, `api_token`, `customer_group_id`, `subscribed_to_news_letter`, `remember_token`, `created_at`, `updated_at`, `is_verified`, `is_suspended`, `token`, `notes`, `phone`) VALUES
-(1, 'Manu', 'kumar', NULL, NULL, 'mannukumarshah@gmail.com', NULL, 1, NULL, NULL, 2, 0, 'l4AcF71JzeW6m4WD5awWu9WgSk7FaeZLZRqJX7WMB0i8REX4nzIw6PJz7uIS', '2022-08-13 15:16:03', '2022-08-13 15:16:03', 1, 0, NULL, NULL, NULL),
-(2, 'Mannu kumar', 'Shah', NULL, NULL, 'mannukumarshah595@gmail.com', NULL, 1, NULL, NULL, 2, 0, 'eyTqIj6Rc5uAGwQFl2EtzLgw0I6Z5kcI4dvrIopgHa6XHIEob9AmcrdPM6H1', '2022-08-14 10:39:30', '2022-08-14 10:39:30', 1, 0, NULL, NULL, NULL),
-(3, 'Danish', 'Bhatia', NULL, NULL, 'danishbhatia4@gmail.com', NULL, 1, NULL, NULL, 2, 0, '1Yq7HFJD0FFZ9Ficn6D1GWOJTuOfJC88kc3atCIPCIJVQnDBge4gkVK08K6A', '2022-08-19 17:56:20', '2022-08-19 17:56:20', 1, 0, NULL, NULL, NULL),
-(4, 'Danish', 'Bhatia', 'Male', '2022-08-01', 'danishbhatia43@gmail.com', NULL, 1, '$2y$10$cGJsGy5adWgHnXs6Qw7Sdejm2PQxEPzTxlHb2ECENKgRm9odC9.8K', '80rHGgwwJujcTA5XdSMFUUj3m7T54pYglWL0DKHhemFnXHScnZgsSm4FYmJdN4CWb1MJh9lwnWwqf5x4', 2, 0, NULL, '2022-08-20 18:21:08', '2022-08-21 10:06:47', 1, 0, '70aad06e227b264a23e40d064657fddc', NULL, '+917006144050');
 
 -- --------------------------------------------------------
 
@@ -6186,15 +6111,6 @@ CREATE TABLE `customer_social_accounts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `customer_social_accounts`
---
-
-INSERT INTO `customer_social_accounts` (`id`, `provider_name`, `provider_id`, `customer_id`, `created_at`, `updated_at`) VALUES
-(1, 'google', '111744805980564254319', 1, '2022-08-13 15:16:03', '2022-08-13 15:16:03'),
-(2, 'google', '115416541000865032060', 2, '2022-08-14 10:39:30', '2022-08-14 10:39:30'),
-(3, 'google', '114111322891131846318', 3, '2022-08-19 17:56:20', '2022-08-19 17:56:20');
 
 -- --------------------------------------------------------
 
@@ -6264,7 +6180,9 @@ CREATE TABLE `import_products` (
 --
 
 INSERT INTO `import_products` (`id`, `attribute_family_id`, `data_flow_profile_id`, `is_downloadable`, `upload_link_files`, `is_links_have_samples`, `upload_link_sample_files`, `is_samples_available`, `upload_sample_files`, `file_path`, `image_path`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0, '', 0, '', 0, '', 'imported-products/admin/files/632d9cf2cd6f9.csv', '', '2022-08-10 07:15:55', '2022-09-23 11:48:02');
+(1, 1, 1, 0, '', 0, '', 0, '', 'imported-products/admin/files/63317c309473e.csv', '', '2022-08-10 07:15:55', '2022-09-26 10:17:20'),
+(2, 1, 3, 0, '', 0, '', 0, '', 'imported-products/admin/files/6324bc5039e20.xlsx', '', '2022-09-16 18:11:28', '2022-09-16 18:11:28'),
+(3, 2, 4, 0, '', 0, '', 0, '', 'imported-products/admin/files/63304211cc5b0.csv', '', '2022-09-25 11:57:05', '2022-09-25 11:57:05');
 
 -- --------------------------------------------------------
 
@@ -6335,14 +6253,6 @@ CREATE TABLE `invoices` (
   `next_reminder_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `invoices`
---
-
-INSERT INTO `invoices` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `sub_total`, `base_sub_total`, `grand_total`, `base_grand_total`, `shipping_amount`, `base_shipping_amount`, `tax_amount`, `base_tax_amount`, `discount_amount`, `base_discount_amount`, `order_id`, `order_address_id`, `created_at`, `updated_at`, `transaction_id`, `reminders`, `next_reminder_at`) VALUES
-(1, '1', 'paid', 0, 1, 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 5, '2022-08-13 15:41:35', '2022-08-13 15:41:35', NULL, 0, NULL),
-(2, '2', 'paid', 0, 1, 'USD', 'USD', 'USD', '200.0000', '200.0000', '210.0000', '210.0000', '10.0000', '10.0000', '0.0000', '0.0000', '0.0000', '0.0000', 3, 15, '2022-08-24 20:18:18', '2022-08-24 20:18:18', NULL, 0, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -6373,14 +6283,6 @@ CREATE TABLE `invoice_items` (
   `discount_amount` decimal(12,4) DEFAULT 0.0000,
   `base_discount_amount` decimal(12,4) DEFAULT 0.0000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `invoice_items`
---
-
-INSERT INTO `invoice_items` (`id`, `name`, `description`, `sku`, `qty`, `price`, `base_price`, `total`, `base_total`, `tax_amount`, `base_tax_amount`, `product_id`, `product_type`, `order_item_id`, `invoice_id`, `parent_id`, `additional`, `created_at`, `updated_at`, `discount_percent`, `discount_amount`, `base_discount_amount`) VALUES
-(1, 'temp1', NULL, 'updatedSKU', 1, '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-13 15:41:35', '2022-08-13 15:41:35', '0.0000', '0.0000', '0.0000'),
-(2, 'temp1sdvc', NULL, 'temp21', 1, '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 4, 2, NULL, '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\",\"locale\":\"en\"}', '2022-08-24 20:18:18', '2022-08-24 20:18:18', '0.0000', '0.0000', '0.0000');
 
 -- --------------------------------------------------------
 
@@ -6738,17 +6640,6 @@ CREATE TABLE `notifications` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `notifications`
---
-
-INSERT INTO `notifications` (`id`, `type`, `read`, `order_id`, `created_at`, `updated_at`) VALUES
-(1, 'order', 1, 1, '2022-08-13 15:41:34', '2022-08-19 19:14:51'),
-(2, 'order', 1, 2, '2022-08-24 19:58:44', '2022-08-25 05:25:22'),
-(3, 'order', 1, 3, '2022-08-24 20:00:31', '2022-08-24 20:17:26'),
-(4, 'order', 1, 4, '2022-09-17 07:27:03', '2022-09-17 07:33:06'),
-(5, 'order', 1, 5, '2022-09-17 07:28:12', '2022-09-17 07:33:06');
-
 -- --------------------------------------------------------
 
 --
@@ -6820,17 +6711,6 @@ CREATE TABLE `orders` (
   `base_shipping_discount_amount` decimal(12,4) DEFAULT 0.0000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`id`, `user_id`, `increment_id`, `status`, `channel_name`, `is_guest`, `customer_email`, `customer_first_name`, `customer_last_name`, `customer_company_name`, `customer_vat_id`, `shipping_method`, `shipping_title`, `shipping_description`, `coupon_code`, `is_gift`, `total_item_count`, `total_qty_ordered`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `grand_total`, `base_grand_total`, `grand_total_invoiced`, `base_grand_total_invoiced`, `grand_total_refunded`, `base_grand_total_refunded`, `sub_total`, `base_sub_total`, `sub_total_invoiced`, `base_sub_total_invoiced`, `sub_total_refunded`, `base_sub_total_refunded`, `discount_percent`, `discount_amount`, `base_discount_amount`, `discount_invoiced`, `base_discount_invoiced`, `discount_refunded`, `base_discount_refunded`, `tax_amount`, `base_tax_amount`, `tax_amount_invoiced`, `base_tax_amount_invoiced`, `tax_amount_refunded`, `base_tax_amount_refunded`, `shipping_amount`, `base_shipping_amount`, `shipping_invoiced`, `base_shipping_invoiced`, `shipping_refunded`, `base_shipping_refunded`, `customer_id`, `customer_type`, `channel_id`, `channel_type`, `created_at`, `updated_at`, `cart_id`, `applied_cart_rule_ids`, `shipping_discount_amount`, `base_shipping_discount_amount`) VALUES
-(1, 0, '1', 'closed', 'Default', 0, 'mannukumarshah@gmail.com', 'Manu', 'kumar', NULL, NULL, 'free_free', 'Free Shipping - Free Shipping', 'Free Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-13 15:41:30', '2022-08-19 19:16:18', 6, '', '0.0000', '0.0000'),
-(2, 3, '2', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 2, 5, 'USD', 'USD', 'USD', '1650.0000', '1650.0000', '1650.0000', '1650.0000', '0.0000', '0.0000', '1600.0000', '1600.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '50.0000', '50.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-09-14 19:58:42', '2022-08-24 19:58:42', 12, '', '0.0000', '0.0000'),
-(3, 0, '3', 'processing', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 1, 1, 'USD', 'USD', 'USD', '210.0000', '210.0000', '210.0000', '210.0000', '0.0000', '0.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '10.0000', '10.0000', '10.0000', '10.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-08-24 20:00:31', '2022-08-24 20:18:18', 13, '', '0.0000', '0.0000'),
-(4, 3, '4', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'flatrate_flatrate', 'Flat Rate - Flat Rate', 'Flat Rate Shipping', NULL, 0, 2, 2, 'USD', 'USD', 'INR', '420.0000', '420.0000', '0.0000', '0.0000', '0.0000', '0.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '20.0000', '20.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-09-17 07:26:56', '2022-09-17 07:26:56', 14, '', '0.0000', '0.0000'),
-(5, 3, '5', 'pending', 'Default', 0, 'danishbhatia43@gmail.com', 'Danish', 'Bhatia', NULL, NULL, 'free_free', 'Free Shipping - Free Shipping', 'Free Shipping', NULL, 0, 2, 2, 'USD', 'USD', 'INR', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Customer\\Models\\Customer', 1, 'Webkul\\Core\\Models\\Channel', '2022-09-17 07:28:06', '2022-09-17 07:28:06', 14, '', '0.0000', '0.0000');
-
 -- --------------------------------------------------------
 
 --
@@ -6846,20 +6726,6 @@ CREATE TABLE `order_brands` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `order_brands`
---
-
-INSERT INTO `order_brands` (`id`, `order_id`, `order_item_id`, `product_id`, `brand`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, NULL, '2022-08-13 15:41:34', '2022-08-13 15:41:34'),
-(2, 2, 2, 4, 10, '2022-08-24 19:58:44', '2022-08-24 19:58:44'),
-(3, 2, 3, 2, 10, '2022-08-24 19:58:44', '2022-08-24 19:58:44'),
-(4, 3, 4, 2, 10, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
-(5, 4, 5, 6, 10, '2022-09-17 07:27:03', '2022-09-17 07:27:03'),
-(6, 4, 7, 3, 10, '2022-09-17 07:27:03', '2022-09-17 07:27:03'),
-(7, 5, 8, 6, 10, '2022-09-17 07:28:12', '2022-09-17 07:28:12'),
-(8, 5, 10, 3, 10, '2022-09-17 07:28:12', '2022-09-17 07:28:12');
 
 -- --------------------------------------------------------
 
@@ -6926,22 +6792,6 @@ CREATE TABLE `order_items` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `order_items`
---
-
-INSERT INTO `order_items` (`id`, `sku`, `type`, `name`, `coupon_code`, `weight`, `total_weight`, `qty_ordered`, `qty_shipped`, `qty_invoiced`, `qty_canceled`, `qty_refunded`, `price`, `base_price`, `total`, `base_total`, `total_invoiced`, `base_total_invoiced`, `amount_refunded`, `base_amount_refunded`, `discount_percent`, `discount_amount`, `base_discount_amount`, `discount_invoiced`, `base_discount_invoiced`, `discount_refunded`, `base_discount_refunded`, `tax_percent`, `tax_amount`, `base_tax_amount`, `tax_amount_invoiced`, `base_tax_amount_invoiced`, `tax_amount_refunded`, `base_tax_amount_refunded`, `product_id`, `product_type`, `order_id`, `parent_id`, `additional`, `created_at`, `updated_at`) VALUES
-(1, 'updatedSKU', 'simple', 'temp1', NULL, '12.0000', '12.0000', 1, 0, 1, 0, 1, '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-13 15:41:30', '2022-08-19 19:16:18'),
-(2, 'temporary-sku-6a87ba', 'simple', 'Copy of cbv (babed1)', NULL, '12.0000', '36.0000', 3, 0, 0, 0, 0, '400.0000', '400.0000', '1200.0000', '1200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 4, 'Webkul\\Product\\Models\\Product', 2, NULL, '{\"quantity\":3,\"product_id\":\"4\",\"_token\":\"SogHAGSqIwg1aQUeu8ffIHPGQks7ykqvs6wYoNJF\",\"locale\":\"en\"}', '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
-(3, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '24.0000', 2, 0, 0, 0, 0, '200.0000', '200.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 2, NULL, '{\"quantity\":2,\"product_id\":\"2\",\"_token\":\"zwSSEN83KcNKGYwzihNMip1GyFxbS205WezdtRIK\",\"locale\":\"en\"}', '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
-(4, 'temp21', 'simple', 'temp1sdvc', NULL, '12.0000', '12.0000', 1, 0, 1, 0, 0, '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '200.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 2, 'Webkul\\Product\\Models\\Product', 3, NULL, '{\"quantity\":1,\"product_id\":\"2\",\"_token\":\"oORtv6zMzMnJ5yK0XgOUENhqaaGxd2AyI8Z5tnjf\",\"locale\":\"en\"}', '2022-08-24 20:00:31', '2022-08-24 20:18:18'),
-(5, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', 1, 0, 0, 0, 0, '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 6, 'Webkul\\Product\\Models\\Product', 4, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}},\"locale\":\"en\"}', '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
-(6, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', 1, 0, 0, 0, 0, '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 7, 'Webkul\\Product\\Models\\Product', 4, 5, '{\"product_id\":7,\"parent_id\":6,\"locale\":\"en\"}', '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
-(7, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', 1, 0, 0, 0, 0, '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 3, 'Webkul\\Product\\Models\\Product', 4, NULL, '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\",\"locale\":\"en\"}', '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
-(8, 'test-3', 'configurable', 'Test Product 3', NULL, '1.0000', '1.0000', 1, 0, 0, 0, 0, '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 6, 'Webkul\\Product\\Models\\Product', 5, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"HvJnc8ZalBCXdiehpR5Z3QZWdkDeLccjG5KxSPm9\",\"product_id\":\"6\",\"quantity\":\"1\",\"selected_configurable_option\":\"7\",\"attributes\":{\"color\":{\"attribute_name\":\"Color\",\"option_id\":1,\"option_label\":\"Red\"},\"size\":{\"attribute_name\":\"Size\",\"option_id\":6,\"option_label\":\"S\"}},\"locale\":\"en\"}', '2022-09-17 07:28:06', '2022-09-17 07:28:06'),
-(9, 'test-3-variant-1-6', 'simple', 'Test Product v1', NULL, '0.0000', '0.0000', 1, 0, 0, 0, 0, '1.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 7, 'Webkul\\Product\\Models\\Product', 5, 8, '{\"product_id\":7,\"parent_id\":6,\"locale\":\"en\"}', '2022-09-17 07:28:06', '2022-09-17 07:28:06'),
-(10, 'temp41', 'simple', 'cbv', NULL, '12.0000', '12.0000', 1, 0, 0, 0, 0, '400.0000', '400.0000', '400.0000', '400.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 3, 'Webkul\\Product\\Models\\Product', 5, NULL, '{\"quantity\":1,\"product_id\":\"3\",\"_token\":\"gm1uVLcLH7JUSd9ZkuALM2OF4g0obWB6JFapZBTJ\",\"locale\":\"en\"}', '2022-09-17 07:28:06', '2022-09-17 07:28:06');
-
 -- --------------------------------------------------------
 
 --
@@ -6957,17 +6807,6 @@ CREATE TABLE `order_payment` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `order_payment`
---
-
-INSERT INTO `order_payment` (`id`, `method`, `method_title`, `order_id`, `additional`, `created_at`, `updated_at`) VALUES
-(1, 'razorpay', NULL, 1, NULL, '2022-08-13 15:41:30', '2022-08-13 15:41:30'),
-(2, 'moneytransfer', NULL, 2, NULL, '2022-08-24 19:58:42', '2022-08-24 19:58:42'),
-(3, 'moneytransfer', NULL, 3, NULL, '2022-08-24 20:00:31', '2022-08-24 20:00:31'),
-(4, 'cashondelivery', NULL, 4, NULL, '2022-09-17 07:26:56', '2022-09-17 07:26:56'),
-(5, 'cashondelivery', NULL, 5, NULL, '2022-09-17 07:28:06', '2022-09-17 07:28:06');
 
 -- --------------------------------------------------------
 
@@ -7034,8 +6873,8 @@ CREATE TABLE `products` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
   `attribute_family_id` int(10) UNSIGNED DEFAULT NULL,
-  `country` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'IN',
-  `delivery_charge` decimal(12,4) NOT NULL DEFAULT 0.0000,
+  `country` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `delivery_charge` decimal(12,4) DEFAULT NULL,
   `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
@@ -7044,509 +6883,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `user_id`, `sku`, `type`, `created_at`, `updated_at`, `parent_id`, `attribute_family_id`, `country`, `delivery_charge`, `additional`) VALUES
-(1, 1, 'updatedSKU', 'simple', '2022-08-10 07:16:06', '2022-08-10 07:16:06', NULL, 1, 'IN', '0.0000', NULL),
-(2, 4, 'temp21', 'simple', '2022-08-10 07:16:07', '2022-08-21 19:01:52', NULL, 1, 'IN', '0.0000', NULL),
-(3, 1, 'temp41', 'simple', '2022-08-10 07:16:09', '2022-08-21 19:01:13', NULL, 1, 'IN', '0.0000', NULL),
-(4, 3, 'temporary-sku-6a87ba', 'simple', '2022-08-12 03:08:32', '2022-08-12 05:23:29', NULL, 1, 'IN', '0.0000', NULL),
-(5, 1, 'test-2', 'simple', '2022-08-12 06:39:28', '2022-08-12 06:39:28', NULL, 1, 'IN', '0.0000', NULL),
-(6, 3, 'test-3', 'configurable', '2022-08-13 14:41:12', '2022-08-27 07:53:24', NULL, 1, 'IN', '0.0000', '{\"default_variant_id\":\"7\"}'),
-(7, NULL, 'test-3-variant-1-6', 'simple', '2022-08-13 14:41:12', '2022-08-13 14:41:12', 6, 1, 'IN', '0.0000', NULL),
-(8, NULL, 'test-3-variant-2-6', 'simple', '2022-08-13 14:41:12', '2022-08-13 14:41:12', 6, 1, 'IN', '0.0000', NULL),
-(9, NULL, 'test-3-variant-3-6', 'simple', '2022-08-13 14:41:13', '2022-08-13 14:41:13', 6, 1, 'IN', '0.0000', NULL),
-(10, NULL, 'test-3-variant-4-6', 'simple', '2022-08-13 14:41:13', '2022-08-13 14:41:13', 6, 1, 'IN', '0.0000', NULL),
-(11, 4, 'abcd12', 'downloadable', '2022-08-27 17:12:25', '2022-08-27 17:12:25', NULL, 1, 'IN', '0.0000', NULL),
-(12, 3, 'NOTE-20', 'configurable', '2022-08-27 17:46:57', '2022-08-27 17:49:16', NULL, 2, 'IN', '0.0000', '{\"default_variant_id\":\"14\"}'),
-(13, NULL, 'NOTE-20-variant-13', 'simple', '2022-08-27 17:46:57', '2022-08-27 17:46:57', 12, 2, 'IN', '0.0000', NULL),
-(14, 1, 'NOTE-20-variant-14', 'simple', '2022-08-27 17:46:57', '2022-08-27 17:48:53', 12, 2, 'IN', '0.0000', NULL),
-(18, 1, '12', 'grouped', '2022-08-27 19:32:05', '2022-08-27 19:32:05', NULL, 2, 'IN', '0.0000', NULL),
-(20, 1, 'temporary-sku-456948', 'grouped', '2022-09-11 20:39:08', '2022-09-11 20:39:08', NULL, 2, 'IN', '0.0000', NULL),
-(21, NULL, 'BS42BEAYYYhem-Blue', 'simple', '2022-09-23 11:48:19', '2022-09-23 11:48:19', NULL, 1, 'IN', '0.0000', NULL),
-(22, NULL, 'BS42BEAYYYhem-Yellow', 'simple', '2022-09-23 11:48:21', '2022-09-23 11:48:21', NULL, 1, 'IN', '0.0000', NULL),
-(23, NULL, 'BS42BELYYYadymor-Blue', 'simple', '2022-09-23 11:48:22', '2022-09-23 11:48:22', NULL, 1, 'IN', '0.0000', NULL),
-(24, NULL, 'BS42BEBYYYandej-Red', 'simple', '2022-09-23 11:48:23', '2022-09-23 11:48:23', NULL, 1, 'IN', '0.0000', NULL),
-(25, NULL, 'BS42BECYYYhokda-Blue', 'simple', '2022-09-23 11:48:24', '2022-09-23 11:48:24', NULL, 1, 'IN', '0.0000', NULL),
-(26, NULL, 'BS42BENYYYew-Purple', 'simple', '2022-09-23 11:48:26', '2022-09-23 11:48:26', NULL, 1, 'IN', '0.0000', NULL),
-(27, NULL, 'BS42BENYYYew-Orange', 'simple', '2022-09-23 11:48:27', '2022-09-23 11:48:27', NULL, 1, 'IN', '0.0000', NULL),
-(28, NULL, 'BS42BENYYYew-Brown', 'simple', '2022-09-23 11:48:28', '2022-09-23 11:48:28', NULL, 1, 'IN', '0.0000', NULL),
-(29, NULL, 'BS42BEDYYYandiya-Blue', 'simple', '2022-09-23 11:48:29', '2022-09-23 11:48:29', NULL, 1, 'IN', '0.0000', NULL),
-(30, NULL, 'BS42BELYYYeheriya-Red', 'simple', '2022-09-23 11:48:30', '2022-09-23 11:48:30', NULL, 1, 'IN', '0.0000', NULL),
-(31, NULL, 'BS42BEPYYYedh-Blue', 'simple', '2022-09-23 11:48:36', '2022-09-23 11:48:36', NULL, 1, 'IN', '0.0000', NULL),
-(32, NULL, 'BS42BERYYYajasthani', 'simple', '2022-09-23 11:48:37', '2022-09-23 11:48:37', NULL, 1, 'IN', '0.0000', NULL),
-(33, NULL, 'BS42BEBYYYandej-Blue', 'simple', '2022-09-23 11:48:38', '2022-09-23 11:48:38', NULL, 1, 'IN', '0.0000', NULL),
-(34, NULL, 'BS42BENYYYayi-Latest', 'simple', '2022-09-23 11:48:39', '2022-09-23 11:48:39', NULL, 1, 'IN', '0.0000', NULL),
-(35, NULL, 'BS42BEAYYYdimanav-Blue', 'simple', '2022-09-23 11:48:41', '2022-09-23 11:48:41', NULL, 1, 'IN', '0.0000', NULL),
-(36, NULL, 'BS42BEAYYYdimanav-Green', 'simple', '2022-09-23 11:48:42', '2022-09-23 11:48:42', NULL, 1, 'IN', '0.0000', NULL),
-(37, NULL, 'BS42BEAYYYdimanav-Pink', 'simple', '2022-09-23 11:48:43', '2022-09-23 11:48:43', NULL, 1, 'IN', '0.0000', NULL),
-(38, NULL, 'BS42BEAYYYdimanav-Seagreen', 'simple', '2022-09-23 11:48:44', '2022-09-23 11:48:44', NULL, 1, 'IN', '0.0000', NULL),
-(39, NULL, 'BS42BEAYYYdimanav-Yellow', 'simple', '2022-09-23 11:48:45', '2022-09-23 11:48:45', NULL, 1, 'IN', '0.0000', NULL),
-(40, NULL, 'BS42BEAYYYnda-Black', 'simple', '2022-09-23 11:48:47', '2022-09-23 11:48:47', NULL, 1, 'IN', '0.0000', NULL),
-(41, NULL, 'BS42BEBYYYandej-Black', 'simple', '2022-09-23 11:49:06', '2022-09-23 11:49:06', NULL, 1, 'IN', '0.0000', NULL),
-(42, NULL, 'BS42BEBYYYandej-Yellow', 'simple', '2022-09-23 11:49:08', '2022-09-23 11:49:08', NULL, 1, 'IN', '0.0000', NULL),
-(43, NULL, 'BS42BEBYYYarfi-Blue', 'simple', '2022-09-23 11:49:09', '2022-09-23 11:49:09', NULL, 1, 'IN', '0.0000', NULL),
-(44, NULL, 'BS42BEBYYYarfi-Yellow', 'simple', '2022-09-23 11:49:10', '2022-09-23 11:49:10', NULL, 1, 'IN', '0.0000', NULL),
-(45, NULL, 'BS42BEBYYYatik-Pink', 'simple', '2022-09-23 11:49:11', '2022-09-23 11:49:11', NULL, 1, 'IN', '0.0000', NULL),
-(46, NULL, 'BS42BEBYYYatik-Grey', 'simple', '2022-09-23 11:49:12', '2022-09-23 11:49:12', NULL, 1, 'IN', '0.0000', NULL),
-(47, NULL, 'BS42BEBYYYindia-Pink', 'simple', '2022-09-23 11:49:14', '2022-09-23 11:49:14', NULL, 1, 'IN', '0.0000', NULL),
-(48, NULL, 'BS42BEBYYYindia-Blue', 'simple', '2022-09-23 11:49:15', '2022-09-23 11:49:15', NULL, 1, 'IN', '0.0000', NULL),
-(49, NULL, 'BS42BEBYYYindia-Seagreen', 'simple', '2022-09-23 11:49:16', '2022-09-23 11:49:16', NULL, 1, 'IN', '0.0000', NULL),
-(50, NULL, 'BS42BEBYYYindia-Yellow', 'simple', '2022-09-23 11:49:17', '2022-09-23 11:49:17', NULL, 1, 'IN', '0.0000', NULL),
-(51, NULL, 'BS42BECYYYheckmate-Blue', 'simple', '2022-09-23 11:49:42', '2022-09-23 11:49:42', NULL, 1, 'IN', '0.0000', NULL),
-(52, NULL, 'BS42BECYYYheckmate-Green', 'simple', '2022-09-23 11:49:44', '2022-09-23 11:49:44', NULL, 1, 'IN', '0.0000', NULL),
-(53, NULL, 'BS42BECYYYheckmate-Pink', 'simple', '2022-09-23 11:49:45', '2022-09-23 11:49:45', NULL, 1, 'IN', '0.0000', NULL),
-(54, NULL, 'BS42BECYYYheckmate-Purple', 'simple', '2022-09-23 11:49:46', '2022-09-23 11:49:46', NULL, 1, 'IN', '0.0000', NULL),
-(55, NULL, 'BS42BECYYYheckmate-Yellow', 'simple', '2022-09-23 11:49:47', '2022-09-23 11:49:47', NULL, 1, 'IN', '0.0000', NULL),
-(56, NULL, 'BS42BEGYYYuldasta', 'simple', '2022-09-23 11:49:49', '2022-09-23 11:49:49', NULL, 1, 'IN', '0.0000', NULL),
-(57, NULL, 'BS42BEPYYYatang', 'simple', '2022-09-23 11:49:50', '2022-09-23 11:49:50', NULL, 1, 'IN', '0.0000', NULL),
-(58, NULL, 'BS42BEHYYYathi-Circle', 'simple', '2022-09-23 11:49:51', '2022-09-23 11:49:51', NULL, 1, 'IN', '0.0000', NULL),
-(59, NULL, 'BS42BEDYYYandiya-Brown', 'simple', '2022-09-23 11:49:52', '2022-09-23 11:49:52', NULL, 1, 'IN', '0.0000', NULL),
-(60, NULL, 'BS42BEDYYYo-Mor', 'simple', '2022-09-23 11:49:53', '2022-09-23 11:49:53', NULL, 1, 'IN', '0.0000', NULL),
-(61, NULL, 'BS42BENYYYayi-Pilli Grey', 'simple', '2022-09-23 11:50:24', '2022-09-23 11:50:24', NULL, 1, 'IN', '0.0000', NULL),
-(62, NULL, 'BS42BECYYYhokada-Red', 'simple', '2022-09-23 11:50:25', '2022-09-23 11:50:25', NULL, 1, 'IN', '0.0000', NULL),
-(63, NULL, 'BS42BECYYYhunari-Yellow', 'simple', '2022-09-23 11:50:27', '2022-09-23 11:50:27', NULL, 1, 'IN', '0.0000', NULL),
-(64, NULL, 'BS42BECYYYhunari-Maroon', 'simple', '2022-09-23 11:50:28', '2022-09-23 11:50:28', NULL, 1, 'IN', '0.0000', NULL),
-(65, NULL, 'BS42BECYYYhunari-Red', 'simple', '2022-09-23 11:50:29', '2022-09-23 11:50:29', NULL, 1, 'IN', '0.0000', NULL),
-(66, NULL, 'BS42BECYYYhunari-Black', 'simple', '2022-09-23 11:50:30', '2022-09-23 11:50:30', NULL, 1, 'IN', '0.0000', NULL),
-(67, NULL, 'BS42BECYYYharkam-Blue', 'simple', '2022-09-23 11:50:31', '2022-09-23 11:50:31', NULL, 1, 'IN', '0.0000', NULL),
-(68, NULL, 'BS42BECYYYharkam-Red', 'simple', '2022-09-23 11:50:32', '2022-09-23 11:50:32', NULL, 1, 'IN', '0.0000', NULL),
-(69, NULL, 'BS42BECYYYharkam-Seagreen', 'simple', '2022-09-23 11:50:34', '2022-09-23 11:50:34', NULL, 1, 'IN', '0.0000', NULL),
-(70, NULL, 'BS42BEGYYYoli-Blue', 'simple', '2022-09-23 11:50:35', '2022-09-23 11:50:35', NULL, 1, 'IN', '0.0000', NULL),
-(71, NULL, 'BS42BEGYYYoli-Pink', 'simple', '2022-09-23 11:51:03', '2022-09-23 11:51:03', NULL, 1, 'IN', '0.0000', NULL),
-(72, NULL, 'BS42BEGYYYoli-Seagreen', 'simple', '2022-09-23 11:51:05', '2022-09-23 11:51:05', NULL, 1, 'IN', '0.0000', NULL),
-(73, NULL, 'BS42BEGYYYoli-Yellow', 'simple', '2022-09-23 11:51:06', '2022-09-23 11:51:06', NULL, 1, 'IN', '0.0000', NULL),
-(74, NULL, 'BS42BEKYYYashmirkali-Yellow', 'simple', '2022-09-23 11:51:07', '2022-09-23 11:51:07', NULL, 1, 'IN', '0.0000', NULL),
-(75, NULL, 'BS42BEKYYYashmirkali-Seagreen', 'simple', '2022-09-23 11:51:08', '2022-09-23 11:51:08', NULL, 1, 'IN', '0.0000', NULL),
-(76, NULL, 'BS42BEKYYYashmirkali-Blue', 'simple', '2022-09-23 11:51:09', '2022-09-23 11:51:09', NULL, 1, 'IN', '0.0000', NULL),
-(77, NULL, 'BS42BEMYYYorpankh-Pink', 'simple', '2022-09-23 11:51:11', '2022-09-23 11:51:11', NULL, 1, 'IN', '0.0000', NULL),
-(78, NULL, 'BS42BEZYYYigzac-Orange', 'simple', '2022-09-23 11:51:12', '2022-09-23 11:51:12', NULL, 1, 'IN', '0.0000', NULL),
-(79, NULL, 'BS42BEZYYYigzac-Blue', 'simple', '2022-09-23 11:51:13', '2022-09-23 11:51:13', NULL, 1, 'IN', '0.0000', NULL),
-(80, NULL, 'BSCHNHDNL1039', 'simple', '2022-09-23 11:51:14', '2022-09-23 11:51:14', NULL, 1, 'IN', '0.0000', NULL),
-(81, NULL, 'BSCHNHDNL1040', 'simple', '2022-09-23 11:51:50', '2022-09-23 11:51:50', NULL, 1, 'IN', '0.0000', NULL),
-(82, NULL, 'BSCHNHDNL1041', 'simple', '2022-09-23 11:51:51', '2022-09-23 11:51:51', NULL, 1, 'IN', '0.0000', NULL),
-(83, NULL, 'BSCHNHDNL1042', 'simple', '2022-09-23 11:51:52', '2022-09-23 11:51:52', NULL, 1, 'IN', '0.0000', NULL),
-(84, NULL, 'BSCHNHDNL1043', 'simple', '2022-09-23 11:51:54', '2022-09-23 11:51:54', NULL, 1, 'IN', '0.0000', NULL),
-(85, NULL, 'BSCHNHDNL1044', 'simple', '2022-09-23 11:51:55', '2022-09-23 11:51:55', NULL, 1, 'IN', '0.0000', NULL),
-(86, NULL, 'BSCHNHDNL1045', 'simple', '2022-09-23 11:51:56', '2022-09-23 11:51:56', NULL, 1, 'IN', '0.0000', NULL),
-(87, NULL, 'BSCHNHDNL1046', 'simple', '2022-09-23 11:51:57', '2022-09-23 11:51:57', NULL, 1, 'IN', '0.0000', NULL),
-(88, NULL, 'BSCHNHDNL1047', 'simple', '2022-09-23 11:51:58', '2022-09-23 11:51:58', NULL, 1, 'IN', '0.0000', NULL),
-(89, NULL, 'BSB15MugMYYYug-EatSleepLiftRe_M', 'simple', '2022-09-23 11:52:00', '2022-09-23 11:52:00', NULL, 1, 'IN', '0.0000', NULL),
-(90, NULL, 'BSB41TMUGMYYYG46', 'simple', '2022-09-23 11:52:01', '2022-09-23 11:52:01', NULL, 1, 'IN', '0.0000', NULL),
-(91, NULL, 'BS42BECYYYHUNARI_RED_H24', 'simple', '2022-09-23 11:52:37', '2022-09-23 11:52:37', NULL, 1, 'IN', '0.0000', NULL),
-(92, NULL, 'BSB66HKBT_310_DS_040', 'simple', '2022-09-23 11:52:38', '2022-09-23 11:52:38', NULL, 1, 'IN', '0.0000', NULL),
-(93, NULL, 'BSB15MugMYYYug-EduIsTMstPwrfWeap1', 'simple', '2022-09-23 11:52:40', '2022-09-23 11:52:40', NULL, 1, 'IN', '0.0000', NULL),
-(94, NULL, 'BSB41TMUGMYYYG47', 'simple', '2022-09-23 11:52:41', '2022-09-23 11:52:41', NULL, 1, 'IN', '0.0000', NULL),
-(95, NULL, 'BS42BECYYYHUNARI_YELLOW_H24', 'simple', '2022-09-23 11:52:42', '2022-09-23 11:52:42', NULL, 1, 'IN', '0.0000', NULL),
-(96, NULL, 'BSB15MugMYYYug-EkToHumPunjabiUparSeCute1', 'simple', '2022-09-23 11:52:43', '2022-09-23 11:52:43', NULL, 1, 'IN', '0.0000', NULL),
-(97, NULL, 'BSB41TMUGMYYYG48', 'simple', '2022-09-23 11:52:45', '2022-09-23 11:52:45', NULL, 1, 'IN', '0.0000', NULL),
-(98, NULL, 'BS42BEDYYYANDIYA_BLUE_H24', 'simple', '2022-09-23 11:52:46', '2022-09-23 11:52:46', NULL, 1, 'IN', '0.0000', NULL),
-(99, NULL, 'BSB66HKBT_310_DS_042', 'simple', '2022-09-23 11:52:47', '2022-09-23 11:52:47', NULL, 1, 'IN', '0.0000', NULL),
-(100, NULL, 'BSB32DYYYK-NG-361', 'simple', '2022-09-23 11:52:48', '2022-09-23 11:52:48', NULL, 1, 'IN', '0.0000', NULL),
-(101, NULL, 'BSB41TMUGMYYYG49', 'simple', '2022-09-23 11:53:25', '2022-09-23 11:53:25', NULL, 1, 'IN', '0.0000', NULL),
-(102, NULL, 'BS42BEDYYYANDIYA_BROWN_H24', 'simple', '2022-09-23 11:53:26', '2022-09-23 11:53:26', NULL, 1, 'IN', '0.0000', NULL),
-(103, NULL, 'BSB66HKBT_310_DS_043', 'simple', '2022-09-23 11:53:28', '2022-09-23 11:53:28', NULL, 1, 'IN', '0.0000', NULL),
-(104, NULL, 'BSB15MugMYYYug-EraseImgineCrte1', 'simple', '2022-09-23 11:53:29', '2022-09-23 11:53:29', NULL, 1, 'IN', '0.0000', NULL),
-(105, NULL, 'BSB32DYYYK-NG-362', 'simple', '2022-09-23 11:53:30', '2022-09-23 11:53:30', NULL, 1, 'IN', '0.0000', NULL),
-(106, NULL, 'BSB41TMUGMYYYG50', 'simple', '2022-09-23 11:53:31', '2022-09-23 11:53:31', NULL, 1, 'IN', '0.0000', NULL),
-(107, NULL, 'BS42BEDYYYANDIYA_ORANGE_H24', 'simple', '2022-09-23 11:53:32', '2022-09-23 11:53:32', NULL, 1, 'IN', '0.0000', NULL),
-(108, NULL, 'BSB66HKBT_310_DS_044', 'simple', '2022-09-23 11:53:34', '2022-09-23 11:53:34', NULL, 1, 'IN', '0.0000', NULL),
-(109, NULL, 'BSB15MugMYYYug-Eyes', 'simple', '2022-09-23 11:53:35', '2022-09-23 11:53:35', NULL, 1, 'IN', '0.0000', NULL),
-(110, NULL, 'BSB32DYYYK-NG-363', 'simple', '2022-09-23 11:53:36', '2022-09-23 11:53:36', NULL, 1, 'IN', '0.0000', NULL),
-(111, NULL, 'BSCHNKH1194', 'simple', '2022-09-23 11:54:01', '2022-09-23 11:54:01', NULL, 1, 'IN', '0.0000', NULL),
-(112, NULL, 'BSB46BEDDYYYohar_DB_201', 'simple', '2022-09-23 11:54:02', '2022-09-23 11:54:02', NULL, 1, 'IN', '0.0000', NULL),
-(113, NULL, 'BS42BEDYYYOT_BLACK_H24', 'simple', '2022-09-23 11:54:03', '2022-09-23 11:54:03', NULL, 1, 'IN', '0.0000', NULL),
-(114, NULL, 'BSB66HKBT_310_DS_045', 'simple', '2022-09-23 11:54:05', '2022-09-23 11:54:05', NULL, 1, 'IN', '0.0000', NULL),
-(115, NULL, 'BSB15MugMYYYug-Father&Son', 'simple', '2022-09-23 11:54:06', '2022-09-23 11:54:06', NULL, 1, 'IN', '0.0000', NULL),
-(116, NULL, 'BSB32DYYYK-NG-364', 'simple', '2022-09-23 11:54:07', '2022-09-23 11:54:07', NULL, 1, 'IN', '0.0000', NULL),
-(117, NULL, 'BSB46BEDDYYYohar_DB_202', 'simple', '2022-09-23 11:54:08', '2022-09-23 11:54:08', NULL, 1, 'IN', '0.0000', NULL),
-(118, NULL, 'BS42BEDYYYOT_ORANGE_H24', 'simple', '2022-09-23 11:54:09', '2022-09-23 11:54:09', NULL, 1, 'IN', '0.0000', NULL),
-(119, NULL, 'BSB66HKBT_310_DS_046', 'simple', '2022-09-23 11:54:10', '2022-09-23 11:54:10', NULL, 1, 'IN', '0.0000', NULL),
-(120, NULL, 'BSB15MugMYYYug-FirstLearnTheRulesThen', 'simple', '2022-09-23 11:54:12', '2022-09-23 11:54:12', NULL, 1, 'IN', '0.0000', NULL),
-(121, NULL, 'BSB32DYYYK-NG-365', 'simple', '2022-09-23 11:54:36', '2022-09-23 11:54:36', NULL, 1, 'IN', '0.0000', NULL),
-(122, NULL, 'BSB46BEDDYYYohar_DB_203', 'simple', '2022-09-23 11:54:37', '2022-09-23 11:54:37', NULL, 1, 'IN', '0.0000', NULL),
-(123, NULL, 'BS42BEFYYYLOWER_PINK_H24', 'simple', '2022-09-23 11:54:38', '2022-09-23 11:54:38', NULL, 1, 'IN', '0.0000', NULL),
-(124, NULL, 'BSB66HKBT_310_DS_047', 'simple', '2022-09-23 11:54:39', '2022-09-23 11:54:39', NULL, 1, 'IN', '0.0000', NULL),
-(125, NULL, 'BSB15MugMYYYug-FocusOnEyes1', 'simple', '2022-09-23 11:54:40', '2022-09-23 11:54:40', NULL, 1, 'IN', '0.0000', NULL),
-(126, NULL, 'BSB32DYYYK-NG-366', 'simple', '2022-09-23 11:54:42', '2022-09-23 11:54:42', NULL, 1, 'IN', '0.0000', NULL),
-(127, NULL, 'BSCHNKH1200', 'simple', '2022-09-23 11:54:43', '2022-09-23 11:54:43', NULL, 1, 'IN', '0.0000', NULL),
-(128, NULL, 'BSB46BEDDYYYohar_DB_204', 'simple', '2022-09-23 11:54:44', '2022-09-23 11:54:44', NULL, 1, 'IN', '0.0000', NULL),
-(129, NULL, 'BS42BEFYYYLOWER_RED_H24', 'simple', '2022-09-23 11:54:46', '2022-09-23 11:54:46', NULL, 1, 'IN', '0.0000', NULL),
-(130, NULL, 'BSB66HKBT_310_DS_048', 'simple', '2022-09-23 11:54:47', '2022-09-23 11:54:47', NULL, 1, 'IN', '0.0000', NULL),
-(131, NULL, 'BSB15MugMYYYug-FreeHugs_M', 'simple', '2022-09-23 11:55:16', '2022-09-23 11:55:16', NULL, 1, 'IN', '0.0000', NULL),
-(132, NULL, 'BSB32DYYYK-NG-367', 'simple', '2022-09-23 11:55:18', '2022-09-23 11:55:18', NULL, 1, 'IN', '0.0000', NULL),
-(133, NULL, 'BSB46BEDDYYYohar_DB_205', 'simple', '2022-09-23 11:55:20', '2022-09-23 11:55:20', NULL, 1, 'IN', '0.0000', NULL),
-(134, NULL, 'BS42BEHYYYATHI_BLACK_H24', 'simple', '2022-09-23 11:55:21', '2022-09-23 11:55:21', NULL, 1, 'IN', '0.0000', NULL),
-(135, NULL, 'BSB66HKBT_275_SS_049', 'simple', '2022-09-23 11:55:22', '2022-09-23 11:55:22', NULL, 1, 'IN', '0.0000', NULL),
-(136, NULL, 'BSB15MugMYYYug-Friends4Life_1', 'simple', '2022-09-23 11:55:23', '2022-09-23 11:55:23', NULL, 1, 'IN', '0.0000', NULL),
-(137, NULL, 'BSB32DYYYK-NG-368', 'simple', '2022-09-23 11:55:25', '2022-09-23 11:55:25', NULL, 1, 'IN', '0.0000', NULL),
-(138, NULL, 'BSL0YYY03', 'simple', '2022-09-23 11:55:26', '2022-09-23 11:55:26', NULL, 1, 'IN', '0.0000', NULL),
-(139, NULL, 'BSB46BEDDYYYohar_DB_206', 'simple', '2022-09-23 11:55:27', '2022-09-23 11:55:27', NULL, 1, 'IN', '0.0000', NULL),
-(140, NULL, 'BS42BEHYYYATHI_BLUE_H24', 'simple', '2022-09-23 11:55:28', '2022-09-23 11:55:28', NULL, 1, 'IN', '0.0000', NULL),
-(141, NULL, 'BSB66HKBT_275_SS_050', 'simple', '2022-09-23 11:56:03', '2022-09-23 11:56:03', NULL, 1, 'IN', '0.0000', NULL),
-(142, NULL, 'BSB15MugMYYYug-FriendsForever', 'simple', '2022-09-23 11:56:04', '2022-09-23 11:56:04', NULL, 1, 'IN', '0.0000', NULL),
-(143, NULL, 'BSB32DYYYK-NG-369', 'simple', '2022-09-23 11:56:05', '2022-09-23 11:56:05', NULL, 1, 'IN', '0.0000', NULL),
-(144, NULL, 'BSL0YYY04', 'simple', '2022-09-23 11:56:06', '2022-09-23 11:56:06', NULL, 1, 'IN', '0.0000', NULL),
-(145, NULL, 'BSCHNKH1315', 'simple', '2022-09-23 11:56:08', '2022-09-23 11:56:08', NULL, 1, 'IN', '0.0000', NULL),
-(146, NULL, 'BSB46BEDDYYYohar_DB_207', 'simple', '2022-09-23 11:56:09', '2022-09-23 11:56:09', NULL, 1, 'IN', '0.0000', NULL),
-(147, NULL, 'BS42BEHYYYATHI_RED_H24', 'simple', '2022-09-23 11:56:10', '2022-09-23 11:56:10', NULL, 1, 'IN', '0.0000', NULL),
-(148, NULL, 'BSB66HKBT_275_SS_051', 'simple', '2022-09-23 11:56:12', '2022-09-23 11:56:12', NULL, 1, 'IN', '0.0000', NULL),
-(149, NULL, 'BSB15MugMYYYug-FunkyEyes', 'simple', '2022-09-23 11:56:13', '2022-09-23 11:56:13', NULL, 1, 'IN', '0.0000', NULL),
-(150, NULL, 'BSB32DYYYK-NG-370', 'simple', '2022-09-23 11:56:14', '2022-09-23 11:56:14', NULL, 1, 'IN', '0.0000', NULL),
-(151, NULL, 'BSL0YYY05', 'simple', '2022-09-23 11:56:48', '2022-09-23 11:56:48', NULL, 1, 'IN', '0.0000', NULL),
-(152, NULL, 'BSB46BEDDYYYohar_DB_208', 'simple', '2022-09-23 11:56:49', '2022-09-23 11:56:49', NULL, 1, 'IN', '0.0000', NULL),
-(153, NULL, 'BS42BEKYYYAMAL_BUTTA_GREY_H24', 'simple', '2022-09-23 11:56:51', '2022-09-23 11:56:51', NULL, 1, 'IN', '0.0000', NULL),
-(154, NULL, 'BSB66HKBT_275_SS_052', 'simple', '2022-09-23 11:56:52', '2022-09-23 11:56:52', NULL, 1, 'IN', '0.0000', NULL),
-(155, NULL, 'BSB15MugMYYYug-Gabru', 'simple', '2022-09-23 11:56:53', '2022-09-23 11:56:53', NULL, 1, 'IN', '0.0000', NULL),
-(156, NULL, 'BSB32DYYYK-NG-371', 'simple', '2022-09-23 11:56:54', '2022-09-23 11:56:54', NULL, 1, 'IN', '0.0000', NULL),
-(157, NULL, 'BSL0YYY06', 'simple', '2022-09-23 11:56:56', '2022-09-23 11:56:56', NULL, 1, 'IN', '0.0000', NULL),
-(158, NULL, 'BSCHNKH1206', 'simple', '2022-09-23 11:56:57', '2022-09-23 11:56:57', NULL, 1, 'IN', '0.0000', NULL),
-(159, NULL, 'BSB46BEDDYYYohar_DB_209', 'simple', '2022-09-23 11:56:58', '2022-09-23 11:56:58', NULL, 1, 'IN', '0.0000', NULL),
-(160, NULL, 'BS42BEKYYYAMAL_BUTTA_PINK_H24', 'simple', '2022-09-23 11:56:59', '2022-09-23 11:56:59', NULL, 1, 'IN', '0.0000', NULL),
-(161, NULL, 'BSB66HKBT_275_SS_053', 'simple', '2022-09-23 11:57:33', '2022-09-23 11:57:33', NULL, 1, 'IN', '0.0000', NULL),
-(162, NULL, 'BSB15MugMYYYug-GiveMe1Month_C', 'simple', '2022-09-23 11:57:34', '2022-09-23 11:57:34', NULL, 1, 'IN', '0.0000', NULL),
-(163, NULL, 'BSB32DYYYK-NG-372', 'simple', '2022-09-23 11:57:36', '2022-09-23 11:57:36', NULL, 1, 'IN', '0.0000', NULL),
-(164, NULL, 'BSL0YYY07', 'simple', '2022-09-23 11:57:37', '2022-09-23 11:57:37', NULL, 1, 'IN', '0.0000', NULL),
-(165, NULL, 'BSB46BEDDYYYohar_DB_210', 'simple', '2022-09-23 11:57:38', '2022-09-23 11:57:38', NULL, 1, 'IN', '0.0000', NULL),
-(166, NULL, 'BS42BEKYYYAMAL_BUTTA_SEAGREEN_H24', 'simple', '2022-09-23 11:57:39', '2022-09-23 11:57:39', NULL, 1, 'IN', '0.0000', NULL),
-(167, NULL, 'BSB66HKBT_275_SS_054', 'simple', '2022-09-23 11:57:40', '2022-09-23 11:57:40', NULL, 1, 'IN', '0.0000', NULL),
-(168, NULL, 'BSB15MugMYYYug-GlobalDbiScore', 'simple', '2022-09-23 11:57:42', '2022-09-23 11:57:42', NULL, 1, 'IN', '0.0000', NULL),
-(169, NULL, 'BSB32DYYYK-NG-373', 'simple', '2022-09-23 11:57:43', '2022-09-23 11:57:43', NULL, 1, 'IN', '0.0000', NULL),
-(170, NULL, 'BSL0YYY08', 'simple', '2022-09-23 11:57:44', '2022-09-23 11:57:44', NULL, 1, 'IN', '0.0000', NULL),
-(171, NULL, 'BSCHNKH1208', 'simple', '2022-09-23 11:58:18', '2022-09-23 11:58:18', NULL, 1, 'IN', '0.0000', NULL),
-(172, NULL, 'BSB46BEDDYYYohar_DB_211', 'simple', '2022-09-23 11:58:19', '2022-09-23 11:58:19', NULL, 1, 'IN', '0.0000', NULL),
-(173, NULL, 'BS42BEKYYYAMAL_BUTTA_YELLOW_H24', 'simple', '2022-09-23 11:58:20', '2022-09-23 11:58:20', NULL, 1, 'IN', '0.0000', NULL),
-(174, NULL, 'BSB66HKBT_275_SS_055', 'simple', '2022-09-23 11:58:21', '2022-09-23 11:58:21', NULL, 1, 'IN', '0.0000', NULL),
-(175, NULL, 'BSB15MugMYYYug-HanjiHello', 'simple', '2022-09-23 11:58:22', '2022-09-23 11:58:22', NULL, 1, 'IN', '0.0000', NULL),
-(176, NULL, 'BSB32DYYYK-NG-374', 'simple', '2022-09-23 11:58:24', '2022-09-23 11:58:24', NULL, 1, 'IN', '0.0000', NULL),
-(177, NULL, 'BSL0YYY09', 'simple', '2022-09-23 11:58:25', '2022-09-23 11:58:25', NULL, 1, 'IN', '0.0000', NULL),
-(178, NULL, 'BSB46BEDDYYYohar_DB_212', 'simple', '2022-09-23 11:58:26', '2022-09-23 11:58:26', NULL, 1, 'IN', '0.0000', NULL),
-(179, NULL, 'BS42BELYYYEAF_BLUE_H24', 'simple', '2022-09-23 11:58:27', '2022-09-23 11:58:27', NULL, 1, 'IN', '0.0000', NULL),
-(180, NULL, 'BSB21HDMYYYcdrcb13_Cream', 'simple', '2022-09-23 11:58:29', '2022-09-23 11:58:29', NULL, 1, 'IN', '0.0000', NULL),
-(181, NULL, 'BSB66HKBT_275_SS_056', 'simple', '2022-09-23 11:59:04', '2022-09-23 11:59:04', NULL, 1, 'IN', '0.0000', NULL),
-(182, NULL, 'BSB15MugMYYYug-HappyFather\'SDay2', 'simple', '2022-09-23 11:59:05', '2022-09-23 11:59:05', NULL, 1, 'IN', '0.0000', NULL),
-(183, NULL, 'BSB32DYYYK-NG-375', 'simple', '2022-09-23 11:59:07', '2022-09-23 11:59:07', NULL, 1, 'IN', '0.0000', NULL),
-(184, NULL, 'BSL1YYY0', 'simple', '2022-09-23 11:59:08', '2022-09-23 11:59:08', NULL, 1, 'IN', '0.0000', NULL),
-(185, NULL, 'BSB46BEDDYYYohar_SB_401', 'simple', '2022-09-23 11:59:09', '2022-09-23 11:59:09', NULL, 1, 'IN', '0.0000', NULL),
-(186, NULL, 'BS42BELYYYEAF_LINING_BLUE_H24', 'simple', '2022-09-23 11:59:10', '2022-09-23 11:59:10', NULL, 1, 'IN', '0.0000', NULL),
-(187, NULL, 'BSB15MugMYYYug-HappyValentin`sDay', 'simple', '2022-09-23 11:59:11', '2022-09-23 11:59:11', NULL, 1, 'IN', '0.0000', NULL),
-(188, NULL, 'BSB32DYYYK-NG-376', 'simple', '2022-09-23 11:59:13', '2022-09-23 11:59:13', NULL, 1, 'IN', '0.0000', NULL),
-(189, NULL, 'BSL1YYY1', 'simple', '2022-09-23 11:59:14', '2022-09-23 11:59:14', NULL, 1, 'IN', '0.0000', NULL),
-(190, NULL, 'BS42BELYYYEAF_LINING_SEAGREEN_H24', 'simple', '2022-09-23 11:59:49', '2022-09-23 11:59:49', NULL, 1, 'IN', '0.0000', NULL),
-(191, NULL, 'BSB21HDPYYYlantbunch_5Champagne', 'simple', '2022-09-23 11:59:51', '2022-09-23 11:59:51', NULL, 1, 'IN', '0.0000', NULL),
-(192, NULL, 'BSB66HKBT_275_SS_058', 'simple', '2022-09-23 11:59:52', '2022-09-23 11:59:52', NULL, 1, 'IN', '0.0000', NULL),
-(193, NULL, 'BSB15MugMYYYug-HealthlsWealth_M', 'simple', '2022-09-23 11:59:53', '2022-09-23 11:59:53', NULL, 1, 'IN', '0.0000', NULL),
-(194, NULL, 'BSB32DYYYK-NG-377', 'simple', '2022-09-23 11:59:54', '2022-09-23 11:59:54', NULL, 1, 'IN', '0.0000', NULL),
-(195, NULL, 'BSL1YYY2', 'simple', '2022-09-23 11:59:56', '2022-09-23 11:59:56', NULL, 1, 'IN', '0.0000', NULL),
-(196, NULL, 'BSB46BEDDYYYohar_SB_403', 'simple', '2022-09-23 11:59:57', '2022-09-23 11:59:57', NULL, 1, 'IN', '0.0000', NULL),
-(197, NULL, 'BSCHNKH1601', 'simple', '2022-09-23 11:59:58', '2022-09-23 11:59:58', NULL, 1, 'IN', '0.0000', NULL),
-(198, NULL, 'BS42BELYYYEAF_LINING_YELLOW_H24', 'simple', '2022-09-23 11:59:59', '2022-09-23 11:59:59', NULL, 1, 'IN', '0.0000', NULL),
-(199, NULL, 'BSB66HKBT_275_SS_059', 'simple', '2022-09-23 12:00:00', '2022-09-23 12:00:00', NULL, 1, 'IN', '0.0000', NULL),
-(200, NULL, 'BSB15MugMYYYug-HeartBoy', 'simple', '2022-09-23 12:00:23', '2022-09-23 12:00:23', NULL, 1, 'IN', '0.0000', NULL),
-(201, NULL, 'BSB32DYYYK-NG-378', 'simple', '2022-09-23 12:00:24', '2022-09-23 12:00:24', NULL, 1, 'IN', '0.0000', NULL),
-(202, NULL, 'BSL1YYY5', 'simple', '2022-09-23 12:00:25', '2022-09-23 12:00:25', NULL, 1, 'IN', '0.0000', NULL),
-(203, NULL, 'BSB46BEDDYYYohar_SB_404', 'simple', '2022-09-23 12:00:27', '2022-09-23 12:00:27', NULL, 1, 'IN', '0.0000', NULL),
-(204, NULL, 'BSCHNKH1602', 'simple', '2022-09-23 12:00:28', '2022-09-23 12:00:28', NULL, 1, 'IN', '0.0000', NULL),
-(205, NULL, 'BS42BELYYYEAF_PINK_H24', 'simple', '2022-09-23 12:00:29', '2022-09-23 12:00:29', NULL, 1, 'IN', '0.0000', NULL),
-(206, NULL, 'BSB66HKBT_275_SS_060', 'simple', '2022-09-23 12:00:30', '2022-09-23 12:00:30', NULL, 1, 'IN', '0.0000', NULL),
-(207, NULL, 'BSB15MugMYYYug-HelloFriends', 'simple', '2022-09-23 12:00:31', '2022-09-23 12:00:31', NULL, 1, 'IN', '0.0000', NULL),
-(208, NULL, 'BSB32DYYYK-NG-379', 'simple', '2022-09-23 12:00:33', '2022-09-23 12:00:33', NULL, 1, 'IN', '0.0000', NULL),
-(209, NULL, 'BSL1YYY6', 'simple', '2022-09-23 12:00:34', '2022-09-23 12:00:34', NULL, 1, 'IN', '0.0000', NULL),
-(210, NULL, 'BSCHNKH1325', 'simple', '2022-09-23 12:01:01', '2022-09-23 12:01:01', NULL, 1, 'IN', '0.0000', NULL),
-(211, NULL, 'BS42BEBYYYatik-Sg', 'simple', '2022-09-23 12:01:03', '2022-09-23 12:01:03', NULL, 1, 'IN', '0.0000', NULL),
-(212, NULL, 'BSB46BEDDYYYohar_SB_405', 'simple', '2022-09-23 12:01:04', '2022-09-23 12:01:04', NULL, 1, 'IN', '0.0000', NULL),
-(213, NULL, 'BSCHNKH1603', 'simple', '2022-09-23 12:01:05', '2022-09-23 12:01:05', NULL, 1, 'IN', '0.0000', NULL),
-(214, NULL, 'BS42BELYYYEAF_RED_H24', 'simple', '2022-09-23 12:01:06', '2022-09-23 12:01:06', NULL, 1, 'IN', '0.0000', NULL),
-(215, NULL, 'BSB21HDPYYYlantbunch_5Sunflowers', 'simple', '2022-09-23 12:01:07', '2022-09-23 12:01:07', NULL, 1, 'IN', '0.0000', NULL),
-(216, NULL, 'BSB66HKBT_275_SS_061', 'simple', '2022-09-23 12:01:09', '2022-09-23 12:01:09', NULL, 1, 'IN', '0.0000', NULL),
-(217, NULL, 'BSB15MugMYYYug-Hike', 'simple', '2022-09-23 12:01:10', '2022-09-23 12:01:10', NULL, 1, 'IN', '0.0000', NULL),
-(218, NULL, 'BSB32DYYYK-NG-380', 'simple', '2022-09-23 12:01:11', '2022-09-23 12:01:11', NULL, 1, 'IN', '0.0000', NULL),
-(219, NULL, 'BSL1YYY7', 'simple', '2022-09-23 12:01:12', '2022-09-23 12:01:12', NULL, 1, 'IN', '0.0000', NULL),
-(220, NULL, 'BSB46BEDDYYYohar_SB_406', 'simple', '2022-09-23 12:01:45', '2022-09-23 12:01:45', NULL, 1, 'IN', '0.0000', NULL),
-(221, NULL, 'BS42BELYYYEAFS_PINK_H24', 'simple', '2022-09-23 12:01:47', '2022-09-23 12:01:47', NULL, 1, 'IN', '0.0000', NULL),
-(222, NULL, 'BSB21HDRYYYed Lily Creeper', 'simple', '2022-09-23 12:01:48', '2022-09-23 12:01:48', NULL, 1, 'IN', '0.0000', NULL),
-(223, NULL, 'BSB66HKBT_275_SS_062', 'simple', '2022-09-23 12:01:49', '2022-09-23 12:01:49', NULL, 1, 'IN', '0.0000', NULL),
-(224, NULL, 'BSB15MugMYYYug-HitWicket_Cric', 'simple', '2022-09-23 12:01:50', '2022-09-23 12:01:50', NULL, 1, 'IN', '0.0000', NULL),
-(225, NULL, 'BSB32DYYYK-NG-381', 'simple', '2022-09-23 12:01:52', '2022-09-23 12:01:52', NULL, 1, 'IN', '0.0000', NULL),
-(226, NULL, 'BSL1YYY8', 'simple', '2022-09-23 12:01:53', '2022-09-23 12:01:53', NULL, 1, 'IN', '0.0000', NULL),
-(227, NULL, 'BSB46BEDDYYYohar_SB_407', 'simple', '2022-09-23 12:01:54', '2022-09-23 12:01:54', NULL, 1, 'IN', '0.0000', NULL),
-(228, NULL, 'BS42BELYYYEAFS_SEAGREEN_H24', 'simple', '2022-09-23 12:01:55', '2022-09-23 12:01:55', NULL, 1, 'IN', '0.0000', NULL),
-(229, NULL, 'BSB66HKBT_275_SS_063', 'simple', '2022-09-23 12:01:57', '2022-09-23 12:01:57', NULL, 1, 'IN', '0.0000', NULL),
-(230, NULL, 'BSB32DYYYK-NG-382', 'simple', '2022-09-23 12:02:31', '2022-09-23 12:02:31', NULL, 1, 'IN', '0.0000', NULL),
-(231, NULL, 'BSL2YYY1', 'simple', '2022-09-23 12:02:33', '2022-09-23 12:02:33', NULL, 1, 'IN', '0.0000', NULL),
-(232, NULL, 'BSB46BEDDYYYohar_SB_408', 'simple', '2022-09-23 12:02:34', '2022-09-23 12:02:34', NULL, 1, 'IN', '0.0000', NULL),
-(233, NULL, 'BS42BELYYYINING_BLUE_H24', 'simple', '2022-09-23 12:02:35', '2022-09-23 12:02:35', NULL, 1, 'IN', '0.0000', NULL),
-(234, NULL, 'BSB66HKBT_275_SS_064', 'simple', '2022-09-23 12:02:36', '2022-09-23 12:02:36', NULL, 1, 'IN', '0.0000', NULL),
-(235, NULL, 'BSB15MugMYYYug-HowToDrink', 'simple', '2022-09-23 12:02:37', '2022-09-23 12:02:37', NULL, 1, 'IN', '0.0000', NULL),
-(236, NULL, 'BSB32DYYYK-NG-383', 'simple', '2022-09-23 12:02:39', '2022-09-23 12:02:39', NULL, 1, 'IN', '0.0000', NULL),
-(237, NULL, 'BSL2YYY4', 'simple', '2022-09-23 12:02:40', '2022-09-23 12:02:40', NULL, 1, 'IN', '0.0000', NULL),
-(238, NULL, 'BS42BELYYYINING_RED_H24', 'simple', '2022-09-23 12:03:17', '2022-09-23 12:03:17', NULL, 1, 'IN', '0.0000', NULL),
-(239, NULL, 'BSB66HKBT_275_SS_065', 'simple', '2022-09-23 12:03:18', '2022-09-23 12:03:18', NULL, 1, 'IN', '0.0000', NULL),
-(240, NULL, 'BSB15MugMYYYug-IAmNotPerfect', 'simple', '2022-09-23 12:03:19', '2022-09-23 12:03:19', NULL, 1, 'IN', '0.0000', NULL),
-(241, NULL, 'BSB32DYYYK-NG-384', 'simple', '2022-09-23 12:03:20', '2022-09-23 12:03:20', NULL, 1, 'IN', '0.0000', NULL),
-(242, NULL, 'BSL2YYY5', 'simple', '2022-09-23 12:03:22', '2022-09-23 12:03:22', NULL, 1, 'IN', '0.0000', NULL),
-(243, NULL, 'BSB46BEDDYYYohar_SB_410', 'simple', '2022-09-23 12:03:23', '2022-09-23 12:03:23', NULL, 1, 'IN', '0.0000', NULL),
-(244, NULL, 'BSCHNKH1608', 'simple', '2022-09-23 12:03:24', '2022-09-23 12:03:24', NULL, 1, 'IN', '0.0000', NULL),
-(245, NULL, 'BS42BELYYYINING_YELLOW_H24', 'simple', '2022-09-23 12:03:25', '2022-09-23 12:03:25', NULL, 1, 'IN', '0.0000', NULL),
-(246, NULL, 'BSB21HDRYYYosebunch6_White', 'simple', '2022-09-23 12:03:26', '2022-09-23 12:03:26', NULL, 1, 'IN', '0.0000', NULL),
-(247, NULL, 'BSB66HKBT_275_SS_066', 'simple', '2022-09-23 12:03:28', '2022-09-23 12:03:28', NULL, 1, 'IN', '0.0000', NULL),
-(248, NULL, 'BSCHNKH1761', 'simple', '2022-09-23 12:03:43', '2022-09-23 12:03:43', NULL, 1, 'IN', '0.0000', NULL),
-(249, NULL, 'BSB15MugMYYYug-IcantKeepCalmImGetting', 'simple', '2022-09-23 12:03:44', '2022-09-23 12:03:44', NULL, 1, 'IN', '0.0000', NULL),
-(250, NULL, 'BSB32DYYYK-NG-385', 'simple', '2022-09-23 12:03:45', '2022-09-23 12:03:45', NULL, 1, 'IN', '0.0000', NULL),
-(251, NULL, 'BSB46BEDDYYYohar_SB_411', 'simple', '2022-09-23 12:04:20', '2022-09-23 12:04:20', NULL, 1, 'IN', '0.0000', NULL),
-(252, NULL, 'BSCHNKH1609', 'simple', '2022-09-23 12:04:20', '2022-09-23 12:04:20', NULL, 1, 'IN', '0.0000', NULL),
-(253, NULL, 'BS42BELYYYOTUS_PINK_H24', 'simple', '2022-09-23 12:04:20', '2022-09-23 12:04:20', NULL, 1, 'IN', '0.0000', NULL),
-(254, NULL, 'BSB66HKBT_275_SS_067', 'simple', '2022-09-23 12:04:21', '2022-09-23 12:04:21', NULL, 1, 'IN', '0.0000', NULL),
-(255, NULL, 'BSCHNKH1762', 'simple', '2022-09-23 12:04:21', '2022-09-23 12:04:21', NULL, 1, 'IN', '0.0000', NULL),
-(256, NULL, 'BSB15MugMYYYug-IcantKeepCalmItsMy', 'simple', '2022-09-23 12:04:22', '2022-09-23 12:04:22', NULL, 1, 'IN', '0.0000', NULL),
-(257, NULL, 'BSB32DYYYK-NG-386', 'simple', '2022-09-23 12:04:22', '2022-09-23 12:04:22', NULL, 1, 'IN', '0.0000', NULL),
-(258, NULL, 'BSL2YYY7', 'simple', '2022-09-23 12:04:22', '2022-09-23 12:04:22', NULL, 1, 'IN', '0.0000', NULL),
-(259, NULL, 'BSB46BEDDYYYohar_SB_412', 'simple', '2022-09-23 12:04:23', '2022-09-23 12:04:23', NULL, 1, 'IN', '0.0000', NULL),
-(260, NULL, 'BS42BEPYYYATTA_ORANGE_H24', 'simple', '2022-09-23 12:04:23', '2022-09-23 12:04:23', NULL, 1, 'IN', '0.0000', NULL),
-(261, NULL, 'BSB66HKBT_275_SS_068', 'simple', '2022-09-23 12:04:28', '2022-09-23 12:04:28', NULL, 1, 'IN', '0.0000', NULL),
-(262, NULL, 'BSCHNKH1763', 'simple', '2022-09-23 12:04:28', '2022-09-23 12:04:28', NULL, 1, 'IN', '0.0000', NULL),
-(263, NULL, 'BSB32DYYYK-NG-387', 'simple', '2022-09-23 12:04:29', '2022-09-23 12:04:29', NULL, 1, 'IN', '0.0000', NULL),
-(264, NULL, 'BSCHNKH1333', 'simple', '2022-09-23 12:04:34', '2022-09-23 12:04:34', NULL, 1, 'IN', '0.0000', NULL),
-(265, NULL, 'BSB46BEDJYYYC_89', 'simple', '2022-09-23 12:04:34', '2022-09-23 12:04:34', NULL, 1, 'IN', '0.0000', NULL),
-(266, NULL, 'BS42BEPYYYATTA_PINK_H24', 'simple', '2022-09-23 12:04:35', '2022-09-23 12:04:35', NULL, 1, 'IN', '0.0000', NULL),
-(267, NULL, 'BSB21HDSYYYmallrosecreeper_ Blue', 'simple', '2022-09-23 12:04:35', '2022-09-23 12:04:35', NULL, 1, 'IN', '0.0000', NULL),
-(268, NULL, 'BSCKEY1001', 'simple', '2022-09-23 12:04:35', '2022-09-23 12:04:35', NULL, 1, 'IN', '0.0000', NULL),
-(269, NULL, 'BSB66HKBT_275_SS_069', 'simple', '2022-09-23 12:04:36', '2022-09-23 12:04:36', NULL, 1, 'IN', '0.0000', NULL),
-(270, NULL, 'BSB15MugMYYYug-IHopeUrDayBiceps_C', 'simple', '2022-09-23 12:04:36', '2022-09-23 12:04:36', NULL, 1, 'IN', '0.0000', NULL),
-(271, NULL, 'BSB32DYYYK-NG-388', 'simple', '2022-09-23 12:04:36', '2022-09-23 12:04:36', NULL, 1, 'IN', '0.0000', NULL),
-(272, NULL, 'BSL3YYY1', 'simple', '2022-09-23 12:04:37', '2022-09-23 12:04:37', NULL, 1, 'IN', '0.0000', NULL),
-(273, NULL, 'BSB46BEDJYYYC_90', 'simple', '2022-09-23 12:04:37', '2022-09-23 12:04:37', NULL, 1, 'IN', '0.0000', NULL),
-(274, NULL, 'BSCHNKH1612', 'simple', '2022-09-23 12:04:42', '2022-09-23 12:04:42', NULL, 1, 'IN', '0.0000', NULL),
-(275, NULL, 'BS42BEPYYYATTA_YELLOW_H24', 'simple', '2022-09-23 12:04:43', '2022-09-23 12:04:43', NULL, 1, 'IN', '0.0000', NULL),
-(276, NULL, 'BSB21HDSYYYmallrosecreeper_ Champagne', 'simple', '2022-09-23 12:04:43', '2022-09-23 12:04:43', NULL, 1, 'IN', '0.0000', NULL),
-(277, NULL, 'BSCKEY1002', 'simple', '2022-09-23 12:04:43', '2022-09-23 12:04:43', NULL, 1, 'IN', '0.0000', NULL),
-(278, NULL, 'BSB66HKBT_275_SS_070', 'simple', '2022-09-23 12:04:44', '2022-09-23 12:04:44', NULL, 1, 'IN', '0.0000', NULL),
-(279, NULL, 'BSB15MugMYYYug-ILikeYou1', 'simple', '2022-09-23 12:04:44', '2022-09-23 12:04:44', NULL, 1, 'IN', '0.0000', NULL),
-(280, NULL, 'BSB32DYYYK-NG-389', 'simple', '2022-09-23 12:04:45', '2022-09-23 12:04:45', NULL, 1, 'IN', '0.0000', NULL),
-(281, NULL, 'BSL3YYY3', 'simple', '2022-09-23 12:04:45', '2022-09-23 12:04:45', NULL, 1, 'IN', '0.0000', NULL),
-(282, NULL, 'BSB46BEDJYYYC_91', 'simple', '2022-09-23 12:04:45', '2022-09-23 12:04:45', NULL, 1, 'IN', '0.0000', NULL),
-(283, NULL, 'BSCHNKH1613', 'simple', '2022-09-23 12:04:46', '2022-09-23 12:04:46', NULL, 1, 'IN', '0.0000', NULL),
-(284, NULL, 'BS42BERYYYING_BLUE_H24', 'simple', '2022-09-23 12:04:51', '2022-09-23 12:04:51', NULL, 1, 'IN', '0.0000', NULL),
-(285, NULL, 'BSB21HDSYYYmallrosecreeper_ Darkpink', 'simple', '2022-09-23 12:04:52', '2022-09-23 12:04:52', NULL, 1, 'IN', '0.0000', NULL),
-(286, NULL, 'BSCKEY1003', 'simple', '2022-09-23 12:04:52', '2022-09-23 12:04:52', NULL, 1, 'IN', '0.0000', NULL),
-(287, NULL, 'BSB66HKBT_275_SS_071', 'simple', '2022-09-23 12:04:52', '2022-09-23 12:04:52', NULL, 1, 'IN', '0.0000', NULL),
-(288, NULL, 'BSCHNKH1766', 'simple', '2022-09-23 12:04:53', '2022-09-23 12:04:53', NULL, 1, 'IN', '0.0000', NULL),
-(289, NULL, 'BSB15MugMYYYug-ILoveMusic', 'simple', '2022-09-23 12:04:53', '2022-09-23 12:04:53', NULL, 1, 'IN', '0.0000', NULL),
-(290, NULL, 'BSB32DYYYK-NG-390', 'simple', '2022-09-23 12:04:54', '2022-09-23 12:04:54', NULL, 1, 'IN', '0.0000', NULL),
-(291, NULL, 'BSL3YYY4', 'simple', '2022-09-23 12:04:54', '2022-09-23 12:04:54', NULL, 1, 'IN', '0.0000', NULL),
-(292, NULL, 'BSCHNKH1336', 'simple', '2022-09-23 12:04:54', '2022-09-23 12:04:54', NULL, 1, 'IN', '0.0000', NULL),
-(293, NULL, 'BSB46BEDJYYYC_92', 'simple', '2022-09-23 12:04:55', '2022-09-23 12:04:55', NULL, 1, 'IN', '0.0000', NULL),
-(294, NULL, 'BS42BERYYYING_RED_H24', 'simple', '2022-09-23 12:04:59', '2022-09-23 12:04:59', NULL, 1, 'IN', '0.0000', NULL),
-(295, NULL, 'BSB21HDSYYYmallrosecreeper_ Orange', 'simple', '2022-09-23 12:05:00', '2022-09-23 12:05:00', NULL, 1, 'IN', '0.0000', NULL),
-(296, NULL, 'BSCKEY1004', 'simple', '2022-09-23 12:05:00', '2022-09-23 12:05:00', NULL, 1, 'IN', '0.0000', NULL),
-(297, NULL, 'BSB66HKBT_275_SS_072', 'simple', '2022-09-23 12:05:00', '2022-09-23 12:05:00', NULL, 1, 'IN', '0.0000', NULL),
-(298, NULL, 'BSB15MugMYYYug-ILoveMyBFrnds', 'simple', '2022-09-23 12:05:01', '2022-09-23 12:05:01', NULL, 1, 'IN', '0.0000', NULL),
-(299, NULL, 'BSB32DYYYK-NG-391', 'simple', '2022-09-23 12:05:01', '2022-09-23 12:05:01', NULL, 1, 'IN', '0.0000', NULL),
-(300, NULL, 'BSL3YYY5', 'simple', '2022-09-23 12:05:02', '2022-09-23 12:05:02', NULL, 1, 'IN', '0.0000', NULL),
-(301, NULL, 'BSB46BEDJYYYC_93', 'simple', '2022-09-23 12:05:02', '2022-09-23 12:05:02', NULL, 1, 'IN', '0.0000', NULL),
-(302, NULL, 'BS42BERYYYING_SEAGREEN_H24', 'simple', '2022-09-23 12:05:02', '2022-09-23 12:05:02', NULL, 1, 'IN', '0.0000', NULL),
-(303, NULL, 'BSCKEY1005', 'simple', '2022-09-23 12:05:03', '2022-09-23 12:05:03', NULL, 1, 'IN', '0.0000', NULL),
-(304, NULL, 'BSB66HKBT_275_SS_073', 'simple', '2022-09-23 12:05:07', '2022-09-23 12:05:07', NULL, 1, 'IN', '0.0000', NULL),
-(305, NULL, 'BSB15MugMYYYug-ILoveMyDad', 'simple', '2022-09-23 12:05:08', '2022-09-23 12:05:08', NULL, 1, 'IN', '0.0000', NULL),
-(306, NULL, 'BSB32DYYYK-NG-392', 'simple', '2022-09-23 12:05:08', '2022-09-23 12:05:08', NULL, 1, 'IN', '0.0000', NULL),
-(307, NULL, 'BS42BETYYYRIANGLE_BLUE_H24', 'simple', '2022-09-23 12:05:14', '2022-09-23 12:05:14', NULL, 1, 'IN', '0.0000', NULL),
-(308, NULL, 'BSB21HDSYYYmallrosecreeper_ White', 'simple', '2022-09-23 12:05:15', '2022-09-23 12:05:15', NULL, 1, 'IN', '0.0000', NULL),
-(309, NULL, 'BSCKEY1006', 'simple', '2022-09-23 12:05:15', '2022-09-23 12:05:15', NULL, 1, 'IN', '0.0000', NULL),
-(310, NULL, 'BSB66HKBT_275_SS_074', 'simple', '2022-09-23 12:05:15', '2022-09-23 12:05:15', NULL, 1, 'IN', '0.0000', NULL),
-(311, NULL, 'BSCHNKH1770', 'simple', '2022-09-23 12:05:16', '2022-09-23 12:05:16', NULL, 1, 'IN', '0.0000', NULL),
-(312, NULL, 'BSB15MugMYYYug-ILoveSmile', 'simple', '2022-09-23 12:05:16', '2022-09-23 12:05:16', NULL, 1, 'IN', '0.0000', NULL),
-(313, NULL, 'BSB32DYYYK-NG-393', 'simple', '2022-09-23 12:05:16', '2022-09-23 12:05:16', NULL, 1, 'IN', '0.0000', NULL),
-(314, NULL, 'BSL3YYY8', 'simple', '2022-09-23 12:05:17', '2022-09-23 12:05:17', NULL, 1, 'IN', '0.0000', NULL),
-(315, NULL, 'BSB46BEDJYYYC_95', 'simple', '2022-09-23 12:05:17', '2022-09-23 12:05:17', NULL, 1, 'IN', '0.0000', NULL),
-(316, NULL, 'BS42BETYYYRIANGLE_ORANGE_H24', 'simple', '2022-09-23 12:05:18', '2022-09-23 12:05:18', NULL, 1, 'IN', '0.0000', NULL),
-(317, NULL, 'BSB21HDSYYYmallrosecreeper_Bluepinkc2', 'simple', '2022-09-23 12:05:22', '2022-09-23 12:05:22', NULL, 1, 'IN', '0.0000', NULL),
-(318, NULL, 'BSCKEY1007', 'simple', '2022-09-23 12:05:22', '2022-09-23 12:05:22', NULL, 1, 'IN', '0.0000', NULL),
-(319, NULL, 'BSB66HKBT_275_SS_075', 'simple', '2022-09-23 12:05:23', '2022-09-23 12:05:23', NULL, 1, 'IN', '0.0000', NULL),
-(320, NULL, 'BSCHNKH1771', 'simple', '2022-09-23 12:05:23', '2022-09-23 12:05:23', NULL, 1, 'IN', '0.0000', NULL),
-(321, NULL, 'BSB15MugMYYYug-ILoveWithYou1', 'simple', '2022-09-23 12:05:24', '2022-09-23 12:05:24', NULL, 1, 'IN', '0.0000', NULL),
-(322, NULL, 'BSB32DYYYK-NG-394', 'simple', '2022-09-23 12:05:24', '2022-09-23 12:05:24', NULL, 1, 'IN', '0.0000', NULL),
-(323, NULL, 'BSL4YYY0', 'simple', '2022-09-23 12:05:24', '2022-09-23 12:05:24', NULL, 1, 'IN', '0.0000', NULL),
-(324, NULL, 'BSB46BEDJYYYC_96', 'simple', '2022-09-23 12:05:25', '2022-09-23 12:05:25', NULL, 1, 'IN', '0.0000', NULL),
-(325, NULL, 'BS42BETYYYRIANGLE_RED_H24', 'simple', '2022-09-23 12:05:25', '2022-09-23 12:05:25', NULL, 1, 'IN', '0.0000', NULL),
-(326, NULL, 'BSB21HDSYYYmallrosecreeper_Bluewhitec2', 'simple', '2022-09-23 12:05:26', '2022-09-23 12:05:26', NULL, 1, 'IN', '0.0000', NULL),
-(327, NULL, 'BSCKEY1008', 'simple', '2022-09-23 12:05:30', '2022-09-23 12:05:30', NULL, 1, 'IN', '0.0000', NULL),
-(328, NULL, 'BSCHNKH1772', 'simple', '2022-09-23 12:05:31', '2022-09-23 12:05:31', NULL, 1, 'IN', '0.0000', NULL),
-(329, NULL, 'BSB15MugMYYYug-I\'m Not40', 'simple', '2022-09-23 12:05:31', '2022-09-23 12:05:31', NULL, 1, 'IN', '0.0000', NULL),
-(330, NULL, 'BSB32DYYYK-NG-395', 'simple', '2022-09-23 12:05:31', '2022-09-23 12:05:31', NULL, 1, 'IN', '0.0000', NULL),
-(331, NULL, 'BSL4YYY1', 'simple', '2022-09-23 12:05:32', '2022-09-23 12:05:32', NULL, 1, 'IN', '0.0000', NULL),
-(332, NULL, 'BSB46BEDJYYYC_97', 'simple', '2022-09-23 12:05:32', '2022-09-23 12:05:32', NULL, 1, 'IN', '0.0000', NULL),
-(333, NULL, 'BS42BEWYYYHITE_FLOWER_GREEN_H24', 'simple', '2022-09-23 12:05:33', '2022-09-23 12:05:33', NULL, 1, 'IN', '0.0000', NULL),
-(334, NULL, 'BSB21HDSYYYmallrosecreeper_Orangechampagnec2', 'simple', '2022-09-23 12:05:33', '2022-09-23 12:05:33', NULL, 1, 'IN', '0.0000', NULL),
-(335, NULL, 'BSCKEY1009', 'simple', '2022-09-23 12:05:33', '2022-09-23 12:05:33', NULL, 1, 'IN', '0.0000', NULL),
-(336, NULL, 'BSCHNKH1773', 'simple', '2022-09-23 12:05:34', '2022-09-23 12:05:34', NULL, 1, 'IN', '0.0000', NULL),
-(337, NULL, 'BSB15MugMYYYug-INeverDreamed', 'simple', '2022-09-23 12:05:38', '2022-09-23 12:05:38', NULL, 1, 'IN', '0.0000', NULL),
-(338, NULL, 'BSB32DYYYK-NG-396', 'simple', '2022-09-23 12:05:39', '2022-09-23 12:05:39', NULL, 1, 'IN', '0.0000', NULL),
-(339, NULL, 'BSL4YYY2', 'simple', '2022-09-23 12:05:39', '2022-09-23 12:05:39', NULL, 1, 'IN', '0.0000', NULL),
-(340, NULL, 'BSB46BEDJYYYC_98', 'simple', '2022-09-23 12:05:39', '2022-09-23 12:05:39', NULL, 1, 'IN', '0.0000', NULL),
-(341, NULL, 'BSCHNKH1620', 'simple', '2022-09-23 12:05:40', '2022-09-23 12:05:40', NULL, 1, 'IN', '0.0000', NULL),
-(342, NULL, 'BSCKEY1010', 'simple', '2022-09-23 12:05:40', '2022-09-23 12:05:40', NULL, 1, 'IN', '0.0000', NULL),
-(343, NULL, 'BSCHNKH1774', 'simple', '2022-09-23 12:05:41', '2022-09-23 12:05:41', NULL, 1, 'IN', '0.0000', NULL),
-(344, NULL, 'BSB15MugMYYYug-InternetIsBroken', 'simple', '2022-09-23 12:05:41', '2022-09-23 12:05:41', NULL, 1, 'IN', '0.0000', NULL),
-(345, NULL, 'BSB32DYYYK-NG-397', 'simple', '2022-09-23 12:05:41', '2022-09-23 12:05:41', NULL, 1, 'IN', '0.0000', NULL),
-(346, NULL, 'BSB46BEDJYYYC_99', 'simple', '2022-09-23 12:05:46', '2022-09-23 12:05:46', NULL, 1, 'IN', '0.0000', NULL),
-(347, NULL, 'BSCHNKH1621', 'simple', '2022-09-23 12:05:46', '2022-09-23 12:05:46', NULL, 1, 'IN', '0.0000', NULL),
-(348, NULL, 'BSCKEY1011', 'simple', '2022-09-23 12:05:47', '2022-09-23 12:05:47', NULL, 1, 'IN', '0.0000', NULL),
-(349, NULL, 'BSB15MugMYYYug-It\'sAPapaThing', 'simple', '2022-09-23 12:05:47', '2022-09-23 12:05:47', NULL, 1, 'IN', '0.0000', NULL),
-(350, NULL, 'BSB32DYYYK-NG-398', 'simple', '2022-09-23 12:05:47', '2022-09-23 12:05:47', NULL, 1, 'IN', '0.0000', NULL),
-(351, NULL, 'BSCHNKH1027', 'simple', '2022-09-23 12:05:48', '2022-09-23 12:05:48', NULL, 1, 'IN', '0.0000', NULL),
-(352, NULL, 'BSL4YYY6', 'simple', '2022-09-23 12:05:48', '2022-09-23 12:05:48', NULL, 1, 'IN', '0.0000', NULL),
-(353, NULL, 'BSCHNKH1195', 'simple', '2022-09-23 12:05:49', '2022-09-23 12:05:49', NULL, 1, 'IN', '0.0000', NULL),
-(354, NULL, 'BSCHNKH1622', 'simple', '2022-09-23 12:05:49', '2022-09-23 12:05:49', NULL, 1, 'IN', '0.0000', NULL),
-(355, NULL, 'BSCKEY1012', 'simple', '2022-09-23 12:05:49', '2022-09-23 12:05:49', NULL, 1, 'IN', '0.0000', NULL),
-(356, NULL, 'BSB15MugMYYYug-ItsNotEasyBeingCool', 'simple', '2022-09-23 12:05:53', '2022-09-23 12:05:53', NULL, 1, 'IN', '0.0000', NULL),
-(357, NULL, 'BSB21HDMYYYCDDC01', 'simple', '2022-09-23 12:05:54', '2022-09-23 12:05:54', NULL, 1, 'IN', '0.0000', NULL),
-(358, NULL, 'BSB32DYYYK-NG-399', 'simple', '2022-09-23 12:05:54', '2022-09-23 12:05:54', NULL, 1, 'IN', '0.0000', NULL),
-(359, NULL, 'BSCHNKH1345', 'simple', '2022-09-23 12:05:55', '2022-09-23 12:05:55', NULL, 1, 'IN', '0.0000', NULL),
-(360, NULL, 'BSCHNKH1623', 'simple', '2022-09-23 12:05:55', '2022-09-23 12:05:55', NULL, 1, 'IN', '0.0000', NULL),
-(361, NULL, 'BSCKEY1013', 'simple', '2022-09-23 12:06:00', '2022-09-23 12:06:00', NULL, 1, 'IN', '0.0000', NULL),
-(362, NULL, 'BSCHNKH1777', 'simple', '2022-09-23 12:06:00', '2022-09-23 12:06:00', NULL, 1, 'IN', '0.0000', NULL),
-(363, NULL, 'BSB15MugMYYYug-ItTook60Yrs', 'simple', '2022-09-23 12:06:01', '2022-09-23 12:06:01', NULL, 1, 'IN', '0.0000', NULL),
-(364, NULL, 'BSB32DYYYK-NG-400', 'simple', '2022-09-23 12:06:05', '2022-09-23 12:06:05', NULL, 1, 'IN', '0.0000', NULL),
-(365, NULL, 'BSCHNKH1346', 'simple', '2022-09-23 12:06:05', '2022-09-23 12:06:05', NULL, 1, 'IN', '0.0000', NULL),
-(366, NULL, 'BSCHNKH1624', 'simple', '2022-09-23 12:06:05', '2022-09-23 12:06:05', NULL, 1, 'IN', '0.0000', NULL),
-(367, NULL, 'BSB21HDWYYYhitefillerrosecreeper_ Darkpink', 'simple', '2022-09-23 12:06:06', '2022-09-23 12:06:06', NULL, 1, 'IN', '0.0000', NULL),
-(368, NULL, 'BSCKEY1014', 'simple', '2022-09-23 12:06:06', '2022-09-23 12:06:06', NULL, 1, 'IN', '0.0000', NULL),
-(369, NULL, 'BSB15MugMYYYug-Jasoos', 'simple', '2022-09-23 12:06:07', '2022-09-23 12:06:07', NULL, 1, 'IN', '0.0000', NULL),
-(370, NULL, 'BSB32DYYYK-NG-401', 'simple', '2022-09-23 12:06:11', '2022-09-23 12:06:11', NULL, 1, 'IN', '0.0000', NULL),
-(371, NULL, 'BSCHNKH1348', 'simple', '2022-09-23 12:06:11', '2022-09-23 12:06:11', NULL, 1, 'IN', '0.0000', NULL),
-(372, NULL, 'BSB21HDWYYYhitefillerrosecreeper_ Emma', 'simple', '2022-09-23 12:06:12', '2022-09-23 12:06:12', NULL, 1, 'IN', '0.0000', NULL),
-(373, NULL, 'BSCKEY1015', 'simple', '2022-09-23 12:06:12', '2022-09-23 12:06:12', NULL, 1, 'IN', '0.0000', NULL),
-(374, NULL, 'BSCHNKH1779', 'simple', '2022-09-23 12:06:13', '2022-09-23 12:06:13', NULL, 1, 'IN', '0.0000', NULL),
-(375, NULL, 'BSB32DYYYK-NG-402', 'simple', '2022-09-23 12:06:17', '2022-09-23 12:06:17', NULL, 1, 'IN', '0.0000', NULL),
-(376, NULL, 'BSCHNKH1349', 'simple', '2022-09-23 12:06:18', '2022-09-23 12:06:18', NULL, 1, 'IN', '0.0000', NULL),
-(377, NULL, 'BSCHNKH1626', 'simple', '2022-09-23 12:06:18', '2022-09-23 12:06:18', NULL, 1, 'IN', '0.0000', NULL),
-(378, NULL, 'BSB21HDWYYYhitefillerrosecreeper_ Lightpink', 'simple', '2022-09-23 12:06:19', '2022-09-23 12:06:19', NULL, 1, 'IN', '0.0000', NULL),
-(379, NULL, 'BSCKEY1016', 'simple', '2022-09-23 12:06:19', '2022-09-23 12:06:19', NULL, 1, 'IN', '0.0000', NULL),
-(380, NULL, 'BSCHNKH1780', 'simple', '2022-09-23 12:06:19', '2022-09-23 12:06:19', NULL, 1, 'IN', '0.0000', NULL),
-(381, NULL, 'BSB32DYYYK-NG-403', 'simple', '2022-09-23 12:06:24', '2022-09-23 12:06:24', NULL, 1, 'IN', '0.0000', NULL),
-(382, NULL, 'BSCHNKH1351', 'simple', '2022-09-23 12:06:24', '2022-09-23 12:06:24', NULL, 1, 'IN', '0.0000', NULL),
-(383, NULL, 'BSCHNKH1627', 'simple', '2022-09-23 12:06:25', '2022-09-23 12:06:25', NULL, 1, 'IN', '0.0000', NULL),
-(384, NULL, 'BSB21HDWYYYhitefillerrosecreeper_ Red', 'simple', '2022-09-23 12:06:25', '2022-09-23 12:06:25', NULL, 1, 'IN', '0.0000', NULL),
-(385, NULL, 'BSCKEY1017', 'simple', '2022-09-23 12:06:25', '2022-09-23 12:06:25', NULL, 1, 'IN', '0.0000', NULL),
-(386, NULL, 'BSCHNKH1781', 'simple', '2022-09-23 12:06:26', '2022-09-23 12:06:26', NULL, 1, 'IN', '0.0000', NULL),
-(387, NULL, 'BSB32DYYYK-NG-404', 'simple', '2022-09-23 12:06:26', '2022-09-23 12:06:26', NULL, 1, 'IN', '0.0000', NULL),
-(388, NULL, 'BSCHNKH1628', 'simple', '2022-09-23 12:06:26', '2022-09-23 12:06:26', NULL, 1, 'IN', '0.0000', NULL),
-(389, NULL, 'BSB21HDWYYYhitefillerrosecreeper_ White', 'simple', '2022-09-23 12:06:27', '2022-09-23 12:06:27', NULL, 1, 'IN', '0.0000', NULL),
-(390, NULL, 'BSCKEY1018', 'simple', '2022-09-23 12:06:27', '2022-09-23 12:06:27', NULL, 1, 'IN', '0.0000', NULL),
-(391, NULL, 'BSCHNKH1782', 'simple', '2022-09-23 12:06:32', '2022-09-23 12:06:32', NULL, 1, 'IN', '0.0000', NULL),
-(392, NULL, 'BSB15MugMYYYug-JustBreakIt', 'simple', '2022-09-23 12:06:32', '2022-09-23 12:06:32', NULL, 1, 'IN', '0.0000', NULL),
-(393, NULL, 'BSB32DYYYK-NG-405', 'simple', '2022-09-23 12:06:37', '2022-09-23 12:06:37', NULL, 1, 'IN', '0.0000', NULL),
-(394, NULL, 'BSCHNKH1355', 'simple', '2022-09-23 12:06:38', '2022-09-23 12:06:38', NULL, 1, 'IN', '0.0000', NULL),
-(395, NULL, 'BSCHNKH1736', 'simple', '2022-09-23 12:06:38', '2022-09-23 12:06:38', NULL, 1, 'IN', '0.0000', NULL),
-(396, NULL, 'BSCKEY1019', 'simple', '2022-09-23 12:06:38', '2022-09-23 12:06:38', NULL, 1, 'IN', '0.0000', NULL),
-(397, NULL, 'BSCHNKH1783', 'simple', '2022-09-23 12:06:39', '2022-09-23 12:06:39', NULL, 1, 'IN', '0.0000', NULL),
-(398, NULL, 'BSB15MugMYYYug-JustDoItLater', 'simple', '2022-09-23 12:06:39', '2022-09-23 12:06:39', NULL, 1, 'IN', '0.0000', NULL),
-(399, NULL, 'BSB32DYYYK-NG-406', 'simple', '2022-09-23 12:06:40', '2022-09-23 12:06:40', NULL, 1, 'IN', '0.0000', NULL),
-(400, NULL, 'BSCHNKH1356', 'simple', '2022-09-23 12:06:40', '2022-09-23 12:06:40', NULL, 1, 'IN', '0.0000', NULL),
-(401, NULL, 'BSCHNKH1737', 'simple', '2022-09-23 12:06:40', '2022-09-23 12:06:40', NULL, 1, 'IN', '0.0000', NULL),
-(402, NULL, 'BSCKEY1020', 'simple', '2022-09-23 12:06:41', '2022-09-23 12:06:41', NULL, 1, 'IN', '0.0000', NULL),
-(403, NULL, 'BSCHNKH1784', 'simple', '2022-09-23 12:06:45', '2022-09-23 12:06:45', NULL, 1, 'IN', '0.0000', NULL),
-(404, NULL, 'BSB15MugMYYYug-JustDoItTomorrow', 'simple', '2022-09-23 12:06:46', '2022-09-23 12:06:46', NULL, 1, 'IN', '0.0000', NULL),
-(405, NULL, 'BSB21HDMYYYCDDC015M', 'simple', '2022-09-23 12:06:46', '2022-09-23 12:06:46', NULL, 1, 'IN', '0.0000', NULL),
-(406, NULL, 'BSB32DYYYK-NG-407', 'simple', '2022-09-23 12:06:46', '2022-09-23 12:06:46', NULL, 1, 'IN', '0.0000', NULL),
-(407, NULL, 'BSCHNKH1357', 'simple', '2022-09-23 12:06:47', '2022-09-23 12:06:47', NULL, 1, 'IN', '0.0000', NULL),
-(408, NULL, 'BSCHNKH1738', 'simple', '2022-09-23 12:06:47', '2022-09-23 12:06:47', NULL, 1, 'IN', '0.0000', NULL),
-(409, NULL, 'BSCKEY1021', 'simple', '2022-09-23 12:06:47', '2022-09-23 12:06:47', NULL, 1, 'IN', '0.0000', NULL),
-(410, NULL, 'BSCHNKH1785', 'simple', '2022-09-23 12:06:48', '2022-09-23 12:06:48', NULL, 1, 'IN', '0.0000', NULL),
-(411, NULL, 'BSB15MugMYYYug-JustDontQuit', 'simple', '2022-09-23 12:06:48', '2022-09-23 12:06:48', NULL, 1, 'IN', '0.0000', NULL),
-(412, NULL, 'BSB21HDMYYYCDDC015XS', 'simple', '2022-09-23 12:06:49', '2022-09-23 12:06:49', NULL, 1, 'IN', '0.0000', NULL),
-(413, NULL, 'BSB32DYYYK-NG-408', 'simple', '2022-09-23 12:06:53', '2022-09-23 12:06:53', NULL, 1, 'IN', '0.0000', NULL),
-(414, NULL, 'BSCHNKH1739', 'simple', '2022-09-23 12:06:54', '2022-09-23 12:06:54', NULL, 1, 'IN', '0.0000', NULL),
-(415, NULL, 'BSCKEY1022', 'simple', '2022-09-23 12:06:54', '2022-09-23 12:06:54', NULL, 1, 'IN', '0.0000', NULL),
-(416, NULL, 'BSCHNKH1786', 'simple', '2022-09-23 12:06:54', '2022-09-23 12:06:54', NULL, 1, 'IN', '0.0000', NULL);
-INSERT INTO `products` (`id`, `user_id`, `sku`, `type`, `created_at`, `updated_at`, `parent_id`, `attribute_family_id`, `country`, `delivery_charge`, `additional`) VALUES
-(417, NULL, 'BSB15MugMYYYug-JustTakeItEasy', 'simple', '2022-09-23 12:06:55', '2022-09-23 12:06:55', NULL, 1, 'IN', '0.0000', NULL),
-(418, NULL, 'BSB21HDMYYYCDDC016M', 'simple', '2022-09-23 12:06:55', '2022-09-23 12:06:55', NULL, 1, 'IN', '0.0000', NULL),
-(419, NULL, 'BSB32DYYYK-NG-409', 'simple', '2022-09-23 12:06:56', '2022-09-23 12:06:56', NULL, 1, 'IN', '0.0000', NULL),
-(420, NULL, 'BSCHNKH1740', 'simple', '2022-09-23 12:06:56', '2022-09-23 12:06:56', NULL, 1, 'IN', '0.0000', NULL),
-(421, NULL, 'BSCKEY1023', 'simple', '2022-09-23 12:06:56', '2022-09-23 12:06:56', NULL, 1, 'IN', '0.0000', NULL),
-(422, NULL, 'BSCHNKH1787', 'simple', '2022-09-23 12:06:57', '2022-09-23 12:06:57', NULL, 1, 'IN', '0.0000', NULL),
-(423, NULL, 'BSB15MugMYYYug-KalSeGymChaloo_C', 'simple', '2022-09-23 12:07:01', '2022-09-23 12:07:01', NULL, 1, 'IN', '0.0000', NULL),
-(424, NULL, 'BSB21HDMYYYCDDC016XS', 'simple', '2022-09-23 12:07:01', '2022-09-23 12:07:01', NULL, 1, 'IN', '0.0000', NULL),
-(425, NULL, 'BSB32DYYYK-NG-410', 'simple', '2022-09-23 12:07:02', '2022-09-23 12:07:02', NULL, 1, 'IN', '0.0000', NULL),
-(426, NULL, 'BSCHNKH1741', 'simple', '2022-09-23 12:07:02', '2022-09-23 12:07:02', NULL, 1, 'IN', '0.0000', NULL),
-(427, NULL, 'BSCKEY1024', 'simple', '2022-09-23 12:07:02', '2022-09-23 12:07:02', NULL, 1, 'IN', '0.0000', NULL),
-(428, NULL, 'BSCHNKH1788', 'simple', '2022-09-23 12:07:03', '2022-09-23 12:07:03', NULL, 1, 'IN', '0.0000', NULL),
-(429, NULL, 'BSB15MugMYYYug-KeepCalmAndLook', 'simple', '2022-09-23 12:07:03', '2022-09-23 12:07:03', NULL, 1, 'IN', '0.0000', NULL),
-(430, NULL, 'BSB21HDMYYYCDDC017M', 'simple', '2022-09-23 12:07:04', '2022-09-23 12:07:04', NULL, 1, 'IN', '0.0000', NULL),
-(431, NULL, 'BSB32DYYYK-NG-411', 'simple', '2022-09-23 12:07:04', '2022-09-23 12:07:04', NULL, 1, 'IN', '0.0000', NULL),
-(432, NULL, 'BSCHNKH1742', 'simple', '2022-09-23 12:07:04', '2022-09-23 12:07:04', NULL, 1, 'IN', '0.0000', NULL),
-(433, NULL, 'BSCKEY1025', 'simple', '2022-09-23 12:07:09', '2022-09-23 12:07:09', NULL, 1, 'IN', '0.0000', NULL),
-(434, NULL, 'BSB21HDMYYYCDDC017XS', 'simple', '2022-09-23 12:07:09', '2022-09-23 12:07:09', NULL, 1, 'IN', '0.0000', NULL),
-(435, NULL, 'BSB32DYYYK-NG-412', 'simple', '2022-09-23 12:07:10', '2022-09-23 12:07:10', NULL, 1, 'IN', '0.0000', NULL),
-(436, NULL, 'BSCHNKH1743', 'simple', '2022-09-23 12:07:10', '2022-09-23 12:07:10', NULL, 1, 'IN', '0.0000', NULL),
-(437, NULL, 'BSCKEY1026', 'simple', '2022-09-23 12:07:11', '2022-09-23 12:07:11', NULL, 1, 'IN', '0.0000', NULL),
-(438, NULL, 'BSCHNKH1790', 'simple', '2022-09-23 12:07:11', '2022-09-23 12:07:11', NULL, 1, 'IN', '0.0000', NULL),
-(439, NULL, 'BSB15MugMYYYug-KeepCalmAndPlayCric', 'simple', '2022-09-23 12:07:11', '2022-09-23 12:07:11', NULL, 1, 'IN', '0.0000', NULL),
-(440, NULL, 'BSB21HDMYYYCDDC018M', 'simple', '2022-09-23 12:07:12', '2022-09-23 12:07:12', NULL, 1, 'IN', '0.0000', NULL),
-(441, NULL, 'BSB32DYYYK-NG-413', 'simple', '2022-09-23 12:07:12', '2022-09-23 12:07:12', NULL, 1, 'IN', '0.0000', NULL),
-(442, NULL, 'BSCHNKH1744', 'simple', '2022-09-23 12:07:13', '2022-09-23 12:07:13', NULL, 1, 'IN', '0.0000', NULL),
-(443, NULL, 'BSCKEY1027', 'simple', '2022-09-23 12:07:17', '2022-09-23 12:07:17', NULL, 1, 'IN', '0.0000', NULL),
-(444, NULL, 'BSCHNKH1791', 'simple', '2022-09-23 12:07:17', '2022-09-23 12:07:17', NULL, 1, 'IN', '0.0000', NULL),
-(445, NULL, 'BSB15MugMYYYug-KeepCalmAndSave', 'simple', '2022-09-23 12:07:18', '2022-09-23 12:07:18', NULL, 1, 'IN', '0.0000', NULL),
-(446, NULL, 'BSB21HDMYYYCDDC018XS', 'simple', '2022-09-23 12:07:18', '2022-09-23 12:07:18', NULL, 1, 'IN', '0.0000', NULL),
-(447, NULL, 'BSB32DYYYK-NG-415', 'simple', '2022-09-23 12:07:19', '2022-09-23 12:07:19', NULL, 1, 'IN', '0.0000', NULL),
-(448, NULL, 'BSCHNKH1044', 'simple', '2022-09-23 12:07:19', '2022-09-23 12:07:19', NULL, 1, 'IN', '0.0000', NULL),
-(449, NULL, 'BSCHNKH1745', 'simple', '2022-09-23 12:07:19', '2022-09-23 12:07:19', NULL, 1, 'IN', '0.0000', NULL),
-(450, NULL, 'BSCKEY1028', 'simple', '2022-09-23 12:07:20', '2022-09-23 12:07:20', NULL, 1, 'IN', '0.0000', NULL),
-(451, NULL, 'BSCHNKH1792', 'simple', '2022-09-23 12:07:20', '2022-09-23 12:07:20', NULL, 1, 'IN', '0.0000', NULL),
-(452, NULL, 'BSB15MugMYYYug-KeepCalmAndTravel', 'simple', '2022-09-23 12:07:21', '2022-09-23 12:07:21', NULL, 1, 'IN', '0.0000', NULL),
-(453, NULL, 'BSB21HDMYYYCDDC02', 'simple', '2022-09-23 12:07:25', '2022-09-23 12:07:25', NULL, 1, 'IN', '0.0000', NULL),
-(454, NULL, 'BSB32DYYYK-NG-416', 'simple', '2022-09-23 12:07:26', '2022-09-23 12:07:26', NULL, 1, 'IN', '0.0000', NULL),
-(455, NULL, 'BSCHNKH1130', 'simple', '2022-09-23 12:07:26', '2022-09-23 12:07:26', NULL, 1, 'IN', '0.0000', NULL),
-(456, NULL, 'BSCHNKH1367', 'simple', '2022-09-23 12:07:26', '2022-09-23 12:07:26', NULL, 1, 'IN', '0.0000', NULL),
-(457, NULL, 'BSCHNKH1746', 'simple', '2022-09-23 12:07:27', '2022-09-23 12:07:27', NULL, 1, 'IN', '0.0000', NULL),
-(458, NULL, 'BSCKEY1029', 'simple', '2022-09-23 12:07:27', '2022-09-23 12:07:27', NULL, 1, 'IN', '0.0000', NULL),
-(459, NULL, 'BSB15MugMYYYug-LifeKoEnjoyKaro', 'simple', '2022-09-23 12:07:28', '2022-09-23 12:07:28', NULL, 1, 'IN', '0.0000', NULL),
-(460, NULL, 'BSB21HDMYYYCDDC03', 'simple', '2022-09-23 12:07:28', '2022-09-23 12:07:28', NULL, 1, 'IN', '0.0000', NULL),
-(461, NULL, 'BSB32DYYYK-NG-417', 'simple', '2022-09-23 12:07:28', '2022-09-23 12:07:28', NULL, 1, 'IN', '0.0000', NULL),
-(462, NULL, 'BSCHNKH1239', 'simple', '2022-09-23 12:07:29', '2022-09-23 12:07:29', NULL, 1, 'IN', '0.0000', NULL),
-(463, NULL, 'BSCHNKH1747', 'simple', '2022-09-23 12:07:33', '2022-09-23 12:07:33', NULL, 1, 'IN', '0.0000', NULL),
-(464, NULL, 'BSCKEY1030', 'simple', '2022-09-23 12:07:33', '2022-09-23 12:07:33', NULL, 1, 'IN', '0.0000', NULL),
-(465, NULL, 'BSCHNKH1794', 'simple', '2022-09-23 12:07:34', '2022-09-23 12:07:34', NULL, 1, 'IN', '0.0000', NULL),
-(466, NULL, 'BSB15MugMYYYug-Look', 'simple', '2022-09-23 12:07:34', '2022-09-23 12:07:34', NULL, 1, 'IN', '0.0000', NULL),
-(467, NULL, 'BSB21HDMYYYCDDC04', 'simple', '2022-09-23 12:07:35', '2022-09-23 12:07:35', NULL, 1, 'IN', '0.0000', NULL),
-(468, NULL, 'BSB32DYYYK-NG-418', 'simple', '2022-09-23 12:07:35', '2022-09-23 12:07:35', NULL, 1, 'IN', '0.0000', NULL),
-(469, NULL, 'BSCHNKH1748', 'simple', '2022-09-23 12:07:35', '2022-09-23 12:07:35', NULL, 1, 'IN', '0.0000', NULL),
-(470, NULL, 'BSCKEY1031', 'simple', '2022-09-23 12:07:36', '2022-09-23 12:07:36', NULL, 1, 'IN', '0.0000', NULL),
-(471, NULL, 'BSCHNKH1795', 'simple', '2022-09-23 12:07:36', '2022-09-23 12:07:36', NULL, 1, 'IN', '0.0000', NULL),
-(472, NULL, 'BSB15MugMYYYug-MeAndMyDogTalk', 'simple', '2022-09-23 12:07:37', '2022-09-23 12:07:37', NULL, 1, 'IN', '0.0000', NULL),
-(473, NULL, 'BSB21HDMYYYCDDC05', 'simple', '2022-09-23 12:07:41', '2022-09-23 12:07:41', NULL, 1, 'IN', '0.0000', NULL),
-(474, NULL, 'BSB32DYYYK-NG-419', 'simple', '2022-09-23 12:07:42', '2022-09-23 12:07:42', NULL, 1, 'IN', '0.0000', NULL),
-(475, NULL, 'BSCHNKH1749', 'simple', '2022-09-23 12:07:42', '2022-09-23 12:07:42', NULL, 1, 'IN', '0.0000', NULL),
-(476, NULL, 'BSCKEY1032', 'simple', '2022-09-23 12:07:42', '2022-09-23 12:07:42', NULL, 1, 'IN', '0.0000', NULL),
-(477, NULL, 'BSB32DYYYK-NG-420', 'simple', '2022-09-23 12:07:43', '2022-09-23 12:07:43', NULL, 1, 'IN', '0.0000', NULL),
-(478, NULL, 'BSCHNKH1750', 'simple', '2022-09-23 12:07:43', '2022-09-23 12:07:43', NULL, 1, 'IN', '0.0000', NULL),
-(479, NULL, 'BSCKEY1033', 'simple', '2022-09-23 12:07:44', '2022-09-23 12:07:44', NULL, 1, 'IN', '0.0000', NULL),
-(480, NULL, 'BSCHNKH1797', 'simple', '2022-09-23 12:07:44', '2022-09-23 12:07:44', NULL, 1, 'IN', '0.0000', NULL),
-(481, NULL, 'BSB21HDMYYYCDDC07', 'simple', '2022-09-23 12:07:44', '2022-09-23 12:07:44', NULL, 1, 'IN', '0.0000', NULL),
-(482, NULL, 'BSB32DYYYK-NG-421', 'simple', '2022-09-23 12:07:45', '2022-09-23 12:07:45', NULL, 1, 'IN', '0.0000', NULL),
-(483, NULL, 'BSCHNKH1136', 'simple', '2022-09-23 12:07:49', '2022-09-23 12:07:49', NULL, 1, 'IN', '0.0000', NULL),
-(484, NULL, 'BSCHNKH1751', 'simple', '2022-09-23 12:07:49', '2022-09-23 12:07:49', NULL, 1, 'IN', '0.0000', NULL),
-(485, NULL, 'BSCKEY1034', 'simple', '2022-09-23 12:07:50', '2022-09-23 12:07:50', NULL, 1, 'IN', '0.0000', NULL),
-(486, NULL, 'BSCHNKH1798', 'simple', '2022-09-23 12:07:50', '2022-09-23 12:07:50', NULL, 1, 'IN', '0.0000', NULL),
-(487, NULL, 'BSB15MugMYYYug-MoocheHoTohNathulal_1', 'simple', '2022-09-23 12:07:51', '2022-09-23 12:07:51', NULL, 1, 'IN', '0.0000', NULL),
-(488, NULL, 'BSB21HDMYYYCDDC08', 'simple', '2022-09-23 12:07:51', '2022-09-23 12:07:51', NULL, 1, 'IN', '0.0000', NULL),
-(489, NULL, 'BSB32DYYYK-NG-422', 'simple', '2022-09-23 12:07:51', '2022-09-23 12:07:51', NULL, 1, 'IN', '0.0000', NULL),
-(490, NULL, 'BSCHNKH1752', 'simple', '2022-09-23 12:07:52', '2022-09-23 12:07:52', NULL, 1, 'IN', '0.0000', NULL),
-(491, NULL, 'BSKEYC1001', 'simple', '2022-09-23 12:07:52', '2022-09-23 12:07:52', NULL, 1, 'IN', '0.0000', NULL),
-(492, NULL, 'BSCKEY1035', 'simple', '2022-09-23 12:07:53', '2022-09-23 12:07:53', NULL, 1, 'IN', '0.0000', NULL),
-(493, NULL, 'BSB15MugMYYYug-Mr.Cool', 'simple', '2022-09-23 12:08:03', '2022-09-23 12:08:03', NULL, 1, 'IN', '0.0000', NULL),
-(494, NULL, 'BSCHNKH1375', 'simple', '2022-09-23 12:08:03', '2022-09-23 12:08:03', NULL, 1, 'IN', '0.0000', NULL),
-(495, NULL, 'BSCHNKH1753', 'simple', '2022-09-23 12:08:04', '2022-09-23 12:08:04', NULL, 1, 'IN', '0.0000', NULL),
-(496, NULL, 'BSCKEY1036', 'simple', '2022-09-23 12:08:04', '2022-09-23 12:08:04', NULL, 1, 'IN', '0.0000', NULL),
-(497, NULL, 'BSB15MugMYYYug-MyBestFriend', 'simple', '2022-09-23 12:08:05', '2022-09-23 12:08:05', NULL, 1, 'IN', '0.0000', NULL),
-(498, NULL, 'BSCHNKH1376', 'simple', '2022-09-23 12:08:05', '2022-09-23 12:08:05', NULL, 1, 'IN', '0.0000', NULL),
-(499, NULL, 'BSCHNKH1313_1', 'simple', '2022-09-23 12:08:05', '2022-09-23 12:08:05', NULL, 1, 'IN', '0.0000', NULL),
-(500, NULL, 'BSCKEY1037', 'simple', '2022-09-23 12:08:10', '2022-09-23 12:08:10', NULL, 1, 'IN', '0.0000', NULL),
-(501, NULL, 'BSCKC1801', 'simple', '2022-09-23 12:08:10', '2022-09-23 12:08:10', NULL, 1, 'IN', '0.0000', NULL),
-(502, NULL, 'BSB15MugMYYYug-MyDadIsMyHero', 'simple', '2022-09-23 12:08:11', '2022-09-23 12:08:11', NULL, 1, 'IN', '0.0000', NULL),
-(503, NULL, 'BSCHNKH1057', 'simple', '2022-09-23 12:08:11', '2022-09-23 12:08:11', NULL, 1, 'IN', '0.0000', NULL),
-(504, NULL, 'BSCHNKH1363_1', 'simple', '2022-09-23 12:08:11', '2022-09-23 12:08:11', NULL, 1, 'IN', '0.0000', NULL),
-(505, NULL, 'BSKEYC1004', 'simple', '2022-09-23 12:08:12', '2022-09-23 12:08:12', NULL, 1, 'IN', '0.0000', NULL),
-(506, NULL, 'BSCKEY1038', 'simple', '2022-09-23 12:08:12', '2022-09-23 12:08:12', NULL, 1, 'IN', '0.0000', NULL);
+(1064, 1, 'BS42BEAYYYhem-Blue', 'simple', '2022-09-26 10:17:36', '2022-09-26 10:17:36', NULL, 1, 'IN', '0.0000', NULL),
+(1065, 1, 'BS42BEAYYYhem-Yellow', 'simple', '2022-09-26 10:17:37', '2022-09-26 10:17:37', NULL, 1, 'IN', '0.0000', NULL),
+(1066, 1, 'BS42BELYYYadymor-Blue', 'simple', '2022-09-26 10:17:39', '2022-09-26 10:17:39', NULL, 1, 'IN', '0.0000', NULL),
+(1067, 1, 'BS42BEBYYYandej-Red', 'simple', '2022-09-26 10:17:40', '2022-09-26 10:17:40', NULL, 1, 'IN', '0.0000', NULL),
+(1068, 1, 'BS42BECYYYhokda-Blue', 'simple', '2022-09-26 10:17:42', '2022-09-26 10:17:42', NULL, 1, 'IN', '0.0000', NULL),
+(1069, 1, 'BS42BENYYYew-Purple', 'simple', '2022-09-26 10:17:43', '2022-09-26 10:17:43', NULL, 1, 'IN', '0.0000', NULL),
+(1070, 1, 'BS42BENYYYew-Orange', 'simple', '2022-09-26 10:17:45', '2022-09-26 10:17:45', NULL, 1, 'IN', '0.0000', NULL),
+(1071, 1, 'BS42BENYYYew-Brown', 'simple', '2022-09-26 10:17:46', '2022-09-26 10:17:46', NULL, 1, 'IN', '0.0000', NULL),
+(1072, 1, 'BS42BEDYYYandiya-Blue', 'simple', '2022-09-26 10:17:48', '2022-09-26 10:17:48', NULL, 1, 'IN', '0.0000', NULL),
+(1073, 1, 'BS42BELYYYeheriya-Red', 'simple', '2022-09-26 10:17:49', '2022-09-26 10:17:49', NULL, 1, 'IN', '0.0000', NULL);
 
 -- --------------------------------------------------------
 
@@ -7574,348 +6920,176 @@ CREATE TABLE `product_attribute_values` (
 --
 
 INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`, `boolean_value`, `integer_value`, `float_value`, `datetime_value`, `date_value`, `json_value`, `product_id`, `attribute_id`) VALUES
-(1, 'en', 'default', 'shortdesc', NULL, NULL, NULL, NULL, NULL, NULL, 1, 9),
-(2, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 1, 10),
-(3, NULL, NULL, 'updatedSKU', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1),
-(4, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 1, 2),
-(5, NULL, NULL, 'erwer', NULL, NULL, NULL, NULL, NULL, NULL, 1, 3),
-(6, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 5),
-(7, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 6),
-(8, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 7),
-(9, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1, 8),
-(10, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 1, 23),
-(11, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 1, 24),
-(12, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1, 26),
-(13, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 1, 16),
-(14, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 1, 17),
-(15, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 1, 18),
-(16, NULL, NULL, NULL, NULL, NULL, '100.0000', NULL, NULL, NULL, 1, 11),
-(17, NULL, 'default', NULL, NULL, NULL, '10.0000', NULL, NULL, NULL, 1, 12),
-(18, NULL, NULL, NULL, NULL, NULL, '80.0000', NULL, NULL, NULL, 1, 13),
-(19, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2019-05-02', NULL, 1, 14),
-(20, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2020-05-20', NULL, 1, 15),
-(21, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 1, 20),
-(22, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 1, 21),
-(23, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 1, 22),
-(24, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 2, 9),
-(25, 'en', 'default', 'fdh', NULL, NULL, NULL, NULL, NULL, NULL, 2, 10),
-(26, NULL, NULL, 'temp21', NULL, NULL, NULL, NULL, NULL, NULL, 2, 1),
-(27, 'en', 'default', 'temp1sdvc', NULL, NULL, NULL, NULL, NULL, NULL, 2, 2),
-(28, NULL, NULL, 'dsfvg', NULL, NULL, NULL, NULL, NULL, NULL, 2, 3),
-(29, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 2, 5),
-(30, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 2, 6),
-(31, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 2, 7),
-(32, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 2, 8),
-(33, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 2, 23),
-(34, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 2, 24),
-(35, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 2, 26),
-(36, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 2, 16),
-(37, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 2, 17),
-(38, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 2, 18),
-(39, NULL, NULL, NULL, NULL, NULL, '200.0000', NULL, NULL, NULL, 2, 11),
-(40, NULL, 'default', NULL, NULL, NULL, '10.0000', NULL, NULL, NULL, 2, 12),
-(41, NULL, NULL, NULL, NULL, NULL, '80.0000', NULL, NULL, NULL, 2, 13),
-(42, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2019-05-02', NULL, 2, 14),
-(43, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2020-05-20', NULL, 2, 15),
-(44, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 2, 20),
-(45, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 2, 21),
-(46, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 2, 22),
-(47, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 3, 9),
-(48, 'en', 'default', 'temp1', NULL, NULL, NULL, NULL, NULL, NULL, 3, 10),
-(49, NULL, NULL, 'temp41', NULL, NULL, NULL, NULL, NULL, NULL, 3, 1),
-(50, 'en', 'default', 'cbv', NULL, NULL, NULL, NULL, NULL, NULL, 3, 2),
-(51, NULL, NULL, 'temp3', NULL, NULL, NULL, NULL, NULL, NULL, 3, 3),
-(52, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 3, 5),
-(53, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 3, 6),
-(54, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 3, 7),
-(55, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 3, 8),
-(56, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, 3, 23),
-(57, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 3, 24),
-(58, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 3, 26),
-(59, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 3, 16),
-(60, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 3, 17),
-(61, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 3, 18),
-(62, NULL, NULL, NULL, NULL, NULL, '400.0000', NULL, NULL, NULL, 3, 11),
-(63, NULL, 'default', NULL, NULL, NULL, '10.0000', NULL, NULL, NULL, 3, 12),
-(64, NULL, NULL, NULL, NULL, NULL, '80.0000', NULL, NULL, NULL, 3, 13),
-(65, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2019-05-02', NULL, 3, 14),
-(66, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2020-05-20', NULL, 3, 15),
-(67, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 3, 20),
-(68, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 3, 21),
-(69, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 3, 22),
-(70, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 4, 9),
-(71, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL, NULL, NULL, NULL, NULL, NULL, 4, 10),
-(72, NULL, NULL, 'temporary-sku-6a87ba', NULL, NULL, NULL, NULL, NULL, NULL, 4, 1),
-(73, 'en', 'default', 'Prodcut With Price', NULL, NULL, NULL, NULL, NULL, NULL, 4, 2),
-(74, NULL, NULL, 'copy-of-temp3-babed1', NULL, NULL, NULL, NULL, NULL, NULL, 4, 3),
-(75, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 5),
-(76, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 6),
-(77, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 7),
-(78, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 4, 8),
-(79, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, 4, 23),
-(80, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 4, 24),
-(81, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 4, 26),
-(82, 'en', 'default', 'Test Title', NULL, NULL, NULL, NULL, NULL, NULL, 4, 16),
-(83, 'en', 'default', 'Test Keyword', NULL, NULL, NULL, NULL, NULL, NULL, 4, 17),
-(84, 'en', 'default', 'Test Description', NULL, NULL, NULL, NULL, NULL, NULL, 4, 18),
-(85, NULL, NULL, NULL, NULL, NULL, '400.0000', NULL, NULL, NULL, 4, 11),
-(86, NULL, 'default', NULL, NULL, NULL, '10.0000', NULL, NULL, NULL, 4, 12),
-(87, NULL, NULL, NULL, NULL, NULL, '80.0000', NULL, NULL, NULL, 4, 13),
-(88, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2022-08-27', NULL, 4, 14),
-(89, NULL, 'default', NULL, NULL, NULL, NULL, NULL, '2022-10-30', NULL, 4, 15),
-(90, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 4, 20),
-(91, NULL, NULL, '34', NULL, NULL, NULL, NULL, NULL, NULL, 4, 21),
-(92, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 4, 22),
-(93, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 4, 4),
-(94, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 4, 27),
-(95, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 4, 19),
-(96, NULL, NULL, 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 1),
-(97, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
-(98, 'en', 'default', 'Test Product v1', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
-(99, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
-(100, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
-(101, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 7, 2),
-(102, NULL, NULL, 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 3),
-(103, 'nl', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
-(104, 'en', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
-(105, 'es', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
-(106, 'fr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
-(107, 'tr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 9),
-(108, 'nl', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
-(109, 'en', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
-(110, 'es', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
-(111, 'fr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
-(112, 'tr', 'default', 'test-3-variant-1-6', NULL, NULL, NULL, NULL, NULL, NULL, 7, 10),
-(113, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 7, 11),
-(114, NULL, NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, 7, 22),
-(115, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 7, 8),
-(116, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, 7, 23),
-(117, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 7, 24),
-(118, NULL, NULL, 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 1),
-(119, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
-(120, 'en', 'default', 'Test Product v2', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
-(121, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
-(122, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
-(123, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 8, 2),
-(124, NULL, NULL, 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 3),
-(125, 'nl', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
-(126, 'en', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
-(127, 'es', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
-(128, 'fr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
-(129, 'tr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 9),
-(130, 'nl', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
-(131, 'en', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
-(132, 'es', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
-(133, 'fr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
-(134, 'tr', 'default', 'test-3-variant-2-6', NULL, NULL, NULL, NULL, NULL, NULL, 8, 10),
-(135, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 8, 11),
-(136, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 8, 22),
-(137, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 8, 8),
-(138, NULL, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL, 8, 23),
-(139, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 8, 24),
-(140, NULL, NULL, 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 1),
-(141, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
-(142, 'en', 'default', 'Test Product v2', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
-(143, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
-(144, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
-(145, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 9, 2),
-(146, NULL, NULL, 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 3),
-(147, 'nl', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
-(148, 'en', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
-(149, 'es', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
-(150, 'fr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
-(151, 'tr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 9),
-(152, 'nl', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
-(153, 'en', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
-(154, 'es', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
-(155, 'fr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
-(156, 'tr', 'default', 'test-3-variant-3-6', NULL, NULL, NULL, NULL, NULL, NULL, 9, 10),
-(157, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 9, 11),
-(158, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 9, 22),
-(159, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 9, 8),
-(160, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, 9, 23),
-(161, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 9, 24),
-(162, NULL, NULL, 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 1),
-(163, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
-(164, 'en', 'default', 'Test Product v2', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
-(165, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
-(166, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
-(167, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 10, 2),
-(168, NULL, NULL, 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 3),
-(169, 'nl', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
-(170, 'en', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
-(171, 'es', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
-(172, 'fr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
-(173, 'tr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 9),
-(174, 'nl', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
-(175, 'en', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
-(176, 'es', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
-(177, 'fr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
-(178, 'tr', 'default', 'test-3-variant-4-6', NULL, NULL, NULL, NULL, NULL, NULL, 10, 10),
-(179, NULL, NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, 10, 11),
-(180, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 10, 22),
-(181, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 10, 8),
-(182, NULL, NULL, NULL, NULL, 4, NULL, NULL, NULL, NULL, 10, 23),
-(183, NULL, NULL, NULL, NULL, 6, NULL, NULL, NULL, NULL, 10, 24),
-(536, 'en', 'default', 'jhj', NULL, NULL, NULL, NULL, NULL, NULL, 6, 9),
-(537, 'en', 'default', 'jhj', NULL, NULL, NULL, NULL, NULL, NULL, 6, 10),
-(538, NULL, NULL, 'test-3', NULL, NULL, NULL, NULL, NULL, NULL, 6, 1),
-(539, 'en', 'default', 'Test Product 3', NULL, NULL, NULL, NULL, NULL, NULL, 6, 2),
-(540, NULL, NULL, 'test-product-3', NULL, NULL, NULL, NULL, NULL, NULL, 6, 3),
-(541, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 6, 4),
-(542, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 5),
-(543, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 6),
-(544, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 7),
-(545, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 6, 8),
-(546, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 6, 25),
-(547, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 6, 26),
-(548, NULL, NULL, '01', NULL, NULL, NULL, NULL, NULL, NULL, 6, 27),
-(549, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 16),
-(550, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 17),
-(551, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 6, 18),
-(552, NULL, NULL, NULL, NULL, 11, NULL, NULL, NULL, NULL, 4, 25),
-(553, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 3, 4),
-(554, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 3, 25),
-(555, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 3, 27),
-(556, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 3, 19),
-(557, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 2, 4),
-(558, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 2, 25),
-(559, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 2, 27),
-(560, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 2, 19),
-(561, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 1, 4),
-(562, NULL, NULL, NULL, NULL, 10, NULL, NULL, NULL, NULL, 1, 25),
-(563, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 27),
-(564, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1, 19),
-(565, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 11, 9),
-(566, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL, NULL, NULL, NULL, NULL, NULL, 11, 10),
-(567, NULL, NULL, 'abcd12', NULL, NULL, NULL, NULL, NULL, NULL, 11, 1),
-(568, 'en', 'default', 'New Downloadable Product', NULL, NULL, NULL, NULL, NULL, NULL, 11, 2),
-(569, NULL, NULL, 'new-downloadable-product', NULL, NULL, NULL, NULL, NULL, NULL, 11, 3),
-(570, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 11, 4),
-(571, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 5),
-(572, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 6),
-(573, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 7),
-(574, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 11, 8),
-(575, NULL, NULL, NULL, NULL, 3, NULL, NULL, NULL, NULL, 11, 23),
-(576, NULL, NULL, NULL, NULL, 7, NULL, NULL, NULL, NULL, 11, 24),
-(577, NULL, NULL, NULL, NULL, 11, NULL, NULL, NULL, NULL, 11, 25),
-(578, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 11, 26),
-(579, NULL, NULL, '1234567890', NULL, NULL, NULL, NULL, NULL, NULL, 11, 27),
-(580, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 11, 16),
-(581, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 11, 17),
-(582, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 11, 18),
-(583, NULL, NULL, NULL, NULL, NULL, '2000.0000', NULL, NULL, NULL, 11, 11),
-(584, NULL, 'default', NULL, NULL, NULL, '100.0000', NULL, NULL, NULL, 11, 12),
-(585, NULL, NULL, NULL, NULL, NULL, '1500.0000', NULL, NULL, NULL, 11, 13),
-(586, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 14),
-(587, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, 15),
-(588, NULL, NULL, 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 1),
-(589, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
-(590, 'en', 'default', 'Note 20 2GB', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
-(591, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
-(592, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
-(593, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 13, 2),
-(594, NULL, NULL, 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 3),
-(595, 'nl', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
-(596, 'en', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
-(597, 'es', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
-(598, 'fr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
-(599, 'tr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 9),
-(600, 'nl', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
-(601, 'en', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
-(602, 'es', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
-(603, 'fr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
-(604, 'tr', 'default', 'NOTE-20-variant-13', NULL, NULL, NULL, NULL, NULL, NULL, 13, 10),
-(605, NULL, NULL, NULL, NULL, NULL, '80000.0000', NULL, NULL, NULL, 13, 11),
-(606, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 13, 22),
-(607, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 13, 8),
-(608, NULL, NULL, NULL, NULL, 13, NULL, NULL, NULL, NULL, 13, 28),
-(609, NULL, NULL, 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 1),
-(610, 'nl', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
-(611, 'en', 'default', 'Note 20 4GB', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
-(612, 'es', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
-(613, 'fr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
-(614, 'tr', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 2),
-(615, NULL, NULL, 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 3),
-(616, 'nl', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
-(617, 'en', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
-(618, 'es', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
-(619, 'fr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
-(620, 'tr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 9),
-(621, 'nl', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
-(622, 'en', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
-(623, 'es', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
-(624, 'fr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
-(625, 'tr', 'default', 'NOTE-20-variant-14', NULL, NULL, NULL, NULL, NULL, NULL, 14, 10),
-(626, NULL, NULL, NULL, NULL, NULL, '100000.0000', NULL, NULL, NULL, 14, 11),
-(627, NULL, NULL, '0', NULL, NULL, NULL, NULL, NULL, NULL, 14, 22),
-(628, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 14, 8),
-(629, NULL, NULL, NULL, NULL, 14, NULL, NULL, NULL, NULL, 14, 28),
-(630, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 12, 9),
-(631, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', NULL, NULL, NULL, NULL, NULL, NULL, 12, 10),
-(632, NULL, NULL, 'NOTE-20', NULL, NULL, NULL, NULL, NULL, NULL, 12, 1),
-(633, 'en', 'default', 'Note 20', NULL, NULL, NULL, NULL, NULL, NULL, 12, 2),
-(634, NULL, NULL, 'note-20', NULL, NULL, NULL, NULL, NULL, NULL, 12, 3),
-(635, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 12, 4),
-(636, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 5),
-(637, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 6),
-(638, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 7),
-(639, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 12, 8),
-(640, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 12, 26),
-(641, NULL, NULL, '123456789343', NULL, NULL, NULL, NULL, NULL, NULL, 12, 27),
-(642, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 12, 16),
-(643, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 12, 17),
-(644, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 12, 18),
-(645, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 14, 4),
-(646, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 5),
-(647, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 6),
-(648, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 7),
-(649, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 14, 26),
-(650, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 27),
-(651, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 16),
-(652, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 17),
-(653, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 18),
-(654, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 12),
-(655, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 13),
-(656, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 14),
-(657, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 15),
-(658, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 19),
-(659, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 20),
-(660, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 14, 21),
-(703, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 18, 9),
-(704, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummyLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 18, 10),
-(705, NULL, NULL, '12', NULL, NULL, NULL, NULL, NULL, NULL, 18, 1),
-(706, 'en', 'default', 'Danish Bhatia', NULL, NULL, NULL, NULL, NULL, NULL, 18, 2),
-(707, NULL, NULL, 'danish-bhatia', NULL, NULL, NULL, NULL, NULL, NULL, 18, 3),
-(708, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 18, 4),
-(709, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 5),
-(710, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 6),
-(711, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 7),
-(712, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 8),
-(713, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 18, 26),
-(714, NULL, NULL, '12345678934344', NULL, NULL, NULL, NULL, NULL, NULL, 18, 27),
-(715, NULL, NULL, NULL, NULL, 14, NULL, NULL, NULL, NULL, 18, 28),
-(716, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 18, 29),
-(717, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 18, 16),
-(718, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 18, 17),
-(719, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 18, 18),
-(720, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 20, 9),
-(721, 'en', 'default', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummyLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', NULL, NULL, NULL, NULL, NULL, NULL, 20, 10),
-(722, NULL, NULL, 'temporary-sku-456948', NULL, NULL, NULL, NULL, NULL, NULL, 20, 1),
-(723, 'en', 'default', 'Copy of Danish Bhatia (ed774b)', NULL, NULL, NULL, NULL, NULL, NULL, 20, 2),
-(724, NULL, NULL, 'copy-of-danish-bhatia-ed774b', NULL, NULL, NULL, NULL, NULL, NULL, 20, 3),
-(725, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 20, 4),
-(726, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 20, 5),
-(727, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 20, 6),
-(728, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 20, 7),
-(729, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 20, 8),
-(730, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 20, 26),
-(731, NULL, NULL, 'copy-of-12345678934344-ed774b', NULL, NULL, NULL, NULL, NULL, NULL, 20, 27),
-(732, NULL, NULL, NULL, NULL, 14, NULL, NULL, NULL, NULL, 20, 28),
-(733, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 20, 29),
-(734, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 20, 16),
-(735, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 20, 17),
-(736, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 20, 18);
+(1693, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 9),
+(1694, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 10),
+(1695, NULL, NULL, 'BS42BEAYYYhem-Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 1),
+(1696, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 2),
+(1697, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-multi-color-pid35601', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 3),
+(1698, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1064, 5),
+(1699, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1064, 6),
+(1700, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1064, 7),
+(1701, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1064, 8),
+(1702, NULL, NULL, 'Multi color', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 23),
+(1703, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 24),
+(1704, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1064, 26),
+(1705, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 30),
+(1706, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 16),
+(1707, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 18),
+(1708, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1064, 11),
+(1709, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1064, 22),
+(1710, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 9),
+(1711, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 10),
+(1712, NULL, NULL, 'BS42BEAYYYhem-Yellow', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 1),
+(1713, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 2),
+(1714, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-multi-color-pid35602', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 3),
+(1715, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1065, 5),
+(1716, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1065, 6),
+(1717, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1065, 7),
+(1718, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1065, 8),
+(1719, NULL, NULL, 'Multi color', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 23),
+(1720, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 24),
+(1721, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1065, 26),
+(1722, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 30),
+(1723, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 16),
+(1724, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 18),
+(1725, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1065, 11),
+(1726, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1065, 22),
+(1727, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 9),
+(1728, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 10),
+(1729, NULL, NULL, 'BS42BELYYYadymor-Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 1),
+(1730, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 2),
+(1731, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-blue-pid35603', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 3),
+(1732, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1066, 5),
+(1733, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1066, 6),
+(1734, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1066, 7),
+(1735, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1066, 8),
+(1736, NULL, NULL, 'Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 23),
+(1737, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 24),
+(1738, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1066, 26),
+(1739, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 30),
+(1740, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 16),
+(1741, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 18),
+(1742, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1066, 11),
+(1743, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1066, 22),
+(1744, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 9),
+(1745, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 10),
+(1746, NULL, NULL, 'BS42BEBYYYandej-Red', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 1),
+(1747, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 2),
+(1748, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-red-pid35604', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 3),
+(1749, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1067, 5),
+(1750, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1067, 6),
+(1751, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1067, 7),
+(1752, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1067, 8),
+(1753, NULL, NULL, 'Red', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 23),
+(1754, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 24),
+(1755, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1067, 26),
+(1756, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 30),
+(1757, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 16),
+(1758, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 18),
+(1759, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1067, 11),
+(1760, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1067, 22),
+(1761, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 9),
+(1762, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 10),
+(1763, NULL, NULL, 'BS42BECYYYhokda-Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 1),
+(1764, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 2),
+(1765, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-blue-pid35607', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 3),
+(1766, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1068, 5),
+(1767, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1068, 6),
+(1768, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1068, 7),
+(1769, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1068, 8),
+(1770, NULL, NULL, 'Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 23),
+(1771, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 24),
+(1772, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1068, 26),
+(1773, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 30),
+(1774, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 16),
+(1775, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 18),
+(1776, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1068, 11),
+(1777, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1068, 22),
+(1778, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 9),
+(1779, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 10),
+(1780, NULL, NULL, 'BS42BENYYYew-Purple', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 1),
+(1781, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 2),
+(1782, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-purple-pid35609', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 3),
+(1783, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1069, 5),
+(1784, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1069, 6),
+(1785, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1069, 7),
+(1786, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1069, 8),
+(1787, NULL, NULL, 'Purple', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 23),
+(1788, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 24),
+(1789, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1069, 26),
+(1790, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 30),
+(1791, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 16),
+(1792, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 18),
+(1793, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1069, 11),
+(1794, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1069, 22),
+(1795, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 9),
+(1796, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 10),
+(1797, NULL, NULL, 'BS42BENYYYew-Orange', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 1),
+(1798, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 2),
+(1799, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-orange-pid35610', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 3),
+(1800, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1070, 5),
+(1801, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1070, 6),
+(1802, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1070, 7),
+(1803, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1070, 8),
+(1804, NULL, NULL, 'Orange', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 23),
+(1805, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 24),
+(1806, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1070, 26),
+(1807, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 30),
+(1808, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 16),
+(1809, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 18),
+(1810, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1070, 11),
+(1811, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1070, 22),
+(1812, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 9),
+(1813, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 10),
+(1814, NULL, NULL, 'BS42BENYYYew-Brown', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 1),
+(1815, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 2),
+(1816, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-mehandi-green-pid35611', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 3),
+(1817, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1071, 5),
+(1818, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1071, 6),
+(1819, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1071, 7),
+(1820, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1071, 8),
+(1821, NULL, NULL, 'Mehandi Green', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 23),
+(1822, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 24),
+(1823, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1071, 26),
+(1824, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 30),
+(1825, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 16),
+(1826, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 18),
+(1827, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1071, 11),
+(1828, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 22),
+(1829, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 9),
+(1830, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 10),
+(1831, NULL, NULL, 'BS42BEDYYYandiya-Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 1),
+(1832, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 2),
+(1833, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-dark-blue-pid35612', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 3),
+(1834, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1072, 5),
+(1835, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1072, 6),
+(1836, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1072, 7),
+(1837, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1072, 8),
+(1838, NULL, NULL, 'Dark Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 23),
+(1839, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 24),
+(1840, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1072, 26),
+(1841, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 30),
+(1842, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 16),
+(1843, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 18),
+(1844, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1072, 11),
+(1845, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 22),
+(1846, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 9),
+(1847, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 10),
+(1848, NULL, NULL, 'BS42BELYYYeheriya-Red', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 1),
+(1849, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 2),
+(1850, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-red-pid35613', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 3),
+(1851, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1073, 5),
+(1852, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1073, 6),
+(1853, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1073, 7),
+(1854, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1073, 8),
+(1855, NULL, NULL, 'Red', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 23),
+(1856, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 24),
+(1857, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1073, 26),
+(1858, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 30),
+(1859, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 16),
+(1860, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 18),
+(1861, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1073, 11),
+(1862, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 22);
 
 -- --------------------------------------------------------
 
@@ -7976,34 +7150,16 @@ CREATE TABLE `product_categories` (
 --
 
 INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
-(6, 12),
-(6, 3),
-(6, 14),
-(4, 1),
-(4, 12),
-(4, 3),
-(4, 14),
-(4, 15),
-(3, 1),
-(3, 12),
-(3, 14),
-(3, 15),
-(3, 4),
-(2, 1),
-(2, 12),
-(2, 15),
-(2, 4),
-(2, 5),
-(1, 1),
-(1, 12),
-(1, 3),
-(11, 1),
-(11, 12),
-(11, 13),
-(11, 14),
-(12, 1),
-(12, 12),
-(12, 13);
+(1064, 13),
+(1065, 13),
+(1066, 13),
+(1067, 13),
+(1068, 13),
+(1069, 13),
+(1070, 13),
+(1071, 13),
+(1072, 13),
+(1073, 13);
 
 -- --------------------------------------------------------
 
@@ -8057,14 +7213,6 @@ CREATE TABLE `product_downloadable_links` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `product_downloadable_links`
---
-
-INSERT INTO `product_downloadable_links` (`id`, `url`, `file`, `file_name`, `type`, `price`, `sample_url`, `sample_file`, `sample_file_name`, `sample_type`, `downloads`, `sort_order`, `product_id`, `created_at`, `updated_at`) VALUES
-(1, 'https://google.com', NULL, NULL, 'url', '2000.0000', NULL, '', '', 'file', 10, 1, 11, '2022-08-27 17:19:12', '2022-08-27 17:19:12'),
-(2, 'https://fb.com', NULL, NULL, 'url', '1800.0000', NULL, '', '', 'file', 20, 2, 11, '2022-08-27 17:19:12', '2022-08-27 17:19:12');
-
 -- --------------------------------------------------------
 
 --
@@ -8077,14 +7225,6 @@ CREATE TABLE `product_downloadable_link_translations` (
   `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_downloadable_link_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `product_downloadable_link_translations`
---
-
-INSERT INTO `product_downloadable_link_translations` (`id`, `locale`, `title`, `product_downloadable_link_id`) VALUES
-(1, 'en', 'Product 1', 1),
-(2, 'en', 'Product 2', 2);
 
 -- --------------------------------------------------------
 
@@ -8104,13 +7244,6 @@ CREATE TABLE `product_downloadable_samples` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `product_downloadable_samples`
---
-
-INSERT INTO `product_downloadable_samples` (`id`, `url`, `file`, `file_name`, `type`, `sort_order`, `product_id`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'product_downloadable_links/11/zsjc5VHhuPHMLtRvelJyut8h4Yo08BschouWYdvH.jpg', '[019046].jpg', 'file', 0, 11, '2022-08-27 17:25:36', '2022-08-27 17:25:36');
-
 -- --------------------------------------------------------
 
 --
@@ -8123,13 +7256,6 @@ CREATE TABLE `product_downloadable_sample_translations` (
   `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `product_downloadable_sample_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `product_downloadable_sample_translations`
---
-
-INSERT INTO `product_downloadable_sample_translations` (`id`, `locale`, `title`, `product_downloadable_sample_id`) VALUES
-(1, 'en', 'Sample - 1', 1);
 
 -- --------------------------------------------------------
 
@@ -8176,1256 +7302,25 @@ CREATE TABLE `product_flat` (
   `depth` decimal(12,4) DEFAULT NULL,
   `brand` int(11) DEFAULT NULL,
   `brand_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `RAM` int(11) DEFAULT NULL,
-  `RAM_label` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `random` tinyint(1) DEFAULT NULL
+  `random` tinyint(1) DEFAULT NULL,
+  `material` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product_flat`
 --
 
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(1, 'updatedSKU', '', 'temp1', 'temp1', 'erwer', 1, 1, 1, NULL, '50.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'en', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', 'shortdesc', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas', NULL, NULL, NULL),
-(2, 'temp21', '', 'temp1sdvc', 'fdh', 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'en', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas', NULL, NULL, NULL),
-(3, 'temp41', '', 'cbv', 'temp1', 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'en', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', 'temp1', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 10, 'Abibas', NULL, NULL, NULL),
-(4, 'temporary-sku-6a87ba', '', 'Prodcut With Price', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'en', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'Test Title', 'Test Keyword', 'Test Description', '34.0000', '34.0000', NULL, 11, 'Puma', NULL, NULL, NULL),
-(5, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'fr', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 11, '', NULL, NULL, NULL),
-(6, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'nl', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 11, '', NULL, NULL, NULL),
-(7, 'temporary-sku-6a87ba', '', NULL, NULL, 'copy-of-temp3-babed1', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2022-08-27', '2022-10-30', '12.0000', 4, 'Black', 7, 'M', '2022-08-12 08:38:32', 'es', 'default', 4, '2022-08-12 10:53:29', NULL, 1, '80.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 11, '', NULL, NULL, NULL),
-(12, 'test-3', '01', 'Test Product 3', 'jhj', 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'en', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', 'jhj', '', '', '', NULL, NULL, NULL, 10, 'Abibas', NULL, NULL, NULL),
-(13, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'fr', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, '', NULL, NULL, NULL),
-(14, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'nl', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, '', NULL, NULL, NULL),
-(15, 'test-3', '01', NULL, NULL, 'test-product-3', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-13 20:11:12', 'es', 'default', 6, '2022-08-27 13:23:24', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 10, '', NULL, NULL, NULL),
-(16, 'test-3-variant-1-6', NULL, 'Test Product v1', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 7, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(17, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 7, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 7, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 'test-3-variant-1-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '1.0000', 1, 'Red', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 7, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(20, 'test-3-variant-2-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'en', 'default', 8, '2022-08-13 20:11:12', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(21, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'fr', 'default', 8, '2022-08-13 20:11:12', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'nl', 'default', 8, '2022-08-13 20:11:12', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 'test-3-variant-2-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 2, 'Green', 6, 'S', '2022-08-13 20:11:12', 'es', 'default', 8, '2022-08-13 20:11:12', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(24, 'test-3-variant-3-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 9, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(25, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 9, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(26, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 9, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(27, 'test-3-variant-3-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 3, 'Yellow', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 9, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(28, 'test-3-variant-4-6', NULL, 'Test Product v2', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'en', 'default', 10, '2022-08-13 20:11:13', 12, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(29, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'fr', 'default', 10, '2022-08-13 20:11:13', 13, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(30, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'nl', 'default', 10, '2022-08-13 20:11:13', 14, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 'test-3-variant-4-6', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '0.0000', NULL, NULL, NULL, NULL, '0.0000', 4, 'Black', 6, 'S', '2022-08-13 20:11:13', 'es', 'default', 10, '2022-08-13 20:11:13', 15, NULL, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(96, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'fr', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(97, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'nl', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(98, 'temp41', '', NULL, NULL, 'temp3', 1, 1, 1, NULL, '400.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 4, 'Black', 7, 'M', '2022-08-10 12:46:09', 'es', 'default', 3, '2022-08-22 00:31:13', NULL, 1, '400.0000', '400.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(99, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'fr', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(100, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'nl', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(101, 'temp21', '', NULL, NULL, 'dsfvg', 1, 1, 1, NULL, '200.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 2, 'Green', 7, 'M', '2022-08-10 12:46:07', 'es', 'default', 2, '2022-08-22 00:31:52', NULL, 1, '200.0000', '200.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(102, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'fr', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(103, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'nl', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(104, 'updatedSKU', '', NULL, NULL, 'erwer', 1, 1, 1, NULL, '100.0000', '10.0000', '80.0000', '2019-05-02', '2020-05-20', '12.0000', 1, 'Red', 7, 'M', '2022-08-10 12:46:06', 'es', 'default', 1, '2022-08-10 12:46:06', NULL, 1, '100.0000', '100.0000', NULL, NULL, NULL, NULL, '34.0000', '34.0000', NULL, 10, '', NULL, NULL, NULL),
-(105, 'abcd12', '1234567890', 'New Downloadable Product', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'en', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, 11, 'Puma', NULL, NULL, NULL),
-(106, 'abcd12', '1234567890', NULL, NULL, 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'fr', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, '', NULL, NULL, NULL),
-(107, 'abcd12', '1234567890', NULL, NULL, 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'nl', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, '', NULL, NULL, NULL),
-(108, 'abcd12', '1234567890', NULL, NULL, 'new-downloadable-product', 1, 1, 1, NULL, '2000.0000', '100.0000', '1500.0000', NULL, NULL, NULL, 3, 'Yellow', 7, 'M', '2022-08-27 22:42:25', 'es', 'default', 11, '2022-08-27 22:42:25', NULL, 1, '1500.0000', '2000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11, '', NULL, NULL, NULL),
-(109, 'NOTE-20', '123456789343', 'Note 20', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'en', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(110, 'NOTE-20', '123456789343', NULL, NULL, 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'fr', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(111, 'NOTE-20', '123456789343', NULL, NULL, 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'nl', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(112, 'NOTE-20', '123456789343', NULL, NULL, 'note-20', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'es', 'default', 12, '2022-08-27 23:19:16', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(113, 'NOTE-20-variant-13', NULL, 'Note 20 2GB', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'en', 'default', 13, '2022-08-27 23:16:57', 109, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '2GB', NULL),
-(114, 'NOTE-20-variant-13', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'fr', 'default', 13, '2022-08-27 23:16:57', 110, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '', NULL),
-(115, 'NOTE-20-variant-13', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'nl', 'default', 13, '2022-08-27 23:16:57', 111, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '', NULL),
-(116, 'NOTE-20-variant-13', NULL, '', NULL, NULL, NULL, NULL, 1, NULL, '80000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'es', 'default', 13, '2022-08-27 23:16:57', 112, NULL, '80000.0000', '80000.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13, '', NULL),
-(117, 'NOTE-20-variant-14', '', 'Note 20 4GB', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'en', 'default', 14, '2022-08-27 23:18:53', 109, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', '', '', '', '0.0000', '0.0000', NULL, NULL, NULL, 14, '4GB', NULL),
-(118, 'NOTE-20-variant-14', '', '', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'fr', 'default', 14, '2022-08-27 23:18:53', 110, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', NULL, NULL, NULL, '0.0000', '0.0000', NULL, NULL, NULL, 14, '', NULL),
-(119, 'NOTE-20-variant-14', '', '', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'nl', 'default', 14, '2022-08-27 23:18:53', 111, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', NULL, NULL, NULL, '0.0000', '0.0000', NULL, NULL, NULL, 14, '', NULL),
-(120, 'NOTE-20-variant-14', '', '', 'NOTE-20-variant-14', 'NOTE-20-variant-14', 0, 0, 1, NULL, '100000.0000', NULL, NULL, NULL, NULL, '0.0000', NULL, NULL, NULL, NULL, '2022-08-27 23:16:57', 'es', 'default', 14, '2022-08-27 23:18:53', 112, 0, '100000.0000', '100000.0000', 'NOTE-20-variant-14', NULL, NULL, NULL, '0.0000', '0.0000', NULL, NULL, NULL, 14, '', NULL),
-(133, '12', '12345678934344', 'Danish Bhatia', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummyLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'en', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, NULL, NULL, 14, '4GB', 1),
-(134, '12', '12345678934344', NULL, NULL, 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'fr', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, '', 1),
-(135, '12', '12345678934344', NULL, NULL, 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'nl', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, '', 1),
-(136, '12', '12345678934344', NULL, NULL, 'danish-bhatia', 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-28 01:02:05', 'es', 'default', 18, '2022-08-28 01:02:05', NULL, 1, '0.0000', '0.0000', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, '', 1),
-(137, 'temporary-sku-456948', 'copy-of-12345678934344-ed774b', 'Copy of Danish Bhatia (ed774b)', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummyLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', 'copy-of-danish-bhatia-ed774b', 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'en', 'default', 20, NULL, NULL, 1, '0.0000', '0.0000', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy', '', '', '', NULL, NULL, NULL, NULL, NULL, 14, '4GB', 1),
-(138, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:19', 'en', 'default', 21, '2022-09-23 17:18:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(139, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:19', 'fr', 'default', 21, '2022-09-23 17:18:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(140, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:19', 'nl', 'default', 21, '2022-09-23 17:18:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(141, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:19', 'es', 'default', 21, '2022-09-23 17:18:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(142, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:21', 'en', 'default', 22, '2022-09-23 17:18:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(143, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:21', 'fr', 'default', 22, '2022-09-23 17:18:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(144, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:21', 'nl', 'default', 22, '2022-09-23 17:18:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(145, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:21', 'es', 'default', 22, '2022-09-23 17:18:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(146, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:22', 'en', 'default', 23, '2022-09-23 17:18:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(147, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:22', 'fr', 'default', 23, '2022-09-23 17:18:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(148, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:22', 'nl', 'default', 23, '2022-09-23 17:18:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(149, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:22', 'es', 'default', 23, '2022-09-23 17:18:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(150, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:23', 'en', 'default', 24, '2022-09-23 17:18:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(151, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:23', 'fr', 'default', 24, '2022-09-23 17:18:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(152, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:23', 'nl', 'default', 24, '2022-09-23 17:18:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(153, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:23', 'es', 'default', 24, '2022-09-23 17:18:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(154, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:24', 'en', 'default', 25, '2022-09-23 17:18:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(155, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:24', 'fr', 'default', 25, '2022-09-23 17:18:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(156, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:24', 'nl', 'default', 25, '2022-09-23 17:18:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(157, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:24', 'es', 'default', 25, '2022-09-23 17:18:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(158, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:26', 'en', 'default', 26, '2022-09-23 17:18:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(159, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:26', 'fr', 'default', 26, '2022-09-23 17:18:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(160, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:26', 'nl', 'default', 26, '2022-09-23 17:18:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(161, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:26', 'es', 'default', 26, '2022-09-23 17:18:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(162, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:27', 'en', 'default', 27, '2022-09-23 17:18:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(163, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:27', 'fr', 'default', 27, '2022-09-23 17:18:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(164, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:27', 'nl', 'default', 27, '2022-09-23 17:18:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(165, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:27', 'es', 'default', 27, '2022-09-23 17:18:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(166, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:28', 'en', 'default', 28, '2022-09-23 17:18:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(167, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:28', 'fr', 'default', 28, '2022-09-23 17:18:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(168, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:28', 'nl', 'default', 28, '2022-09-23 17:18:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(169, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:28', 'es', 'default', 28, '2022-09-23 17:18:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(170, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:29', 'en', 'default', 29, '2022-09-23 17:18:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(171, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:29', 'fr', 'default', 29, '2022-09-23 17:18:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(172, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:29', 'nl', 'default', 29, '2022-09-23 17:18:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(173, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:29', 'es', 'default', 29, '2022-09-23 17:18:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(174, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:30', 'en', 'default', 30, '2022-09-23 17:18:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(175, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:30', 'fr', 'default', 30, '2022-09-23 17:18:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(176, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:30', 'nl', 'default', 30, '2022-09-23 17:18:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(177, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:30', 'es', 'default', 30, '2022-09-23 17:18:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(178, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:36', 'en', 'default', 31, '2022-09-23 17:18:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(179, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:36', 'fr', 'default', 31, '2022-09-23 17:18:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(180, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:36', 'nl', 'default', 31, '2022-09-23 17:18:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(181, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:36', 'es', 'default', 31, '2022-09-23 17:18:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(182, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:37', 'en', 'default', 32, '2022-09-23 17:18:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(183, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:37', 'fr', 'default', 32, '2022-09-23 17:18:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(184, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:37', 'nl', 'default', 32, '2022-09-23 17:18:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(185, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:37', 'es', 'default', 32, '2022-09-23 17:18:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(186, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:38', 'en', 'default', 33, '2022-09-23 17:18:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(187, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:38', 'fr', 'default', 33, '2022-09-23 17:18:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(188, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:38', 'nl', 'default', 33, '2022-09-23 17:18:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(189, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:38', 'es', 'default', 33, '2022-09-23 17:18:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(190, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:39', 'en', 'default', 34, '2022-09-23 17:18:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(191, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:39', 'fr', 'default', 34, '2022-09-23 17:18:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(192, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:39', 'nl', 'default', 34, '2022-09-23 17:18:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(193, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:39', 'es', 'default', 34, '2022-09-23 17:18:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(194, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:41', 'en', 'default', 35, '2022-09-23 17:18:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(195, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:41', 'fr', 'default', 35, '2022-09-23 17:18:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(196, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:41', 'nl', 'default', 35, '2022-09-23 17:18:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(197, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:41', 'es', 'default', 35, '2022-09-23 17:18:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(198, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:42', 'en', 'default', 36, '2022-09-23 17:18:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(199, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:42', 'fr', 'default', 36, '2022-09-23 17:18:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(200, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:42', 'nl', 'default', 36, '2022-09-23 17:18:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(201, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:42', 'es', 'default', 36, '2022-09-23 17:18:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(202, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:43', 'en', 'default', 37, '2022-09-23 17:18:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(203, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:43', 'fr', 'default', 37, '2022-09-23 17:18:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(204, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:43', 'nl', 'default', 37, '2022-09-23 17:18:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(205, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:43', 'es', 'default', 37, '2022-09-23 17:18:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(206, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:44', 'en', 'default', 38, '2022-09-23 17:18:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(207, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:44', 'fr', 'default', 38, '2022-09-23 17:18:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(208, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:44', 'nl', 'default', 38, '2022-09-23 17:18:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(209, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:44', 'es', 'default', 38, '2022-09-23 17:18:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(210, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:45', 'en', 'default', 39, '2022-09-23 17:18:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(211, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:45', 'fr', 'default', 39, '2022-09-23 17:18:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(212, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:45', 'nl', 'default', 39, '2022-09-23 17:18:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(213, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:45', 'es', 'default', 39, '2022-09-23 17:18:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(214, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:47', 'en', 'default', 40, '2022-09-23 17:18:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(215, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:47', 'fr', 'default', 40, '2022-09-23 17:18:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(216, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:47', 'nl', 'default', 40, '2022-09-23 17:18:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(217, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:18:47', 'es', 'default', 40, '2022-09-23 17:18:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(218, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:06', 'en', 'default', 41, '2022-09-23 17:19:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(219, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:06', 'fr', 'default', 41, '2022-09-23 17:19:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(220, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:06', 'nl', 'default', 41, '2022-09-23 17:19:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(221, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:06', 'es', 'default', 41, '2022-09-23 17:19:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(222, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:08', 'en', 'default', 42, '2022-09-23 17:19:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(223, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:08', 'fr', 'default', 42, '2022-09-23 17:19:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(224, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:08', 'nl', 'default', 42, '2022-09-23 17:19:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(225, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:08', 'es', 'default', 42, '2022-09-23 17:19:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(226, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:09', 'en', 'default', 43, '2022-09-23 17:19:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(227, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:09', 'fr', 'default', 43, '2022-09-23 17:19:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(228, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:09', 'nl', 'default', 43, '2022-09-23 17:19:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(229, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:09', 'es', 'default', 43, '2022-09-23 17:19:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(230, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:10', 'en', 'default', 44, '2022-09-23 17:19:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(231, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:10', 'fr', 'default', 44, '2022-09-23 17:19:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(232, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:10', 'nl', 'default', 44, '2022-09-23 17:19:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(233, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:10', 'es', 'default', 44, '2022-09-23 17:19:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(234, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:11', 'en', 'default', 45, '2022-09-23 17:19:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(235, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:11', 'fr', 'default', 45, '2022-09-23 17:19:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(236, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:11', 'nl', 'default', 45, '2022-09-23 17:19:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(237, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:11', 'es', 'default', 45, '2022-09-23 17:19:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(238, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:12', 'en', 'default', 46, '2022-09-23 17:19:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(239, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:12', 'fr', 'default', 46, '2022-09-23 17:19:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(240, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:12', 'nl', 'default', 46, '2022-09-23 17:19:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(241, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:12', 'es', 'default', 46, '2022-09-23 17:19:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(242, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:14', 'en', 'default', 47, '2022-09-23 17:19:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(243, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:14', 'fr', 'default', 47, '2022-09-23 17:19:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(244, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:14', 'nl', 'default', 47, '2022-09-23 17:19:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(245, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:14', 'es', 'default', 47, '2022-09-23 17:19:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(246, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:15', 'en', 'default', 48, '2022-09-23 17:19:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(247, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:15', 'fr', 'default', 48, '2022-09-23 17:19:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(248, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:15', 'nl', 'default', 48, '2022-09-23 17:19:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(249, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:15', 'es', 'default', 48, '2022-09-23 17:19:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(250, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:16', 'en', 'default', 49, '2022-09-23 17:19:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(251, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:16', 'fr', 'default', 49, '2022-09-23 17:19:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(252, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:16', 'nl', 'default', 49, '2022-09-23 17:19:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(253, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:16', 'es', 'default', 49, '2022-09-23 17:19:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(254, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:17', 'en', 'default', 50, '2022-09-23 17:19:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(255, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:17', 'fr', 'default', 50, '2022-09-23 17:19:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(256, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:17', 'nl', 'default', 50, '2022-09-23 17:19:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(257, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:17', 'es', 'default', 50, '2022-09-23 17:19:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(258, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:42', 'en', 'default', 51, '2022-09-23 17:19:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(259, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:42', 'fr', 'default', 51, '2022-09-23 17:19:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(260, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:42', 'nl', 'default', 51, '2022-09-23 17:19:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(261, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:42', 'es', 'default', 51, '2022-09-23 17:19:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(262, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:44', 'en', 'default', 52, '2022-09-23 17:19:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(263, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:44', 'fr', 'default', 52, '2022-09-23 17:19:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(264, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:44', 'nl', 'default', 52, '2022-09-23 17:19:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(265, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:44', 'es', 'default', 52, '2022-09-23 17:19:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(266, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:45', 'en', 'default', 53, '2022-09-23 17:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(267, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:45', 'fr', 'default', 53, '2022-09-23 17:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(268, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:45', 'nl', 'default', 53, '2022-09-23 17:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(269, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:45', 'es', 'default', 53, '2022-09-23 17:19:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(270, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:46', 'en', 'default', 54, '2022-09-23 17:19:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(271, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:46', 'fr', 'default', 54, '2022-09-23 17:19:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(272, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:46', 'nl', 'default', 54, '2022-09-23 17:19:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(273, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:46', 'es', 'default', 54, '2022-09-23 17:19:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(274, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:47', 'en', 'default', 55, '2022-09-23 17:19:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(275, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:47', 'fr', 'default', 55, '2022-09-23 17:19:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(276, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:47', 'nl', 'default', 55, '2022-09-23 17:19:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(277, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:47', 'es', 'default', 55, '2022-09-23 17:19:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(278, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:49', 'en', 'default', 56, '2022-09-23 17:19:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(279, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:49', 'fr', 'default', 56, '2022-09-23 17:19:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(280, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:49', 'nl', 'default', 56, '2022-09-23 17:19:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(281, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:49', 'es', 'default', 56, '2022-09-23 17:19:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(282, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:50', 'en', 'default', 57, '2022-09-23 17:19:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(283, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:50', 'fr', 'default', 57, '2022-09-23 17:19:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(284, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:50', 'nl', 'default', 57, '2022-09-23 17:19:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(285, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:50', 'es', 'default', 57, '2022-09-23 17:19:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(286, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:51', 'en', 'default', 58, '2022-09-23 17:19:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(287, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:51', 'fr', 'default', 58, '2022-09-23 17:19:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(288, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:51', 'nl', 'default', 58, '2022-09-23 17:19:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(289, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:51', 'es', 'default', 58, '2022-09-23 17:19:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(290, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:52', 'en', 'default', 59, '2022-09-23 17:19:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(291, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:52', 'fr', 'default', 59, '2022-09-23 17:19:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(292, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:52', 'nl', 'default', 59, '2022-09-23 17:19:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(293, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:52', 'es', 'default', 59, '2022-09-23 17:19:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(294, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:53', 'en', 'default', 60, '2022-09-23 17:19:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(295, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:53', 'fr', 'default', 60, '2022-09-23 17:19:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(296, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:53', 'nl', 'default', 60, '2022-09-23 17:19:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(297, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:19:53', 'es', 'default', 60, '2022-09-23 17:19:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(298, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:24', 'en', 'default', 61, '2022-09-23 17:20:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(299, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:24', 'fr', 'default', 61, '2022-09-23 17:20:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(300, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:24', 'nl', 'default', 61, '2022-09-23 17:20:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(301, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:24', 'es', 'default', 61, '2022-09-23 17:20:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(302, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:25', 'en', 'default', 62, '2022-09-23 17:20:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(303, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:25', 'fr', 'default', 62, '2022-09-23 17:20:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(304, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:25', 'nl', 'default', 62, '2022-09-23 17:20:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(305, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:25', 'es', 'default', 62, '2022-09-23 17:20:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(306, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:27', 'en', 'default', 63, '2022-09-23 17:20:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(307, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:27', 'fr', 'default', 63, '2022-09-23 17:20:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(308, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:27', 'nl', 'default', 63, '2022-09-23 17:20:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(309, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:27', 'es', 'default', 63, '2022-09-23 17:20:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(310, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:28', 'en', 'default', 64, '2022-09-23 17:20:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(311, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:28', 'fr', 'default', 64, '2022-09-23 17:20:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(312, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:28', 'nl', 'default', 64, '2022-09-23 17:20:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(313, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:28', 'es', 'default', 64, '2022-09-23 17:20:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(314, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:29', 'en', 'default', 65, '2022-09-23 17:20:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(315, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:29', 'fr', 'default', 65, '2022-09-23 17:20:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(316, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:29', 'nl', 'default', 65, '2022-09-23 17:20:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(317, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:29', 'es', 'default', 65, '2022-09-23 17:20:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(318, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:30', 'en', 'default', 66, '2022-09-23 17:20:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(319, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:30', 'fr', 'default', 66, '2022-09-23 17:20:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(320, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:30', 'nl', 'default', 66, '2022-09-23 17:20:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(321, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:30', 'es', 'default', 66, '2022-09-23 17:20:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(322, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:31', 'en', 'default', 67, '2022-09-23 17:20:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(323, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:31', 'fr', 'default', 67, '2022-09-23 17:20:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(324, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:31', 'nl', 'default', 67, '2022-09-23 17:20:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(325, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:31', 'es', 'default', 67, '2022-09-23 17:20:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(326, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:32', 'en', 'default', 68, '2022-09-23 17:20:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(327, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:32', 'fr', 'default', 68, '2022-09-23 17:20:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(328, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:32', 'nl', 'default', 68, '2022-09-23 17:20:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(329, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:32', 'es', 'default', 68, '2022-09-23 17:20:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(330, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:34', 'en', 'default', 69, '2022-09-23 17:20:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(331, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:34', 'fr', 'default', 69, '2022-09-23 17:20:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(332, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:34', 'nl', 'default', 69, '2022-09-23 17:20:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(333, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:34', 'es', 'default', 69, '2022-09-23 17:20:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(334, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:35', 'en', 'default', 70, '2022-09-23 17:20:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(335, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:35', 'fr', 'default', 70, '2022-09-23 17:20:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(336, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:35', 'nl', 'default', 70, '2022-09-23 17:20:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(337, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:20:35', 'es', 'default', 70, '2022-09-23 17:20:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(338, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:03', 'en', 'default', 71, '2022-09-23 17:21:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(339, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:03', 'fr', 'default', 71, '2022-09-23 17:21:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(340, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:03', 'nl', 'default', 71, '2022-09-23 17:21:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(341, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:03', 'es', 'default', 71, '2022-09-23 17:21:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(342, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:05', 'en', 'default', 72, '2022-09-23 17:21:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(343, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:05', 'fr', 'default', 72, '2022-09-23 17:21:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(344, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:05', 'nl', 'default', 72, '2022-09-23 17:21:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(345, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:05', 'es', 'default', 72, '2022-09-23 17:21:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(346, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:06', 'en', 'default', 73, '2022-09-23 17:21:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(347, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:06', 'fr', 'default', 73, '2022-09-23 17:21:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(348, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:06', 'nl', 'default', 73, '2022-09-23 17:21:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(349, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:06', 'es', 'default', 73, '2022-09-23 17:21:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(350, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:07', 'en', 'default', 74, '2022-09-23 17:21:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(351, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:07', 'fr', 'default', 74, '2022-09-23 17:21:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(352, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:07', 'nl', 'default', 74, '2022-09-23 17:21:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(353, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:07', 'es', 'default', 74, '2022-09-23 17:21:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(354, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:08', 'en', 'default', 75, '2022-09-23 17:21:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(355, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:08', 'fr', 'default', 75, '2022-09-23 17:21:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(356, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:08', 'nl', 'default', 75, '2022-09-23 17:21:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(357, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:08', 'es', 'default', 75, '2022-09-23 17:21:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(358, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:09', 'en', 'default', 76, '2022-09-23 17:21:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(359, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:09', 'fr', 'default', 76, '2022-09-23 17:21:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(360, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:09', 'nl', 'default', 76, '2022-09-23 17:21:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(361, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:09', 'es', 'default', 76, '2022-09-23 17:21:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(362, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:11', 'en', 'default', 77, '2022-09-23 17:21:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(363, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:11', 'fr', 'default', 77, '2022-09-23 17:21:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(364, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:11', 'nl', 'default', 77, '2022-09-23 17:21:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(365, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:11', 'es', 'default', 77, '2022-09-23 17:21:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(366, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:12', 'en', 'default', 78, '2022-09-23 17:21:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(367, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:12', 'fr', 'default', 78, '2022-09-23 17:21:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(368, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:12', 'nl', 'default', 78, '2022-09-23 17:21:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(369, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:12', 'es', 'default', 78, '2022-09-23 17:21:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(370, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:13', 'en', 'default', 79, '2022-09-23 17:21:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(371, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:13', 'fr', 'default', 79, '2022-09-23 17:21:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(372, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:13', 'nl', 'default', 79, '2022-09-23 17:21:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(373, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:13', 'es', 'default', 79, '2022-09-23 17:21:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(374, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:14', 'en', 'default', 80, '2022-09-23 17:21:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(375, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:14', 'fr', 'default', 80, '2022-09-23 17:21:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(376, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:14', 'nl', 'default', 80, '2022-09-23 17:21:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(377, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:14', 'es', 'default', 80, '2022-09-23 17:21:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(378, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:50', 'en', 'default', 81, '2022-09-23 17:21:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(379, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:50', 'fr', 'default', 81, '2022-09-23 17:21:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(380, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:50', 'nl', 'default', 81, '2022-09-23 17:21:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(381, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:50', 'es', 'default', 81, '2022-09-23 17:21:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(382, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:51', 'en', 'default', 82, '2022-09-23 17:21:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(383, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:51', 'fr', 'default', 82, '2022-09-23 17:21:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(384, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:51', 'nl', 'default', 82, '2022-09-23 17:21:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(385, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:51', 'es', 'default', 82, '2022-09-23 17:21:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(386, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:52', 'en', 'default', 83, '2022-09-23 17:21:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(387, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:52', 'fr', 'default', 83, '2022-09-23 17:21:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(388, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:52', 'nl', 'default', 83, '2022-09-23 17:21:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(389, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:52', 'es', 'default', 83, '2022-09-23 17:21:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(390, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:54', 'en', 'default', 84, '2022-09-23 17:21:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(391, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:54', 'fr', 'default', 84, '2022-09-23 17:21:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(392, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:54', 'nl', 'default', 84, '2022-09-23 17:21:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(393, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:54', 'es', 'default', 84, '2022-09-23 17:21:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(394, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:55', 'en', 'default', 85, '2022-09-23 17:21:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(395, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:55', 'fr', 'default', 85, '2022-09-23 17:21:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(396, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:55', 'nl', 'default', 85, '2022-09-23 17:21:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(397, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:55', 'es', 'default', 85, '2022-09-23 17:21:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(398, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:56', 'en', 'default', 86, '2022-09-23 17:21:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(399, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:56', 'fr', 'default', 86, '2022-09-23 17:21:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(400, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:56', 'nl', 'default', 86, '2022-09-23 17:21:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(401, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:56', 'es', 'default', 86, '2022-09-23 17:21:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(402, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:57', 'en', 'default', 87, '2022-09-23 17:21:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(403, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:57', 'fr', 'default', 87, '2022-09-23 17:21:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(404, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:57', 'nl', 'default', 87, '2022-09-23 17:21:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(405, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:57', 'es', 'default', 87, '2022-09-23 17:21:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(406, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:58', 'en', 'default', 88, '2022-09-23 17:21:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(407, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:58', 'fr', 'default', 88, '2022-09-23 17:21:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(408, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:58', 'nl', 'default', 88, '2022-09-23 17:21:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(409, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:21:58', 'es', 'default', 88, '2022-09-23 17:21:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(410, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:00', 'en', 'default', 89, '2022-09-23 17:22:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(411, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:00', 'fr', 'default', 89, '2022-09-23 17:22:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(412, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:00', 'nl', 'default', 89, '2022-09-23 17:22:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(413, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:00', 'es', 'default', 89, '2022-09-23 17:22:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(414, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:01', 'en', 'default', 90, '2022-09-23 17:22:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(415, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:01', 'fr', 'default', 90, '2022-09-23 17:22:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(416, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:01', 'nl', 'default', 90, '2022-09-23 17:22:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(417, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:01', 'es', 'default', 90, '2022-09-23 17:22:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(418, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:37', 'en', 'default', 91, '2022-09-23 17:22:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(419, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:37', 'fr', 'default', 91, '2022-09-23 17:22:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(420, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:37', 'nl', 'default', 91, '2022-09-23 17:22:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(421, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:37', 'es', 'default', 91, '2022-09-23 17:22:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(422, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:38', 'en', 'default', 92, '2022-09-23 17:22:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(423, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:38', 'fr', 'default', 92, '2022-09-23 17:22:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(424, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:38', 'nl', 'default', 92, '2022-09-23 17:22:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(425, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:38', 'es', 'default', 92, '2022-09-23 17:22:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(426, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:40', 'en', 'default', 93, '2022-09-23 17:22:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(427, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:40', 'fr', 'default', 93, '2022-09-23 17:22:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(428, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:40', 'nl', 'default', 93, '2022-09-23 17:22:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(429, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:40', 'es', 'default', 93, '2022-09-23 17:22:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(430, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:41', 'en', 'default', 94, '2022-09-23 17:22:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(431, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:41', 'fr', 'default', 94, '2022-09-23 17:22:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(432, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:41', 'nl', 'default', 94, '2022-09-23 17:22:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(433, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:41', 'es', 'default', 94, '2022-09-23 17:22:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(434, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:42', 'en', 'default', 95, '2022-09-23 17:22:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(435, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:42', 'fr', 'default', 95, '2022-09-23 17:22:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(436, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:42', 'nl', 'default', 95, '2022-09-23 17:22:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(437, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:42', 'es', 'default', 95, '2022-09-23 17:22:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(438, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:43', 'en', 'default', 96, '2022-09-23 17:22:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(439, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:43', 'fr', 'default', 96, '2022-09-23 17:22:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(440, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:43', 'nl', 'default', 96, '2022-09-23 17:22:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(441, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:43', 'es', 'default', 96, '2022-09-23 17:22:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(442, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:45', 'en', 'default', 97, '2022-09-23 17:22:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(443, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:45', 'fr', 'default', 97, '2022-09-23 17:22:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(444, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:45', 'nl', 'default', 97, '2022-09-23 17:22:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(445, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:45', 'es', 'default', 97, '2022-09-23 17:22:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(446, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:46', 'en', 'default', 98, '2022-09-23 17:22:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(447, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:46', 'fr', 'default', 98, '2022-09-23 17:22:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(448, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:46', 'nl', 'default', 98, '2022-09-23 17:22:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(449, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:46', 'es', 'default', 98, '2022-09-23 17:22:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(450, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:47', 'en', 'default', 99, '2022-09-23 17:22:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(451, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:47', 'fr', 'default', 99, '2022-09-23 17:22:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(452, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:47', 'nl', 'default', 99, '2022-09-23 17:22:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(453, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:47', 'es', 'default', 99, '2022-09-23 17:22:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(454, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:48', 'en', 'default', 100, '2022-09-23 17:22:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(455, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:48', 'fr', 'default', 100, '2022-09-23 17:22:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(456, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:48', 'nl', 'default', 100, '2022-09-23 17:22:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(457, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:22:48', 'es', 'default', 100, '2022-09-23 17:22:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(458, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:25', 'en', 'default', 101, '2022-09-23 17:23:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(459, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:25', 'fr', 'default', 101, '2022-09-23 17:23:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(460, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:25', 'nl', 'default', 101, '2022-09-23 17:23:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(461, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:25', 'es', 'default', 101, '2022-09-23 17:23:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(462, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:26', 'en', 'default', 102, '2022-09-23 17:23:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(463, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:26', 'fr', 'default', 102, '2022-09-23 17:23:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(464, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:26', 'nl', 'default', 102, '2022-09-23 17:23:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(465, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:26', 'es', 'default', 102, '2022-09-23 17:23:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(466, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:28', 'en', 'default', 103, '2022-09-23 17:23:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(467, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:28', 'fr', 'default', 103, '2022-09-23 17:23:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(468, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:28', 'nl', 'default', 103, '2022-09-23 17:23:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(469, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:28', 'es', 'default', 103, '2022-09-23 17:23:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(470, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:29', 'en', 'default', 104, '2022-09-23 17:23:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(471, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:29', 'fr', 'default', 104, '2022-09-23 17:23:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(472, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:29', 'nl', 'default', 104, '2022-09-23 17:23:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(473, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:29', 'es', 'default', 104, '2022-09-23 17:23:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(474, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:30', 'en', 'default', 105, '2022-09-23 17:23:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(475, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:30', 'fr', 'default', 105, '2022-09-23 17:23:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(476, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:30', 'nl', 'default', 105, '2022-09-23 17:23:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(477, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:30', 'es', 'default', 105, '2022-09-23 17:23:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(478, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:31', 'en', 'default', 106, '2022-09-23 17:23:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(479, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:31', 'fr', 'default', 106, '2022-09-23 17:23:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(480, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:31', 'nl', 'default', 106, '2022-09-23 17:23:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(481, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:31', 'es', 'default', 106, '2022-09-23 17:23:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(482, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:32', 'en', 'default', 107, '2022-09-23 17:23:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(483, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:32', 'fr', 'default', 107, '2022-09-23 17:23:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(484, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:32', 'nl', 'default', 107, '2022-09-23 17:23:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(485, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:32', 'es', 'default', 107, '2022-09-23 17:23:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(486, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:34', 'en', 'default', 108, '2022-09-23 17:23:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(487, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:34', 'fr', 'default', 108, '2022-09-23 17:23:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(488, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:34', 'nl', 'default', 108, '2022-09-23 17:23:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(489, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:34', 'es', 'default', 108, '2022-09-23 17:23:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(490, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:35', 'en', 'default', 109, '2022-09-23 17:23:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(491, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:35', 'fr', 'default', 109, '2022-09-23 17:23:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(492, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:35', 'nl', 'default', 109, '2022-09-23 17:23:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(493, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:35', 'es', 'default', 109, '2022-09-23 17:23:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(494, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:36', 'en', 'default', 110, '2022-09-23 17:23:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(495, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:36', 'fr', 'default', 110, '2022-09-23 17:23:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(496, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:36', 'nl', 'default', 110, '2022-09-23 17:23:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(497, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:23:36', 'es', 'default', 110, '2022-09-23 17:23:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(498, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:01', 'en', 'default', 111, '2022-09-23 17:24:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(499, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:01', 'fr', 'default', 111, '2022-09-23 17:24:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(500, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:01', 'nl', 'default', 111, '2022-09-23 17:24:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(501, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:01', 'es', 'default', 111, '2022-09-23 17:24:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(502, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:02', 'en', 'default', 112, '2022-09-23 17:24:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(503, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:02', 'fr', 'default', 112, '2022-09-23 17:24:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(504, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:02', 'nl', 'default', 112, '2022-09-23 17:24:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(505, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:02', 'es', 'default', 112, '2022-09-23 17:24:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(506, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:03', 'en', 'default', 113, '2022-09-23 17:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(507, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:03', 'fr', 'default', 113, '2022-09-23 17:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(508, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:03', 'nl', 'default', 113, '2022-09-23 17:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(509, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:03', 'es', 'default', 113, '2022-09-23 17:24:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(510, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:05', 'en', 'default', 114, '2022-09-23 17:24:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(511, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:05', 'fr', 'default', 114, '2022-09-23 17:24:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(512, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:05', 'nl', 'default', 114, '2022-09-23 17:24:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(513, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:05', 'es', 'default', 114, '2022-09-23 17:24:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(514, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:06', 'en', 'default', 115, '2022-09-23 17:24:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(515, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:06', 'fr', 'default', 115, '2022-09-23 17:24:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(516, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:06', 'nl', 'default', 115, '2022-09-23 17:24:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(517, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:06', 'es', 'default', 115, '2022-09-23 17:24:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(518, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:07', 'en', 'default', 116, '2022-09-23 17:24:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(519, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:07', 'fr', 'default', 116, '2022-09-23 17:24:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(520, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:07', 'nl', 'default', 116, '2022-09-23 17:24:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(521, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:07', 'es', 'default', 116, '2022-09-23 17:24:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(522, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:08', 'en', 'default', 117, '2022-09-23 17:24:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(523, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:08', 'fr', 'default', 117, '2022-09-23 17:24:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(524, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:08', 'nl', 'default', 117, '2022-09-23 17:24:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(525, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:08', 'es', 'default', 117, '2022-09-23 17:24:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(526, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:09', 'en', 'default', 118, '2022-09-23 17:24:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(527, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:09', 'fr', 'default', 118, '2022-09-23 17:24:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(528, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:09', 'nl', 'default', 118, '2022-09-23 17:24:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(529, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:09', 'es', 'default', 118, '2022-09-23 17:24:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(530, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:10', 'en', 'default', 119, '2022-09-23 17:24:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(531, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:10', 'fr', 'default', 119, '2022-09-23 17:24:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(532, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:10', 'nl', 'default', 119, '2022-09-23 17:24:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(533, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:10', 'es', 'default', 119, '2022-09-23 17:24:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(534, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:12', 'en', 'default', 120, '2022-09-23 17:24:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(535, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:12', 'fr', 'default', 120, '2022-09-23 17:24:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(536, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:12', 'nl', 'default', 120, '2022-09-23 17:24:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(537, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:12', 'es', 'default', 120, '2022-09-23 17:24:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(538, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:36', 'en', 'default', 121, '2022-09-23 17:24:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(539, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:36', 'fr', 'default', 121, '2022-09-23 17:24:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(540, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:36', 'nl', 'default', 121, '2022-09-23 17:24:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(541, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:36', 'es', 'default', 121, '2022-09-23 17:24:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(542, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:37', 'en', 'default', 122, '2022-09-23 17:24:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(543, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:37', 'fr', 'default', 122, '2022-09-23 17:24:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(544, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:37', 'nl', 'default', 122, '2022-09-23 17:24:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(545, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:37', 'es', 'default', 122, '2022-09-23 17:24:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(546, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:38', 'en', 'default', 123, '2022-09-23 17:24:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(547, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:38', 'fr', 'default', 123, '2022-09-23 17:24:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(548, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:38', 'nl', 'default', 123, '2022-09-23 17:24:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(549, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:38', 'es', 'default', 123, '2022-09-23 17:24:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(550, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:39', 'en', 'default', 124, '2022-09-23 17:24:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(551, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:39', 'fr', 'default', 124, '2022-09-23 17:24:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(552, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:39', 'nl', 'default', 124, '2022-09-23 17:24:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(553, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:39', 'es', 'default', 124, '2022-09-23 17:24:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(554, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:40', 'en', 'default', 125, '2022-09-23 17:24:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(555, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:40', 'fr', 'default', 125, '2022-09-23 17:24:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(556, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:40', 'nl', 'default', 125, '2022-09-23 17:24:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(557, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:40', 'es', 'default', 125, '2022-09-23 17:24:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(558, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:42', 'en', 'default', 126, '2022-09-23 17:24:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(559, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:42', 'fr', 'default', 126, '2022-09-23 17:24:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(560, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:42', 'nl', 'default', 126, '2022-09-23 17:24:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(561, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:42', 'es', 'default', 126, '2022-09-23 17:24:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(562, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:43', 'en', 'default', 127, '2022-09-23 17:24:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(563, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:43', 'fr', 'default', 127, '2022-09-23 17:24:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(564, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:43', 'nl', 'default', 127, '2022-09-23 17:24:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(565, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:43', 'es', 'default', 127, '2022-09-23 17:24:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(566, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:44', 'en', 'default', 128, '2022-09-23 17:24:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(567, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:44', 'fr', 'default', 128, '2022-09-23 17:24:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(568, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:44', 'nl', 'default', 128, '2022-09-23 17:24:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(569, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:44', 'es', 'default', 128, '2022-09-23 17:24:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(570, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:46', 'en', 'default', 129, '2022-09-23 17:24:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(571, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:46', 'fr', 'default', 129, '2022-09-23 17:24:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(572, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:46', 'nl', 'default', 129, '2022-09-23 17:24:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(573, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:46', 'es', 'default', 129, '2022-09-23 17:24:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(574, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:47', 'en', 'default', 130, '2022-09-23 17:24:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(575, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:47', 'fr', 'default', 130, '2022-09-23 17:24:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(576, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:47', 'nl', 'default', 130, '2022-09-23 17:24:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(577, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:24:47', 'es', 'default', 130, '2022-09-23 17:24:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(578, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:16', 'en', 'default', 131, '2022-09-23 17:25:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(579, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:16', 'fr', 'default', 131, '2022-09-23 17:25:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(580, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:16', 'nl', 'default', 131, '2022-09-23 17:25:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(581, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:16', 'es', 'default', 131, '2022-09-23 17:25:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(582, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:18', 'en', 'default', 132, '2022-09-23 17:25:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(583, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:18', 'fr', 'default', 132, '2022-09-23 17:25:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(584, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:18', 'nl', 'default', 132, '2022-09-23 17:25:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(585, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:18', 'es', 'default', 132, '2022-09-23 17:25:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(586, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:20', 'en', 'default', 133, '2022-09-23 17:25:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(587, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:20', 'fr', 'default', 133, '2022-09-23 17:25:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(588, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:20', 'nl', 'default', 133, '2022-09-23 17:25:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(589, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:20', 'es', 'default', 133, '2022-09-23 17:25:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(590, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:21', 'en', 'default', 134, '2022-09-23 17:25:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(591, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:21', 'fr', 'default', 134, '2022-09-23 17:25:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(592, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:21', 'nl', 'default', 134, '2022-09-23 17:25:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(593, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:21', 'es', 'default', 134, '2022-09-23 17:25:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(594, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:22', 'en', 'default', 135, '2022-09-23 17:25:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(595, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:22', 'fr', 'default', 135, '2022-09-23 17:25:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(596, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:22', 'nl', 'default', 135, '2022-09-23 17:25:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(597, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:22', 'es', 'default', 135, '2022-09-23 17:25:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(598, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:23', 'en', 'default', 136, '2022-09-23 17:25:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(599, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:23', 'fr', 'default', 136, '2022-09-23 17:25:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(600, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:23', 'nl', 'default', 136, '2022-09-23 17:25:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(601, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:23', 'es', 'default', 136, '2022-09-23 17:25:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(602, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:25', 'en', 'default', 137, '2022-09-23 17:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(603, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:25', 'fr', 'default', 137, '2022-09-23 17:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(604, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:25', 'nl', 'default', 137, '2022-09-23 17:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(605, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:25', 'es', 'default', 137, '2022-09-23 17:25:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(606, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:26', 'en', 'default', 138, '2022-09-23 17:25:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(607, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:26', 'fr', 'default', 138, '2022-09-23 17:25:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(608, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:26', 'nl', 'default', 138, '2022-09-23 17:25:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(609, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:26', 'es', 'default', 138, '2022-09-23 17:25:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(610, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:27', 'en', 'default', 139, '2022-09-23 17:25:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(611, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:27', 'fr', 'default', 139, '2022-09-23 17:25:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(612, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:27', 'nl', 'default', 139, '2022-09-23 17:25:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(613, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:27', 'es', 'default', 139, '2022-09-23 17:25:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(614, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:28', 'en', 'default', 140, '2022-09-23 17:25:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(615, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:28', 'fr', 'default', 140, '2022-09-23 17:25:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(616, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:28', 'nl', 'default', 140, '2022-09-23 17:25:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(617, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:25:28', 'es', 'default', 140, '2022-09-23 17:25:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(618, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:03', 'en', 'default', 141, '2022-09-23 17:26:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(619, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:03', 'fr', 'default', 141, '2022-09-23 17:26:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(620, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:03', 'nl', 'default', 141, '2022-09-23 17:26:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(621, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:03', 'es', 'default', 141, '2022-09-23 17:26:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(622, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:04', 'en', 'default', 142, '2022-09-23 17:26:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(623, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:04', 'fr', 'default', 142, '2022-09-23 17:26:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(624, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:04', 'nl', 'default', 142, '2022-09-23 17:26:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(625, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:04', 'es', 'default', 142, '2022-09-23 17:26:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(626, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:05', 'en', 'default', 143, '2022-09-23 17:26:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(627, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:05', 'fr', 'default', 143, '2022-09-23 17:26:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(628, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:05', 'nl', 'default', 143, '2022-09-23 17:26:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(629, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:05', 'es', 'default', 143, '2022-09-23 17:26:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(630, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:06', 'en', 'default', 144, '2022-09-23 17:26:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(631, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:06', 'fr', 'default', 144, '2022-09-23 17:26:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(632, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:06', 'nl', 'default', 144, '2022-09-23 17:26:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(633, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:06', 'es', 'default', 144, '2022-09-23 17:26:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(634, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:08', 'en', 'default', 145, '2022-09-23 17:26:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(635, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:08', 'fr', 'default', 145, '2022-09-23 17:26:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(636, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:08', 'nl', 'default', 145, '2022-09-23 17:26:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(637, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:08', 'es', 'default', 145, '2022-09-23 17:26:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(638, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:09', 'en', 'default', 146, '2022-09-23 17:26:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(639, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:09', 'fr', 'default', 146, '2022-09-23 17:26:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(640, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:09', 'nl', 'default', 146, '2022-09-23 17:26:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(641, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:09', 'es', 'default', 146, '2022-09-23 17:26:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(642, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:10', 'en', 'default', 147, '2022-09-23 17:26:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(643, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:10', 'fr', 'default', 147, '2022-09-23 17:26:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(644, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:10', 'nl', 'default', 147, '2022-09-23 17:26:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(645, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:10', 'es', 'default', 147, '2022-09-23 17:26:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(646, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:12', 'en', 'default', 148, '2022-09-23 17:26:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(647, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:12', 'fr', 'default', 148, '2022-09-23 17:26:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(648, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:12', 'nl', 'default', 148, '2022-09-23 17:26:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(649, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:12', 'es', 'default', 148, '2022-09-23 17:26:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(650, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:13', 'en', 'default', 149, '2022-09-23 17:26:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(651, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:13', 'fr', 'default', 149, '2022-09-23 17:26:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(652, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:13', 'nl', 'default', 149, '2022-09-23 17:26:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(653, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:13', 'es', 'default', 149, '2022-09-23 17:26:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(654, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:14', 'en', 'default', 150, '2022-09-23 17:26:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(655, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:14', 'fr', 'default', 150, '2022-09-23 17:26:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(656, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:14', 'nl', 'default', 150, '2022-09-23 17:26:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(657, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:14', 'es', 'default', 150, '2022-09-23 17:26:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(658, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:48', 'en', 'default', 151, '2022-09-23 17:26:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(659, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:48', 'fr', 'default', 151, '2022-09-23 17:26:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(660, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:48', 'nl', 'default', 151, '2022-09-23 17:26:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(661, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:48', 'es', 'default', 151, '2022-09-23 17:26:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(662, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:49', 'en', 'default', 152, '2022-09-23 17:26:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(663, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:49', 'fr', 'default', 152, '2022-09-23 17:26:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(664, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:49', 'nl', 'default', 152, '2022-09-23 17:26:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(665, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:49', 'es', 'default', 152, '2022-09-23 17:26:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(666, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:51', 'en', 'default', 153, '2022-09-23 17:26:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(667, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:51', 'fr', 'default', 153, '2022-09-23 17:26:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(668, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:51', 'nl', 'default', 153, '2022-09-23 17:26:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(669, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:51', 'es', 'default', 153, '2022-09-23 17:26:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(670, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:52', 'en', 'default', 154, '2022-09-23 17:26:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(671, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:52', 'fr', 'default', 154, '2022-09-23 17:26:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(672, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:52', 'nl', 'default', 154, '2022-09-23 17:26:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(673, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:52', 'es', 'default', 154, '2022-09-23 17:26:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(674, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:53', 'en', 'default', 155, '2022-09-23 17:26:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(675, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:53', 'fr', 'default', 155, '2022-09-23 17:26:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(676, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:53', 'nl', 'default', 155, '2022-09-23 17:26:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(677, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:53', 'es', 'default', 155, '2022-09-23 17:26:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(678, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:54', 'en', 'default', 156, '2022-09-23 17:26:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(679, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:54', 'fr', 'default', 156, '2022-09-23 17:26:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(680, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:54', 'nl', 'default', 156, '2022-09-23 17:26:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(681, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:54', 'es', 'default', 156, '2022-09-23 17:26:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(682, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:56', 'en', 'default', 157, '2022-09-23 17:26:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(683, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:56', 'fr', 'default', 157, '2022-09-23 17:26:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(684, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:56', 'nl', 'default', 157, '2022-09-23 17:26:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(685, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:56', 'es', 'default', 157, '2022-09-23 17:26:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(686, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:57', 'en', 'default', 158, '2022-09-23 17:26:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(687, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:57', 'fr', 'default', 158, '2022-09-23 17:26:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(688, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:57', 'nl', 'default', 158, '2022-09-23 17:26:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(689, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:57', 'es', 'default', 158, '2022-09-23 17:26:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(690, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:58', 'en', 'default', 159, '2022-09-23 17:26:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(691, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:58', 'fr', 'default', 159, '2022-09-23 17:26:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(692, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:58', 'nl', 'default', 159, '2022-09-23 17:26:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(693, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:58', 'es', 'default', 159, '2022-09-23 17:26:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(694, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:59', 'en', 'default', 160, '2022-09-23 17:26:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(695, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:59', 'fr', 'default', 160, '2022-09-23 17:26:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(696, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:59', 'nl', 'default', 160, '2022-09-23 17:26:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(697, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:26:59', 'es', 'default', 160, '2022-09-23 17:26:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(698, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:33', 'en', 'default', 161, '2022-09-23 17:27:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(699, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:33', 'fr', 'default', 161, '2022-09-23 17:27:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(700, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:33', 'nl', 'default', 161, '2022-09-23 17:27:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(701, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:33', 'es', 'default', 161, '2022-09-23 17:27:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(702, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:34', 'en', 'default', 162, '2022-09-23 17:27:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(703, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:34', 'fr', 'default', 162, '2022-09-23 17:27:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(704, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:34', 'nl', 'default', 162, '2022-09-23 17:27:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(705, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:34', 'es', 'default', 162, '2022-09-23 17:27:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(706, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:36', 'en', 'default', 163, '2022-09-23 17:27:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(707, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:36', 'fr', 'default', 163, '2022-09-23 17:27:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(708, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:36', 'nl', 'default', 163, '2022-09-23 17:27:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(709, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:36', 'es', 'default', 163, '2022-09-23 17:27:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(710, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:37', 'en', 'default', 164, '2022-09-23 17:27:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(711, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:37', 'fr', 'default', 164, '2022-09-23 17:27:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(712, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:37', 'nl', 'default', 164, '2022-09-23 17:27:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(713, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:37', 'es', 'default', 164, '2022-09-23 17:27:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(714, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:38', 'en', 'default', 165, '2022-09-23 17:27:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(715, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:38', 'fr', 'default', 165, '2022-09-23 17:27:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(716, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:38', 'nl', 'default', 165, '2022-09-23 17:27:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(717, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:38', 'es', 'default', 165, '2022-09-23 17:27:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(718, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:39', 'en', 'default', 166, '2022-09-23 17:27:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(719, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:39', 'fr', 'default', 166, '2022-09-23 17:27:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(720, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:39', 'nl', 'default', 166, '2022-09-23 17:27:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(721, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:39', 'es', 'default', 166, '2022-09-23 17:27:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(722, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:40', 'en', 'default', 167, '2022-09-23 17:27:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(723, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:40', 'fr', 'default', 167, '2022-09-23 17:27:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(724, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:40', 'nl', 'default', 167, '2022-09-23 17:27:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(725, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:40', 'es', 'default', 167, '2022-09-23 17:27:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(726, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:42', 'en', 'default', 168, '2022-09-23 17:27:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(727, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:42', 'fr', 'default', 168, '2022-09-23 17:27:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(728, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:42', 'nl', 'default', 168, '2022-09-23 17:27:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(729, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:42', 'es', 'default', 168, '2022-09-23 17:27:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(730, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:43', 'en', 'default', 169, '2022-09-23 17:27:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(731, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:43', 'fr', 'default', 169, '2022-09-23 17:27:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(732, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:43', 'nl', 'default', 169, '2022-09-23 17:27:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(733, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:43', 'es', 'default', 169, '2022-09-23 17:27:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(734, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:44', 'en', 'default', 170, '2022-09-23 17:27:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(735, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:44', 'fr', 'default', 170, '2022-09-23 17:27:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(736, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:44', 'nl', 'default', 170, '2022-09-23 17:27:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(737, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:27:44', 'es', 'default', 170, '2022-09-23 17:27:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(738, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:18', 'en', 'default', 171, '2022-09-23 17:28:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(739, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:18', 'fr', 'default', 171, '2022-09-23 17:28:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(740, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:18', 'nl', 'default', 171, '2022-09-23 17:28:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(741, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:18', 'es', 'default', 171, '2022-09-23 17:28:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(742, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:19', 'en', 'default', 172, '2022-09-23 17:28:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(743, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:19', 'fr', 'default', 172, '2022-09-23 17:28:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(744, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:19', 'nl', 'default', 172, '2022-09-23 17:28:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(745, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:19', 'es', 'default', 172, '2022-09-23 17:28:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(746, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:20', 'en', 'default', 173, '2022-09-23 17:28:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(747, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:20', 'fr', 'default', 173, '2022-09-23 17:28:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(748, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:20', 'nl', 'default', 173, '2022-09-23 17:28:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(749, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:20', 'es', 'default', 173, '2022-09-23 17:28:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(750, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:21', 'en', 'default', 174, '2022-09-23 17:28:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(751, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:21', 'fr', 'default', 174, '2022-09-23 17:28:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(752, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:21', 'nl', 'default', 174, '2022-09-23 17:28:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(753, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:21', 'es', 'default', 174, '2022-09-23 17:28:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(754, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:22', 'en', 'default', 175, '2022-09-23 17:28:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(755, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:22', 'fr', 'default', 175, '2022-09-23 17:28:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(756, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:22', 'nl', 'default', 175, '2022-09-23 17:28:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(757, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:22', 'es', 'default', 175, '2022-09-23 17:28:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(758, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:24', 'en', 'default', 176, '2022-09-23 17:28:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(759, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:24', 'fr', 'default', 176, '2022-09-23 17:28:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(760, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:24', 'nl', 'default', 176, '2022-09-23 17:28:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(761, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:24', 'es', 'default', 176, '2022-09-23 17:28:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(762, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:25', 'en', 'default', 177, '2022-09-23 17:28:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(763, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:25', 'fr', 'default', 177, '2022-09-23 17:28:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(764, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:25', 'nl', 'default', 177, '2022-09-23 17:28:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(765, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:25', 'es', 'default', 177, '2022-09-23 17:28:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(766, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:26', 'en', 'default', 178, '2022-09-23 17:28:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(767, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:26', 'fr', 'default', 178, '2022-09-23 17:28:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(768, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:26', 'nl', 'default', 178, '2022-09-23 17:28:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(769, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:26', 'es', 'default', 178, '2022-09-23 17:28:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(770, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:27', 'en', 'default', 179, '2022-09-23 17:28:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(771, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:27', 'fr', 'default', 179, '2022-09-23 17:28:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(772, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:27', 'nl', 'default', 179, '2022-09-23 17:28:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(773, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:27', 'es', 'default', 179, '2022-09-23 17:28:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(774, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:29', 'en', 'default', 180, '2022-09-23 17:28:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(775, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:29', 'fr', 'default', 180, '2022-09-23 17:28:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(776, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:29', 'nl', 'default', 180, '2022-09-23 17:28:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(777, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:28:29', 'es', 'default', 180, '2022-09-23 17:28:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(778, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:04', 'en', 'default', 181, '2022-09-23 17:29:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(779, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:04', 'fr', 'default', 181, '2022-09-23 17:29:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(780, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:04', 'nl', 'default', 181, '2022-09-23 17:29:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(781, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:04', 'es', 'default', 181, '2022-09-23 17:29:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(782, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:05', 'en', 'default', 182, '2022-09-23 17:29:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(783, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:05', 'fr', 'default', 182, '2022-09-23 17:29:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(784, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:05', 'nl', 'default', 182, '2022-09-23 17:29:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(785, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:05', 'es', 'default', 182, '2022-09-23 17:29:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(786, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:07', 'en', 'default', 183, '2022-09-23 17:29:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(787, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:07', 'fr', 'default', 183, '2022-09-23 17:29:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(788, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:07', 'nl', 'default', 183, '2022-09-23 17:29:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(789, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:07', 'es', 'default', 183, '2022-09-23 17:29:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(790, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:08', 'en', 'default', 184, '2022-09-23 17:29:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(791, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:08', 'fr', 'default', 184, '2022-09-23 17:29:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(792, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:08', 'nl', 'default', 184, '2022-09-23 17:29:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(793, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:08', 'es', 'default', 184, '2022-09-23 17:29:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(794, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:09', 'en', 'default', 185, '2022-09-23 17:29:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(795, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:09', 'fr', 'default', 185, '2022-09-23 17:29:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(796, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:09', 'nl', 'default', 185, '2022-09-23 17:29:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(797, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:09', 'es', 'default', 185, '2022-09-23 17:29:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(798, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:10', 'en', 'default', 186, '2022-09-23 17:29:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(799, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:10', 'fr', 'default', 186, '2022-09-23 17:29:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(800, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:10', 'nl', 'default', 186, '2022-09-23 17:29:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(801, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:10', 'es', 'default', 186, '2022-09-23 17:29:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(802, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:11', 'en', 'default', 187, '2022-09-23 17:29:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(803, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:11', 'fr', 'default', 187, '2022-09-23 17:29:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(804, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:11', 'nl', 'default', 187, '2022-09-23 17:29:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(805, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:11', 'es', 'default', 187, '2022-09-23 17:29:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(806, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:13', 'en', 'default', 188, '2022-09-23 17:29:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(807, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:13', 'fr', 'default', 188, '2022-09-23 17:29:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(808, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:13', 'nl', 'default', 188, '2022-09-23 17:29:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(809, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:13', 'es', 'default', 188, '2022-09-23 17:29:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(810, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:14', 'en', 'default', 189, '2022-09-23 17:29:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(811, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:14', 'fr', 'default', 189, '2022-09-23 17:29:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(812, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:14', 'nl', 'default', 189, '2022-09-23 17:29:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(813, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:14', 'es', 'default', 189, '2022-09-23 17:29:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(814, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:49', 'en', 'default', 190, '2022-09-23 17:29:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(815, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:49', 'fr', 'default', 190, '2022-09-23 17:29:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(816, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:49', 'nl', 'default', 190, '2022-09-23 17:29:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(817, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:49', 'es', 'default', 190, '2022-09-23 17:29:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(818, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:51', 'en', 'default', 191, '2022-09-23 17:29:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(819, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:51', 'fr', 'default', 191, '2022-09-23 17:29:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(820, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:51', 'nl', 'default', 191, '2022-09-23 17:29:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(821, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:51', 'es', 'default', 191, '2022-09-23 17:29:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(822, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:52', 'en', 'default', 192, '2022-09-23 17:29:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(823, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:52', 'fr', 'default', 192, '2022-09-23 17:29:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(824, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:52', 'nl', 'default', 192, '2022-09-23 17:29:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(825, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:52', 'es', 'default', 192, '2022-09-23 17:29:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(826, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:53', 'en', 'default', 193, '2022-09-23 17:29:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(827, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:53', 'fr', 'default', 193, '2022-09-23 17:29:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(828, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:53', 'nl', 'default', 193, '2022-09-23 17:29:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(829, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:53', 'es', 'default', 193, '2022-09-23 17:29:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(830, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:54', 'en', 'default', 194, '2022-09-23 17:29:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(831, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:54', 'fr', 'default', 194, '2022-09-23 17:29:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(832, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:54', 'nl', 'default', 194, '2022-09-23 17:29:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(833, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:54', 'es', 'default', 194, '2022-09-23 17:29:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(834, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:56', 'en', 'default', 195, '2022-09-23 17:29:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(835, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:56', 'fr', 'default', 195, '2022-09-23 17:29:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(836, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:56', 'nl', 'default', 195, '2022-09-23 17:29:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(837, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:56', 'es', 'default', 195, '2022-09-23 17:29:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(838, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:57', 'en', 'default', 196, '2022-09-23 17:29:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(839, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:57', 'fr', 'default', 196, '2022-09-23 17:29:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(840, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:57', 'nl', 'default', 196, '2022-09-23 17:29:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(841, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:57', 'es', 'default', 196, '2022-09-23 17:29:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(842, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:58', 'en', 'default', 197, '2022-09-23 17:29:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(843, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:58', 'fr', 'default', 197, '2022-09-23 17:29:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(844, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:58', 'nl', 'default', 197, '2022-09-23 17:29:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(845, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:58', 'es', 'default', 197, '2022-09-23 17:29:58', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(846, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:59', 'en', 'default', 198, '2022-09-23 17:29:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(847, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:59', 'fr', 'default', 198, '2022-09-23 17:29:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(848, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:59', 'nl', 'default', 198, '2022-09-23 17:29:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(849, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:29:59', 'es', 'default', 198, '2022-09-23 17:29:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(850, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:00', 'en', 'default', 199, '2022-09-23 17:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(851, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:00', 'fr', 'default', 199, '2022-09-23 17:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(852, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:00', 'nl', 'default', 199, '2022-09-23 17:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(853, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:00', 'es', 'default', 199, '2022-09-23 17:30:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(854, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:23', 'en', 'default', 200, '2022-09-23 17:30:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(855, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:23', 'fr', 'default', 200, '2022-09-23 17:30:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(856, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:23', 'nl', 'default', 200, '2022-09-23 17:30:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(857, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:23', 'es', 'default', 200, '2022-09-23 17:30:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(858, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:24', 'en', 'default', 201, '2022-09-23 17:30:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(859, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:24', 'fr', 'default', 201, '2022-09-23 17:30:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(860, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:24', 'nl', 'default', 201, '2022-09-23 17:30:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(861, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:24', 'es', 'default', 201, '2022-09-23 17:30:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(862, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:25', 'en', 'default', 202, '2022-09-23 17:30:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(863, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:25', 'fr', 'default', 202, '2022-09-23 17:30:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(864, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:25', 'nl', 'default', 202, '2022-09-23 17:30:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(865, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:25', 'es', 'default', 202, '2022-09-23 17:30:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(866, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:27', 'en', 'default', 203, '2022-09-23 17:30:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(867, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:27', 'fr', 'default', 203, '2022-09-23 17:30:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(868, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:27', 'nl', 'default', 203, '2022-09-23 17:30:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(869, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:27', 'es', 'default', 203, '2022-09-23 17:30:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(870, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:28', 'en', 'default', 204, '2022-09-23 17:30:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(871, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:28', 'fr', 'default', 204, '2022-09-23 17:30:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(872, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:28', 'nl', 'default', 204, '2022-09-23 17:30:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(873, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:28', 'es', 'default', 204, '2022-09-23 17:30:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(874, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:29', 'en', 'default', 205, '2022-09-23 17:30:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(875, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:29', 'fr', 'default', 205, '2022-09-23 17:30:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(876, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:29', 'nl', 'default', 205, '2022-09-23 17:30:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(877, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:29', 'es', 'default', 205, '2022-09-23 17:30:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(878, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:30', 'en', 'default', 206, '2022-09-23 17:30:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(879, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:30', 'fr', 'default', 206, '2022-09-23 17:30:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(880, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:30', 'nl', 'default', 206, '2022-09-23 17:30:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(881, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:30', 'es', 'default', 206, '2022-09-23 17:30:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(882, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:31', 'en', 'default', 207, '2022-09-23 17:30:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(883, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:31', 'fr', 'default', 207, '2022-09-23 17:30:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(884, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:31', 'nl', 'default', 207, '2022-09-23 17:30:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(885, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:31', 'es', 'default', 207, '2022-09-23 17:30:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(886, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:33', 'en', 'default', 208, '2022-09-23 17:30:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(887, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:33', 'fr', 'default', 208, '2022-09-23 17:30:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(888, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:33', 'nl', 'default', 208, '2022-09-23 17:30:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(889, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:33', 'es', 'default', 208, '2022-09-23 17:30:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(890, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:34', 'en', 'default', 209, '2022-09-23 17:30:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(891, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:34', 'fr', 'default', 209, '2022-09-23 17:30:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(892, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:34', 'nl', 'default', 209, '2022-09-23 17:30:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(893, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:30:34', 'es', 'default', 209, '2022-09-23 17:30:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(894, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:01', 'en', 'default', 210, '2022-09-23 17:31:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(895, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:01', 'fr', 'default', 210, '2022-09-23 17:31:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(896, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:01', 'nl', 'default', 210, '2022-09-23 17:31:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(897, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:01', 'es', 'default', 210, '2022-09-23 17:31:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(898, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:03', 'en', 'default', 211, '2022-09-23 17:31:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(899, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:03', 'fr', 'default', 211, '2022-09-23 17:31:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(900, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:03', 'nl', 'default', 211, '2022-09-23 17:31:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(901, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:03', 'es', 'default', 211, '2022-09-23 17:31:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(902, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:04', 'en', 'default', 212, '2022-09-23 17:31:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(903, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:04', 'fr', 'default', 212, '2022-09-23 17:31:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(904, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:04', 'nl', 'default', 212, '2022-09-23 17:31:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(905, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:04', 'es', 'default', 212, '2022-09-23 17:31:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(906, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:05', 'en', 'default', 213, '2022-09-23 17:31:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(907, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:05', 'fr', 'default', 213, '2022-09-23 17:31:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(908, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:05', 'nl', 'default', 213, '2022-09-23 17:31:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(909, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:05', 'es', 'default', 213, '2022-09-23 17:31:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(910, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:06', 'en', 'default', 214, '2022-09-23 17:31:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(911, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:06', 'fr', 'default', 214, '2022-09-23 17:31:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(912, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:06', 'nl', 'default', 214, '2022-09-23 17:31:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(913, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:06', 'es', 'default', 214, '2022-09-23 17:31:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(914, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:07', 'en', 'default', 215, '2022-09-23 17:31:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(915, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:07', 'fr', 'default', 215, '2022-09-23 17:31:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(916, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:07', 'nl', 'default', 215, '2022-09-23 17:31:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(917, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:07', 'es', 'default', 215, '2022-09-23 17:31:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(918, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:09', 'en', 'default', 216, '2022-09-23 17:31:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(919, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:09', 'fr', 'default', 216, '2022-09-23 17:31:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(920, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:09', 'nl', 'default', 216, '2022-09-23 17:31:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(921, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:09', 'es', 'default', 216, '2022-09-23 17:31:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(922, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:10', 'en', 'default', 217, '2022-09-23 17:31:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(923, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:10', 'fr', 'default', 217, '2022-09-23 17:31:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(924, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:10', 'nl', 'default', 217, '2022-09-23 17:31:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(925, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:10', 'es', 'default', 217, '2022-09-23 17:31:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(926, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:11', 'en', 'default', 218, '2022-09-23 17:31:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(927, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:11', 'fr', 'default', 218, '2022-09-23 17:31:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(928, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:11', 'nl', 'default', 218, '2022-09-23 17:31:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(929, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:11', 'es', 'default', 218, '2022-09-23 17:31:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(930, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:12', 'en', 'default', 219, '2022-09-23 17:31:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(931, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:12', 'fr', 'default', 219, '2022-09-23 17:31:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(932, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:12', 'nl', 'default', 219, '2022-09-23 17:31:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(933, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:12', 'es', 'default', 219, '2022-09-23 17:31:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(934, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:45', 'en', 'default', 220, '2022-09-23 17:31:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(935, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:45', 'fr', 'default', 220, '2022-09-23 17:31:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(936, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:45', 'nl', 'default', 220, '2022-09-23 17:31:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(937, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:45', 'es', 'default', 220, '2022-09-23 17:31:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(938, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:47', 'en', 'default', 221, '2022-09-23 17:31:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(939, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:47', 'fr', 'default', 221, '2022-09-23 17:31:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(940, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:47', 'nl', 'default', 221, '2022-09-23 17:31:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(941, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:47', 'es', 'default', 221, '2022-09-23 17:31:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(942, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:48', 'en', 'default', 222, '2022-09-23 17:31:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(943, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:48', 'fr', 'default', 222, '2022-09-23 17:31:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(944, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:48', 'nl', 'default', 222, '2022-09-23 17:31:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(945, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:48', 'es', 'default', 222, '2022-09-23 17:31:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(946, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:49', 'en', 'default', 223, '2022-09-23 17:31:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(947, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:49', 'fr', 'default', 223, '2022-09-23 17:31:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(948, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:49', 'nl', 'default', 223, '2022-09-23 17:31:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(949, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:49', 'es', 'default', 223, '2022-09-23 17:31:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(950, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:50', 'en', 'default', 224, '2022-09-23 17:31:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(951, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:50', 'fr', 'default', 224, '2022-09-23 17:31:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(952, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:50', 'nl', 'default', 224, '2022-09-23 17:31:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(953, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:50', 'es', 'default', 224, '2022-09-23 17:31:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(954, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:52', 'en', 'default', 225, '2022-09-23 17:31:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(955, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:52', 'fr', 'default', 225, '2022-09-23 17:31:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(956, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:52', 'nl', 'default', 225, '2022-09-23 17:31:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(957, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:52', 'es', 'default', 225, '2022-09-23 17:31:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(958, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:53', 'en', 'default', 226, '2022-09-23 17:31:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(959, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:53', 'fr', 'default', 226, '2022-09-23 17:31:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(960, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:53', 'nl', 'default', 226, '2022-09-23 17:31:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(961, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:53', 'es', 'default', 226, '2022-09-23 17:31:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(962, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:54', 'en', 'default', 227, '2022-09-23 17:31:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(963, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:54', 'fr', 'default', 227, '2022-09-23 17:31:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(964, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:54', 'nl', 'default', 227, '2022-09-23 17:31:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(965, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:54', 'es', 'default', 227, '2022-09-23 17:31:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(966, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:55', 'en', 'default', 228, '2022-09-23 17:31:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(967, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:55', 'fr', 'default', 228, '2022-09-23 17:31:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(968, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:55', 'nl', 'default', 228, '2022-09-23 17:31:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(969, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:55', 'es', 'default', 228, '2022-09-23 17:31:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(970, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:57', 'en', 'default', 229, '2022-09-23 17:31:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(971, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:57', 'fr', 'default', 229, '2022-09-23 17:31:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(972, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:57', 'nl', 'default', 229, '2022-09-23 17:31:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(973, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:31:57', 'es', 'default', 229, '2022-09-23 17:31:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(974, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:31', 'en', 'default', 230, '2022-09-23 17:32:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(975, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:31', 'fr', 'default', 230, '2022-09-23 17:32:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(976, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:31', 'nl', 'default', 230, '2022-09-23 17:32:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(977, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:31', 'es', 'default', 230, '2022-09-23 17:32:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(978, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:33', 'en', 'default', 231, '2022-09-23 17:32:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(979, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:33', 'fr', 'default', 231, '2022-09-23 17:32:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(980, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:33', 'nl', 'default', 231, '2022-09-23 17:32:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(981, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:33', 'es', 'default', 231, '2022-09-23 17:32:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(982, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:34', 'en', 'default', 232, '2022-09-23 17:32:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(983, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:34', 'fr', 'default', 232, '2022-09-23 17:32:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(984, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:34', 'nl', 'default', 232, '2022-09-23 17:32:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(985, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:34', 'es', 'default', 232, '2022-09-23 17:32:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(986, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:35', 'en', 'default', 233, '2022-09-23 17:32:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(987, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:35', 'fr', 'default', 233, '2022-09-23 17:32:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(988, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:35', 'nl', 'default', 233, '2022-09-23 17:32:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(989, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:35', 'es', 'default', 233, '2022-09-23 17:32:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(990, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:36', 'en', 'default', 234, '2022-09-23 17:32:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(991, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:36', 'fr', 'default', 234, '2022-09-23 17:32:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(992, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:36', 'nl', 'default', 234, '2022-09-23 17:32:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(993, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:36', 'es', 'default', 234, '2022-09-23 17:32:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(994, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:37', 'en', 'default', 235, '2022-09-23 17:32:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(995, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:37', 'fr', 'default', 235, '2022-09-23 17:32:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(996, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:37', 'nl', 'default', 235, '2022-09-23 17:32:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(997, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:37', 'es', 'default', 235, '2022-09-23 17:32:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(998, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:39', 'en', 'default', 236, '2022-09-23 17:32:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(999, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:39', 'fr', 'default', 236, '2022-09-23 17:32:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1000, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:39', 'nl', 'default', 236, '2022-09-23 17:32:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1001, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:39', 'es', 'default', 236, '2022-09-23 17:32:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1002, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:40', 'en', 'default', 237, '2022-09-23 17:32:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1003, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:40', 'fr', 'default', 237, '2022-09-23 17:32:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1004, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:40', 'nl', 'default', 237, '2022-09-23 17:32:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1005, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:32:40', 'es', 'default', 237, '2022-09-23 17:32:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1006, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:17', 'en', 'default', 238, '2022-09-23 17:33:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1007, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:17', 'fr', 'default', 238, '2022-09-23 17:33:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1008, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:17', 'nl', 'default', 238, '2022-09-23 17:33:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1009, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:17', 'es', 'default', 238, '2022-09-23 17:33:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1010, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:18', 'en', 'default', 239, '2022-09-23 17:33:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1011, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:18', 'fr', 'default', 239, '2022-09-23 17:33:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1012, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:18', 'nl', 'default', 239, '2022-09-23 17:33:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1013, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:18', 'es', 'default', 239, '2022-09-23 17:33:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1014, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:19', 'en', 'default', 240, '2022-09-23 17:33:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1015, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:19', 'fr', 'default', 240, '2022-09-23 17:33:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1016, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:19', 'nl', 'default', 240, '2022-09-23 17:33:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1017, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:19', 'es', 'default', 240, '2022-09-23 17:33:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1018, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:20', 'en', 'default', 241, '2022-09-23 17:33:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1019, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:20', 'fr', 'default', 241, '2022-09-23 17:33:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1020, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:20', 'nl', 'default', 241, '2022-09-23 17:33:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1021, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:20', 'es', 'default', 241, '2022-09-23 17:33:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1022, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:22', 'en', 'default', 242, '2022-09-23 17:33:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1023, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:22', 'fr', 'default', 242, '2022-09-23 17:33:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1024, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:22', 'nl', 'default', 242, '2022-09-23 17:33:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1025, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:22', 'es', 'default', 242, '2022-09-23 17:33:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1026, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:23', 'en', 'default', 243, '2022-09-23 17:33:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1027, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:23', 'fr', 'default', 243, '2022-09-23 17:33:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1028, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:23', 'nl', 'default', 243, '2022-09-23 17:33:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1029, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:23', 'es', 'default', 243, '2022-09-23 17:33:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1030, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:24', 'en', 'default', 244, '2022-09-23 17:33:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1031, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:24', 'fr', 'default', 244, '2022-09-23 17:33:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1032, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:24', 'nl', 'default', 244, '2022-09-23 17:33:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1033, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:24', 'es', 'default', 244, '2022-09-23 17:33:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1034, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:25', 'en', 'default', 245, '2022-09-23 17:33:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1035, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:25', 'fr', 'default', 245, '2022-09-23 17:33:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1036, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:25', 'nl', 'default', 245, '2022-09-23 17:33:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1037, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:25', 'es', 'default', 245, '2022-09-23 17:33:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1038, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:26', 'en', 'default', 246, '2022-09-23 17:33:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1039, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:26', 'fr', 'default', 246, '2022-09-23 17:33:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1040, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:26', 'nl', 'default', 246, '2022-09-23 17:33:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1041, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:26', 'es', 'default', 246, '2022-09-23 17:33:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1042, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:28', 'en', 'default', 247, '2022-09-23 17:33:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1043, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:28', 'fr', 'default', 247, '2022-09-23 17:33:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1044, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:28', 'nl', 'default', 247, '2022-09-23 17:33:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1045, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:28', 'es', 'default', 247, '2022-09-23 17:33:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1046, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:43', 'en', 'default', 248, '2022-09-23 17:33:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1047, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:43', 'fr', 'default', 248, '2022-09-23 17:33:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1048, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:43', 'nl', 'default', 248, '2022-09-23 17:33:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1049, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:43', 'es', 'default', 248, '2022-09-23 17:33:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1050, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:44', 'en', 'default', 249, '2022-09-23 17:33:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1051, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:44', 'fr', 'default', 249, '2022-09-23 17:33:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1052, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:44', 'nl', 'default', 249, '2022-09-23 17:33:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1053, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:44', 'es', 'default', 249, '2022-09-23 17:33:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1054, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:45', 'en', 'default', 250, '2022-09-23 17:33:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1055, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:45', 'fr', 'default', 250, '2022-09-23 17:33:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1056, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:45', 'nl', 'default', 250, '2022-09-23 17:33:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1057, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:33:45', 'es', 'default', 250, '2022-09-23 17:33:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1058, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:20', 'en', 'default', 251, '2022-09-23 17:34:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1059, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:20', 'en', 'default', 252, '2022-09-23 17:34:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1060, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:20', 'en', 'default', 253, '2022-09-23 17:34:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1061, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:21', 'en', 'default', 254, '2022-09-23 17:34:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1062, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:21', 'en', 'default', 255, '2022-09-23 17:34:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1063, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:22', 'en', 'default', 256, '2022-09-23 17:34:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1064, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:22', 'en', 'default', 257, '2022-09-23 17:34:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1065, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:22', 'en', 'default', 258, '2022-09-23 17:34:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1066, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:23', 'en', 'default', 259, '2022-09-23 17:34:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1067, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:23', 'en', 'default', 260, '2022-09-23 17:34:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1068, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:28', 'en', 'default', 261, '2022-09-23 17:34:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1069, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:28', 'en', 'default', 262, '2022-09-23 17:34:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1070, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:29', 'en', 'default', 263, '2022-09-23 17:34:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1071, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:34', 'en', 'default', 264, '2022-09-23 17:34:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1072, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:34', 'en', 'default', 265, '2022-09-23 17:34:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1073, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:35', 'en', 'default', 266, '2022-09-23 17:34:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1074, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:35', 'en', 'default', 267, '2022-09-23 17:34:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1075, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:35', 'en', 'default', 268, '2022-09-23 17:34:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1076, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:36', 'en', 'default', 269, '2022-09-23 17:34:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1077, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:36', 'en', 'default', 270, '2022-09-23 17:34:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1078, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:36', 'en', 'default', 271, '2022-09-23 17:34:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1079, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:37', 'en', 'default', 272, '2022-09-23 17:34:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1080, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:37', 'en', 'default', 273, '2022-09-23 17:34:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1081, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:42', 'en', 'default', 274, '2022-09-23 17:34:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1082, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:43', 'en', 'default', 275, '2022-09-23 17:34:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1083, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:43', 'en', 'default', 276, '2022-09-23 17:34:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1084, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:43', 'en', 'default', 277, '2022-09-23 17:34:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1085, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:44', 'en', 'default', 278, '2022-09-23 17:34:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1086, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:44', 'en', 'default', 279, '2022-09-23 17:34:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1087, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:45', 'en', 'default', 280, '2022-09-23 17:34:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1088, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:45', 'en', 'default', 281, '2022-09-23 17:34:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1089, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:45', 'en', 'default', 282, '2022-09-23 17:34:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1090, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:46', 'en', 'default', 283, '2022-09-23 17:34:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1091, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:51', 'en', 'default', 284, '2022-09-23 17:34:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1092, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:52', 'en', 'default', 285, '2022-09-23 17:34:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1093, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:52', 'en', 'default', 286, '2022-09-23 17:34:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1094, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:52', 'en', 'default', 287, '2022-09-23 17:34:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1095, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:53', 'en', 'default', 288, '2022-09-23 17:34:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1096, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:53', 'en', 'default', 289, '2022-09-23 17:34:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1097, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:54', 'en', 'default', 290, '2022-09-23 17:34:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1098, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:54', 'en', 'default', 291, '2022-09-23 17:34:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1099, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:54', 'en', 'default', 292, '2022-09-23 17:34:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1100, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:55', 'en', 'default', 293, '2022-09-23 17:34:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1101, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:34:59', 'en', 'default', 294, '2022-09-23 17:34:59', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1102, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:00', 'en', 'default', 295, '2022-09-23 17:35:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1103, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:00', 'en', 'default', 296, '2022-09-23 17:35:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1104, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:00', 'en', 'default', 297, '2022-09-23 17:35:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1105, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:01', 'en', 'default', 298, '2022-09-23 17:35:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1106, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:01', 'en', 'default', 299, '2022-09-23 17:35:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1107, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:02', 'en', 'default', 300, '2022-09-23 17:35:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1108, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:02', 'en', 'default', 301, '2022-09-23 17:35:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1109, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:02', 'en', 'default', 302, '2022-09-23 17:35:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1110, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:03', 'en', 'default', 303, '2022-09-23 17:35:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1111, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:07', 'en', 'default', 304, '2022-09-23 17:35:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1112, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:08', 'en', 'default', 305, '2022-09-23 17:35:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1113, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:08', 'en', 'default', 306, '2022-09-23 17:35:08', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1114, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:14', 'en', 'default', 307, '2022-09-23 17:35:14', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(1115, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:15', 'en', 'default', 308, '2022-09-23 17:35:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1116, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:15', 'en', 'default', 309, '2022-09-23 17:35:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1117, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:15', 'en', 'default', 310, '2022-09-23 17:35:15', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1118, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:16', 'en', 'default', 311, '2022-09-23 17:35:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1119, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:16', 'en', 'default', 312, '2022-09-23 17:35:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1120, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:16', 'en', 'default', 313, '2022-09-23 17:35:16', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1121, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:17', 'en', 'default', 314, '2022-09-23 17:35:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1122, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:17', 'en', 'default', 315, '2022-09-23 17:35:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1123, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:18', 'en', 'default', 316, '2022-09-23 17:35:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1124, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:22', 'en', 'default', 317, '2022-09-23 17:35:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1125, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:22', 'en', 'default', 318, '2022-09-23 17:35:22', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1126, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:23', 'en', 'default', 319, '2022-09-23 17:35:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1127, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:23', 'en', 'default', 320, '2022-09-23 17:35:23', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1128, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:24', 'en', 'default', 321, '2022-09-23 17:35:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1129, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:24', 'en', 'default', 322, '2022-09-23 17:35:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1130, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:24', 'en', 'default', 323, '2022-09-23 17:35:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1131, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:25', 'en', 'default', 324, '2022-09-23 17:35:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1132, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:25', 'en', 'default', 325, '2022-09-23 17:35:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1133, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:26', 'en', 'default', 326, '2022-09-23 17:35:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1134, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:30', 'en', 'default', 327, '2022-09-23 17:35:30', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1135, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:31', 'en', 'default', 328, '2022-09-23 17:35:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1136, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:31', 'en', 'default', 329, '2022-09-23 17:35:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1137, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:31', 'en', 'default', 330, '2022-09-23 17:35:31', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1138, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:32', 'en', 'default', 331, '2022-09-23 17:35:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1139, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:32', 'en', 'default', 332, '2022-09-23 17:35:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1140, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:33', 'en', 'default', 333, '2022-09-23 17:35:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1141, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:33', 'en', 'default', 334, '2022-09-23 17:35:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1142, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:33', 'en', 'default', 335, '2022-09-23 17:35:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1143, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:34', 'en', 'default', 336, '2022-09-23 17:35:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1144, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:38', 'en', 'default', 337, '2022-09-23 17:35:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1145, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:39', 'en', 'default', 338, '2022-09-23 17:35:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1146, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:39', 'en', 'default', 339, '2022-09-23 17:35:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1147, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:39', 'en', 'default', 340, '2022-09-23 17:35:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1148, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:40', 'en', 'default', 341, '2022-09-23 17:35:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1149, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:40', 'en', 'default', 342, '2022-09-23 17:35:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1150, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:41', 'en', 'default', 343, '2022-09-23 17:35:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1151, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:41', 'en', 'default', 344, '2022-09-23 17:35:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1152, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:41', 'en', 'default', 345, '2022-09-23 17:35:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1153, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:46', 'en', 'default', 346, '2022-09-23 17:35:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1154, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:46', 'en', 'default', 347, '2022-09-23 17:35:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1155, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:47', 'en', 'default', 348, '2022-09-23 17:35:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1156, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:47', 'en', 'default', 349, '2022-09-23 17:35:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1157, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:47', 'en', 'default', 350, '2022-09-23 17:35:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1158, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:48', 'en', 'default', 351, '2022-09-23 17:35:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1159, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:48', 'en', 'default', 352, '2022-09-23 17:35:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1160, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:49', 'en', 'default', 353, '2022-09-23 17:35:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1161, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:49', 'en', 'default', 354, '2022-09-23 17:35:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1162, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:49', 'en', 'default', 355, '2022-09-23 17:35:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1163, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:53', 'en', 'default', 356, '2022-09-23 17:35:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1164, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:54', 'en', 'default', 357, '2022-09-23 17:35:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1165, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:54', 'en', 'default', 358, '2022-09-23 17:35:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1166, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:55', 'en', 'default', 359, '2022-09-23 17:35:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1167, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:35:55', 'en', 'default', 360, '2022-09-23 17:35:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1168, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:00', 'en', 'default', 361, '2022-09-23 17:36:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1169, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:00', 'en', 'default', 362, '2022-09-23 17:36:00', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1170, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:01', 'en', 'default', 363, '2022-09-23 17:36:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1171, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:05', 'en', 'default', 364, '2022-09-23 17:36:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1172, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:05', 'en', 'default', 365, '2022-09-23 17:36:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1173, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:05', 'en', 'default', 366, '2022-09-23 17:36:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1174, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:06', 'en', 'default', 367, '2022-09-23 17:36:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1175, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:06', 'en', 'default', 368, '2022-09-23 17:36:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1176, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:07', 'en', 'default', 369, '2022-09-23 17:36:07', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1177, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:11', 'en', 'default', 370, '2022-09-23 17:36:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1178, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:11', 'en', 'default', 371, '2022-09-23 17:36:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1179, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:12', 'en', 'default', 372, '2022-09-23 17:36:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1180, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:12', 'en', 'default', 373, '2022-09-23 17:36:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1181, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:13', 'en', 'default', 374, '2022-09-23 17:36:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1182, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:17', 'en', 'default', 375, '2022-09-23 17:36:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1183, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:18', 'en', 'default', 376, '2022-09-23 17:36:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1184, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:18', 'en', 'default', 377, '2022-09-23 17:36:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1185, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:19', 'en', 'default', 378, '2022-09-23 17:36:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1186, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:19', 'en', 'default', 379, '2022-09-23 17:36:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1187, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:19', 'en', 'default', 380, '2022-09-23 17:36:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1188, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:24', 'en', 'default', 381, '2022-09-23 17:36:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1189, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:24', 'en', 'default', 382, '2022-09-23 17:36:24', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1190, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:25', 'en', 'default', 383, '2022-09-23 17:36:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1191, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:25', 'en', 'default', 384, '2022-09-23 17:36:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1192, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:25', 'en', 'default', 385, '2022-09-23 17:36:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1193, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:26', 'en', 'default', 386, '2022-09-23 17:36:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1194, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:26', 'en', 'default', 387, '2022-09-23 17:36:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1195, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:26', 'en', 'default', 388, '2022-09-23 17:36:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1196, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:27', 'en', 'default', 389, '2022-09-23 17:36:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1197, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:27', 'en', 'default', 390, '2022-09-23 17:36:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1198, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:32', 'en', 'default', 391, '2022-09-23 17:36:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1199, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:32', 'en', 'default', 392, '2022-09-23 17:36:32', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1200, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:37', 'en', 'default', 393, '2022-09-23 17:36:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1201, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:38', 'en', 'default', 394, '2022-09-23 17:36:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1202, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:38', 'en', 'default', 395, '2022-09-23 17:36:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1203, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:38', 'en', 'default', 396, '2022-09-23 17:36:38', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1204, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:39', 'en', 'default', 397, '2022-09-23 17:36:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1205, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:39', 'en', 'default', 398, '2022-09-23 17:36:39', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1206, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:40', 'en', 'default', 399, '2022-09-23 17:36:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1207, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:40', 'en', 'default', 400, '2022-09-23 17:36:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1208, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:40', 'en', 'default', 401, '2022-09-23 17:36:40', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1209, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:41', 'en', 'default', 402, '2022-09-23 17:36:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1210, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:45', 'en', 'default', 403, '2022-09-23 17:36:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1211, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:46', 'en', 'default', 404, '2022-09-23 17:36:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1212, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:46', 'en', 'default', 405, '2022-09-23 17:36:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1213, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:46', 'en', 'default', 406, '2022-09-23 17:36:46', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1214, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:47', 'en', 'default', 407, '2022-09-23 17:36:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1215, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:47', 'en', 'default', 408, '2022-09-23 17:36:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1216, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:47', 'en', 'default', 409, '2022-09-23 17:36:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1217, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:48', 'en', 'default', 410, '2022-09-23 17:36:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1218, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:48', 'en', 'default', 411, '2022-09-23 17:36:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1219, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:49', 'en', 'default', 412, '2022-09-23 17:36:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1220, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:53', 'en', 'default', 413, '2022-09-23 17:36:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1221, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:54', 'en', 'default', 414, '2022-09-23 17:36:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1222, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:54', 'en', 'default', 415, '2022-09-23 17:36:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1223, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:54', 'en', 'default', 416, '2022-09-23 17:36:54', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1224, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:55', 'en', 'default', 417, '2022-09-23 17:36:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1225, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:55', 'en', 'default', 418, '2022-09-23 17:36:55', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1226, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:56', 'en', 'default', 419, '2022-09-23 17:36:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1227, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:56', 'en', 'default', 420, '2022-09-23 17:36:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1228, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:56', 'en', 'default', 421, '2022-09-23 17:36:56', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1229, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:36:57', 'en', 'default', 422, '2022-09-23 17:36:57', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1230, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:01', 'en', 'default', 423, '2022-09-23 17:37:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1231, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:01', 'en', 'default', 424, '2022-09-23 17:37:01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1232, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:02', 'en', 'default', 425, '2022-09-23 17:37:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1233, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:02', 'en', 'default', 426, '2022-09-23 17:37:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1234, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:02', 'en', 'default', 427, '2022-09-23 17:37:02', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1235, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:03', 'en', 'default', 428, '2022-09-23 17:37:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1236, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:03', 'en', 'default', 429, '2022-09-23 17:37:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1237, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:04', 'en', 'default', 430, '2022-09-23 17:37:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1238, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:04', 'en', 'default', 431, '2022-09-23 17:37:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1239, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:04', 'en', 'default', 432, '2022-09-23 17:37:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1240, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:09', 'en', 'default', 433, '2022-09-23 17:37:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1241, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:09', 'en', 'default', 434, '2022-09-23 17:37:09', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1242, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:10', 'en', 'default', 435, '2022-09-23 17:37:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1243, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:10', 'en', 'default', 436, '2022-09-23 17:37:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1244, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:11', 'en', 'default', 437, '2022-09-23 17:37:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1245, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:11', 'en', 'default', 438, '2022-09-23 17:37:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1246, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:11', 'en', 'default', 439, '2022-09-23 17:37:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1247, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:12', 'en', 'default', 440, '2022-09-23 17:37:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1248, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:12', 'en', 'default', 441, '2022-09-23 17:37:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1249, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:13', 'en', 'default', 442, '2022-09-23 17:37:13', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1250, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:17', 'en', 'default', 443, '2022-09-23 17:37:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1251, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:17', 'en', 'default', 444, '2022-09-23 17:37:17', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1252, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:18', 'en', 'default', 445, '2022-09-23 17:37:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1253, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:18', 'en', 'default', 446, '2022-09-23 17:37:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1254, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:19', 'en', 'default', 447, '2022-09-23 17:37:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1255, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:19', 'en', 'default', 448, '2022-09-23 17:37:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1256, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:19', 'en', 'default', 449, '2022-09-23 17:37:19', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1257, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:20', 'en', 'default', 450, '2022-09-23 17:37:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1258, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:20', 'en', 'default', 451, '2022-09-23 17:37:20', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1259, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:21', 'en', 'default', 452, '2022-09-23 17:37:21', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1260, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:25', 'en', 'default', 453, '2022-09-23 17:37:25', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1261, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:26', 'en', 'default', 454, '2022-09-23 17:37:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1262, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:26', 'en', 'default', 455, '2022-09-23 17:37:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1263, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:26', 'en', 'default', 456, '2022-09-23 17:37:26', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1264, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:27', 'en', 'default', 457, '2022-09-23 17:37:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1265, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:27', 'en', 'default', 458, '2022-09-23 17:37:27', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1266, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:28', 'en', 'default', 459, '2022-09-23 17:37:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1267, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:28', 'en', 'default', 460, '2022-09-23 17:37:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1268, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:28', 'en', 'default', 461, '2022-09-23 17:37:28', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1269, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:29', 'en', 'default', 462, '2022-09-23 17:37:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1270, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:33', 'en', 'default', 463, '2022-09-23 17:37:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1271, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:33', 'en', 'default', 464, '2022-09-23 17:37:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1272, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:34', 'en', 'default', 465, '2022-09-23 17:37:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1273, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:34', 'en', 'default', 466, '2022-09-23 17:37:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1274, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:35', 'en', 'default', 467, '2022-09-23 17:37:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1275, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:35', 'en', 'default', 468, '2022-09-23 17:37:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1276, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:35', 'en', 'default', 469, '2022-09-23 17:37:35', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1277, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:36', 'en', 'default', 470, '2022-09-23 17:37:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1278, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:36', 'en', 'default', 471, '2022-09-23 17:37:36', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1279, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:37', 'en', 'default', 472, '2022-09-23 17:37:37', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1280, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:41', 'en', 'default', 473, '2022-09-23 17:37:41', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1281, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:42', 'en', 'default', 474, '2022-09-23 17:37:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1282, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:42', 'en', 'default', 475, '2022-09-23 17:37:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1283, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:42', 'en', 'default', 476, '2022-09-23 17:37:42', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1284, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:43', 'en', 'default', 477, '2022-09-23 17:37:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1285, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:43', 'en', 'default', 478, '2022-09-23 17:37:43', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1286, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:44', 'en', 'default', 479, '2022-09-23 17:37:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1287, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:44', 'en', 'default', 480, '2022-09-23 17:37:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1288, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:44', 'en', 'default', 481, '2022-09-23 17:37:44', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1289, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:45', 'en', 'default', 482, '2022-09-23 17:37:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `RAM`, `RAM_label`, `random`) VALUES
-(1290, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:49', 'en', 'default', 483, '2022-09-23 17:37:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1291, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:49', 'en', 'default', 484, '2022-09-23 17:37:49', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1292, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:50', 'en', 'default', 485, '2022-09-23 17:37:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1293, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:50', 'en', 'default', 486, '2022-09-23 17:37:50', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1294, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:51', 'en', 'default', 487, '2022-09-23 17:37:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1295, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:51', 'en', 'default', 488, '2022-09-23 17:37:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1296, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:51', 'en', 'default', 489, '2022-09-23 17:37:51', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1297, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:52', 'en', 'default', 490, '2022-09-23 17:37:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1298, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:52', 'en', 'default', 491, '2022-09-23 17:37:52', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1299, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:37:53', 'en', 'default', 492, '2022-09-23 17:37:53', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1300, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:03', 'en', 'default', 493, '2022-09-23 17:38:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1301, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:03', 'en', 'default', 494, '2022-09-23 17:38:03', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1302, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:04', 'en', 'default', 495, '2022-09-23 17:38:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1303, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:04', 'en', 'default', 496, '2022-09-23 17:38:04', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1304, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:05', 'en', 'default', 497, '2022-09-23 17:38:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1305, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:05', 'en', 'default', 498, '2022-09-23 17:38:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1306, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:05', 'en', 'default', 499, '2022-09-23 17:38:05', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1307, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:10', 'en', 'default', 500, '2022-09-23 17:38:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1308, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:10', 'en', 'default', 501, '2022-09-23 17:38:10', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1309, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:11', 'en', 'default', 502, '2022-09-23 17:38:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1310, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:11', 'en', 'default', 503, '2022-09-23 17:38:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1311, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:11', 'en', 'default', 504, '2022-09-23 17:38:11', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1312, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:12', 'en', 'default', 505, '2022-09-23 17:38:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(1313, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-23 17:38:12', 'en', 'default', 506, '2022-09-23 17:38:12', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`, `url_key`, `new`, `featured`, `status`, `thumbnail`, `price`, `cost`, `special_price`, `special_price_from`, `special_price_to`, `weight`, `color`, `color_label`, `size`, `size_label`, `created_at`, `locale`, `channel`, `product_id`, `updated_at`, `parent_id`, `visible_individually`, `min_price`, `max_price`, `short_description`, `meta_title`, `meta_keywords`, `meta_description`, `width`, `height`, `depth`, `brand`, `brand_label`, `random`, `material`) VALUES
+(1181, 'BS42BEAYYYhem-Blue', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-multi-color-pid35601', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:36', 'en', 'default', 1064, '2022-09-26 15:47:36', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1182, 'BS42BEAYYYhem-Yellow', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-multi-color-pid35602', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:37', 'en', 'default', 1065, '2022-09-26 15:47:37', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Multi color)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1183, 'BS42BELYYYadymor-Blue', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-blue-pid35603', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:39', 'en', 'default', 1066, '2022-09-26 15:47:39', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1184, 'BS42BEBYYYandej-Red', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-red-pid35604', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:40', 'en', 'default', 1067, '2022-09-26 15:47:40', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1185, 'BS42BECYYYhokda-Blue', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-blue-pid35607', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:42', 'en', 'default', 1068, '2022-09-26 15:47:42', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1186, 'BS42BENYYYew-Purple', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-purple-pid35609', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:43', 'en', 'default', 1069, '2022-09-26 15:47:43', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1187, 'BS42BENYYYew-Orange', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-orange-pid35610', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:45', 'en', 'default', 1070, '2022-09-26 15:47:45', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1188, 'BS42BENYYYew-Brown', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-mehandi-green-pid35611', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:46', 'en', 'default', 1071, '2022-09-26 15:47:46', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1189, 'BS42BEDYYYandiya-Blue', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-dark-blue-pid35612', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:48', 'en', 'default', 1072, '2022-09-26 15:47:48', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
+(1190, 'BS42BELYYYeheriya-Red', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-red-pid35613', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:49', 'en', 'default', 1073, '2022-09-26 15:47:49', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton');
 
 -- --------------------------------------------------------
 
@@ -9460,13 +7355,26 @@ CREATE TABLE `product_images` (
 --
 
 INSERT INTO `product_images` (`id`, `type`, `path`, `product_id`, `position`) VALUES
-(2, 'images', 'product/4/kT4sWtQAkK14RAnKsLu9S7Rs1xMeq5kT8NPfMQvD.jpg', 4, 0),
-(3, 'images', 'product/4/78FwFUNTZ0WIW8s3errHOkkN939XSFOfVSFm5czB.jpg', 4, 1),
-(4, 'images', 'product/6/9upgwwL6YQEJS2ttvTJkzDiHdvagAgkCqajfjYIM.jpg', 6, 0),
-(5, 'images', 'product/6/26KmR73Vla97OKwbD5qquxrXftJErtvrq270nCRl.jpg', 6, 1),
-(6, 'images', 'product/6/FaQyNoKtiqvGajGg6QYBCZb3XH9YC4D3g8DJy31h.jpg', 6, 2),
-(7, 'images', 'product/11/ctiwkAoX19uTnHI0AU9EfGbOl3ob5jPVRznwHwnk.jpg', 11, 0),
-(8, 'images', 'product/12/Ftc5DaQj7jXgsvQbHieV8sr6SeCUms7aetZLv7nh.jpg', 12, 0);
+(153, NULL, 'product/1064/51209091279_81a24bf9be_o_d.jpg', 1064, 0),
+(154, NULL, 'product/1064/51209091279_81a24bf9be_o_d.jpg', 1064, 0),
+(155, NULL, 'product/1065/51209393695_37c9cddbc1_o_d.jpg', 1065, 0),
+(156, NULL, 'product/1065/51209393695_37c9cddbc1_o_d.jpg', 1065, 0),
+(157, NULL, 'product/1066/51209091214_6a60d5d3f4_o_d.jpg', 1066, 0),
+(158, NULL, 'product/1066/51209091214_6a60d5d3f4_o_d.jpg', 1066, 0),
+(159, NULL, 'product/1067/51208528928_7f0dababea_o_d.jpg', 1067, 0),
+(160, NULL, 'product/1067/51208528928_7f0dababea_o_d.jpg', 1067, 0),
+(161, NULL, 'product/1068/51209082574_c069b9ae0d_o_d.jpg', 1068, 0),
+(162, NULL, 'product/1068/51209082574_c069b9ae0d_o_d.jpg', 1068, 0),
+(163, NULL, 'product/1069/51207615002_30876af8d2_o_d.jpg', 1069, 0),
+(164, NULL, 'product/1069/51207615002_30876af8d2_o_d.jpg', 1069, 0),
+(165, NULL, 'product/1070/51208327981_47ffd625b6_o_d.jpg', 1070, 0),
+(166, NULL, 'product/1070/51208327981_47ffd625b6_o_d.jpg', 1070, 0),
+(167, NULL, 'product/1071/51208327941_d0dce5954c_o_d.jpg', 1071, 0),
+(168, NULL, 'product/1071/51208327941_d0dce5954c_o_d.jpg', 1071, 0),
+(169, NULL, 'product/1072/51209393370_a46bb02385_o_d.jpg', 1072, 0),
+(170, NULL, 'product/1072/51209393370_a46bb02385_o_d.jpg', 1072, 0),
+(171, NULL, 'product/1073/51208528603_7e457d588e_o_d.jpg', 1073, 0),
+(172, NULL, 'product/1073/51208528603_7e457d588e_o_d.jpg', 1073, 0);
 
 -- --------------------------------------------------------
 
@@ -9487,16 +7395,16 @@ CREATE TABLE `product_inventories` (
 --
 
 INSERT INTO `product_inventories` (`id`, `qty`, `product_id`, `inventory_source_id`, `vendor_id`) VALUES
-(1, 123, 1, 1, 0),
-(2, 124, 2, 1, 0),
-(3, 126, 3, 1, 0),
-(4, 126, 4, 1, 0),
-(5, 10, 7, 1, 0),
-(6, 10, 8, 1, 0),
-(7, 10, 9, 1, 0),
-(8, 10, 10, 1, 0),
-(9, 10, 13, 1, 0),
-(10, 10, 14, 1, 0);
+(60, 98, 1064, 1, 0),
+(61, 98, 1065, 1, 0),
+(62, 100, 1066, 1, 0),
+(63, 100, 1067, 1, 0),
+(64, 1, 1068, 1, 0),
+(65, 100, 1069, 1, 0),
+(66, 100, 1070, 1, 0),
+(67, 100, 1071, 1, 0),
+(68, 96, 1072, 1, 0),
+(69, 97, 1073, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -9511,17 +7419,6 @@ CREATE TABLE `product_ordered_inventories` (
   `channel_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `product_ordered_inventories`
---
-
-INSERT INTO `product_ordered_inventories` (`id`, `qty`, `product_id`, `channel_id`) VALUES
-(1, 0, 1, 1),
-(2, 3, 4, 1),
-(3, 3, 2, 1),
-(4, 2, 7, 1),
-(5, 2, 3, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -9532,15 +7429,6 @@ CREATE TABLE `product_relations` (
   `parent_id` int(10) UNSIGNED NOT NULL,
   `child_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `product_relations`
---
-
-INSERT INTO `product_relations` (`parent_id`, `child_id`) VALUES
-(6, 11),
-(6, 18),
-(6, 12);
 
 -- --------------------------------------------------------
 
@@ -9560,13 +7448,6 @@ CREATE TABLE `product_reviews` (
   `customer_id` int(11) DEFAULT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `product_reviews`
---
-
-INSERT INTO `product_reviews` (`id`, `title`, `rating`, `comment`, `status`, `created_at`, `updated_at`, `product_id`, `customer_id`, `name`) VALUES
-(4, 'wedsc', 4, 'ervfdcdswde', 'approved', '2022-08-22 07:09:42', '2022-08-27 05:56:45', 6, 4, 'Danish Bhatia');
 
 -- --------------------------------------------------------
 
@@ -9591,15 +7472,6 @@ CREATE TABLE `product_super_attributes` (
   `product_id` int(10) UNSIGNED NOT NULL,
   `attribute_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `product_super_attributes`
---
-
-INSERT INTO `product_super_attributes` (`product_id`, `attribute_id`) VALUES
-(6, 23),
-(6, 24),
-(12, 28);
 
 -- --------------------------------------------------------
 
@@ -9661,13 +7533,6 @@ CREATE TABLE `refunds` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `refunds`
---
-
-INSERT INTO `refunds` (`id`, `increment_id`, `state`, `email_sent`, `total_qty`, `base_currency_code`, `channel_currency_code`, `order_currency_code`, `adjustment_refund`, `base_adjustment_refund`, `adjustment_fee`, `base_adjustment_fee`, `sub_total`, `base_sub_total`, `grand_total`, `base_grand_total`, `shipping_amount`, `base_shipping_amount`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `order_id`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'refunded', 0, 1, 'USD', 'USD', 'USD', '0.0000', '0.0000', '0.0000', '0.0000', '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, '2022-08-19 19:16:18', '2022-08-19 19:16:18');
-
 -- --------------------------------------------------------
 
 --
@@ -9698,13 +7563,6 @@ CREATE TABLE `refund_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `refund_items`
---
-
-INSERT INTO `refund_items` (`id`, `name`, `description`, `sku`, `qty`, `price`, `base_price`, `total`, `base_total`, `tax_amount`, `base_tax_amount`, `discount_percent`, `discount_amount`, `base_discount_amount`, `product_id`, `product_type`, `order_item_id`, `refund_id`, `parent_id`, `additional`, `created_at`, `updated_at`) VALUES
-(1, 'temp1', NULL, 'updatedSKU', 1, '100.0000', '100.0000', '100.0000', '100.0000', '0.0000', '0.0000', '0.0000', '0.0000', '0.0000', 1, 'Webkul\\Product\\Models\\Product', 1, 1, NULL, '{\"is_buy_now\":\"0\",\"_token\":\"tFPTRLTssSVTIpPv7R2B3pfLDz0J9u5pwY7N78S3\",\"product_id\":\"1\",\"quantity\":1,\"locale\":\"en\"}', '2022-08-19 19:16:18', '2022-08-19 19:16:18');
 
 -- --------------------------------------------------------
 
@@ -9804,7 +7662,7 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`, `permission_type`, `permissions`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'Administrator role', 'custom', '[\"dashboard\",\"payment-request.cancel\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"suggestion\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.categories.edit\",\"catalog.categories.delete\",\"catalog.categories.mass-delete\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.attributes.edit\",\"catalog.attributes.delete\",\"catalog.attributes.mass-delete\",\"catalog.families\",\"catalog.families.create\",\"catalog.families.edit\",\"catalog.families.delete\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.customers.edit\",\"customers.customers.delete\",\"customers.customers.mass-update\",\"customers.customers.mass-delete\",\"customers.addresses\",\"customers.addresses.create\",\"customers.addresses.edit\",\"customers.addresses.delete\",\"customers.note\",\"customers.groups\",\"customers.groups.create\",\"customers.groups.edit\",\"customers.groups.delete\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\",\"customers.payment-request\",\"customers.payment-request.edit\",\"customers.payment-request.update\",\"customers.orders\",\"customers.payment-history\",\"velocity\",\"velocity.meta-data\",\"velocity.meta-data.edit\",\"velocity.header\",\"velocity.header.create\",\"velocity.header.edit\",\"velocity.header.delete\",\"marketing\",\"marketing.email-marketing\",\"marketing.email-marketing.email-templates\",\"marketing.email-marketing.email-templates.create\",\"marketing.email-marketing.email-templates.edit\",\"marketing.email-marketing.email-templates.delete\",\"marketing.email-marketing.events\",\"marketing.email-marketing.events.create\",\"marketing.email-marketing.events.edit\",\"marketing.email-marketing.events.delete\",\"marketing.email-marketing.campaigns\",\"marketing.email-marketing.campaigns.create\",\"marketing.email-marketing.campaigns.edit\",\"marketing.email-marketing.campaigns.delete\",\"marketing.email-marketing.subscribers\",\"marketing.email-marketing.subscribers.edit\",\"marketing.email-marketing.subscribers.delete\",\"cms\",\"cms.pages\",\"cms.pages.create\",\"cms.pages.edit\",\"cms.pages.delete\",\"cms.pages.mass-delete\",\"settings\",\"settings.locales\",\"settings.locales.create\",\"settings.locales.edit\",\"settings.locales.delete\",\"settings.currencies\",\"settings.currencies.create\",\"settings.currencies.edit\",\"settings.currencies.delete\",\"settings.exchange_rates\",\"settings.exchange_rates.create\",\"settings.exchange_rates.edit\",\"settings.exchange_rates.delete\",\"settings.inventory_sources\",\"settings.inventory_sources.create\",\"settings.inventory_sources.edit\",\"settings.inventory_sources.delete\",\"settings.channels\",\"settings.channels.create\",\"settings.channels.edit\",\"settings.channels.delete\",\"settings.users\",\"settings.users.users\",\"settings.users.users.create\",\"settings.users.users.edit\",\"settings.users.users.view\",\"settings.users.users.delete\",\"settings.users.roles\",\"settings.users.roles.create\",\"settings.users.roles.edit\",\"settings.users.roles.delete\",\"settings.users.vendors\",\"settings.users.vendors.view\",\"settings.users.vendors.approve\",\"settings.users.vendors.delete\",\"settings.sliders\",\"settings.sliders.create\",\"settings.sliders.edit\",\"settings.sliders.delete\",\"settings.taxes\",\"settings.taxes.tax-categories\",\"settings.taxes.tax-categories.create\",\"settings.taxes.tax-categories.edit\",\"settings.taxes.tax-categories.delete\",\"settings.taxes.tax-rates\",\"settings.taxes.tax-rates.create\",\"settings.taxes.tax-rates.edit\",\"settings.taxes.tax-rates.delete\",\"configuration\",\"contact\"]', NULL, '2022-09-16 19:43:06'),
+(1, 'Administrator', 'Administrator role', 'custom', '[\"dashboard\",\"shopify-delete\",\"payment-request.cancel\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"suggestion\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.categories.edit\",\"catalog.categories.delete\",\"catalog.categories.mass-delete\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.attributes.edit\",\"catalog.attributes.delete\",\"catalog.attributes.mass-delete\",\"catalog.families\",\"catalog.families.create\",\"catalog.families.edit\",\"catalog.families.delete\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.customers.edit\",\"customers.customers.delete\",\"customers.customers.mass-update\",\"customers.customers.mass-delete\",\"customers.addresses\",\"customers.addresses.create\",\"customers.addresses.edit\",\"customers.addresses.delete\",\"customers.note\",\"customers.groups\",\"customers.groups.create\",\"customers.groups.edit\",\"customers.groups.delete\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\",\"customers.payment-request\",\"customers.payment-request.edit\",\"customers.payment-request.update\",\"customers.orders\",\"customers.payment-history\",\"velocity\",\"velocity.meta-data\",\"velocity.meta-data.edit\",\"velocity.header\",\"velocity.header.create\",\"velocity.header.edit\",\"velocity.header.delete\",\"marketing\",\"marketing.promotions\",\"marketing.promotions.cart-rules\",\"marketing.promotions.cart-rules.create\",\"marketing.promotions.cart-rules.copy\",\"marketing.promotions.cart-rules.edit\",\"marketing.promotions.cart-rules.delete\",\"marketing.promotions.catalog-rules\",\"marketing.promotions.catalog-rules.create\",\"marketing.promotions.catalog-rules.edit\",\"marketing.promotions.catalog-rules.delete\",\"marketing.email-marketing\",\"marketing.email-marketing.email-templates\",\"marketing.email-marketing.email-templates.create\",\"marketing.email-marketing.email-templates.edit\",\"marketing.email-marketing.email-templates.delete\",\"marketing.email-marketing.events\",\"marketing.email-marketing.events.create\",\"marketing.email-marketing.events.edit\",\"marketing.email-marketing.events.delete\",\"marketing.email-marketing.campaigns\",\"marketing.email-marketing.campaigns.create\",\"marketing.email-marketing.campaigns.edit\",\"marketing.email-marketing.campaigns.delete\",\"marketing.email-marketing.subscribers\",\"marketing.email-marketing.subscribers.edit\",\"marketing.email-marketing.subscribers.delete\",\"cms\",\"cms.pages\",\"cms.pages.create\",\"cms.pages.edit\",\"cms.pages.delete\",\"cms.pages.mass-delete\",\"settings\",\"settings.locales\",\"settings.locales.create\",\"settings.locales.edit\",\"settings.locales.delete\",\"settings.currencies\",\"settings.currencies.create\",\"settings.currencies.edit\",\"settings.currencies.delete\",\"settings.exchange_rates\",\"settings.exchange_rates.create\",\"settings.exchange_rates.edit\",\"settings.exchange_rates.delete\",\"settings.inventory_sources\",\"settings.inventory_sources.create\",\"settings.inventory_sources.edit\",\"settings.inventory_sources.delete\",\"settings.channels\",\"settings.channels.create\",\"settings.channels.edit\",\"settings.channels.delete\",\"settings.users\",\"settings.users.users\",\"settings.users.users.create\",\"settings.users.users.edit\",\"settings.users.users.delete\",\"settings.users.roles\",\"settings.users.roles.create\",\"settings.users.roles.edit\",\"settings.users.roles.delete\",\"settings.users.vendors\",\"settings.users.vendors.view\",\"settings.users.vendors.approve\",\"settings.users.vendors.delete\",\"settings.sliders\",\"settings.sliders.create\",\"settings.sliders.edit\",\"settings.sliders.delete\",\"settings.taxes\",\"settings.taxes.tax-categories\",\"settings.taxes.tax-categories.create\",\"settings.taxes.tax-categories.edit\",\"settings.taxes.tax-categories.delete\",\"settings.taxes.tax-rates\",\"settings.taxes.tax-rates.create\",\"settings.taxes.tax-rates.edit\",\"settings.taxes.tax-rates.delete\",\"configuration\",\"contact\"]', NULL, '2022-09-24 18:35:15'),
 (2, 'Vendor', 'Role for Vendor', 'custom', '[\"dashboard\",\"payment-request\",\"payment-request.create\",\"payment-request.cancel\",\"payment-request.delete\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.families\",\"catalog.families.create\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.addresses\",\"customers.addresses.create\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\"]', '2022-08-12 06:57:20', '2022-09-11 17:24:38');
 
 -- --------------------------------------------------------
@@ -9876,8 +7734,7 @@ CREATE TABLE `shopify_file_csv` (
 --
 
 INSERT INTO `shopify_file_csv` (`id`, `vendor_id`, `file_name`, `created_at`) VALUES
-(1, 1, 'converted_csv/we1.csv', '2022-09-23 12:46:59'),
-(2, 1, 'converted_csv/we11.csv', '2022-09-23 12:47:40');
+(16, 1, 'converted_csv/converted-SF_MC_200922_1.csv', '2022-09-26 10:15:46');
 
 -- --------------------------------------------------------
 
@@ -10116,15 +7973,6 @@ CREATE TABLE `vendor_payment_request` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `vendor_payment_request`
---
-
-INSERT INTO `vendor_payment_request` (`id`, `vendor_id`, `status`, `amount_requested`, `amount_paid`, `transaction_no`, `payment_via`, `paid_at`, `created_at`, `updated_at`) VALUES
-(2, 3, 'Pending', 4000, '4000', 324567, 'paytm', '2022-09-12 06:50:48', '2022-09-11 17:26:48', '2022-09-12 06:50:48'),
-(3, 3, 'Approved', 3000, '3000', 324567, 'paytm', '2022-09-12 07:43:07', '2022-09-11 17:28:19', '2022-09-12 07:43:07'),
-(7, 4, 'Approved', 1500, '1500', 234567890, 'paytm', '2022-09-16 19:22:18', '2022-09-16 19:14:31', '2022-09-16 19:22:18');
-
 -- --------------------------------------------------------
 
 --
@@ -10172,9 +8020,8 @@ CREATE TABLE `vendor_registration` (
 --
 
 INSERT INTO `vendor_registration` (`id`, `name`, `email`, `phone`, `address`, `city`, `state`, `country`, `pincode`, `display_name`, `description`, `additional_notes`, `facebook_link`, `instagram_link`, `youtube_link`, `twitter_link`, `gstin`, `gst_certificate`, `mca_certificate`, `other_certificate`, `store_images`, `profile_image`, `status`, `owner_name`, `owner_email`, `owner_phone`, `owner_address`, `owner_city`, `owner_state`, `owner_country`, `owner_pincode`, `created_at`, `updated_at`) VALUES
-(1, 'Archies Gallery', 'archies.gallery@gmail.com', '1234567890', 'Gandhi Nagar', 'Jammu', 'J&K', 'IN', '180010', 'Archies Gallery', 'ARCHIES BEAUTY is the perfect Online Beauty Gifting Destination, a combination of Cosmetics, Fragrance, Bath & Body, Skincare… much more!As a widely appreciated and the most preferred brand for over 42 years now, Archies has a well-established gifting market with a wide range of products to offer.Similar to that, Archies Beauty will be following the same concept and offer Beauty based Gifting items…We have exclusive gifting sets especially designed for Archies Beauty by our brand partners available at both online and offline market through our state of the art website and 200+ ARCHIES Stores.', 'Nothing...', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', '1234567890lkjhg', '/storage/vendor/mannukumarshah595@gmail.com/xEtPQLCOz7C9DVemoVlYiH30ZsXDShx2H2H1tBBM.jpg', '/storage/vendor/mannukumarshah595@gmail.com/jPyjLYsm5Sn8DnijsCoEXdJC7NXo5ofw9IDHC5v7.jpg', '/storage/vendor/mannukumarshah595@gmail.com/Ig209n1jr73320MLlVcW99uVsoxonmtFKop4q13i.jpg', '/storage/vendor/mannukumarshah595@gmail.com/eizv3RUv7JWJ8UXjtEqpmfeisLQSelCLZ1jBN0Pv.jpg,/storage/vendor/mannukumarshah595@gmail.com/WRMkZdLMlbtrwAUqeg91X37QghrtACpCNRvAuhrQ.jpg', '/storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg', 1, 'David George', 'David@gmail', '1234567890', 'Gandhi Nagar', 'Jammu', 'JK', 'IN', '123456', '2022-09-03 07:54:18', '2022-09-16 19:13:55'),
-(2, 'Perfect Phone', 'perfect.phone@gmail.com', '1234567890', 'Gandhi Nagar', 'Jammu', 'JK', 'IN', '', 'Perfect Mobile', 'I’m going to assume that you meant to ask for a method of decrypting your phone’s data without a password (correct me if I’m wrong).\r\n\r\nFor most modern smartphones running Android or iOS, there is no feasible way to decrypt your phone data other than knowing the password to it. Both operating systems lock down their system (and sdcard if you are on Android) partitions such that they can only be accessed after a correct passcode is entered.', 'Nothing..', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', '345678jhgfghjk', '', '', NULL, NULL, NULL, 0, 'Alok Singh', 'alok@gmail.com', '1234567890', 'gandhi Nagar', 'Jmkjhj', 'JK', 'IN', '123456', '2022-09-03 07:58:02', '2022-09-03 07:58:02'),
-(3, 'Danish Bhatia', 'danishbhatia4@gmail.com', '7006144050', 'HNo 208/C Uttam Nagar Near Shiv Mandir Opp. Vishal Mega Mart Bye Pass Road Kunjwani', 'Jammu', 'Jammu and Kashmir', 'India', '180010', 'DB Store', 'ARCHIES BEAUTY is the perfect Online Beauty Gifting Destination, a combination of Cosmetics, Fragrance, Bath & Body, Skincare… much more!As a widely appreciated and the most preferred brand for over 42 years now, Archies has a well-established gifting market with a wide range of products to offer.Similar to that, Archies Beauty will be following the same concept and offer Beauty based Gifting items…We have exclusive gifting sets especially designed for Archies Beauty by our brand partners available at both online and offline market through our state of the art website and 200+ ARCHIES Stores.', 'sdsdvdfvdsf', '', '', '', '', 'sd2ewd23', '/storage/vendor/danishbhatia4@gmail.com/j9034Rb0MkSTEH7b6Zr2Jsqzw7nHAfzROu72FGKs.docx', '/storage/vendor/danishbhatia4@gmail.com/qHAQ13MAtNOj8uKOqukcIRoXzpQuWHp4qKQQ1MVY.xlsx', '/storage/vendor/danishbhatia4@gmail.com/9bIIYPBu9yh7jfQvQdYsdnMijLlwy1MzzB3dr4DB.xlsx', '/storage/vendor/danishbhatia4@gmail.com/7n124fyPmKsXw72J55fyZGT7jfvEJDa811QoqdYQ.jpg,/storage/vendor/danishbhatia4@gmail.com/zHDtFNZSsHbYmw20Etjjw1zp4oeAyj6CB6mxF8g0.jpg', '/storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg', 1, 'db', 'db@db.com', '324234234234', 'wdfswqedwdas', 'Jammu', 'JK', 'IN', '180010', '2022-09-03 19:28:41', '2022-09-10 19:37:32');
+(0, 'Generic', 'info@worldekart.com', '1234567890', 'Delhi', 'Delhi', 'Delhi', 'IN', '121000', 'Generic', 'ARCHIES BEAUTY is the perfect Online Beauty Gifting Destination, a combination of Cosmetics, Fragrance, Bath & Body, Skincare… much more!\r\n\r\nAs a widely appreciated and the most preferred brand for over 42 years now, Archies has a well-established gifting market with a wide range of products to offer.\r\n\r\nSimilar to that, Archies Beauty will be following the same concept and offer Beauty based Gifting items…\r\n\r\nWe have exclusive gifting sets especially designed for Archies Beauty by our brand partners available at both online and offline market through our state of the art website and 200+ ARCHIES Stores.', 'Nothing...', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', '1234567890lkjhg', '/storage/vendor/mannukumarshah595@gmail.com/xEtPQLCOz7C9DVemoVlYiH30ZsXDShx2H2H1tBBM.jpg', '/storage/vendor/mannukumarshah595@gmail.com/jPyjLYsm5Sn8DnijsCoEXdJC7NXo5ofw9IDHC5v7.jpg', '/storage/vendor/mannukumarshah595@gmail.com/Ig209n1jr73320MLlVcW99uVsoxonmtFKop4q13i.jpg', '/storage/vendor/mannukumarshah595@gmail.com/eizv3RUv7JWJ8UXjtEqpmfeisLQSelCLZ1jBN0Pv.jpg,/storage/vendor/mannukumarshah595@gmail.com/WRMkZdLMlbtrwAUqeg91X37QghrtACpCNRvAuhrQ.jpg', '/storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg', 1, 'David George', 'David@gmail.com', '1234567890', 'Gandhi Nagar', 'Delhi', 'Delhi', 'IN', '121000', '2022-09-03 07:54:18', '2022-09-03 07:54:18'),
+(1, 'Archies Gallery', 'archies.gallery@gmail.com', '1234567890', 'Gandhi Nagar', 'Jammu', '', 'IN', '', 'Archies Gallery', 'ARCHIES BEAUTY is the perfect Online Beauty Gifting Destination, a combination of Cosmetics, Fragrance, Bath & Body, Skincare… much more!\n\nAs a widely appreciated and the most preferred brand for over 42 years now, Archies has a well-established gifting market with a wide range of products to offer.\n\nSimilar to that, Archies Beauty will be following the same concept and offer Beauty based Gifting items…\n\nWe have exclusive gifting sets especially designed for Archies Beauty by our brand partners available at both online and offline market through our state of the art website and 200+ ARCHIES Stores.', 'Nothing...', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', 'https://www.instagram.com/', '1234567890lkjhg', '/storage/vendor/mannukumarshah595@gmail.com/xEtPQLCOz7C9DVemoVlYiH30ZsXDShx2H2H1tBBM.jpg', '/storage/vendor/mannukumarshah595@gmail.com/jPyjLYsm5Sn8DnijsCoEXdJC7NXo5ofw9IDHC5v7.jpg', '/storage/vendor/mannukumarshah595@gmail.com/Ig209n1jr73320MLlVcW99uVsoxonmtFKop4q13i.jpg', '/storage/vendor/mannukumarshah595@gmail.com/eizv3RUv7JWJ8UXjtEqpmfeisLQSelCLZ1jBN0Pv.jpg,/storage/vendor/mannukumarshah595@gmail.com/WRMkZdLMlbtrwAUqeg91X37QghrtACpCNRvAuhrQ.jpg', '/storage/vendor/mannukumarshah595@gmail.com/BE6QwMRbW7HY8gz02Fy1XUfWsmoHi74NTSrkZy5Y.jpg', 1, 'David George', 'David@gmail', '1234567890', 'Gandhi Nagar', 'Jammu', 'JK', 'IN', '123456', '2022-09-03 07:54:18', '2022-09-03 07:54:18');
 
 -- --------------------------------------------------------
 
@@ -10214,13 +8061,6 @@ CREATE TABLE `wishlist` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `additional` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`additional`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
-
---
--- Dumping data for table `wishlist`
---
-
-INSERT INTO `wishlist` (`id`, `channel_id`, `product_id`, `customer_id`, `item_options`, `moved_to_cart`, `shared`, `time_of_moving`, `created_at`, `updated_at`, `additional`) VALUES
-(3, 1, 4, 4, NULL, NULL, 1, NULL, '2022-08-21 16:07:44', '2022-08-21 16:08:10', NULL);
 
 --
 -- Indexes for dumped tables
@@ -11185,7 +9025,7 @@ ALTER TABLE `wishlist`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `admins`
@@ -11197,7 +9037,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `attributes`
 --
 ALTER TABLE `attributes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `attribute_families`
@@ -11227,7 +9067,7 @@ ALTER TABLE `attribute_option_translations`
 -- AUTO_INCREMENT for table `attribute_translations`
 --
 ALTER TABLE `attribute_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `bookings`
@@ -11281,19 +9121,19 @@ ALTER TABLE `booking_product_table_slots`
 -- AUTO_INCREMENT for table `bulkupload_data_flow_profiles`
 --
 ALTER TABLE `bulkupload_data_flow_profiles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `cart_item_inventories`
@@ -11305,7 +9145,7 @@ ALTER TABLE `cart_item_inventories`
 -- AUTO_INCREMENT for table `cart_payment`
 --
 ALTER TABLE `cart_payment`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `cart_rules`
@@ -11341,7 +9181,7 @@ ALTER TABLE `cart_rule_translations`
 -- AUTO_INCREMENT for table `cart_shipping_rates`
 --
 ALTER TABLE `cart_shipping_rates`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `catalog_rules`
@@ -11365,13 +9205,13 @@ ALTER TABLE `catalog_rule_product_prices`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `category_translations`
 --
 ALTER TABLE `category_translations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=326;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=334;
 
 --
 -- AUTO_INCREMENT for table `channels`
@@ -11407,7 +9247,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `core_config`
 --
 ALTER TABLE `core_config`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=166;
 
 --
 -- AUTO_INCREMENT for table `countries`
@@ -11443,7 +9283,7 @@ ALTER TABLE `currencies`
 -- AUTO_INCREMENT for table `currency_exchange_rates`
 --
 ALTER TABLE `currency_exchange_rates`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -11479,7 +9319,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `import_products`
 --
 ALTER TABLE `import_products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `inventory_sources`
@@ -11491,13 +9331,13 @@ ALTER TABLE `inventory_sources`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `invoice_items`
 --
 ALTER TABLE `invoice_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `jobs`
@@ -11539,19 +9379,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_brands`
 --
 ALTER TABLE `order_brands`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_comments`
@@ -11563,13 +9403,13 @@ ALTER TABLE `order_comments`
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `order_payment`
 --
 ALTER TABLE `order_payment`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_transactions`
@@ -11587,13 +9427,13 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=507;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1074;
 
 --
 -- AUTO_INCREMENT for table `product_attribute_values`
 --
 ALTER TABLE `product_attribute_values`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=737;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1863;
 
 --
 -- AUTO_INCREMENT for table `product_bundle_options`
@@ -11647,7 +9487,7 @@ ALTER TABLE `product_downloadable_sample_translations`
 -- AUTO_INCREMENT for table `product_flat`
 --
 ALTER TABLE `product_flat`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1314;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1191;
 
 --
 -- AUTO_INCREMENT for table `product_grouped_products`
@@ -11659,19 +9499,19 @@ ALTER TABLE `product_grouped_products`
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=173;
 
 --
 -- AUTO_INCREMENT for table `product_inventories`
 --
 ALTER TABLE `product_inventories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `product_ordered_inventories`
 --
 ALTER TABLE `product_ordered_inventories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `product_reviews`
@@ -11755,7 +9595,7 @@ ALTER TABLE `shipment_items`
 -- AUTO_INCREMENT for table `shopify_file_csv`
 --
 ALTER TABLE `shopify_file_csv`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `size_charts`
@@ -11833,13 +9673,13 @@ ALTER TABLE `velocity_meta_data`
 -- AUTO_INCREMENT for table `vendor_payment_request`
 --
 ALTER TABLE `vendor_payment_request`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `vendor_registration`
 --
 ALTER TABLE `vendor_registration`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `vendor_reviews`

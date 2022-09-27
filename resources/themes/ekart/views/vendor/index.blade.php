@@ -163,7 +163,7 @@
                         </accordian>
                         <accordian title="Certificate Section" :active="false">
                             <div class="form-header" slot="header">
-                                <h3 class="h4 d-inline-block">Certificate Section</h3>
+                                <h3 class="h4 d-inline-block">Certificate & Images</h3>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
                             <div slot="body">

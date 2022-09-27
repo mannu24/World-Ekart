@@ -804,7 +804,15 @@ class ProductController extends Controller
         if($flag) return response()->json(['message'=>'File Deleted Successfully!']) ;
         else return response()->json(['message'=>'File Deletion Unsuccessful!'],500) ;
         
-}
+    }
+
+    public function download_shopify_file($id) {
+        $check = DB::table('shopify_file_csv')->find($id) ;
+        if(file_exists($file =  public_path($check->file_name))) {
+            return response()->download($file) ;
+        }
+        else return response()->json(['message'=>'File Not Found!'],500) ;
+    }
 
     public function save_bulk_upload_back($data) {
         unset($data[count($data) - 1]);

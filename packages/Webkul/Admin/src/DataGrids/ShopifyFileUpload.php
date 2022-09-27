@@ -73,18 +73,6 @@ class ShopifyFileUpload extends DataGrid
                 return date( 'M d, y H:i' , strtotime($data->created_at)) ;
             },
         ]);
-        
-        $this->addColumn([
-            'index'      => 'download',
-            'label'      => 'Download File',
-            'type'       => 'html',
-            'searchable' => false,
-            'sortable'   => false,
-            'filterable' => false,
-            'closure'    => function($data) {
-                return '<a href="/'.$data->file_name.'"><i class="fas fa-file-download fa-24x text-grey"></i></a>' ;
-            },
-        ]);
     }
 
     /**
@@ -94,6 +82,12 @@ class ShopifyFileUpload extends DataGrid
      */
     public function prepareActions() 
     {
+        $this->addAction([
+            'title'  => 'Download File',
+            'method' => 'GET',
+            'route'  => 'admin.catalog.shopify.download',
+            'icon'   => 'fas fa-file-download fa-24x text-grey',
+        ]);
         $this->addAction([
             'title'  => trans('admin::app.datagrid.delete'),
             'method' => 'POST',

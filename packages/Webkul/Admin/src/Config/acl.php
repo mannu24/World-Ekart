@@ -527,6 +527,11 @@ return [
     */
 
     [
+        'key'   => 'shopify-download',
+        'name'  => 'Shopify File Download',
+        'route' => 'admin.catalog.shopify.download',
+        'sort'  => 1,
+    ], [
         'key'   => 'shopify-delete',
         'name'  => 'Shopify File Delete',
         'route' => 'admin.catalog.shopify.delete',

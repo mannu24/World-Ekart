@@ -14,12 +14,14 @@
     </div>
 </div>
  --}}
+@inject ('helper', 'Webkul\Velocity\Helpers\Helper')
+@php $categories = $helper->getRootCategories()->toArray() ;@endphp
     {{-- {{ dd(get_defined_vars()['__data']) }} --}}
-@php $site_data = core()->getCurrentChannel()->translate(core()->getRequestedLocaleCode()) ;  @endphp 
+@php $site_data = core()->getCurrentChannel()->translate(core()->getRequestedLocaleCode()) ; @endphp 
 <footer class="ps-footer">
     <div class="container">
         <div class="ps-footer__widgets">
-            <aside class="col-md-4 widget widget_footer widget_contact-us">
+            {{-- <aside class="col-md-4 widget widget_footer widget_contact-us">
                 <div class="logo">
                     <a href="{{ route('shop.home.index') }}" aria-label="Logo">
                         @if ($logo = core()->getCurrentChannel()->logo_url)
@@ -39,6 +41,14 @@
                         {!! __('velocity::app.admin.meta-data.footer-left-raw-content') !!}
                     @endif
                 @endif
+            </aside> --}}
+            <aside class="widget widget_footer text-center text-md-left mw-100">
+                <h4 class="widget-title">Site Categories</h4>
+                <ul class="ps-list--link" style="columns: 2;-webkit-columns: 2;-moz-columns: 2;">
+                    @foreach ($categories as $item)
+                        <li><a href="{{ $item['url_path'] }}">{{ $item['name'] }}</a></li>
+                    @endforeach
+                </ul>
             </aside>
             <aside class="widget widget_footer text-center text-md-left">
                 <h4 class="widget-title">Site Policies</h4>
@@ -61,15 +71,15 @@
             <aside class="col-md-3 widget widget_footer widget_contact-us text-center text-md-left">
                 <h4 class="widget-title">Contact us</h4>
                 <div class="widget_content">
-                    <p>Call us 24/7</p>
+                    {{-- <p>Call us 24/7</p> --}}
                     @if ($site_data->phone_number)
-                        <h3>{{ $site_data->phone_number }}</h3>
+                        <a href="tel:{{ $site_data->phone_number }}"><h3>{{ $site_data->phone_number }}</h3></a>
                     @endif
                     @if ($site_data->email_address)
                         <h3 class="h4"><a href="mailto:{{ $site_data->email_address }}"><i class="far fa-envelope-open mr-2"></i> {{ $site_data->email_address }}</a></h3>
                     @endif
                     @if ($site_data->address)
-                        <p>{{ $site_data->address }}<br /></p>
+                        <b>{{ $site_data->address }}<br /></b>
                     @endif
                     <ul class="ps-list--social">
                         @if ($site_data->facebook_link)
@@ -82,16 +92,23 @@
                 </div>
             </aside>
         </div>
-        <div class="ps-footer__copyright">
-            <p>&copy; 2022 {{ $site_data->site_name }}. All Rights Reserved</p>
-            <p>
+        <div class="ps-footer__copyright justify-content-center">
+            <p>{{ $site_data->site_name }} &copy; <font id="year-write"></font> . All Rights Reserved</p>
+            {{-- <p>
                 <span>We Using Safe Payment For:</span>
                 <img src="{{ asset('themes/martfury/assets/images/payment-method/1.jpg') }}" alt="{{ $site_data->site_name }}" role="button" />
                 <img src="{{ asset('themes/martfury/assets/images/payment-method/2.jpg') }}" alt="{{ $site_data->site_name }}" role="button" />
                 <img src="{{ asset('themes/martfury/assets/images/payment-method/3.jpg') }}" alt="{{ $site_data->site_name }}" role="button" />
                 <img src="{{ asset('themes/martfury/assets/images/payment-method/4.jpg') }}" alt="{{ $site_data->site_name }}" role="button" />
                 <img src="{{ asset('themes/martfury/assets/images/payment-method/5.jpg') }}" alt="{{ $site_data->site_name }}" role="button" />
-            </p>
+            </p> --}}
         </div>
     </div>
 </footer>
+
+@push('scripts')
+    <script>
+        var year = (new Date()).getFullYear() ;
+        $('#year-write').text(year) ;
+    </script>
+@endpush

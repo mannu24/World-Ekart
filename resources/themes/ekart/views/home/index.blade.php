@@ -55,7 +55,7 @@
 
 @section('content-wrapper')
     @include('shop::home.slider')
-    <div class="ps-site-features mt-30">
+    {{-- <div class="ps-site-features mt-30">
         <div class="ps-container">
             <div class="ps-block--site-features">
                 <div class="ps-block__item">
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 {{-- @endsection
 @section('full-content-wrapper') --}}
     {{-- @if ($velocityMetaData)
