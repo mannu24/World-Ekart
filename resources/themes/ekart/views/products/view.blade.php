@@ -22,6 +22,7 @@ $images = productimage()->getGalleryImages($product);
 foreach ($images as $key => $image) {
     array_push($productImages, $image['medium_image_url']);
 }
+$specs = $product->toArray() ;
 @endphp
 
 @section('page_title')
@@ -126,6 +127,15 @@ foreach ($images as $key => $image) {
                                                         <label class="badge badge-secondary">{{ __('velocity::app.products.tax-inclusive') }}</label>
                                                     </p>
                                                 @endif
+                                                @if ($product->product->delivery_charge!=0)
+                                                    <p class="d-inline">
+                                                        <label class="badge badge-danger">{{ core()->formatPrice($product->product->delivery_charge).' Delivery Charges' }}</label>
+                                                    </p>
+                                                @else
+                                                    <p class="d-inline">
+                                                        <label class="badge badge-success">Free Delivery</label>
+                                                    </p>
+                                                @endif
                                                 @if ($total)
                                                     <div class="ps-product__rating">
                                                         <star-ratings push-class="mr-2" :ratings="{{ $avgStarRating }}"></star-ratings>
@@ -138,6 +148,11 @@ foreach ($images as $key => $image) {
                                                 @endif
                                             </div>
                                             {!! $product->getTypeInstance()->getPriceHtml() !!}
+                                            @if ($product->product->delivery_charge!=0)
+                                                <p>{{ "+".core()->formatPrice($product->product->delivery_charge).' Delivery Charges' }}</p>
+                                            @else
+                                                <p>Free Delivery</p>
+                                            @endif
                                         </header>
                                         <div class="ps-product__desc">
                                             @if ($product->product->admin->vendor)
@@ -221,7 +236,36 @@ foreach ($images as $key => $image) {
                                             {!! $product->description !!}
                                         </tab>
                                         <tab name="Specification" :selected="false">
-                                            efgh
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <table class="table table-bordered table-hover">
+                                                        <tbody>
+                                                            @foreach ($customAttributeValues as $item)
+                                                                @if ($item['value']!=null)
+                                                                    <tr>
+                                                                        <td>{{ $item['admin_name'] }}</td>
+                                                                        <td>{{ $item['value'] }}</td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                            <tr>
+                                                                <td>SKU</td>
+                                                                <td>{{ $specs['sku'] }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Product Name</td>
+                                                                <td>{{ $specs['name'] }}</td>
+                                                            </tr>
+                                                            @if (!is_null($specs['product_number']))
+                                                                <tr>
+                                                                    <td>Product Number</td>
+                                                                    <td>{{ $specs['product_number'] }}</td>
+                                                                </tr>                                                                
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </tab>
                                         <tab name="Reviews ({{ $total }})" :selected="false">
                                             @include ('shop::products.view.reviews')
@@ -237,9 +281,9 @@ foreach ($images as $key => $image) {
                             <section>
                                 <aside class="widget widget_product widget_features">
                                     <p><i class="icon-network"></i> Shipping worldwide</p>
-                                    <p><i class="icon-3d-rotate"></i> Free 7-day return if eligible, so easy</p>
+                                    {{-- <p><i class="icon-3d-rotate"></i> Free 7-day return if eligible, so easy</p> --}}
                                     <p><i class="icon-receipt"></i> Supplier give bills for this product.</p>
-                                    <p><i class="icon-credit-card"></i> Pay online or when receiving goods</p>
+                                    {{-- <p><i class="icon-credit-card"></i> Pay online or when receiving goods</p> --}}
                                 </aside>
                                 <aside class="widget widget_sell-on-site">
                                     <p><i class="icon-store"></i> Become a Seller?<a target="_blank" href="/page/become-a-seller"> Register Now !</a></p>
