@@ -50,14 +50,14 @@
     
 <div class="ps-page--shop">
     <div class="ps-breadcrumb border-bottom">
-        <div class="container">
+        <div class="container-fluid">
             <ul class="breadcrumb">
                 <li><a href="/">{{ __('shop::app.home.home-title') }}</a></li>
                 <li>{{ __('shop::app.search.page-title') }}</li>
             </ul>
         </div>
     </div>
-    <div class="container pt-50">
+    <div class="container-fluid pt-50">
         <search-component></search-component>
     </div>
 </div>
@@ -85,7 +85,7 @@
         </div>
     </script>
     <script type="text/x-template" id="seach-component-template">
-        <section class="search-container row category-container ps-shopping justify-content-center">
+        <section class="search-container category-container ps-shopping justify-content-center">
             @if (request('image-search'))
                 <image-search-result-component></image-search-result-component>
             @endif
