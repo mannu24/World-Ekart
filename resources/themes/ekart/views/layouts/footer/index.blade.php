@@ -20,7 +20,7 @@
 @php $site_data = core()->getCurrentChannel()->translate(core()->getRequestedLocaleCode()) ; @endphp 
 <footer class="ps-footer">
     <div class="container">
-        <div class="ps-footer__widgets">
+        <div class="ps-footer__widgets pb-0">
             {{-- <aside class="col-md-4 widget widget_footer widget_contact-us">
                 <div class="logo">
                     <a href="{{ route('shop.home.index') }}" aria-label="Logo">
@@ -42,7 +42,7 @@
                     @endif
                 @endif
             </aside> --}}
-            <aside class="widget widget_footer text-center text-md-left mw-100">
+            <aside class="widget widget_footer text-center text-md-left mw-100 mb-0">
                 <h4 class="widget-title">Site Categories</h4>
                 <ul class="ps-list--link" style="columns: 2;-webkit-columns: 2;-moz-columns: 2;">
                     @foreach ($categories as $item)
@@ -50,7 +50,7 @@
                     @endforeach
                 </ul>
             </aside>
-            <aside class="widget widget_footer text-center text-md-left">
+            <aside class="widget widget_footer text-center text-md-left mb-0">
                 <h4 class="widget-title">Site Policies</h4>
                 <ul class="ps-list--link">
                     <li><a href="/page/privacy-policy">Privacy Policy</a></li>
@@ -59,7 +59,7 @@
                     <li><a href="/page/refund-policy">Refund Policy</a></li>
                 </ul>
             </aside>
-            <aside class="widget widget_footer text-center text-md-left">
+            <aside class="widget widget_footer text-center text-md-left mb-0">
                 <h4 class="widget-title">Company</h4>
                 <ul class="ps-list--link">
                     <li><a href="/page/about-us">About Us</a></li>
@@ -68,7 +68,7 @@
                     {{-- <li><a href="/track-order">Track Your Order</a></li> --}}
                 </ul>
             </aside>
-            <aside class="col-md-3 widget widget_footer widget_contact-us text-center text-md-left">
+            <aside class="col-md-3 widget widget_footer widget_contact-us text-center text-md-left mb-0">
                 <h4 class="widget-title">Contact us</h4>
                 <div class="widget_content">
                     {{-- <p>Call us 24/7</p> --}}
