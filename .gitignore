@@ -1,7 +1,5 @@
 vendor/*
 !vendor/bagisto/bagisto-bulk-upload/*
-
-
 .env
 node_modules/
 bootstrap/cache/
