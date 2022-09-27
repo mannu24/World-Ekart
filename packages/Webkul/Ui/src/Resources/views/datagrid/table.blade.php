@@ -326,7 +326,7 @@
                         numberConditionSelect: false,
                         datetimeConditionSelect: false,
                         perPage: {{ $results['itemsPerPage'] ?: 10 }},
-                        perPageProduct: [10, 20, 30, 40, 50,100],
+                        perPageProduct: [10, 20, 30, 40, 50, 100],
                         extraFilters: @json($results['extraFilters']),
                     }
                 },

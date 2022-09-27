@@ -839,7 +839,7 @@ export default {
             booleanConditionSelect: false,
             numberConditionSelect: false,
             datetimeConditionSelect: false,
-            perPageProduct: [10, 20, 30, 40, 50]
+            perPageProduct: [10, 20, 30, 40, 50, 100]
         };
     },
 
