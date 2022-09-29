@@ -46,7 +46,7 @@
                 <h4 class="widget-title">Site Categories</h4>
                 <ul class="ps-list--link" style="columns: 2;-webkit-columns: 2;-moz-columns: 2;">
                     @foreach ($categories as $item)
-                        <li><a href="{{ $item['url_path'] }}">{{ $item['name'] }}</a></li>
+                        <li><a href="/{{ $item['url_path'] }}">{{ $item['name'] }}</a></li>
                     @endforeach
                 </ul>
             </aside>
