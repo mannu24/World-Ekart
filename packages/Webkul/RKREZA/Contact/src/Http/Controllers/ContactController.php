@@ -71,35 +71,20 @@ class ContactController extends Controller
     {
         $this->validate(request(), [
             'name'              => 'required',
-            'email'             => 'required',
+            'email'             => 'required|email',
             'message_body'      => 'required',
-            'product_id'        => 'nullable',
+            'product_id'        => 'sometimes',
         ]);
 
         $data = request()->all();
 
-        
+        $contact = $this->contact->create($data);
 
-        try {
-            $contact = $this->contact->create([
-                'name'          => $data['name'],
-                'email'         => $data['email'],
-                'message_body'  => $data['message_body'],
-                'product_id'    => $data['product_id']
-            ]);
-
-            if ($contact) {
-                session()->flash('success', trans('contact_lang::app.response.message-send-success'));
-                return redirect()->route($this->_config['redirect']);
-            }
-        }catch (\Exception $e) {
-
+        if ($contact) {
+            session()->flash('success', trans('contact_lang::app.response.message-send-success'));
+            return redirect()->route($this->_config['redirect']);
         }
-
-            
+        session()->flash('failed', 'Failed to Submit Message');
+        return redirect()->route($this->_config['redirect']);
     }
-
-    
-
-
 }

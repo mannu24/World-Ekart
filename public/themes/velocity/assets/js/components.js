@@ -3692,9 +3692,6 @@ __webpack_require__.r(__webpack_exports__);
       'addToCartHtml': ''
     };
   },
-  mounted: function mounted() {
-    console.log(this.product);
-  },
   methods: {
     'isMobile': function isMobile() {
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {

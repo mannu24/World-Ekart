@@ -197,11 +197,11 @@ $specs = $product->toArray() ;
                                                         : false,
                                             ])
                                             <div class="ps-product__actions">@include ('shop::products.ul-wishlist')</div>
-                                            <div class="col-12 p-0">
+                                            {{-- <div class="col-12 p-0">
                                                 <button type="submit" class="ps-btn btn-small btn-block @if (!$product->getTypeInstance()->showQuantityBox()) mt-25 @endif" {{ ! $product->isSaleable(1) ? 'disabled' : '' }}>
                                                     {{ __('shop::app.products.buy-now') }}
                                                 </button>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         {{-- <div class="ps-product__specification">
                                             <a class="report" href="/page/blank">Report
@@ -248,10 +248,10 @@ $specs = $product->toArray() ;
                                                                     </tr>
                                                                 @endif
                                                             @endforeach
-                                                            <tr>
+                                                            {{-- <tr>
                                                                 <td>SKU</td>
                                                                 <td>{{ $specs['sku'] }}</td>
-                                                            </tr>
+                                                            </tr> --}}
                                                             <tr>
                                                                 <td>Product Name</td>
                                                                 <td>{{ $specs['name'] }}</td>

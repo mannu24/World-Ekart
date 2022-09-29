@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 27, 2022 at 04:42 AM
+-- Generation Time: Sep 29, 2022 at 11:28 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -20,6 +20,51 @@ SET time_zone = "+00:00";
 --
 -- Database: `ekart`
 --
+
+DELIMITER $$
+--
+-- Functions
+--
+CREATE DEFINER=`root`@`localhost` FUNCTION `get_url_path_of_category` (`categoryId` INT, `localeCode` VARCHAR(255)) RETURNS VARCHAR(255) CHARSET utf8mb4 DETERMINISTIC BEGIN
+
+                DECLARE urlPath VARCHAR(255);
+
+                IF NOT EXISTS (
+                    SELECT id
+                    FROM categories
+                    WHERE
+                        id = categoryId
+                        AND parent_id IS NULL
+                )
+                THEN
+                    SELECT
+                        GROUP_CONCAT(parent_translations.slug SEPARATOR '/') INTO urlPath
+                    FROM
+                        categories AS node,
+                        categories AS parent
+                        JOIN category_translations AS parent_translations ON parent.id = parent_translations.category_id
+                    WHERE
+                        node._lft >= parent._lft
+                        AND node._rgt <= parent._rgt
+                        AND node.id = categoryId
+                        AND node.parent_id IS NOT NULL
+                        AND parent.parent_id IS NOT NULL
+                        AND parent_translations.locale = localeCode
+                    GROUP BY
+                        node.id;
+
+                    IF urlPath IS NULL
+                    THEN
+                        SET urlPath = (SELECT slug FROM category_translations WHERE category_translations.category_id = categoryId);
+                    END IF;
+                 ELSE
+                    SET urlPath = '';
+                 END IF;
+
+                 RETURN urlPath;
+            END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -142,8 +187,8 @@ INSERT INTO `attributes` (`id`, `code`, `admin_name`, `type`, `validation`, `pos
 (6, 'featured', 'Featured', 'boolean', NULL, 7, 0, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (7, 'visible_individually', 'Visible Individually', 'boolean', NULL, 9, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (8, 'status', 'Status', 'boolean', NULL, 10, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(9, 'short_description', 'Short Description', 'textarea', NULL, 11, 1, 0, 1, 1, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
-(10, 'description', 'Description', 'textarea', NULL, 12, 1, 0, 1, 1, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 1, 0),
+(9, 'short_description', 'Short Description', 'textarea', NULL, 11, 1, 0, 1, 1, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 1),
+(10, 'description', 'Description', 'textarea', NULL, 12, 1, 0, 1, 1, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 1, 1),
 (11, 'price', 'Price', 'price', 'decimal', 13, 1, 0, 0, 0, 1, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 1, 0),
 (12, 'cost', 'Cost', 'price', 'decimal', 14, 0, 0, 0, 1, 0, 0, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (13, 'special_price', 'Special Price', 'price', 'decimal', 15, 0, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
@@ -157,19 +202,19 @@ INSERT INTO `attributes` (`id`, `code`, `admin_name`, `type`, `validation`, `pos
 (21, 'height', 'Height', 'text', 'decimal', 24, 0, 0, 0, 0, 0, 0, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (22, 'weight', 'Weight', 'text', 'decimal', 25, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (23, 'color', 'Color', 'text', '', 26, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-09-24 19:10:18', 'text', 1, 0, 0),
-(24, 'size', 'Size', 'text', NULL, 27, 0, 0, 0, 0, 1, 1, 1, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
+(24, 'size', 'Size', 'text', NULL, 27, 0, 0, 0, 0, 1, 1, 1, 1, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (25, 'brand', 'Brand', 'text', '', 28, 0, 0, 0, 0, 1, 0, 1, 1, '2022-08-10 07:08:12', '2022-08-13 14:37:41', 'dropdown', 1, 0, 0),
 (26, 'guest_checkout', 'Guest Checkout', 'boolean', NULL, 8, 1, 0, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (27, 'product_number', 'Product Number', 'text', NULL, 2, 0, 1, 0, 0, 0, 0, 0, 0, '2022-08-10 07:08:12', '2022-08-10 07:08:12', NULL, 1, 0, 0),
 (28, 'RAM', 'RAM', 'select', '', NULL, 1, 0, 0, 0, 1, 1, 1, 1, '2022-08-27 17:44:26', '2022-09-26 18:24:07', 'text', 0, 0, 0),
 (29, 'random', 'Admin', 'boolean', '', NULL, 1, 1, 0, 0, 0, 1, 1, 1, '2022-08-27 18:59:55', '2022-08-27 18:59:55', NULL, 1, 0, 0),
-(30, 'material', 'Material', 'text', '', NULL, 0, 0, 0, 0, 0, 0, 1, 0, '2022-09-24 06:00:33', '2022-09-24 06:00:33', NULL, 1, 0, 0),
-(31, 'product_type', 'Product Type', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
-(32, 'pattern', 'Pattern', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
-(33, 'gender', 'Gender', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
-(34, 'package_contains', 'Package Contains', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
-(35, 'model', 'Model', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0),
-(36, 'style', 'Style', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 0, NULL, NULL, NULL, 1, 0, 0);
+(30, 'material', 'Material', 'text', '', NULL, 0, 0, 0, 0, 0, 0, 1, 1, '2022-09-24 06:00:33', '2022-09-24 06:00:33', NULL, 1, 0, 0),
+(31, 'product_type', 'Product Type', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, 0),
+(32, 'pattern', 'Pattern', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, 0),
+(33, 'gender', 'Gender', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, 0),
+(34, 'package_contains', 'Package Contains', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, 0),
+(35, 'model', 'Model', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, 0),
+(36, 'style', 'Style', 'text', NULL, NULL, 0, 0, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -966,7 +1011,7 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `position`, `image`, `status`, `_lft`, `_rgt`, `parent_id`, `created_at`, `updated_at`, `display_mode`, `category_icon_path`, `additional`) VALUES
-(1, 1, NULL, 1, 1, 154, NULL, '2022-08-10 01:38:11', '2022-08-10 01:38:11', 'products_and_description', NULL, NULL),
+(1, 1, NULL, 1, 1, 154, NULL, '2022-08-10 01:38:11', '2022-08-10 01:38:11', 'products_only', NULL, NULL),
 (3, 2, NULL, 1, 40, 61, 1, '2022-08-21 05:07:28', '2022-08-21 05:10:13', 'products_only', NULL, NULL),
 (4, 3, NULL, 1, 14, 39, 1, '2022-08-21 05:08:38', '2022-08-21 05:09:44', 'products_only', NULL, NULL),
 (5, 4, NULL, 1, 62, 81, 1, '2022-08-21 05:11:30', '2022-08-21 05:11:30', 'products_only', NULL, NULL),
@@ -1022,8 +1067,8 @@ INSERT INTO `categories` (`id`, `position`, `image`, `status`, `_lft`, `_rgt`, `
 (57, 1, NULL, 1, 30, 31, 19, '2022-08-21 08:12:55', '2022-08-21 08:12:55', 'products_only', NULL, NULL),
 (58, 1, NULL, 1, 34, 35, 20, '2022-08-21 08:13:33', '2022-08-21 08:13:33', 'products_only', NULL, NULL),
 (59, 1, NULL, 1, 36, 37, 20, '2022-08-21 08:14:19', '2022-08-21 08:14:19', 'products_only', NULL, NULL),
-(60, 1, NULL, 1, 42, 43, 13, '2022-08-21 08:15:20', '2022-08-21 08:15:20', 'products_only', NULL, NULL),
-(61, 1, NULL, 1, 44, 45, 13, '2022-08-21 08:15:54', '2022-08-21 08:15:54', 'products_only', NULL, NULL),
+(60, 1, NULL, 1, 42, 43, 13, '2022-08-21 08:15:20', '2022-09-29 07:34:29', 'products_only', NULL, NULL),
+(61, 1, NULL, 1, 44, 45, 13, '2022-08-21 08:15:54', '2022-09-29 07:34:29', 'products_only', NULL, NULL),
 (62, 1, NULL, 1, 48, 49, 14, '2022-08-21 08:16:49', '2022-08-21 08:16:49', 'products_only', NULL, NULL),
 (63, 1, NULL, 1, 50, 51, 14, '2022-08-21 08:17:32', '2022-08-21 08:17:32', 'products_only', NULL, NULL),
 (64, 1, NULL, 1, 54, 55, 15, '2022-08-21 08:18:24', '2022-08-21 08:18:24', 'products_only', NULL, NULL),
@@ -1146,7 +1191,28 @@ CREATE TABLE `category_filterable_attributes` (
 --
 
 INSERT INTO `category_filterable_attributes` (`category_id`, `attribute_id`) VALUES
-(65, 24);
+(65, 24),
+(74, 23),
+(74, 33),
+(74, 31),
+(73, 23),
+(73, 33),
+(73, 31),
+(69, 23),
+(69, 30),
+(69, 31),
+(13, 23),
+(13, 30),
+(13, 24),
+(71, 23),
+(71, 30),
+(71, 35),
+(70, 23),
+(70, 30),
+(70, 24),
+(72, 23),
+(72, 33),
+(72, 31);
 
 -- --------------------------------------------------------
 
@@ -1173,7 +1239,7 @@ CREATE TABLE `category_translations` (
 --
 
 INSERT INTO `category_translations` (`id`, `name`, `slug`, `description`, `meta_title`, `meta_description`, `meta_keywords`, `category_id`, `locale`, `locale_id`, `url_path`) VALUES
-(1, 'Root', 'root', 'Root', '', '', '', 1, 'en', NULL, ''),
+(1, 'Root', 'root', 'Root', '', '', '', 1, 'en', NULL, 'root'),
 (2, 'Raíz', 'root', 'Raíz', '', '', '', 1, 'es', NULL, ''),
 (3, 'Racine', 'root', 'Racine', '', '', '', 1, 'fr', NULL, ''),
 (4, 'Hoofdcategorie', 'root', 'Hoofdcategorie', '', '', '', 1, 'nl', NULL, ''),
@@ -7056,8 +7122,8 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (1826, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 18),
 (1827, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1071, 11),
 (1828, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1071, 22),
-(1829, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 9),
-(1830, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 10),
+(1829, 'en', 'default', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)</p>', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 9),
+(1830, 'en', 'default', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br />Bedsheet:215X240cm<br />Pillows:43x69cm<br />Thread Count: 140<br />Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br />Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.</p>', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 10),
 (1831, NULL, NULL, 'BS42BEDYYYandiya-Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 1),
 (1832, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 2),
 (1833, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-dark-blue-pid35612', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 3),
@@ -7067,14 +7133,14 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (1837, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1072, 8),
 (1838, NULL, NULL, 'Dark Blue', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 23),
 (1839, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 24),
-(1840, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1072, 26),
+(1840, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1072, 26),
 (1841, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 30),
 (1842, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 16),
 (1843, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 18),
 (1844, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1072, 11),
 (1845, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 22),
-(1846, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 9),
-(1847, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 10),
+(1846, 'en', 'default', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)</p>', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 9),
+(1847, 'en', 'default', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br />Bedsheet:215X240cm<br />Pillows:43x69cm<br />Thread Count: 140<br />Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br />Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.</p>', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 10),
 (1848, NULL, NULL, 'BS42BELYYYeheriya-Red', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 1),
 (1849, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 2),
 (1850, NULL, NULL, 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-red-pid35613', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 3),
@@ -7084,12 +7150,42 @@ INSERT INTO `product_attribute_values` (`id`, `locale`, `channel`, `text_value`,
 (1854, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1073, 8),
 (1855, NULL, NULL, 'Red', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 23),
 (1856, NULL, NULL, 'Bedsheet:215X240cm,Pillows:43x69cm', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 24),
-(1857, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 1073, 26),
+(1857, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 1073, 26),
 (1858, NULL, NULL, 'Cotton', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 30),
 (1859, 'en', 'default', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 16),
 (1860, 'en', 'default', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 18),
 (1861, NULL, NULL, NULL, NULL, NULL, '423.0000', NULL, NULL, NULL, 1073, 11),
-(1862, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 22);
+(1862, NULL, NULL, '750', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 22),
+(1863, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 1073, 4),
+(1864, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 27),
+(1865, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 31),
+(1866, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 32),
+(1867, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 33),
+(1868, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 34),
+(1869, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 35),
+(1870, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 36),
+(1871, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 17),
+(1872, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1073, 12),
+(1873, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1073, 13),
+(1874, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1073, 14),
+(1875, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1073, 15),
+(1876, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 20),
+(1877, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1073, 21),
+(1878, NULL, 'default', NULL, NULL, 0, NULL, NULL, NULL, NULL, 1072, 4),
+(1879, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 27),
+(1880, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 31),
+(1881, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 32),
+(1882, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 33),
+(1883, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 34),
+(1884, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 35),
+(1885, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 36),
+(1886, 'en', 'default', '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 17),
+(1887, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1072, 12),
+(1888, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1072, 13),
+(1889, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1072, 14),
+(1890, NULL, 'default', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1072, 15),
+(1891, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 20),
+(1892, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, 1072, 21);
 
 -- --------------------------------------------------------
 
@@ -7158,8 +7254,8 @@ INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
 (1069, 13),
 (1070, 13),
 (1071, 13),
-(1072, 13),
-(1073, 13);
+(1073, 60),
+(1072, 60);
 
 -- --------------------------------------------------------
 
@@ -7319,8 +7415,8 @@ INSERT INTO `product_flat` (`id`, `sku`, `product_number`, `name`, `description`
 (1186, 'BS42BENYYYew-Purple', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-purple-pid35609', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:43', 'en', 'default', 1069, '2022-09-26 15:47:43', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Purple)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
 (1187, 'BS42BENYYYew-Orange', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-orange-pid35610', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:45', 'en', 'default', 1070, '2022-09-26 15:47:45', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Orange)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
 (1188, 'BS42BENYYYew-Brown', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-mehandi-green-pid35611', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:46', 'en', 'default', 1071, '2022-09-26 15:47:46', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Mehandi Green)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
-(1189, 'BS42BEDYYYandiya-Blue', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-dark-blue-pid35612', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:48', 'en', 'default', 1072, '2022-09-26 15:47:48', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton'),
-(1190, 'BS42BELYYYeheriya-Red', NULL, 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-red-pid35613', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:49', 'en', 'default', 1073, '2022-09-26 15:47:49', NULL, 1, NULL, NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', NULL, 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', NULL, NULL, NULL, NULL, NULL, NULL, 'Cotton');
+(1189, 'BS42BEDYYYandiya-Blue', '', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br />Bedsheet:215X240cm<br />Pillows:43x69cm<br />Thread Count: 140<br />Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br />Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.</p>', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-dark-blue-pid35612', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:48', 'en', 'default', 1072, '2022-09-26 15:47:48', NULL, 1, '423.0000', '423.0000', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)</p>', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)', '', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Dark Blue)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', '0.0000', '0.0000', NULL, NULL, NULL, NULL, 'Cotton'),
+(1190, 'BS42BELYYYeheriya-Red', '', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br />Bedsheet:215X240cm<br />Pillows:43x69cm<br />Thread Count: 140<br />Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br />Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.</p>', 'generic-cotton-double-bed-sheet-with-2-pillow-covers-color-red-pid35613', 0, 0, 1, NULL, '423.0000', NULL, NULL, NULL, NULL, '750.0000', 0, NULL, 0, NULL, '2022-09-26 15:47:49', 'en', 'default', 1073, '2022-09-26 15:47:49', NULL, 1, '423.0000', '423.0000', '<p>Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)</p>', 'Generic Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)', '', 'Cotton Double Bed Sheet with 2 Pillow Covers (Color:Red)<br>Bedsheet:215X240cm<br>Pillows:43x69cm<br>Thread Count: 140<br>Wash care: Machine wash or Hand wash. Do not bleach, Do not tumble dry, Do not soak for long time.<br>Disclaimer: The color of actual product may vary slightly from the images provided due to photographic lighting conditions and difference in screen resolutions.', '0.0000', '0.0000', NULL, NULL, NULL, NULL, 'Cotton');
 
 -- --------------------------------------------------------
 
@@ -7372,9 +7468,9 @@ INSERT INTO `product_images` (`id`, `type`, `path`, `product_id`, `position`) VA
 (167, NULL, 'product/1071/51208327941_d0dce5954c_o_d.jpg', 1071, 0),
 (168, NULL, 'product/1071/51208327941_d0dce5954c_o_d.jpg', 1071, 0),
 (169, NULL, 'product/1072/51209393370_a46bb02385_o_d.jpg', 1072, 0),
-(170, NULL, 'product/1072/51209393370_a46bb02385_o_d.jpg', 1072, 0),
+(170, NULL, 'product/1072/51209393370_a46bb02385_o_d.jpg', 1072, 1),
 (171, NULL, 'product/1073/51208528603_7e457d588e_o_d.jpg', 1073, 0),
-(172, NULL, 'product/1073/51208528603_7e457d588e_o_d.jpg', 1073, 0);
+(172, NULL, 'product/1073/51208528603_7e457d588e_o_d.jpg', 1073, 1);
 
 -- --------------------------------------------------------
 
@@ -7662,8 +7758,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `description`, `permission_type`, `permissions`, `created_at`, `updated_at`) VALUES
-(1, 'Administrator', 'Administrator role', 'custom', '[\"dashboard\",\"shopify-delete\",\"payment-request.cancel\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"suggestion\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.categories.edit\",\"catalog.categories.delete\",\"catalog.categories.mass-delete\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.attributes.edit\",\"catalog.attributes.delete\",\"catalog.attributes.mass-delete\",\"catalog.families\",\"catalog.families.create\",\"catalog.families.edit\",\"catalog.families.delete\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.customers.edit\",\"customers.customers.delete\",\"customers.customers.mass-update\",\"customers.customers.mass-delete\",\"customers.addresses\",\"customers.addresses.create\",\"customers.addresses.edit\",\"customers.addresses.delete\",\"customers.note\",\"customers.groups\",\"customers.groups.create\",\"customers.groups.edit\",\"customers.groups.delete\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\",\"customers.payment-request\",\"customers.payment-request.edit\",\"customers.payment-request.update\",\"customers.orders\",\"customers.payment-history\",\"velocity\",\"velocity.meta-data\",\"velocity.meta-data.edit\",\"velocity.header\",\"velocity.header.create\",\"velocity.header.edit\",\"velocity.header.delete\",\"marketing\",\"marketing.promotions\",\"marketing.promotions.cart-rules\",\"marketing.promotions.cart-rules.create\",\"marketing.promotions.cart-rules.copy\",\"marketing.promotions.cart-rules.edit\",\"marketing.promotions.cart-rules.delete\",\"marketing.promotions.catalog-rules\",\"marketing.promotions.catalog-rules.create\",\"marketing.promotions.catalog-rules.edit\",\"marketing.promotions.catalog-rules.delete\",\"marketing.email-marketing\",\"marketing.email-marketing.email-templates\",\"marketing.email-marketing.email-templates.create\",\"marketing.email-marketing.email-templates.edit\",\"marketing.email-marketing.email-templates.delete\",\"marketing.email-marketing.events\",\"marketing.email-marketing.events.create\",\"marketing.email-marketing.events.edit\",\"marketing.email-marketing.events.delete\",\"marketing.email-marketing.campaigns\",\"marketing.email-marketing.campaigns.create\",\"marketing.email-marketing.campaigns.edit\",\"marketing.email-marketing.campaigns.delete\",\"marketing.email-marketing.subscribers\",\"marketing.email-marketing.subscribers.edit\",\"marketing.email-marketing.subscribers.delete\",\"cms\",\"cms.pages\",\"cms.pages.create\",\"cms.pages.edit\",\"cms.pages.delete\",\"cms.pages.mass-delete\",\"settings\",\"settings.locales\",\"settings.locales.create\",\"settings.locales.edit\",\"settings.locales.delete\",\"settings.currencies\",\"settings.currencies.create\",\"settings.currencies.edit\",\"settings.currencies.delete\",\"settings.exchange_rates\",\"settings.exchange_rates.create\",\"settings.exchange_rates.edit\",\"settings.exchange_rates.delete\",\"settings.inventory_sources\",\"settings.inventory_sources.create\",\"settings.inventory_sources.edit\",\"settings.inventory_sources.delete\",\"settings.channels\",\"settings.channels.create\",\"settings.channels.edit\",\"settings.channels.delete\",\"settings.users\",\"settings.users.users\",\"settings.users.users.create\",\"settings.users.users.edit\",\"settings.users.users.delete\",\"settings.users.roles\",\"settings.users.roles.create\",\"settings.users.roles.edit\",\"settings.users.roles.delete\",\"settings.users.vendors\",\"settings.users.vendors.view\",\"settings.users.vendors.approve\",\"settings.users.vendors.delete\",\"settings.sliders\",\"settings.sliders.create\",\"settings.sliders.edit\",\"settings.sliders.delete\",\"settings.taxes\",\"settings.taxes.tax-categories\",\"settings.taxes.tax-categories.create\",\"settings.taxes.tax-categories.edit\",\"settings.taxes.tax-categories.delete\",\"settings.taxes.tax-rates\",\"settings.taxes.tax-rates.create\",\"settings.taxes.tax-rates.edit\",\"settings.taxes.tax-rates.delete\",\"configuration\",\"contact\"]', NULL, '2022-09-24 18:35:15'),
-(2, 'Vendor', 'Role for Vendor', 'custom', '[\"dashboard\",\"payment-request\",\"payment-request.create\",\"payment-request.cancel\",\"payment-request.delete\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.families\",\"catalog.families.create\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.addresses\",\"customers.addresses.create\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\"]', '2022-08-12 06:57:20', '2022-09-11 17:24:38');
+(1, 'Administrator', 'Administrator role', 'custom', '[\"dashboard\",\"shopify-download\",\"shopify-delete\",\"payment-request.cancel\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"suggestion\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.categories.edit\",\"catalog.categories.delete\",\"catalog.categories.mass-delete\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.attributes.edit\",\"catalog.attributes.delete\",\"catalog.attributes.mass-delete\",\"catalog.families\",\"catalog.families.create\",\"catalog.families.edit\",\"catalog.families.delete\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.customers.edit\",\"customers.customers.delete\",\"customers.customers.mass-update\",\"customers.customers.mass-delete\",\"customers.addresses\",\"customers.addresses.create\",\"customers.addresses.edit\",\"customers.addresses.delete\",\"customers.note\",\"customers.groups\",\"customers.groups.create\",\"customers.groups.edit\",\"customers.groups.delete\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\",\"customers.payment-request\",\"customers.payment-request.edit\",\"customers.payment-request.update\",\"customers.orders\",\"customers.payment-history\",\"velocity\",\"velocity.meta-data\",\"velocity.meta-data.edit\",\"velocity.header\",\"velocity.header.create\",\"velocity.header.edit\",\"velocity.header.delete\",\"marketing\",\"marketing.promotions\",\"marketing.promotions.cart-rules\",\"marketing.promotions.cart-rules.create\",\"marketing.promotions.cart-rules.copy\",\"marketing.promotions.cart-rules.edit\",\"marketing.promotions.cart-rules.delete\",\"marketing.promotions.catalog-rules\",\"marketing.promotions.catalog-rules.create\",\"marketing.promotions.catalog-rules.edit\",\"marketing.promotions.catalog-rules.delete\",\"marketing.email-marketing\",\"marketing.email-marketing.email-templates\",\"marketing.email-marketing.email-templates.create\",\"marketing.email-marketing.email-templates.edit\",\"marketing.email-marketing.email-templates.delete\",\"marketing.email-marketing.events\",\"marketing.email-marketing.events.create\",\"marketing.email-marketing.events.edit\",\"marketing.email-marketing.events.delete\",\"marketing.email-marketing.campaigns\",\"marketing.email-marketing.campaigns.create\",\"marketing.email-marketing.campaigns.edit\",\"marketing.email-marketing.campaigns.delete\",\"marketing.email-marketing.subscribers\",\"marketing.email-marketing.subscribers.edit\",\"marketing.email-marketing.subscribers.delete\",\"cms\",\"cms.pages\",\"cms.pages.create\",\"cms.pages.edit\",\"cms.pages.delete\",\"cms.pages.mass-delete\",\"settings\",\"settings.locales\",\"settings.locales.create\",\"settings.locales.edit\",\"settings.locales.delete\",\"settings.currencies\",\"settings.currencies.create\",\"settings.currencies.edit\",\"settings.currencies.delete\",\"settings.exchange_rates\",\"settings.exchange_rates.create\",\"settings.exchange_rates.edit\",\"settings.exchange_rates.delete\",\"settings.inventory_sources\",\"settings.inventory_sources.create\",\"settings.inventory_sources.edit\",\"settings.inventory_sources.delete\",\"settings.channels\",\"settings.channels.create\",\"settings.channels.edit\",\"settings.channels.delete\",\"settings.users\",\"settings.users.users\",\"settings.users.users.create\",\"settings.users.users.edit\",\"settings.users.users.delete\",\"settings.users.roles\",\"settings.users.roles.create\",\"settings.users.roles.edit\",\"settings.users.roles.delete\",\"settings.users.vendors\",\"settings.users.vendors.view\",\"settings.users.vendors.approve\",\"settings.users.vendors.delete\",\"settings.sliders\",\"settings.sliders.create\",\"settings.sliders.edit\",\"settings.sliders.delete\",\"settings.taxes\",\"settings.taxes.tax-categories\",\"settings.taxes.tax-categories.create\",\"settings.taxes.tax-categories.edit\",\"settings.taxes.tax-categories.delete\",\"settings.taxes.tax-rates\",\"settings.taxes.tax-rates.create\",\"settings.taxes.tax-rates.edit\",\"settings.taxes.tax-rates.delete\",\"configuration\",\"contact\"]', NULL, '2022-09-27 03:00:18'),
+(2, 'Vendor', 'Role for Vendor', 'custom', '[\"dashboard\",\"shopify-download\",\"shopify-delete\",\"payment-request\",\"payment-request.create\",\"payment-request.cancel\",\"payment-request.delete\",\"sales\",\"sales.orders\",\"sales.orders.view\",\"sales.orders.cancel\",\"sales.invoices\",\"sales.invoices.view\",\"sales.invoices.create\",\"sales.shipments\",\"sales.shipments.view\",\"sales.shipments.create\",\"sales.refunds\",\"sales.refunds.view\",\"sales.refunds.create\",\"catalog\",\"catalog.products\",\"catalog.products.create\",\"catalog.products.copy\",\"catalog.products.edit\",\"catalog.products.delete\",\"catalog.products.mass-update\",\"catalog.products.mass-delete\",\"catalog.categories\",\"catalog.categories.create\",\"catalog.attributes\",\"catalog.attributes.create\",\"catalog.families\",\"catalog.families.create\",\"catalog.bulkupload\",\"catalog.bulkupload.data-flow-profile\",\"catalog.bulkupload.upload-files\",\"catalog.bulkupload.run-profile\",\"customers\",\"customers.customers\",\"customers.customers.create\",\"customers.addresses\",\"customers.addresses.create\",\"customers.reviews\",\"customers.reviews.edit\",\"customers.reviews.delete\",\"customers.reviews.mass-update\",\"customers.reviews.mass-delete\"]', '2022-08-12 06:57:20', '2022-09-27 03:00:31');
 
 -- --------------------------------------------------------
 
@@ -7734,7 +7830,8 @@ CREATE TABLE `shopify_file_csv` (
 --
 
 INSERT INTO `shopify_file_csv` (`id`, `vendor_id`, `file_name`, `created_at`) VALUES
-(16, 1, 'converted_csv/converted-SF_MC_200922_1.csv', '2022-09-26 10:15:46');
+(16, 1, 'converted_csv/converted-SF_MC_200922_1.csv', '2022-09-26 10:15:46'),
+(17, 1, 'converted_csv/converted-SF_MC_200922_2.csv', '2022-09-29 08:04:22');
 
 -- --------------------------------------------------------
 
@@ -9433,7 +9530,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_attribute_values`
 --
 ALTER TABLE `product_attribute_values`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1863;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1893;
 
 --
 -- AUTO_INCREMENT for table `product_bundle_options`
@@ -9595,7 +9692,7 @@ ALTER TABLE `shipment_items`
 -- AUTO_INCREMENT for table `shopify_file_csv`
 --
 ALTER TABLE `shopify_file_csv`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `size_charts`

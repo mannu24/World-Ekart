@@ -199,16 +199,23 @@ class ProductRepository extends Repository
             $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
-
             $qb = $query->distinct()
-                ->select('product_flat.*')
-                ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
-                ->where('product_flat.channel', $channel)
-                ->where('product_flat.locale', $locale)
-                ->whereNotNull('product_flat.url_key');
-
+            ->select('product_flat.*')
+            ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
+            ->leftJoin('categories', 'product_categories.category_id', '=', 'categories.id')
+            ->where('product_flat.channel', $channel)
+            ->where('product_flat.locale', $locale)
+            ->whereNotNull('product_flat.url_key');
+                
             if ($categoryId) {
-                $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
+                $cat_id = DB::table('categories')->where('parent_id',$categoryId)->pluck('id') ;
+
+                if(count($cat_id) > 0) {
+                    $qb->whereIn('product_categories.category_id', explode(',', $categoryId),'or') ;
+                    $qb->whereIn('categories.id',$cat_id) ;
+                }
+                else  $qb->whereIn('product_categories.category_id', explode(',', $categoryId)) ;
+                $qb->orWhere('categories.parent_id', $categoryId) ;
             }
 
             if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {

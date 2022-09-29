@@ -719,6 +719,27 @@ class ProductController extends Controller
 
         $this->attributeCheck($data[0],$d['attribute_families']) ;
 
+        //Linking Attributes with Categories
+        foreach ($data as $key => $value) {
+            if($key==0) continue ; 
+
+            $keys = $value ;
+            $spl_loc = array_search('special_price_to', $data[0])+1 ;
+            $attributes = array_splice($keys,$spl_loc,-3) ;
+            $att = [] ;
+            foreach ($attributes as $k => $v) {
+                if(!is_null($v)) {
+                    $att_id = $this->attributeRepository->where('code',$data[0][$k+$spl_loc])->first()->toArray()['id'] ;
+                    $att[] = $att_id ;
+                }
+            }
+            $cat = DB::table('category_translations')->where('slug',$value[3])->first()->category_id ;
+            DB::table('category_filterable_attributes')->where('category_id',$cat)->delete() ;
+            foreach ($att as $a) {
+                DB::table('category_filterable_attributes')->insert(['category_id' => $cat,'attribute_id' => $a]) ;
+            }
+        }
+
         // dd($data);
 
         // $data = include(public_path('csvjson.php'));
@@ -757,7 +778,6 @@ class ProductController extends Controller
 
     public function attributeCheck($data,$af) {
 
-        // dd($data,$af) ;
         // attribute check and addition 
         $keys = $data ;
         $csvAttributes = array_splice($keys,array_search('special_price_to', $data)+1,-3) ;
