@@ -22,7 +22,7 @@
     <div class="ps-breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="http://localhost:8000/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li>{{ __('contact_lang::app.shop.title') }}</li>
             </ul>
         </div>
@@ -36,7 +36,7 @@
                     <p>If you want to know something, just send us a message, we glad to hear from you.</p>
 
                     <form class="row" action="{{ route('shop.contact.send-message') }}" method="post">
-                        {{ csrf_field() }}
+                        @csrf
                         <div class="form-group col-12 col-md-6">
                             <label class="cd-label" for="cd-name">Name</label>
                             <input class="form-control" type="text" name="name" id="cd-name" required>
