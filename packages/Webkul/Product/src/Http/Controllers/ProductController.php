@@ -869,7 +869,7 @@ class ProductController extends Controller
         fclose($fp);
 
 
-        dd($data);
+        // dd($data);
     }
     // if(false !== $new_location = array_search($item[7], $new_attributes)){
 
