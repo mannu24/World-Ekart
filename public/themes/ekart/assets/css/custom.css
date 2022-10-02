@@ -826,3 +826,68 @@ a:visited, a:link {
     background-color: #fcb800;
     color: #000;
 }
+
+
+.mega-menu { 
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+.mega-menu .mega-menu__column {
+    min-width: 25%;
+    width:25% ;
+}
+
+.menu>li.has-mega-menu {
+    position: unset;
+}
+
+.navigation__right {
+    position: relative;
+}
+
+.menu>li>a {
+    font-size:14px; 
+    font-weight:500;
+}
+
+.mega-menu h4 {
+    font-weight: 500;
+    color: #d06104; 
+}
+
+.menu>li.has-mega-menu .mega-menu {
+    transform: none !important;
+    left: 0;
+    right: 0 ;
+}
+
+.height-180 {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-410 {
+    height: 410px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-465 {
+    height: 465px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-225 {
+    height: 225px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-447 {
+    height: 447px;
+    width: 100%;
+    object-fit: cover;
+}
