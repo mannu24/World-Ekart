@@ -28,9 +28,7 @@
                                 </div>
 
                                 <div class="pl-30">
-                                    <div class="row">
-                                        <b>{{ core()->currency($rate->base_price) }}</b>
-                                    </div>
+                                    
                                     <div class="row">
                                         <b>{{ $rate->method_title }}</b> - {{ __($rate->method_description) }}
                                     </div>

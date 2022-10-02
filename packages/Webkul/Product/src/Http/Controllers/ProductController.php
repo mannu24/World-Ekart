@@ -743,7 +743,7 @@ class ProductController extends Controller
         // dd($data);
 
         // $data = include(public_path('csvjson.php'));
-        $fp = fopen("converted_csv/converted-$name", 'w+');
+        $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
         foreach ($data as $fields) {
             fputcsv($fp, $fields);
         }

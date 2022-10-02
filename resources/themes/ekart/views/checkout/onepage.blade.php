@@ -222,6 +222,8 @@
                                     switch (scope) {
                                         case 'address-form':
                                             /* loader will activate only when save as address is clicked */
+                                            this.$root.showLoader();
+
                                             if (this.address.billing.save_as_address) {
                                                 this.$root.showLoader();
                                             }

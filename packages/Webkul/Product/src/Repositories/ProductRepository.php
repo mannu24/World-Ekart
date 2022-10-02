@@ -209,10 +209,15 @@ class ProductRepository extends Repository
                 
             if ($categoryId) {
                 $cat_id = DB::table('categories')->where('parent_id',$categoryId)->pluck('id') ;
+                // dd($cat_id);
+                $ids = explode(',', $categoryId);
+                foreach($cat_id as $v){
+                    array_push($ids,$v);
+                }
 
                 if(count($cat_id) > 0) {
-                    $qb->whereIn('product_categories.category_id', explode(',', $categoryId),'or') ;
-                    $qb->whereIn('categories.id',$cat_id) ;
+                    $qb->whereIn('product_categories.category_id', $ids) ;
+                    // $qb->whereIn('product_categories.category_id',$cat_id) ;
                 }
                 else  $qb->whereIn('product_categories.category_id', explode(',', $categoryId)) ;
                 $qb->orWhere('categories.parent_id', $categoryId) ;

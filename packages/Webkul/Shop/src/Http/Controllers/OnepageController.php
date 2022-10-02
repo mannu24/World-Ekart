@@ -224,6 +224,10 @@ class OnepageController extends Controller
             $mul_ord_data[$vid]['sub_total'] = 0;
             $mul_ord_data[$vid]['base_sub_total'] = 0;
             $mul_ord_data[$vid]['items'] = [];
+            $mul_ord_data[$vid]['shipping_amount'] = 0;
+            $mul_ord_data[$vid]['base_shipping_amount'] = 0;
+            $mul_ord_data[$vid]['shipping_invoiced'] = 0;
+            $mul_ord_data[$vid]['base_shipping_invoiced'] = 0;
 
             foreach ($step_data['items'] as $key => $sdi) {
                 if($sdi['product']->user_id == $vid){
@@ -246,7 +250,7 @@ class OnepageController extends Controller
 
                     $mul_ord_data[$vid]['base_shipping_amount'] = $mul_ord_data[$vid]['base_shipping_amount'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
 
-                    $mul_ord_data[$vid]['shipping_invoiced'] = $mul_ord_data[$vid]['shshipping_invoicedipping_amount'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
+                    $mul_ord_data[$vid]['shipping_invoiced'] = $mul_ord_data[$vid]['shipping_invoiced'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
 
                     $mul_ord_data[$vid]['base_shipping_invoiced'] = $mul_ord_data[$vid]['base_shipping_invoiced'] + ($sdi['qty_ordered'] * $sdi['product']->delivery_charge);
 

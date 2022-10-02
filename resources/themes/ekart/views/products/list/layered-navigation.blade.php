@@ -1,5 +1,5 @@
 <div class="ps-layout__left">
-    <h5 class="ps-shop__heading">{{ __('shop::app.products.layered-nav-title') }}</h5>
+    <h5 class="ps-shop__heading">Filter</h5>
     <layered-navigation
         attribute-src="{{ route('admin.catalog.products.get-filter-attributes', $category->id ?? null) }}"
         max-price-src="{{ route('admin.catalog.products.get-category-product-maximum-price', $category->id ?? null) }}">

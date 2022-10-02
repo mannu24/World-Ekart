@@ -145,9 +145,6 @@
                             </div>
 
                             <div class="text">
-                                <h4 class="font-weight-bolder h4">
-                                    {{ core()->currency($cart->selected_shipping_rate->base_price) }}
-                                </h4>
 
                                 <div class="info">
                                     {{ $cart->selected_shipping_rate->method_title }}
