@@ -44912,7 +44912,7 @@ backgr .ps-vendor-banner:before {
     margin: 0 0 10px;
     font-size: 16px;
     font-weight: 600;
-    color: #000;
+    color: purple;
 }
 .mega-menu .mega-menu__column {
     min-width: 180px;

@@ -827,15 +827,14 @@ a:visited, a:link {
     color: #000;
 }
 
-
 .mega-menu { 
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content:start ;
 }
 
 .mega-menu .mega-menu__column {
-    min-width: 25%;
-    width:25% ;
+    min-width: 20%;
+    width:20% ;
 }
 
 .menu>li.has-mega-menu {
@@ -847,13 +846,13 @@ a:visited, a:link {
 }
 
 .menu>li>a {
-    font-size:14px; 
+    font-size:13px; 
     font-weight:500;
 }
 
 .mega-menu h4 {
-    font-weight: 500;
-    color: #d06104; 
+    font-weight: 800;
+    color: purple; 
 }
 
 .menu>li.has-mega-menu .mega-menu {
