@@ -333,7 +333,7 @@
                                         :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                                     </image-wrapper>
                                 @endif
-                                {{-- <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-four-resolution') }}</span> --}}
+                                 <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-four-resolution') }}</span> 
                             </div>
                             @foreach ($links[4] as $key => $item)
                                 <div class="control-group">
@@ -382,7 +382,7 @@
                                         :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                                     </image-wrapper>
                                 @endif
-                                {{-- <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-three-resolution') }}</span> --}}
+                                 <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-three-resolution') }}</span>
                             </div>
                             @foreach ($links[3] as $key => $item)
                                 <div class="control-group">
@@ -429,7 +429,7 @@
                                         :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
                                     </image-wrapper>
                                 @endif
-                                {{-- <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-two-resolution') }}</span> --}}
+                                 <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-two-resolution') }}</span>
                             </div>
                             @foreach ($links[2] as $key => $item)
                                 <div class="control-group">
