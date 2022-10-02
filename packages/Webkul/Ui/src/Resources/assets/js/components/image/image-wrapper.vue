@@ -3,7 +3,7 @@
         <div class="image-wrapper mb-0">
             <image-item v-for="image in items" :key="image.id" :image="image" :input-name="inputName" :required="required" :remove-button-label="removeButtonLabel" @onRemoveImage="removeImage($event)"></image-item>
         </div>
-        <label class="ps-btn btn-small ps-btn--outline mb-20" style="display: inline-block; width: auto" @click="createFileType" v-if="!hideButton">{{ buttonLabel }}</label>
+        <label class="btn btn-lg btn-primary mb-20" style="display: inline-block; width: auto" @click="createFileType" v-if="!hideButton">{{ buttonLabel }}</label>
     </div>
 </template>
 
@@ -20,6 +20,12 @@ export default {
             type: String,
             required: false,
             default: 'Remove Image'
+        },
+
+        max: {
+            type: Number,
+            required: false,
+            default: 1
         },
 
         inputName: {
@@ -54,6 +60,14 @@ export default {
             items: []
         };
     },
+
+    // watch:  {
+    //     imageCount(n) {
+    //         if(n>=this.max) {
+    //             this.hideButton = true ;
+    //         }
+    //     }
+    // },
 
     created: function() {
         this.initImages();

@@ -2,8 +2,11 @@
 
 namespace Webkul\Core\Http\Controllers;
 
-use Webkul\Admin\DataGrids\ChannelDataGrid;
-use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Admin\DataGrids\ChannelDataGrid ;
+use Webkul\Core\Repositories\ChannelRepository ;
+use Webkul\Velocity\Repositories\VelocityMetadataRepository ;
+use Webkul\Velocity\Helpers\Helper ;
+use Webkul\Velocity\Http\Controllers\Admin\ConfigurationController;
 
 class ChannelController extends Controller
 {
@@ -19,7 +22,10 @@ class ChannelController extends Controller
      *
      * @var \Webkul\Core\Repositories\ChannelRepository
      */
+    protected $velocityMetaDataRepository;
     protected $channelRepository;
+    protected $velocityHelper;
+    protected $configController;
 
     /**
      * Create a new controller instance.
@@ -27,11 +33,22 @@ class ChannelController extends Controller
      * @param  \Webkul\Core\Repositories\ChannelRepository  $channelRepository
      * @return void
      */
-    public function __construct(ChannelRepository $channelRepository)
+    public function __construct(
+        Helper $velocityHelper,
+        ChannelRepository $channelRepository,
+        ConfigurationController $configController,
+        VelocityMetadataRepository $velocityMetadataRepository
+    )
     {
         $this->channelRepository = $channelRepository;
 
         $this->_config = request('_config');
+
+        $this->velocityHelper = $velocityHelper;
+
+        $this->velocityMetaDataRepository = $velocityMetadataRepository;
+
+        $this->configController = $configController ;
     }
 
     /**
@@ -115,9 +132,16 @@ class ChannelController extends Controller
      */
     public function edit($id)
     {
+
+        $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
+
+        $channel = core()->getRequestedChannelCode();
+
+        $metaData = $this->velocityHelper->getVelocityMetaData($locale, $channel, false);
+        
         $channel = $this->channelRepository->with(['locales', 'currencies'])->findOrFail($id);
         // return $channel;
-        return view($this->_config['view'], compact('channel'));
+        return view($this->_config['view'], compact('channel','metaData'));
     }
 
     /**
@@ -167,8 +191,39 @@ class ChannelController extends Controller
             'is_maintenance_on'                => 'boolean',
             $locale . '.maintenance_mode_text' => 'nullable',
             'allowed_ips'                      => 'nullable',
+
+            'images'                           => 'array',
+            'links'                           => 'array',
         ]);
-        // dd($da)
+
+
+        $velocityMetaData = $this->velocityMetaDataRepository->findOneWhere([ 'id' => 1 ]);
+
+        $advertisement = json_decode($velocityMetaData->advertisement, true);
+
+        $params['advertisement'] = [];
+
+        if (isset($data['images'])) {
+            foreach ($data['images'] as $index => $images) {
+                $params['advertisement'][$index] =  $this->configController->uploadAdvertisementImages($images, $index, $advertisement);
+            }
+
+            if ($advertisement) {
+                foreach ($advertisement as $key => $image_array) {
+                    if (! isset($data['images'][$key])) {
+                        foreach ($advertisement[$key] as $image) {
+                            Storage::delete($image);
+                        }
+                    }
+                }
+            }
+        }
+
+        $params['advertisement'] = json_encode($params['advertisement']);
+        $params['links'] = json_encode(($data['links'])) ;
+
+        $this->velocityMetaDataRepository->update($params, $id);
+
         $data = $this->setSEOContent($data, $locale);
 
         $channel = $this->channelRepository->update($data, $id);

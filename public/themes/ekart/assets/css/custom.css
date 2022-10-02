@@ -860,3 +860,33 @@ a:visited, a:link {
     left: 0;
     right: 0 ;
 }
+
+.height-180 {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-410 {
+    height: 410px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-465 {
+    height: 465px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-225 {
+    height: 225px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.height-447 {
+    height: 447px;
+    width: 100%;
+    object-fit: cover;
+}

@@ -169,7 +169,7 @@
                     </accordian>
 
                     {{-- design --}}
-                    <accordian title="{{ __('admin::app.settings.channels.design') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.design') }}" :active="false">
                         <div slot="body">
                             <div class="control-group">
                                 <label for="theme">{{ __('admin::app.settings.channels.theme') }}</label>
@@ -264,13 +264,191 @@
                         </div>
                     </accordian>
 
+                    <accordian :title="'Advertisements'" :active="false">
+                        <div slot="body">
+                            <div class="control-group">
+                                <label>{{ __('velocity::app.admin.meta-data.advertisement-four') }}</label>
+        
+                                @php
+                                    $images = [
+                                        4 => [],
+                                        3 => [],
+                                        2 => [],
+                                    ];
+        
+                                    $index = 0;
+        
+                                    foreach ($metaData->get('locale')->all() as $key => $value) {
+                                        if ($value->locale == $locale) {
+                                            $index = $key;
+                                        }
+                                    }
+        
+                                    $advertisement = json_decode($metaData->get('advertisement')->all()[$index]->advertisement, true);
+                                    $links = json_decode($metaData->get('links')->all()[$index]->links, true);
+                                @endphp
+        
+                                @if(! isset($advertisement[4]) || ! count($advertisement[4]))
+                                    @php
+                                        $images[4][] = [
+                                            'id' => 'image_1',
+                                            'url' => asset('/themes/velocity/assets/images/big-sale-banner.webp'),
+                                        ];
+                                        $images[4][] = [
+                                            'id' => 'image_2',
+                                            'url' => asset('/themes/velocity/assets/images/seasons.webp'),
+                                        ];
+                                        $images[4][] = [
+                                            'id' => 'image_3',
+                                            'url' => asset('/themes/velocity/assets/images/deals.webp'),
+                                        ];
+                                        $images[4][] = [
+                                            'id' => 'image_4',
+                                            'url' => asset('/themes/velocity/assets/images/kids.webp'),
+                                        ];
+                                    @endphp
+        
+                                    <image-wrapper
+                                        :multiple="true"
+                                        max="4"
+                                        input-name="images[4]"
+                                        :images='@json($images[4])'
+                                        :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
+                                    </image-wrapper>
+                                @else
+                                    @foreach ($advertisement[4] as $index => $image)
+                                        @php
+                                            $images[4][] = [
+                                                'id' => 'image_' . $index,
+                                                'url' => Storage::url($image),
+                                            ];
+                                        @endphp
+                                    @endforeach
+        
+                                    <image-wrapper
+                                        :multiple="true"
+                                        max="4"
+                                        input-name="images[4]"
+                                        :images='@json($images[4])'
+                                        :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
+                                    </image-wrapper>
+                                @endif
+                                {{-- <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-four-resolution') }}</span> --}}
+                            </div>
+                            @foreach ($links[4] as $key => $item)
+                                <div class="control-group">
+                                    <label>Advertisement Four Image {{ $key }} Link</label>
+                                    <input type="url" v-validate="'url'" value="{{ $item }}" class="control" name="links[4][{{ $key }}]">
+                                </div>
+                            @endforeach
+                            <div class="control-group">
+                                <label>{{ __('velocity::app.admin.meta-data.advertisement-three') }}</label>
+                                @if(! isset($advertisement[3]) || ! count($advertisement[3]))
+                                    @php
+                                        $images[3][] = [
+                                            'id' => 'image_1',
+                                            'url' => asset('/themes/velocity/assets/images/headphones.webp'),
+                                        ];
+                                        $images[3][] = [
+                                            'id' => 'image_2',
+                                            'url' => asset('/themes/velocity/assets/images/watch.webp'),
+                                        ];
+                                        $images[3][] = [
+                                            'id' => 'image_3',
+                                            'url' => asset('/themes/velocity/assets/images/kids-2.webp'),
+                                        ];
+                                    @endphp
+        
+                                    <image-wrapper
+                                        input-name="images[3]"
+                                        max="3"
+                                        :images='@json($images[3])'
+                                        :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
+                                    </image-wrapper>
+                                @else
+                                    @foreach ($advertisement[3] as $index => $image)
+                                        @php
+                                            $images[3][] = [
+                                                'id' => 'image_' . $index,
+                                                'url' => Storage::url($image),
+                                            ];
+                                        @endphp
+                                    @endforeach
+        
+                                    <image-wrapper
+                                        input-name="images[3]"
+                                        max="3"
+                                        :images='@json($images[3])'
+                                        :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
+                                    </image-wrapper>
+                                @endif
+                                {{-- <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-three-resolution') }}</span> --}}
+                            </div>
+                            @foreach ($links[3] as $key => $item)
+                                <div class="control-group">
+                                    <label>Advertisement Three Image {{ $key }} Link</label>
+                                    <input type="url" v-validate="'url'" value="{{ $item }}" class="control" name="links[3][{{ $key }}]">
+                                </div>
+                            @endforeach
+
+                            <div class="control-group">
+                                <label>{{ __('velocity::app.admin.meta-data.advertisement-two') }}</label>
+        
+                                @if(! isset($advertisement[2]) || ! count($advertisement[2]))
+                                    @php
+                                        $images[2][] = [
+                                            'id' => 'image_1',
+                                            'url' => asset('/themes/velocity/assets/images/toster.webp'),
+                                        ];
+                                        $images[2][] = [
+                                            'id' => 'image_2',
+                                            'url' => asset('/themes/velocity/assets/images/trimmer.webp'),
+                                        ];
+                                    @endphp
+        
+                                    <image-wrapper
+                                        input-name="images[2]"
+                                        max="2"
+                                        :images='@json($images[2])'
+                                        :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
+                                    </image-wrapper>
+                                @else
+                                    @foreach ($advertisement[2] as $index => $image)
+                                        @php
+                                            $images[2][] = [
+                                                'id' => 'image_' . $index,
+                                                'url' => Storage::url($image),
+                                            ];
+                                        @endphp
+                                    @endforeach
+        
+                                    <image-wrapper
+                                        input-name="images[2]"
+                                        max="2"
+                                        :images='@json($images[2])'
+                                        :button-label="'{{ __('velocity::app.admin.meta-data.add-image-btn-title') }}'">
+                                    </image-wrapper>
+                                @endif
+                                {{-- <span class="control-info mt-10">{{ __('velocity::app.admin.meta-data.image-two-resolution') }}</span> --}}
+                            </div>
+                            @foreach ($links[2] as $key => $item)
+                                <div class="control-group">
+                                    <label>Advertisement Two Image {{ $key }} Link</label>
+                                    <input type="url" v-validate="'url'" value="{{ $item }}" class="control" name="links[2][{{ $key }}]">
+                                </div>
+                            @endforeach
+
+                        </div>
+                    </accordian>
+        
+
                     @php
                         $home_seo = $channel->translate($locale)['home_seo'] ?? $channel->home_seo;
                         $seo = json_decode($home_seo);
                     @endphp
 
                     {{-- home page seo --}}
-                    <accordian title="{{ __('admin::app.settings.channels.seo') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.seo') }}" :active="false">
                         <div slot="body">
                             <div class="control-group" :class="[errors.has('{{$locale}}[seo_title]') ? 'has-error' : '']">
                                 <label for="seo_title" class="required">
@@ -308,7 +486,7 @@
                     </accordian>
 
                     {{-- maintenance mode --}}
-                    <accordian title="{{ __('admin::app.settings.channels.maintenance-mode') }}" :active="true">
+                    <accordian title="{{ __('admin::app.settings.channels.maintenance-mode') }}" :active="false">
                         <div slot="body">
                             <div class="control-group">
                                 <label for="maintenance-mode-status">{{ __('admin::app.status') }}</label>
