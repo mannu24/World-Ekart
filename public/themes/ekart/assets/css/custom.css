@@ -864,29 +864,45 @@ a:visited, a:link {
 .height-180 {
     height: 180px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .height-410 {
     height: 410px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .height-465 {
     height: 465px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .height-225 {
     height: 225px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .height-447 {
     height: 447px;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
+}
+
+.header__left .ps-logo {
+    margin-left: 50px;
+}
+
+.header__left .ps-logo img {
+    height: 42px;
+}
+
+.header.header--sticky .header__left .ps-logo {
+    display: block;
+}
+
+.header.header--sticky .header__top {
+    padding: 20px 0;
 }

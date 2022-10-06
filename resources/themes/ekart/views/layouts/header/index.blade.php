@@ -9,7 +9,7 @@
                         <img class="logo" src="{{ bagisto_asset('images/logo_light.png') }}" alt="" />
                     @endif
                 </a>
-                <mega-menu :mobile="false" :vertical="true"></mega-menu>
+                {{-- <mega-menu :mobile="false" :vertical="true"></mega-menu> --}}
             </div>
             <div class="header__center">
                 <searchbar-component route="{{ route('velocity.search.index') }}"></searchbar-component>
@@ -36,7 +36,12 @@
                             $showWishlist = core()->getConfigData('general.content.shop.wishlist_option') == "1" ? true : false;
                         @endphp
                         <div class="ps-block--user-account">
-                            <i class="icon-user"></i>
+                            <div class="ps-block--user-header">
+                                <div class="ps-block__left"><i class="icon-user"></i></div>
+                                <div class="ps-block__right">
+                                    <a>Hello, <br>{{ auth()->user()->first_name }}</a>
+                                </div>
+                            </div>
                             <div class="ps-block__content">
                                 <ul class="ps-list--arrow">
                                     <li>

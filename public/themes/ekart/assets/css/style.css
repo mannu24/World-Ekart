@@ -45580,14 +45580,22 @@ backgr .ps-vendor-banner:before {
 .header.header--sticky .menu--product-categories .menu__toggle span {
     font-size: 16px;
 }
-.header.header--sticky .header__top {
+.header.header--sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: none;
+    padding-bottom: 10px;
+}
+/* .header.header--sticky .header__top {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000;
     border-bottom: none;
     padding: 10px 0;
-}
+} */
 .header.header--sticky .header__left .ps-logo {
     display: none;
 }

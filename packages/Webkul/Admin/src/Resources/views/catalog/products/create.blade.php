@@ -125,11 +125,6 @@
 
                             @endforeach
                         </select>
-
-                        @if ($familyId)
-                        <input type="hidden" name="country" value="{{ $familyId }}" />
-                        @endif
-
                         <span class="control-error" v-if="errors.has('country')">@{{ errors.first('country') }}</span>
                     </div>
 
@@ -139,11 +134,6 @@
                         <input type="text" v-validate="{ required: true}"
                             class="control" id="delivery_charge" name="delivery_charge" value="{{ request()->input('delivery_charge') ?: old('delivery_charge') }}"
                             data-vv-as="&quot;{{ __('admin::app.catalog.products.delivery_charge') }}&quot;" />
-
-                        @if ($familyId)
-                        <input type="hidden" name="delivery_charge" value="{{ $familyId }}" />
-                        @endif
-
                         <span class="control-error" v-if="errors.has('delivery_charge')">@{{ errors.first('delivery_charge') }}</span>
                     </div>
 
