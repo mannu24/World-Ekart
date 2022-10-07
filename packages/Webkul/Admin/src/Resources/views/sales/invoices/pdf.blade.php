@@ -103,7 +103,7 @@
 
             .logo {
                 height: 70px;
-                width: 70px;
+                width: 100px;
             }
 
             .merchant-details {
@@ -125,7 +125,7 @@
             <div class="header">
                 <div class="row">
                     <div class="col-12">
-                        <h1 class="text-center">{{ __('admin::app.sales.invoices.invoice') }}</h1>
+                        <h1 class="text-center">Tax Invoice</h1>
                     </div>
                 </div>
 
