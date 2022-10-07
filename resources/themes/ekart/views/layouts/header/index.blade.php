@@ -12,7 +12,8 @@
                 {{-- <mega-menu :mobile="false" :vertical="true"></mega-menu> --}}
             </div>
             <div class="header__center">
-                <searchbar-component route="{{ route('velocity.search.index') }}"></searchbar-component>
+                @include('shop::layouts.particals.search-bar')
+                {{-- <searchbar-component></searchbar-component> --}}
             </div>
             <div class="header__right">
                 <div class="header__actions">
@@ -37,9 +38,9 @@
                         @endphp
                         <div class="ps-block--user-account">
                             <div class="ps-block--user-header">
-                                <div class="ps-block__left"><i class="icon-user"></i></div>
+                                <a href="{{ route('customer.profile.index') }}" class="ps-block__left"><i class="icon-user"></i></a>
                                 <div class="ps-block__right">
-                                    <a>Hello, <br>{{ auth()->user()->first_name }}</a>
+                                    <a href="{{ route('customer.profile.index') }}">Hello, <br>{{ auth()->guard('customer')->user()->first_name }}</a>
                                 </div>
                             </div>
                             <div class="ps-block__content">
@@ -99,5 +100,18 @@
             $('#menu-drawer').addClass('d-none').removeClass('ant-drawer-open') ;
         }
 
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).mouseup(function(e) {
+                var container = $(".form-control");
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    $('.suggests').hide();
+                } else {
+                    $('.suggests').show();
+                }
+            });
+        });
     </script>
 @endpush
