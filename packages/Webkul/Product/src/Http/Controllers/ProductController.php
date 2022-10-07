@@ -189,7 +189,7 @@ class ProductController extends Controller
             && ProductType::hasVariants(request()->input('type'))
             && request()->input('sku') != ''
         ) {
-            return redirect(url()->current() . '?type=' . request()->input('type') . '&family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku'));
+            return redirect(url()->current() . '?type=' . request()->input('type') . '&family=' . request()->input('attribute_family_id') . '&sku=' . request()->input('sku') . '&country=' . request()->input('country') . '&delivery_charge=' . request()->input('delivery_charge'));
         }
 
         if (
@@ -205,10 +205,10 @@ class ProductController extends Controller
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
-            'country' => 'required',
+            'country'             => 'required',
+            'delivery_charge'     => 'required',
             'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
-
         $product = $this->productRepository->create(request()->all());
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
