@@ -8,7 +8,7 @@ return [
         'sort'  => 1,
     ], [
         'key'   => 'account.profile',
-        'name'  => 'shop::app.layouts.profile',
+        'name'  => 'Account Details',
         'route' =>'customer.profile.index',
         'sort'  => 1,
     ], [
@@ -35,7 +35,7 @@ return [
     ],
      [
         'key'   => 'account.orders',
-        'name'  => 'shop::app.layouts.orders',
+        'name'  => 'Order Details',
         'route' =>'customer.orders.index',
         'sort'  => 6,
     ], 

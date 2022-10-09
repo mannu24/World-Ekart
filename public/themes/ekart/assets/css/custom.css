@@ -28,6 +28,11 @@ a:visited, a:link {
     margin-bottom: 30px;
 }
 
+.static-page .container-xl h4{
+    color: #444;
+    margin-bottom: 15px;
+}
+
 .static-page .container-xl p{
     font-size: 1.7rem;
     margin-bottom: 40px;
@@ -906,3 +911,29 @@ a:visited, a:link {
 .header.header--sticky .header__top {
     padding: 20px 0;
 }
+
+.suggests {
+    z-index: 10000;
+    height: auto !important;
+    max-height: 400px !important;
+    width: 100% ;
+    top: 40px;
+}
+
+.suggests .velocity_img img {
+    height: 90px !important;
+    object-fit: cover;
+}
+
+.ps-product:not(.ps-product.ps-product--wide) .ps-product__title {
+    --max-lines: unset ;
+    max-width: 250px;
+}
+
+.ant-menu-inline.ant-menu-root .ant-menu-item>.ant-menu-title-content, .ant-menu-inline.ant-menu-root .ant-menu-submenu-title>.ant-menu-title-content {
+    flex: none;
+}
+
+/*
+Line 45043 ,45035 for hover
+*/

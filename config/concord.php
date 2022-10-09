@@ -40,6 +40,6 @@ return [
         \Webkul\Velocity\Providers\ModuleServiceProvider::class,
         \Webkul\suggestion\Providers\ModuleServiceProvider::class,
         \RKREZA\Contact\Providers\ModuleServiceProvider::class,
-        \Webkul\RMA\Providers\RepositoryServiceProvider::class,
+        \Webkul\RMA\Providers\RepositoryServiceProvider::class
     ],
 ];

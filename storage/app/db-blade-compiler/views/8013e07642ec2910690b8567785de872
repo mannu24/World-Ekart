@@ -1,1 +1,34 @@
-<div class="static-container"><div class="mb-5">Shipping Policy  page content</div></div>
+<div class="ps-page--single static-page">
+<div class="ps-breadcrumb">
+<div class="container">
+<ul class="breadcrumb">
+<li><a href="http://localhost:8000/">Home</a></li>
+<li>Shipment/Cancellation Policy</li>
+</ul>
+</div>
+</div>
+<div class="container-xl">
+<h2 class="text-center">Shipment Policy</h2>
+<p>World Ekart offers the lowest shipping cost across all online platforms in India. We have tied up with multiple Logistics Partners who pick up the product from your location and deliver it straight to the customer.<br /><br />With such low delivery charges, you can receive orders from all over India and focus more on selling your products online than handling the stress of shipping and logistics all by yourself.</p>
+<ol>
+<li>
+<h4>Manage and process your orders through World Ekart Supplier Panel</h4>
+<p>Log on to the World Ekart Supplier Panel and accept your order. Once done, you will have to download and print the Label and Manifest.</p>
+</li>
+<li>
+<h4>Pack your product and keep it ready for pickup</h4>
+<p>Pack the product properly in plain packaging material with no branding. World Ekart does not provide any packaging material. Please ensure that the product is properly packed and paste the label on the packaging.</p>
+</li>
+<li>
+<h4>Hand over the product to World Ekart Delivery Partner</h4>
+<p>Our logistics partner will pick up the order from your pickup address and deliver it directly to the customer.<br />Sit back and relax while World Ekart delivers your products safely and quickly. Customers love it when their products are packed well and delivered on time, and a happy customer service means a higher number of returning customers and orders for you.</p>
+</li>
+<li>
+<h4>Shipping Timeline</h4>
+<p>The orders must be shipped within 2-7 days from the date of receiving the order within the agreed time provided by you (also known as Service Level Agreement or SLA). You can check the status of your order and the days left for dispatch on the World Ekart Supplier Panel.</p>
+</li>
+</ol>
+<h2>Cancellation Policy on World Ekart</h2>
+<p>In order to maintain a good customer experience for customers, it is important for you to ensure that the products you have listed on World Ekart are in stock and available to ship. However, we understand that there could be delays that are out of your control leading to late dispatch or order cancellation. In that case, World Ekart will not charge any penalty to you so you can continue to sell online without any tension.</p>
+</div>
+</div>

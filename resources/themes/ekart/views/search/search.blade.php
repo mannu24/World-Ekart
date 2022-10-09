@@ -91,8 +91,8 @@
             @endif
             <div class="ps-shopping__header">
                 <div class="ps-shopping__actions flex-column flex-md-row">
-                    <p class="w-100"><strong class="mr-2">{{ $results->total() }}</strong>
-                        @if ($results->total() == 1)
+                    <p class="w-100"><strong class="mr-2">{{ count($results->items()) }}</strong>
+                        @if (count($results->items()) == 1)
                             {{ __('shop::app.search.found-result') }}
                         @else
                             {{ __('shop::app.search.found-results') }}
@@ -103,7 +103,7 @@
             </div>
             <div class="ps-shopping__content vendor-store">
                 <div class="row no-gutters">
-                    @if (!$results->count())
+                    @if (!count($results->items()))
                         <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
                         <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>
                     @else
@@ -122,7 +122,9 @@
                                 </div>
                             @endif
                         @endforeach
-                        @include('ui::datagrid.pagination')
+                        <div class="col-12 mt-10 d-flex justify-content-center"> 
+                            @include('ui::datagrid.pagination')
+                        </div>
                     @endif
                 </div>
             </div>

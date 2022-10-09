@@ -45032,7 +45032,7 @@ backgr .ps-vendor-banner:before {
     top: 100%;
     left: 0;
 }
-.menu>li.has-mega-menu:hover .mega-menu {
+.menu>li.has-mega-menu.hover .mega-menu {
     visibility: visible;
     opacity: 1;
     transform: translateY(0);
@@ -45040,7 +45040,7 @@ backgr .ps-vendor-banner:before {
 .menu>li:hover .sub-toggle {
     color: #fff;
 }
-.menu>li:hover.menu-item-has-children>a:before, .menu>li:hover>.sub-menu {
+.menu>li.hover.menu-item-has-children>a:before, .menu>li.hover>.sub-menu {
     visibility: visible;
     opacity: 1;
 }

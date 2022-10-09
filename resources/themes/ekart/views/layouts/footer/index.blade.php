@@ -1,47 +1,9 @@
-{{-- <div class="footer">
-    <div class="footer-content">
-
-        @include('shop::layouts.footer.newsletter-subscription')
-        @include('shop::layouts.footer.footer-links')
-
-        @if ($categories)
-            @include('shop::layouts.footer.top-brands')
-        @endif
-
-        @if (core()->getConfigData('general.content.footer.footer_toggle'))
-            @include('shop::layouts.footer.copy-right')
-        @endif
-    </div>
-</div>
- --}}
 @inject ('helper', 'Webkul\Velocity\Helpers\Helper')
 @php $categories = $helper->getRootCategories()->toArray() ;@endphp
-    {{-- {{ dd(get_defined_vars()['__data']) }} --}}
 @php $site_data = core()->getCurrentChannel()->translate(core()->getRequestedLocaleCode()) ; @endphp 
 <footer class="ps-footer pt-5">
     <div class="container">
         <div class="ps-footer__widgets pb-0">
-            {{-- <aside class="col-md-4 widget widget_footer widget_contact-us">
-                <div class="logo">
-                    <a href="{{ route('shop.home.index') }}" aria-label="Logo">
-                        @if ($logo = core()->getCurrentChannel()->logo_url)
-                            <img src="{{ $logo }}" class="logo full-img mb-3" width="200" height="50" />
-                        @else
-                            <img src="{{ asset('themes/ekart/assets/images/logo.png') }}" class="logo full-img" width="200" height="50" />
-                        @endif
-                    </a>
-                </div>
-                @php $seo = json_decode($site_data->home_seo) ; @endphp
-                @if ($seo)
-                    {{ $seo->meta_description }}
-                @else
-                    @if ($velocityMetaData)
-                        {!! $velocityMetaData->footer_left_content !!}
-                    @else
-                        {!! __('velocity::app.admin.meta-data.footer-left-raw-content') !!}
-                    @endif
-                @endif
-            </aside> --}}
             <aside class="widget widget_footer text-center text-md-left mw-100 mb-0">
                 <h4 class="widget-title">Site Categories</h4>
                 <ul class="ps-list--link" style="columns: 2;-webkit-columns: 2;-moz-columns: 2;">
@@ -57,6 +19,7 @@
                     <li><a href="/page/terms-conditions">Term &amp; Condition</a></li>
                     <li><a href="/page/return-policy">Return Policy</a></li>
                     <li><a href="/page/refund-policy">Refund Policy</a></li>
+                    <li><a href="/page/shipping-cancellation-policy">Shipping/Cancellation Policy</a></li>
                 </ul>
             </aside>
             <aside class="widget widget_footer text-center text-md-left mb-0">
