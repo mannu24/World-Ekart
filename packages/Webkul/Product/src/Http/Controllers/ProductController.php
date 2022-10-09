@@ -518,18 +518,22 @@ class ProductController extends Controller
         }
         return view($this->_config['view'], compact('attribute_families'));
     }
+
     public function save_bulk_upload() {
-        // dd(request()->file('csv-file')) ;
+
         $d = request()->validate([
-            // 'categories' => 'required|array',
             'attribute_families' => 'required|string',
+            'type' => 'required|string',
         ]) ;
+
         $name = request()->file('csv-file')->getClientOriginalName() ;
         $check = DB::table('shopify_file_csv')->where('file_name',"converted_csv/converted-$name")->get()->count() ;
+
         if($check>0) {
             session()->flash('error','File Name Already Exists!') ;
             return redirect()->back() ;
         }
+
         // $d['categories'] = implode(',',$d['categories']) ;
 
         $file = fopen(request()->file('csv-file'), "r");
@@ -539,7 +543,8 @@ class ProductController extends Controller
         }
         fclose($file);
 
-        $completed = $this->manipulate_file($data,$name,$d);
+        if($d['type'] == 'Simple') $completed = $this->manipulate_file($data,$name,$d);
+        else $completed = $this->manipulate_file_config($data,$name,$d);
         
         if($completed) {
             $upload['vendor_id'] = auth()->guard('admin')->user()->id ;
@@ -710,6 +715,19 @@ class ProductController extends Controller
             $data[$key] = array_values($item) ;
         }
 
+        $length = count($data[0]) ;
+
+        //Adding min and max price
+        $data[0][$length] = 'min_price';
+        $data[0][$length+1] = 'max_price';
+
+        foreach($data as $key => $value){
+            if($key==0) continue ; 
+
+            $data[$key][$length] = $value[9];
+            $data[$key][$length+1] = $value[9];
+        }
+
         //Attributes header Style FORMATTING 
         foreach ($data[0] as $key => $value) {
             if($key > 28 && $key < (count($data[0]) -3)) {
@@ -717,32 +735,217 @@ class ProductController extends Controller
             }
         }
 
-        $this->attributeCheck($data[0],$d['attribute_families']) ;
+        dd($data);
 
-        //Linking Attributes with Categories
-        foreach ($data as $key => $value) {
-            if($key==0) continue ; 
+        // $data = include(public_path('csvjson.php'));
+        $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
+        foreach ($data as $fields) {
+            fputcsv($fp, $fields);
+        }
+        fclose($fp);
 
-            $keys = $value ;
-            $spl_loc = array_search('special_price_to', $data[0])+1 ;
-            $attributes = array_splice($keys,$spl_loc,-3) ;
-            $att = [] ;
-            foreach ($attributes as $k => $v) {
-                if(!is_null($v)) {
-                    $att_id = $this->attributeRepository->where('code',$data[0][$k+$spl_loc])->first()->toArray()['id'] ;
-                    $att[] = $att_id ;
-                }
+        return true ;
+    }
+
+    public function manipulate_file_config($data,$name,$d) {
+
+        //Change Header for Bulk Upload
+        $data[0][0] = 'url_key'; 
+        $data[0][1] = 'name'; 
+        $data[0][2] = 'description'; 
+        $data[0][4] = 'categories_slug'; 
+        $data[0][6] = 'status'; 
+        $data[0][13] = 'sku'; 
+        $data[0][14] = 'weight'; 
+        $data[0][15] = 'inventory_sources'; 
+        $data[0][16] = 'inventories'; 
+        $data[0][19] = 'price'; 
+        $data[0][21] = 'tax_category_id'; 
+        $data[0][24] = 'images'; 
+        $data[0][28] = 'meta_title'; 
+        $data[0][29] = 'meta_description'; 
+
+        
+        //Remove Null Value Record at Last
+        if(!$data[count($data) - 1]) unset($data[count($data) - 1]);
+        
+        //Image Implode and Extra Row Removal
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+            
+            if ($item[25] == "1") {
+                $parent = $key;
             }
-            $cat = DB::table('category_translations')->where('slug',$value[3])->first()->category_id ;
-            DB::table('category_filterable_attributes')->where('category_id',$cat)->delete() ;
-            foreach ($att as $a) {
-                DB::table('category_filterable_attributes')->insert(['category_id' => $cat,'attribute_id' => $a]) ;
+
+            if ((int)$item[25] > 1) {
+                $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
+                $data[$key][24] = '' ;
+                // unset($data[$key]);
+                // unset($data[$parent][25]);
             }
         }
 
-        // dd($data);
+        //Null Meta Desc in Child Cell
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+            
+            if ($item[25] != "1") {
+                $data[$key][29] = '' ;
+            }
+        }
 
-        // $data = include(public_path('csvjson.php'));
+        //Column Removal and Updation
+        foreach ($data as $key => $value) {
+            unset(
+                $data[$key][3], $data[$key][5], $data[$key][17], $data[$key][18], $data[$key][20], $data[$key][22],
+                $data[$key][23], $data[$key][26], $data[$key][27], $data[$key][30], $data[$key][31], $data[$key][32],
+                $data[$key][33], $data[$key][34], $data[$key][35], $data[$key][36], $data[$key][37], $data[$key][38],
+                $data[$key][39], $data[$key][40], $data[$key][41], $data[$key][42], $data[$key][43], $data[$key][44],
+                $data[$key][45], $data[$key][46]
+            );
+            if ($key == 0) {
+                $data[$key][30] = 'new';
+                $data[$key][31] = 'featured';
+                $data[$key][32] = 'visible_individually';
+                $data[$key][33] = 'cost';
+                $data[$key][34] = 'width';
+                $data[$key][35] = 'height';
+                $data[$key][36] = 'depth';
+                $data[$key][37] = 'type';
+                $data[$key][38] = 'attribute_family_name';
+                $data[$key][39] = 'guest_checkout';
+                $data[$key][40] = 'meta_keywords';
+                $data[$key][41] = 'short_description';
+                $data[$key][42] = 'special_price';
+                $data[$key][43] = 'special_price_from';
+                $data[$key][44] = 'special_price_to';
+            } else {
+                $data[$key][0] = strtolower($value[0]) ;
+                //category
+                if($data[$key][25] == '1') {
+                    $category = $this->categoryCheck($data[$key][4]) ;
+                    $data[$key][4] = $category ;
+                }
+                else $data[$key][4] = '' ;
+                //STATUS
+                if($data[$key][25] == '1') {
+                    $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
+                }
+                else $data[$key][6] = '' ;
+
+                $data[$key][15] = 'default';
+                $data[$key][21] = null;
+                $data[$key][30] = 0;
+                $data[$key][31] = 0;
+                $data[$key][32] = 1;
+                $data[$key][33] = null;
+                $data[$key][34] = null;
+                $data[$key][35] = null;
+                $data[$key][36] = null;
+                $data[$key][37] = $data[$key][25] == '1' ? 'configurable' : 'variant';
+                $data[$key][38] = $d['attribute_families'] ;
+                $data[$key][39] = 1;
+                $data[$key][40] = null;
+                $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
+                $data[$key][42] = null;
+                $data[$key][43] = null;
+                $data[$key][44] = null;
+                
+               
+            }
+        }
+
+        //Columns Addition 
+        foreach ($data as $key => $item) {
+            if($key == 0 ) {
+                $data[0][] = 'user_id' ;
+                $data[0][] = 'country' ;
+                $data[0][] = 'delivery_charge' ;
+                $data[0][] = 'barcode' ;
+                $data[0][] = 'min_price' ;
+                $data[0][] = 'max_price' ;
+                $data[0][] = 'super_attributes' ;
+                $data[0][] = 'super_attribute_option' ;
+                $data[0][] = 'super_attribute_price' ;
+                $data[0][] = 'super_attribute_qty' ;
+                $data[0][] = 'super_attribute_weight' ;
+            }
+            else {
+                $data[$key][] = auth()->guard('admin')->user()->id ;
+                $data[$key][] = 'IN' ;
+                $data[$key][] = 0.0000 ;
+                $data[$key][] = 0 ;
+                $data[$key][] = $data[$key][25] == '1' ? $item[19] : '' ;
+                $data[$key][] = $data[$key][25] == '1' ? $item[19] : '' ;
+                $data[$key][] = '' ;
+                $data[$key][] = '' ;
+                $data[$key][] = '' ;
+                $data[$key][] = '' ;
+                $data[$key][] = '' ;
+            } 
+        }
+
+        //Image Position Column Removal
+        foreach ($data as $key => $item) {
+            unset($data[$key][25]) ;
+        }
+
+        //Parent Array Reindexing
+        $data = array_values($data) ;
+
+        //Item Array Reindexing
+        foreach ($data as $key => $item) {
+            $data[$key] = array_values($item) ;
+        }
+        
+        $parent = '' ;
+
+        // Updating Attribute Values
+        foreach ($data as $key => $item) {
+            if ($key == 0) continue;
+            if($item[27]=='configurable') {
+                $parent = $key ;
+                $data[$key][11] = strtolower($item[11]) ;
+            } 
+            else {
+                $data[$key][41] = strtolower($data[$parent][5].','.$data[$parent][7].','.$data[$parent][9]) ;
+                $data[$key][11] = strtolower( 
+                    $data[$key][11].'-'.str_replace([', ',' '],'-',$data[$key][6])
+                    .'-'.
+                    str_replace([', ',' '],'-',$data[$key][8])
+                    .'-'.
+                    str_replace([', ',' '],'-',$data[$key][10])
+                );
+                $data[$key][42] = 
+                    str_replace([', ',' '],'-',$data[$key][6])
+                    .','.
+                    str_replace([', ',' '],'-',$data[$key][8])
+                    .','.
+                    str_replace([', ',' '],'-',$data[$key][10])
+                ;
+                $data[$key][43] = $data[$key][15] ;
+                $data[$key][44] = $data[$key][14] ;
+                $data[$key][45] = $data[$key][12] ;
+                $data[$key][1] = $data[$parent][1] ;
+                $data[$key][2] = $data[$parent][2] ;
+                $data[$key][19] = $data[$parent][19] ;
+
+            }
+        }
+
+        
+        //Deleting Original Attributes Column
+        foreach ($data as $key => $item) {
+            unset($data[$key][5],$data[$key][6],$data[$key][7],$data[$key][8],$data[$key][9],$data[$key][10],$data[$key][12],$data[$key][14]) ;
+        }
+        
+        //Item Array Reindexing
+        foreach ($data as $key => $item) {
+            $data[$key] = array_values($item) ;
+        }
+        
+        // dd(array_splice($data,0,10)) ;
+        
         $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
         foreach ($data as $fields) {
             fputcsv($fp, $fields);
@@ -773,46 +976,6 @@ class ProductController extends Controller
             }
 
             return $cat ;
-        }
-    }
-
-    public function attributeCheck($data,$af) {
-
-        // attribute check and addition 
-        $keys = $data ;
-        $csvAttributes = array_splice($keys,array_search('special_price_to', $data)+1,-3) ;
-        $aFamily = $this->attributeFamilyRepository->findOneByfield(['name' => $af]) ; 
-        $attributeArray = $this->attributeRepository->pluck('code')->toArray() ;
-
-        
-        $attribute_fam_groups = $this->attributeGroupRepository->where('attribute_family_id',$aFamily->id)->pluck('id') ;
-        $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id',$attribute_fam_groups)->pluck('attribute_id') ;
-        $all_fam_att_codes = $this->attributeRepository->whereIn('id',$all_fam_attributes)->pluck('code')->toArray() ;
-        $fam_gen = $this->attributeGroupRepository->where('id',$aFamily->id)->where('name','General')->first() ;
-        // dd($attribute_fam_groups,$all_fam_att_codes,$all_fam_attributes, $fam_gen) ;
-
-        foreach ($csvAttributes as $key => $value) {
-            if (in_array($value, $attributeArray)) {
-                if(!in_array($value,$all_fam_att_codes)){
-                    $att_to_add = $this->attributeRepository->where('code',$value)->first();
-                    DB::table('attribute_group_mappings')->insert([
-                        'attribute_id' => $att_to_add->id,
-                        'attribute_group_id' => $fam_gen->id
-                    ]);
-                }
-            }
-            else {
-                    $id = $this->attributeRepository->insertGetId([
-                        'code' => $value,
-                        'admin_name' => ucwords(str_replace("_", " ", $value)),
-                        'is_visible_on_front' => 1,
-                        'type' => 'text',
-                    ]);
-                    DB::table('attribute_group_mappings')->insert([
-                        'attribute_id' => $id,
-                        'attribute_group_id' => $fam_gen->id
-                    ]);
-            }
         }
     }
 

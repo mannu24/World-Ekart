@@ -8,6 +8,24 @@
 <script type="text/javascript" src="{{ asset('themes/velocity/assets/js/jquery-ez-plus.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.3/js/bootstrap.min.js" integrity="sha512-8qmis31OQi6hIRgvkht0s6mCOittjMa9GMqtK9hes5iEQBQE/Ca6yGE5FsW36vyipGoWQswBj/QBm2JR086Rkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script>
+    $(document).ready(function() {
+        $('body').on('click','ul.menu li a',function(e) {
+            var ele = $(e)[0] ;
+            var computedStyle = getComputedStyle(ele.target) ;
+            var padding = parseFloat(computedStyle.paddingRight) ;
+            if (ele.offsetX > (ele.target.offsetWidth - padding)) {
+                var parent = ele.target.parentElement ;
+                if(parent.classList.contains('has-mega-menu')) {
+                    parent.classList.toggle('hover')
+                    return false;
+                }
+            }
+            return true ;
+        });
+    });
+</script>
+
 <script type="text/javascript">
     (() => {
         /* activate session messages */

@@ -12,30 +12,28 @@
 @push('scripts')
 
 <script type="text/x-template" id="suggestionSearchBar">
-    <template>
-        <div>
-            <form method="GET" role="search" id="search-form" class="ps-form--quick-search" :action="route">
-                <div class="ps-form__categories">
-                    <select class="form-control" name="category" aria-label="Category" @change="focusInput($event)">
-                        <option value="" v-text="__('header.all-categories')"></option>
-                        <template v-for="(category, index) in $root.sharedRootCategories">
-                            <option :key="index" selected="selected" :value="category.id"
-                                v-if="category.id == searchedQuery.category" v-text="category.name"></option>
-                            <option :key="index" :value="category.id" v-text="category.name" v-else></option>
-                        </template>
-                    </select>
-                    <div class="select-icon-container d-inline-block float-right">
-                        <span class="select-icon rango-arrow-down"></span>
-                    </div>
+    <div>
+        <form method="GET" role="search" id="search-form" class="ps-form--quick-search" :action="route">
+            <div class="ps-form__categories">
+                <select class="form-control" name="category" aria-label="Category" @change="focusInput($event)">
+                    <option value="" v-text="__('header.all-categories')"></option>
+                    <template v-for="(category, index) in $root.sharedRootCategories">
+                        <option :key="index" selected="selected" :value="category.id"
+                            v-if="category.id == searchedQuery.category" v-text="category.name"></option>
+                        <option :key="index" :value="category.id" v-text="category.name" v-else></option>
+                    </template>
+                </select>
+                <div class="select-icon-container d-inline-block float-right">
+                    <span class="select-icon rango-arrow-down"></span>
                 </div>
-                <div class="ps-form__input">
-                    <input required name="term" autocomplete="off" type="search" class="form-control" @keyup="someFunctionRun($event)" :placeholder="__('header.search-text')" aria-label="Search" v-model:value="inputVal" />
-                </div>
-                <button type="button" id="header-search-icon" aria-label="Search" @click="submitForm">Search</button>
-                <div id="old-new" class="suggests full-width"></div>
-            </form>
-        </div>
-    </template>
+            </div>
+            <div class="ps-form__input">
+                <input required name="term" autocomplete="off" type="search" class="form-control" @keyup="someFunctionRun($event)" :placeholder="__('header.search-text')" aria-label="Search" v-model:value="inputVal" />
+            </div>
+            <button type="button" id="header-search-icon" aria-label="Search" @click="submitForm">Search</button>
+            <div id="old-new" class="suggests full-width"></div>
+        </form>
+    </div>
 </script>
 
 <script>
