@@ -212,6 +212,9 @@ class ConfigurableProductRepository extends Repository
                                         $data['type'] = $csvData[$i]['type'];
                                         $data['attribute_family_id'] = $attributeFamilyData->id;
                                         $data['sku'] = $csvData[$i]['sku'];
+                                        $data['user_id'] = $csvData[$i]['user_id'];
+                                        $data['country'] = $csvData[$i]['country'];
+                                        $data['delivery_charge'] = $csvData[$i]['delivery_charge'];
 
                                         $product = $this->bulkProductRepository->create($data);
                                     } else {
@@ -290,11 +293,11 @@ class ConfigurableProductRepository extends Repository
                                                 $data['images'][$imageArraykey] = $imagePath;
                                             }
                                         }
-                                    } else if (isset($csvData['images'])) {
+                                    } else if (isset($csvData[$i]['images'])) {
                                         foreach ($individualProductimages as $imageArraykey => $imageURL)
                                         {
                                             if (filter_var(trim($imageURL), FILTER_VALIDATE_URL)) {
-                                                $imagePath = storage_path('app/public/  imported-products/extracted-images/admin/'.   $dataFlowProfileRecord->id);
+                                                $imagePath = storage_path('app/public/imported-products/extracted-images/admin/'.   $dataFlowProfileRecord->id);
 
                                                 if (!file_exists($imagePath)) {
                                                     mkdir($imagePath, 0777, true);
@@ -313,7 +316,7 @@ class ConfigurableProductRepository extends Repository
 
                                     if (isset($imageZipName)) {
                                         $this->productImageRepository->bulkuploadImages($data, $product, $imageZipName);
-                                    } else if (isset($csvData['images'])) {
+                                    } else if (isset($csvData[$i]['images'])) {
                                         $this->productImageRepository->bulkuploadImages($data, $product, $imageZipName = null);
                                     }
 
@@ -529,11 +532,11 @@ class ConfigurableProductRepository extends Repository
                                                         $data['images'][$imageArraykey] = $imagePath;
                                                     }
                                                 }
-                                            } else if (isset($csvData['images'])) {
+                                            } else if (isset($csvData[$i]['images'])) {
                                                 foreach ($individualProductimages as $imageArraykey => $imageURL)
                                                 {
                                                     if (filter_var(trim($imageURL), FILTER_VALIDATE_URL)) {
-                                                        $imagePath = storage_path('app/public/  imported-products/extracted-images/admin/'.   $dataFlowProfileRecord->id);
+                                                        $imagePath = storage_path('app/public/imported-products/extracted-images/admin/'.   $dataFlowProfileRecord->id);
 
                                                         if (!file_exists($imagePath)) {
                                                             mkdir($imagePath, 0777, true);
@@ -552,7 +555,7 @@ class ConfigurableProductRepository extends Repository
 
                                             if (isset($imageZipName)) {
                                                 $this->productImageRepository->bulkuploadImages($data, $configSimpleproduct, $imageZipName);
-                                            } else if (isset($csvData['images'])) {
+                                            } else if (isset($csvData[$i]['images'])) {
                                                 $this->productImageRepository->bulkuploadImages($data, $configSimpleproduct, $imageZipName = null);
                                             }
 

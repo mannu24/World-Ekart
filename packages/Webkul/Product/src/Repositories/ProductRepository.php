@@ -270,41 +270,44 @@ class ProductRepository extends Repository
                 $priceRange = explode(',', $priceFilter);
 
                 if (count($priceRange) > 0) {
-                    $customerGroupId = null;
 
-                    if (auth()->guard()->check()) {
-                        $customerGroupId = auth()->guard()->user()->customer_group_id;
-                    } else {
-                        $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
+                    $this->apply_price_filter($qb, $priceRange);
+                    
+                    // $customerGroupId = null;
 
-                        if ($customerGuestGroup) {
-                            $customerGroupId = $customerGuestGroup->id;
-                        }
-                    }
+                    // if (auth()->guard()->check()) {
+                    //     $customerGroupId = auth()->guard()->user()->customer_group_id;
+                    // } else {
+                    //     $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
 
-                    $this->variantJoin($qb);
+                    //     if ($customerGuestGroup) {
+                    //         $customerGroupId = $customerGuestGroup->id;
+                    //     }
+                    // }
 
-                    $qb
-                        ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
-                        ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
-                        ->where(function ($qb) use ($priceRange, $customerGroupId) {
-                            $qb->where(function ($qb) use ($priceRange) {
-                                $qb
-                                    ->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]))
-                                    ->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
-                            })
-                                ->orWhere(function ($qb) use ($priceRange) {
-                                    $qb
-                                        ->where('catalog_rule_product_prices.price', '>=', core()->convertToBasePrice($priceRange[0]))
-                                        ->where('catalog_rule_product_prices.price', '<=', core()->convertToBasePrice(end($priceRange)));
-                                })
-                                ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
-                                    $qb
-                                        ->where('product_customer_group_prices.value', '>=', core()->convertToBasePrice($priceRange[0]))
-                                        ->where('product_customer_group_prices.value', '<=', core()->convertToBasePrice(end($priceRange)))
-                                        ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
-                                });
-                        });
+                    // $this->variantJoin($qb);
+
+                    // $qb
+                    //     ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
+                    //     ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
+                    //     ->where(function ($qb) use ($priceRange, $customerGroupId) {
+                    //         $qb->where(function ($qb) use ($priceRange) {
+                    //             $qb
+                    //                 ->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]))
+                    //                 ->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+                    //         })
+                    //             ->orWhere(function ($qb) use ($priceRange) {
+                    //                 $qb
+                    //                     ->where('catalog_rule_product_prices.price', '>=', core()->convertToBasePrice($priceRange[0]))
+                    //                     ->where('catalog_rule_product_prices.price', '<=', core()->convertToBasePrice(end($priceRange)));
+                    //             })
+                    //             ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
+                    //                 $qb
+                    //                     ->where('product_customer_group_prices.value', '>=', core()->convertToBasePrice($priceRange[0]))
+                    //                     ->where('product_customer_group_prices.value', '<=', core()->convertToBasePrice(end($priceRange)))
+                    //                     ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
+                    //             });
+                    //     });
                 }
             }
 
@@ -681,6 +684,26 @@ class ProductRepository extends Repository
             /* `created_at` is not an attribute so it will be in else case */
             $query->orderBy('product_flat.created_at', $direction);
         }
+
+        return $query;
+    }
+
+    private function apply_price_filter($query, $priceRange)
+    {
+        // $attribute = $this->attributeRepository->findOneByField('code', $sort);
+
+        // if ($attribute) {
+        //     if ($attribute->code === 'price') {
+        //         $query->orderBy('min_price', $direction);
+        //     } else {
+        //         $query->orderBy($attribute->code, $direction);
+        //     }
+        // } else {
+        //     /* `created_at` is not an attribute so it will be in else case */
+        //     $query->orderBy('product_flat.created_at', $direction);
+        // }
+        $query->where('product_flat.min_price','>=', (float)$priceRange[0]);
+        $query->where('product_flat.min_price','<=', (float)$priceRange[1]);
 
         return $query;
     }
