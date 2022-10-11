@@ -100,6 +100,7 @@ class ProductDataGrid extends DataGrid
                 ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
                 ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
                 ->leftJoin('admins', 'products.user_id', '=', 'admins.id')
+                ->where('product_flat.parent_id',null)
                 ->select(
                     'product_flat.locale',
                     'product_flat.channel',
@@ -120,6 +121,7 @@ class ProductDataGrid extends DataGrid
                 ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                 ->leftJoin('attribute_families', 'products.attribute_family_id', '=', 'attribute_families.id')
                 ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
+                ->where('product_flat.parent_id',null)
                 ->select(
                     'product_flat.locale',
                     'product_flat.channel',
@@ -189,14 +191,14 @@ class ProductDataGrid extends DataGrid
             'filterable' => true,
         ]);
 
-        $this->addColumn([
-            'index'      => 'product_number',
-            'label'      => trans('admin::app.datagrid.product-number'),
-            'type'       => 'string',
-            'searchable' => true,
-            'sortable'   => true,
-            'filterable' => true,
-        ]);
+        // $this->addColumn([
+        //     'index'      => 'product_number',
+        //     'label'      => trans('admin::app.datagrid.product-number'),
+        //     'type'       => 'string',
+        //     'searchable' => true,
+        //     'sortable'   => true,
+        //     'filterable' => true,
+        // ]);
 
         
 
@@ -243,30 +245,30 @@ class ProductDataGrid extends DataGrid
             },
         ]);
 
-        $this->addColumn([
-            'index'      => 'price',
-            'label'      => trans('admin::app.datagrid.price'),
-            'type'       => 'price',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => true,
-        ]);
+        // $this->addColumn([
+        //     'index'      => 'price',
+        //     'label'      => trans('admin::app.datagrid.price'),
+        //     'type'       => 'price',
+        //     'sortable'   => true,
+        //     'searchable' => false,
+        //     'filterable' => true,
+        // ]);
 
-        $this->addColumn([
-            'index'      => 'quantity',
-            'label'      => trans('admin::app.datagrid.qty'),
-            'type'       => 'number',
-            'sortable'   => true,
-            'searchable' => false,
-            'filterable' => false,
-            'closure'    => function ($row) {
-                if (is_null($row->quantity)) {
-                    return 0;
-                } else {
-                    return $this->renderQuantityView($row);
-                }
-            },
-        ]);
+        // $this->addColumn([
+        //     'index'      => 'quantity',
+        //     'label'      => trans('admin::app.datagrid.qty'),
+        //     'type'       => 'number',
+        //     'sortable'   => true,
+        //     'searchable' => false,
+        //     'filterable' => false,
+        //     'closure'    => function ($row) {
+        //         if (is_null($row->quantity)) {
+        //             return 0;
+        //         } else {
+        //             return $this->renderQuantityView($row);
+        //         }
+        //     },
+        // ]);
     }
 
     /**
