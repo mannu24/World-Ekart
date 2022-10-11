@@ -39,3 +39,20 @@
     height: 100%;
     object-fit: cover;
 }
+
+.select2-results { color: #5b6469; }
+
+.select2-container {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.dark-mode .select2-container--default .select2-selection--multiple {
+    background-color: #02080d;
+    color: hsla(0,0%,100%,.8);
+    border: 1px solid #24384c;
+}
+
+.dark-mode .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    color: black;
+}

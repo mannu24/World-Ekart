@@ -166,6 +166,10 @@ class ProductController extends Controller
     {
         $families = $this->attributeFamilyRepository->all();
 
+        $categories = $this->categoryRepository->getCategoryTree();
+
+        $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
+
         $configurableFamily = null;
 
         if ($familyId = request()->get('family')) {
@@ -174,7 +178,7 @@ class ProductController extends Controller
 
         $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
 
-        return view($this->_config['view'], compact('families', 'configurableFamily', 'countries'));
+        return view($this->_config['view'], compact('families', 'inventorySources', 'configurableFamily', 'countries', 'categories'));
     }
 
     /**

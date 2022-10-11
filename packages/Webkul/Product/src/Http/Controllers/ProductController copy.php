@@ -813,16 +813,16 @@ class ProductController extends Controller
                 }
             }
             else {
-                    $id = $this->attributeRepository->insertGetId([
-                        'code' => $value,
-                        'admin_name' => ucwords(str_replace("_", " ", $value)),
-                        'is_visible_on_front' => 1,
-                        'type' => 'text',
-                    ]);
-                    DB::table('attribute_group_mappings')->insert([
-                        'attribute_id' => $id,
-                        'attribute_group_id' => $fam_gen->id
-                    ]);
+                $id = $this->attributeRepository->insertGetId([
+                    'code' => $value,
+                    'admin_name' => ucwords(str_replace("_", " ", $value)),
+                    'is_visible_on_front' => 1,
+                    'type' => 'text',
+                ]);
+                DB::table('attribute_group_mappings')->insert([
+                    'attribute_id' => $id,
+                    'attribute_group_id' => $fam_gen->id
+                ]);
             }
         }
     }

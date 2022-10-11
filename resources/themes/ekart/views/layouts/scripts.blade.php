@@ -13,9 +13,14 @@
         $('body').on('click','ul.menu li a',function(e) {
             var ele = $(e)[0] ;
             var computedStyle = getComputedStyle(ele.target) ;
+            var parent = ele.target.parentElement ;
+            var li_s = $('ul.menu li') ;
+            li_s.each((k,e) => {
+                if(e!=parent)
+                e.classList.remove('hover')
+            });
             var padding = parseFloat(computedStyle.paddingRight) ;
             if (ele.offsetX > (ele.target.offsetWidth - padding)) {
-                var parent = ele.target.parentElement ;
                 if(parent.classList.contains('has-mega-menu')) {
                     parent.classList.toggle('hover')
                     return false;
