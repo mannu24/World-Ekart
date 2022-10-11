@@ -24,8 +24,8 @@
                         <div class="col-md-12 control-group">
                             <label class="required">Select Product Type</label>
                             <select name="type" class="control">
-                                <option value="Simple" selected>Simple Product</option>
-                                <option value="Configurable">Product with Variants (Configurable)</option>
+                                <option value="Simple">Simple Product</option>
+                                <option value="Configurable" selected>Product with Variants (Configurable)</option>
                             </select>
                         </div>
                         {{-- <div class="col-md-12 control-group">

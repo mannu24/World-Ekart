@@ -954,9 +954,10 @@ class ProductController extends Controller
                         str_replace([',',' '],'-',$data[$key][10])
                     ;
                 }
-                $data[$key][43] = $data[$key][15] ;
-                $data[$key][44] = $data[$key][14] ;
-                $data[$key][45] = $data[$key][12] ;
+
+                $data[$key][43] = $data[$parent][15] ;
+                $data[$key][44] = $data[$parent][14] ;
+                $data[$key][45] = $data[$parent][12] ;
                 $data[$key][1] = $data[$parent][1] ;
                 $data[$key][2] = $data[$parent][2] ;
                 $data[$key][19] = $data[$parent][19] ;
