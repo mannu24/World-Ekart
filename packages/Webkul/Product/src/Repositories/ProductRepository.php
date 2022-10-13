@@ -208,13 +208,15 @@ class ProductRepository extends Repository
             ->whereNotNull('product_flat.url_key');
                 
             if ($categoryId) {
-                $cat_id = DB::table('categories')->where('parent_id',$categoryId)->pluck('id') ;
-                // dd($cat_id);
+                $cat_id = DB::table('categories')->where('parent_id',$categoryId)->get() ;
                 $ids = explode(',', $categoryId);
                 foreach($cat_id as $v){
-                    array_push($ids,$v);
+                    $sub_child = DB::table('categories')->where('parent_id',$v->id)->pluck('id') ;
+                    foreach($sub_child as $sc) {
+                        array_push($ids,$sc);
+                    }
+                    array_push($ids,$v->id);
                 }
-
                 if(count($cat_id) > 0) {
                     $qb->whereIn('product_categories.category_id', $ids) ;
                     // $qb->whereIn('product_categories.category_id',$cat_id) ;

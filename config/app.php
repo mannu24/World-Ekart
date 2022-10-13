@@ -281,7 +281,6 @@ return [
         Webkul\DebugBar\Providers\DebugBarServiceProvider::class,
         Webkul\Marketing\Providers\MarketingServiceProvider::class,
         Webkul\Notification\Providers\NotificationServiceProvider::class,
-        Webkul\SizeChart\Providers\SizeChartServiceProvider::class,
         // Razorpay provider
         Wontonee\Razorpay\Providers\RazorpayServiceProvider::class,
 

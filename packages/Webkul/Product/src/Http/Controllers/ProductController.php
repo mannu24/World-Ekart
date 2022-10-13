@@ -844,7 +844,7 @@ class ProductController extends Controller
                     $data[$key][6] = 1;
                 // }
                 // else $data[$key][6] = '' ;
-
+                $data[$key][13] = str_replace([' ','\"','\''], '-', $value[13]) ;
                 $data[$key][15] = 'default';
                 $data[$key][21] = null;
                 $data[$key][30] = 0;
