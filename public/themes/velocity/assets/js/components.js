@@ -6371,7 +6371,12 @@ var render = function render() {
     staticClass: "ps-product__info"
   }, [_c("header", [_c("h1", [_vm._v(_vm._s(_vm.product.name))]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__meta"
-  }, [_c("p", [_vm._v("Brand: " + _vm._s(_vm.product.brand))]), _vm._v(" "), _vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
+  }, [_vm.product.vendor != "" ? _c("p", [_vm._v("Seller:\n                                    "), _c("a", {
+    staticClass: "ml-2 text-capitalize",
+    attrs: {
+      href: "/shop/" + _vm.product.vendor
+    }
+  }, [_vm._v(_vm._s(_vm.product.vendor))])]) : _vm._e(), _vm._v(" "), _vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
     staticClass: "ps-product__rating"
   }, [_c("star-ratings", {
     attrs: {
@@ -6392,11 +6397,15 @@ var render = function render() {
   })])]), _vm._v(" "), _c("h4", {
     staticClass: "ps-product__price",
     domProps: {
-      innerHTML: _vm._s(_vm.product.price)
+      innerHTML: _vm._s(_vm.product.priceHTML)
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__desc"
-  }, [_c("span", [_vm._v("Description:")]), _vm._v(" " + _vm._s(_vm.product.shortDescription))]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v("Description:")]), _c("span", {
+    domProps: {
+      innerHTML: _vm._s(_vm.product.shortDescription)
+    }
+  })]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__shopping extend pb-0"
   }, [_c("div", {
     staticClass: "ps-product__btn-group"
