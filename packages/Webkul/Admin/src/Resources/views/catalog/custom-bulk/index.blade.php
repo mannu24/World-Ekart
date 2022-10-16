@@ -22,6 +22,10 @@
                             <input type="file" class="control" accept=".csv" name="csv-file">
                         </div>
                         <div class="col-md-12 control-group">
+                            <label class="required">Select Margin %</label>
+                            <input type="number" class="control" name="margin" max="100" min="0" value="0">
+                        </div>
+                        <div class="col-md-12 control-group">
                             <label class="required">Select Product Type</label>
                             <select name="type" class="control">
                                 <option value="Simple">Simple Product</option>

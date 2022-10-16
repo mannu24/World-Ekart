@@ -355,6 +355,7 @@ class Helper extends Review
             'new'              => $isProductNew,
             'galleryImages'    => $galleryImages,
             'name'             => $product->name,
+            'vendor'           => $product->product->admin->vendor ? $product->product->admin->vendor->display_name : '',
             'slug'             => $product->url_key,
             'description'      => $product->description,
             'shortDescription' => $product->short_description,

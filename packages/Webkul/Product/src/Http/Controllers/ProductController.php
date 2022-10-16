@@ -529,6 +529,7 @@ class ProductController extends Controller
         $d = request()->validate([
             'attribute_families' => 'required|string',
             'type' => 'required|string',
+            'margin' => 'required|numeric',
         ]) ;
 
         $name = request()->file('csv-file')->getClientOriginalName() ;
@@ -830,7 +831,7 @@ class ProductController extends Controller
                 $data[$key][43] = 'special_price_from';
                 $data[$key][44] = 'special_price_to';
             } else {
-                $data[$key][0] = str_replace('\'','',strtolower($value[0])) ;
+                $data[$key][0] = preg_replace("/[^A-Za-z0-9_-]+/","",strtolower($value[0])) ;
                 //category
                 if($data[$key][25] == '1') {
                     $data[$key][4] = str_replace('\'','',$data[$key][4]) ;
@@ -867,7 +868,7 @@ class ProductController extends Controller
             }
         }
 
-        //Columns Addition 
+        //Columns Addition and Price Change
         foreach ($data as $key => $item) {
             if($key == 0 ) {
                 $data[0][] = 'user_id' ;
@@ -887,18 +888,23 @@ class ProductController extends Controller
                 $data[$key][] = 'IN' ;
                 $data[$key][] = 0.0000 ;
                 $data[$key][] = 0 ;
-                $data[$key][] = $data[$key][25] == '1' ? $item[19] : '' ;
-                $data[$key][] = $data[$key][25] == '1' ? $item[19] : '' ;
+                $data[$key][] = $data[$key][25] == '1' ? (int) $item[19] : '' ;
+                $data[$key][] = $data[$key][25] == '1' ? (int) $item[19] : '' ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
+                $data[$key][42] = (int) $data[$key][19] ;
+                $data[$key][19] = ceil(((int) $data[$key][19])*(1+($d['margin']/100))) ;
             } 
         }
 
         //Image Position Column Removal
         foreach ($data as $key => $item) {
+            // if($d['margin'] != 0) {
+            //     $data['key'] ;
+            // }
             unset($data[$key][25]) ;
         }
 

@@ -28,7 +28,9 @@
                             <header>
                                 <h1>{{product.name}}</h1>
                                 <div class="ps-product__meta">
-                                    <p>Brand: {{ product.brand }}</p>
+                                    <p v-if=" product.vendor!='' ">Seller:
+                                        <a class="ml-2 text-capitalize" :href="'/shop/' + product.vendor">{{ product.vendor }}</a>
+                                    </p>
                                     <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">
                                         <star-ratings :ratings="product.avgRating"></star-ratings>
                                         <span><a :href="`${$root.baseUrl}/reviews/${product.slug}`">
@@ -39,9 +41,11 @@
                                         <span v-text="product.firstReviewText"></span>
                                     </div>
                                 </div>
-                                <h4 class="ps-product__price" v-html="product.price"></h4>
+                                <h4 class="ps-product__price" v-html="product.priceHTML"></h4>
                             </header>
-                            <div class="ps-product__desc"><span>Description:</span> {{ product.shortDescription }}</div>
+                            <div class="ps-product__desc">
+                                <span>Description:</span><span v-html="product.shortDescription"></span>
+                            </div>
                             <div class="ps-product__shopping extend pb-0">
                                 <div class="ps-product__btn-group">
                                     <vnode-injector :nodes="getDynamicHTML(product.addToCartHtml)"></vnode-injector>
