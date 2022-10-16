@@ -103,7 +103,7 @@
                     <div class="control-group" :class="[errors.has('sku') ? 'has-error' : '']">
                         <label for="sku" class="required">{{ __('admin::app.catalog.products.sku') }}</label>
 
-                        <input type="text" v-validate="{ required: true, regex: /^[A-Za-z0-9_-,.']*$/ }"
+                        <input type="text" v-validate="{ required: true, regex: /^\S+$/ }"
                             class="control" id="sku" name="sku" value="{{ request()->input('sku') ?: old('sku') }}"
                             data-vv-as="&quot;{{ __('admin::app.catalog.products.sku') }}&quot;" />
 
