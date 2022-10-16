@@ -47,7 +47,7 @@
   array (
     'providers' => 
     array (
-      0 => 'Webkul\\DataFaker\\Providers\\DataFakerServiceProvider',
+      0 => 'Webkul\\Faker\\Providers\\FakerServiceProvider',
     ),
     'aliases' => 
     array (
