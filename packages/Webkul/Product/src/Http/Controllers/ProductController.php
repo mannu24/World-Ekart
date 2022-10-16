@@ -741,7 +741,7 @@ class ProductController extends Controller
             }
         }
 
-        dd($data);
+        // dd($data);
 
         // $data = include(public_path('csvjson.php'));
         $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
@@ -927,36 +927,36 @@ class ProductController extends Controller
             } 
             else {
 
-                $data[$key][41] = strtolower($data[$parent][5].','.$data[$parent][7].','.$data[$parent][9]) ;
+                $data[$key][41] = strtolower($data[$parent][5].($data[$parent][7]!=''?',':'').$data[$parent][7].($data[$parent][9]!=''?',':'').$data[$parent][9]) ;
                 if($item[11] == '') {
                     $data[$key][11] = strtolower( 
-                        $data[$parent][11].'-'.str_replace([',',' '],'-',$data[$parent][6])
-                        .'-'.
+                        $data[$parent][11].($data[$parent][6]!=''?'-':'').str_replace([',',' '],'-',$data[$parent][6])
+                        .($data[$parent][8]!=''?'-':'').
                         str_replace([',',' '],'-',$data[$parent][8])
-                        .'-'.
+                        .($data[$parent][10]!=''?'-':'').
                         str_replace([',',' '],'-',$data[$parent][10])
                     );
                     $data[$key][42] = 
                         str_replace([',',' '],'-',$data[$parent][6])
-                        .','.
+                        .($data[$parent][8]!=''?',':'').
                         str_replace([',',' '],'-',$data[$parent][8])
-                        .','.
+                        .($data[$parent][10]!=''?',':'').
                         str_replace([',',' '],'-',$data[$parent][10])
                     ;    
                 }
                 else {
                     $data[$key][11] = strtolower( 
                         $data[$key][11].'-'.str_replace([',',' '],'-',$data[$key][6])
-                        .'-'.
+                        .($data[$parent][8]!=''?'-':'').
                         str_replace([',',' '],'-',$data[$key][8])
-                        .'-'.
+                        .($data[$parent][10]!=''?'-':'').
                         str_replace([',',' '],'-',$data[$key][10])
                     );
                     $data[$key][42] = 
                         str_replace([',',' '],'-',$data[$key][6])
-                        .','.
+                        .($data[$parent][8]!=''?',':'').
                         str_replace([',',' '],'-',$data[$key][8])
-                        .','.
+                        .($data[$parent][10]!=''?',':'').
                         str_replace([',',' '],'-',$data[$key][10])
                     ;
                 }
@@ -967,7 +967,10 @@ class ProductController extends Controller
                 $data[$key][1] = $data[$parent][1] ;
                 $data[$key][2] = $data[$parent][2] ;
                 $data[$key][19] = $data[$parent][19] ;
-
+                $data[$key][22] = 0; //Visble Indivdually False
+                
+                $data[$key][32] =  $data[$parent][32] ; //Special Price
+                $data[$key][15] = $data[$parent][15]; // MRP
             }
         }
 
@@ -987,7 +990,12 @@ class ProductController extends Controller
             if($value[19] != 'configurable') {
                 $att_code = explode(',',$value[33]) ;
                 $att_values = explode(',',$value[34]) ;
-                $pass_data = [[$att_code[0],$att_values[0]],[$att_code[1],$att_values[1]],[$att_code[2],$att_values[2]]] ;
+                $pass_data = [];
+                if($att_code[0]!='' && $att_values[0]!='') $pass_data[] = [$att_code[0],$att_values[0]];
+                if(isset($att_code[1]) && $att_code[1]!='' && $att_values[1]!='') $pass_data[] = [$att_code[1],$att_values[1]];
+                if(isset($att_code[2]) && $att_code[2]!='' && $att_values[2]!='') $pass_data[] = [$att_code[2],$att_values[2]];
+                // dd($pass_data);
+                // $pass_data = [[$att_code[0],$att_values[0]],[$att_code[1],$att_values[1]],[$att_code[2],$att_values[2]]] ;
                 $this->attributeCheck_config($pass_data,$d['attribute_families']) ;
             }
         }
@@ -1041,50 +1049,52 @@ class ProductController extends Controller
 
 
         foreach ($pass_data as $key => $value) {
-            if (in_array($value[0], $attributeArray)) {
-                $att_to_add = $this->attributeRepository->where('code',$value[0])->first();
-                if(!in_array($value[0],$all_fam_att_codes)){
+            if($value[0]!='' && $value[1] != ''){
+                if (in_array($value[0], $attributeArray)) {
+                    $att_to_add = $this->attributeRepository->where('code',$value[0])->first();
+                    if(!in_array($value[0],$all_fam_att_codes)){
+                        DB::table('attribute_group_mappings')->insert([
+                            'attribute_id' => $att_to_add->id,
+                            'attribute_group_id' => $fam_gen->id
+                        ]);
+                    }
+    
+                    //check for option existence
+                    $check  = DB::table('attribute_options')->where('attribute_id',$att_to_add->id)->where('admin_name',$value[1])->count();
+                    if($check<1){
+                        DB::table('attribute_options')->insert([
+                            'attribute_id' => $att_to_add->id,
+                            'admin_name' => $value[1],
+                            'sort_order' => 1,
+                        ]);
+                    }
+                }
+                else {
+    
+                    //Created attribute
+                    $id = $this->attributeRepository->insertGetId([
+                        'code' => $value[0],
+                        'admin_name' => ucwords(str_replace("_", " ", $value[0])),
+                        'is_visible_on_front' => 1,
+                        'is_configurable' => 1,
+                        'is_filterable' => 1,
+                        'swatch_type' => 'dropdown',
+                        'type' => 'select',
+                    ]);
+    
+                    //Linked to group
                     DB::table('attribute_group_mappings')->insert([
-                        'attribute_id' => $att_to_add->id,
+                        'attribute_id' => $id,
                         'attribute_group_id' => $fam_gen->id
                     ]);
-                }
-
-                //check for option existence
-                $check  = DB::table('attribute_options')->where('attribute_id',$att_to_add->id)->where('admin_name',$value[1])->count();
-                if($check<1){
+    
+                    //Creating option 
                     DB::table('attribute_options')->insert([
-                        'attribute_id' => $att_to_add->id,
+                        'attribute_id' => $id,
                         'admin_name' => $value[1],
                         'sort_order' => 1,
                     ]);
                 }
-            }
-            else {
-
-                //Created attribute
-                $id = $this->attributeRepository->insertGetId([
-                    'code' => $value[0],
-                    'admin_name' => ucwords(str_replace("_", " ", $value[0])),
-                    'is_visible_on_front' => 1,
-                    'is_configurable' => 1,
-                    'is_filterable' => 1,
-                    'swatch_type' => 'dropdown',
-                    'type' => 'select',
-                ]);
-
-                //Linked to group
-                DB::table('attribute_group_mappings')->insert([
-                    'attribute_id' => $id,
-                    'attribute_group_id' => $fam_gen->id
-                ]);
-
-                //Creating option 
-                DB::table('attribute_options')->insert([
-                    'attribute_id' => $id,
-                    'admin_name' => $value[1],
-                    'sort_order' => 1,
-                ]);
             }
         }
     }

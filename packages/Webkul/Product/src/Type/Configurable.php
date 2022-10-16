@@ -578,8 +578,8 @@ class Configurable extends AbstractType
             . '<span class="final-price">' . core()->currency($this->evaluatePrice($this->getOfferPrice())) . '</span>';
         } else {
             return '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'
-            . ' '
-            . '<h4 class="ps-product__price final-price d-inline">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</h4>';
+            . '<del class="mr-2"><span class="regular-price"></span></del> '
+            . '<h4 class="ps-product__price final-price d-inline sale">' . core()->currency($this->evaluatePrice($this->getMinimalPrice())) . '</h4>';
         }
     }
 
