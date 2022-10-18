@@ -24,7 +24,7 @@
     <script type="text/x-template" id="filter-attribute-item-template">
         <div>
             <aside class="widget widget_shop widget_shop--brand">
-                <h4 class="widget-title d-inline">@{{ attribute.name ? attribute.name : attribute.admin_name }}</h4>
+                <h4 class="widget-title d-inline">@{{ attribute.admin_name ? attribute.admin_name : attribute.name }}</h4>
                 <div class="float-right display-table" style="cursor:pointer;">
                     <span v-if="appliedFilters.length" @click.stop="clearFilters()">
                         {{ __('shop::app.products.remove-filter-link-title') }}
@@ -37,7 +37,8 @@
                                 <input type="checkbox" class="ant-radio-input" @change="addFilter($event)" :id="option.id" :value="option.id" v-model="appliedFilters">
                                 <span class="ant-radio-inner"></span>
                             </span>
-                            <span @click="optionClicked(option.id, $event)">@{{ option.label ? option.label : option.admin_name }}</span>
+                            {{-- <span @click="optionClicked(option.id, $event)">@{{ option.label ? option.label : option.admin_name }}</span> --}}
+                            <span @click="optionClicked(option.id, $event)">@{{ option.admin_name }}</span>
                         </label>
                     </div>
                     <div class="price-range-wrapper" v-if="attribute.type == 'price'">
@@ -86,6 +87,7 @@
                         .get(this.attributeSrc)
                         .then((response) => {
                             this.attributes = response.data.filter_attributes;
+                            console.log(this.attributes);
                         });
                 },
 

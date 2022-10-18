@@ -56,3 +56,7 @@
 .dark-mode .select2-container--default .select2-selection--multiple .select2-selection__choice {
     color: black;
 }
+
+.dark-mode .control-group .control:focus {
+    border-color: #0041FF;
+}

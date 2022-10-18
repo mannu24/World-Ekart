@@ -2,6 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Webkul\Velocity\Helpers\Helper;
+use Webkul\Product\Helpers\View as PHelper;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
@@ -10,7 +12,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
-
+use DB ;
 class ProductController extends Controller
 {
     /**
@@ -55,6 +57,10 @@ class ProductController extends Controller
      */
     protected $categoryRepository;
 
+    protected $velocityHelper;
+
+    protected $phelper;
+
     /**
      * Create a new controller instance.
      *
@@ -72,7 +78,9 @@ class ProductController extends Controller
         ProductAttributeValueRepository $productAttributeValueRepository,
         ProductDownloadableSampleRepository $productDownloadableSampleRepository,
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
-        CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository,
+        Helper $velocityHelper,
+        PHelper $phelper
     ) {
         $this->productRepository = $productRepository;
 
@@ -85,6 +93,8 @@ class ProductController extends Controller
         $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
 
         $this->categoryRepository = $categoryRepository;
+        $this->velocityHelper = $velocityHelper;
+        $this->phelper = $phelper;
 
         parent::__construct();
     }
@@ -162,15 +172,39 @@ class ProductController extends Controller
     public function getFilterAttributes($categoryId = null, AttributeRepository $attributeRepository)
     {
         $filterAttributes = [];
-
         if ($category = $this->categoryRepository->find($categoryId)) {
-            $filterAttributes = $this->productFlatRepository->getFilterAttributes($category);
+            $products = $this->productRepository->getAll($categoryId);
+            foreach ($products as $key1 => $product) {
+                $customAtt = $this->phelper->getAdditionalData($product) ; 
+                foreach ($customAtt as $key2 => $att) {
+                    if($att['value'] != '' && $att['value']!=null) {
+                        $loc = array_search($att['admin_name'],array_column($filterAttributes,'admin_name')) ;
+                        $att_id = DB::table('attribute_options')->where('admin_name',$att['value'])->pluck('id') ; 
+                        dd($att_id,$att['value']);
+                        if(false === $loc) {
+                            $filterAttributes[] = [
+                                'admin_name' => $att['admin_name'],
+                                'name' => $att['label'],
+                                'code' => $att['code'],
+                                'options' => [['admin_name' => $att['value'],'id'=>$att_id]]
+                            ] ;
+                        }
+                        else {
+                            if(!in_array($att['value'],array_column($filterAttributes[$loc]['options'],'admin_name')))
+                                array_push($filterAttributes[$loc]['options'],['admin_name' => $att['value'],'id'=>$att_id]) ;
+                        }
+                    }
+                }
+            }
+            // dd($filterAttributes) ;
+            // $filterAttributes = $this->productFlatRepository->getFilterAttributes($category);
         }
 
         if (! count($filterAttributes) > 0) {
             $filterAttributes = $attributeRepository->getFilterAttributes();
         }
 
+        // dd($filterAttributes) ;
         return response()->json([
             'filter_attributes' => $filterAttributes,
         ]);
