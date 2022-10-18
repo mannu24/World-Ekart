@@ -396,6 +396,11 @@ class ConfigurableProductRepository extends Repository
                                                 $data['sku']        = $csvData[$i]['sku'];
 
                                                 $configSimpleproduct = $this->productRepository->create($data);
+                                                //For Default Set
+                                                if(is_null(DB::table('products')->where('id',$product->id)->pluck('additional')[0])){
+                                                    $default = (object) ["default_variant_id" => $configSimpleproduct->id] ;
+                                                    DB::table('products')->where('id',$product->id)->update([ 'additional' =>  json_encode($default)]);
+                                                }
                                             } else {
                                                 $configSimpleproduct = $productData;
                                             }
