@@ -15,7 +15,7 @@ class ConfigurableOption extends AbstractProduct
      */
     public function getAllowedProducts($product)
     {
-        static $variants = [];
+        $variants = [];
 
         if (count($variants)) {
             return $variants;

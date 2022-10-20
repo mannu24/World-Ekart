@@ -12,7 +12,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use DB ;
+use Webkul\Product\Helpers\ConfigurableOption;
 class ProductController extends Controller
 {
     /**
@@ -61,6 +61,8 @@ class ProductController extends Controller
 
     protected $phelper;
 
+    protected $con ;
+
     /**
      * Create a new controller instance.
      *
@@ -80,7 +82,8 @@ class ProductController extends Controller
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         CategoryRepository $categoryRepository,
         Helper $velocityHelper,
-        PHelper $phelper
+        PHelper $phelper,
+        ConfigurableOption $con
     ) {
         $this->productRepository = $productRepository;
 
@@ -93,8 +96,12 @@ class ProductController extends Controller
         $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
 
         $this->categoryRepository = $categoryRepository;
+
         $this->velocityHelper = $velocityHelper;
+
         $this->phelper = $phelper;
+        
+        $this->con = $con ;
 
         parent::__construct();
     }
@@ -175,29 +182,66 @@ class ProductController extends Controller
         if ($category = $this->categoryRepository->find($categoryId)) {
             $products = $this->productRepository->getAll($categoryId);
             foreach ($products as $key1 => $product) {
-                $customAtt = $this->phelper->getAdditionalData($product) ; 
-                foreach ($customAtt as $key2 => $att) {
-                    if($att['value'] != '' && $att['value']!=null) {
-                        $loc = array_search($att['admin_name'],array_column($filterAttributes,'admin_name')) ;
-                        $att_id = DB::table('attribute_options')->where('admin_name',$att['value'])->pluck('id') ; 
-                        dd($att_id,$att['value']);
-                        if(false === $loc) {
-                            $filterAttributes[] = [
-                                'admin_name' => $att['admin_name'],
-                                'name' => $att['label'],
-                                'code' => $att['code'],
-                                'options' => [['admin_name' => $att['value'],'id'=>$att_id]]
-                            ] ;
-                        }
-                        else {
-                            if(!in_array($att['value'],array_column($filterAttributes[$loc]['options'],'admin_name')))
-                                array_push($filterAttributes[$loc]['options'],['admin_name' => $att['value'],'id'=>$att_id]) ;
-                        }
+                $customAtt = null;
+                // if($product->product->type=='simple') {
+                    // if($key1==2) {
+                        $customAtt = $this->con->getConfigurationConfig($product)['attributes'] ;
+                        // $filterAttributes[] = $customAtt ;
+                    // }
+                    // dd($filterAttributes);
+                    foreach ($customAtt as $key2 => $att) {
+                        // if($att['value'] != '' && $att['value']!=null) {
+                            $loc = array_search($att['label'],array_column($filterAttributes,'label')) ;
+                            // $att_id = DB::table('attribute_options')->where('label',$att['value'])->pluck('id')->toArray()[0] ; 
+                            // dd($att_id,$att);
+                            if(false === $loc) {
+                                // $filterAttributes[] = [
+                                //     'label' => $att['label'],
+                                //     'name' => $att['label'],
+                                //     'code' => $att['code'],
+                                //     'options' => [['label' => $att['value'],'id'=>$att_id]]
+                                // ] ;
+                                $filterAttributes[] = $att ;
+                            }
+                            else {
+                                if(!in_array($att['options'][0]['label'],array_column($filterAttributes[$loc]['options'],'label')))
+                                    array_push($filterAttributes[$loc]['options'],$att['options'][0]) ;
+                            }
+                        // }
                     }
-                }
+                // }
+                // else {
+                //     $variants = $product->product->variants ;
+                //     foreach ($variants as $variant) {
+                //         $customAtt = $this->phelper->getAdditionalData($p) ; 
+                //         dd($variant,$customAtt); 
+                //         foreach ($customAtt as $key2 => $att) {
+                //             if($att['value'] != '' && $att['value']!=null) {
+                //                 $loc = array_search($att['admin_name'],array_column($filterAttributes,'admin_name')) ;
+                //                 $att_id = DB::table('attribute_options')->where('admin_name',$att['value'])->pluck('id')->toArray()[0] ; 
+                //                 // dd($att_id,$att,$variant);
+                //                 if(false === $loc) {
+                //                     $filterAttributes[] = [
+                //                         'admin_name' => $att['admin_name'],
+                //                         'name' => $att['label'],
+                //                         'code' => $att['code'],
+                //                         'options' => [['admin_name' => $att['value'],'id'=>$att_id]]
+                //                     ] ;
+                //                 }
+                //                 else {
+                //                     if(!in_array($att['value'],array_column($filterAttributes[$loc]['options'],'admin_name')))
+                //                         array_push($filterAttributes[$loc]['options'],['admin_name' => $att['value'],'id'=>$att_id]) ;
+                //                 }
+                //             }
+                //         }
+                //     }
+                // }
             }
             // dd($filterAttributes) ;
-            // $filterAttributes = $this->productFlatRepository->getFilterAttributes($category);
+            $arr = $this->productFlatRepository->getFilterAttributes($category)->toArray() ;
+            $loc = array_search('price',array_column($arr,'code')) ;
+            if($loc !== false)
+            array_unshift($filterAttributes, $arr[$loc]) ;
         }
 
         if (! count($filterAttributes) > 0) {

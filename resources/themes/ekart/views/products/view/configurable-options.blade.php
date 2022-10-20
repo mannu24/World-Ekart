@@ -5,7 +5,6 @@
     @php
         $defaultVariant = $product->getTypeInstance()->getDefaultVariant();
         $config = $configurableOptionHelper->getConfigurationConfig($product);
-        dd($config) ;
         $galleryImages = productimage()->getGalleryImages($product);
     @endphp
 
