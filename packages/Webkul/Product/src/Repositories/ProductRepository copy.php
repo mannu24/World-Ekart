@@ -17,8 +17,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductAttributeValueProxy;
 use Webkul\Product\Models\ProductFlat;
-use Log;
-
+Use Log;
 class ProductRepository extends Repository
 {
     /**
@@ -153,10 +152,9 @@ class ProductRepository extends Repository
             'channel' => core()->getCurrentChannelCode(),
         ]);
 
-        if (!$product) {
+        if (! $product) {
             throw (new ModelNotFoundException)->setModel(
-                get_class($this->model),
-                $slug
+                get_class($this->model), $slug
             );
         }
 
@@ -193,9 +191,9 @@ class ProductRepository extends Repository
         if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
 
-            $perPage = isset($params['limit']) ? (!empty($params['limit']) ? $params['limit'] : 9) : current($pages);
+            $perPage = isset($params['limit']) ? (! empty($params['limit']) ? $params['limit'] : 9) : current($pages);
         } else {
-            $perPage = isset($params['limit']) && !empty($params['limit']) ? $params['limit'] : 9;
+            $perPage = isset($params['limit']) && ! empty($params['limit']) ? $params['limit'] : 9;
         }
 
         $page = Paginator::resolveCurrentPage('page');
@@ -205,31 +203,32 @@ class ProductRepository extends Repository
 
             $locale = core()->getRequestedLocaleCode();
             $qb = $query->distinct()
-                ->select('product_flat.*')
-                ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
-                ->leftJoin('categories', 'product_categories.category_id', '=', 'categories.id')
-                // ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'product_flat.product_id')
-                ->where('product_flat.channel', $channel)
-                ->where('product_flat.locale', $locale)
-                ->whereNotNull('product_flat.url_key');
-                // $this->variantJoin($qb);
+            ->select('product_flat.*')
+            ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
+            ->leftJoin('categories', 'product_categories.category_id', '=', 'categories.id')
+            ->where('product_flat.channel', $channel)
+            ->where('product_flat.locale', $locale)
+            ->whereNotNull('product_flat.url_key');
+                
             if ($categoryId) {
-                $cat_id = DB::table('categories')->where('parent_id', $categoryId)->get();
+                $cat_id = DB::table('categories')->where('parent_id',$categoryId)->get() ;
                 $ids = explode(',', $categoryId);
-                foreach ($cat_id as $v) {
-                    $sub_child = DB::table('categories')->where('parent_id', $v->id)->pluck('id');
-                    foreach ($sub_child as $sc) {
-                        array_push($ids, $sc);
+                foreach($cat_id as $v){
+                    $sub_child = DB::table('categories')->where('parent_id',$v->id)->pluck('id') ;
+                    foreach($sub_child as $sc) {
+                        array_push($ids,$sc);
                     }
-                    array_push($ids, $v->id);
+                    array_push($ids,$v->id);
                 }
-                if (count($cat_id) > 0) {
-                    $qb->whereIn('product_categories.category_id', $ids);
+                if(count($cat_id) > 0) {
+                    $qb->whereIn('product_categories.category_id', $ids) ;
                     // $qb->whereIn('product_categories.category_id',$cat_id) ;
-                } else  $qb->whereIn('product_categories.category_id', explode(',', $categoryId));
+                }
+                else  $qb->whereIn('product_categories.category_id', explode(',', $categoryId)) ;
+                $qb->orWhere('categories.parent_id', $categoryId) ;
             }
 
-            if (!core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+            if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
                 $qb = $this->checkOutOfStockItem($qb);
             }
 
@@ -237,14 +236,13 @@ class ProductRepository extends Repository
                 $qb->where('product_flat.status', 1);
             }
 
-            // if (is_null(request()->input('visible_individually'))) {
-            //     $qb->where('product_flat.visible_individually', 1);
-            // }
+            if (is_null(request()->input('visible_individually'))) {
+                $qb->where('product_flat.visible_individually', 1);
+            }
 
             if (isset($params['search'])) {
                 $qb->where('product_flat.name', 'like', '%' . urldecode($params['search']) . '%');
             }
-
 
             if (isset($params['name'])) {
                 $qb->where('product_flat.name', 'like', '%' . urldecode($params['name']) . '%');
@@ -261,131 +259,103 @@ class ProductRepository extends Repository
             } else {
                 $sortOptions = $this->getDefaultSortByOption();
 
-                $orderDirection = !empty($sortOptions) ? $sortOptions[1] : 'asc';
+                $orderDirection = ! empty($sortOptions) ? $sortOptions[1] : 'asc';
             }
 
             if (isset($params['sort'])) {
                 $this->checkSortAttributeAndGenerateQuery($qb, $params['sort'], $orderDirection);
             } else {
                 $sortOptions = $this->getDefaultSortByOption();
-                if (!empty($sortOptions)) {
+                if (! empty($sortOptions)) {
                     $this->checkSortAttributeAndGenerateQuery($qb, $sortOptions[0], $orderDirection);
                 }
             }
-            
 
             if ($priceFilter = request('price')) {
                 $priceRange = explode(',', $priceFilter);
 
                 if (count($priceRange) > 0) {
 
-                    // $this->apply_price_filter($qb, $priceRange);
-                    // $qb->where('product_flat.min_price', '>=', (float)$priceRange[0]);
-                    // $qb->where('product_flat.min_price', '<=', (float)$priceRange[1]);
+                    $this->apply_price_filter($qb, $priceRange);
+                    
+                    // $customerGroupId = null;
 
-                    $customerGroupId = null;
+                    // if (auth()->guard()->check()) {
+                    //     $customerGroupId = auth()->guard()->user()->customer_group_id;
+                    // } else {
+                    //     $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
 
-                    if (auth()->guard()->check()) {
-                        $customerGroupId = auth()->guard()->user()->customer_group_id;
-                    } else {
-                        $customerGuestGroup = app('Webkul\Customer\Repositories\CustomerGroupRepository')->getCustomerGuestGroup();
+                    //     if ($customerGuestGroup) {
+                    //         $customerGroupId = $customerGuestGroup->id;
+                    //     }
+                    // }
 
-                        if ($customerGuestGroup) {
-                            $customerGroupId = $customerGuestGroup->id;
-                        }
-                    }
+                    // $this->variantJoin($qb);
 
-                    $this->variantJoin($qb);
-
-                    $qb
-                        ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
-                        ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
-                        ->where(function ($qb) use ($priceRange, $customerGroupId) {
-                            $qb->where(function ($qb) use ($priceRange) {
-                                $qb
-                                    ->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]))
-                                    ->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
-                            })
-                                ->orWhere(function ($qb) use ($priceRange) {
-                                    $qb
-                                        ->where('catalog_rule_product_prices.price', '>=', core()->convertToBasePrice($priceRange[0]))
-                                        ->where('catalog_rule_product_prices.price', '<=', core()->convertToBasePrice(end($priceRange)));
-                                })
-                                ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
-                                    $qb
-                                        ->where('product_customer_group_prices.value', '>=', core()->convertToBasePrice($priceRange[0]))
-                                        ->where('product_customer_group_prices.value', '<=', core()->convertToBasePrice(end($priceRange)))
-                                        ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
-                                });
-                        });
+                    // $qb
+                    //     ->leftJoin('catalog_rule_product_prices', 'catalog_rule_product_prices.product_id', '=', 'variants.product_id')
+                    //     ->leftJoin('product_customer_group_prices', 'product_customer_group_prices.product_id', '=', 'variants.product_id')
+                    //     ->where(function ($qb) use ($priceRange, $customerGroupId) {
+                    //         $qb->where(function ($qb) use ($priceRange) {
+                    //             $qb
+                    //                 ->where('variants.min_price', '>=', core()->convertToBasePrice($priceRange[0]))
+                    //                 ->where('variants.min_price', '<=', core()->convertToBasePrice(end($priceRange)));
+                    //         })
+                    //             ->orWhere(function ($qb) use ($priceRange) {
+                    //                 $qb
+                    //                     ->where('catalog_rule_product_prices.price', '>=', core()->convertToBasePrice($priceRange[0]))
+                    //                     ->where('catalog_rule_product_prices.price', '<=', core()->convertToBasePrice(end($priceRange)));
+                    //             })
+                    //             ->orWhere(function ($qb) use ($priceRange, $customerGroupId) {
+                    //                 $qb
+                    //                     ->where('product_customer_group_prices.value', '>=', core()->convertToBasePrice($priceRange[0]))
+                    //                     ->where('product_customer_group_prices.value', '<=', core()->convertToBasePrice(end($priceRange)))
+                    //                     ->where('product_customer_group_prices.customer_group_id', '=', $customerGroupId);
+                    //             });
+                    //     });
                 }
             }
-            
-            $attributeFilters = $this->attributeRepository->getProductDefaultAttributes(array_keys(request()->except(['price'])));
-            // dd($attributeFilters);
-            $new_qb = null;
+            // dd($qb->get()) ;
+            $attributeFilters = $this->attributeRepository->getProductDefaultAttributes(array_keys( request()->except(['price']) ));
             if (count($attributeFilters) > 0) {
                 $this->variantJoin($qb);
-                // $qb->where('product_attribute_values.integer_value',371) ;
-             
-                $qb->where(function ($filterQuery) use ($attributeFilters) {
-                    $this->variantJoin($filterQuery);
-                    foreach ($attributeFilters as $attribute) {
-                        $filterQuery->where(function ($attributeQuery) use ($attribute) {
-                            $this->variantJoin($attributeQuery);
 
-                            // dd($attributeQuery->where('product_attribute_values.integer_value',371)->get()) ;
+                $qb->where(function ($filterQuery) use ($attributeFilters) {
+                    foreach ($attributeFilters as $attribute) {
+                        $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
+
                             $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
                             $filterInputValues = explode(',', request()->get($attribute->code));
+
                             # define the attribute we are filtering
                             $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
-                            // dd($attributeQuery->get()) ;
 
                             # apply the filter values to the correct column for this type of attribute.
                             if ($attribute->type != 'price') {
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
-                                    $this->variantJoin($attributeValueQuery);
-                                    // dd($attributeValueQuery->get());
-
                                     foreach ($filterInputValues as $filterValue) {
-                                        if (!is_numeric($filterValue)) {
+                                        if (! is_numeric($filterValue)) {
                                             continue;
                                         }
                                         $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
-                                        // dd($column,$filterValue,$attributeValueQuery->get()) ;
                                     }
-                            // dd($attributeValueQuery->get()) ;
-
                                 });
+
+                            } else {
+                                $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
+                                    ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
                             }
-                            // dd($attributeQuery->get()) ;
-                            
-
-                            // else {
-                            //     $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
-                            //         ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
-                            // }
                         });
-
                     }
-                    // dd($filterQuery->get()) ;
-
-
                 });
-
-                    // dd($qb->get()) ;
-                
 
                 # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
                 # we know that it has matched all of the requested filters.
-                $qb->groupBy('product_flat.id');
-                
-                // $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
-                // dd($qb->get());
+                $qb->groupBy('variants.id');
+                $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
             }
-            // dd($qb->get());
-
+            // dd($qb->get()) ;
             return $qb->groupBy('product_flat.id');
         });
 
@@ -414,20 +384,19 @@ class ProductRepository extends Repository
         return $results;
     }
 
-    public function getAllCatProd($categoryId)
-    {
+    public function getAllCatProd($categoryId) {
         $qb = $this->pflat
-            ->select('product_flat.*')
-            ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
-            ->leftJoin('categories', 'product_categories.category_id', '=', 'categories.id')
-            // ->where('product_flat.channel', $channel)
-            // ->where('product_flat.locale', $locale)
-            ->whereNotNull('product_flat.url_key')
-            ->where('product_flat.status', 1)
-            // ->where('product_flat.visible_individually', 1)
-            ->where('product_categories.category_id', $categoryId)->get();
-
-        return $qb;
+        ->select('product_flat.*')
+        ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
+        ->leftJoin('categories', 'product_categories.category_id', '=', 'categories.id')
+        // ->where('product_flat.channel', $channel)
+        // ->where('product_flat.locale', $locale)
+        ->whereNotNull('product_flat.url_key')
+        ->where('product_flat.status', 1)
+        // ->where('product_flat.visible_individually', 1)
+        ->where('product_categories.category_id', $categoryId)->get() ;
+        
+        return $qb ;
     }
 
     /**
@@ -562,7 +531,7 @@ class ProductRepository extends Repository
                     ->where('product_flat.locale', $locale)
                     ->whereNotNull('product_flat.url_key');
 
-                if (!core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                if (! core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
                     $query = $this->checkOutOfStockItem($query);
                 }
 
@@ -621,7 +590,7 @@ class ProductRepository extends Repository
             ->leftJoin('product_inventories as pv', 'product_flat.product_id', '=', 'pv.product_id')
             ->where(function ($qb) {
                 return $qb
-                    /* for grouped, downloadable, bundle and booking product */
+                /* for grouped, downloadable, bundle and booking product */
                     ->orWhereIn('ps.type', ['grouped', 'downloadable', 'bundle', 'booking'])
                     /* for simple and virtual product */
                     ->orWhere(function ($qb) {
@@ -650,7 +619,7 @@ class ProductRepository extends Repository
     {
         $this->fillOriginalProduct($originalProduct);
 
-        if (!$originalProduct->getTypeInstance()->canBeCopied()) {
+        if (! $originalProduct->getTypeInstance()->canBeCopied()) {
             throw new Exception(trans('admin::app.response.product-can-not-be-copied', ['type' => $originalProduct->type]));
         }
 
@@ -683,9 +652,9 @@ class ProductRepository extends Repository
      */
     private function variantJoin($query)
     {
-         $alreadyJoined = false;
+        static $alreadyJoined = false;
 
-        if (!$alreadyJoined) {
+        if (! $alreadyJoined) {
             $alreadyJoined = true;
 
             $query
@@ -748,8 +717,8 @@ class ProductRepository extends Repository
         //     /* `created_at` is not an attribute so it will be in else case */
         //     $query->orderBy('product_flat.created_at', $direction);
         // }
-        $query->where('product_flat.min_price', '>=', (float)$priceRange[0]);
-        $query->where('product_flat.min_price', '<=', (float)$priceRange[1]);
+        $query->where('product_flat.min_price','>=', (float)$priceRange[0]);
+        $query->where('product_flat.min_price','<=', (float)$priceRange[1]);
 
         return $query;
     }
@@ -842,8 +811,7 @@ class ProductRepository extends Repository
             // change name of copied product
             if ($oldValue->attribute_id === $attributeIds['name']) {
                 $copyOf = trans('admin::app.copy-of');
-                $copiedName = sprintf(
-                    '%s%s (%s)',
+                $copiedName = sprintf('%s%s (%s)',
                     Str::startsWith($originalProduct->name, $copyOf) ? '' : $copyOf,
                     $originalProduct->name,
                     $randomSuffix
@@ -855,8 +823,7 @@ class ProductRepository extends Repository
             // change url_key of copied product
             if ($oldValue->attribute_id === $attributeIds['url_key']) {
                 $copyOfSlug = trans('admin::app.copy-of-slug');
-                $copiedSlug = sprintf(
-                    '%s%s-%s',
+                $copiedSlug = sprintf('%s%s-%s',
                     Str::startsWith($originalProduct->url_key, $copyOfSlug) ? '' : $copyOfSlug,
                     $originalProduct->url_key,
                     $randomSuffix
@@ -874,8 +841,7 @@ class ProductRepository extends Repository
             // change product number
             if ($oldValue->attribute_id === $attributeIds['product_number']) {
                 $copyProductNumber = trans('admin::app.copy-of-slug');
-                $copiedProductNumber = sprintf(
-                    '%s%s-%s',
+                $copiedProductNumber = sprintf('%s%s-%s',
                     Str::startsWith($originalProduct->product_number, $copyProductNumber) ? '' : $copyProductNumber,
                     $originalProduct->product_number,
                     $randomSuffix
@@ -907,7 +873,7 @@ class ProductRepository extends Repository
     {
         $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
 
-        if (!in_array('categories', $attributesToSkip)) {
+        if (! in_array('categories', $attributesToSkip)) {
             foreach ($originalProduct->categories as $category) {
                 DB::table('product_categories')->insert([
                     'product_id'  => $copiedProduct->id,
@@ -916,19 +882,19 @@ class ProductRepository extends Repository
             }
         }
 
-        if (!in_array('inventories', $attributesToSkip)) {
+        if (! in_array('inventories', $attributesToSkip)) {
             foreach ($originalProduct->inventories as $inventory) {
                 $copiedProduct->inventories()->save($inventory->replicate());
             }
         }
 
-        if (!in_array('customer_group_pricces', $attributesToSkip)) {
+        if (! in_array('customer_group_pricces', $attributesToSkip)) {
             foreach ($originalProduct->customer_group_prices as $customer_group_price) {
                 $copiedProduct->customer_group_prices()->save($customer_group_price->replicate());
             }
         }
 
-        if (!in_array('images', $attributesToSkip)) {
+        if (! in_array('images', $attributesToSkip)) {
             foreach ($originalProduct->images as $image) {
                 $copiedProductImage = $copiedProduct->images()->save($image->replicate());
 
@@ -936,7 +902,7 @@ class ProductRepository extends Repository
             }
         }
 
-        if (!in_array('videos', $attributesToSkip)) {
+        if (! in_array('videos', $attributesToSkip)) {
             foreach ($originalProduct->videos as $video) {
                 $copiedProductVideo = $copiedProduct->videos()->save($video->replicate());
 
@@ -944,19 +910,19 @@ class ProductRepository extends Repository
             }
         }
 
-        if (!in_array('super_attributes', $attributesToSkip)) {
+        if (! in_array('super_attributes', $attributesToSkip)) {
             foreach ($originalProduct->super_attributes as $super_attribute) {
                 $copiedProduct->super_attributes()->save($super_attribute);
             }
         }
 
-        if (!in_array('bundle_options', $attributesToSkip)) {
+        if (! in_array('bundle_options', $attributesToSkip)) {
             foreach ($originalProduct->bundle_options as $bundle_option) {
                 $copiedProduct->bundle_options()->save($bundle_option->replicate());
             }
         }
 
-        if (!in_array('variants', $attributesToSkip)) {
+        if (! in_array('variants', $attributesToSkip)) {
             foreach ($originalProduct->variants as $variant) {
                 $variant = $this->copy($variant);
                 $variant->parent_id = $copiedProduct->id;
