@@ -26,6 +26,7 @@ class ProductRepository extends Repository
      * @var \Webkul\Attribute\Repositories\AttributeRepository
      */
     protected $attributeRepository;
+    protected $pflat;
 
     /**
      * Create a new repository instance.
@@ -37,9 +38,11 @@ class ProductRepository extends Repository
      */
     public function __construct(
         AttributeRepository $attributeRepository,
+        ProductFlat $pflat,
         App $app
     ) {
         $this->attributeRepository = $attributeRepository;
+        $this->pflat = $pflat;
 
         parent::__construct($app);
     }
@@ -312,12 +315,8 @@ class ProductRepository extends Repository
                     //     });
                 }
             }
-
-            $attributeFilters = $this->attributeRepository
-                ->getProductDefaultAttributes(array_keys(
-                    request()->except(['price'])
-                ));
-
+            // dd($qb->get()) ;
+            $attributeFilters = $this->attributeRepository->getProductDefaultAttributes(array_keys( request()->except(['price']) ));
             if (count($attributeFilters) > 0) {
                 $this->variantJoin($qb);
 
@@ -334,7 +333,6 @@ class ProductRepository extends Repository
 
                             # apply the filter values to the correct column for this type of attribute.
                             if ($attribute->type != 'price') {
-
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
                                     foreach ($filterInputValues as $filterValue) {
                                         if (! is_numeric($filterValue)) {
@@ -357,7 +355,7 @@ class ProductRepository extends Repository
                 $qb->groupBy('variants.id');
                 $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
             }
-
+            // dd($qb->get()) ;
             return $qb->groupBy('product_flat.id');
         });
 
@@ -384,6 +382,21 @@ class ProductRepository extends Repository
         ]);
 
         return $results;
+    }
+
+    public function getAllCatProd($categoryId) {
+        $qb = $this->pflat
+        ->select('product_flat.*')
+        ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
+        ->leftJoin('categories', 'product_categories.category_id', '=', 'categories.id')
+        // ->where('product_flat.channel', $channel)
+        // ->where('product_flat.locale', $locale)
+        ->whereNotNull('product_flat.url_key')
+        ->where('product_flat.status', 1)
+        // ->where('product_flat.visible_individually', 1)
+        ->where('product_categories.category_id', $categoryId)->get() ;
+        
+        return $qb ;
     }
 
     /**

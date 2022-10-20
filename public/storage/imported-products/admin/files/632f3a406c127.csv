@@ -1,2 +1,0 @@
-categories_slug,name,description,short_description,sku,price,special_price,special_price_from,special_price_to,inventory_sources,inventories,weight,meta_title,meta_keywords,meta_description,color,size,url_key,tax_category_id,new,featured,visible_individually,status,cost,width,height,depth,type,attribute_family_name,images,guest_checkout
-root,hello book,temp1,shortdesc,man909,100,80,02-05-2019,20-05-2020,default,123,12,Test Title,Test Keyword,Test Description,Red,M,bookpol,,1,1,1,1,10,34,34,234,simple,Default,"banner.jpeg,bg.jpg,download.jpeg",1

@@ -8,7 +8,7 @@
     <div class="account-layout">
 
         <!-- download samples -->
-        <accordian :title="'{{ __('bulkupload::app.admin.bulk-upload.upload-files.download-sample') }}'" :active="true">
+        <accordian :title="'{{ __('bulkupload::app.admin.bulk-upload.upload-files.download-sample') }}'" :active="false">
             <div slot="body">
                 <div class="import-product">
                     <form action="{{ route('download-sample-files') }}" method="post">

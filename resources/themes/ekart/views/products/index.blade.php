@@ -1,5 +1,6 @@
 @inject ('toolbarHelper', 'Webkul\Product\Helpers\Toolbar')
 @inject ('productRepository', 'Webkul\Product\Repositories\ProductRepository')
+@inject ('catRepository', 'Webkul\Category\Repositories\CategoryRepository')
 
 @extends('shop::layouts.master')
 
@@ -49,6 +50,8 @@
             'products_and_description'
         ]
     );
+
+    $isEnd = $catRepository->getChildCategories($category->id)->count() ;
 @endphp
 
 @section('content-wrapper')
@@ -68,10 +71,10 @@
     <script type="text/x-template" id="category-template">
         <div class="container-fluid">
             <div class="ps-layout--shop ps-shop--category">
-                @if (in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
+                @if ($isEnd == 0 && in_array($category->display_mode, [null, 'products_only', 'products_and_description']))
                     @include ('shop::products.list.layered-navigation')
                 @endif
-                <div class="ps-layout__right">
+                <div class="@if($isEnd == 0) ps-layout__right @endif">
                     <h3 class="ps-shop__heading">{{ $category->name }}</h3>
                     @if ($isDescriptionDisplayMode)
                         @if ($category->description)
@@ -98,8 +101,8 @@
                                 <template v-else-if="products.length > 0">
                                     @if ($toolbarHelper->getCurrentMode() == 'grid')
                                         <div class="ps-shop-items">
-                                            <div class="row">
-                                                <product-card :key="index" col=true :product="product" v-for="(product, index) in products">
+                                            <div class="row justify-content-start">
+                                                <product-card :key="index" @if($isEnd == 0) col="3" @else col="4" @endif  :product="product" v-for="(product, index) in products">
                                                 </product-card>
                                             </div>
                                         </div>

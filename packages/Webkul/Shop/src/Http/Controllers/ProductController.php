@@ -12,7 +12,7 @@ use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
 use Webkul\Product\Repositories\ProductDownloadableSampleRepository;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
-use DB ;
+use Webkul\Product\Helpers\ConfigurableOption;
 class ProductController extends Controller
 {
     /**
@@ -61,6 +61,8 @@ class ProductController extends Controller
 
     protected $phelper;
 
+    protected $con ;
+
     /**
      * Create a new controller instance.
      *
@@ -80,7 +82,8 @@ class ProductController extends Controller
         ProductDownloadableLinkRepository $productDownloadableLinkRepository,
         CategoryRepository $categoryRepository,
         Helper $velocityHelper,
-        PHelper $phelper
+        PHelper $phelper,
+        ConfigurableOption $con
     ) {
         $this->productRepository = $productRepository;
 
@@ -93,8 +96,12 @@ class ProductController extends Controller
         $this->productDownloadableLinkRepository = $productDownloadableLinkRepository;
 
         $this->categoryRepository = $categoryRepository;
+
         $this->velocityHelper = $velocityHelper;
+
         $this->phelper = $phelper;
+
+        $this->con = $con ;
 
         parent::__construct();
     }
@@ -173,38 +180,30 @@ class ProductController extends Controller
     {
         $filterAttributes = [];
         if ($category = $this->categoryRepository->find($categoryId)) {
-            $products = $this->productRepository->getAll($categoryId);
+            $products = $this->productRepository->getAllCatProd($categoryId);
             foreach ($products as $key1 => $product) {
-                $customAtt = $this->phelper->getAdditionalData($product) ; 
+                $customAtt = null;
+                $customAtt = $this->con->getConfigurationConfig($product)['attributes'] ;
                 foreach ($customAtt as $key2 => $att) {
-                    if($att['value'] != '' && $att['value']!=null) {
-                        $loc = array_search($att['admin_name'],array_column($filterAttributes,'admin_name')) ;
-                        $att_id = DB::table('attribute_options')->where('admin_name',$att['value'])->pluck('id') ; 
-                        dd($att_id,$att['value']);
-                        if(false === $loc) {
-                            $filterAttributes[] = [
-                                'admin_name' => $att['admin_name'],
-                                'name' => $att['label'],
-                                'code' => $att['code'],
-                                'options' => [['admin_name' => $att['value'],'id'=>$att_id]]
-                            ] ;
-                        }
-                        else {
-                            if(!in_array($att['value'],array_column($filterAttributes[$loc]['options'],'admin_name')))
-                                array_push($filterAttributes[$loc]['options'],['admin_name' => $att['value'],'id'=>$att_id]) ;
-                        }
+                    $loc = array_search($att['label'],array_column($filterAttributes,'label')) ;
+                    if(false === $loc) $filterAttributes[] = $att ;
+                    else {
+                        if(!in_array($att['options'][0]['label'],array_column($filterAttributes[$loc]['options'],'label')))
+                            array_push($filterAttributes[$loc]['options'],$att['options'][0]) ;
                     }
                 }
             }
             // dd($filterAttributes) ;
-            // $filterAttributes = $this->productFlatRepository->getFilterAttributes($category);
+            $arr = $this->productFlatRepository->getFilterAttributes($category)->toArray() ;
+            $loc = array_search('price',array_column($arr,'code')) ;
+            if($loc !== false)
+            array_unshift($filterAttributes, $arr[$loc]) ;
         }
 
         if (! count($filterAttributes) > 0) {
             $filterAttributes = $attributeRepository->getFilterAttributes();
         }
 
-        // dd($filterAttributes) ;
         return response()->json([
             'filter_attributes' => $filterAttributes,
         ]);
