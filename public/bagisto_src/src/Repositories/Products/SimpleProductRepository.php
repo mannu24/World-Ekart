@@ -17,13 +17,6 @@ use Webkul\Bulkupload\Repositories\Products\HelperRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Bulkupload\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use Webkul\Attribute\Contracts\AttributeGroup;
-use Webkul\Attribute\Repositories\AttributeGroupRepository;
-use Webkul\Attribute\Repositories\AttributeGroupMapRepository;
-use Webkul\Attribute\Repositories\AttributeRepository;
-
 
 class SimpleProductRepository extends Repository
 {
@@ -61,9 +54,6 @@ class SimpleProductRepository extends Repository
      * @var \Webkul\Attribute\Repositories\AttributeFamilyRepository
      */
     protected $attributeFamilyRepository;
-    protected $attributeRepository;
-    protected $attributeGroupRepository;
-    protected $attributeGroupMapRepository;
 
     /**
      * HelperRepository object
@@ -115,9 +105,6 @@ class SimpleProductRepository extends Repository
         ProductFlatRepository $productFlatRepository,
         ProductRepository $productRepository,
         AttributeFamilyRepository $attributeFamilyRepository,
-        AttributeGroupRepository $attributeGroupRepository,
-        AttributeGroupMapRepository $attributeGroupMapRepository,
-        AttributeRepository $attributeRepository,
         HelperRepository $helperRepository,
         ProductImageRepository $productImageRepository,
         InventorySourceRepository $inventorySourceRepository
@@ -136,12 +123,6 @@ class SimpleProductRepository extends Repository
         $this->productImageRepository = $productImageRepository;
 
         $this->attributeFamilyRepository = $attributeFamilyRepository;
-
-        $this->attributeGroupRepository = $attributeGroupRepository;
-
-        $this->attributeGroupMapRepository = $attributeGroupMapRepository;
-
-        $this->attributeRepository = $attributeRepository;
 
         $this->helperRepository = $helperRepository;
 
@@ -311,59 +292,6 @@ class SimpleProductRepository extends Repository
             $data = [];
             $attributeCode = [];
             $attributeValue = [];
-            
-            // dd($csvData);
-
-            // // attribute check and addition 
-            // $keys = array_keys($csvData) ;
-            // $csvAttributes = array_splice($keys,array_search('special_price_to', $keys)+1,-3) ;
-            // $attributeArray = array_column($simpleproductData->getTypeInstance()->getEditableAttributes()->toArray(),'code') ; 
-            
-            // // Log::info($csvAttributes,$attributeArray);
-            
-            // $attribute_fam_groups = $this->attributeGroupRepository->where('attribute_family_id',$attributeFamilyData->id)->pluck('id') ;
-            // // Log::info($attribute_fam_groups) ;
-            // // Log::info() ;
-            // $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id',$attribute_fam_groups)->pluck('attribute_id') ;
-            // Log::info($all_fam_attributes) ;
-            // $all_fam_att_codes = $this->attributeRepository->whereIn('id',$all_fam_attributes)->pluck('code') ;
-            // Log::info($all_fam_att_codes) ;
-            // $fam_gen = $this->attributeGroupRepository->where('id',$attributeFamilyData->id)->where('name','General')->first() ;
-            // Log::info($fam_gen) ;
-          
-
-            // foreach ($csvAttributes as $key => $value) {
-            //     if (array_search($value, $attributeArray)) {
-            //         if(array_search($value,$all_fam_att_codes)){
-            //             Log::info('All condition satistfies' );
-
-            //         }
-            //         else{
-            //             Log::info('Second condition fails' );
-
-            //             $att_to_add = $this->attributeRepository->where('code',$value)->first();
-            //             DB::table('attributes_group_mappings')->insert([
-            //                 'attribute_id' => $att_to_add->id,
-            //                 'attribute_group_id' => $fam_gen->id
-            //             ]);
-            //         }
-            //     }
-            //     else {
-            //             $id = $this->attributeRepository->insertGetId([
-            //                 'code' => $value,
-            //                 'admin_name' => ucwords(str_replace("_", " ", $value)),
-            //                 'type' => 'text',
-            //             ]);
-            //             DB::table('attributes_group_mappings')->insert([
-            //                 'attribute_id' => $id,
-            //                 'attribute_group_id' => $fam_gen->id
-            //             ]);
-            //             Log::info('Fam Gen '.$fam_gen->id );
-
-            //             Log::info('Attribute Created '.$id );
-            //     }
-            // }
-    
             //default attributes
             foreach ($simpleproductData->getTypeInstance()->getEditableAttributes()->toArray() as $key => $value) {
                 $attributeOptionArray = array();
@@ -524,9 +452,6 @@ class SimpleProductRepository extends Repository
             }
 
 
-            // Log::info($data);
-            // dd($data, $simpleproductData->id);
-            Log::info('Before fn call');
             $configSimpleProductAttributeStore = $this->productRepository->update($data, $simpleproductData->id);
 
             if (isset($imageZipName)) {

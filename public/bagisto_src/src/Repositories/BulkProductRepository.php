@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Illuminate\Container\Container as App;
+use Illuminate\Support\Facades\DB;
 use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -207,7 +208,10 @@ class BulkProductRepository extends Repository
         }
 
         Event::dispatch('catalog.product.update.after', $product);
-
+        DB::table('product_flat')->where('product_id',$id)->update([
+            'min_price' => $data['min_price'],
+            'max_price' => $data['max_price']
+        ]);
         return $product;
     }
 }

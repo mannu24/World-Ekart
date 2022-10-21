@@ -265,7 +265,7 @@ class ConfigurableProductRepository extends Repository
                                     $data['channel'] = core()->getCurrentChannel()->code;
 
                                     $dataProfile = app('Webkul\Bulkupload\Repositories\DataFlowProfileRepository')->findOneByfield(['id' => $data['dataFlowProfileRecordId']]);
-                                    $data['locale'] = $dataProfile->locale_code;
+                                    $data['locale'] = 'en' ;
 
                                     $data['tax_category_id'] = (isset($csvData[$i]['tax_category_id']) && $csvData[$i]['tax_category_id']) ? $csvData[$i]['tax_category_id'] : null;
 
@@ -311,6 +311,9 @@ class ConfigurableProductRepository extends Repository
                                             }
                                         }
                                     }
+                                    
+                                    $data['min_price'] = (string)$csvData[$i]['min_price'] ;
+                                    $data['max_price'] = (string)$csvData[$i]['max_price'] ;
 
                                     $productAttributeStore = $this->bulkProductRepository->productRepositoryUpdateForVariants($data, $product->id);
 
@@ -488,13 +491,15 @@ class ConfigurableProductRepository extends Repository
                                             $data['channel'] = core()->getCurrentChannel()->code;
 
                                             $dataProfile = app('Webkul\Bulkupload\Repositories\DataFlowProfileRepository')->findOneByfield(['id' => $data['dataFlowProfileRecordId']]);
-                                            $data['locale'] = $dataProfile->locale_code;
+                                            $data['locale'] = 'en' ;
 
                                             $data['price'] = (string)$csvData[$i]['super_attribute_price'];
                                             $data['special_price'] = (string)$csvData[$i]['special_price'];
                                             $data['special_price_from'] = (string)$csvData[$i]['special_price_from'];
                                             $data['special_price_to'] = (string)$csvData[$i]['special_price_to'];
                                             $data['new'] = (string)$csvData[$i]['new'];
+                                            $data['min_price'] = (string)$csvData[$i]['min_price'];
+                                            $data['max_price'] = (string)$csvData[$i]['max_price'];
                                             $data['featured'] = (string)$csvData[$i]['featured'];
                                             $data['visible_individually'] = (string)$csvData[$i]['visible_individually'];
                                             $data['tax_category_id'] = (string)$csvData[$i]['tax_category_id'];
