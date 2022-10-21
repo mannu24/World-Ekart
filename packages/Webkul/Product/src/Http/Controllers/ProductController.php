@@ -234,10 +234,7 @@ class ProductController extends Controller
         $categories = $this->categoryRepository->getCategoryTree();
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
-        // // $user = auth;
-        // dd(auth()->guard('admin')->user()->id);
         $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
-        // return $product;
         $c_count = 1;
         $d_count = 1;
         return view($this->_config['view'], compact('product', 'categories', 'inventorySources', 'countries', 'c_count', 'd_count'));
@@ -884,19 +881,20 @@ class ProductController extends Controller
                 $data[0][] = 'super_attribute_weight' ;
             }
             else {
+                $data[$key][42] = (int) $data[$key][19] ;
+                $data[$key][19] = ceil(((int) $data[$key][19])*(1+($d['margin']/100))) ;
+
                 $data[$key][] = auth()->guard('admin')->user()->id ;
                 $data[$key][] = 'IN' ;
                 $data[$key][] = 0.0000 ;
                 $data[$key][] = 0 ;
-                $data[$key][] = $data[$key][25] == '1' ? (int) $item[19] : '' ;
-                $data[$key][] = $data[$key][25] == '1' ? (int) $item[19] : '' ;
+                $data[$key][] = $data[$key][42] ;
+                $data[$key][] = $data[$key][19] ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
                 $data[$key][] = '' ;
-                $data[$key][42] = (int) $data[$key][19] ;
-                $data[$key][19] = ceil(((int) $data[$key][19])*(1+($d['margin']/100))) ;
             } 
         }
 
@@ -937,11 +935,11 @@ class ProductController extends Controller
                         str_replace([',',' '],'-',$data[$parent][10])
                     );
                     $data[$key][42] = 
-                        str_replace([',',' '],'-',$data[$parent][6])
+                        preg_replace('/\s+/', ' ', str_replace(',',' ',$data[$parent][6]))
                         .($data[$parent][8]!=''?',':'').
-                        str_replace([',',' '],'-',$data[$parent][8])
+                        preg_replace('/\s+/', ' ', str_replace(',',' ',$data[$parent][8]))
                         .($data[$parent][10]!=''?',':'').
-                        str_replace([',',' '],'-',$data[$parent][10])
+                        preg_replace('/\s+/', ' ', str_replace(',',' ',$data[$parent][10]))
                     ;    
                 }
                 else {
@@ -953,11 +951,11 @@ class ProductController extends Controller
                         str_replace([',',' '],'-',$data[$key][10])
                     );
                     $data[$key][42] = 
-                        str_replace([',',' '],'-',$data[$key][6])
+                        preg_replace('/\s+/', ' ', str_replace([','],' ',$data[$key][6]))
                         .($data[$parent][8]!=''?',':'').
-                        str_replace([',',' '],'-',$data[$key][8])
+                        preg_replace('/\s+/', ' ', str_replace([','],' ',$data[$key][8]))
                         .($data[$parent][10]!=''?',':'').
-                        str_replace([',',' '],'-',$data[$key][10])
+                        preg_replace('/\s+/', ' ', str_replace([','],' ',$data[$key][10]))
                     ;
                 }
 
@@ -971,6 +969,8 @@ class ProductController extends Controller
                 
                 $data[$key][32] =  $data[$parent][32] ; //Special Price
                 $data[$key][15] = $data[$parent][15]; // MRP
+                $data[$key][39] = $data[$parent][39]; // Min Price
+                $data[$key][40] = $data[$parent][40]; // Max Price
             }
         }
 

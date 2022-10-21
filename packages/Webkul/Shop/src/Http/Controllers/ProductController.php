@@ -193,7 +193,6 @@ class ProductController extends Controller
                     }
                 }
             }
-            // dd($filterAttributes) ;
             $arr = $this->productFlatRepository->getFilterAttributes($category)->toArray() ;
             $loc = array_search('price',array_column($arr,'code')) ;
             if($loc !== false)

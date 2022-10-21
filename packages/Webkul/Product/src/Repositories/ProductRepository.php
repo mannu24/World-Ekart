@@ -87,21 +87,14 @@ class ProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-        Log::info('Product st1');
         Event::dispatch('catalog.product.update.before', $id);
 
         $product = $this->find($id);
-        Log::info('Product st2');
-        Log::info($data);
-        Log::info($id);
-        Log::info($attribute);
         $product = $product->getTypeInstance()->update($data, $id, $attribute);
-        Log::info('Product st3');
 
         if (isset($data['channels'])) {
             $product['channels'] = $data['channels'];
         }
-        Log::info('Product st4');
 
         Event::dispatch('catalog.product.update.after', $product);
 
@@ -322,67 +315,48 @@ class ProductRepository extends Repository
             }
             
             $attributeFilters = $this->attributeRepository->getProductDefaultAttributes(array_keys(request()->except(['price'])));
-            // dd($attributeFilters);
             $new_qb = null;
             if (count($attributeFilters) > 0) {
                 $this->variantJoin($qb);
-                // $qb->where('product_attribute_values.integer_value',371) ;
-             
+
                 $qb->where(function ($filterQuery) use ($attributeFilters) {
                     $this->variantJoin($filterQuery);
                     foreach ($attributeFilters as $attribute) {
                         $filterQuery->where(function ($attributeQuery) use ($attribute) {
                             $this->variantJoin($attributeQuery);
 
-                            // dd($attributeQuery->where('product_attribute_values.integer_value',371)->get()) ;
                             $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
                             $filterInputValues = explode(',', request()->get($attribute->code));
+
                             # define the attribute we are filtering
                             $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
-                            // dd($attributeQuery->get()) ;
 
                             # apply the filter values to the correct column for this type of attribute.
                             if ($attribute->type != 'price') {
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
                                     $this->variantJoin($attributeValueQuery);
-                                    // dd($attributeValueQuery->get());
 
                                     foreach ($filterInputValues as $filterValue) {
                                         if (!is_numeric($filterValue)) {
                                             continue;
                                         }
                                         $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
-                                        // dd($column,$filterValue,$attributeValueQuery->get()) ;
                                     }
-                            // dd($attributeValueQuery->get()) ;
-
                                 });
                             }
-                            // dd($attributeQuery->get()) ;
-                            
-
                             // else {
                             //     $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
                             //         ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
                             // }
                         });
-
                     }
-                    // dd($filterQuery->get()) ;
-
-
                 });
-
-                    // dd($qb->get()) ;
-                
-
                 # this is key! if a product has been filtered down to the same number of attributes that we filtered on,
                 # we know that it has matched all of the requested filters.
                 $qb->groupBy('product_flat.id');
                 
-                // $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
-                // dd($qb->get());
+                $qb->havingRaw('COUNT(*) = ' . count($attributeFilters));
             }
             // dd($qb->get());
 
