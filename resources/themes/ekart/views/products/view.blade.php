@@ -96,7 +96,7 @@ $specs = $product->toArray() ;
         <div class="ps-container">
             <ul class="breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li><a href="/shop">Shop</a></li>
+                <li>Product</li>
                 <li>{{ $product->name }}</li>
             </ul>
         </div>

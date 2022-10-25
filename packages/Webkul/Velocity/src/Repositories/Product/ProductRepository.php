@@ -131,7 +131,7 @@ class ProductRepository extends Repository
                            ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                            ->leftJoin('product_categories', 'products.id', '=', 'product_categories.product_id')
                            ->where('product_flat.status', 1)
-                           ->where('product_flat.visible_individually', 1)
+                        //    ->where('product_flat.visible_individually', 1)
                            ->where('product_flat.channel', $channel)
                            ->where('product_flat.locale', $locale)
                            ->whereNotNull('product_flat.url_key');

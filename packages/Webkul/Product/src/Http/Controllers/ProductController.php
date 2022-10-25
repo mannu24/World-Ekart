@@ -802,6 +802,28 @@ class ProductController extends Controller
             }
         }
 
+        //Extra Variant Row Addition
+        $newData = [] ; $parent= '' ;
+        foreach ($data as $key => $value) {
+            if($key==0) $newData[] = $value ;
+            else{
+                if($data[$key][25] == '1') { $parent = $key ; $newData[] = $value ; }
+                else {
+                    if($data[$key][25] == '2' && $data[$key][13] != '') {
+                        $newData[] = $value ;
+                        $last = array_keys($newData) ; $last = end($last) ;
+                        $newData[$last][8] = $data[$parent][8] ;
+                        $newData[$last][10] = $data[$parent][10] ;
+                        $newData[$last][12] = $data[$parent][12] ;
+                        
+                        $newData[] = $value ;
+                    }   
+                    else $newData[] = $value ;
+                }
+            }
+        }
+        $data = $newData ;
+
         //Column Removal and Updation
         foreach ($data as $key => $value) {
             unset(
@@ -900,9 +922,6 @@ class ProductController extends Controller
 
         //Image Position Column Removal
         foreach ($data as $key => $item) {
-            // if($d['margin'] != 0) {
-            //     $data['key'] ;
-            // }
             unset($data[$key][25]) ;
         }
 
@@ -924,7 +943,6 @@ class ProductController extends Controller
                 $data[$key][11] = strtolower($item[11]) ;
             } 
             else {
-
                 $data[$key][41] = strtolower($data[$parent][5].($data[$parent][7]!=''?',':'').$data[$parent][7].($data[$parent][9]!=''?',':'').$data[$parent][9]) ;
                 if($item[11] == '') {
                     $data[$key][11] = strtolower( 
@@ -973,6 +991,7 @@ class ProductController extends Controller
                 $data[$key][40] = $data[$parent][40]; // Max Price
             }
         }
+
 
         //Deleting Original Attributes Column
         foreach ($data as $key => $item) {

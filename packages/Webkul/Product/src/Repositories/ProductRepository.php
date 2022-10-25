@@ -315,15 +315,14 @@ class ProductRepository extends Repository
             }
             
             $attributeFilters = $this->attributeRepository->getProductDefaultAttributes(array_keys(request()->except(['price'])));
-            $new_qb = null;
             if (count($attributeFilters) > 0) {
                 $this->variantJoin($qb);
 
                 $qb->where(function ($filterQuery) use ($attributeFilters) {
-                    $this->variantJoin($filterQuery);
+                    // $this->variantJoin($filterQuery);
                     foreach ($attributeFilters as $attribute) {
-                        $filterQuery->where(function ($attributeQuery) use ($attribute) {
-                            $this->variantJoin($attributeQuery);
+                        $filterQuery->orWhere(function ($attributeQuery) use ($attribute) {
+                            // $this->variantJoin($attributeQuery);
 
                             $column = DB::getTablePrefix() . 'product_attribute_values.' . ProductAttributeValueProxy::modelClass()::$attributeTypeFields[$attribute->type];
 
@@ -335,7 +334,7 @@ class ProductRepository extends Repository
                             # apply the filter values to the correct column for this type of attribute.
                             if ($attribute->type != 'price') {
                                 $attributeQuery->where(function ($attributeValueQuery) use ($column, $filterInputValues) {
-                                    $this->variantJoin($attributeValueQuery);
+                                    // $this->variantJoin($attributeValueQuery);
 
                                     foreach ($filterInputValues as $filterValue) {
                                         if (!is_numeric($filterValue)) {
@@ -344,11 +343,10 @@ class ProductRepository extends Repository
                                         $attributeValueQuery->orWhereRaw("find_in_set(?, {$column})", [$filterValue]);
                                     }
                                 });
+                            } else {
+                                $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
+                                    ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
                             }
-                            // else {
-                            //     $attributeQuery->where($column, '>=', core()->convertToBasePrice(current($filterInputValues)))
-                            //         ->where($column, '<=', core()->convertToBasePrice(end($filterInputValues)));
-                            // }
                         });
                     }
                 });
