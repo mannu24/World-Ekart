@@ -49,6 +49,13 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="control-group">
+                            <label style="width:100%;"> Update Stock? </label>
+                            <label class="switch">
+                                <input name="update_stock" type="checkbox" class="control" />
+                                <span class="slider round"></span>
+                            </label>
+                        </div>    
                         <div class="col-md-12 control-group">
                             <button class="btn btn-primary btn-lg">Submit</button>
                         </div>

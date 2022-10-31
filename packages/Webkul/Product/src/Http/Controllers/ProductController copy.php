@@ -710,44 +710,23 @@ class ProductController extends Controller
             $data[$key] = array_values($item) ;
         }
 
+        $length = count($data[0]) ;
+
         //Adding min and max price
-        $data[29] = 'min_price';
-        $data[30] = 'max_price';
+        $data[0][$length] = 'min_price';
+        $data[0][$length+1] = 'max_price';
 
         foreach($data as $key => $value){
             if($key==0) continue ; 
 
-            $data[$key][29] = $data[$key][10];
-            $data[$key][30] = $data[$key][10];
+            $data[$key][$length] = $value[9];
+            $data[$key][$length+1] = $value[9];
         }
 
         //Attributes header Style FORMATTING 
         foreach ($data[0] as $key => $value) {
-            if($key > 30 && $key < (count($data[0]) -3)) {
+            if($key > 28 && $key < (count($data[0]) -3)) {
                 $data[0][$key] = str_replace(' ', '_', $value) ;
-            }
-        }
-
-        $this->attributeCheck($data[0],$d['attribute_families']) ;
-
-        //Linking Attributes with Categories
-        foreach ($data as $key => $value) {
-            if($key==0) continue ; 
-
-            $keys = $value ;
-            $spl_loc = array_search('max_price', $data[0])+1 ;
-            $attributes = array_splice($keys,$spl_loc,-3) ;
-            $att = [] ;
-            foreach ($attributes as $k => $v) {
-                if(!is_null($v)) {
-                    $att_id = $this->attributeRepository->where('code',$data[0][$k+$spl_loc])->first()->toArray()['id'] ;
-                    $att[] = $att_id ;
-                }
-            }
-            $cat = DB::table('category_translations')->where('slug',$value[3])->first()->category_id ;
-            DB::table('category_filterable_attributes')->where('category_id',$cat)->delete() ;
-            foreach ($att as $a) {
-                DB::table('category_filterable_attributes')->insert(['category_id' => $cat,'attribute_id' => $a]) ;
             }
         }
 

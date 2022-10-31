@@ -1,5 +1,5 @@
 @component('shop::emails.layouts.master')
-    <div style="text-align: center;">
+    <div style="text-align: center;padding:top:20px;">
         <a href="{{ config('app.url') }}">
             @include ('shop::emails.layouts.logo')
         </a>
@@ -7,7 +7,17 @@
 
     <?php $order = $invoice->order; ?>
 
-    <div style="padding: 30px;">
+    <div style="padding: 30px 0px;">
+        <div style="font-weight: bold;font-size: 30px;color: #242424;line-height: 30px;margin-bottom: 20px !important;text-align:center;">
+            <u>TAX INVOICE</u>
+            <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
+                GSTIN: 09AASFT1797R1ZS
+            </p>
+            <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
+                PAN: AASFT1797R
+            </p>
+        </div>
+
         <div style="font-size: 20px;color: #242424;line-height: 30px;margin-bottom: 34px;">
             <span style="font-weight: bold;">
                 {{ __('shop::app.mail.invoice.heading', ['order_id' => $order->increment_id, 'invoice_id' => $invoice->increment_id ?? $invoice->id]) }}
@@ -129,9 +139,9 @@
                 border-spacing: 0;width: 100%">
                     <thead>
                     <tr style="background-color: #f2f2f2">
-                        <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
-                        <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.price') }}</th>
+                        <th style="text-align: left;padding: 8px">Product Name</th>
                         <th style="text-align: left;padding: 8px">{{ __('shop::app.customer.account.order.view.qty') }}</th>
+                        <th style="text-align: right;padding: 8px">{{ __('shop::app.customer.account.order.view.price') }}</th>
                     </tr>
                     </thead>
 
@@ -154,14 +164,12 @@
                                 @endif
                             </td>
 
+                            <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}" style="text-align: left;padding: 8px">{{ $item->qty }}</td>
+            
                             <td data-value="{{ __('shop::app.customer.account.order.view.price') }}"
-                                style="text-align: left;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
+                                style="text-align: right;padding: 8px">{{ core()->formatPrice($item->price, $order->order_currency_code) }}
                             </td>
-
-                            <td data-value="{{ __('shop::app.customer.account.order.view.qty') }}"
-                                style="text-align: left;padding: 8px">{{ $item->qty }}</td>
                         </tr>
-
                     @endforeach
                     </tbody>
                 </table>

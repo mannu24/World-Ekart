@@ -29,8 +29,9 @@
                     <span v-if="appliedFilters.length" @click.stop="clearFilters()">
                         {{ __('shop::app.products.remove-filter-link-title') }}
                     </span>
+                    <span v-if="attribute.type != 'price'" class="ml-3"><i @click="toggleBlock(attribute.code)" class="fas fa-chevron-down"></i></span>
                 </div>
-                <figure>
+                <figure :class="'block-'+attribute.code" v-show="attribute.type == 'price'">
                     <div class="ant-radio-group ant-radio-group-outline" v-if="attribute.type != 'price'">
                         <label class="ant-radio-wrapper" v-for='(option, index) in attribute.options'>
                             <span class="ant-radio" :class="appliedFilters.indexOf(option.id.toString()) != -1 ? 'ant-radio-checked' : ''">
@@ -42,8 +43,7 @@
                     </div>
                     <div class="price-range-wrapper" v-if="attribute.type == 'price'">
                         <vue-slider ref="slider" v-model="sliderConfig.value" :process-style="sliderConfig.processStyle"
-                            :tooltip-style="sliderConfig.tooltipStyle" :max="sliderConfig.max" :lazy="true" @change="priceRangeUpdated($event)"
-                        ></vue-slider>
+                            :tooltip-style="sliderConfig.tooltipStyle" :max="sliderConfig.max" :lazy="true" @change="priceRangeUpdated($event)"></vue-slider>
                         <div class="row">
                             <div class="col-12 d-flex align-items-center">
                                 {{-- <p class="py-2">Price: @{{ sliderConfig.priceFrom }} - @{{ sliderConfig.priceTo }}</p> --}}
@@ -172,6 +172,10 @@
             },
 
             methods: {
+                toggleBlock: function(block) {
+                    $('.block-'+block).slideToggle() ;
+                },
+
                 setMaxPrice: function () {
                     axios
                         .get(this.maxPriceSrc)

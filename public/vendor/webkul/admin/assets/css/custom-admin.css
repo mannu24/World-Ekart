@@ -60,3 +60,7 @@
 .dark-mode .control-group .control:focus {
     border-color: #0041FF;
 }
+
+.dark-mode .control-group input:checked+.slider {
+    background-color: #0041FF !important;
+}
