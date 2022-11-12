@@ -171,6 +171,9 @@ class ProductController extends Controller
     {
         $families = $this->attributeFamilyRepository->all();
 
+        $att = $this->attributeRepository->getPartial_new();
+        // dd($att) ;
+
         $categories = $this->categoryRepository->getCategoryTree();
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
@@ -183,7 +186,7 @@ class ProductController extends Controller
 
         $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
 
-        return view($this->_config['view'], compact('families', 'inventorySources', 'configurableFamily', 'countries', 'categories'));
+        return view($this->_config['view'], compact('families', 'att', 'inventorySources', 'configurableFamily', 'countries', 'categories'));
     }
 
     /**
@@ -536,7 +539,8 @@ class ProductController extends Controller
             'margin' => 'required|numeric',
             'delivery_charge' => 'required|numeric',
             'countries' => 'required',
-        ]);
+            'update_stock' => 'accepted|sometimes',
+        ]) ;
 
         $this->countries = json_encode($d['countries']);
         $this->delivery_charge = $d['delivery_charge'];
@@ -574,213 +578,7 @@ class ProductController extends Controller
         }
     }
 
-    public function manipulate_file($data, $name, $d)
-    {
-
-        //Change Header for Bulk Upload
-        $data[0][0] = 'url_key';
-        $data[0][1] = 'name';
-        $data[0][2] = 'description';
-        $data[0][4] = 'categories_slug';
-        $data[0][6] = 'status';
-        $data[0][13] = 'sku';
-        $data[0][14] = 'weight';
-        $data[0][15] = 'inventory_sources';
-        $data[0][16] = 'inventories';
-        $data[0][19] = 'price';
-        $data[0][21] = 'tax_category_id';
-        $data[0][24] = 'images';
-        $data[0][28] = 'meta_title';
-        $data[0][29] = 'meta_description';
-
-        //Remove Null Value Record at Last
-        if (!$data[count($data) - 1]) unset($data[count($data) - 1]);
-
-        //Image Implode and Extra Row Removal
-        foreach ($data as $key => $item) {
-            if ($key == 0) continue;
-
-            if ($item[25] == "1") {
-                $parent = $key;
-            }
-
-            if ((int)$item[25] > 1) {
-                $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
-                unset($data[$key]);
-                // unset($data[$parent][25]);
-            }
-        }
-        foreach ($data as $key => $item) {
-            unset($data[$key][25]);
-        }
-
-        //Column Removal and Updation
-        foreach ($data as $key => $value) {
-            unset(
-                $data[$key][3],
-                $data[$key][5],
-                $data[$key][17],
-                $data[$key][18],
-                $data[$key][20],
-                $data[$key][22],
-                $data[$key][23],
-                $data[$key][26],
-                $data[$key][27],
-                $data[$key][30],
-                $data[$key][31],
-                $data[$key][32],
-                $data[$key][33],
-                $data[$key][34],
-                $data[$key][35],
-                $data[$key][36],
-                $data[$key][37],
-                $data[$key][38],
-                $data[$key][39],
-                $data[$key][40],
-                $data[$key][41],
-                $data[$key][42],
-                $data[$key][43],
-                $data[$key][44],
-                $data[$key][45],
-                $data[$key][46]
-            );
-            if ($key == 0) {
-                $data[$key][30] = 'new';
-                $data[$key][31] = 'featured';
-                $data[$key][32] = 'visible_individually';
-                $data[$key][33] = 'cost';
-                $data[$key][34] = 'width';
-                $data[$key][35] = 'height';
-                $data[$key][36] = 'depth';
-                $data[$key][37] = 'type';
-                $data[$key][38] = 'attribute_family_name';
-                $data[$key][39] = 'guest_checkout';
-                $data[$key][40] = 'meta_keywords';
-                $data[$key][41] = 'short_description';
-                $data[$key][42] = 'special_price';
-                $data[$key][43] = 'special_price_from';
-                $data[$key][44] = 'special_price_to';
-            } else {
-                $data[$key][0] = strtolower($value[0]);
-                $category = $this->categoryCheck($data[$key][4]);
-                $data[$key][4] = $category;
-                $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
-                $data[$key][15] = 'default';
-                $data[$key][21] = null;
-                $data[$key][30] = 0;
-                $data[$key][31] = 0;
-                $data[$key][32] = 1;
-                $data[$key][33] = null;
-                $data[$key][34] = null;
-                $data[$key][35] = null;
-                $data[$key][36] = null;
-                $data[$key][37] = 'simple';
-                $data[$key][38] = $d['attribute_families'];
-                $data[$key][39] = 1;
-                $data[$key][40] = null;
-                $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
-                $data[$key][42] = null;
-                $data[$key][43] = null;
-                $data[$key][44] = null;
-            }
-        }
-
-        //Parent Array Reindexing
-        $data = array_values($data);
-
-        //Item Array Reindexing
-        foreach ($data as $key => $item) {
-            $data[$key] = array_values($item);
-        }
-
-        //Attribute Header Set
-        foreach ($data as $key => $item) {
-            if ($key == 0) continue;
-
-            if (false == $location = array_search(strtolower($item[5]), $data[0])) if (strtolower($item[5]) != '') $data[0][] = strtolower($item[5]);
-            if (false == $location = array_search(strtolower($item[7]), $data[0])) if (strtolower($item[7]) != '') $data[0][] = strtolower($item[7]);
-            if (false == $location = array_search(strtolower($item[9]), $data[0])) if (strtolower($item[9]) != '') $data[0][] = strtolower($item[9]);
-        }
-
-        //All Attributes Null
-        foreach ($data as $key => $item) {
-            if ($key == 0) continue;
-            $len = count($data[0]);
-            if ($len > 34) {
-                $i = 34 + 1;
-                while ($i < $len) {
-                    $data[$key][$i] = null;
-                    $i++;
-                }
-            }
-        }
-
-        // Updating Attribute Values
-        foreach ($data as $key => $item) {
-            if ($key == 0) continue;
-
-            if (false !== $location = array_search(strtolower($item[5]), $data[0])) if (strtolower($item[5 + 1]) != '') $data[$key][$location] = $item[5 + 1];
-            if (false !== $location = array_search(strtolower($item[7]), $data[0])) if (strtolower($item[7 + 1]) != '') $data[$key][$location] = $item[7 + 1];
-            if (false !== $location = array_search(strtolower($item[9]), $data[0])) if (strtolower($item[9 + 1]) != '') $data[$key][$location] = $item[9 + 1];
-        }
-
-        //User ID + Country + Delivery Charge Column Addition 
-        foreach ($data as $key => $item) {
-            if ($key == 0) {
-                $data[0][] = 'user_id';
-                $data[0][] = 'country';
-                $data[0][] = 'delivery_charge';
-            } else {
-                $data[$key][] = auth()->guard('admin')->user()->id;
-                $data[$key][] = $this->countries;
-                $data[$key][] = $this->delivery_charge;
-            }
-        }
-
-        //Deleting Original Attributes Column
-        foreach ($data as $key => $item) {
-            unset($data[$key][5], $data[$key][6], $data[$key][7], $data[$key][8], $data[$key][9], $data[$key][10]);
-        }
-
-        //Item Array Reindexing
-        foreach ($data as $key => $item) {
-            $data[$key] = array_values($item);
-        }
-
-        $length = count($data[0]);
-
-        //Adding min and max price
-        $data[0][$length] = 'min_price';
-        $data[0][$length + 1] = 'max_price';
-
-        foreach ($data as $key => $value) {
-            if ($key == 0) continue;
-
-            $data[$key][$length] = $value[9];
-            $data[$key][$length + 1] = $value[9];
-        }
-
-        //Attributes header Style FORMATTING 
-        foreach ($data[0] as $key => $value) {
-            if ($key > 28 && $key < (count($data[0]) - 3)) {
-                $data[0][$key] = str_replace(' ', '_', $value);
-            }
-        }
-
-        // dd($data);
-
-        // $data = include(public_path('csvjson.php'));
-        $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
-        foreach ($data as $fields) {
-            fputcsv($fp, $fields);
-        }
-        fclose($fp);
-
-        return true;
-    }
-
-    public function manipulate_file_config($data, $name, $d)
-    {
+    public function manipulate_file_config($data,$name,$d) {
 
         //Change Header for Bulk Upload
         $data[0][0] = 'url_key';
@@ -1070,9 +868,21 @@ class ProductController extends Controller
                 $this->attributeCheck_config($pass_data, $d['attribute_families']);
             }
         }
-
+        
+        if(isset($d['update_stock']))  {
+            foreach ($data as $key => $value) {
+                if($key == 0) continue ;
+                else {
+                    if($value[19] == 'variant' && $value[5] != '') {
+                        $p = DB::table('products')->where('sku', $value[5])->first() ;
+                        if($p)
+                            DB::table('product_inventories')->where('product_id', $p->id)->update(['qty' => $value[36]]) ;
+                    }
+                }
+            }    
+        }
+        
         // dd($data);
-        // $data= json_decode( json_encode($data), true);
 
         $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
         foreach ($data as $fields) {

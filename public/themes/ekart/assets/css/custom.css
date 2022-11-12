@@ -189,6 +189,10 @@ a:visited, a:link {
     .ps-shopping .ps-shopping__actions .form-control {
         margin-right: 5px;
     }
+    .big-tab {
+        padding: 10px !important;
+        font-size: 15px !important;
+    }
 }
 
 .ps-product .ps-product__thumbnail img {
@@ -218,6 +222,20 @@ a:visited, a:link {
     }
 }
 
+@media (max-width: 991PX){
+    .shimmer-card-container .VueCarousel .VueCarousel-inner {
+        flex-wrap: wrap;
+    }
+
+    .shimmer-card-container .VueCarousel .VueCarousel-inner .VueCarousel-slide {
+        flex-basis: 50%;
+    }
+
+    .shimmer-card-container .VueCarousel .VueCarousel-inner .VueCarousel-slide .shimmer-card{
+        padding: 15px 20px;
+    }
+}
+
 #alert-container {
     top: 50px;
     right: 15px;
@@ -241,8 +259,8 @@ a:visited, a:link {
 }
 
 .ps-btn.btn-small, button.ps-btn.btn-small {
-    padding: 10px 30px;
-    font-size: 15px;
+    padding: 7px 20px;
+    font-size: 13px;
 }
 .ps-product--wide .ps-product__container {
     padding: 20px !important;
@@ -728,6 +746,15 @@ a:visited, a:link {
     .ps-footer__widgets>* {
         max-width: 50%;
         flex-basis: 100%;
+    }
+    .ps-product--detail .ps-product__shopping .ps-btn {
+        display: block;
+        width: auto;
+        margin-right: 1.5rem !important;
+    }
+    .ps-product--detail .ps-product__shopping figure .form-group--number {
+        width: auto !important;
+        max-width: unset !important;
     }
 }
 

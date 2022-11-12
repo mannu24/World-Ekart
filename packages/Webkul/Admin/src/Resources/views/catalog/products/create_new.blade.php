@@ -47,11 +47,13 @@
             <input type="hidden" name="user_id" value="{{auth()->guard('admin')->user()->id}}">
 
             <general-accordian></general-accordian>
-            @foreach ($families as $item)
+            
+            {{-- @foreach ($families as $item)
                 @php
-                    $att[] = ['id' => (string) $item->id, 'attrs' => $item->configurable_attributes->toArray()] ;
+                    $att[] = ['id' => $item->id,'name' => (string) $item->name, 'attrs' => $item->configurable_attributes->toArray()] ;
                 @endphp
-            @endforeach
+            @endforeach --}}
+
             <accordian title="Description" :active="false">
                 <div slot="body">
                     <div class="control-group have-wysiwyg" :class="[errors.has('description') ? 'has-error' : '']">
@@ -145,13 +147,13 @@
             
             <variation-accordian></variation-accordian>
             
-            {{-- <modal id="addVariant" :is-open="modalIds.addVariant">
+            <modal id="addVariant" :is-open="modalIds.addVariant">
                 <h3 slot="header">{{ __('admin::app.catalog.products.add-variant-title') }}</h3>
             
                 <div slot="body">
                     <variant-form></variant-form>
                 </div>
-            </modal> --}}
+            </modal>
           
         </div>
     </form>
@@ -172,7 +174,9 @@
                 image_advtab: true,
             });
             $('.select2').select2() ;
+            $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
         })
+        let g_att = []
     </script>
 
     <script type="text/x-template" id="general-accordian-template">
@@ -275,7 +279,13 @@
     <script type="text/x-template" id="variation-accordian-template">
         <accordian title="{{ __('admin::app.catalog.products.variations') }}" v-if="product_type!='simple'" :active="true">
             <div slot="body">
-                <variant-form></variant-form>
+                <div class="control-group">
+                    <label for="">Select Attributes</label>
+                    <select v-select2 v-model="var_att" name="var_att" @change="var_att_c" multiple required class="control form-control select2-p" style="width:100%;">
+                        <option v-for='(a, index) in attributes' :value="a" v-text="a.name"></option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-lg btn-primary" @click="showModal('addVariant',true)">Create Variants</button>
                 <div class="mt-20 mb-10" />
                 <variant-list></variant-list>
             </div>
@@ -283,12 +293,27 @@
     </script>
 
     <script>
+        Vue.directive('select2', {
+            inserted(el) {
+                $(el).on('select2:select', () => {
+                    const event = new Event('change', { bubbles: true, cancelable: true });
+                    el.dispatchEvent(event);
+                });
+
+                $(el).on('select2:unselect', () => {
+                    const event = new Event('change', {bubbles: true, cancelable: true})
+                    el.dispatchEvent(event)
+                })
+            },
+        });
         Vue.component('variation-accordian', {
             template: '#variation-accordian-template',
 
             data: function() {
                 return {
                     product_type : '', 
+                    var_att: [],
+                    attributes: @json($att),
                 }
             },
 
@@ -296,12 +321,25 @@
                 eventBus.$on('changeIt', (data) => {
                     this.product_type = data
                 })
+                $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
+            },
+
+            updated() {
+                $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
             },
 
             methods: {
                 type_change: function(e) {
                     this.product_type = e.target.value ;
                     eventBus.$emit('changeIt', this.product_type);
+                },
+
+                var_att_c: function() {
+                    g_att = this.var_att ;
+                },
+
+                showModal(id,v) {
+                    this.$root.$set(this.$root.modalIds, id, v);
                 },
             }
         });
@@ -762,42 +800,20 @@
     </script>
 
     <script type="text/x-template" id="variant-form-template">
-        <form method="POST" action="{{ route('admin.catalog.products.store') }}" data-vv-scope="add-variant-form" @submit.prevent="addVariant('add-variant-form')">
+        <div class="page-content">
             <div class="form-container">
-                <div v-for='(attribute, index) in super_attributes' :class="['control-group', errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']">
-                    <label
-                        class="required"
-                        :for="attribute.code"
-                        v-text="attribute.admin_name">
-                    </label>
-
-                    <select
-                        v-validate="'required'"
-                        v-model="variant[attribute.code]"
-                        class="control"
-                        :id="attribute.code"
-                        :name="attribute.code"
-                        :data-vv-as="'&quot;' + attribute.admin_name + '&quot;'"
-                    >
-                        <option
-                            v-for='(option, index) in attribute.options'
-                            :value="option.id"
-                            v-text="option.admin_name">
-                        </option>
+                <div v-for='(attribute, index) in local_att' :class="['control-group', errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']">
+                    <label class="required" :for="attribute.code" v-text="attribute.name"></label>
+                    <select v-validate="'required'" multiple v-select2 v-model="variant[attribute.code]" class="control select2-p" :id="attribute.code" :name="attribute.code" :data-vv-as="'&quot;' + attribute.name + '&quot;'">
+                        <option v-for='(option, index) in attribute.options' :value="option.admin_name" v-text="option.admin_name"></option>
                     </select>
-
-                    <span
-                        class="control-error"
-                        v-text="errors.first('add-variant-form.' + attribute.code)"
-                        v-if="errors.has('add-variant-form.' + attribute.code)">
-                    </span>
+                    <span class="control-error" v-text="errors.first('add-variant-form.' + attribute.code)" v-if="errors.has('add-variant-form.' + attribute.code)"></span>
                 </div>
-
-                <button type="submit" class="btn btn-lg btn-primary">
-                    Create Variants
+                <button type="button" class="btn btn-lg btn-primary" @click="showModal('addVariant',false)">
+                    {{ __('admin::app.catalog.products.add-variant-title') }}
                 </button>
             </div>
-        </form>
+        </div>
     </script>
 
     <script type="text/x-template" id="variant-list-template">
@@ -1051,9 +1067,9 @@
             data: function () {
                 return {
                     variant: {},
-                    super_attributes: '',
                     family: '1',
-                    families: @json($att),
+                    families: '',
+                    local_att: [],
                     
                 }
             },
@@ -1061,19 +1077,31 @@
             template: '#variant-form-template',
 
             created: function () {
-                eventBus.$on('familyChange', (data) => {
-                    $(this.families).each(function (k,e) {
-                        if(e.id==data) {
-                            super_attributes = e.attrs
-                            this.super_attributes = e.attrs
-                        }
-                    })
-                    this.resetModel();
-                    console.log(this.super_attributes);
-                })
+                // eventBus.$on('familyChange', (data) => {
+                //     this.update_attrs(data) ;
+                // })
+                this.local_att = g_att
+                $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
+                console.log(this.local_att);
+            },
+
+            updated() {
+                $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
             },
 
             methods: {
+                update_attrs: function(data) {
+                    var attributes = [] ;
+                    $(this.families).each(function (k,e) {
+                        if(e.id==data) {
+                            super_attributes = e.attrs
+                            attributes = e.attrs
+                        }
+                    })
+                    this.resetModel();
+                    this.attributes = attributes ;
+                },
+
                 addVariant: function (formScope) {
                     this.$validator.validateAll(formScope).then((result) => {
                         if (result) {
@@ -1127,7 +1155,17 @@
                     super_attributes.forEach(function (attribute) {
                         self.variant[attribute.code] = '';
                     })
+                },
+
+                showModal(id,v) {
+                    this.create_list() ;
+                    this.$root.$set(this.$root.modalIds, id, v);
+                },
+
+                create_list: function() {
+                    console.log('hii');
                 }
+
             }
         });
 
@@ -1142,7 +1180,7 @@
 
                     old_variants: '',
 
-                    superAttributes: super_attributes
+                    superAttributes: g_att
                 }
             },
 
@@ -1171,7 +1209,7 @@
                             } else {
                                 variants[index][code] = [];
 
-                                for (let inventorySourceId in variant[code]) {
+                                for (let inventorySou   rceId in variant[code]) {
                                     variants[index][code].push({
                                         'qty': variant[code][inventorySourceId],
                                         'inventory_source_id': inventorySourceId
