@@ -178,12 +178,12 @@ $specs = $product->toArray() ;
 
                                         @include ('shop::products.view.bundle-options')
 
-                                        <div class="ps-product__shopping align-items-center pb-0 mb-0 pb-md-5 mb-md-4">
+                                        <div class="ps-product__shopping align-items-center d-flex pb-0 mb-0 pb-md-5 mb-md-4">
                                             @if ($product->getTypeInstance()->showQuantityBox())
-                                                <figure>
-                                                    <figcaption>Quantity</figcaption>
+                                                <div class="d-flex flex-column">
+                                                    <label>Quantity</label>
                                                     <quantity-changer quantity-text="{{ __('shop::app.products.quantity') }}"></quantity-changer>
-                                                </figure>
+                                                </div>
                                             @else
                                                 <input type="hidden" name="quantity" value="1">
                                             @endif
@@ -191,6 +191,7 @@ $specs = $product->toArray() ;
                                                 'form' => false,
                                                 'product' => $product,
                                                 'showCartIcon' => false,
+                                                'detail_mobile' => true ,
                                                 'showCompare' =>
                                                     core()->getConfigData('general.content.shop.compare_option') == '1'
                                                         ? true
@@ -214,7 +215,7 @@ $specs = $product->toArray() ;
                                                     href="/shop">technologies</a><a href="/shop">wireless</a></p>
                                         </div> --}}
                                         {!! view_render_event('bagisto.shop.products.view.description.before', ['product' => $product]) !!}
-                                        <div class="ps-product__actions-mobile">
+                                        {{-- <div class="ps-product__actions-mobile">
                                             @include ('shop::products.add-to-cart', [
                                                 'form' => false,
                                                 'product' => $product,
@@ -227,7 +228,7 @@ $specs = $product->toArray() ;
                                                         : false,
                                             ])
                                             <button type="submit" class="ps-btn btn-small" {{ ! $product->isSaleable(1) ? 'disabled' : '' }}>{{ __('shop::app.products.buy-now') }}</button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="ps-product__content ps-tab-root">

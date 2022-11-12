@@ -273,4 +273,37 @@ class AttributeRepository extends Repository
 
         return $trimmed;
     }
+
+    public function getPartial_new()
+    {
+        $attributes = $this->model->all();
+
+        $trimmed = [];
+
+        foreach ($attributes as $key => $attribute) {
+            if ( $attribute->code != 'tax_category_id' && ($attribute->type == 'select' || $attribute->type == 'multiselect') ) {
+                if ($attribute->options()->exists()) {
+                    array_push($trimmed, [
+                        'id'          => $attribute->id,
+                        'name'        => $attribute->admin_name,
+                        'type'        => $attribute->type,
+                        'code'        => $attribute->code,
+                        'has_options' => true,
+                        'options'     => $attribute->options->toArray(),
+                    ]);
+                } else {
+                    array_push($trimmed, [
+                        'id'          => $attribute->id,
+                        'name'        => $attribute->admin_name,
+                        'type'        => $attribute->type,
+                        'code'        => $attribute->code,
+                        'has_options' => false,
+                        'options'     => null,
+                    ]);
+                }
+            }
+        }
+
+        return $trimmed;
+    }
 }

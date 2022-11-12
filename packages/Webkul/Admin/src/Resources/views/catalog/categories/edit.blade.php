@@ -97,7 +97,7 @@
 
                     {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.before', ['category' => $category]) !!}
 
-                    <accordian title="{{ __('admin::app.catalog.categories.description-and-images') }}" :active="true">
+                    <accordian title="{{ __('admin::app.catalog.categories.description-and-images') }}" :active="false">
                         <div slot="body">
                             {!! view_render_event('bagisto.admin.catalog.category.edit_form_accordian.description_images.controls.before', ['category' => $category]) !!}
 

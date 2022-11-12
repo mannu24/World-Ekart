@@ -16,7 +16,7 @@
 <style scoped>
     .big-tab {
         color: #888 !important;
-        font-size: 20px!important;
+        font-size: 20px ;
         font-weight: 600;
         text-shadow: 0 0 .25px currentcolor;
     }

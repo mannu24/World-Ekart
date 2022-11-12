@@ -64,3 +64,7 @@
 .dark-mode .control-group input:checked+.slider {
     background-color: #0041FF !important;
 }
+
+.dark-mode .select2-container--default .select2-search--inline .select2-search__field {
+    color: #fff;
+}
