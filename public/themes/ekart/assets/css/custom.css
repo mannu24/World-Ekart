@@ -222,6 +222,20 @@ a:visited, a:link {
     }
 }
 
+@media (max-width: 991PX){
+    .shimmer-card-container .VueCarousel .VueCarousel-inner {
+        flex-wrap: wrap;
+    }
+
+    .shimmer-card-container .VueCarousel .VueCarousel-inner .VueCarousel-slide {
+        flex-basis: 50%;
+    }
+
+    .shimmer-card-container .VueCarousel .VueCarousel-inner .VueCarousel-slide .shimmer-card{
+        padding: 15px 20px;
+    }
+}
+
 #alert-container {
     top: 50px;
     right: 15px;
