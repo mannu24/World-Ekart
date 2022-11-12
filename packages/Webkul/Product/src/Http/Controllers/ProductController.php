@@ -944,6 +944,7 @@ class ProductController extends Controller
                             'attribute_group_id' => $fam_gen->id
                         ]);
                     }
+                    
                     //Link attribute with category
                     $check0  = DB::table('category_filterable_attributes')->where('attribute_id', $att_to_add->id)->where('category_id', $this->shop_category->category_id)->count();
                     if($check0 <1 ){
