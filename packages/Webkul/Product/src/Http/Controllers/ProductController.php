@@ -94,6 +94,10 @@ class ProductController extends Controller
      */
     protected $productInventoryRepository;
 
+    protected $shop_category = null;
+    protected $delivery_charge = null;
+    protected $countries = null;
+
     /**
      * Create a new controller instance.
      *
@@ -511,30 +515,38 @@ class ProductController extends Controller
         );
     }
 
-    public function custum_bulk_upload() {
+    public function custum_bulk_upload()
+    {
         $attribute_families = DB::table('attribute_families')->get();
+        $countries = DB::table('countries')->get();
         // $categories = $this->categoryRepository->get() ;
 
         if (request()->ajax()) {
             return app(ShopifyFileUpload::class)->toJson();
         }
-        return view($this->_config['view'], compact('attribute_families'));
+        return view($this->_config['view'], compact('attribute_families','countries'));
     }
 
-    public function save_bulk_upload() {
+    public function save_bulk_upload()
+    {
 
         $d = request()->validate([
             'attribute_families' => 'required|string',
             'type' => 'required|string',
             'margin' => 'required|numeric',
-        ]) ;
+            'delivery_charge' => 'required|numeric',
+            'countries' => 'required',
+        ]);
 
-        $name = request()->file('csv-file')->getClientOriginalName() ;
-        $check = DB::table('shopify_file_csv')->where('file_name',"converted_csv/converted-$name")->get()->count() ;
+        $this->countries = json_encode($d['countries']);
+        $this->delivery_charge = $d['delivery_charge'];
 
-        if($check>0) {
-            session()->flash('error','File Name Already Exists!') ;
-            return redirect()->back() ;
+        $name = request()->file('csv-file')->getClientOriginalName();
+        $check = DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->get()->count();
+
+        if ($check > 0) {
+            session()->flash('error', 'File Name Already Exists!');
+            return redirect()->back();
         }
 
         // $d['categories'] = implode(',',$d['categories']) ;
@@ -546,48 +558,48 @@ class ProductController extends Controller
         }
         fclose($file);
 
-        if($d['type'] == 'Simple') $completed = $this->manipulate_file($data,$name,$d);
-        else $completed = $this->manipulate_file_config($data,$name,$d);
-        
-        if($completed) {
-            $upload['vendor_id'] = auth()->guard('admin')->user()->id ;
-            $upload['file_name'] = "converted_csv/converted-$name" ;
-    
-            $check = DB::table('shopify_file_csv')->insert($upload) ;
-    
-            if($check) session()->flash('success','File Converted Successfully!') ;
-            else session()->flash('failed','File Conversion Unsuccessful!') ;
-            
-            return redirect()->back() ;
-        }
+        if ($d['type'] == 'Simple') $completed = $this->manipulate_file($data, $name, $d);
+        else $completed = $this->manipulate_file_config($data, $name, $d);
 
+        if ($completed) {
+            $upload['vendor_id'] = auth()->guard('admin')->user()->id;
+            $upload['file_name'] = "converted_csv/converted-$name";
+
+            $check = DB::table('shopify_file_csv')->insert($upload);
+
+            if ($check) session()->flash('success', 'File Converted Successfully!');
+            else session()->flash('failed', 'File Conversion Unsuccessful!');
+
+            return redirect()->back();
+        }
     }
 
-    public function manipulate_file($data,$name,$d) {
+    public function manipulate_file($data, $name, $d)
+    {
 
         //Change Header for Bulk Upload
-        $data[0][0] = 'url_key'; 
-        $data[0][1] = 'name'; 
-        $data[0][2] = 'description'; 
-        $data[0][4] = 'categories_slug'; 
-        $data[0][6] = 'status'; 
-        $data[0][13] = 'sku'; 
-        $data[0][14] = 'weight'; 
-        $data[0][15] = 'inventory_sources'; 
-        $data[0][16] = 'inventories'; 
-        $data[0][19] = 'price'; 
-        $data[0][21] = 'tax_category_id'; 
-        $data[0][24] = 'images'; 
-        $data[0][28] = 'meta_title'; 
-        $data[0][29] = 'meta_description'; 
-        
+        $data[0][0] = 'url_key';
+        $data[0][1] = 'name';
+        $data[0][2] = 'description';
+        $data[0][4] = 'categories_slug';
+        $data[0][6] = 'status';
+        $data[0][13] = 'sku';
+        $data[0][14] = 'weight';
+        $data[0][15] = 'inventory_sources';
+        $data[0][16] = 'inventories';
+        $data[0][19] = 'price';
+        $data[0][21] = 'tax_category_id';
+        $data[0][24] = 'images';
+        $data[0][28] = 'meta_title';
+        $data[0][29] = 'meta_description';
+
         //Remove Null Value Record at Last
-        if(!$data[count($data) - 1]) unset($data[count($data) - 1]);
+        if (!$data[count($data) - 1]) unset($data[count($data) - 1]);
 
         //Image Implode and Extra Row Removal
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
-            
+
             if ($item[25] == "1") {
                 $parent = $key;
             }
@@ -599,17 +611,38 @@ class ProductController extends Controller
             }
         }
         foreach ($data as $key => $item) {
-            unset($data[$key][25]) ;
+            unset($data[$key][25]);
         }
 
         //Column Removal and Updation
         foreach ($data as $key => $value) {
             unset(
-                $data[$key][3], $data[$key][5], $data[$key][17], $data[$key][18], $data[$key][20], $data[$key][22],
-                $data[$key][23], $data[$key][26], $data[$key][27], $data[$key][30], $data[$key][31], $data[$key][32],
-                $data[$key][33], $data[$key][34], $data[$key][35], $data[$key][36], $data[$key][37], $data[$key][38],
-                $data[$key][39], $data[$key][40], $data[$key][41], $data[$key][42], $data[$key][43], $data[$key][44],
-                $data[$key][45], $data[$key][46]
+                $data[$key][3],
+                $data[$key][5],
+                $data[$key][17],
+                $data[$key][18],
+                $data[$key][20],
+                $data[$key][22],
+                $data[$key][23],
+                $data[$key][26],
+                $data[$key][27],
+                $data[$key][30],
+                $data[$key][31],
+                $data[$key][32],
+                $data[$key][33],
+                $data[$key][34],
+                $data[$key][35],
+                $data[$key][36],
+                $data[$key][37],
+                $data[$key][38],
+                $data[$key][39],
+                $data[$key][40],
+                $data[$key][41],
+                $data[$key][42],
+                $data[$key][43],
+                $data[$key][44],
+                $data[$key][45],
+                $data[$key][46]
             );
             if ($key == 0) {
                 $data[$key][30] = 'new';
@@ -628,9 +661,9 @@ class ProductController extends Controller
                 $data[$key][43] = 'special_price_from';
                 $data[$key][44] = 'special_price_to';
             } else {
-                $data[$key][0] = strtolower($value[0]) ;
-                $category = $this->categoryCheck($data[$key][4]) ;
-                $data[$key][4] = $category ;
+                $data[$key][0] = strtolower($value[0]);
+                $category = $this->categoryCheck($data[$key][4]);
+                $data[$key][4] = $category;
                 $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
                 $data[$key][15] = 'default';
                 $data[$key][21] = null;
@@ -642,99 +675,95 @@ class ProductController extends Controller
                 $data[$key][35] = null;
                 $data[$key][36] = null;
                 $data[$key][37] = 'simple';
-                $data[$key][38] = $d['attribute_families'] ;
+                $data[$key][38] = $d['attribute_families'];
                 $data[$key][39] = 1;
                 $data[$key][40] = null;
                 $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
                 $data[$key][42] = null;
                 $data[$key][43] = null;
                 $data[$key][44] = null;
-                
-               
             }
         }
 
         //Parent Array Reindexing
-        $data = array_values($data) ;
+        $data = array_values($data);
 
         //Item Array Reindexing
         foreach ($data as $key => $item) {
-            $data[$key] = array_values($item) ;
+            $data[$key] = array_values($item);
         }
 
         //Attribute Header Set
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
 
-            if(false == $location = array_search(strtolower($item[5]), $data[0])) if(strtolower($item[5])!='') $data[0][] = strtolower($item[5]);
-            if(false == $location = array_search(strtolower($item[7]), $data[0])) if(strtolower($item[7])!='') $data[0][] = strtolower($item[7]);
-            if(false == $location = array_search(strtolower($item[9]), $data[0])) if(strtolower($item[9])!='') $data[0][] = strtolower($item[9]);
+            if (false == $location = array_search(strtolower($item[5]), $data[0])) if (strtolower($item[5]) != '') $data[0][] = strtolower($item[5]);
+            if (false == $location = array_search(strtolower($item[7]), $data[0])) if (strtolower($item[7]) != '') $data[0][] = strtolower($item[7]);
+            if (false == $location = array_search(strtolower($item[9]), $data[0])) if (strtolower($item[9]) != '') $data[0][] = strtolower($item[9]);
         }
 
         //All Attributes Null
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
-            $len = count($data[0]) ;
-            if($len>34){
-                $i = 34+1;
+            $len = count($data[0]);
+            if ($len > 34) {
+                $i = 34 + 1;
                 while ($i < $len) {
                     $data[$key][$i] = null;
                     $i++;
                 }
             }
-
         }
-        
+
         // Updating Attribute Values
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
 
-            if(false !== $location = array_search(strtolower($item[5]), $data[0])) if(strtolower($item[5+1])!='') $data[$key][$location] = $item[5+1] ;
-            if(false !== $location = array_search(strtolower($item[7]), $data[0])) if(strtolower($item[7+1])!='') $data[$key][$location] = $item[7+1] ;
-            if(false !== $location = array_search(strtolower($item[9]), $data[0])) if(strtolower($item[9+1])!='') $data[$key][$location] = $item[9+1] ;
+            if (false !== $location = array_search(strtolower($item[5]), $data[0])) if (strtolower($item[5 + 1]) != '') $data[$key][$location] = $item[5 + 1];
+            if (false !== $location = array_search(strtolower($item[7]), $data[0])) if (strtolower($item[7 + 1]) != '') $data[$key][$location] = $item[7 + 1];
+            if (false !== $location = array_search(strtolower($item[9]), $data[0])) if (strtolower($item[9 + 1]) != '') $data[$key][$location] = $item[9 + 1];
         }
 
         //User ID + Country + Delivery Charge Column Addition 
         foreach ($data as $key => $item) {
-            if($key == 0 ) {
-                $data[0][] = 'user_id' ;
-                $data[0][] = 'country' ;
-                $data[0][] = 'delivery_charge' ;
+            if ($key == 0) {
+                $data[0][] = 'user_id';
+                $data[0][] = 'country';
+                $data[0][] = 'delivery_charge';
+            } else {
+                $data[$key][] = auth()->guard('admin')->user()->id;
+                $data[$key][] = $this->countries;
+                $data[$key][] = $this->delivery_charge;
             }
-            else {
-                $data[$key][] = auth()->guard('admin')->user()->id ;
-                $data[$key][] = 'IN' ;
-                $data[$key][] =  0.0000 ;
-            } 
         }
-        
+
         //Deleting Original Attributes Column
         foreach ($data as $key => $item) {
-            unset($data[$key][5],$data[$key][6],$data[$key][7],$data[$key][8],$data[$key][9],$data[$key][10]) ;
+            unset($data[$key][5], $data[$key][6], $data[$key][7], $data[$key][8], $data[$key][9], $data[$key][10]);
         }
 
         //Item Array Reindexing
         foreach ($data as $key => $item) {
-            $data[$key] = array_values($item) ;
+            $data[$key] = array_values($item);
         }
 
-        $length = count($data[0]) ;
+        $length = count($data[0]);
 
         //Adding min and max price
         $data[0][$length] = 'min_price';
-        $data[0][$length+1] = 'max_price';
+        $data[0][$length + 1] = 'max_price';
 
-        foreach($data as $key => $value){
-            if($key==0) continue ; 
+        foreach ($data as $key => $value) {
+            if ($key == 0) continue;
 
             $data[$key][$length] = $value[9];
-            $data[$key][$length+1] = $value[9];
+            $data[$key][$length + 1] = $value[9];
         }
 
         //Attributes header Style FORMATTING 
         foreach ($data[0] as $key => $value) {
-            if($key > 28 && $key < (count($data[0]) -3)) {
-                $data[0][$key] = str_replace(' ', '_', $value) ;
+            if ($key > 28 && $key < (count($data[0]) - 3)) {
+                $data[0][$key] = str_replace(' ', '_', $value);
             }
         }
 
@@ -747,44 +776,45 @@ class ProductController extends Controller
         }
         fclose($fp);
 
-        return true ;
+        return true;
     }
 
-    public function manipulate_file_config($data,$name,$d) {
+    public function manipulate_file_config($data, $name, $d)
+    {
 
         //Change Header for Bulk Upload
-        $data[0][0] = 'url_key'; 
-        $data[0][1] = 'name'; 
-        $data[0][2] = 'description'; 
-        $data[0][4] = 'categories_slug'; 
-        $data[0][6] = 'status'; 
-        $data[0][13] = 'sku'; 
-        $data[0][14] = 'weight'; 
-        $data[0][15] = 'inventory_sources'; 
-        $data[0][16] = 'inventories'; 
-        $data[0][19] = 'price'; 
-        $data[0][21] = 'tax_category_id'; 
-        $data[0][24] = 'images'; 
-        $data[0][28] = 'meta_title'; 
-        $data[0][29] = 'meta_description'; 
+        $data[0][0] = 'url_key';
+        $data[0][1] = 'name';
+        $data[0][2] = 'description';
+        $data[0][4] = 'categories_slug';
+        $data[0][6] = 'status';
+        $data[0][13] = 'sku';
+        $data[0][14] = 'weight';
+        $data[0][15] = 'inventory_sources';
+        $data[0][16] = 'inventories';
+        $data[0][19] = 'price';
+        $data[0][21] = 'tax_category_id';
+        $data[0][24] = 'images';
+        $data[0][28] = 'meta_title';
+        $data[0][29] = 'meta_description';
 
-        
+
         //Remove Null Value Record at Last
-        if(!$data[count($data) - 1]) unset($data[count($data) - 1]);
-        
+        if (!$data[count($data) - 1]) unset($data[count($data) - 1]);
+
         //Image Implode and Extra Row Removal
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
-            
+
             if ($item[25] == "1") {
                 $parent = $key;
             }
 
             if ((int)$item[25] > 1) {
                 $data[$parent][24] = $data[$parent][24] . ',' . $data[$key][24];
-                $data[$key][24] = '' ;
+                $data[$key][24] = '';
 
-                if($data[$key][13]=='' && array_key_exists($key+1,$data) && $data[$key+1][25] != '1') unset($data[$key]);
+                if ($data[$key][13] == '' && array_key_exists($key + 1, $data) && $data[$key + 1][25] != '1') unset($data[$key]);
                 // unset($data[$parent][25]);
             }
         }
@@ -792,46 +822,70 @@ class ProductController extends Controller
         //Null Meta Desc in Child Cell
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
-            if($item[13]=='') {
-                $data[$key][26] = '' ;
-                $data[$key][27] = '' ;
-                $data[$key][28] = '' ;
+            if ($item[13] == '') {
+                $data[$key][26] = '';
+                $data[$key][27] = '';
+                $data[$key][28] = '';
             }
             if ($item[25] != "1") {
-                $data[$key][29] = '' ;
+                $data[$key][29] = '';
             }
         }
 
         //Extra Variant Row Addition
-        $newData = [] ; $parent= '' ;
+        $newData = [];
+        $parent = '';
         foreach ($data as $key => $value) {
-            if($key==0) $newData[] = $value ;
-            else{
-                if($data[$key][25] == '1') { $parent = $key ; $newData[] = $value ; }
-                else {
-                    if($data[$key][25] == '2' && $data[$key][13] != '') {
-                        $newData[] = $value ;
-                        $last = array_keys($newData) ; $last = end($last) ;
-                        $newData[$last][8] = $data[$parent][8] ;
-                        $newData[$last][10] = $data[$parent][10] ;
-                        $newData[$last][12] = $data[$parent][12] ;
-                        
-                        $newData[] = $value ;
-                    }   
-                    else $newData[] = $value ;
+            if ($key == 0) $newData[] = $value;
+            else {
+                if ($data[$key][25] == '1') {
+                    $parent = $key;
+                    $newData[] = $value;
+                } else {
+                    if ($data[$key][25] == '2' && $data[$key][13] != '') {
+                        $newData[] = $value;
+                        $last = array_keys($newData);
+                        $last = end($last);
+                        $newData[$last][8] = $data[$parent][8];
+                        $newData[$last][10] = $data[$parent][10];
+                        $newData[$last][12] = $data[$parent][12];
+
+                        $newData[] = $value;
+                    } else $newData[] = $value;
                 }
             }
         }
-        $data = $newData ;
+        $data = $newData;
 
         //Column Removal and Updation
         foreach ($data as $key => $value) {
             unset(
-                $data[$key][3], $data[$key][5], $data[$key][17], $data[$key][18], $data[$key][20], $data[$key][22],
-                $data[$key][23], $data[$key][26], $data[$key][27], $data[$key][30], $data[$key][31], $data[$key][32],
-                $data[$key][33], $data[$key][34], $data[$key][35], $data[$key][36], $data[$key][37], $data[$key][38],
-                $data[$key][39], $data[$key][40], $data[$key][41], $data[$key][42], $data[$key][43], $data[$key][44],
-                $data[$key][45], $data[$key][46]
+                $data[$key][3],
+                $data[$key][5],
+                $data[$key][17],
+                $data[$key][18],
+                $data[$key][20],
+                $data[$key][22],
+                $data[$key][23],
+                $data[$key][26],
+                $data[$key][27],
+                $data[$key][30],
+                $data[$key][31],
+                $data[$key][32],
+                $data[$key][33],
+                $data[$key][34],
+                $data[$key][35],
+                $data[$key][36],
+                $data[$key][37],
+                $data[$key][38],
+                $data[$key][39],
+                $data[$key][40],
+                $data[$key][41],
+                $data[$key][42],
+                $data[$key][43],
+                $data[$key][44],
+                $data[$key][45],
+                $data[$key][46]
             );
             if ($key == 0) {
                 $data[$key][30] = 'new';
@@ -850,21 +904,26 @@ class ProductController extends Controller
                 $data[$key][43] = 'special_price_from';
                 $data[$key][44] = 'special_price_to';
             } else {
-                $data[$key][0] = preg_replace("/[^A-Za-z0-9_-]+/","",strtolower($value[0])) ;
+                $data[$key][0] = preg_replace("/[^A-Za-z0-9_-]+/", "", strtolower($value[0]));
                 //category
-                if($data[$key][25] == '1') {
-                    $data[$key][4] = str_replace('\'','',$data[$key][4]) ;
-                    $category = $this->categoryCheck($data[$key][4]) ;
-                    $data[$key][4] = $category ;
-                }
-                else $data[$key][4] = '' ;
+                if ($data[$key][25] == '1') {
+                    $data[$key][4] = str_replace('\'', '', $data[$key][4]);
+
+                    if ($this->shop_category == null) {
+                        $category = $this->categoryCheck($data[$key][4]);
+                    } else {
+                        $category = $this->shop_category->slug;
+                    }
+
+                    $data[$key][4] = $category;
+                } else $data[$key][4] = '';
                 //STATUS
                 // if($data[$key][25] == '1') {
-                    // $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
-                    $data[$key][6] = 1;
+                // $data[$key][6] = $data[$key][6] == "TRUE" ? 1 : 0;
+                $data[$key][6] = 1;
                 // }
                 // else $data[$key][6] = '' ;
-                $data[$key][13] = str_replace([' ','\"','\''], '-', $value[13]) ;
+                $data[$key][13] = str_replace([' ', '\"', '\''], '-', $value[13]);
                 $data[$key][15] = 'default';
                 $data[$key][21] = null;
                 $data[$key][30] = 0;
@@ -875,117 +934,110 @@ class ProductController extends Controller
                 $data[$key][35] = null;
                 $data[$key][36] = null;
                 $data[$key][37] = $data[$key][25] == '1' ? 'configurable' : 'variant';
-                $data[$key][38] = $d['attribute_families'] ;
+                $data[$key][38] = $d['attribute_families'];
                 $data[$key][39] = 1;
                 $data[$key][40] = null;
                 $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
                 $data[$key][42] = null;
                 $data[$key][43] = null;
                 $data[$key][44] = null;
-                
-               
             }
         }
 
         //Columns Addition and Price Change
         foreach ($data as $key => $item) {
-            if($key == 0 ) {
-                $data[0][] = 'user_id' ;
-                $data[0][] = 'country' ;
-                $data[0][] = 'delivery_charge' ;
-                $data[0][] = 'barcode' ;
-                $data[0][] = 'min_price' ;
-                $data[0][] = 'max_price' ;
-                $data[0][] = 'super_attributes' ;
-                $data[0][] = 'super_attribute_option' ;
-                $data[0][] = 'super_attribute_price' ;
-                $data[0][] = 'super_attribute_qty' ;
-                $data[0][] = 'super_attribute_weight' ;
-            }
-            else {
-                $data[$key][42] = (int) $data[$key][19] ;
-                $data[$key][19] = ceil(((int) $data[$key][19])*(1+($d['margin']/100))) ;
+            if ($key == 0) {
+                $data[0][] = 'user_id';
+                $data[0][] = 'country';
+                $data[0][] = 'delivery_charge';
+                $data[0][] = 'barcode';
+                $data[0][] = 'min_price';
+                $data[0][] = 'max_price';
+                $data[0][] = 'super_attributes';
+                $data[0][] = 'super_attribute_option';
+                $data[0][] = 'super_attribute_price';
+                $data[0][] = 'super_attribute_qty';
+                $data[0][] = 'super_attribute_weight';
+            } else {
+                $data[$key][42] = (int) $data[$key][19];
+                $data[$key][19] = ceil(((int) $data[$key][19]) * (1 + ($d['margin'] / 100)));
 
-                $data[$key][] = auth()->guard('admin')->user()->id ;
-                $data[$key][] = 'IN' ;
-                $data[$key][] = 0.0000 ;
-                $data[$key][] = 0 ;
-                $data[$key][] = $data[$key][42] ;
-                $data[$key][] = $data[$key][19] ;
-                $data[$key][] = '' ;
-                $data[$key][] = '' ;
-                $data[$key][] = '' ;
-                $data[$key][] = '' ;
-                $data[$key][] = '' ;
-            } 
+                $data[$key][] = auth()->guard('admin')->user()->id;
+                $data[$key][] = $this->countries;
+                $data[$key][] = $this->delivery_charge;
+                $data[$key][] = 0;
+                $data[$key][] = $data[$key][42];
+                $data[$key][] = $data[$key][19];
+                $data[$key][] = '';
+                $data[$key][] = '';
+                $data[$key][] = '';
+                $data[$key][] = '';
+                $data[$key][] = '';
+            }
         }
 
         //Image Position Column Removal
         foreach ($data as $key => $item) {
-            unset($data[$key][25]) ;
+            unset($data[$key][25]);
         }
 
         //Parent Array Reindexing
-        $data = array_values($data) ;
+        $data = array_values($data);
 
         //Item Array Reindexing
         foreach ($data as $key => $item) {
-            $data[$key] = array_values($item) ;
+            $data[$key] = array_values($item);
         }
-        
-        $parent = '' ;
-        
+
+        $parent = '';
+
         // Updating Attribute Values
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
-            if($item[27]=='configurable') {
-                $parent = $key ;
-                $data[$key][11] = strtolower($item[11]) ;
-            } 
-            else {
-                $data[$key][41] = strtolower($data[$parent][5].($data[$parent][7]!=''?',':'').$data[$parent][7].($data[$parent][9]!=''?',':'').$data[$parent][9]) ;
-                if($item[11] == '') {
-                    $data[$key][11] = strtolower( 
-                        $data[$parent][11].($data[$parent][6]!=''?'-':'').str_replace([',',' '],'-',$data[$parent][6])
-                        .($data[$parent][8]!=''?'-':'').
-                        str_replace([',',' '],'-',$data[$parent][8])
-                        .($data[$parent][10]!=''?'-':'').
-                        str_replace([',',' '],'-',$data[$parent][10])
+            if ($item[27] == 'configurable') {
+                $parent = $key;
+                $data[$key][11] = strtolower($item[11]);
+            } else {
+                $data[$key][41] = strtolower($data[$parent][5] . ($data[$parent][7] != '' ? ',' : '') . $data[$parent][7] . ($data[$parent][9] != '' ? ',' : '') . $data[$parent][9]);
+                if ($item[11] == '') {
+                    $data[$key][11] = strtolower(
+                        $data[$parent][11] . ($data[$parent][6] != '' ? '-' : '') . str_replace([',', ' '], '-', $data[$parent][6])
+                            . ($data[$parent][8] != '' ? '-' : '') .
+                            str_replace([',', ' '], '-', $data[$parent][8])
+                            . ($data[$parent][10] != '' ? '-' : '') .
+                            str_replace([',', ' '], '-', $data[$parent][10])
                     );
-                    $data[$key][42] = 
-                        preg_replace('/\s+/', ' ', str_replace(',',' ',$data[$parent][6]))
-                        .($data[$parent][8]!=''?',':'').
-                        preg_replace('/\s+/', ' ', str_replace(',',' ',$data[$parent][8]))
-                        .($data[$parent][10]!=''?',':'').
-                        preg_replace('/\s+/', ' ', str_replace(',',' ',$data[$parent][10]))
-                    ;    
-                }
-                else {
-                    $data[$key][11] = strtolower( 
-                        $data[$key][11].'-'.str_replace([',',' '],'-',$data[$key][6])
-                        .($data[$parent][8]!=''?'-':'').
-                        str_replace([',',' '],'-',$data[$key][8])
-                        .($data[$parent][10]!=''?'-':'').
-                        str_replace([',',' '],'-',$data[$key][10])
+                    $data[$key][42] =
+                        preg_replace('/\s+/', ' ', str_replace(',', ' ', $data[$parent][6]))
+                        . ($data[$parent][8] != '' ? ',' : '') .
+                        preg_replace('/\s+/', ' ', str_replace(',', ' ', $data[$parent][8]))
+                        . ($data[$parent][10] != '' ? ',' : '') .
+                        preg_replace('/\s+/', ' ', str_replace(',', ' ', $data[$parent][10]));
+                } else {
+                    $data[$key][11] = strtolower(
+                        $data[$key][11] . '-' . str_replace([',', ' '], '-', $data[$key][6])
+                            . ($data[$parent][8] != '' ? '-' : '') .
+                            str_replace([',', ' '], '-', $data[$key][8])
+                            . ($data[$parent][10] != '' ? '-' : '') .
+                            str_replace([',', ' '], '-', $data[$key][10])
                     );
-                    $data[$key][42] = 
-                        preg_replace('/\s+/', ' ', str_replace([','],' ',$data[$key][6]))
-                        .($data[$parent][8]!=''?',':'').
-                        preg_replace('/\s+/', ' ', str_replace([','],' ',$data[$key][8]))
-                        .($data[$parent][10]!=''?',':'').
-                        preg_replace('/\s+/', ' ', str_replace([','],' ',$data[$key][10]))
-                    ;
+                    $data[$key][42] =
+                        preg_replace('/\s+/', ' ', str_replace([','], ' ', $data[$key][6]))
+                        . ($data[$parent][8] != '' ? ',' : '') .
+                        preg_replace('/\s+/', ' ', str_replace([','], ' ', $data[$key][8]))
+                        . ($data[$parent][10] != '' ? ',' : '') .
+                        preg_replace('/\s+/', ' ', str_replace([','], ' ', $data[$key][10]));
                 }
 
-                $data[$key][43] = $data[$parent][15] ;
-                $data[$key][44] = $data[$parent][14] ;
-                $data[$key][45] = $data[$parent][12] ;
-                $data[$key][1] = $data[$parent][1] ;
-                $data[$key][2] = $data[$parent][2] ;
-                $data[$key][19] = $data[$parent][19] ;
+                $data[$key][43] = $data[$parent][15];
+                $data[$key][44] = $data[$parent][14];
+                $data[$key][45] = $data[$parent][12];
+                $data[$key][1] = $data[$parent][1];
+                $data[$key][2] = $data[$parent][2];
+                $data[$key][19] = $data[$parent][19];
                 $data[$key][22] = 0; //Visble Indivdually False
-                
-                $data[$key][32] =  $data[$parent][32] ; //Special Price
+
+                $data[$key][32] =  $data[$parent][32]; //Special Price
                 $data[$key][15] = $data[$parent][15]; // MRP
                 $data[$key][39] = $data[$parent][39]; // Min Price
                 $data[$key][40] = $data[$parent][40]; // Max Price
@@ -995,101 +1047,133 @@ class ProductController extends Controller
 
         //Deleting Original Attributes Column
         foreach ($data as $key => $item) {
-            unset($data[$key][5],$data[$key][6],$data[$key][7],$data[$key][8],$data[$key][9],$data[$key][10],$data[$key][12],$data[$key][14]) ;
+            unset($data[$key][5], $data[$key][6], $data[$key][7], $data[$key][8], $data[$key][9], $data[$key][10], $data[$key][12], $data[$key][14]);
         }
-        
+
         //Item Array Reindexing
         foreach ($data as $key => $item) {
-            $data[$key] = array_values($item) ;
+            $data[$key] = array_values($item);
         }
 
         //For Attribute Checking and Addition
         foreach ($data as $key => $value) {
-            if($key==0) continue ;
-            if($value[19] != 'configurable') {
-                $att_code = explode(',',$value[33]) ;
-                $att_values = explode(',',$value[34]) ;
+            if ($key == 0) continue;
+            if ($value[19] != 'configurable') {
+                $att_code = explode(',', $value[33]);
+                $att_values = explode(',', $value[34]);
                 $pass_data = [];
-                if($att_code[0]!='' && $att_values[0]!='') $pass_data[] = [$att_code[0],$att_values[0]];
-                if(isset($att_code[1]) && $att_code[1]!='' && $att_values[1]!='') $pass_data[] = [$att_code[1],$att_values[1]];
-                if(isset($att_code[2]) && $att_code[2]!='' && $att_values[2]!='') $pass_data[] = [$att_code[2],$att_values[2]];
+                if ($att_code[0] != '' && $att_values[0] != '') $pass_data[] = [$att_code[0], $att_values[0]];
+                if (isset($att_code[1]) && $att_code[1] != '' && $att_values[1] != '') $pass_data[] = [$att_code[1], $att_values[1]];
+                if (isset($att_code[2]) && $att_code[2] != '' && $att_values[2] != '') $pass_data[] = [$att_code[2], $att_values[2]];
                 // dd($pass_data);
                 // $pass_data = [[$att_code[0],$att_values[0]],[$att_code[1],$att_values[1]],[$att_code[2],$att_values[2]]] ;
-                $this->attributeCheck_config($pass_data,$d['attribute_families']) ;
+                $this->attributeCheck_config($pass_data, $d['attribute_families']);
             }
         }
 
         // dd($data);
-        
+        // $data= json_decode( json_encode($data), true);
+
         $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
         foreach ($data as $fields) {
             fputcsv($fp, $fields);
         }
         fclose($fp);
 
-        return true ;
+        return true;
     }
 
-    public function categoryCheck($category) {
-        $cat = strtolower(str_replace(" ","-",$category)) ;
+    public function categoryCheck($category)
+    {
+        $cat = strtolower(str_replace(" ", "-", $category));
         // $check = DB::table('category_translations')->where('slug', $cat)->first() ;
-        $check = DB::table('category_translations')->where('slug', 'like' , "%$cat%")->first() ;
-        if(isset($check)) return $check->slug ;
-        else {
-            $data['position'] = 1 ;
-            $data['status'] = 0 ;
-            $data['parent_id'] = 1 ;
-            $data['display_mode'] = 'products_only' ;
-            $insert = $this->categoryRepository->create($data) ;
-            if($insert) {
-                $newCat['name'] = $category ;
-                $newCat['slug'] = $cat ;
-                $newCat['category_id'] = $insert->id ;
-                $newCat['locale'] = 'en' ;
-                $newCat['locale_id'] = 1 ;
-                DB::table('category_translations')->insertGetId($newCat) ;
+        $check = DB::table('category_translations')->where('slug', 'like', "%$cat%")->first();
+        if (isset($check)) {
+            $this->shop_category = $check;
+            return $check->slug;
+        } else {
+            $data['position'] = 1;
+            $data['status'] = 0;
+            $data['parent_id'] = 1;
+            $data['display_mode'] = 'products_only';
+            $insert = $this->categoryRepository->create($data);
+            if ($insert) {
+                $newCat['name'] = $category;
+                $newCat['slug'] = $cat;
+                $newCat['category_id'] = $insert->id;
+                $newCat['locale'] = 'en';
+                $newCat['locale_id'] = 1;
+                DB::table('category_translations')->insertGetId($newCat);
             }
 
-            return $cat ;
+            return $cat;
         }
     }
 
-    
-    public function attributeCheck_config($pass_data,$af) {
-        $aFamily = $this->attributeFamilyRepository->findOneByfield(['name' => $af]) ; 
-        $attributeArray = $this->attributeRepository->pluck('code')->toArray() ;
 
-        
-        $attribute_fam_groups = $this->attributeGroupRepository->where('attribute_family_id',$aFamily->id)->pluck('id') ;
-        $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id',$attribute_fam_groups)->pluck('attribute_id') ;
-        $all_fam_att_codes = $this->attributeRepository->whereIn('id',$all_fam_attributes)->pluck('code')->toArray() ;
-        $fam_gen = $this->attributeGroupRepository->where('attribute_family_id',$aFamily->id)->where('name','General')->first() ;
+    public function attributeCheck_config($pass_data, $af)
+    {
+        $aFamily = $this->attributeFamilyRepository->findOneByfield(['name' => $af]);
+        $attributeArray = $this->attributeRepository->pluck('code')->toArray();
+
+
+        $attribute_fam_groups = $this->attributeGroupRepository->where('attribute_family_id', $aFamily->id)->pluck('id');
+        $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id', $attribute_fam_groups)->pluck('attribute_id');
+        $all_fam_att_codes = $this->attributeRepository->whereIn('id', $all_fam_attributes)->pluck('code')->toArray();
+        $fam_gen = $this->attributeGroupRepository->where('attribute_family_id', $aFamily->id)->where('name', 'General')->first();
         // dd($aFamily,$attribute_fam_groups,$all_fam_att_codes,$all_fam_attributes, $fam_gen) ;
 
 
         foreach ($pass_data as $key => $value) {
-            if($value[0]!='' && $value[1] != ''){
+            if ($value[0] != '' && $value[1] != '') {
                 if (in_array($value[0], $attributeArray)) {
-                    $att_to_add = $this->attributeRepository->where('code',$value[0])->first();
-                    if(!in_array($value[0],$all_fam_att_codes)){
+                    $att_to_add = $this->attributeRepository->where('code', $value[0])->first();
+                    if (!in_array($value[0], $all_fam_att_codes)) {
                         DB::table('attribute_group_mappings')->insert([
                             'attribute_id' => $att_to_add->id,
                             'attribute_group_id' => $fam_gen->id
                         ]);
                     }
-    
+                    //Link attribute with category
+                    $check0  = DB::table('category_filterable_attributes')->where('attribute_id', $att_to_add->id)->where('category_id', $this->shop_category->category_id)->count();
+                    if($check0 <1 ){
+                        $cfa_id =  DB::table('category_filterable_attributes')->insertGetId([
+                            'attribute_id' => $att_to_add->id,
+                            'category_id' => $this->shop_category->category_id,
+                        ]);
+                    }
+
                     //check for option existence
-                    $check  = DB::table('attribute_options')->where('attribute_id',$att_to_add->id)->where('admin_name',$value[1])->count();
-                    if($check<1){
-                        DB::table('attribute_options')->insert([
+                    $check  = DB::table('attribute_options')->where('attribute_id', $att_to_add->id)->where('admin_name', $value[1])->first();
+                    if (empty($check)) {
+
+                        $new_option_id =  DB::table('attribute_options')->insertGetId([
                             'attribute_id' => $att_to_add->id,
                             'admin_name' => $value[1],
                             'sort_order' => 1,
                         ]);
+
+                        //Linking option with category
+                        DB::table('attribute_category_options')->insert([
+                            'attribute_id' => $att_to_add->id,
+                            'category_id' => $this->shop_category->category_id,
+                            'option_id' => $new_option_id,
+                        ]);
                     }
-                }
-                else {
-    
+
+                    else{
+                        $check1  = DB::table('attribute_category_options')->where('option_id', $check->id)->where('category_id', $this->shop_category->category_id)->count();
+                        if ($check1 < 1) {
+                            //Linking option with category
+                            DB::table('attribute_category_options')->insert([
+                                'attribute_id' => $att_to_add->id,
+                                'category_id' => $this->shop_category->category_id,
+                                'option_id' => $check->id,
+                            ]);
+                        }
+                    }
+                } else {
+
                     //Created attribute
                     $id = $this->attributeRepository->insertGetId([
                         'code' => $value[0],
@@ -1100,44 +1184,58 @@ class ProductController extends Controller
                         'swatch_type' => 'dropdown',
                         'type' => 'select',
                     ]);
-    
+
+                    //Link attribute with category
+                    $cfa_id =  DB::table('category_filterable_attributes')->insertGetId([
+                        'attribute_id' => $id,
+                        'category_id' => $this->shop_category->category_id,
+                    ]);
+
                     //Linked to group
                     DB::table('attribute_group_mappings')->insert([
                         'attribute_id' => $id,
                         'attribute_group_id' => $fam_gen->id
                     ]);
-    
+
                     //Creating option 
-                    DB::table('attribute_options')->insert([
+                    $new_option_id =  DB::table('attribute_options')->insertGetId([
                         'attribute_id' => $id,
                         'admin_name' => $value[1],
                         'sort_order' => 1,
+                    ]);
+
+                    //Linking option with category
+                    DB::table('attribute_category_options')->insert([
+                        'attribute_id' => $id,
+                        'category_id' => $this->shop_category->category_id,
+                        'option_id' => $new_option_id,
                     ]);
                 }
             }
         }
     }
 
-    public function delete_shopify_file($id) {
-        $check = DB::table('shopify_file_csv')->find($id) ;
-        if(file_exists($file =  public_path($check->file_name))) {
-            unlink($file) ;
-            $flag = DB::table('shopify_file_csv')->delete($id) ;
+    public function delete_shopify_file($id)
+    {
+        $check = DB::table('shopify_file_csv')->find($id);
+        if (file_exists($file =  public_path($check->file_name))) {
+            unlink($file);
+            $flag = DB::table('shopify_file_csv')->delete($id);
         }
-        if($flag) return response()->json(['message'=>'File Deleted Successfully!']) ;
-        else return response()->json(['message'=>'File Deletion Unsuccessful!'],500) ;
-        
+        if ($flag) return response()->json(['message' => 'File Deleted Successfully!']);
+        else return response()->json(['message' => 'File Deletion Unsuccessful!'], 500);
     }
 
-    public function download_shopify_file($id) {
-        $check = DB::table('shopify_file_csv')->find($id) ;
-        if(file_exists($file =  public_path($check->file_name))) {
-            return response()->download($file) ;
-        }
-        else return response()->json(['message'=>'File Not Found!'],500) ;
+    public function download_shopify_file($id)
+    {
+        $check = DB::table('shopify_file_csv')->find($id);
+        if (file_exists($file =  public_path($check->file_name))) {
+            return response()->download($file);
+        } else return response()->json(['message' => 'File Not Found!'], 500);
     }
 
-    public function save_bulk_upload_back($data) {
+    public function save_bulk_upload_back($data)
+    {
         unset($data[count($data) - 1]);
 
 
@@ -1178,13 +1276,13 @@ class ProductController extends Controller
     //     // $data[$key][$location] = $item[8];
     //     $data[$key][45 + $new_location] = $item[8];
     // }
-    
+
     // else{
     //     $new_attributes[] =  $item[7];
     //     $data[0][] = $item[7];
 
     //     $new_location = array_search($item[7], $new_attributes);
-        
+
     //     $data[$key][45 + $new_location] = $item[8];
     // }
 }

@@ -180,23 +180,25 @@ class ProductController extends Controller
     {
         $filterAttributes = [];
         if ($category = $this->categoryRepository->find($categoryId)) {
-            $products = $this->productRepository->getAllCatProd($categoryId);
-            foreach ($products as $key1 => $product) {
-                $customAtt = null;
-                $customAtt = $this->con->getConfigurationConfig($product)['attributes'] ;
-                foreach ($customAtt as $key2 => $att) {
-                    $loc = array_search($att['label'],array_column($filterAttributes,'label')) ;
-                    if(false === $loc) $filterAttributes[] = $att ;
-                    else {
-                        if(!in_array($att['options'][0]['label'],array_column($filterAttributes[$loc]['options'],'label')))
-                            array_push($filterAttributes[$loc]['options'],$att['options'][0]) ;
-                    }
-                }
-            }
-            $arr = $this->productFlatRepository->getFilterAttributes($category)->toArray() ;
-            $loc = array_search('price',array_column($arr,'code')) ;
-            if($loc !== false)
-            array_unshift($filterAttributes, $arr[$loc]) ;
+            $filterAttributes = $this->productFlatRepository->getFilterAttributes($category);
+
+            // $products = $this->productRepository->getAllCatProd($categoryId);
+            // foreach ($products as $key1 => $product) {
+            //     $customAtt = null;
+            //     $customAtt = $this->con->getConfigurationConfig($product)['attributes'] ;
+            //     foreach ($customAtt as $key2 => $att) {
+            //         $loc = array_search($att['label'],array_column($filterAttributes,'label')) ;
+            //         if(false === $loc) $filterAttributes[] = $att ;
+            //         else {
+            //             if(!in_array($att['options'][0]['label'],array_column($filterAttributes[$loc]['options'],'label')))
+            //                 array_push($filterAttributes[$loc]['options'],$att['options'][0]) ;
+            //         }
+            //     }
+            // }
+            // $arr = $this->productFlatRepository->getFilterAttributes($category)->toArray() ;
+            // $loc = array_search('price',array_column($arr,'code')) ;
+            // if($loc !== false)
+            // array_unshift($filterAttributes, $arr[$loc]) ;
         }
 
         if (! count($filterAttributes) > 0) {
