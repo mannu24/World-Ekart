@@ -530,12 +530,11 @@ class ProductController extends Controller
         return view($this->_config['view'], compact('attribute_families','countries'));
     }
 
-    public function save_bulk_upload()
-    {
+    public function save_bulk_upload() {
 
         $d = request()->validate([
             'attribute_families' => 'required|string',
-            'type' => 'required|string',
+            // 'type' => 'required|string',
             'margin' => 'required|numeric',
             'delivery_charge' => 'required|numeric',
             'countries' => 'required',
@@ -546,11 +545,12 @@ class ProductController extends Controller
         $this->delivery_charge = $d['delivery_charge'];
 
         $name = request()->file('csv-file')->getClientOriginalName();
-        $check = DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->get()->count();
-
-        if ($check > 0) {
-            session()->flash('error', 'File Name Already Exists!');
-            return redirect()->back();
+        $check = DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->get() ;
+        if (count($check) > 0) {
+            if(file_exists($file = public_path("converted_csv/converted-$name"))) unlink($file) ;
+            DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->delete() ;
+            // session()->flash('error', 'File Name Already Exists!');
+            // return redirect()->back();
         }
 
         // $d['categories'] = implode(',',$d['categories']) ;
@@ -562,8 +562,9 @@ class ProductController extends Controller
         }
         fclose($file);
 
-        if ($d['type'] == 'Simple') $completed = $this->manipulate_file($data, $name, $d);
-        else $completed = $this->manipulate_file_config($data, $name, $d);
+        // if ($d['type'] == 'Simple') $completed = $this->manipulate_file($data, $name, $d);
+        // else 
+        $completed = $this->manipulate_file_config($data, $name, $d);
 
         if ($completed) {
             $upload['vendor_id'] = auth()->guard('admin')->user()->id;
@@ -572,7 +573,7 @@ class ProductController extends Controller
             $check = DB::table('shopify_file_csv')->insert($upload);
 
             if ($check) session()->flash('success', 'File Converted Successfully!');
-            else session()->flash('failed', 'File Conversion Unsuccessful!');
+            else session()->flash('error', 'File Conversion Unsuccessful!');
 
             return redirect()->back();
         }
@@ -631,14 +632,27 @@ class ProductController extends Controller
         }
 
         //Extra Variant Row Addition
-        $newData = [];
-        $parent = '';
+        $newData = [] ; $parent = '' ;
         foreach ($data as $key => $value) {
             if ($key == 0) $newData[] = $value;
             else {
                 if ($data[$key][25] == '1') {
+                    if(isset($data[$key+1]) && ($data[$key+1][25] == '1')) {
+                        $newData[] = $value;
+                        $last = array_keys($newData);
+                        $last = end($last);
+                        $newData[$last][8] = $data[$parent][8];
+                        $newData[$last][10] = $data[$parent][10];
+                        $newData[$last][12] = $data[$parent][12];
+                        $value[25] = '2' ;
+                        $value[24] = '' ;
+                        $value[28] = '' ;
+                        // $value[25] = '' ;
+                        $newData[] = $value;                        
+                    }else {
+                        $newData[] = $value;
+                    }
                     $parent = $key;
-                    $newData[] = $value;
                 } else {
                     if ($data[$key][25] == '2' && $data[$key][13] != '') {
                         $newData[] = $value;
@@ -654,6 +668,7 @@ class ProductController extends Controller
             }
         }
         $data = $newData;
+        // dd($data);
 
         //Column Removal and Updation
         foreach ($data as $key => $value) {
@@ -735,7 +750,7 @@ class ProductController extends Controller
                 $data[$key][38] = $d['attribute_families'];
                 $data[$key][39] = 1;
                 $data[$key][40] = null;
-                $data[$key][41] = $data[$key][2] ? explode('<br', $data[$key][2])[0] : '';
+                $data[$key][41] = $data[$key][2] ? explode('<br>', $data[$key][2])[0] : '';
                 $data[$key][42] = null;
                 $data[$key][43] = null;
                 $data[$key][44] = null;
@@ -786,10 +801,9 @@ class ProductController extends Controller
         foreach ($data as $key => $item) {
             $data[$key] = array_values($item);
         }
-
-        $parent = '';
-
+        
         // Updating Attribute Values
+        $parent = '';
         foreach ($data as $key => $item) {
             if ($key == 0) continue;
             if ($item[27] == 'configurable') {
@@ -842,7 +856,6 @@ class ProductController extends Controller
             }
         }
 
-
         //Deleting Original Attributes Column
         foreach ($data as $key => $item) {
             unset($data[$key][5], $data[$key][6], $data[$key][7], $data[$key][8], $data[$key][9], $data[$key][10], $data[$key][12], $data[$key][14]);
@@ -881,7 +894,7 @@ class ProductController extends Controller
                 }
             }    
         }
-        
+      
         // dd($data);
 
         $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
@@ -893,8 +906,7 @@ class ProductController extends Controller
         return true;
     }
 
-    public function categoryCheck($category)
-    {
+    public function categoryCheck($category) {
         $cat = strtolower(str_replace(" ", "-", $category));
         // $check = DB::table('category_translations')->where('slug', $cat)->first() ;
         $check = DB::table('category_translations')->where('slug', 'like', "%$cat%")->first();
@@ -920,9 +932,7 @@ class ProductController extends Controller
         }
     }
 
-
-    public function attributeCheck_config($pass_data, $af)
-    {
+    public function attributeCheck_config($pass_data, $af){
         $aFamily = $this->attributeFamilyRepository->findOneByfield(['name' => $af]);
         $attributeArray = $this->attributeRepository->pluck('code')->toArray();
 
@@ -1026,8 +1036,7 @@ class ProductController extends Controller
         }
     }
 
-    public function delete_shopify_file($id)
-    {
+    public function delete_shopify_file($id) {
         $check = DB::table('shopify_file_csv')->find($id);
         if (file_exists($file =  public_path($check->file_name))) {
             unlink($file);
@@ -1037,12 +1046,14 @@ class ProductController extends Controller
         else return response()->json(['message' => 'File Deletion Unsuccessful!'], 500);
     }
 
-    public function download_shopify_file($id)
-    {
+    public function download_shopify_file($id) {
         $check = DB::table('shopify_file_csv')->find($id);
         if (file_exists($file =  public_path($check->file_name))) {
             return response()->download($file);
-        } else return response()->json(['message' => 'File Not Found!'], 500);
+        } else {
+            session()->flash('error', 'File not Found!');
+            return redirect()->back() ;
+        }
     }
 
     public function save_bulk_upload_back($data)

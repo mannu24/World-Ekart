@@ -29,19 +29,19 @@
                             <label class="required">Delivery Charge</label>
                             <input type="number" class="control" name="delivery_charge"  min="0" value="0">
                         </div>
-                        <div class="col-md-12 control-group">
+                        {{-- <div class="col-md-12 control-group">
                             <label class="required">Select Product Type</label>
                             <select name="type" class="control">
                                 <option value="Simple">Simple Product</option>
                                 <option value="Configurable" selected>Product with Variants (Configurable)</option>
                             </select>
-                        </div>
+                        </div> --}}
                          <div class="col-md-12 control-group">
                             <label>Select Countries</label>
                             <select name="countries[]" multiple class="control select2" required>
                                 <option value=""></option>
                                 @foreach($countries as $key => $value)
-                                    <option value="{{ $value->code }}">{{ $value->name }}</option>
+                                    <option value="{{ $value->code }}" @selected($value->name == 'India')>{{ $value->name }}</option>
                                 @endforeach
                             </select>
                         </div> 
