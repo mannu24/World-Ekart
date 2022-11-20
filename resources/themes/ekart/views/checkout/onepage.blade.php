@@ -320,7 +320,6 @@
                             this.$http.post("{{ route('customer.checkout.exist') }}", {email: this.address.billing.email})
                             .then(response => {
                                 this.is_customer_exist = response.data ? 1 : 0;
-                                console.log(this.is_customer_exist);
 
                                 if (response.data)
                                     this.$root.hideLoader();
@@ -399,7 +398,6 @@
                             .then(response => {
                                 this.disable_button = false;
                                 this.isPlaceOrderEnabled = true;
-                                console.log(response);
                                 if (this.step_numbers[response.data.jump_to_section] == 2) {
                                     this.showShippingSection = true;
                                     shippingHtml = Vue.compile(response.data.html);
@@ -538,7 +536,6 @@
 
                     paymentMethodSelected: function (paymentMethod) {
                         this.selected_payment_method = paymentMethod;
-                        console.log(this.selected_payment_method);
                     },
 
                     newBillingAddress: function () {
@@ -594,6 +591,10 @@
                     }
 
                     eventBus.$emit('after-checkout-shipping-section-added');
+                },
+
+                updated() {
+                    $('#free_free').trigger('click') ;
                 },
 
                 render: function (h) {

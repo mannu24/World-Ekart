@@ -50,6 +50,12 @@ return [
         'sort'       => 5,
         'icon-class' => '',
     ], [
+        'key'        => 'sales.tracking',
+        'name'       => 'Courier Tracking Links',
+        'route'      => 'admin.sales.tracking',
+        'sort'       => 8,
+        'icon-class' => '',
+    ], [
         'key'        => 'catalog',
         'name'       => 'admin::app.layouts.catalog',
         'route'      => 'admin.catalog.products.index',

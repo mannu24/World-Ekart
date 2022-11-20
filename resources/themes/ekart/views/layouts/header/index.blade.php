@@ -81,17 +81,17 @@
 @include('shop::layouts.header.mobile')
 @push('scripts')
     <script type="text/javascript">
-        (() => {
-            document.addEventListener('scroll', e => {
-                scrollPosition = Math.round(window.scrollY);
+        // (() => {
+        //     document.addEventListener('scroll', e => {
+        //         scrollPosition = Math.round(window.scrollY);
 
-                if (scrollPosition > 50) {
-                    document.querySelector('#headerSticky').classList.add('header-shadow','header--sticky');
-                } else {
-                    document.querySelector('#headerSticky').classList.remove('header-shadow','header--sticky');
-                }
-            });
-        })();
+        //         if (scrollPosition > 50) {
+        //             document.querySelector('#headerSticky').classList.add('header-shadow','header--sticky');
+        //         } else {
+        //             document.querySelector('#headerSticky').classList.remove('header-shadow','header--sticky');
+        //         }
+        //     });
+        // })();
 
         function open_drawer() {
             $('#menu-drawer').removeClass('d-none').addClass('ant-drawer-open') ;

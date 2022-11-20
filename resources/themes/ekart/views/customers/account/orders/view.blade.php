@@ -62,7 +62,7 @@
                                             <table>
                                                 <thead>
                                                     <tr>
-                                                        <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th>
+                                                        {{-- <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th> --}}
                                                         <th>{{ __('shop::app.customer.account.order.view.product-name') }}</th>
                                                         <th>{{ __('shop::app.customer.account.order.view.price') }}</th>
                                                         <th>{{ __('shop::app.customer.account.order.view.item-status') }}</th>
@@ -76,9 +76,9 @@
                                                 <tbody>
                                                     @foreach ($order->items as $item)
                                                         <tr>
-                                                            <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
+                                                            {{-- <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                                 {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
-                                                            </td>
+                                                            </td> --}}
                     
                                                             <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
                                                                 {{ $item->name }}
@@ -234,7 +234,7 @@
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th>
+                                                                {{-- <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th> --}}
                                                                 <th>{{ __('shop::app.customer.account.order.view.product-name') }}</th>
                                                                 <th>{{ __('shop::app.customer.account.order.view.price') }}</th>
                                                                 <th>{{ __('shop::app.customer.account.order.view.qty') }}</th>
@@ -248,9 +248,9 @@
                     
                                                             @foreach ($invoice->items as $item)
                                                                 <tr>
-                                                                    <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
+                                                                    {{-- <td data-value="{{ __('shop::app.customer.account.order.view.SKU') }}">
                                                                         {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
-                                                                    </td>
+                                                                    </td> --}}
                     
                                                                     <td data-value="{{ __('shop::app.customer.account.order.view.product-name') }}">
                                                                         {{ $item->name }}
@@ -336,9 +336,12 @@
                     
                                         <div class="sale-section">
                                             <div class="section-content">
-                                                <div class="align-items-sm-baseline col-12 justify-content-start row">
-                                                        {{__('shop::app.customer.account.order.view.tracking-number') }}
-                                                    </label>
+                                                <div class="mb-1 col-12 row justify-content-between">
+                                                    <h4>Courier Title: <strong>{{  $shipment->carrier_title }}</strong></h4>
+                                                    <h4>Tracking Number: <strong>{{  $shipment->track_number }}</strong></h4>
+                                                </div>
+                                                <div class="mb-3 col-12 row justify-content-between">
+                                                    <p>To View Tracking Details, Copy the Tracking Number Above and paste it <a href="{{ $title->link }}" class="text-primary" target="_blank">here</a></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -353,7 +356,7 @@
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th>
+                                                                {{-- <th>{{ __('shop::app.customer.account.order.view.SKU') }}</th> --}}
                                                                 <th>{{ __('shop::app.customer.account.order.view.product-name') }}</th>
                                                                 <th>{{ __('shop::app.customer.account.order.view.qty') }}</th>
                                                             </tr>
@@ -364,7 +367,7 @@
                                                             @foreach ($shipment->items as $item)
                     
                                                                 <tr>
-                                                                    <td data-value="{{  __('shop::app.customer.account.order.view.SKU') }}">{{ $item->sku }}</td>
+                                                                    {{-- <td data-value="{{  __('shop::app.customer.account.order.view.SKU') }}">{{ $item->sku }}</td> --}}
                                                                     <td data-value="{{  __('shop::app.customer.account.order.view.product-name') }}">{{ $item->name }}</td>
                                                                     <td data-value="{{  __('shop::app.customer.account.order.view.qty') }}">{{ $item->qty }}</td>
                                                                 </tr>

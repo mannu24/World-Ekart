@@ -85,12 +85,6 @@
         
                             <span class="control-error" v-if="errors.has('password_confirmation')">@{{ errors.first('password_confirmation') }}</span>
                         </div>
-                        @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-                            <div class="col-sm-6 form-group control-group">
-                                <input type="checkbox" id="checkbox2" name="subscribed_to_news_letter"@if (isset($customer->subscription)) value="{{ $customer->subscription->is_subscribed }}" {{ $customer->subscription->is_subscribed ? 'checked' : ''}} @endif>
-                                <span>{{ __('shop::app.customer.signup-form.subscribe-to-newsletter') }}</span>
-                            </div>
-                        @endif
                     </div>
                     <div class="form-group submit">
                         <button type="submit" class="ps-btn">{{ __('shop::app.customer.account.profile.submit') }}</button>
@@ -99,115 +93,10 @@
             </div>
         </div>
     </div>
-{{-- 
-    <div class="account-head mb-0">
-        <span class="account-heading">
-            {{ __('shop::app.customer.account.profile.index.title') }}
-        </span>
-
-        <span class="account-action">
-            <a href="{{ route('customer.profile.edit') }}" class="theme-btn light unset float-right">
-                {{ __('shop::app.customer.account.profile.index.edit') }}
-            </a>
-        </span>
-    </div>
-
-    {!! view_render_event('bagisto.shop.customers.account.profile.view.before', ['customer' => $customer]) !!}
-
-    <div class="account-table-content profile-page-content">
-        <div class="table">
-            <table>
-                <tbody>
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.before', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.fname') }}</td>
-
-                        <td>{{ $customer->first_name }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.first_name.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.lname') }}</td>
-
-                        <td>{{ $customer->last_name }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.last_name.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.gender') }}</td>
-
-                        <td>{{ $customer->gender ?? '-' }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.gender.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.dob') }}</td>
-
-                        <td>{{ $customer->date_of_birth ?? '-' }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.date_of_birth.after', ['customer' => $customer]) !!}
-
-                    <tr>
-                        <td>{{ __('shop::app.customer.account.profile.email') }}</td>
-
-                        <td>{{ $customer->email }}</td>
-                    </tr>
-
-                    {!! view_render_event('bagisto.shop.customers.account.profile.view.table.after', ['customer' => $customer]) !!}
-                </tbody>
-            </table>
-        </div>
-
-        <button
-            type="submit"
-            class="theme-btn mb20" onclick="window.showDeleteProfileModal();">
-            {{ __('shop::app.customer.account.address.index.delete') }}
-        </button>
-
-        <div id="deleteProfileForm" class="d-none">
-            <form method="POST" action="{{ route('customer.profile.destroy') }}" @submit.prevent="onSubmit">
-                @csrf
-
-                <modal id="deleteProfile" :is-open="modalIds.deleteProfile">
-                    <h3 slot="header">
-                        {{ __('shop::app.customer.account.address.index.enter-password') }}
-                    </h3>
-
-                    <i class="rango-close"></i>
-
-                    <div slot="body">
-                        <div class="control-group" :class="[errors.has('password') ? 'has-error' : '']">
-                            <label for="password" class="required">{{ __('admin::app.users.users.password') }}</label>
-
-                            <input type="password" v-validate="'required|min:6'" class="control" id="password" name="password" data-vv-as="&quot;{{ __('admin::app.users.users.password') }}&quot;"/>
-
-                            <span class="control-error" v-if="errors.has('password')" v-text="errors.first('password')"></span>
-                        </div>
-
-                        <div class="page-action">
-                            <button type="submit"  class="theme-btn mb20">
-                                {{ __('shop::app.customer.account.address.index.delete') }}
-                            </button>
-                        </div>
-                    </div>
-                </modal>
-            </form>
-        </div>
-    </div>
-
-    {!! view_render_event('bagisto.shop.customers.account.profile.view.after', ['customer' => $customer]) !!} --}}
 @endsection
 
 @push('scripts')
     <script>
-        /**
-         * Show delete profile modal.
-         */
         function showDeleteProfileModal() {
             document.getElementById('deleteProfileForm').classList.remove('d-none');
 

@@ -6,6 +6,7 @@ use Webkul\Admin\Http\Controllers\Sales\OrderController;
 use Webkul\Admin\Http\Controllers\Sales\RefundController;
 use Webkul\Admin\Http\Controllers\Sales\ShipmentController;
 use Webkul\Admin\Http\Controllers\Sales\TransactionController;
+use Webkul\Admin\Http\Controllers\TrackingController;
 
 /**
  * Sales routes.
@@ -116,5 +117,17 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
         Route::get('/transactions/view/{id}', [TransactionController::class, 'view'])->defaults('_config', [
             'view' => 'admin::sales.transactions.view',
         ])->name('admin.sales.transactions.view');
+
+        /**
+         * Courier Tracking routes.
+         */
+        Route::get('/tracking', [TrackingController::class, 'index'])->defaults('_config', [
+            'view' => 'admin::sales.tracking.index',
+        ])->name('admin.sales.tracking');
+
+        Route::post('/tracking/add', [TrackingController::class, 'store'])->name('admin.sales.tracking.add');
+
+        Route::post('/tracking/delete/{id}', [TrackingController::class, 'destroy'])->name('admin.sales.tracking.delete');
+
     });
 });

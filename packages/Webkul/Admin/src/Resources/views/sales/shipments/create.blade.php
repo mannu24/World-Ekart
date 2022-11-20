@@ -200,12 +200,17 @@
                                         </div>
 
                                         <div class="control-group" style="margin-top: 40px">
-                                            <label for="shipment[carrier_title]">{{ __('admin::app.sales.shipments.carrier-title') }}</label>
-                                            <input type="text" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]"/>
+                                            <label for="shipment[carrier_title]" class="required">{{ __('admin::app.sales.shipments.carrier-title') }}</label>
+                                            {{-- <input type="text" class="control" id="shipment[carrier_title]" name="shipment[carrier_title]"/> --}}
+                                            <select id="shipment[carrier_title]" class="control" name="shipment[carrier_title]" required>
+                                                @foreach ($titles as $item)
+                                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
 
                                         <div class="control-group">
-                                            <label for="shipment[track_number]">{{ __('admin::app.sales.shipments.tracking-number') }}</label>
+                                            <label for="shipment[track_number]" class="required">{{ __('admin::app.sales.shipments.tracking-number') }}</label>
                                             <input type="text" class="control" id="shipment[track_number]" name="shipment[track_number]"/>
                                         </div>
                                     </div>

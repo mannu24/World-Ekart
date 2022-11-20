@@ -10,13 +10,6 @@ return [
             'name' => 'Default'
         ],
 
-        'martfury' => [
-            'views_path' => 'resources/themes/martfury/views',
-            'assets_path' => 'public/themes/martfury/assets',
-            'name' => 'Martfury',
-            'parent' => 'default'
-        ],
-
         'ekart' => [
             'views_path' => 'resources/themes/ekart/views',
             'assets_path' => 'public/themes/ekart/assets',

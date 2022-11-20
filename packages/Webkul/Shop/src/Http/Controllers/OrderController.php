@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -81,11 +82,14 @@ class OrderController extends Controller
             'id'          => $id,
         ]);
 
+        $shipment = $order->shipments->first() ;
+        $title = DB::table('courier_titles')->where('name', $shipment->carrier_title)->first() ;
+
         if (! $order) {
             abort(404);
         }
 
-        return view($this->_config['view'], compact('order'));
+        return view($this->_config['view'], compact('order', 'title'));
     }
 
     /**

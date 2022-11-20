@@ -90,6 +90,21 @@ return [
         'name'  => 'admin::app.acl.create',
         'route' => 'admin.sales.refunds.create',
         'sort'  => 2,
+    ], [
+        'key'   => 'sales.tracking',
+        'name'  => 'Courier Tracking Links',
+        'route' => 'admin.sales.tracking',
+        'sort'  => 5,
+    ], [
+        'key'   => 'sales.tracking.add',
+        'name'  => 'Add Courier Title',
+        'route' => 'admin.sales.tracking.add',
+        'sort'  => 1,
+    ], [
+        'key'   => 'sales.tracking.delete',
+        'name'  => 'Delete Courier Title',
+        'route' => 'admin.sales.tracking.delete',
+        'sort'  => 1,
     ],
 
     /*

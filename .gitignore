@@ -6,7 +6,7 @@ node_modules/
 bootstrap/cache/
 npm-debug.log
 yarn-error.log
-
+commands.txt
 # Laravel 4 specific
 bootstrap/compiled.php
 public/storage

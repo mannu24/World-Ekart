@@ -7,7 +7,7 @@ use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderItemRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\ShipmentRepository;
-
+use DB ;
 class ShipmentController extends Controller
 {
     /**
@@ -92,7 +92,9 @@ class ShipmentController extends Controller
             return redirect()->back();
         }
 
-        return view($this->_config['view'], compact('order'));
+        $titles = DB::table('courier_titles')->latest()->get() ;
+        
+        return view($this->_config['view'], compact('order','titles'));
     }
 
     /**
