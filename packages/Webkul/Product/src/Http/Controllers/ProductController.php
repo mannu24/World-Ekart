@@ -194,8 +194,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {
+    public function store_og() {
         if (
             !request()->get('family')
             && ProductType::hasVariants(request()->input('type'))
@@ -214,6 +213,23 @@ class ProductController extends Controller
             return back();
         }
 
+        $this->validate(request(), [
+            'type'                => 'required',
+            'attribute_family_id' => 'required',
+            'country'             => 'required',
+            'delivery_charge'     => 'required',
+            'sku'                 => ['required', 'unique:products,sku', new Slug],
+        ]);
+        $product = $this->productRepository->create(request()->all());
+
+        session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
+
+        return redirect()->route($this->_config['redirect'], ['id' => $product->id]);
+    }
+
+    public function store() {
+        dd(request()->toArray()) ;
+        
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',

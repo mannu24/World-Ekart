@@ -185,84 +185,7 @@
             @endif
             
             @if (count($shipAtt))
-                <accordian title="Shipping" :active="false">
-                    <div slot="body">
-                        @foreach ($shipAtt as $attribute)
-                            <?php
-                                if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
-                                    continue;
-                                }
-
-                                $validations = [];
-
-                                if ($attribute->is_required) {
-                                    array_push($validations, 'required');
-                                }
-
-                                if ($attribute->type == 'price') {
-                                    array_push($validations, 'decimal');
-                                }
-
-                                if ($attribute->type == 'file') {
-                                    $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
-                                    array_push($validations, 'size:' . $retVal);
-                                }
-
-                                if ($attribute->type == 'image') {
-                                    $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
-                                    array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
-                                }
-
-                                array_push($validations, $attribute->validation);
-
-                                $validations = implode('|', array_filter($validations));
-                                if($attribute->type == 'price') $typeView = 'admin::catalog.products.field-types.price1' ;
-                                else if($attribute->type == 'date') $typeView = 'admin::catalog.products.field-types.date1' ;
-                                else if($attribute->type == 'text') $typeView = 'admin::catalog.products.field-types.text1' ;
-                                else $typeView = 'admin::catalog.products.field-types.' . $attribute->type ;
-                            ?>
-                            @if (view()->exists($typeView))
-                                <div class="control-group {{ $attribute->type }} {{ $attribute->enable_wysiwyg ? 'have-wysiwyg' : '' }}"
-                                    @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
-                                    @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
-            
-                                    <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
-
-                                        {{ $attribute->admin_name }}
-
-                                        <?php
-                                            $channel_locale = [];
-
-                                            if ($attribute->value_per_channel) {
-                                                array_push($channel_locale, $channel);
-                                            }
-
-                                            if ($attribute->value_per_locale) {
-                                                array_push($channel_locale, $locale);
-                                            }
-                                        ?>
-            
-                                        @if (count($channel_locale))
-                                            <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
-                                        @endif
-                                    </label>
-            
-                                    @include ($typeView)
-            
-                                    <span class="control-error" @if ($attribute->type == 'multiselect')
-                                        v-if="errors.has('{{ $attribute->code }}[]')"
-                                        @else v-if="errors.has('{{ $attribute->code }}')" @endif>
-                                        @if ($attribute->type == 'multiselect')
-                                        @{{ errors.first('{!! $attribute->code !!}[]') }}
-                                        @else
-                                        @{{ errors.first('{!! $attribute->code !!}') }}
-                                        @endif
-                                    </span>
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </accordian>
+                <shipping-accordian></shipping-accordian>
             @endif
 
             <accordian title="{{ __('admin::app.catalog.products.images') }}" :active="false">
@@ -366,7 +289,7 @@
                     <select class="control" @change="type_change($event)" v-validate="'required'" id="type" name="type"
                         data-vv-as="&quot;{{ __('admin::app.catalog.products.product-type') }}&quot;">
                         <option value="simple">Simple</option>
-                        <option value="configurable">Configurable</option>
+                        <option value="configurable" selected>Configurable</option>
                     </select>
                     <span class="control-error" v-if="errors.has('type')">@{{ errors.first('type') }}</span>
                 </div>
@@ -387,18 +310,18 @@
                     <span class="control-error" v-if="errors.has('attribute_family_id')">@{{ errors.first('attribute_family_id') }}</span>
                 </div>
 
-                <div class="control-group" :class="[errors.has('country') ? 'has-error' : '']">
+                <div class="control-group col-md-12" :class="[errors.has('country') ? 'has-error' : '']">
                     <label for="country" class="required">Country</label>
 
-                    <select class="control" v-validate="'required'" id="country" name="country">
+                    <select class="control select2" multiple v-validate="'required'" id="country" name="country[]" style="width:525px">
                         @foreach ($countries as $item)
-                        @if(old('country'))
-                        <option value="{{ $item->code }}" {{ (old('country') == $item->code) ? 'selected' : '' }}>
-                            {{ $item->name }}</option>
-                        @else
-                        <option value="{{ $item->code }}" {{ ($item->code == 'IN') ? 'selected' : '' }}>
-                            {{ $item->name }}</option>
-                        @endif
+                            @if(old('country'))
+                            <option value="{{ $item->code }}" {{ (old('country') == $item->code) ? 'selected' : '' }}>
+                                {{ $item->name }}</option>
+                            @else
+                            <option value="{{ $item->code }}" {{ ($item->code == 'IN') ? 'selected' : '' }}>
+                                {{ $item->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                     <span class="control-error" v-if="errors.has('country')">@{{ errors.first('country') }}</span>
@@ -414,6 +337,7 @@
                 </div>
 
                 @foreach ($generalAtt as $attribute)
+
                     <?php
                         if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
                             continue;
@@ -447,44 +371,46 @@
                         else if($attribute->type == 'boolean') $typeView = 'admin::catalog.products.field-types.boolean1' ;
                         else $typeView = 'admin::catalog.products.field-types.' . $attribute->type ;
                     ?>
-                    @if (view()->exists($typeView))
-                        <div class="control-group {{ $attribute->type }} {{ $attribute->enable_wysiwyg ? 'have-wysiwyg' : '' }}"
-                            @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
-                            @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
+                    @if ($attribute->code != 'url_key' && $attribute->is_user_defined != 1 && $attribute->code != 'product_number')
+                        @if (view()->exists($typeView))
+                            <div class="control-group {{ $attribute->type }} {{ $attribute->enable_wysiwyg ? 'have-wysiwyg' : '' }}"
+                                @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
+                                @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
 
-                            <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
+                                <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
 
-                                {{ $attribute->admin_name }}
+                                    {{ $attribute->admin_name }}
 
-                                <?php
-                                    $channel_locale = [];
+                                    <?php
+                                        $channel_locale = [];
 
-                                    if ($attribute->value_per_channel) {
-                                        array_push($channel_locale, $channel);
-                                    }
+                                        if ($attribute->value_per_channel) {
+                                            array_push($channel_locale, $channel);
+                                        }
 
-                                    if ($attribute->value_per_locale) {
-                                        array_push($channel_locale, $locale);
-                                    }
-                                ?>
+                                        if ($attribute->value_per_locale) {
+                                            array_push($channel_locale, $locale);
+                                        }
+                                    ?>
 
-                                @if (count($channel_locale))
-                                    <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
-                                @endif
-                            </label>
+                                    @if (count($channel_locale))
+                                        <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
+                                    @endif
+                                </label>
 
-                            @include ($typeView)
+                                @include ($typeView)
 
-                            <span class="control-error" @if ($attribute->type == 'multiselect')
-                                v-if="errors.has('{{ $attribute->code }}[]')"
-                                @else v-if="errors.has('{{ $attribute->code }}')" @endif>
-                                @if ($attribute->type == 'multiselect')
-                                @{{ errors.first('{!! $attribute->code !!}[]') }}
-                                @else
-                                @{{ errors.first('{!! $attribute->code !!}') }}
-                                @endif
-                            </span>
-                        </div>
+                                <span class="control-error" @if ($attribute->type == 'multiselect')
+                                    v-if="errors.has('{{ $attribute->code }}[]')"
+                                    @else v-if="errors.has('{{ $attribute->code }}')" @endif>
+                                    @if ($attribute->type == 'multiselect')
+                                    @{{ errors.first('{!! $attribute->code !!}[]') }}
+                                    @else
+                                    @{{ errors.first('{!! $attribute->code !!}') }}
+                                    @endif
+                                </span>
+                            </div>
+                        @endif
                     @endif
                 @endforeach
             </div>
@@ -521,7 +447,7 @@
     </script>
 
     <script type="text/x-template" id="variation-accordian-template">
-        <accordian title="{{ __('admin::app.catalog.products.variations') }}" v-if="product_type!='simple'" :active="true">
+        <accordian title="{{ __('admin::app.catalog.products.variations') }}" v-if="product_type!='simple'" :active="false">
             <div slot="body">
                 <div class="control-group">
                     <label for="">Select Attributes</label>
@@ -585,6 +511,109 @@
                 showModal(id,v) {
                     this.$root.$set(this.$root.modalIds, id, v);
                 },
+            }
+        });
+
+    </script>
+
+    <script type="text/x-template" id="shipping-accordian-template">
+        <accordian title="Shippings" :active="false">
+            <div slot="body">
+                @foreach ($shipAtt as $attribute)
+                    <?php
+                        if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
+                            continue;
+                        }
+
+                        $validations = [];
+
+                        if ($attribute->is_required) {
+                            array_push($validations, 'required');
+                        }
+
+                        if ($attribute->type == 'price') {
+                            array_push($validations, 'decimal');
+                        }
+
+                        if ($attribute->type == 'file') {
+                            $retVal = (core()->getConfigData('catalog.products.attribute.file_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.file_attribute_upload_size') : '2048' ;
+                            array_push($validations, 'size:' . $retVal);
+                        }
+
+                        if ($attribute->type == 'image') {
+                            $retVal = (core()->getConfigData('catalog.products.attribute.image_attribute_upload_size')) ? core()->getConfigData('catalog.products.attribute.image_attribute_upload_size') : '2048' ;
+                            array_push($validations, 'size:' . $retVal . '|mimes:bmp,jpeg,jpg,png,webp');
+                        }
+
+                        array_push($validations, $attribute->validation);
+
+                        $validations = implode('|', array_filter($validations));
+                        if($attribute->type == 'price') $typeView = 'admin::catalog.products.field-types.price1' ;
+                        else if($attribute->type == 'date') $typeView = 'admin::catalog.products.field-types.date1' ;
+                        else if($attribute->type == 'text') $typeView = 'admin::catalog.products.field-types.text1' ;
+                        else $typeView = 'admin::catalog.products.field-types.' . $attribute->type ;
+                    ?>
+                    @if (view()->exists($typeView))
+                        <div class="control-group {{ $attribute->type }} {{ $attribute->enable_wysiwyg ? 'have-wysiwyg' : '' }}"
+                            @if ($attribute->type == 'multiselect') :class="[errors.has('{{ $attribute->code }}[]') ? 'has-error' : '']"
+                            @else :class="[errors.has('{{ $attribute->code }}') ? 'has-error' : '']" @endif>
+    
+                            <label for="{{ $attribute->code }}" {{ $attribute->is_required ? 'class=required' : '' }}>
+
+                                {{ $attribute->admin_name }}
+
+                                <?php
+                                    $channel_locale = [];
+
+                                    if ($attribute->value_per_channel) {
+                                        array_push($channel_locale, $channel);
+                                    }
+
+                                    if ($attribute->value_per_locale) {
+                                        array_push($channel_locale, $locale);
+                                    }
+                                ?>
+    
+                                @if (count($channel_locale))
+                                    <span class="locale">[{{ implode(' - ', $channel_locale) }}]</span>
+                                @endif
+                            </label>
+    
+                            @include ($typeView)
+    
+                            <span class="control-error" @if ($attribute->type == 'multiselect')
+                                v-if="errors.has('{{ $attribute->code }}[]')"
+                                @else v-if="errors.has('{{ $attribute->code }}')" @endif>
+                                @if ($attribute->type == 'multiselect')
+                                @{{ errors.first('{!! $attribute->code !!}[]') }}
+                                @else
+                                @{{ errors.first('{!! $attribute->code !!}') }}
+                                @endif
+                            </span>
+                        </div>
+                    @endif
+                @endforeach
+            </div>
+        </accordian>
+    </script>
+
+    <script>
+        Vue.component('shipping-accordian', {
+            template: '#shipping-accordian-template',
+
+            data: function() {
+                return {
+                    product_type : '', 
+                }
+            },
+
+            created: function() {
+                // eventBus.$on('changeIt', (data) => {
+                //     this.product_type = data
+                // })
+            },
+
+            methods: {
             }
         });
 
@@ -1050,10 +1079,10 @@
                     <div v-for='(attribute, index) in local_att' :class="['control-group', errors.has('add-variant-form.' + attribute.code) ? 'has-error' : '']">
                         <label class="required" v-if="typeof attribute === 'object'" :for="attribute.code" v-text="attribute.name"></label>
                         <label class="required" v-else :for="attribute" v-text="attribute"></label>
-                        <select v-validate="'required'" multiple v-select2 v-if="typeof attribute === 'object'" v-model="variant[attribute.code]" class="control select2-p" :id="attribute.code" :name="attribute.code" :data-vv-as="'&quot;' + attribute.name + '&quot;'">
+                        <select v-validate="'required'" multiple v-select2 v-if="typeof attribute === 'object'" v-model="variant[attribute.code]" class="control select2-a" :id="attribute.code" :name="attribute.code" :data-vv-as="'&quot;' + attribute.name + '&quot;'">
                             <option v-for='(option, index) in attribute.options' :value="option.admin_name" v-text="option.admin_name"></option>
                         </select>
-                        <select v-validate="'required'" multiple v-select2 v-else v-model="variant[attribute]" class="control select2-p" :id="attribute" :name="attribute" :data-vv-as="'&quot;' + attribute + '&quot;'">
+                        <select v-validate="'required'" multiple v-select2 v-else v-model="variant[attribute]" class="control select2-a" :id="attribute" :name="attribute" :data-vv-as="'&quot;' + attribute + '&quot;'">
                         </select>
                         <span class="control-error" v-text="errors.first('add-variant-form.' + attribute.code)" v-if="errors.has('add-variant-form.' + attribute.code)"></span>
                     </div>
@@ -1073,11 +1102,10 @@
                         <th class="is-default">{{ __('admin::app.catalog.products.is-default') }}</th>
                         <th class="sku">{{ __('admin::app.catalog.products.sku') }}</th>
                         <th>{{ __('admin::app.catalog.products.name') }}</th>
-                        <th>{{ __('admin::app.catalog.products.images') }}</th>
                         <th class="qty">{{ __('admin::app.catalog.products.qty') }}</th>
                         <th class="price">{{ __('admin::app.catalog.products.price') }}</th>
+                        <th class="special_price">Special Price</th>
                         <th class="weight">{{ __('admin::app.catalog.products.weight') }}</th>
-                        <th class="status">{{ __('admin::app.catalog.products.status') }}</th>
                         <th class="actions"></th>
                     </tr>
                 </thead>
@@ -1149,53 +1177,19 @@
                 </div>
 
                 <div class="item-options" style="margin-top: 10px">
-                    <div v-for='(attribute, index) in superAttributes'>
-                        <b>@{{ attribute.admin_name }} : </b>@{{ optionName(variant[attribute.code]) }}
+                    <div v-for='(attribute, index) in variant.new_arr'>
+                        <span><b style="text-transform:capitalize">@{{ attribute.key }} : </b>@{{ optionName(attribute.key) }}</span>
 
                         <input
                             type="hidden"
-                            :name="[variantInputName + '[' + attribute.code + ']']"
-                            :value="variant[attribute.code]"
+                            :name="[variantInputName + '[' + attribute.key + ']']"
+                            :value="variant[attribute.key]"
                         />
                     </div>
                 </div>
             </td>
 
-            <td>
-                <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
-                    <div v-for='(image, index) in items' class="image-wrapper variant-image">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
-                            <input
-                                type="hidden"
-                                :name="[variantInputName + '[images][files][' + image.id + ']']"
-                                v-if="! new_image[index]"/>
-
-                            <input
-                                :ref="'imageInput' + index"
-                                :id="image.id"
-                                type="file"
-                                :name="[variantInputName + '[images][files][' + index + ']']"
-                                accept="image/*"
-                                multiple="multiple"
-                                v-validate="'mimes:image/*'"
-                                @change="addImageView($event, index)"/>
-
-                            <img
-                                class="preview"
-                                :src="imageData[index]"
-                                v-if="imageData[index]">
-                        </label>
-
-                        <span class="icon trash-icon" @click="removeImage(image)"></span>
-                    </div>
-
-                    <label class="btn btn-lg btn-primary add-image" @click="createFileType">
-                        {{ __('admin::app.catalog.products.add-image-btn-title') }}
-                    </label>
-                </div>
-            </td>
-
-            <td>
+            {{-- <td>
                 <button style="width: 100%;" type="button" class="dropdown-btn dropdown-toggle">
                     @{{ totalQty }}
 
@@ -1228,6 +1222,24 @@
                         </ul>
                     </div>
                 </div>
+            </td> --}}
+            <td>
+                <div :class="['control-group', errors.has(variantInputName + '[qty]') ? 'has-error' : '']">
+                    <input
+                        class="control"
+                        type="number"
+                        :name="[variantInputName + '[qty]']"
+                        v-model="variant.qty"
+                        v-validate="'required'"
+                        data-vv-as="&quot;Quantity&quot;"
+                        step="any"/>
+
+                    <span
+                        class="control-error"
+                        v-text="errors.first(variantInputName + '[qty]')"
+                        v-if="errors.has(variantInputName + '[qty]')">
+                    </span>
+                </div>
             </td>
 
             <td>
@@ -1250,6 +1262,25 @@
             </td>
 
             <td>
+                <div :class="['control-group', errors.has(variantInputName + '[special_price]') ? 'has-error' : '']">
+                    <input
+                        class="control"
+                        type="number"
+                        :name="[variantInputName + '[special_price]']"
+                        v-model="variant.special_price"
+                        v-validate="'required'"
+                        data-vv-as="&quot;{{ __('admin::app.catalog.products.special_price') }}&quot;"
+                        step="any"/>
+
+                    <span
+                        class="control-error"
+                        v-text="errors.first(variantInputName + '[special_price]')"
+                        v-if="errors.has(variantInputName + '[special_price]')">
+                    </span>
+                </div>
+            </td>
+
+            <td>
                 <div :class="['control-group', errors.has(variantInputName + '[weight]') ? 'has-error' : '']">
                     <input
                         type="number"
@@ -1267,33 +1298,10 @@
                 </div>
             </td>
 
-            <td>
-                <div class="control-group">
-                    <select
-                        class="control"
-                        type="text"
-                        v-model="variant.status"
-                        :name="[variantInputName + '[status]']">
-
-                        <option
-                            value="1"
-                            :selected="variant.status">
-                            {{ __('admin::app.catalog.products.enabled') }}
-                        </option>
-
-                        <option
-                            value="0"
-                            :selected="!variant.status">
-                            {{ __('admin::app.catalog.products.disabled') }}
-                        </option>
-                    </select>
-                </div>
-            </td>
-
             <td class="actions">
-                <a :href="['{{ route('admin.catalog.products.index') }}/edit/' + variant.id]">
+                {{-- <a :href="['{{ route('admin.catalog.products.index') }}/edit/' + variant.id]">
                     <i class="icon pencil-lg-icon"></i>
-                </a>
+                </a> --}}
 
                 <i class="icon remove-icon" @click="removeVariant()"></i>
             </td>
@@ -1324,11 +1332,11 @@
 
             created: function () {
                 this.local_att = g_att
-                $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
+                $('.select2-a').select2({ tags:true }) ;
             },
 
             updated() {
-                $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
+                $('.select2-a').select2({ tags:true }) ;
             },
 
             methods: {
@@ -1340,14 +1348,13 @@
 
                             let filteredVariants = variants.filter(function (variant) {
                                 let matchCount = 0;
-
                                 for (let key in self.variant) {
-                                    if (variant[key] == self.variant[key]) {
+                                    if (JSON.stringify(variant[key]) == JSON.stringify(self.variant[key])) {
                                         matchCount++;
                                     }
                                 }
 
-                                return matchCount == self.super_attributes.length;
+                                return matchCount;
                             })
 
                             if (filteredVariants.length) {
@@ -1360,20 +1367,26 @@
 
                                 this.$root.addFlashMessages()
                             } else {
-                                let optionIds = [];
+                                let optionIds = [], new_Arr = [] ;
                                 for (let key in self.variant) {
                                     optionIds.push(self.variant[key]);
+                                    new_Arr.push({
+                                        key: key,
+                                        opts: self.variant[key],
+                                    });
                                 }
 
                                 var result = optionIds.reduce((a, b) => a.reduce((r, v) => r.concat(b.map(w => [].concat(v, w))), []));
 
                                 result.forEach((arr) => { 
                                     variants.push(Object.assign({
-                                        sku: '' + '-variant-' + arr.map(v => v.replace(/\s+/g, '_').toLowerCase()).join('-'),
-                                        name: '',
-                                        price: 0,
-                                        weight: 0,
-                                        status: 1
+                                        sku: $('#sku').val() + '-variant-' + arr.map(v => v.replace(/\s+/g, '_').toLowerCase()).join('-'),
+                                        name: $('#name').val(),
+                                        price: $('#price').val() || 0,
+                                        special_price: $('#special_price').val() || 0,
+                                        weight: $('#weight').val(),
+                                        arr:arr,
+                                        new_arr:new_Arr,
                                     }, this.variant));
                                 });
 
@@ -1480,37 +1493,23 @@
                     inventorySources: @json($inventorySources),
                     inventories: {},
                     totalQty: 0,
-                    superAttributes: super_attributes,
+                    superAttributes: g_att,
                     items: [],
                     imageCount: 0,
                     images: {},
                     imageData: [],
                     new_image: [],
+                    local_att: g_att,
                 }
             },
 
             created: function () {
                 let self = this;
-
+                console.log(this.inventorySources);
                 this.inventorySources.forEach(function (inventorySource) {
                     self.inventories[inventorySource.id] = self.sourceInventoryQty(inventorySource.id)
                     self.totalQty += parseInt(self.inventories[inventorySource.id]);
                 })
-            },
-
-            mounted () {
-                let self = this;
-
-                self.variant.images.forEach(function(image) {
-                    self.items.push(image)
-                    self.imageCount++;
-
-                    if (image.id && image.url) {
-                        self.imageData.push(image.url);
-                    } else if (image.id && image.file) {
-                        self.readFile(image.file);
-                    }
-                });
             },
 
             computed: {
@@ -1533,16 +1532,13 @@
 
                 optionName: function (optionId) {
                     let optionName = '';
-
-                    this.superAttributes.forEach(function (attribute) {
-                        attribute.options.forEach(function (option) {
-                            if (optionId == option.id) {
-                                optionName = option.admin_name;
-                            }
-                        });
+                    let self = this ;
+                    this.variant.new_arr.forEach(function (attribute) {
+                        if (attribute.key == optionId) {
+                            optionName =  self.variant.arr.filter(value => attribute.opts.includes(value));;
+                        }
                     })
-
-                    return optionName;
+                    return optionName[0];
                 },
 
                 sourceInventoryQty: function (inventorySourceId) {
@@ -1565,52 +1561,6 @@
                     for (let key in this.inventories) {
                         this.totalQty += parseInt(this.inventories[key]);
                     }
-                },
-
-                createFileType: function() {
-                    let self = this;
-
-                    this.imageCount++;
-
-                    this.items.push({'id': 'image_' + this.imageCount});
-
-                    this.imageData[this.imageData.length] = '';
-                },
-
-                removeImage (image) {
-                    let index = this.items.indexOf(image);
-
-                    Vue.delete(this.items, index);
-
-                    Vue.delete(this.imageData, index);
-                },
-
-                addImageView: function($event, index) {
-                    let ref = "imageInput" + index;
-                    let imageInput = this.$refs[ref][0];
-
-                    if (imageInput.files && imageInput.files[0]) {
-                        if (imageInput.files[0].type.includes('image/')) {
-                            this.readFile(imageInput.files[0], index);
-
-                        } else {
-                            imageInput.value = "";
-
-                            alert('Only images (.jpeg, .jpg, .png, ..) are allowed.');
-                        }
-                    }
-                },
-
-                readFile: function(image, index) {
-                    let reader = new FileReader();
-
-                    reader.onload = (e) => {
-                        this.imageData.splice(index, 1, e.target.result);
-                    }
-
-                    reader.readAsDataURL(image);
-
-                    this.new_image[index] = 1;
                 },
             }
         });

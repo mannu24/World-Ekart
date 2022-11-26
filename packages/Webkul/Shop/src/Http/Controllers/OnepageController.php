@@ -205,7 +205,7 @@ class OnepageController extends Controller
 
         $cart = Cart::getCart();
         $products = DB::table('cart_items')->where('cart_id',$cart->id)->pluck('product_id');
-        $vendor_ids = DB::table('products')->whereIn('id',$products)->pluck('user_id');
+        $vendor_ids = DB::table('products')->where('user_id', '!=', null)->whereIn('id',$products)->pluck('user_id');
         
         if ($redirectUrl = Payment::getRedirectUrl($cart)) {
             return response()->json([
