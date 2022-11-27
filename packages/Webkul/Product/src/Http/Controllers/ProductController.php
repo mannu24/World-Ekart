@@ -23,6 +23,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Attribute\Repositories\AttributeGroupRepository;
 use Webkul\Attribute\Repositories\AttributeGroupMapRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Symfony\Component\HttpFoundation\Request;
 
 ini_set('max_execution_time', 3000);
 
@@ -194,7 +195,8 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store_og() {
+    public function store_og()
+    {
         if (
             !request()->get('family')
             && ProductType::hasVariants(request()->input('type'))
@@ -227,9 +229,13 @@ class ProductController extends Controller
         return redirect()->route($this->_config['redirect'], ['id' => $product->id]);
     }
 
-    public function store() {
-        dd(request()->toArray()) ;
-        
+    public function store(Request $request)
+    {
+        $value =  preg_replace('/[^A-Za-z0-9]/', ' ', request()->name);
+        $value =  strtolower(preg_replace('/\s+/', '-', $value));
+
+        $request->merge(['url_key' => $value]);
+
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
@@ -237,7 +243,10 @@ class ProductController extends Controller
             'delivery_charge'     => 'required',
             'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
+
         $product = $this->productRepository->create(request()->all());
+
+        $saved = $this->update($product->id, 'passed');
 
         session()->flash('success', trans('admin::app.response.create-success', ['name' => 'Product']));
 
@@ -253,9 +262,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productRepository->with(['variants', 'variants.inventories'])->findOrFail($id);
+        dd($product->variants) ;
 
         $categories = $this->categoryRepository->getCategoryTree();
-
+        // return $product;
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
         $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
         $c_count = 1;
@@ -270,14 +280,149 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductForm $request, $id)
+    public function update($id, $p = null)
     {
         $data = request()->all();
+        // dd($data);
+        $data_loop = $data;
 
+        if ($p == 'passed') {
+            //Attributes Data
+            // $aFamily = $this->attributeFamilyRepository->findOneByfield(['id' => $data['attribute_family_id']]);
+            $attributeArray = $this->attributeRepository->pluck('code')->toArray();
+
+
+            $attribute_fam_groups = $this->attributeGroupRepository->where('attribute_family_id',  $data['attribute_family_id'])->pluck('id');
+            $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id', $attribute_fam_groups)->pluck('attribute_id');
+            $all_fam_att_codes = $this->attributeRepository->whereIn('id', $all_fam_attributes)->pluck('code')->toArray();
+            $fam_gen = $this->attributeGroupRepository->where('attribute_family_id',  $data['attribute_family_id'])->where('name', 'General')->first();
+
+
+            //Saving Attributes and their options if not exists
+            foreach ($data['variants'] as $key_v => $variant_values) {
+                foreach ($variant_values as $key_vd => $single_v_value) {
+                    if (!in_array($key_vd, ['sku', 'name', 'qty', 'price', 'special_price', 'weight'])) {
+                        // $att_chk = DB::table('attributes')->where('code', $key_vd)->count();
+                        if (in_array($key_vd, $attributeArray)) {
+                            
+                            $att_to_add = $this->attributeRepository->where('code', $key_vd)->first();
+                            if (!in_array($key_vd, $all_fam_att_codes)) {
+                                // dd($key);
+                                DB::table('attribute_group_mappings')->insert([
+                                    'attribute_id' => $att_to_add->id,
+                                    'attribute_group_id' => $fam_gen->id
+                                ]);
+                            }
+
+                            foreach ($data['categories'] as $key_c => $p_cat_id) {
+
+                                //Link attribute with category
+                                $check0  = DB::table('category_filterable_attributes')->where('attribute_id', $att_to_add->id)->where('category_id', $p_cat_id)->count();
+                                if ($check0 < 1) {
+                                    $cfa_id =  DB::table('category_filterable_attributes')->insertGetId([
+                                        'attribute_id' => $att_to_add->id,
+                                        'category_id' => $p_cat_id,
+                                    ]);
+                                }
+
+                                //check for option existence
+                                $check  = DB::table('attribute_options')->where('attribute_id', $att_to_add->id)->where('admin_name', $single_v_value)->first();
+                                if (empty($check)) {
+
+                                    $new_option_id =  DB::table('attribute_options')->insertGetId([
+                                        'attribute_id' => $att_to_add->id,
+                                        'admin_name' => $single_v_value,
+                                        'sort_order' => 1,
+                                    ]);
+
+                                    //Linking option with category
+                                    DB::table('attribute_category_options')->insert([
+                                        'attribute_id' => $att_to_add->id,
+                                        'category_id' => $p_cat_id,
+                                        'option_id' => $new_option_id,
+                                    ]);
+                                    //Altering Variant Received data
+                                    $data_loop['variants'][$key_v][$key_vd] = (string) $new_option_id;
+                                } else {
+                                    $check1  = DB::table('attribute_category_options')->where('option_id', $check->id)->where('category_id', $p_cat_id)->count();
+                                    if ($check1 < 1) {
+                                        //Linking option with category
+                                        DB::table('attribute_category_options')->insert([
+                                            'attribute_id' => $att_to_add->id,
+                                            'category_id' => $p_cat_id,
+                                            'option_id' => $check->id,
+                                        ]);
+                                    }
+                                    // dd($data_loop['variants'][$key_v][$key_vd]);
+
+                                    $data_loop['variants'][$key_v][$key_vd] = (string)$check->id;
+
+                                }
+                            }
+                        } else {
+                            //Created attribute
+                            $id = $this->attributeRepository->insertGetId([
+                                'code' => $key_vd,
+                                'admin_name' => ucwords(str_replace("_", " ", $key_vd)),
+                                'is_visible_on_front' => 1,
+                                'is_configurable' => 1,
+                                'is_filterable' => 1,
+                                'swatch_type' => 'dropdown',
+                                'type' => 'select',
+                            ]);
+
+                            //Creating option 
+                            $new_option_id =  DB::table('attribute_options')->insertGetId([
+                                'attribute_id' => $id,
+                                'admin_name' => $single_v_value,
+                                'sort_order' => 1,
+                            ]);
+
+                            $data_loop['variants'][$key_v][$key_vd] = (string)$new_option_id;
+
+
+                            //Linked to group
+                            DB::table('attribute_group_mappings')->insert([
+                                'attribute_id' => $id,
+                                'attribute_group_id' => $fam_gen->id
+                            ]);
+
+                            foreach ($data['categories'] as $key => $p_cat_id) {
+
+                                //Linking option with category
+                                DB::table('attribute_category_options')->insert([
+                                    'attribute_id' => $id,
+                                    'category_id' => $p_cat_id,
+                                    'option_id' => $new_option_id,
+                                ]);
+
+                                //Link attribute with category
+                                $cfa_id =  DB::table('category_filterable_attributes')->insertGetId([
+                                    'attribute_id' => $id,
+                                    'category_id' => $p_cat_id,
+                                ]);
+                            }
+                        }
+
+                        $data_loop['variants'][$key_v]['inventories'] = [1=>$data_loop['variants'][$key_v]['qty']];
+                        $data_loop['variants'][$key_v]['status'] = "1";
+                        $data_loop['variants'][$key_v]['images']['files'] = [];
+                    }
+                }
+            }
+
+            // foreach ($data[] as $key => $value) {
+            //     # code...
+            // }
+            $data = $data_loop;
+        }
+
+        // dd($data) ;
         $multiselectAttributeCodes = [];
-
+        
         $productAttributes = $this->productRepository->findOrFail($id);
-
+        $prod = $this->productRepository->findOrFail($id);
+        
         foreach ($productAttributes->attribute_family->attribute_groups as $attributeGroup) {
             $customAttributes = $productAttributes->getEditableAttributes($attributeGroup);
 
@@ -289,7 +434,6 @@ class ProductController extends Controller
                 }
             }
         }
-
         if (count($multiselectAttributeCodes)) {
             foreach ($multiselectAttributeCodes as $multiselectAttributeCode) {
                 if (!isset($data[$multiselectAttributeCode])) {
@@ -299,10 +443,26 @@ class ProductController extends Controller
         }
 
         $this->productRepository->update($data, $id);
-
-        session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
-
-        return redirect()->route($this->_config['redirect']);
+        if ($p=='passed') {
+            foreach ($prod->variants as $key => $variant) {
+                $pp = $prod->product_flats[0] ; 
+                $vv = $variant->product_flats[0] ;
+                foreach($data['variants'] as $recived_p_variant){
+                    if($vv->sku == $recived_p_variant['sku']){
+                        DB::table('product_flat')->where('id',$vv->id)->update([
+                            'min_price' =>  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                            'max_price' => $recived_p_variant['price'],
+                            'special_price' => $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                            'visible_individually' => false,
+                        ]);
+                    }
+                }
+            }
+            return true;
+        } else {
+            session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
+            return redirect()->route($this->_config['redirect']);
+        }
     }
 
     /**
@@ -543,10 +703,11 @@ class ProductController extends Controller
         if (request()->ajax()) {
             return app(ShopifyFileUpload::class)->toJson();
         }
-        return view($this->_config['view'], compact('attribute_families','countries'));
+        return view($this->_config['view'], compact('attribute_families', 'countries'));
     }
 
-    public function save_bulk_upload() {
+    public function save_bulk_upload()
+    {
 
         $d = request()->validate([
             'attribute_families' => 'required|string',
@@ -555,16 +716,16 @@ class ProductController extends Controller
             'delivery_charge' => 'required|numeric',
             'countries' => 'required',
             'update_stock' => 'accepted|sometimes',
-        ]) ;
+        ]);
 
         $this->countries = json_encode($d['countries']);
         $this->delivery_charge = $d['delivery_charge'];
 
         $name = request()->file('csv-file')->getClientOriginalName();
-        $check = DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->get() ;
+        $check = DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->get();
         if (count($check) > 0) {
-            if(file_exists($file = public_path("converted_csv/converted-$name"))) unlink($file) ;
-            DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->delete() ;
+            if (file_exists($file = public_path("converted_csv/converted-$name"))) unlink($file);
+            DB::table('shopify_file_csv')->where('file_name', "converted_csv/converted-$name")->delete();
             // session()->flash('error', 'File Name Already Exists!');
             // return redirect()->back();
         }
@@ -595,7 +756,8 @@ class ProductController extends Controller
         }
     }
 
-    public function manipulate_file_config($data,$name,$d) {
+    public function manipulate_file_config($data, $name, $d)
+    {
 
         //Change Header for Bulk Upload
         $data[0][0] = 'url_key';
@@ -648,24 +810,25 @@ class ProductController extends Controller
         }
 
         //Extra Variant Row Addition
-        $newData = [] ; $parent = '' ;
+        $newData = [];
+        $parent = '';
         foreach ($data as $key => $value) {
             if ($key == 0) $newData[] = $value;
             else {
                 if ($data[$key][25] == '1') {
-                    if(isset($data[$key+1]) && ($data[$key+1][25] == '1')) {
+                    if (isset($data[$key + 1]) && ($data[$key + 1][25] == '1')) {
                         $newData[] = $value;
                         $last = array_keys($newData);
                         $last = end($last);
                         $newData[$last][8] = $data[$parent][8];
                         $newData[$last][10] = $data[$parent][10];
                         $newData[$last][12] = $data[$parent][12];
-                        $value[25] = '2' ;
-                        $value[24] = '' ;
-                        $value[28] = '' ;
+                        $value[25] = '2';
+                        $value[24] = '';
+                        $value[28] = '';
                         // $value[25] = '' ;
-                        $newData[] = $value;                        
-                    }else {
+                        $newData[] = $value;
+                    } else {
                         $newData[] = $value;
                     }
                     $parent = $key;
@@ -817,7 +980,7 @@ class ProductController extends Controller
         foreach ($data as $key => $item) {
             $data[$key] = array_values($item);
         }
-        
+
         // Updating Attribute Values
         $parent = '';
         foreach ($data as $key => $item) {
@@ -897,20 +1060,20 @@ class ProductController extends Controller
                 $this->attributeCheck_config($pass_data, $d['attribute_families']);
             }
         }
-        
-        if(isset($d['update_stock']))  {
+
+        if (isset($d['update_stock'])) {
             foreach ($data as $key => $value) {
-                if($key == 0) continue ;
+                if ($key == 0) continue;
                 else {
-                    if($value[19] == 'variant' && $value[5] != '') {
-                        $p = DB::table('products')->where('sku', $value[5])->first() ;
-                        if($p)
-                            DB::table('product_inventories')->where('product_id', $p->id)->update(['qty' => $value[36]]) ;
+                    if ($value[19] == 'variant' && $value[5] != '') {
+                        $p = DB::table('products')->where('sku', $value[5])->first();
+                        if ($p)
+                            DB::table('product_inventories')->where('product_id', $p->id)->update(['qty' => $value[36]]);
                     }
                 }
-            }    
+            }
         }
-      
+
         // dd($data);
 
         $fp = fopen(public_path("converted_csv/converted-$name"), 'w+');
@@ -922,7 +1085,8 @@ class ProductController extends Controller
         return true;
     }
 
-    public function categoryCheck($category) {
+    public function categoryCheck($category)
+    {
         $cat = strtolower(str_replace(" ", "-", $category));
         // $check = DB::table('category_translations')->where('slug', $cat)->first() ;
         $check = DB::table('category_translations')->where('slug', 'like', "%$cat%")->first();
@@ -948,7 +1112,8 @@ class ProductController extends Controller
         }
     }
 
-    public function attributeCheck_config($pass_data, $af){
+    public function attributeCheck_config($pass_data, $af)
+    {
         $aFamily = $this->attributeFamilyRepository->findOneByfield(['name' => $af]);
         $attributeArray = $this->attributeRepository->pluck('code')->toArray();
 
@@ -970,10 +1135,10 @@ class ProductController extends Controller
                             'attribute_group_id' => $fam_gen->id
                         ]);
                     }
-                    
+
                     //Link attribute with category
                     $check0  = DB::table('category_filterable_attributes')->where('attribute_id', $att_to_add->id)->where('category_id', $this->shop_category->category_id)->count();
-                    if($check0 <1 ){
+                    if ($check0 < 1) {
                         $cfa_id =  DB::table('category_filterable_attributes')->insertGetId([
                             'attribute_id' => $att_to_add->id,
                             'category_id' => $this->shop_category->category_id,
@@ -996,9 +1161,7 @@ class ProductController extends Controller
                             'category_id' => $this->shop_category->category_id,
                             'option_id' => $new_option_id,
                         ]);
-                    }
-
-                    else{
+                    } else {
                         $check1  = DB::table('attribute_category_options')->where('option_id', $check->id)->where('category_id', $this->shop_category->category_id)->count();
                         if ($check1 < 1) {
                             //Linking option with category
@@ -1052,7 +1215,8 @@ class ProductController extends Controller
         }
     }
 
-    public function delete_shopify_file($id) {
+    public function delete_shopify_file($id)
+    {
         $check = DB::table('shopify_file_csv')->find($id);
         if (file_exists($file =  public_path($check->file_name))) {
             unlink($file);
@@ -1062,13 +1226,14 @@ class ProductController extends Controller
         else return response()->json(['message' => 'File Deletion Unsuccessful!'], 500);
     }
 
-    public function download_shopify_file($id) {
+    public function download_shopify_file($id)
+    {
         $check = DB::table('shopify_file_csv')->find($id);
         if (file_exists($file =  public_path($check->file_name))) {
             return response()->download($file);
         } else {
             session()->flash('error', 'File not Found!');
-            return redirect()->back() ;
+            return redirect()->back();
         }
     }
 

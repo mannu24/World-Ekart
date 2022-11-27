@@ -50,6 +50,8 @@ class Product extends Model implements ProductContract
      */
     protected $casts = [
         'additional' => 'array',
+        'country' => 'array',
+        
     ];
 
     /**
@@ -86,6 +88,10 @@ class Product extends Model implements ProductContract
                 }
             }
         });
+    }
+
+    public function getCountryAttribute($value) {
+        return json_decode($value) ;
     }
 
     public function vendor(): BelongsTo {

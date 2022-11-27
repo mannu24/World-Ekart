@@ -23,6 +23,7 @@
 @php
     $locale = core()->checkRequestedLocaleCodeInRequestedChannel();
     $channel = core()->getRequestedChannelCode();
+    
     $channelLocales = core()->getAllLocalesByRequestedChannel()['locales'];
 
     $item = $families->first() ;
@@ -39,7 +40,7 @@
 
 @section('content')
 <div class="content">
-    <form method="POST" action="" @submit.prevent="onSubmit">
+    <form method="POST" action="" enctype="multipart/form-data" @submit.prevent="onSubmit">
 
         <div class="page-header">
             <div class="page-title">
@@ -61,6 +62,8 @@
         <div class="page-content">
             @csrf()
             <input type="hidden" name="user_id" value="{{auth()->guard('admin')->user()->id}}">
+            <input type="hidden" name="channel" value="{{$channel}}">
+            <input type="hidden" name="locale" value="{{$locale}}">
 
             <general-accordian></general-accordian>
 
@@ -187,6 +190,8 @@
             @if (count($shipAtt))
                 <shipping-accordian></shipping-accordian>
             @endif
+
+            <inventory-accordian></inventory-accordian>                                
 
             <accordian title="{{ __('admin::app.catalog.products.images') }}" :active="false">
                 <div slot="body">
@@ -446,12 +451,71 @@
 
     </script>
 
+    <script type="text/x-template" id="inventory-accordian-template">
+        <accordian title="{{ __('admin::app.catalog.products.inventories') }}" v-if="product_type=='simple'" :active="false">
+            <div slot="body">
+
+
+                @foreach ($inventorySources as $inventorySource)
+                    <?php
+
+                        $qty = 0;
+
+                        $qty = old('inventories[' . $inventorySource->id . ']') ?: $qty;
+
+                    ?>
+                    <div class="control-group" :class="[errors.has('inventories[{{ $inventorySource->id }}]') ? 'has-error' : '']">
+                        <label>{{ $inventorySource->name }}</label>
+
+                        <input type="text" v-validate="'numeric|min:0'" name="inventories[{{ $inventorySource->id }}]" class="control" value="{{ $qty }}" data-vv-as="&quot;{{ $inventorySource->name }}&quot;"/>
+                        
+                        <span class="control-error" v-if="errors.has('inventories[{{ $inventorySource->id }}]')">@{{ errors.first('inventories[{!! $inventorySource->id !!}]') }}</span>
+                    </div>
+                
+                @endforeach
+
+
+            </div>
+        </accordian>
+    </script>
+
+    <script>
+        Vue.component('inventory-accordian', {
+            template: '#inventory-accordian-template',
+
+            data: function() {
+                return {
+                    product_type : '', 
+                    family: '1',
+                }
+            },
+
+            created: function() {
+                eventBus.$on('changeIt', (data) => {
+                    this.product_type = data
+                })
+            },
+
+            methods: {
+                type_change: function(e) {
+                    this.product_type = e.target.value ;
+                    eventBus.$emit('changeIt', this.product_type);
+                },
+                family_change: function(e) {
+                    this.family = e.target.value ;
+                    eventBus.$emit('familyChange', this.family);
+                },
+            }
+        });
+
+    </script>
+
     <script type="text/x-template" id="variation-accordian-template">
         <accordian title="{{ __('admin::app.catalog.products.variations') }}" v-if="product_type!='simple'" :active="false">
             <div slot="body">
                 <div class="control-group">
                     <label for="">Select Attributes</label>
-                    <select v-select2 v-model="var_att" name="var_att" @change="var_att_c" multiple required class="control form-control select2-p" style="width:100%;">
+                    <select v-select2 v-model="var_att" @change="var_att_c" multiple required class="control form-control select2-p" style="width:100%;">
                         <option v-for='(a, index) in attributes' :value="a" v-text="a.name"></option>
                     </select>
                 </div>
@@ -1183,46 +1247,12 @@
                         <input
                             type="hidden"
                             :name="[variantInputName + '[' + attribute.key + ']']"
-                            :value="variant[attribute.key]"
+                            :value="optionName(attribute.key)"
                         />
                     </div>
                 </div>
             </td>
-
-            {{-- <td>
-                <button style="width: 100%;" type="button" class="dropdown-btn dropdown-toggle">
-                    @{{ totalQty }}
-
-                    <i class="icon arrow-down-icon"></i>
-                </button>
-
-                <div class="dropdown-list">
-                    <div class="dropdown-container">
-                        <ul>
-                            <li v-for='(inventorySource, index) in inventorySources'>
-                                <div class="control-group"
-                                    :class="[errors.has(variantInputName + '[inventories][' + inventorySource.id + ']') ? 'has-error' : '']">
-                                    <label v-text="inventorySource.name"></label>
-
-                                    <input
-                                        type="text"
-                                        :name="[variantInputName + '[inventories][' + inventorySource.id + ']']"
-                                        v-model="inventories[inventorySource.id]" class="control"
-                                        v-validate="'numeric|min:0'"
-                                        :data-vv-as="'&quot;' + inventorySource.name  + '&quot;'"
-                                        v-on:keyup="updateTotalQty()"/>
-
-                                    <span
-                                        class="control-error"
-                                        v-text="errors.first(variantInputName + '[inventories][' + inventorySource.id + ']')"
-                                        v-if="errors.has(variantInputName + '[inventories][' + inventorySource.id + ']')">
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </td> --}}
+            
             <td>
                 <div :class="['control-group', errors.has(variantInputName + '[qty]') ? 'has-error' : '']">
                     <input

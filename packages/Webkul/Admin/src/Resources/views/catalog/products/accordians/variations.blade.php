@@ -105,11 +105,12 @@
                         <th class="is-default">{{ __('admin::app.catalog.products.is-default') }}</th>
                         <th class="sku">{{ __('admin::app.catalog.products.sku') }}</th>
                         <th>{{ __('admin::app.catalog.products.name') }}</th>
-                        <th>{{ __('admin::app.catalog.products.images') }}</th>
+                        <!-- <th>{{ __('admin::app.catalog.products.images') }}</th> -->
                         <th class="qty">{{ __('admin::app.catalog.products.qty') }}</th>
                         <th class="price">{{ __('admin::app.catalog.products.price') }}</th>
+                        <th class="price">Special price</th>
                         <th class="weight">{{ __('admin::app.catalog.products.weight') }}</th>
-                        <th class="status">{{ __('admin::app.catalog.products.status') }}</th>
+                        <!-- <th class="status">{{ __('admin::app.catalog.products.status') }}</th> -->
                         <th class="actions"></th>
                     </tr>
                 </thead>
@@ -193,7 +194,7 @@
                 </div>
             </td>
 
-            <td>
+            <!-- <td>
                 <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
                     <div v-for='(image, index) in items' class="image-wrapper variant-image">
                         <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
@@ -225,7 +226,7 @@
                         {{ __('admin::app.catalog.products.add-image-btn-title') }}
                     </label>
                 </div>
-            </td>
+            </td> -->
 
             <td>
                 <button style="width: 100%;" type="button" class="dropdown-btn dropdown-toggle">
@@ -282,6 +283,25 @@
             </td>
 
             <td>
+                <div :class="['control-group', errors.has(variantInputName + '[special_price]') ? 'has-error' : '']">
+                    <input
+                        class="control"
+                        type="number"
+                        :name="[variantInputName + '[special_price]']"
+                        v-model="variant.special_price"
+                        v-validate="'required'"
+                        data-vv-as="&quot;{{ __('admin::app.catalog.products.special_price') }}&quot;"
+                        step="any"/>
+
+                    <span
+                        class="control-error"
+                        v-text="errors.first(variantInputName + '[special_price]')"
+                        v-if="errors.has(variantInputName + '[special_price]')">
+                    </span>
+                </div>
+            </td>
+
+            <td>
                 <div :class="['control-group', errors.has(variantInputName + '[weight]') ? 'has-error' : '']">
                     <input
                         type="number"
@@ -299,7 +319,7 @@
                 </div>
             </td>
 
-            <td>
+            <!-- <td>
                 <div class="control-group">
                     <select
                         class="control"
@@ -320,7 +340,7 @@
                         </option>
                     </select>
                 </div>
-            </td>
+            </td> -->
 
             <td class="actions">
                 <a :href="['{{ route('admin.catalog.products.index') }}/edit/' + variant.id]">
@@ -343,6 +363,7 @@
 
         let super_attributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
         let variants = @json($product->variants);
+        console.log(variants,super_attributes);
 
         Vue.component('variant-form', {
             data: function () {
@@ -395,8 +416,9 @@
                                     sku: '{{ $product->sku }}' + '-variant-' + optionIds.join('-'),
                                     name: '',
                                     price: 0,
+                                    special_price: 0,
                                     weight: 0,
-                                    status: 1
+                                    // status: 1
                                 }, this.variant));
 
                                 this.resetModel();

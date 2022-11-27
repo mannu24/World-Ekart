@@ -100,20 +100,18 @@
                     {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name .
                     '.controls.before', ['product' => $product]) !!}
 
-                    @foreach ($customAttributes as $attribute)
+                    @foreach ($customAttributes->where('is_user_defined', '!=', 1) as $attribute)
                     @if($c_count==1)
                     <div class="control-group" :class="[errors.has('country') ? 'has-error' : '']">
                         <label for="country" class="required">Country</label>
-
-                        <select class="control" v-validate="'required'" id="country" name="country">
-                            <option value="" disabled selected>Select</option>
+                        <select class="control select2" v-validate="'required'" multiple id="country" name="country[]">
                             @foreach ($countries as $item)
                             @if(old('country'))
                             <option value="{{ $item->code }}" {{ (old('country') == $item->code) ? 'selected' : '' }}>
                                 {{ $item->name }}</option>
                             @else
                             <option value="{{ $item->code }}"
-                                {{ ($item->code == $product->country) ? 'selected' : '' }}>
+                                {{ (in_array($item->code, $product->country)) ? 'selected' : '' }}>
                                 {{ $item->name }}</option>
                             @endif
 
@@ -237,9 +235,9 @@
             ['product' => $product])
             !!}
             @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
-
+            @if($view != 'admin::catalog.products.accordians.product-links')
             @include ($view)
-
+                @endif
             @endforeach
 
             {!! view_render_event(
@@ -283,6 +281,7 @@ $(document).ready(function() {
         toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
         image_advtab: true,
     });
+    $('.select2').select2() ;
 });
 </script>
 @endpush
