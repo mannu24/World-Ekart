@@ -262,15 +262,20 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->productRepository->with(['variants', 'variants.inventories'])->findOrFail($id);
-        dd($product->variants) ;
 
+        $att = $this->attributeRepository->getPartial_new();
+
+        $variants = [] ;
+        foreach ($product->variants as $key => $variant) {
+            array_push($variants,$variant) ;
+        }
         $categories = $this->categoryRepository->getCategoryTree();
         // return $product;
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
         $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
         $c_count = 1;
         $d_count = 1;
-        return view($this->_config['view'], compact('product', 'categories', 'inventorySources', 'countries', 'c_count', 'd_count'));
+        return view($this->_config['view'], compact('product', 'variants', 'att', 'categories', 'inventorySources', 'countries', 'c_count', 'd_count'));
     }
 
     /**
@@ -308,10 +313,13 @@ class ProductController extends Controller
                             $att_to_add = $this->attributeRepository->where('code', $key_vd)->first();
                             if (!in_array($key_vd, $all_fam_att_codes)) {
                                 // dd($key);
-                                DB::table('attribute_group_mappings')->insert([
-                                    'attribute_id' => $att_to_add->id,
-                                    'attribute_group_id' => $fam_gen->id
-                                ]);
+                                $cac = DB::table('attribute_group_mappings')->where('attribute_id', $att_to_add->id)->where('attribute_group_id' , $fam_gen->id)->first() ;
+                                if(!$cac) {
+                                    DB::table('attribute_group_mappings')->insert([
+                                        'attribute_id' => $att_to_add->id,
+                                        'attribute_group_id' => $fam_gen->id
+                                    ]);
+                                }
                             }
 
                             foreach ($data['categories'] as $key_c => $p_cat_id) {
@@ -406,7 +414,6 @@ class ProductController extends Controller
 
                         $data_loop['variants'][$key_v]['inventories'] = [1=>$data_loop['variants'][$key_v]['qty']];
                         $data_loop['variants'][$key_v]['status'] = "1";
-                        $data_loop['variants'][$key_v]['images']['files'] = [];
                     }
                 }
             }

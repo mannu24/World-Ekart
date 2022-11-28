@@ -30,10 +30,6 @@
     <div slot="body">
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.before', ['product' => $product]) !!}
 
-        <button type="button" class="btn btn-md btn-primary" @click="showModal('addVariant')">
-            {{ __('admin::app.catalog.products.add-variant-btn-title') }}
-        </button>
-
         <variant-list></variant-list>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.variations.controls.after', ['product' => $product]) !!}
@@ -194,40 +190,6 @@
                 </div>
             </td>
 
-            <!-- <td>
-                <div :class="['control-group', errors.has(variantInputName + '[images][files][' + index + ']') ? 'has-error' : '']">
-                    <div v-for='(image, index) in items' class="image-wrapper variant-image">
-                        <label class="image-item" v-bind:class="{ 'has-image': imageData[index] }">
-                            <input
-                                type="hidden"
-                                :name="[variantInputName + '[images][files][' + image.id + ']']"
-                                v-if="! new_image[index]"/>
-
-                            <input
-                                :ref="'imageInput' + index"
-                                :id="image.id"
-                                type="file"
-                                :name="[variantInputName + '[images][files][' + index + ']']"
-                                accept="image/*"
-                                multiple="multiple"
-                                v-validate="'mimes:image/*'"
-                                @change="addImageView($event, index)"/>
-
-                            <img
-                                class="preview"
-                                :src="imageData[index]"
-                                v-if="imageData[index]">
-                        </label>
-
-                        <span class="icon trash-icon" @click="removeImage(image)"></span>
-                    </div>
-
-                    <label class="btn btn-lg btn-primary add-image" @click="createFileType">
-                        {{ __('admin::app.catalog.products.add-image-btn-title') }}
-                    </label>
-                </div>
-            </td> -->
-
             <td>
                 <button style="width: 100%;" type="button" class="dropdown-btn dropdown-toggle">
                     @{{ totalQty }}
@@ -319,29 +281,6 @@
                 </div>
             </td>
 
-            <!-- <td>
-                <div class="control-group">
-                    <select
-                        class="control"
-                        type="text"
-                        v-model="variant.status"
-                        :name="[variantInputName + '[status]']">
-
-                        <option
-                            value="1"
-                            :selected="variant.status">
-                            {{ __('admin::app.catalog.products.enabled') }}
-                        </option>
-
-                        <option
-                            value="0"
-                            :selected="!variant.status">
-                            {{ __('admin::app.catalog.products.disabled') }}
-                        </option>
-                    </select>
-                </div>
-            </td> -->
-
             <td class="actions">
                 <a :href="['{{ route('admin.catalog.products.index') }}/edit/' + variant.id]">
                     <i class="icon pencil-lg-icon"></i>
@@ -361,9 +300,12 @@
             ];
         });
 
-        let super_attributes = @json(app('\Webkul\Product\Repositories\ProductRepository')->getSuperAttributes($product));
-        let variants = @json($product->variants);
-        console.log(variants,super_attributes);
+        let super_attributes = @json($att);
+        let variants = @json($variants);
+        variants.forEach((e,v) => {
+            e.special_price = e.product_flats[0].special_price
+        });
+        console.log(super_attributes);
 
         Vue.component('variant-form', {
             data: function () {

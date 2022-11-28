@@ -256,7 +256,7 @@ class Product extends Model implements ProductContract
      */
     public function variants(): HasMany
     {
-        return $this->hasMany(static::class, 'parent_id');
+        return $this->hasMany(static::class, 'parent_id')->with('product_flats');
     }
 
     /**
