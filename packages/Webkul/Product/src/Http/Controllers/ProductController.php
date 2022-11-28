@@ -291,7 +291,7 @@ class ProductController extends Controller
         // dd($data);
         $data_loop = $data;
 
-        if ($p == 'passed') {
+        if ($p == 'passed' && $data['type'] != 'simple') {
             //Attributes Data
             // $aFamily = $this->attributeFamilyRepository->findOneByfield(['id' => $data['attribute_family_id']]);
             $attributeArray = $this->attributeRepository->pluck('code')->toArray();
@@ -301,7 +301,6 @@ class ProductController extends Controller
             $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id', $attribute_fam_groups)->pluck('attribute_id');
             $all_fam_att_codes = $this->attributeRepository->whereIn('id', $all_fam_attributes)->pluck('code')->toArray();
             $fam_gen = $this->attributeGroupRepository->where('attribute_family_id',  $data['attribute_family_id'])->where('name', 'General')->first();
-
 
             //Saving Attributes and their options if not exists
             foreach ($data['variants'] as $key_v => $variant_values) {

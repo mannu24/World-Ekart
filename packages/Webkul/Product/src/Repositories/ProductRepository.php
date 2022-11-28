@@ -183,6 +183,12 @@ class ProductRepository extends Repository
     {
         $params = request()->input();
 
+        $country = $_COOKIE['country'] ;
+
+        $country = 'US' ;
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+        
         if (core()->getConfigData('catalog.products.storefront.products_per_page')) {
             $pages = explode(',', core()->getConfigData('catalog.products.storefront.products_per_page'));
 
@@ -193,7 +199,7 @@ class ProductRepository extends Repository
 
         $page = Paginator::resolveCurrentPage('page');
 
-        $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categoryId) {
+        $repository = app(ProductFlatRepository::class)->scopeQuery(function ($query) use ($params, $categoryId ,$country) {
             $channel = core()->getRequestedChannelCode();
 
             $locale = core()->getRequestedLocaleCode();
@@ -201,9 +207,10 @@ class ProductRepository extends Repository
                 ->select('product_flat.*')
                 ->leftJoin('product_categories', 'product_categories.product_id', '=', 'product_flat.product_id')
                 ->leftJoin('categories', 'product_categories.category_id', '=', 'categories.id')
-                // ->leftJoin('product_attribute_values', 'product_attribute_values.product_id', '=', 'product_flat.product_id')
+                ->leftJoin('products', 'product_flat.product_id', '=', 'products.id')
                 ->where('product_flat.channel', $channel)
                 ->where('product_flat.locale', $locale)
+                ->whereJsonContains('products.country', $country)
                 ->whereNotNull('product_flat.url_key');
                 // $this->variantJoin($qb);
             if ($categoryId) {
