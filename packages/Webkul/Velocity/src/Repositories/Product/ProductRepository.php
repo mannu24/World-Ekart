@@ -83,23 +83,126 @@ class ProductRepository extends Repository
      * @param  int  $count
      * @return \Illuminate\Support\Collection
      */
-    public function getNewProducts($count)
-    {
-        $results = app(ProductFlatRepository::class)->scopeQuery(function($query) {
+    public function getNewProducts($count) {
+
+        $country = $_COOKIE['country'] ;
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
+        $results = app(ProductFlatRepository::class)->scopeQuery( function($query) use($country) {
+            
             $channel = core()->getRequestedChannelCode();
-
             $locale = core()->getRequestedLocaleCode();
-
             return $query->distinct()
                         ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
-                         ->addSelect('product_flat.*')
-                         ->where('product_flat.status', 1)
-                         ->where('product_flat.visible_individually', 1)
-                         ->where('product_flat.new', 1)
-                         ->where('products.country', $this->country)
-                         ->where('product_flat.channel', $channel)
-                         ->where('product_flat.locale', $locale)
-                         ->orderBy('product_id', 'desc');
+                        ->addSelect('product_flat.*')
+                        ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
+                        ->where('product_flat.new', 1)
+                        ->where('product_flat.channel', $channel)
+                        ->where('product_flat.locale', $locale)
+                        ->whereJsonContains('products.country', $country)
+                        ->orderBy('product_id', 'desc');
+        })->paginate($count);
+
+        return $results;
+    }
+
+    public function getMensProducts($count) {
+
+        $country = $_COOKIE['country'] ;
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
+        $results = app(ProductFlatRepository::class)->scopeQuery( function($query) use($country) {
+            
+            $channel = core()->getRequestedChannelCode();
+            $locale = core()->getRequestedLocaleCode();
+            return $query->distinct()
+                        ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
+                        ->addSelect('product_flat.*')
+                        ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
+                        ->where('products.is_mens_fashion', 1)
+                        ->where('product_flat.channel', $channel)
+                        ->where('product_flat.locale', $locale)
+                        ->whereJsonContains('products.country', $country)
+                        ->orderBy('product_id', 'desc');
+        })->paginate($count);
+
+        return $results;
+    }
+
+    public function getWomensProducts($count) {
+
+        $country = $_COOKIE['country'] ;
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
+        $results = app(ProductFlatRepository::class)->scopeQuery( function($query) use($country) {
+            
+            $channel = core()->getRequestedChannelCode();
+            $locale = core()->getRequestedLocaleCode();
+            return $query->distinct()
+                        ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
+                        ->addSelect('product_flat.*')
+                        ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
+                        ->where('products.is_womens_fashion', 1)
+                        ->where('product_flat.channel', $channel)
+                        ->where('product_flat.locale', $locale)
+                        ->whereJsonContains('products.country', $country)
+                        ->orderBy('product_id', 'desc');
+        })->paginate($count);
+
+        return $results;
+    }
+
+    public function getElectronicsProducts($count) {
+
+        $country = $_COOKIE['country'] ;
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
+        $results = app(ProductFlatRepository::class)->scopeQuery( function($query) use($country) {
+            
+            $channel = core()->getRequestedChannelCode();
+            $locale = core()->getRequestedLocaleCode();
+            return $query->distinct()
+                        ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
+                        ->addSelect('product_flat.*')
+                        ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
+                        ->where('products.is_electronics', 1)
+                        ->where('product_flat.channel', $channel)
+                        ->where('product_flat.locale', $locale)
+                        ->whereJsonContains('products.country', $country)
+                        ->orderBy('product_id', 'desc');
+        })->paginate($count);
+
+        return $results;
+    }
+
+    public function getAccessoriesProducts($count) {
+
+        $country = $_COOKIE['country'] ;
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
+        $results = app(ProductFlatRepository::class)->scopeQuery( function($query) use($country) {
+            
+            $channel = core()->getRequestedChannelCode();
+            $locale = core()->getRequestedLocaleCode();
+            return $query->distinct()
+                        ->leftJoin('products', 'products.id', '=', 'product_flat.product_id')
+                        ->addSelect('product_flat.*')
+                        ->where('product_flat.status', 1)
+                        ->where('product_flat.visible_individually', 1)
+                        ->where('products.is_accessories', 1)
+                        ->where('product_flat.channel', $channel)
+                        ->where('product_flat.locale', $locale)
+                        ->whereJsonContains('products.country', $country)
+                        ->orderBy('product_id', 'desc');
         })->paginate($count);
 
         return $results;

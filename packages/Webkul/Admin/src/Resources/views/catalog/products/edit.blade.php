@@ -139,49 +139,6 @@ $sli_count = 1;
                     <p style="display:none;">{{$d_count = 0}}</p>
                     @endif
 
-                    @if($sli_count==1)
-                    <div class="control-group boolean" :class="[errors.has('is_mens_fashion') ? 'has-error' : '']">
-                        <label for="is_mens_fashion" class="">Mens Fashion</label>
-                        <label class="switch">
-                            <input type="checkbox" class="control" id="is_mens_fashion" name="is_mens_fashion" @if($product->is_mens_fashion == 1) checked @endif>
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="control-error"
-                            v-if="errors.has('is_mens_fashion')">@{{ errors.first('is_mens_fashion') }}</span>
-                    </div>
-
-                    <div class="control-group boolean" :class="[errors.has('is_womens_fashion') ? 'has-error' : '']">
-                        <label for="is_womens_fashion" class="">Womens Fashion</label>
-                        <label class="switch">
-                            <input type="checkbox" class="control" id="is_womens_fashion" name="is_womens_fashion" @if($product->is_womens_fashion == 1) checked @endif>
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="control-error"
-                            v-if="errors.has('is_womens_fashion')">@{{ errors.first('is_womens_fashion') }}</span>
-                    </div>
-
-                    <div class="control-group boolean" :class="[errors.has('is_electronics') ? 'has-error' : '']">
-                        <label for="is_electronics" class="">Electronics</label>
-                        <label class="switch">
-                            <input type="checkbox" class="control" id="is_electronics" name="is_electronics" @if($product->is_electronics == 1) checked @endif>
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="control-error"
-                            v-if="errors.has('is_electronics')">@{{ errors.first('is_electronics') }}</span>
-                    </div>
-
-                    <div class="control-group boolean" :class="[errors.has('is_accessories') ? 'has-error' : '']">
-                        <label for="is_accessories" class="">Accessories</label>
-                        <label class="switch">
-                            <input type="checkbox" class="control" id="is_accessories" name="is_accessories" @if($product->is_accessories == 1) checked @endif>
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="control-error"
-                            v-if="errors.has('is_accessories')">@{{ errors.first('is_accessories') }}</span>
-                    </div>
-                    <p style="display:none;">{{$sli_count = 0}}</p>
-                    @endif
-
 
                     <?php
                                         if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
@@ -265,6 +222,49 @@ $sli_count = 1;
 
                     @include ('admin::catalog.products.accordians.customer-group-price')
 
+                    @endif
+
+                    @if($sli_count==1)
+                        <div class="control-group boolean" :class="[errors.has('is_mens_fashion') ? 'has-error' : '']">
+                            <label for="is_mens_fashion" class="">Mens Fashion</label>
+                            <label class="switch">
+                                <input type="checkbox" class="control" id="is_mens_fashion" name="is_mens_fashion" @if($product->is_mens_fashion == 1) checked @endif>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="control-error"
+                                v-if="errors.has('is_mens_fashion')">@{{ errors.first('is_mens_fashion') }}</span>
+                        </div>
+
+                        <div class="control-group boolean" :class="[errors.has('is_womens_fashion') ? 'has-error' : '']">
+                            <label for="is_womens_fashion" class="">Womens Fashion</label>
+                            <label class="switch">
+                                <input type="checkbox" class="control" id="is_womens_fashion" name="is_womens_fashion" @if($product->is_womens_fashion == 1) checked @endif>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="control-error"
+                                v-if="errors.has('is_womens_fashion')">@{{ errors.first('is_womens_fashion') }}</span>
+                        </div>
+
+                        <div class="control-group boolean" :class="[errors.has('is_electronics') ? 'has-error' : '']">
+                            <label for="is_electronics" class="">Electronics</label>
+                            <label class="switch">
+                                <input type="checkbox" class="control" id="is_electronics" name="is_electronics" @if($product->is_electronics == 1) checked @endif>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="control-error"
+                                v-if="errors.has('is_electronics')">@{{ errors.first('is_electronics') }}</span>
+                        </div>
+
+                        <div class="control-group boolean" :class="[errors.has('is_accessories') ? 'has-error' : '']">
+                            <label for="is_accessories" class="">Accessories</label>
+                            <label class="switch">
+                                <input type="checkbox" class="control" id="is_accessories" name="is_accessories" @if($product->is_accessories == 1) checked @endif>
+                                <span class="slider round"></span>
+                            </label>
+                            <span class="control-error"
+                                v-if="errors.has('is_accessories')">@{{ errors.first('is_accessories') }}</span>
+                        </div>
+                        <p style="display:none;">{{$sli_count = 0}}</p>
                     @endif
 
                     {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.' . $attributeGroup->name .

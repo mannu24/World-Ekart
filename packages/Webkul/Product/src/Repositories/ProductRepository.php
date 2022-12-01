@@ -185,7 +185,6 @@ class ProductRepository extends Repository
 
         $country = $_COOKIE['country'] ;
 
-        $country = 'US' ;
         if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
         else app('\Webkul\Core\Core')->setCurrency('INR') ;
         

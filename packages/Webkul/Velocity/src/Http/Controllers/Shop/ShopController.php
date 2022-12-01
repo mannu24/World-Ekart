@@ -67,59 +67,119 @@ class ShopController extends Controller
         if (! $slug) {
             abort(404);
         }
-
-        switch ($slug) {
-            case 'new-products':
-            case 'featured-products':
-                $count = request()->get('count');
-
-                if ($slug == 'new-products') {
-                    $products = $this->velocityProductRepository->getNewProducts($count);
-                } else if ($slug == 'featured-products') {
-                    $products = $this->velocityProductRepository->getFeaturedProducts($count);
-                }
-
-                $response = [
-                    'status'   => true,
-                    'products' => $products->map(function ($product) {
-                        if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
-                            return $this->velocityHelper->formatProduct($product);
-                        } else {
-                            if ($product->isSaleable()) {
-                                return $this->velocityHelper->formatProduct($product);
-                            }
-                        }
-                    })->reject(function ($product) {
-                        return is_null($product);
-                    })->values(),
-                ];
-
-                break;
-            default:
-                $categoryDetails = $this->categoryRepository->findByPath($slug);
-
-                if ($categoryDetails) {
-                    $list = false;
-                    $customizedProducts = [];
-                    $products = $this->productRepository->getAll($categoryDetails->id);
-
-                    foreach ($products as $product) {
-                        $productDetails = [];
-
-                        $productDetails = array_merge($productDetails, $this->velocityHelper->formatProduct($product));
-
-                        array_push($customizedProducts, $productDetails);
+        if($slug != 'all-collections') {
+            switch ($slug) {
+                case 'new-products':
+                case 'featured-products':
+                    $count = request()->get('count');
+    
+                    if ($slug == 'new-products') {
+                        $products = $this->velocityProductRepository->getNewProducts($count);
+                    } else if ($slug == 'featured-products') {
+                        $products = $this->velocityProductRepository->getFeaturedProducts($count);
                     }
-
+    
                     $response = [
-                        'status'           => true,
-                        'list'             => $list,
-                        'categoryDetails'  => $categoryDetails,
-                        'categoryProducts' => $customizedProducts,
+                        'status'   => true,
+                        'products' => $products->map(function ($product) {
+                            if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) {
+                                return $this->velocityHelper->formatProduct($product);
+                            } else {
+                                if ($product->isSaleable()) {
+                                    return $this->velocityHelper->formatProduct($product);
+                                }
+                            }
+                        })->reject(function ($product) {
+                            return is_null($product);
+                        })->values(),
                     ];
-                }
+    
+                    break;
+                default:
+                    $categoryDetails = $this->categoryRepository->findByPath($slug);
+    
+                    if ($categoryDetails) {
+                        $list = false;
+                        $customizedProducts = [];
+                        $products = $this->productRepository->getAll($categoryDetails->id);
+    
+                        foreach ($products as $product) {
+                            $productDetails = [];
+    
+                            $productDetails = array_merge($productDetails, $this->velocityHelper->formatProduct($product));
+    
+                            array_push($customizedProducts, $productDetails);
+                        }
+    
+                        $response = [
+                            'status'           => true,
+                            'list'             => $list,
+                            'categoryDetails'  => $categoryDetails,
+                            'categoryProducts' => $customizedProducts,
+                        ];
+                    }
+    
+                    break;
+            }
+        }
 
-                break;
+        else {
+            $count = request()->get('count');
+            $new_products = $this->velocityProductRepository->getNewProducts($count);
+            $mens_products = $this->velocityProductRepository->getMensProducts($count);
+            $womens_products = $this->velocityProductRepository->getWomensProducts($count);
+            $electronics_products = $this->velocityProductRepository->getElectronicsProducts($count);
+            $accessories_products = $this->velocityProductRepository->getAccessoriesProducts($count);
+
+            $n_p = $new_products->map(function ($product) {
+                if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) 
+                    return $this->velocityHelper->formatProduct($product);
+                else {
+                    if ($product->isSaleable()) return $this->velocityHelper->formatProduct($product);
+                }
+            })->reject(function ($product) { return is_null($product); })->values(); 
+
+            $m_p = $mens_products->map(function ($product) {
+                if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) 
+                    return $this->velocityHelper->formatProduct($product);
+                else {
+                    if ($product->isSaleable()) return $this->velocityHelper->formatProduct($product);
+                }
+            })->reject(function ($product) { return is_null($product); })->values(); 
+
+            $w_p = $womens_products->map(function ($product) {
+                if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) 
+                    return $this->velocityHelper->formatProduct($product);
+                else {
+                    if ($product->isSaleable()) return $this->velocityHelper->formatProduct($product);
+                }
+            })->reject(function ($product) { return is_null($product); })->values(); 
+
+            $e_p = $electronics_products->map(function ($product) {
+                if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) 
+                    return $this->velocityHelper->formatProduct($product);
+                else {
+                    if ($product->isSaleable()) return $this->velocityHelper->formatProduct($product);
+                }
+            })->reject(function ($product) { return is_null($product); })->values(); 
+
+            $a_p = $accessories_products->map(function ($product) {
+                if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) 
+                    return $this->velocityHelper->formatProduct($product);
+                else {
+                    if ($product->isSaleable()) return $this->velocityHelper->formatProduct($product);
+                }
+            })->reject(function ($product) { return is_null($product); })->values(); 
+
+            $response = [
+                'status'   => true,
+                'n_p' => $n_p, 
+                'm_p' => $m_p, 
+                'w_p' => $w_p, 
+                'e_p' => $e_p, 
+                'a_p' => $a_p, 
+            ];
+
         }
 
         return $response ?? [

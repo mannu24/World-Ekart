@@ -86,7 +86,8 @@
     {{-- @if ($velocityMetaData)
         {!! DbView::make($velocityMetaData)->field('home_page_content')->render() !!}
     @else --}}
-        <div class="col-12 py-5">
+    @include('shop::home.featured-collections')
+    {{-- <div class="col-12 py-5">
             @include('shop::home.advertisements.advertisement-four')
         </div>
         @include('shop::home.featured-products')
@@ -97,7 +98,7 @@
         <div class="col-12 py-5">
             @include('shop::home.advertisements.advertisement-two')
         </div>
-        @include('shop::home.customer-reviews')
+        @include('shop::home.customer-reviews') --}}
         {{-- @include('shop::home.hot-categories') --}}
         {{-- @endif --}}
 @endsection

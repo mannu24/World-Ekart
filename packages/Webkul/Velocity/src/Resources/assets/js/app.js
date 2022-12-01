@@ -23,6 +23,7 @@ import zh_CN from 'vee-validate/dist/locale/zh_CN';
 /**
  * Vue plugins.
  */
+
 Vue.use(VueCarousel);
 Vue.use(BootstrapSass);
 Vue.use(VeeValidate, {
@@ -68,6 +69,7 @@ Vue.component('menu-item', () => import('@components/menu-item'));
 Vue.component('right-side-header', () => import('@components/header-right-side'));
 Vue.component('sidebar-component', () => import('@components/sidebar'));
 Vue.component('product-card', () => import('@components/product-card'));
+Vue.component('product-card-new', () => import('@components/product-card-new'));
 Vue.component('wishlist-component', () => import('@components/wishlist'));
 Vue.component('carousel-component', () => import('@components/carousel'));
 Vue.component('slider-component', () => import('@components/banners'));
@@ -83,6 +85,7 @@ Vue.component('product-quick-view', () => import('@components/product-quick-view
 Vue.component('product-quick-view-btn', () => import('@components/product-quick-view-btn'));
 Vue.component('recently-viewed', () => import('@components/recently-viewed'));
 Vue.component('product-collections', () => import('@components/product-collections'));
+Vue.component('product-collections-new', () => import('@components/product-collections-new'));
 Vue.component('hot-category', () => import('@components/hot-category'));
 Vue.component('hot-categories', () => import('@components/hot-categories'));
 Vue.component('popular-category', () => import('@components/popular-category'));

@@ -142,6 +142,9 @@ vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('sidebar-component', func
 vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('product-card', function () {
   return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/product-card */ "./src/Resources/assets/js/UI/components/product-card.vue"));
 });
+vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('product-card-new', function () {
+  return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/product-card-new */ "./src/Resources/assets/js/UI/components/product-card-new.vue"));
+});
 vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('wishlist-component', function () {
   return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/wishlist */ "./src/Resources/assets/js/UI/components/wishlist.vue"));
 });
@@ -186,6 +189,9 @@ vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('recently-viewed', functi
 });
 vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('product-collections', function () {
   return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/product-collections */ "./src/Resources/assets/js/UI/components/product-collections.vue"));
+});
+vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('product-collections-new', function () {
+  return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/product-collections-new */ "./src/Resources/assets/js/UI/components/product-collections-new.vue"));
 });
 vue__WEBPACK_IMPORTED_MODULE_13__["default"].component('hot-category', function () {
   return __webpack_require__.e(/*! import() */ "js/components").then(__webpack_require__.bind(__webpack_require__, /*! @components/hot-category */ "./src/Resources/assets/js/UI/components/hot-category.vue"));
