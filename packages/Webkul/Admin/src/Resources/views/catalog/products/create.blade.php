@@ -341,6 +341,8 @@
                     <span class="control-error" v-if="errors.has('delivery_charge')">@{{ errors.first('delivery_charge') }}</span>
                 </div>
 
+                
+
                 @foreach ($generalAtt as $attribute)
 
                     <?php
@@ -418,6 +420,42 @@
                         @endif
                     @endif
                 @endforeach
+
+                <div class="control-group boolean" :class="[errors.has('is_mens_fashion') ? 'has-error' : '']">
+                    <label for="is_mens_fashion" class="">Mens Fashion</label>
+                    <label class="switch">
+                        <input type="checkbox" class="control" id="is_mens_fashion" name="is_mens_fashion" >
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="control-error" v-if="errors.has('is_mens_fashion')">@{{ errors.first('is_mens_fashion') }}</span>
+                </div>
+
+                <div class="control-group boolean" :class="[errors.has('is_womens_fashion') ? 'has-error' : '']">
+                    <label for="is_womens_fashion" class="">Womens Fashion</label>
+                    <label class="switch">
+                        <input type="checkbox" class="control" id="is_womens_fashion" name="is_womens_fashion" >
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="control-error" v-if="errors.has('is_womens_fashion')">@{{ errors.first('is_womens_fashion') }}</span>
+                </div>
+
+                <div class="control-group boolean" :class="[errors.has('is_electronics') ? 'has-error' : '']">
+                    <label for="is_electronics" class="">Electronics</label>
+                    <label class="switch">
+                        <input type="checkbox" class="control" id="is_electronics" name="is_electronics" >
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="control-error" v-if="errors.has('is_electronics')">@{{ errors.first('is_electronics') }}</span>
+                </div>
+
+                <div class="control-group boolean" :class="[errors.has('is_accessories') ? 'has-error' : '']">
+                    <label for="is_accessories" class="">Accessories</label>
+                    <label class="switch">
+                        <input type="checkbox" class="control" id="is_accessories" name="is_accessories" >
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="control-error" v-if="errors.has('is_accessories')">@{{ errors.first('is_accessories') }}</span>
+                </div>
             </div>
         </accordian>
     </script>

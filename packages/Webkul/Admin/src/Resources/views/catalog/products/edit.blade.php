@@ -24,6 +24,9 @@
 }
 </style>
 @endpush
+@php
+$sli_count = 1;
+@endphp
 
 @section('content')
 <div class="content">
@@ -127,12 +130,58 @@
                     <div class="control-group" :class="[errors.has('delivery_charge') ? 'has-error' : '']">
                         <label for="delivery_charge" class="required">Delivery Charge</label>
 
-                        <input type="text" class="control" v-validate="'required'" id="delivery_charge" name="delivery_charge"  value="{{ $product->delivery_charge }}">
+                        <input type="text" class="control" v-validate="'required'" id="delivery_charge"
+                            name="delivery_charge" value="{{ $product->delivery_charge }}">
 
-                        <span class="control-error" v-if="errors.has('delivery_charge')">@{{ errors.first('delivery_charge') }}</span>
+                        <span class="control-error"
+                            v-if="errors.has('delivery_charge')">@{{ errors.first('delivery_charge') }}</span>
                     </div>
                     <p style="display:none;">{{$d_count = 0}}</p>
                     @endif
+
+                    @if($sli_count==1)
+                    <div class="control-group boolean" :class="[errors.has('is_mens_fashion') ? 'has-error' : '']">
+                        <label for="is_mens_fashion" class="">Mens Fashion</label>
+                        <label class="switch">
+                            <input type="checkbox" class="control" id="is_mens_fashion" name="is_mens_fashion" @if($product->is_mens_fashion == 1) checked @endif>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="control-error"
+                            v-if="errors.has('is_mens_fashion')">@{{ errors.first('is_mens_fashion') }}</span>
+                    </div>
+
+                    <div class="control-group boolean" :class="[errors.has('is_womens_fashion') ? 'has-error' : '']">
+                        <label for="is_womens_fashion" class="">Womens Fashion</label>
+                        <label class="switch">
+                            <input type="checkbox" class="control" id="is_womens_fashion" name="is_womens_fashion" @if($product->is_womens_fashion == 1) checked @endif>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="control-error"
+                            v-if="errors.has('is_womens_fashion')">@{{ errors.first('is_womens_fashion') }}</span>
+                    </div>
+
+                    <div class="control-group boolean" :class="[errors.has('is_electronics') ? 'has-error' : '']">
+                        <label for="is_electronics" class="">Electronics</label>
+                        <label class="switch">
+                            <input type="checkbox" class="control" id="is_electronics" name="is_electronics" @if($product->is_electronics == 1) checked @endif>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="control-error"
+                            v-if="errors.has('is_electronics')">@{{ errors.first('is_electronics') }}</span>
+                    </div>
+
+                    <div class="control-group boolean" :class="[errors.has('is_accessories') ? 'has-error' : '']">
+                        <label for="is_accessories" class="">Accessories</label>
+                        <label class="switch">
+                            <input type="checkbox" class="control" id="is_accessories" name="is_accessories" @if($product->is_accessories == 1) checked @endif>
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="control-error"
+                            v-if="errors.has('is_accessories')">@{{ errors.first('is_accessories') }}</span>
+                    </div>
+                    <p style="display:none;">{{$sli_count = 0}}</p>
+                    @endif
+
 
                     <?php
                                         if ($attribute->code == 'guest_checkout' && ! core()->getConfigData('catalog.products.guest-checkout.allow-guest-checkout')) {
@@ -175,7 +224,7 @@
                             {{ $attribute->admin_name }}
 
                             @if ($attribute->type == 'price')
-                                <span class="currency-code">({{ core()->getBaseCurrency()->symbol }})</span>
+                            <span class="currency-code">({{ core()->getBaseCurrency()->symbol }})</span>
                             @endif
 
                             <?php
@@ -237,7 +286,7 @@
             @foreach ($product->getTypeInstance()->getAdditionalViews() as $view)
             @if($view != 'admin::catalog.products.accordians.product-links')
             @include ($view)
-                @endif
+            @endif
             @endforeach
 
             {!! view_render_event(
@@ -268,7 +317,7 @@ $(document).ready(function() {
         }
 
         var query = '?channel=' + $('#channel-switcher').val() + '&locale=' + $('#locale-switcher')
-        .val();
+            .val();
 
         window.location.href = "{{ route('admin.catalog.products.edit', $product->id)  }}" + query;
     });
@@ -281,7 +330,7 @@ $(document).ready(function() {
         toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor link hr | alignleft aligncenter alignright alignjustify | numlist bullist outdent indent  | removeformat | code | table',
         image_advtab: true,
     });
-    $('.select2').select2() ;
+    $('.select2').select2();
 });
 </script>
 @endpush

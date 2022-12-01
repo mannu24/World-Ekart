@@ -231,19 +231,73 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        // dd(request()->all());
         $value =  preg_replace('/[^A-Za-z0-9]/', ' ', request()->name);
         $value =  strtolower(preg_replace('/\s+/', '-', $value));
 
         $request->merge(['url_key' => $value]);
+        
+
+        if(isset($request->is_mens_fashion)){
+            if($request->is_mens_fashion == 'on'){
+                $request->merge(['is_mens_fashion' =>  1]);
+            }
+            else{
+                $request->merge(['is_mens_fashion' =>  0]);
+            }
+        }
+        else{
+            $request->merge(['is_mens_fashion' =>  0]);
+        }
+
+        if(isset($request->is_womens_fashion)){
+            if($request->is_womens_fashion == 'on'){
+                $request->merge(['is_womens_fashion' =>  1]);
+            }
+            else{
+                $request->merge(['is_womens_fashion' =>  0]);
+            }
+        }
+        else{
+            $request->merge(['is_womens_fashion' =>  0]);
+        }
+
+        if(isset($request->is_electronics)){
+            if($request->is_electronics == 'on'){
+                $request->merge(['is_electronics' =>  1]);
+            }
+            else{
+                $request->merge(['is_electronics' =>  0]);
+            }
+        }
+        else{
+            $request->merge(['is_electronics' =>  0]);
+        }
+
+        if(isset($request->is_accessories)){
+            if($request->is_accessories == 'on'){
+                $request->merge(['is_accessories' =>  1]);
+            }
+            else{
+                $request->merge(['is_accessories' =>  0]);
+            }
+        }
+        else{
+            $request->merge(['is_accessories' =>  0]);
+        }
 
         $this->validate(request(), [
             'type'                => 'required',
             'attribute_family_id' => 'required',
             'country'             => 'required',
             'delivery_charge'     => 'required',
+            'is_mens_fashion'     => 'required',
+            'is_womens_fashion'   => 'required',
+            'is_electronics'      => 'required',
+            'is_accessories'      => 'required',
             'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
-
+        // dd(request()->all());
         $product = $this->productRepository->create(request()->all());
 
         $saved = $this->update($product->id, 'passed');
@@ -285,11 +339,61 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, $p = null)
+    public function update(Request $request,$id, $p = null)
     {
         $data = request()->all();
-        // dd($data);
         $data_loop = $data;
+        if($p != 'passed'){
+            // dd('h');
+            if(isset($data['is_mens_fashion'])){
+                if($data['is_mens_fashion'] == 'on'){
+                    $data['is_mens_fashion'] = 1;
+                }
+                else{
+                    $data['is_mens_fashion'] = 0;
+                }
+            }
+            else{
+                $data['is_mens_fashion'] = 0;
+            }
+    
+            if(isset($data['is_womens_fashion'])){
+                if($data['is_womens_fashion'] == 'on'){
+                    $data['is_womens_fashion'] = 1;
+                }
+                else{
+                    $data['is_womens_fashion'] = 0;
+                }
+            }
+            else{
+                $data['is_womens_fashion'] = 1;
+            }
+    
+            if(isset($data['is_electronics'])){
+                if($data['is_electronics'] == 'on'){
+                    $data['is_electronics'] = 1;
+                }
+                else{
+                    $data['is_electronics'] = 0;
+                }
+            }
+            else{
+                $data['is_electronics'] = 0;
+            }
+    
+            if(isset($data['is_accessories'])){
+                if($data['is_accessories'] == 'on'){
+                    $data['is_accessories'] = 1;
+                }
+                else{
+                    $data['is_accessories'] = 0;
+                }
+            }
+            else{
+                $data['is_accessories'] = 0;
+            }
+        }
+
 
         if ($p == 'passed' && $data['type'] != 'simple') {
             //Attributes Data
@@ -422,6 +526,7 @@ class ProductController extends Controller
             // }
             $data = $data_loop;
         }
+        
 
         // dd($data) ;
         $multiselectAttributeCodes = [];

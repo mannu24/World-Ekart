@@ -41,6 +41,10 @@ class Product extends Model implements ProductContract
         'user_id',
         'country',
         'delivery_charge',
+        'is_mens_fashion',
+        'is_womens_fashion',
+        'is_electronics',
+        'is_accessories',
     ];
 
     /**
