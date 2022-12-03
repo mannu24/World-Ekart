@@ -339,7 +339,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id, $p = null)
+    public function update($id, $p = null)
     {
         $data = request()->all();
         $data_loop = $data;
@@ -400,7 +400,7 @@ class ProductController extends Controller
             // $aFamily = $this->attributeFamilyRepository->findOneByfield(['id' => $data['attribute_family_id']]);
             $attributeArray = $this->attributeRepository->pluck('code')->toArray();
 
-
+            $custum_att_values = [];
             $attribute_fam_groups = $this->attributeGroupRepository->where('attribute_family_id',  $data['attribute_family_id'])->pluck('id');
             $all_fam_attributes = $this->attributeGroupMapRepository->whereIn('attribute_group_id', $attribute_fam_groups)->pluck('attribute_id');
             $all_fam_att_codes = $this->attributeRepository->whereIn('id', $all_fam_attributes)->pluck('code')->toArray();
@@ -409,10 +409,11 @@ class ProductController extends Controller
             //Saving Attributes and their options if not exists
             foreach ($data['variants'] as $key_v => $variant_values) {
                 foreach ($variant_values as $key_vd => $single_v_value) {
+                    $custum_danish_option_id = null;
+                    $custum_danish_attribute_id = null;
                     if (!in_array($key_vd, ['sku', 'name', 'qty', 'price', 'special_price', 'weight'])) {
                         // $att_chk = DB::table('attributes')->where('code', $key_vd)->count();
                         if (in_array($key_vd, $attributeArray)) {
-                            
                             $att_to_add = $this->attributeRepository->where('code', $key_vd)->first();
                             if (!in_array($key_vd, $all_fam_att_codes)) {
                                 // dd($key);
@@ -426,7 +427,6 @@ class ProductController extends Controller
                             }
 
                             foreach ($data['categories'] as $key_c => $p_cat_id) {
-
                                 //Link attribute with category
                                 $check0  = DB::table('category_filterable_attributes')->where('attribute_id', $att_to_add->id)->where('category_id', $p_cat_id)->count();
                                 if ($check0 < 1) {
@@ -435,40 +435,51 @@ class ProductController extends Controller
                                         'category_id' => $p_cat_id,
                                     ]);
                                 }
+                            }
+                            //check for option existence
+                            $check  = DB::table('attribute_options')->where('attribute_id', $att_to_add->id)->where('admin_name', $single_v_value)->first();
+                            if (empty($check)) {
 
-                                //check for option existence
-                                $check  = DB::table('attribute_options')->where('attribute_id', $att_to_add->id)->where('admin_name', $single_v_value)->first();
-                                if (empty($check)) {
+                                $new_option_id =  DB::table('attribute_options')->insertGetId([
+                                    'attribute_id' => $att_to_add->id,
+                                    'admin_name' => $single_v_value,
+                                    'sort_order' => 1,
+                                ]);
 
-                                    $new_option_id =  DB::table('attribute_options')->insertGetId([
-                                        'attribute_id' => $att_to_add->id,
-                                        'admin_name' => $single_v_value,
-                                        'sort_order' => 1,
-                                    ]);
+                                //Linking option with category
+                                DB::table('attribute_category_options')->insert([
+                                    'attribute_id' => $att_to_add->id,
+                                    'category_id' => $p_cat_id,
+                                    'option_id' => $new_option_id,
+                                ]);
+                                //Altering Variant Received data
+                                $data_loop['variants'][$key_v][$key_vd] = (string) $new_option_id;
 
+                                //creating Custom Att Array
+
+                                $custum_att_values[] = ['v_sku'=>$variant_values['sku'],'attribute_id'=>$att_to_add->id,'option_id'=>$new_option_id]; 
+                                $custum_danish_attribute_id = $att_to_add->id;
+                                $custum_danish_option_id = $new_option_id;
+
+                            } else {
+                                $check1  = DB::table('attribute_category_options')->where('option_id', $check->id)->where('category_id', $p_cat_id)->count();
+                                if ($check1 < 1) {
                                     //Linking option with category
                                     DB::table('attribute_category_options')->insert([
                                         'attribute_id' => $att_to_add->id,
                                         'category_id' => $p_cat_id,
-                                        'option_id' => $new_option_id,
+                                        'option_id' => $check->id,
                                     ]);
-                                    //Altering Variant Received data
-                                    $data_loop['variants'][$key_v][$key_vd] = (string) $new_option_id;
-                                } else {
-                                    $check1  = DB::table('attribute_category_options')->where('option_id', $check->id)->where('category_id', $p_cat_id)->count();
-                                    if ($check1 < 1) {
-                                        //Linking option with category
-                                        DB::table('attribute_category_options')->insert([
-                                            'attribute_id' => $att_to_add->id,
-                                            'category_id' => $p_cat_id,
-                                            'option_id' => $check->id,
-                                        ]);
-                                    }
-                                    // dd($data_loop['variants'][$key_v][$key_vd]);
-
-                                    $data_loop['variants'][$key_v][$key_vd] = (string)$check->id;
-
                                 }
+                                // dd($data_loop['variants'][$key_v][$key_vd]);
+
+                                $data_loop['variants'][$key_v][$key_vd] = (string)$check->id;
+
+                                //creating Custom Att Array
+                                 $custum_att_values[] = ['v_sku'=>$variant_values['sku'],'attribute_id'=>$att_to_add->id,'option_id'=>$check->id]; 
+                                $custum_danish_attribute_id = $att_to_add->id;
+                                $custum_danish_option_id = $check->id;
+
                             }
                         } else {
                             //Created attribute
@@ -513,21 +524,23 @@ class ProductController extends Controller
                                     'category_id' => $p_cat_id,
                                 ]);
                             }
+
+                            //creating Custom Att Array
+                            $custum_att_values[] = ['v_sku'=>$variant_values['sku'],'attribute_id'=>$id,'option_id'=>$new_option_id]; 
+                            $custum_danish_attribute_id = $id;
+                            $custum_danish_option_id = $new_option_id;
                         }
 
                         $data_loop['variants'][$key_v]['inventories'] = [1=>$data_loop['variants'][$key_v]['qty']];
                         $data_loop['variants'][$key_v]['status'] = "1";
                     }
                 }
+
             }
 
-            // foreach ($data[] as $key => $value) {
-            //     # code...
-            // }
             $data = $data_loop;
         }
         
-
         // dd($data) ;
         $multiselectAttributeCodes = [];
         
@@ -555,20 +568,73 @@ class ProductController extends Controller
 
         $this->productRepository->update($data, $id);
         if ($p=='passed') {
+            $pp = $prod->product_flats[0] ;
+            $pp->visible_individually = 1;
+            $pp->min_price = $pp->special_price;
+            $pp->max_price = $pp->price;
+            $pp->save(); 
+            $d_setted = 0;
             foreach ($prod->variants as $key => $variant) {
-                $pp = $prod->product_flats[0] ; 
+                //Adding default variant
+                if($d_setted == 0){
+                    DB::table('products')->where('id',$prod->id)->update([
+                        'additional' =>  json_encode(['default_variant_id'=>$variant->id]),
+                    ]);
+                }
+
+                
+                
+
                 $vv = $variant->product_flats[0] ;
+                $att_to_add = $this->attributeRepository->where('code', 'special_price')->first();
+
                 foreach($data['variants'] as $recived_p_variant){
                     if($vv->sku == $recived_p_variant['sku']){
                         DB::table('product_flat')->where('id',$vv->id)->update([
-                            'min_price' =>  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
-                            'max_price' => $recived_p_variant['price'],
+                            'min_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                            // 'max_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                            'max_price' => (int) $recived_p_variant['price'],
                             'special_price' => $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
                             'visible_individually' => false,
                         ]);
+
+                        //Setting Special Price
+
+                        DB::table('product_attribute_values')->insert([
+                            'float_value' =>  (float)$recived_p_variant['special_price'] ?: (float)$recived_p_variant['price'],
+                            'product_id' => $variant->id,
+                            'attribute_id' => $att_to_add->id,
+                        ]);
+
                     }
                 }
+                
+                foreach ($custum_att_values as $key => $value) {
+                    if($variant->sku == $value['v_sku']){
+                        DB::table('product_attribute_values')->insert([
+                            'integer_value' =>  $value['option_id'],
+                            'product_id' => $variant->id,
+                            'attribute_id' => $value['attribute_id'],
+                        ]);
+                        
+                    }
+                   
+                }
+                $d_setted = 1;
             }
+            $inserted = [];
+            foreach ($custum_att_values as $key => $value) {
+                if(!in_array($value['attribute_id'] ,$inserted)){
+
+                DB::table('product_super_attributes')->insert([
+                    'product_id' => $id,
+                    'attribute_id' => $value['attribute_id'],
+                ]);
+                $inserted[] = $value['attribute_id'];
+            }
+
+            }
+            dd('h');
             return true;
         } else {
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));

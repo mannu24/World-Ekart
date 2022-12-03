@@ -179,10 +179,10 @@
 
                 <div class="item-options" style="margin-top: 10px">
                     <div v-for='(attribute, index) in superAttributes'>
-                        <b>@{{ attribute.admin_name }} : </b>@{{ optionName(variant[attribute.code]) }}
+                        <b v-if="variant[attribute.code]">@{{ attribute.name }} : </b>@{{ optionName(variant[attribute.code]) }}
 
                         <input
-                            type="hidden"
+                            type="hidden" v-if="variant[attribute.code]"
                             :name="[variantInputName + '[' + attribute.code + ']']"
                             :value="variant[attribute.code]"
                         />

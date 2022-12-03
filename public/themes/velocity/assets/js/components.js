@@ -6226,7 +6226,7 @@ var render = function render() {
     staticClass: "ps-product__container"
   }, [_c("div", {
     staticClass: "ps-product__vendor"
-  }, [_vm._v(_vm._s(_vm.product.vendor))]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Sold By: " + _vm._s(_vm.product.vendor))]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__content"
   }, [_c("a", {
     staticClass: "ps-product__title",
@@ -6316,7 +6316,7 @@ var render = function render() {
     }
   }, [_vm._v(_vm._s(_vm.product.name))]), _vm._v(" "), _c("p", {
     staticClass: "ps-product__vendor"
-  }, [_vm._v("Sold by: " + _vm._s(_vm.product.brand))]), _vm._v(" "), _vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
+  }, [_vm._v("Sold By: " + _vm._s(_vm.product.vendor))]), _vm._v(" "), _vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
     staticClass: "ps-product__rating"
   }, [_c("star-ratings", {
     attrs: {
@@ -6336,7 +6336,11 @@ var render = function render() {
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__desc"
-  }, [_c("span", [_vm._v("Description:")]), _vm._v(" " + _vm._s(_vm.product.shortDescription))])]), _vm._v(" "), _c("div", {
+  }, [_c("span", [_vm._v("Description:")]), _vm._v(" "), _c("span", {
+    domProps: {
+      innerHTML: _vm._s(_vm.product.shortDescription)
+    }
+  })])]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__shopping"
   }, [_c("p", {
     staticClass: "ps-product__price text-center",
@@ -6392,7 +6396,7 @@ var render = function render() {
     staticClass: "ps-product__container"
   }, [_c("div", {
     staticClass: "ps-product__vendor"
-  }, [_vm._v(_vm._s(_vm.product.brand))]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Sold By: " + _vm._s(_vm.product.vendor))]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__content"
   }, [_c("a", {
     staticClass: "ps-product__title",

@@ -10,7 +10,7 @@
         <div class="ps-product__container">
             <div class="ps-product__content w-60">
                 <a :href="`${baseUrl}/${product.slug}`" :title="product.name" class="ps-product__title">{{product.name}}</a>
-                <p class="ps-product__vendor">Sold by: {{ product.brand }}</p>
+                <p class="ps-product__vendor">Sold By: {{ product.vendor }}</p>
                 <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">
                     <star-ratings :ratings="product.avgRating"></star-ratings>
                     <span><a :href="`${$root.baseUrl}/reviews/${product.slug}`">
@@ -20,7 +20,7 @@
                 <div class="ps-product__rating" v-else>
                     <span v-text="product.firstReviewText"></span>
                 </div>
-                <div class="ps-product__desc"><span>Description:</span> {{ product.shortDescription }}</div>
+                <div class="ps-product__desc"><span>Description:</span> <span v-html="product.shortDescription"></span></div>
             </div>
             <div class="ps-product__shopping">
                 <p class="ps-product__price text-center" v-html="product.priceHTML"></p>
@@ -55,7 +55,7 @@
             </div>
             <div class="ps-product__container">
                 <!-- <a :title="product.name" :href="`${baseUrl}/${product.slug}`" class="ps-product__vendor">{{ product.brand }}</a> -->
-                <div class="ps-product__vendor">{{ product.brand }}</div>
+                <div class="ps-product__vendor">Sold By: {{ product.vendor }}</div>
                 <div class="ps-product__content">
                     <a :href="`${baseUrl}/${product.slug}`" class="ps-product__title">{{product.name}}</a>
                     <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">

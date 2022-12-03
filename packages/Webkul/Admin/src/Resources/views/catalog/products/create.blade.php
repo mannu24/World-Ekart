@@ -554,7 +554,7 @@
                 <div class="control-group">
                     <label for="">Select Attributes</label>
                     <select v-select2 v-model="var_att" @change="var_att_c" multiple required class="control form-control select2-p" style="width:100%;">
-                        <option v-for='(a, index) in attributes' :value="a" v-text="a.name"></option>
+                        <option v-for='(a, index) in attributes' :value="a.code" v-text="a.name"></option>
                     </select>
                 </div>
                 <button type="button" class="btn btn-lg btn-primary" @click="showModal('addVariant',true)">Create Variants</button>
@@ -586,6 +586,7 @@
                     product_type : '', 
                     var_att: [],
                     attributes: @json($att),
+                    attributes_codes: [],
                 }
             },
 
@@ -594,6 +595,9 @@
                     this.product_type = data
                 })
                 $('.select2-p').select2({ tags:true, maximumSelectionLength: 3 }) ;
+                this.attributes.forEach(element => {
+                    this.attributes_codes.push(element.code)
+                });
             },
 
             updated() {
@@ -607,7 +611,21 @@
                 },
 
                 var_att_c: function() {
-                    g_att = this.var_att ;
+                    g_att = [];
+                    this.var_att.forEach(element => {
+                        
+                        if(this.attributes_codes.includes(element)){
+                            this.attributes.forEach(att_item => {
+                                if(att_item.code == element){
+                                    g_att.push(att_item)
+                                }
+                            });
+                        }else{
+                            g_att.push(element)
+
+                        }
+                    });
+                    
                 },
 
                 showModal(id,v) {

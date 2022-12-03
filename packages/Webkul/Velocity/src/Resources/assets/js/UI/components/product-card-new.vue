@@ -17,7 +17,7 @@
         </div>
         <div class="ps-product__container">
             <!-- <a :title="product.name" :href="`${baseUrl}/${product.slug}`" class="ps-product__vendor">{{ product.brand }}</a> -->
-            <div class="ps-product__vendor">{{ product.vendor }}</div>
+            <div class="ps-product__vendor">Sold By: {{ product.vendor }}</div>
             <div class="ps-product__content">
                 <a :href="`${baseUrl}/${product.slug}`" class="ps-product__title">{{product.name}}</a>
                 <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">

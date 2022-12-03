@@ -966,23 +966,28 @@ a:visited, a:link {
 Line 45043 ,45035 for hover
 */
 
-.ps-product.ps-product-new {
+.ps-product {
     padding: 0;
 }
 
-.ps-product.ps-product-new:hover {
+.ps-product:hover {
     border:none;
 }
 
-.ps-product.ps-product-new .ps-product__thumbnail img {
+/* .ps-product .ps-product__thumbnail img {
     object-fit: cover;
-}
+} */
 
-.ps-product.ps-product-new .ps-product__actions {
+.ps-product .ps-product__actions {
     padding: 5px 0;
 }
 
-.ps-product.ps-product-new .ps-product__container {
+.ps-product--wide .ps-product__actions {
+    padding-top: 20px ;
+    background-color: transparent ;
+}
+
+.ps-product .ps-product__container {
     padding: 10px 20px;
     background-color: #f7f7f7;
 }
@@ -991,7 +996,7 @@ Line 45043 ,45035 for hover
     justify-content: start;
 }
 
-.ps-product.ps-product-new .ps-product__title {
+.ps-product .ps-product__title {
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -1000,7 +1005,7 @@ Line 45043 ,45035 for hover
 }
 
 @media (min-width: 991px) {
-    .ps-product.ps-product-new .ps-product__title {
+    .ps-product .ps-product__title {
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
