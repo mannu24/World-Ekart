@@ -636,6 +636,30 @@ class ProductController extends Controller
             }
             return true;
         } else {
+            $att_to_add = $this->attributeRepository->where('code', 'special_price')->first();
+
+            foreach ($prod->variants as $key => $variant) {
+                
+                $vv = $variant->product_flats[0] ;
+
+                foreach($data['variants'] as $recived_p_variant){
+                    if($vv->sku == $recived_p_variant['sku']){
+
+                        DB::table('product_flat')->where('id',$vv->id)->update([
+                            'min_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                            // 'max_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                            'max_price' => (int) $recived_p_variant['price'],
+                            'special_price' => $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                        ]);
+
+                        DB::table('product_attribute_values')->where('product_id',$variant->id)->where('attribute_id',$att_to_add->id)->update([
+                            'float_value' =>  (float)$recived_p_variant['special_price'] ?: (float)$recived_p_variant['price'],
+                        ]);
+
+                    }
+                }
+                
+            }
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
             return redirect()->route($this->_config['redirect']);
         }

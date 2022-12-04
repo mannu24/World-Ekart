@@ -109,14 +109,13 @@ $sli_count = 1;
                         <label for="country" class="required">Country</label>
                         <select class="control select2" v-validate="'required'" multiple id="country" name="country[]">
                             @foreach ($countries as $item)
-                            @if(old('country'))
-                            <option value="{{ $item->code }}" {{ (old('country') == $item->code) ? 'selected' : '' }}>
-                                {{ $item->name }}</option>
-                            @else
-                            <option value="{{ $item->code }}" @selected(in_array($item->code,$product->country)) >
-                                {{ $item->name }}</option>
-                            @endif
-
+                                @if(old('country'))
+                                    <option value="{{ $item->code }}" {{ (old('country') == $item->code) ? 'selected' : '' }}>
+                                    {{ $item->name }}</option>
+                                @else
+                                    <option value="{{ $item->code }}" @selected(in_array($item->code,$product->country)) >
+                                    {{ $item->name }}</option>
+                                @endif
                             @endforeach
                         </select>
 
