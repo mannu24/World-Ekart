@@ -123,8 +123,7 @@ class ProductImage extends AbstractProduct
      */
     protected function otherwiseLoadFromProduct($product)
     {
-        $images = $product ? $product->images : null;
-
+        $images = $product ? ($product->images->count() > 0 ? $product->images : $product->parent->images) : null;
         return $images && $images->count()
             ? $this->getCachedImageUrls($images[0]->path)
             : $this->getFallbackImageUrls();

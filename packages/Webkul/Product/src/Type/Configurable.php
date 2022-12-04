@@ -571,6 +571,12 @@ class Configurable extends AbstractType
      */
     public function getPriceHtml()
     {
+
+        $country = $_COOKIE['country'] ;
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
+
         if ($this->haveOffer()) {
             return '<div class="sticker sale">' . trans('shop::app.products.sale') . '</div>'
             . '<span class="price-label">' . trans('shop::app.products.price-label') . '</span>'

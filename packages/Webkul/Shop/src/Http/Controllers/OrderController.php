@@ -83,7 +83,8 @@ class OrderController extends Controller
         ]);
 
         $shipment = $order->shipments->first() ;
-        $title = DB::table('courier_titles')->where('name', $shipment->carrier_title)->first() ;
+        $title = '' ;
+        if($shipment) $title = DB::table('courier_titles')->where('name', $shipment->carrier_title)->first() ;
 
         if (! $order) {
             abort(404);
@@ -105,11 +106,9 @@ class OrderController extends Controller
         if ($invoice->order->customer_id !== $this->currentCustomer->id) {
             abort(404);
         }
-
-        return $this->downloadPDF(
-            view('shop::customers.account.orders.pdf', compact('invoice'))->render(),
-            'invoice-' . $invoice->created_at->format('d-m-Y')
-        );
+        $pdf = view('shop::customers.account.orders.pdf', compact('invoice'))->render() ;
+        
+        return $this->downloadPDF( $pdf, 'Invoice-' . $invoice->created_at->format('d-m-Y'));
     }
 
     /**

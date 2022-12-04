@@ -19,6 +19,11 @@ class CartController extends Controller
     {
         $cart = cart()->getCart();
 
+        $country = isset($_COOKIE['country']) ? $_COOKIE['country'] : 'IN';
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
+
         if ($cart) {
             $items = $cart->items;
             $cartItems = $items->toArray();

@@ -113,8 +113,7 @@ $sli_count = 1;
                             <option value="{{ $item->code }}" {{ (old('country') == $item->code) ? 'selected' : '' }}>
                                 {{ $item->name }}</option>
                             @else
-                            <option value="{{ $item->code }}"
-                                >
+                            <option value="{{ $item->code }}" @selected(in_array($item->code,$product->country)) >
                                 {{ $item->name }}</option>
                             @endif
 

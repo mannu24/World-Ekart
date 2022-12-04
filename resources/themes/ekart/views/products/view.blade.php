@@ -4,6 +4,10 @@
 @inject ('customHelper', 'Webkul\Velocity\Helpers\Helper')
 @inject ('productViewHelper', 'Webkul\Product\Helpers\View')
 @php
+    $country = isset($_COOKIE['country']) ? $_COOKIE['country'] : 'IN';
+    if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+    else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
     $customAttributeValues = $productViewHelper->getAdditionalData($product);
     $related_products = $product->related_products()->get() ;
 @endphp
@@ -129,7 +133,7 @@ $specs = $product->toArray() ;
                                                 @endif
                                                 @if ($product->product->delivery_charge!=0)
                                                     <p class="d-inline">
-                                                        <label class="badge badge-danger">{{ core()->formatPrice($product->product->delivery_charge).' Delivery Charges' }}</label>
+                                                        <label class="badge badge-danger">{{ core()->currency($product->product->delivery_charge).' Delivery Charges' }}</label>
                                                     </p>
                                                 @else
                                                     <p class="d-inline">
@@ -149,7 +153,7 @@ $specs = $product->toArray() ;
                                             </div>
                                             {!! $product->getTypeInstance()->getPriceHtml() !!}
                                             @if ($product->product->delivery_charge!=0)
-                                                <p>{{ "+".core()->formatPrice($product->product->delivery_charge).' Delivery Charges' }}</p>
+                                                <p>{{ "+".core()->currency($product->product->delivery_charge).' Delivery Charges' }}</p>
                                             @else
                                                 <p>Free Delivery</p>
                                             @endif

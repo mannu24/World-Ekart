@@ -119,6 +119,10 @@ class Cart
     public function getCart(): ?\Webkul\Checkout\Contracts\Cart
     {
         $cart = null;
+        
+        $country = isset($_COOKIE['country']) ? $_COOKIE['country'] : 'IN';
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
 
         if (auth()->guard()->check()) {
             $cart = $this->cartRepository->findOneWhere([
@@ -474,6 +478,11 @@ class Cart
      */
     public function collectTotals(): void
     {
+
+        $country = isset($_COOKIE['country']) ? $_COOKIE['country'] : 'IN';
+        if($country != 'IN') app('\Webkul\Core\Core')->setCurrency('USD') ;
+        else app('\Webkul\Core\Core')->setCurrency('INR') ;
+
         if (! $this->validateItems()) {
             return;
         }

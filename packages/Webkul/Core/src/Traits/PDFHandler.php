@@ -16,13 +16,16 @@ trait PDFHandler
      */
     protected function downloadPDF(string $html, ?string $fileName = null)
     {
+
+        set_time_limit(300);
+        
         if (is_null($fileName)) {
             $fileName = Str::random(32);
         }
 
         $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
 
-        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
+        return PDF::loadHTML($html)
             ->setPaper('a4')
             ->download($fileName . '.pdf');
     }

@@ -634,7 +634,6 @@ class ProductController extends Controller
             }
 
             }
-            dd('h');
             return true;
         } else {
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
