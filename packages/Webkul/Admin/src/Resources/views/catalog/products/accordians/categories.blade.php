@@ -7,8 +7,8 @@
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.controls.before', ['product' => $product]) !!}
 
-        <!-- <tree-view behavior="normal" value-field="id" name-field="categories" input-type="checkbox" items='@json($categories)' value='@json($product->categories->pluck("id"))' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view> -->
-        @php $c_ids = $product->categories->pluck("id")->toArray() ; @endphp
+        <tree-view behavior="normal" value-field="id" name-field="categories" input-type="checkbox" items='@json($categories)' value='@json($product->categories->pluck("id"))' fallback-locale="{{ config('app.fallback_locale') }}"></tree-view>
+        {{-- @php $c_ids = $product->categories->pluck("id")->toArray() ; @endphp
         <select name="categories[]" multiple required class="control form-control select2" style="width:100%;">
             @foreach($categories as $category) 
                 <option @selected(in_array($category->id,$c_ids)) value="{{ $category->id }}">{{ $category->name }}</option>
@@ -23,7 +23,7 @@
                     @endforeach
                 @endif
             @endforeach
-        </select>
+        </select> --}}
 
 
         {!! view_render_event('bagisto.admin.catalog.product.edit_form_accordian.categories.controls.after', ['product' => $product]) !!}
