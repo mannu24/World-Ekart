@@ -3,7 +3,7 @@ vendor/*
 .env
 *.zip
 node_modules/
-bootstrap/cache/
+bootstrap/cache
 npm-debug.log
 yarn-error.log
 commands.txt

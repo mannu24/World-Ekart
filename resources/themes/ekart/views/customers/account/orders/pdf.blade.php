@@ -125,18 +125,16 @@
             <div class="header">
                 <div class="row">
                     <div class="col-12">
-                        <div style="text-align: center;padding:20px 0;">
+                        <div style="text-align: center;">
                             <a href="{{ config('app.url') }}">
                                 @include ('shop::emails.layouts.logo')
                             </a>
                         </div>
                         <h1 class="text-center"><u>TAX INVOICE</u></h1>
-                        <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                            GSTIN: 09AASFT1797R1ZS
-                        </p>
-                        <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
-                            PAN: AASFT1797R
-                        </p>
+                        <div style="padding: 0 30px 10px;">
+                            <span style="font-size: 16px;color: #5E5E5E;">GSTIN: 09AASFT1797R1ZS</span>
+                            <span style="font-size: 16px;color: #5E5E5E; float:right;">PAN: AASFT1797R</span>
+                        </div>
                     </div>
                 </div>
 
@@ -284,44 +282,33 @@
                     <table>
                         <thead>
                             <tr>
-                                {{-- <th class="text-center">{{ __('shop::app.customer.account.order.view.SKU') }}</th> --}}
                                 <th class="text-center">{{ __('shop::app.customer.account.order.view.product-name') }}</th>
+                                <th class="text-center">Product Style</th>
                                 <th class="text-center">{{ __('shop::app.customer.account.order.view.qty') }}</th>
                                 <th class="text-center">{{ __('shop::app.customer.account.order.view.price') }}</th>
-                                {{-- <th class="text-center">{{ __('shop::app.customer.account.order.view.subtotal') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.tax-amount') }}</th>
-                                <th class="text-center">{{ __('shop::app.customer.account.order.view.grand-total') }}</th> --}}
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach ($invoice->items as $item)
                                 <tr>
-                                    {{-- <td class="text-center">{{ $item->child ? $item->child->sku : $item->sku }}</td> --}}
+                                    <td class="text-center">{{ $item->name }}</td>
 
                                     <td class="text-center">
-                                        {{ $item->name }}
-
                                         @if (isset($item->additional['attributes']))
-                                            <div class="item-options">
-
-                                                @foreach ($item->additional['attributes'] as $attribute)
-                                                    <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}</br>
-                                                @endforeach
-
-                                            </div>
+                                                <div class="item-options">
+                                                    @foreach ($item->additional['attributes'] as $attribute)
+                                                        <b>{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                    @endforeach
+                                                </div>
+                                        @else
+                                            <p>---</p>                                            
                                         @endif
                                     </td>
 
                                     <td class="text-center">{{ $item->qty }}</td>
                                     
                                     <td class="text-center">{{ core()->formatPrice($item->price, $invoice->order->order_currency_code) }}</td>
-
-                                    {{-- <td class="text-center">{{ core()->formatPrice($item->total, $invoice->order->order_currency_code) }}</td>
-
-                                    <td class="text-center">{{ core()->formatPrice($item->tax_amount, $invoice->order->order_currency_code) }}</td>
-
-                                    <td class="text-center">{{ core()->formatPrice(($item->total + $item->tax_amount), $invoice->order->order_currency_code) }}</td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
