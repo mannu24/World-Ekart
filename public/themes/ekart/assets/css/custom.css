@@ -775,8 +775,8 @@ a:visited, a:link {
     justify-content: start;
 }
 
-.VueCarousel-dot[data-v-438fd353]:focus {
-    outline: 1px solid #fcb800;
+.VueCarousel-dot:focus {
+    outline: 1px solid #fcb80077 !important;
 }
 
 .VueCarousel-dot--active {
@@ -1021,4 +1021,30 @@ Line 45043 ,45035 for hover
 .VueCarousel-dot {
     margin-top: 0 !important;
     margin-bottom: 10px !important;
+}
+
+.product-gallery .VueCarousel-inner {
+    justify-content: start;
+}
+
+.product-gallery .arrow {
+    align-items: end;
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    left: 45%;
+    color: #fcb80077;
+    opacity: .5;
+    position: absolute;
+    z-index: 1001;
+}
+
+.product-gallery .arrow.right {
+    left: unset;
+    right: 45%;
+}
+
+
+.product-gallery .arrow:hover {
+    color: #fcb800;
 }

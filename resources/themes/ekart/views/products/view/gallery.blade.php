@@ -40,9 +40,9 @@
 
 <script type="text/x-template" id="product-gallery-template">
     <ul class="thumb-list col-12 row ltr" type="none">
-        <li class="arrow left" @click="scroll('prev')" v-if="thumbs.length > 4">
-            <i class="fas fa-chevron-left h3"></i>
-        </li>
+        {{-- <li class="arrow left" @click="scroll('prev')" v-if="thumbs.length > 4">
+            <i class="fa fa-chevron-left h3"></i>
+        </li> --}}
 
         <carousel-component slides-per-page="4" :id="galleryCarouselId" pagination-enabled="hide" navigation-enabled="hide"
             add-class="product-gallery" :slides-count="thumbs.length">
@@ -61,9 +61,9 @@
 
         </carousel-component>
 
-        <li class="arrow right" @click="scroll('next')" v-if="thumbs.length > 4">
-            <i class="fas fa-chevron-right h3"></i>
-        </li>
+        {{-- <li class="arrow right" @click="scroll('next')" v-if="thumbs.length > 4">
+            <i class="fa fa-chevron-right h3"></i>
+        </li> --}}
     </ul>
 </script>
 

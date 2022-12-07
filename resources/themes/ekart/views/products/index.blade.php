@@ -102,7 +102,7 @@
                                     @if ($toolbarHelper->getCurrentMode() == 'grid')
                                         <div class="ps-shop-items">
                                             <div class="row justify-content-start">
-                                                <product-card :key="index" @if($isEnd == 0) col="3" @else col="4" @endif  :product="product" v-for="(product, index) in products">
+                                                <product-card :key="index" @if($isEnd == 0) col="4" @else col="6" @endif  :product="product" v-for="(product, index) in products">
                                                 </product-card>
                                             </div>
                                         </div>

@@ -6362,7 +6362,7 @@ var render = function render() {
       "quick-view-details": _vm.product
     }
   })], 1) : _vm._e()])], 1)])]) : _c("div", {
-    "class": _vm.col && _vm.col == "3" ? "col-lg-4 col-6" : "col-lg-3 col-6"
+    "class": _vm.col && _vm.col == "6" ? "col-lg-2 col-6" : "col-lg-3 col-6"
   }, [_c("div", {
     staticClass: "ps-product"
   }, [_c("div", {
