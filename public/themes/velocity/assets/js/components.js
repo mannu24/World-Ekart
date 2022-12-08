@@ -3778,6 +3778,7 @@ __webpack_require__.r(__webpack_exports__);
       w_p: [],
       e_p: [],
       a_p: [],
+      f_p: [],
       slidesPerPage: 5,
       windowWidth: window.innerWidth
     };
@@ -3817,6 +3818,7 @@ __webpack_require__.r(__webpack_exports__);
             _this2.w_p = response.data.w_p;
             _this2.e_p = response.data.e_p;
             _this2.a_p = response.data.a_p;
+            _this2.f_p = response.data.f_p;
           }
         } else {
           _this2.productCollections = 0;
@@ -6546,6 +6548,40 @@ var render = function render() {
       "slides-count": _vm.w_p.length
     }
   }, _vm._l(_vm.w_p, function (product, index) {
+    return _c("slide", {
+      key: index,
+      attrs: {
+        slot: "slide-".concat(index)
+      },
+      slot: "slide-".concat(index)
+    }, [_c("product-card-new", {
+      attrs: {
+        col: "false",
+        product: product
+      }
+    })], 1);
+  }), 1) : _vm._e()], 1)])] : _vm._e()], 2), _vm._v(" "), _c("div", {
+    staticClass: "ps-container"
+  }, [_vm.isLoading ? _c("shimmer-component") : _vm.f_p.length > 0 ? [_c("card-list-header", {
+    attrs: {
+      heading: "Kids Fashion",
+      "view-all": _vm.isCategory ? "".concat(this.baseUrl, "/").concat(_vm.categoryDetails.url_path) : ""
+    }
+  }), _vm._v(" "), _c("div", {
+    staticClass: "row",
+    "class": _vm.localeDirection
+  }, [_c("div", {
+    staticClass: "col-md-12 carousel-products match-height",
+    "class": _vm.showRecentlyViewed === "true" ? "with-recent-viewed col-lg-9" : "without-recent-viewed col-lg-12"
+  }, [_vm.count != 0 ? _c("carousel-component", {
+    attrs: {
+      "slides-per-page": _vm.slidesPerPage,
+      "pagination-enabled": "hide",
+      id: _vm.isCategory ? "".concat(_vm.categoryDetails.name, "-carousel") : _vm.productId,
+      "locale-direction": _vm.localeDirection,
+      "slides-count": _vm.f_p.length
+    }
+  }, _vm._l(_vm.f_p, function (product, index) {
     return _c("slide", {
       key: index,
       attrs: {
