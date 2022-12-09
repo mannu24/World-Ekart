@@ -231,7 +231,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        // dd(request()->all());
         $value =  preg_replace('/[^A-Za-z0-9]/', ' ', request()->name);
         $value =  strtolower(preg_replace('/\s+/', '-', $value));
 
@@ -294,6 +293,7 @@ class ProductController extends Controller
             'is_mens_fashion'     => 'required',
             'is_womens_fashion'   => 'required',
             'is_electronics'      => 'required',
+            'user_id'             => 'required',
             'is_accessories'      => 'required',
             'sku'                 => ['required', 'unique:products,sku', new Slug],
         ]);
@@ -323,7 +323,7 @@ class ProductController extends Controller
         foreach ($product->variants as $key => $variant) {
             array_push($variants,$variant) ;
         }
-        $categories = $this->categoryRepository->getCategoryTree();
+        $categories = $this->categoryRepository->get();
         // return $product;
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
         $countries = DB::table('countries')->orderBy('name', 'ASC')->get();
@@ -343,7 +343,7 @@ class ProductController extends Controller
     {
         $data = request()->all();
         $data_loop = $data;
-        if($p != 'passed'){
+        // if(1){
             // dd('h');
             if(isset($data['is_mens_fashion'])){
                 if($data['is_mens_fashion'] == 'on'){
@@ -366,7 +366,7 @@ class ProductController extends Controller
                 }
             }
             else{
-                $data['is_womens_fashion'] = 1;
+                $data['is_womens_fashion'] = 0;
             }
     
             if(isset($data['is_electronics'])){
@@ -392,7 +392,7 @@ class ProductController extends Controller
             else{
                 $data['is_accessories'] = 0;
             }
-        }
+        // }
 
 
         if ($p == 'passed' && $data['type'] != 'simple') {
@@ -567,6 +567,7 @@ class ProductController extends Controller
         }
 
         $this->productRepository->update($data, $id);
+
         if ($p=='passed') {
             $pp = $prod->product_flats[0] ;
             $pp->visible_individually = 1;
@@ -582,7 +583,9 @@ class ProductController extends Controller
                     ]);
                 }
 
-                
+                DB::table('products')->where('id',$variant->id)->update([
+                    'user_id' =>  $prod->user_id,
+                ]);
                 
 
                 $vv = $variant->product_flats[0] ;
@@ -634,6 +637,7 @@ class ProductController extends Controller
             }
 
             }
+
             return true;
         } else {
             $att_to_add = $this->attributeRepository->where('code', 'special_price')->first();

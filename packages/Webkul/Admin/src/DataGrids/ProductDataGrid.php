@@ -254,21 +254,21 @@ class ProductDataGrid extends DataGrid
         //     'filterable' => true,
         // ]);
 
-        // $this->addColumn([
-        //     'index'      => 'quantity',
-        //     'label'      => trans('admin::app.datagrid.qty'),
-        //     'type'       => 'number',
-        //     'sortable'   => true,
-        //     'searchable' => false,
-        //     'filterable' => false,
-        //     'closure'    => function ($row) {
-        //         if (is_null($row->quantity)) {
-        //             return 0;
-        //         } else {
-        //             return $this->renderQuantityView($row);
-        //         }
-        //     },
-        // ]);
+        $this->addColumn([
+            'index'      => 'quantity',
+            'label'      => 'Total Qty.',
+            'type'       => 'number',
+            'sortable'   => true,
+            'searchable' => false,
+            'filterable' => false,
+            'closure'    => function ($row) {
+                if ($row->product_type =='simple') {
+                    return $row->quantity;
+                } else {
+                    return $this->totat_quantity($row);
+                }
+            },
+        ]);
     }
 
     /**
@@ -345,5 +345,14 @@ class ProductDataGrid extends DataGrid
         $totalQuantity = $row->quantity;
 
         return view('admin::catalog.products.datagrid.quantity', compact('product', 'inventorySources', 'totalQuantity'))->render();
+    }
+
+    private function totat_quantity($row)
+    {
+        $v_ids = DB::table('products')->where('parent_id', $row->product_id)->pluck('id');
+
+        $q = DB::table('product_inventories')->whereIn('product_id', $v_ids)->sum('qty');
+
+        return $q;
     }
 }
