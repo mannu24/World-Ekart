@@ -175,7 +175,7 @@ class ProductController extends Controller
         $att = $this->attributeRepository->getPartial_new();
         // dd($att) ;
 
-        $categories = $this->categoryRepository->getCategoryTree();
+        $categories = $this->categoryRepository->get();
 
         $inventorySources = $this->inventorySourceRepository->findWhere(['status' => 1]);
 
@@ -235,53 +235,45 @@ class ProductController extends Controller
         $value =  strtolower(preg_replace('/\s+/', '-', $value));
 
         $request->merge(['url_key' => $value]);
-        
 
-        if(isset($request->is_mens_fashion)){
-            if($request->is_mens_fashion == 'on'){
+
+        if (isset($request->is_mens_fashion)) {
+            if ($request->is_mens_fashion == 'on') {
                 $request->merge(['is_mens_fashion' =>  1]);
-            }
-            else{
+            } else {
                 $request->merge(['is_mens_fashion' =>  0]);
             }
-        }
-        else{
+        } else {
             $request->merge(['is_mens_fashion' =>  0]);
         }
 
-        if(isset($request->is_womens_fashion)){
-            if($request->is_womens_fashion == 'on'){
+        if (isset($request->is_womens_fashion)) {
+            if ($request->is_womens_fashion == 'on') {
                 $request->merge(['is_womens_fashion' =>  1]);
-            }
-            else{
+            } else {
                 $request->merge(['is_womens_fashion' =>  0]);
             }
-        }
-        else{
+        } else {
             $request->merge(['is_womens_fashion' =>  0]);
         }
 
-        if(isset($request->is_electronics)){
-            if($request->is_electronics == 'on'){
+        if (isset($request->is_electronics)) {
+            if ($request->is_electronics == 'on') {
                 $request->merge(['is_electronics' =>  1]);
-            }
-            else{
+            } else {
                 $request->merge(['is_electronics' =>  0]);
             }
-        }
-        else{
+        } else {
             $request->merge(['is_electronics' =>  0]);
         }
 
-        if(isset($request->is_accessories)){
-            if($request->is_accessories == 'on'){
+        if (isset($request->is_accessories)) {
+            if ($request->is_accessories == 'on') {
                 $request->merge(['is_accessories' =>  1]);
-            }
-            else{
+            } else {
                 $request->merge(['is_accessories' =>  0]);
             }
-        }
-        else{
+        } else {
             $request->merge(['is_accessories' =>  0]);
         }
 
@@ -319,9 +311,9 @@ class ProductController extends Controller
 
         $att = $this->attributeRepository->getPartial_new();
 
-        $variants = [] ;
+        $variants = [];
         foreach ($product->variants as $key => $variant) {
-            array_push($variants,$variant) ;
+            array_push($variants, $variant);
         }
         $categories = $this->categoryRepository->get();
         // return $product;
@@ -344,54 +336,46 @@ class ProductController extends Controller
         $data = request()->all();
         $data_loop = $data;
         // if(1){
-            // dd('h');
-            if(isset($data['is_mens_fashion'])){
-                if($data['is_mens_fashion'] == 'on'){
-                    $data['is_mens_fashion'] = 1;
-                }
-                else{
-                    $data['is_mens_fashion'] = 0;
-                }
-            }
-            else{
+        // dd('h');
+        if (isset($data['is_mens_fashion'])) {
+            if ($data['is_mens_fashion'] == 'on') {
+                $data['is_mens_fashion'] = 1;
+            } else {
                 $data['is_mens_fashion'] = 0;
             }
-    
-            if(isset($data['is_womens_fashion'])){
-                if($data['is_womens_fashion'] == 'on'){
-                    $data['is_womens_fashion'] = 1;
-                }
-                else{
-                    $data['is_womens_fashion'] = 0;
-                }
-            }
-            else{
+        } else {
+            $data['is_mens_fashion'] = 0;
+        }
+
+        if (isset($data['is_womens_fashion'])) {
+            if ($data['is_womens_fashion'] == 'on') {
+                $data['is_womens_fashion'] = 1;
+            } else {
                 $data['is_womens_fashion'] = 0;
             }
-    
-            if(isset($data['is_electronics'])){
-                if($data['is_electronics'] == 'on'){
-                    $data['is_electronics'] = 1;
-                }
-                else{
-                    $data['is_electronics'] = 0;
-                }
-            }
-            else{
+        } else {
+            $data['is_womens_fashion'] = 0;
+        }
+
+        if (isset($data['is_electronics'])) {
+            if ($data['is_electronics'] == 'on') {
+                $data['is_electronics'] = 1;
+            } else {
                 $data['is_electronics'] = 0;
             }
-    
-            if(isset($data['is_accessories'])){
-                if($data['is_accessories'] == 'on'){
-                    $data['is_accessories'] = 1;
-                }
-                else{
-                    $data['is_accessories'] = 0;
-                }
-            }
-            else{
+        } else {
+            $data['is_electronics'] = 0;
+        }
+
+        if (isset($data['is_accessories'])) {
+            if ($data['is_accessories'] == 'on') {
+                $data['is_accessories'] = 1;
+            } else {
                 $data['is_accessories'] = 0;
             }
+        } else {
+            $data['is_accessories'] = 0;
+        }
         // }
 
 
@@ -417,8 +401,8 @@ class ProductController extends Controller
                             $att_to_add = $this->attributeRepository->where('code', $key_vd)->first();
                             if (!in_array($key_vd, $all_fam_att_codes)) {
                                 // dd($key);
-                                $cac = DB::table('attribute_group_mappings')->where('attribute_id', $att_to_add->id)->where('attribute_group_id' , $fam_gen->id)->first() ;
-                                if(!$cac) {
+                                $cac = DB::table('attribute_group_mappings')->where('attribute_id', $att_to_add->id)->where('attribute_group_id', $fam_gen->id)->first();
+                                if (!$cac) {
                                     DB::table('attribute_group_mappings')->insert([
                                         'attribute_id' => $att_to_add->id,
                                         'attribute_group_id' => $fam_gen->id
@@ -457,10 +441,9 @@ class ProductController extends Controller
 
                                 //creating Custom Att Array
 
-                                $custum_att_values[] = ['v_sku'=>$variant_values['sku'],'attribute_id'=>$att_to_add->id,'option_id'=>$new_option_id]; 
+                                $custum_att_values[] = ['v_sku' => $variant_values['sku'], 'attribute_id' => $att_to_add->id, 'option_id' => $new_option_id];
                                 $custum_danish_attribute_id = $att_to_add->id;
                                 $custum_danish_option_id = $new_option_id;
-
                             } else {
                                 $check1  = DB::table('attribute_category_options')->where('option_id', $check->id)->where('category_id', $p_cat_id)->count();
                                 if ($check1 < 1) {
@@ -476,10 +459,9 @@ class ProductController extends Controller
                                 $data_loop['variants'][$key_v][$key_vd] = (string)$check->id;
 
                                 //creating Custom Att Array
-                                 $custum_att_values[] = ['v_sku'=>$variant_values['sku'],'attribute_id'=>$att_to_add->id,'option_id'=>$check->id]; 
+                                $custum_att_values[] = ['v_sku' => $variant_values['sku'], 'attribute_id' => $att_to_add->id, 'option_id' => $check->id];
                                 $custum_danish_attribute_id = $att_to_add->id;
                                 $custum_danish_option_id = $check->id;
-
                             }
                         } else {
                             //Created attribute
@@ -526,27 +508,26 @@ class ProductController extends Controller
                             }
 
                             //creating Custom Att Array
-                            $custum_att_values[] = ['v_sku'=>$variant_values['sku'],'attribute_id'=>$id,'option_id'=>$new_option_id]; 
+                            $custum_att_values[] = ['v_sku' => $variant_values['sku'], 'attribute_id' => $id, 'option_id' => $new_option_id];
                             $custum_danish_attribute_id = $id;
                             $custum_danish_option_id = $new_option_id;
                         }
 
-                        $data_loop['variants'][$key_v]['inventories'] = [1=>$data_loop['variants'][$key_v]['qty']];
+                        $data_loop['variants'][$key_v]['inventories'] = [1 => $data_loop['variants'][$key_v]['qty']];
                         $data_loop['variants'][$key_v]['status'] = "1";
                     }
                 }
-
             }
 
             $data = $data_loop;
         }
-        
+
         // dd($data) ;
         $multiselectAttributeCodes = [];
-        
+
         $productAttributes = $this->productRepository->findOrFail($id);
         $prod = $this->productRepository->findOrFail($id);
-        
+
         foreach ($productAttributes->attribute_family->attribute_groups as $attributeGroup) {
             $customAttributes = $productAttributes->getEditableAttributes($attributeGroup);
 
@@ -568,101 +549,99 @@ class ProductController extends Controller
 
         $this->productRepository->update($data, $id);
 
-        if ($p=='passed') {
-            $pp = $prod->product_flats[0] ;
+        if ($p == 'passed') {
+            $pp = $prod->product_flats[0];
             $pp->visible_individually = 1;
             $pp->min_price = $pp->special_price;
             $pp->max_price = $pp->price;
-            $pp->save(); 
-            $d_setted = 0;
-            foreach ($prod->variants as $key => $variant) {
-                //Adding default variant
-                if($d_setted == 0){
-                    DB::table('products')->where('id',$prod->id)->update([
-                        'additional' =>  json_encode(['default_variant_id'=>$variant->id]),
-                    ]);
-                }
+            $pp->save();
+            if ($data['type'] != 'simple') {
 
-                DB::table('products')->where('id',$variant->id)->update([
-                    'user_id' =>  $prod->user_id,
-                ]);
-                
-
-                $vv = $variant->product_flats[0] ;
-                $att_to_add = $this->attributeRepository->where('code', 'special_price')->first();
-
-                foreach($data['variants'] as $recived_p_variant){
-                    if($vv->sku == $recived_p_variant['sku']){
-                        DB::table('product_flat')->where('id',$vv->id)->update([
-                            'min_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
-                            // 'max_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
-                            'max_price' => (int) $recived_p_variant['price'],
-                            'special_price' => $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
-                            'visible_individually' => false,
+                $d_setted = 0;
+                foreach ($prod->variants as $key => $variant) {
+                    //Adding default variant
+                    if ($d_setted == 0) {
+                        DB::table('products')->where('id', $prod->id)->update([
+                            'additional' =>  json_encode(['default_variant_id' => $variant->id]),
                         ]);
-
-                        //Setting Special Price
-
-                        DB::table('product_attribute_values')->insert([
-                            'float_value' =>  (float)$recived_p_variant['special_price'] ?: (float)$recived_p_variant['price'],
-                            'product_id' => $variant->id,
-                            'attribute_id' => $att_to_add->id,
-                        ]);
-
                     }
+
+                    DB::table('products')->where('id', $variant->id)->update([
+                        'user_id' =>  $prod->user_id,
+                    ]);
+
+
+                    $vv = $variant->product_flats[0];
+                    $att_to_add = $this->attributeRepository->where('code', 'special_price')->first();
+
+                    foreach ($data['variants'] as $recived_p_variant) {
+                        if ($vv->sku == $recived_p_variant['sku']) {
+                            DB::table('product_flat')->where('id', $vv->id)->update([
+                                'min_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                                // 'max_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                                'max_price' => (int) $recived_p_variant['price'],
+                                'special_price' => $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
+                                'visible_individually' => false,
+                            ]);
+
+                            //Setting Special Price
+
+                            DB::table('product_attribute_values')->insert([
+                                'float_value' =>  (float)$recived_p_variant['special_price'] ?: (float)$recived_p_variant['price'],
+                                'product_id' => $variant->id,
+                                'attribute_id' => $att_to_add->id,
+                            ]);
+                        }
+                    }
+
+                    foreach ($custum_att_values as $key => $value) {
+                        if ($variant->sku == $value['v_sku']) {
+                            DB::table('product_attribute_values')->insert([
+                                'integer_value' =>  $value['option_id'],
+                                'product_id' => $variant->id,
+                                'attribute_id' => $value['attribute_id'],
+                            ]);
+                        }
+                    }
+                    $d_setted = 1;
                 }
-                
+                $inserted = [];
                 foreach ($custum_att_values as $key => $value) {
-                    if($variant->sku == $value['v_sku']){
-                        DB::table('product_attribute_values')->insert([
-                            'integer_value' =>  $value['option_id'],
-                            'product_id' => $variant->id,
+                    if (!in_array($value['attribute_id'], $inserted)) {
+
+                        DB::table('product_super_attributes')->insert([
+                            'product_id' => $id,
                             'attribute_id' => $value['attribute_id'],
                         ]);
-                        
+                        $inserted[] = $value['attribute_id'];
                     }
-                   
                 }
-                $d_setted = 1;
-            }
-            $inserted = [];
-            foreach ($custum_att_values as $key => $value) {
-                if(!in_array($value['attribute_id'] ,$inserted)){
-
-                DB::table('product_super_attributes')->insert([
-                    'product_id' => $id,
-                    'attribute_id' => $value['attribute_id'],
-                ]);
-                $inserted[] = $value['attribute_id'];
             }
 
-            }
 
             return true;
         } else {
             $att_to_add = $this->attributeRepository->where('code', 'special_price')->first();
 
             foreach ($prod->variants as $key => $variant) {
-                
-                $vv = $variant->product_flats[0] ;
 
-                foreach($data['variants'] as $recived_p_variant){
-                    if($vv->sku == $recived_p_variant['sku']){
+                $vv = $variant->product_flats[0];
 
-                        DB::table('product_flat')->where('id',$vv->id)->update([
+                foreach ($data['variants'] as $recived_p_variant) {
+                    if ($vv->sku == $recived_p_variant['sku']) {
+
+                        DB::table('product_flat')->where('id', $vv->id)->update([
                             'min_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
                             // 'max_price' => (int)  $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
                             'max_price' => (int) $recived_p_variant['price'],
                             'special_price' => $recived_p_variant['special_price'] ?: $recived_p_variant['price'],
                         ]);
 
-                        DB::table('product_attribute_values')->where('product_id',$variant->id)->where('attribute_id',$att_to_add->id)->update([
+                        DB::table('product_attribute_values')->where('product_id', $variant->id)->where('attribute_id', $att_to_add->id)->update([
                             'float_value' =>  (float)$recived_p_variant['special_price'] ?: (float)$recived_p_variant['price'],
                         ]);
-
                     }
                 }
-                
             }
             session()->flash('success', trans('admin::app.response.update-success', ['name' => 'Product']));
             return redirect()->route($this->_config['redirect']);
@@ -1020,6 +999,7 @@ class ProductController extends Controller
             if ($key == 0) $newData[] = $value;
             else {
                 if ($data[$key][25] == '1') {
+                    $parent = $key;
                     if (isset($data[$key + 1]) && ($data[$key + 1][25] == '1')) {
                         $newData[] = $value;
                         $last = array_keys($newData);
@@ -1035,7 +1015,6 @@ class ProductController extends Controller
                     } else {
                         $newData[] = $value;
                     }
-                    $parent = $key;
                 } else {
                     if ($data[$key][25] == '2' && $data[$key][13] != '') {
                         $newData[] = $value;
