@@ -120,11 +120,11 @@ $specs = $product->toArray() ;
                                         <header>
                                             <h1>{{ $product->name }}</h1>
                                             <div class="ps-product__meta flex-wrap flex-md-nowrap">
-                                                @if ($product->product->admin->vendor)
+                                                {{-- @if ($product->product->admin->vendor)
                                                     <p>Seller:
                                                         <a class="ml-2 text-capitalize" href="{{ route('shop.vendor.store-page',['name' => $product->product->admin->vendor->display_name ]) }}">{{ $product->product->admin->vendor->display_name }}</a>
                                                     </p>
-                                                @endif
+                                                @endif --}}
                                                 @include ('shop::products.view.stock', ['product' => $product])
                                                 @if (Webkul\Tax\Helpers\Tax::isTaxInclusive() && $product->getTypeInstance()->getTaxCategory())
                                                     <p class="d-inline">
@@ -159,11 +159,11 @@ $specs = $product->toArray() ;
                                             @endif
                                         </header>
                                         <div class="ps-product__desc">
-                                            @if ($product->product->admin->vendor)
+                                            {{-- @if ($product->product->admin->vendor)
                                                 <p>Sold By:<a href="{{ route('shop.vendor.store-page',['name' => $product->product->admin->vendor->display_name ]) }}">
                                                     <strong class="ml-2">{{ $product->product->admin->vendor->display_name }}</strong>
                                                 </a></p>
-                                            @endif
+                                            @endif --}}
                                             @if (count($product->getTypeInstance()->getCustomerGroupPricingOffers()) > 0)
                                                 <ul class="ps-list--dot">
                                                     @foreach ($product->getTypeInstance()->getCustomerGroupPricingOffers() as $offers)
