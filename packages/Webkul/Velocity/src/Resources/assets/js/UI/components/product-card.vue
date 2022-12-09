@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div :class="col && col=='3' ?  'col-lg-4 col-6' : 'col-lg-3 col-6'" v-else>
+    <div :class="col && col=='6' ?  'col-lg-2 col-6' : 'col-lg-3 col-6'" v-else>
         <div class="ps-product">
             <div class="ps-product__thumbnail">
                 <a :href="`${baseUrl}/${product.slug}`" :title="product.name">

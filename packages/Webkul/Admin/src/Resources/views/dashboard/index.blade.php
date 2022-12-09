@@ -334,7 +334,7 @@
                             @foreach ($statistics['stock_threshold'] as $item)
 
                                 <li>
-                                    <a href="{{ route('admin.catalog.products.edit', $item->product_id) }}">
+                                    <a href="{{ route('admin.catalog.products.edit', $item->product->parent_id) }}">
                                         <div class="image">
                                             <?php $productBaseImage = productimage()->getProductBaseImage($item->product); ?>
 

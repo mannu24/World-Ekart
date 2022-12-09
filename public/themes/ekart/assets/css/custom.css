@@ -688,7 +688,7 @@ a:visited, a:link {
     left: 15px;
     margin-top: 10px;
     overflow: hidden;
-    padding: 0;
+    padding-bottom: 35px;
     position: relative;
     z-index: 99;
 }
@@ -775,8 +775,8 @@ a:visited, a:link {
     justify-content: start;
 }
 
-.VueCarousel-dot[data-v-438fd353]:focus {
-    outline: 1px solid #fcb800;
+.VueCarousel-dot:focus {
+    outline: 1px solid #fcb80077 !important;
 }
 
 .VueCarousel-dot--active {
@@ -1021,4 +1021,30 @@ Line 45043 ,45035 for hover
 .VueCarousel-dot {
     margin-top: 0 !important;
     margin-bottom: 10px !important;
+}
+
+.product-gallery .VueCarousel-inner {
+    justify-content: start;
+}
+
+.thumb-list .arrow {
+    cursor: pointer;
+    left: 45%;
+    bottom: 0;
+    color: #fcb800aa;
+    position: absolute;
+    z-index: 1001;
+}
+
+.thumb-list .arrow.right {
+    left: unset;
+    right: 45%;
+}
+
+.thumb-list .arrow:hover {
+    color: #fcb800;
+}
+
+.navigation-hide .VueCarousel-navigation, .pagination-hide .VueCarousel-pagination {
+    display: none;
 }

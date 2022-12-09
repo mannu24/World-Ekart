@@ -78,6 +78,32 @@
         </div>
         <div class="ps-container">
             <shimmer-component v-if="isLoading"></shimmer-component>
+            <template v-else-if="f_p.length > 0">
+                <card-list-header :heading="'Kids Fashion'" 
+                :view-all="isCategory ? `${this.baseUrl}/${categoryDetails.url_path}` : ''">
+                </card-list-header>
+                <div class="row" :class="localeDirection">
+                    <div
+                        class="col-md-12 carousel-products match-height"
+                        :class="showRecentlyViewed === 'true' ? 'with-recent-viewed col-lg-9' : 'without-recent-viewed col-lg-12'">
+                        <carousel-component
+                            :slides-per-page="slidesPerPage"
+                            pagination-enabled="hide"
+                            :id="isCategory ? `${categoryDetails.name}-carousel` : productId"
+                            :locale-direction="localeDirection"
+                            :slides-count="f_p.length"
+                            v-if="count != 0">
+
+                            <slide :key="index" :slot="`slide-${index}`" v-for="(product, index) in f_p">
+                                <product-card-new col=false :product="product"></product-card-new>
+                            </slide>
+                        </carousel-component>
+                    </div>
+                </div>
+            </template>
+        </div>
+        <div class="ps-container">
+            <shimmer-component v-if="isLoading"></shimmer-component>
             <template v-else-if="e_p.length > 0">
                 <card-list-header :heading="'Trending Electronics'" 
                 :view-all="isCategory ? `${this.baseUrl}/${categoryDetails.url_path}` : ''">
@@ -163,6 +189,7 @@
                 w_p: [],
                 e_p: [],
                 a_p: [],
+                f_p: [],
                 slidesPerPage: 5,
                 windowWidth: window.innerWidth,
             }
@@ -203,6 +230,7 @@
                             this.w_p = response.data.w_p;
                             this.e_p = response.data.e_p;
                             this.a_p = response.data.a_p;
+                            this.f_p = response.data.f_p;
                         }
                     } else {
                         this.productCollections = 0;

@@ -130,6 +130,7 @@ class ShopController extends Controller
             $womens_products = $this->velocityProductRepository->getWomensProducts($count);
             $electronics_products = $this->velocityProductRepository->getElectronicsProducts($count);
             $accessories_products = $this->velocityProductRepository->getAccessoriesProducts($count);
+            $featured_products = $this->velocityProductRepository->getFeaturedProducts($count);
 
             $n_p = $new_products->map(function ($product) {
                 if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) 
@@ -171,6 +172,14 @@ class ShopController extends Controller
                 }
             })->reject(function ($product) { return is_null($product); })->values(); 
 
+            $f_p = $featured_products->map(function ($product) {
+                if (core()->getConfigData('catalog.products.homepage.out_of_stock_items')) 
+                    return $this->velocityHelper->formatProduct($product);
+                else {
+                    if ($product->isSaleable()) return $this->velocityHelper->formatProduct($product);
+                }
+            })->reject(function ($product) { return is_null($product); })->values(); 
+
             $response = [
                 'status'   => true,
                 'n_p' => $n_p, 
@@ -178,6 +187,7 @@ class ShopController extends Controller
                 'w_p' => $w_p, 
                 'e_p' => $e_p, 
                 'a_p' => $a_p, 
+                'f_p' => $f_p, 
             ];
 
         }

@@ -25,12 +25,12 @@
 {!! view_render_event('bagisto.shop.products.view.gallery.before', ['product' => $product]) !!}
 
     <div class="product-image-group">
-        <div class="row col-12">
+        <div class="row col-12 justify-content-center">
             <magnify-image src="{{ $images[0]['large_image_url'] }}" type="{{ $images[0]['type'] }}">
             </magnify-image>
         </div>
 
-        <div class="row col-12">
+        <div class="row col-12 justify-content-center">
             <product-gallery></product-gallery>
         </div>
 
@@ -41,7 +41,7 @@
 <script type="text/x-template" id="product-gallery-template">
     <ul class="thumb-list col-12 row ltr" type="none">
         <li class="arrow left" @click="scroll('prev')" v-if="thumbs.length > 4">
-            <i class="fas fa-chevron-left h3"></i>
+            <i class="fa fa-chevron-left h3"></i>
         </li>
 
         <carousel-component slides-per-page="4" :id="galleryCarouselId" pagination-enabled="hide" navigation-enabled="hide"
@@ -62,7 +62,7 @@
         </carousel-component>
 
         <li class="arrow right" @click="scroll('next')" v-if="thumbs.length > 4">
-            <i class="fas fa-chevron-right h3"></i>
+            <i class="fa fa-chevron-right h3"></i>
         </li>
     </ul>
 </script>
@@ -110,7 +110,7 @@
                         currentType: this.images[0]['type']
                     });
 
-                    eventBus.$on('configurable-variant-update-images-event', this.updateImages);
+                    // eventBus.$on('configurable-variant-update-images-event', this.updateImages);
 
                     this.prepareThumbs();
                 },
