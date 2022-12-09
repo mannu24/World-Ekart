@@ -28,9 +28,9 @@
                             <header>
                                 <h1>{{product.name}}</h1>
                                 <div class="ps-product__meta">
-                                    <p v-if=" product.vendor!='' ">Seller:
+                                    <!-- <p v-if=" product.vendor!='' ">Seller:
                                         <a class="ml-2 text-capitalize" :href="'/shop/' + product.vendor">{{ product.vendor }}</a>
-                                    </p>
+                                    </p> -->
                                     <div class="ps-product__rating" v-if="product.totalReviews && product.totalReviews > 0">
                                         <star-ratings :ratings="product.avgRating"></star-ratings>
                                         <span><a :href="`${$root.baseUrl}/reviews/${product.slug}`">

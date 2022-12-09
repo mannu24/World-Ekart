@@ -6227,8 +6227,6 @@ var render = function render() {
   })], 1) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__container"
   }, [_c("div", {
-    staticClass: "ps-product__vendor"
-  }, [_vm._v("Sold By: " + _vm._s(_vm.product.vendor))]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__content"
   }, [_c("a", {
     staticClass: "ps-product__title",
@@ -6316,9 +6314,7 @@ var render = function render() {
       href: "".concat(_vm.baseUrl, "/").concat(_vm.product.slug),
       title: _vm.product.name
     }
-  }, [_vm._v(_vm._s(_vm.product.name))]), _vm._v(" "), _c("p", {
-    staticClass: "ps-product__vendor"
-  }, [_vm._v("Sold By: " + _vm._s(_vm.product.vendor))]), _vm._v(" "), _vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
+  }, [_vm._v(_vm._s(_vm.product.name))]), _vm._v(" "), _vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
     staticClass: "ps-product__rating"
   }, [_c("star-ratings", {
     attrs: {
@@ -6397,8 +6393,6 @@ var render = function render() {
   })], 1) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__container"
   }, [_c("div", {
-    staticClass: "ps-product__vendor"
-  }, [_vm._v("Sold By: " + _vm._s(_vm.product.vendor))]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__content"
   }, [_c("a", {
     staticClass: "ps-product__title",
@@ -6880,12 +6874,7 @@ var render = function render() {
     staticClass: "ps-product__info"
   }, [_c("header", [_c("h1", [_vm._v(_vm._s(_vm.product.name))]), _vm._v(" "), _c("div", {
     staticClass: "ps-product__meta"
-  }, [_vm.product.vendor != "" ? _c("p", [_vm._v("Seller:\n                                    "), _c("a", {
-    staticClass: "ml-2 text-capitalize",
-    attrs: {
-      href: "/shop/" + _vm.product.vendor
-    }
-  }, [_vm._v(_vm._s(_vm.product.vendor))])]) : _vm._e(), _vm._v(" "), _vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
+  }, [_vm.product.totalReviews && _vm.product.totalReviews > 0 ? _c("div", {
     staticClass: "ps-product__rating"
   }, [_c("star-ratings", {
     attrs: {

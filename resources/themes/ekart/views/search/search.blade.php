@@ -102,7 +102,7 @@
                 </div>
             </div>
             <div class="ps-shopping__content vendor-store">
-                <div class="row no-gutters">
+                <div class="row no-gutters justify-content-start">
                     @if (!count($results->items()))
                         <h2 class="col-12">{{ __('shop::app.products.whoops') }}</h2>
                         <h3 class="col-12">{{ __('shop::app.search.no-results') }}</h3>

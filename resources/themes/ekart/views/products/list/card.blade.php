@@ -59,48 +59,50 @@
             </div>
         </div>
     @else
-        <div class="ps-product">
-            <div class="ps-product__thumbnail">
-                <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
-                    <img loading="lazy" class="logo" alt="{{ $product->name }}" src="{{ $productBaseImage['large_image_url'] }}" :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
-                </a>
-                @if (!$product->getTypeInstance()->haveSpecialPrice() && $product->new)
-                    <span class="ps-product__badge new">New</span>
-                @endif
-                <ul class="ps-product__actions justify-content-around">
-                    <li>
-                        @include ('shop::products.ul-wishlist')
-                    </li>
-                    <li v-if="!isMobile()">
-                        <product-quick-view-btn :quick-view-details="{{ json_encode($velocityHelper->formatProduct($product)) }}"></product-quick-view-btn>
-                    </li>
-                </ul>
-            </div>
-            <div class="ps-product__container">
-                <div class="ps-product__content">
-                    <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}" class="ps-product__title">{{ $product->name }}</a>
-                    @if ($totalReviews)
-                        <div class="ps-product__rating">
-                            <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
-                            <span>{{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}</span>
-                        </div>
-                    @else
-                        <div class="ps-product__rating">
-                            <span>{{ __('velocity::app.products.be-first-review') }}</span>
-                        </div>
+        <div class="col-lg-2 col-6">
+            <div class="ps-product">
+                <div class="ps-product__thumbnail">
+                    <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}">
+                        <img loading="lazy" class="logo" alt="{{ $product->name }}" src="{{ $productBaseImage['large_image_url'] }}" :onerror="`this.src='${this.$root.baseUrl}/vendor/webkul/ui/assets/images/product/large-product-placeholder.png'`" />
+                    </a>
+                    @if (!$product->getTypeInstance()->haveSpecialPrice() && $product->new)
+                        <span class="ps-product__badge new">New</span>
                     @endif
-                    @include ('shop::products.price', ['product' => $product])
-                    @include ('shop::products.add-to-cart', [
-                        'product'           => $product,
-                        'btnText'           => $btnText ?? null,
-                        'detail_mobile'     => true,
-                        'moveToCart'        => $moveToCart ?? null,
-                        'wishlistMoveRoute' => $wishlistMoveRoute ?? null,
-                        'reloadPage'        => $reloadPage ?? null,
-                        'addToCartForm'     => $addToCartForm ?? false,
-                        'addToCartBtnClass' => $addToCartBtnClass ?? '',
-                        'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
-                    ])
+                    <ul class="ps-product__actions justify-content-around">
+                        <li>
+                            @include ('shop::products.ul-wishlist')
+                        </li>
+                        <li v-if="!isMobile()">
+                            <product-quick-view-btn :quick-view-details="{{ json_encode($velocityHelper->formatProduct($product)) }}"></product-quick-view-btn>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ps-product__container">
+                    <div class="ps-product__content">
+                        <a href="{{ route('shop.productOrCategory.index', $product->url_key) }}" title="{{ $product->name }}" class="ps-product__title">{{ $product->name }}</a>
+                        @if ($totalReviews)
+                            <div class="ps-product__rating">
+                                <star-ratings ratings="{{ $avgRatings }}"></star-ratings>
+                                <span>{{ __('velocity::app.products.ratings', ['totalRatings' => $totalReviews ]) }}</span>
+                            </div>
+                        @else
+                            <div class="ps-product__rating">
+                                <span>{{ __('velocity::app.products.be-first-review') }}</span>
+                            </div>
+                        @endif
+                        @include ('shop::products.price', ['product' => $product])
+                        @include ('shop::products.add-to-cart', [
+                            'product'           => $product,
+                            'btnText'           => $btnText ?? null,
+                            'detail_mobile'     => true,
+                            'moveToCart'        => $moveToCart ?? null,
+                            'wishlistMoveRoute' => $wishlistMoveRoute ?? null,
+                            'reloadPage'        => $reloadPage ?? null,
+                            'addToCartForm'     => $addToCartForm ?? false,
+                            'addToCartBtnClass' => $addToCartBtnClass ?? '',
+                            'showCompare'       => core()->getConfigData('general.content.shop.compare_option') == "1" ? true : false,
+                        ])
+                    </div>
                 </div>
             </div>
         </div>
