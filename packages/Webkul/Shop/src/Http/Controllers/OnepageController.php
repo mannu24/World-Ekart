@@ -12,7 +12,7 @@ use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Shipping\Facades\Shipping;
 use Webkul\Shop\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 class OnepageController extends Controller
 {
     /**
@@ -451,6 +451,7 @@ class OnepageController extends Controller
 
     public function cashfree_pay()
     {
+
         // $domain = 'http://localhost:8000';
         $domain = config()['app']['url'];
         $cart = Cart::getCart();
@@ -459,7 +460,7 @@ class OnepageController extends Controller
         $discount_amount = $cart->discount_amount; // discount amount
         $total_amount =  ($cart->sub_total + $cart->tax_total + $shipping_rate) - $discount_amount; // total amount
         // $pay_data = Payment::getSupportedPaymentMethods();
-        // dd($pay_data);
+        // dd($total_amount);
         if(core()->getConfigData('sales.paymentmethods.cashfree.test_mode') == true){
 
             $mode = "test"; //<------------ Change to TEST for test server, PROD for production
@@ -467,12 +468,11 @@ class OnepageController extends Controller
         else{
             $mode = "PROD";
         }
-
         // extract($_POST);
         $secretKey = core()->getConfigData('sales.paymentmethods.cashfree.key_secret');
         $postData = array(
             "appId" => core()->getConfigData('sales.paymentmethods.cashfree.app_id'),
-            "orderId" => str_random(10),
+            "orderId" => Str::random(10),
             "orderAmount" => $total_amount,
             "orderCurrency" => 'INR',
             "orderNote" => 'Cashfree Payment',

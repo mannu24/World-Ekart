@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Repositories\InvoiceRepository;
 use \Webkul\Sales\Repositories\OrderCommentRepository;
 
 class OrderController extends Controller
@@ -23,6 +24,7 @@ class OrderController extends Controller
      * @var \Webkul\Sales\Repositories\OrderRepository
      */
     protected $orderRepository;
+    protected $invoiceRepository;
 
     /**
      * OrderCommentRepository object
@@ -40,6 +42,7 @@ class OrderController extends Controller
      */
     public function __construct(
         OrderRepository $orderRepository,
+        InvoiceRepository $invoiceRepository,
         OrderCommentRepository $orderCommentRepository
     )
     {
@@ -48,6 +51,7 @@ class OrderController extends Controller
         $this->_config = request('_config');
 
         $this->orderRepository = $orderRepository;
+        $this->invoiceRepository = $invoiceRepository;
 
         $this->orderCommentRepository = $orderCommentRepository;
     }
@@ -75,7 +79,6 @@ class OrderController extends Controller
     public function view($id)
     {
         $order = $this->orderRepository->findOrFail($id);
-
         return view($this->_config['view'], compact('order'));
     }
 
@@ -93,6 +96,22 @@ class OrderController extends Controller
             session()->flash('success', trans('admin::app.response.cancel-success', ['name' => 'Order']));
         } else {
             session()->flash('error', trans('admin::app.response.cancel-error', ['name' => 'Order']));
+        }
+
+        return redirect()->back();
+    }
+
+    public function complete($id)
+    {
+        // dd($invoice);
+        $result = $this->orderRepository->complete($id);
+        $invoice = $this->invoiceRepository->where('order_id', $id)->first();
+
+        $result2 = $this->invoiceRepository->updateState($invoice, 'paid');
+        if ($result && $result2) {
+            session()->flash('success', 'Order completed successfully');
+        } else {
+            session()->flash('error', 'Error while Completing Order');
         }
 
         return redirect()->back();

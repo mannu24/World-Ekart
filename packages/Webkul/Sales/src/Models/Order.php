@@ -23,6 +23,8 @@ class Order extends Model implements OrderContract
 
     public const STATUS_PROCESSING = 'processing';
 
+    public const STATUS_SHIPPED = 'shipped';
+
     public const STATUS_COMPLETED = 'completed';
 
     public const STATUS_CANCELED = 'canceled';
@@ -47,6 +49,7 @@ class Order extends Model implements OrderContract
         self::STATUS_PENDING         => 'Pending',
         self::STATUS_PENDING_PAYMENT => 'Pending Payment',
         self::STATUS_PROCESSING      => 'Processing',
+        self::STATUS_SHIPPED         => 'Shipped',
         self::STATUS_COMPLETED       => 'Completed',
         self::STATUS_CANCELED        => 'Canceled',
         self::STATUS_CLOSED          => 'Closed',
@@ -308,15 +311,17 @@ class Order extends Model implements OrderContract
      */
     public function canCancel(): bool
     {
-        if ($this->payment->method == 'cashondelivery' && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')) {
-            return false;
-        }
-
+        // if ($this->payment->method == 'cashondelivery' && core()->getConfigData('sales.paymentmethods.cashondelivery.generate_invoice')) {
+        //     return false;
+        // }
         if ($this->payment->method == 'moneytransfer' && core()->getConfigData('sales.paymentmethods.moneytransfer.generate_invoice')) {
             return false;
         }
 
         if ($this->status === self::STATUS_FRAUD) {
+            return false;
+        }
+        if ($this->status === self::STATUS_COMPLETED) {
             return false;
         }
 
@@ -334,6 +339,7 @@ class Order extends Model implements OrderContract
 
         return false;
     }
+
 
     /**
      * Checks if order can be refunded or not
@@ -360,6 +366,15 @@ class Order extends Model implements OrderContract
 
         if ($this->base_grand_total_invoiced - $this->base_grand_total_refunded - $this->refunds()
             ->sum('base_adjustment_fee') > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function canComplete(): bool
+    {
+        if ($this->status === self::STATUS_SHIPPED) {
             return true;
         }
 

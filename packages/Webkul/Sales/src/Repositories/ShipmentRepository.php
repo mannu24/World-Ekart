@@ -160,13 +160,15 @@ class ShipmentRepository extends Repository
                 'inventory_source_name' => $shipment->inventory_source->name,
             ]);
 
-            if (isset($orderState)) {
-                $this->orderRepository->updateOrderStatus($order, $orderState);
-            } elseif ($order->hasOpenInvoice()) {
-                $this->orderRepository->updateOrderStatus($order, 'pending_payment');
-            } else {
-                $this->orderRepository->updateOrderStatus($order);
-            }
+            // if (isset($orderState)) {
+            //     $this->orderRepository->updateOrderStatus($order, $orderState);
+            // } elseif ($order->hasOpenInvoice()) {
+            //     $this->orderRepository->updateOrderStatus($order, 'shipped');
+            // } else {
+            //     $this->orderRepository->updateOrderStatus($order);
+            // }
+            $this->orderRepository->updateOrderStatus($order, 'shipped');
+
 
             Event::dispatch('sales.shipment.save.after', $shipment);
         } catch (\Exception $e) {

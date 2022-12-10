@@ -201,9 +201,20 @@ class OrderRepository extends Repository
             $this->downloadableLinkPurchasedRepository->updateStatus($item, 'expired');
         }
 
-        $this->updateOrderStatus($order);
+        $this->updateOrderStatus($order, 'canceled');
 
         Event::dispatch('sales.order.cancel.after', $order);
+
+        return true;
+    }
+
+    public function complete($orderOrId)
+    {
+        /* order */
+        $order = $this->resolveOrderInstance($orderOrId);
+
+        $this->updateOrderStatus($order, 'completed');
+
 
         return true;
     }

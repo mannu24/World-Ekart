@@ -28,6 +28,10 @@ Route::group(['middleware' => ['web', 'admin', 'admin_locale'], 'prefix' => conf
             'view' => 'admin::sales.orders.cancel',
         ])->name('admin.sales.orders.cancel');
 
+        Route::get('/orders/complete/{id}', [OrderController::class, 'complete'])->defaults('_config', [
+            'view' => 'admin::sales.orders.index',
+        ])->name('admin.sales.orders.complete');
+
         Route::post('/orders/create/{order_id}', [OrderController::class, 'comment'])->name('admin.sales.orders.comment');
 
         /**
