@@ -7,7 +7,7 @@
 
     {{-- To Do (@devansh-webkul): Need to handle from the backend. --}}
     @if ($attribute->code === 'sku')
-        v-validate="{ required: true, regex: /^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*$/ }"
+        v-validate="{ required: true, regex: /^\S+$/ }"
     @else
         v-validate="'{{ $validations }}'"
     @endif
