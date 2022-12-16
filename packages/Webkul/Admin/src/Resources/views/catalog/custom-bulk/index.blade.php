@@ -29,6 +29,10 @@
                             <label class="required">Delivery Charge</label>
                             <input type="number" class="control" name="delivery_charge"  min="0" value="0">
                         </div>
+                        <div class="col-md-12 control-group">
+                            <label class="required">Minimum Product Price for free Delivery</label>
+                            <input type="number" class="control" name="free_delivery" min="0" value="500">
+                        </div>
                         {{-- <div class="col-md-12 control-group">
                             <label class="required">Select Product Type</label>
                             <select name="type" class="control">

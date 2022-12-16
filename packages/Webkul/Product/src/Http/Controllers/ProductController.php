@@ -897,6 +897,7 @@ class ProductController extends Controller
             // 'type' => 'required|string',
             'margin' => 'required|numeric',
             'delivery_charge' => 'required|numeric',
+            'free_delivery' => 'required|numeric',
             'countries' => 'required',
             'update_stock' => 'accepted|sometimes',
         ]);
@@ -1255,6 +1256,12 @@ class ProductController extends Controller
                     }
                 }
             }
+        }
+
+        //For Free Delivery
+        foreach ($data as $key => $value) {
+            if ($key == 0) continue;
+            if($value[24] >= $d['free_delivery']) $data[$key][29] = 0 ;
         }
 
         // dd($data);
