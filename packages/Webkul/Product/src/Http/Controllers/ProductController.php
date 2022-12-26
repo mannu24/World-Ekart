@@ -1000,34 +1000,43 @@ class ProductController extends Controller
             if ($key == 0) $newData[] = $value;
             else {
                 if ($data[$key][25] == '1') {
-                    $parent = $key;
-                    if (isset($data[$key + 1]) && ($data[$key + 1][25] == '1')) {
+                    // $parent = $key;
+                    // if (isset($data[$key + 1]) && ($data[$key + 1][25] == '1')) {
+                    //     $newData[] = $value;
+                    //     $last = array_keys($newData);
+                    //     $last = end($last);
+                    //     $newData[$last][8] = $data[$parent][8];
+                    //     $newData[$last][10] = $data[$parent][10];
+                    //     $newData[$last][12] = $data[$parent][12];
+                    //     $value[25] = '2';
+                    //     $value[24] = '';
+                    //     $value[28] = '';
+                    //     $newData[] = $value;
+                    // } elseif(!isset($data[$key + 1])) {
                         $newData[] = $value;
                         $last = array_keys($newData);
                         $last = end($last);
-                        $newData[$last][8] = $data[$parent][8];
-                        $newData[$last][10] = $data[$parent][10];
-                        $newData[$last][12] = $data[$parent][12];
+                        $newData[$last][8] = $data[$key][8];
+                        $newData[$last][10] = $data[$key][10];
+                        $newData[$last][12] = $data[$key][12];
                         $value[25] = '2';
                         $value[24] = '';
                         $value[28] = '';
-                        // $value[25] = '' ;
                         $newData[] = $value;
-                    } else {
-                        $newData[] = $value;
-                    }
-                } else {
-                    if ($data[$key][25] == '2' && $data[$key][13] != '') {
-                        $newData[] = $value;
-                        $last = array_keys($newData);
-                        $last = end($last);
-                        $newData[$last][8] = $data[$parent][8];
-                        $newData[$last][10] = $data[$parent][10];
-                        $newData[$last][12] = $data[$parent][12];
+                    // }
+                } 
+                // else {
+                //     if ($data[$key][25] == '2' && $data[$key][13] != '') {
+                //         $newData[] = $value;
+                //         $last = array_keys($newData);
+                //         $last = end($last);
+                //         $newData[$last][8] = $data[$parent][8];
+                //         $newData[$last][10] = $data[$parent][10];
+                //         $newData[$last][12] = $data[$parent][12];
 
-                        $newData[] = $value;
-                    } else $newData[] = $value;
-                }
+                //         $newData[] = $value;
+                //     } else $newData[] = $value;
+                // }
             }
         }
         $data = $newData;
